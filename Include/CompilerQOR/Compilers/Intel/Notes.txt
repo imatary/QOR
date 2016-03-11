@@ -1,0 +1,8 @@
+Intel ICL compiler
+
+Local installation
+D:\Tools\Intel\Compiler\Compiler\11.1\067\bin
+
+Behaviour is very close to VS2008.
+supports x86_32 x86_64 and IA64
+

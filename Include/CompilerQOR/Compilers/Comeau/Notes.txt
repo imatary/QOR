@@ -1,0 +1,12 @@
+Comeau
+
+Proprietary
+
+Based on EDG frontend
+
+supports export templates
+
+http://www.comeaucomputing.com/
+
+Translates to C then uses another compiler to do the rest
+

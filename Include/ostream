@@ -1,0 +1,3 @@
+//ostream
+
+#include "../libcxx/include/ostream"

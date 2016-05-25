@@ -1,0 +1,12 @@
+Consider per Shell scripts which preprocess the same project description files to produce build scripts relevant to that Shell.
+This would actually need to be a Shell/Compiler combination unless we use something like the CC alias.
+
+e.g.
+bash_gcc QOR2.ppp		would generate a make file to build QOR2 using GCC
+qosh_clang QOR3.ppp		could generate a Qosh script to build QOR3 using clang
+cmd_msvc QOR3.ppp		would generate a Batch file to build QOR3 using MSVC
+bash_cmake QOR1.ppp		would generate CMake lists to build QOR1 using CMake
+qosh_vs2010 QOR4.ppp	would generate a Visual Studio 2010 solution to build QOR4
+
+run ... .bat which preprocesses ... .pp to produce a script which builds ...
+

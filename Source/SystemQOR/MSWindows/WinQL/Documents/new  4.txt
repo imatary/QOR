@@ -1,0 +1,32 @@
+Application
+Console Application
+	Input driven
+GUI Application
+	Desktop application
+	Touch application
+	System Tray Application
+		Message loop driven
+Service Application
+	Event driven
+Web service application
+	Event driven
+
+Thread Pools as an application components, consider worker pool, IO pool
+
+Need to get working samples of C/C++ implementations of all these kinds of application and look 
+at working backward from them to a common Application concept and how to extend it to do all these things.
+Also need to look at the new C++/CX ATL stuff to work out how to interact with the CLR and produce tile based
+UI on Windows 8
+WebKit integration is also something to consider for developing and testing Web service applications.
+Also need to be able to produce specialist Dlls, ISAPI and COM in process Servers
+
+Compare ClanLib Core code and consider where to put what we have missed out and how to do it.
+Fixes to CodeQOR to remove 1 based list are needed
+general integration of iterators with stl or dropping them
+Reference trait for all clsses.
+Allocators that actaully make use of the mem-traits for singleton, fixed set, pooled, busy-free, 
+per-thread or per-process or per-machine if possible
+
+Strata-2 WinQL needs restructuring in the same way as Strata-3. This will also impact Strata-1
+Then Build Gen needs to be addressed
+

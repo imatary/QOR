@@ -1,0 +1,46 @@
+MonkiQOR will provide the View part of the overall QOR Model|View|Controller architecture
+
+This will mean base classes for Views and specific derived view classes to support QOR UI display on the range of supported rendering platforms.
+
+To support the rendering of Push Buttons on Windows, Linux, Mac, Android etc GDIButtonView, XButtonView, CocoaButtonView, QursesButtonView, OpenGLButtonView etc will be needed derived
+from a common base AbstractButtonView defining the interface with which a ButtonController will interact
+
+A view will consist of Visual Elements each backed by the relevant sub model of a Visual Model.
+
+Each Visual Element will be constructed from Visual Primitives which will made available to be rendered by a Monki Renderer. 
+The set of renderers available will depend on the platform and application type.
+
+Consider having levels of renderers, simple and advanced so that complex visual elements that will not appear on Qurses interfaces for example can make use of advanced renderer features
+without having to make many feature availability requests, rather a single renderer level query.
+
+A View will be in all casses an Observer on a Model which will provide all the State used by the View. 
+This model may in turn be derived for the purpose of supporting the View instance from another model or not but this does not concern the view which 
+will deal with a single model and must treat it as a shared resource.
+
+Views will contain other views in a hierarchy matching that of the Model hierarchy being observed.
+
+View instances will need to be manufactured by GUI specific factories in order to get the correct view sub-type matching the GUI.
+
+Will need a way for the platform to register renderer availability with Monki including Qurses registering one.
+
+
+An abstract GUI class with derivatives for Terminalware, Gameware etc
+A set of implementations which are actually derived from SystemQOR:: pimpl wrappers over the platform specific implementations of the abstract classes
+
+An abstract Primary Window class for each of the GUI classes which is derived and structured in the same way
+
+Monki should consider a platform/GUI as a provider of implementations or well known items such as a Modal Message that it can create and render. 
+The Windows GUI can provide the facility via MessageBox, the Qurses GUI can provide it via a Modal Panel of some kind. 
+A pure text UI might provide the same functionality by displaying the message and waiting for a key press.
+
+These semantic controls should properly be under Appocrita with the rendering and interaction details taken care of by Monki
+
+The set of semantic controls for an interface needs a description which could be in XML or JSON or such like.
+
+Short List Selector --> Menu, Image List, List Control, Pick List
+Two State --> Toggle Button, Switch, Status marker + Hot Key
+Activator --> Button, Menu item, Hot Key
+
+The order of these becomes the Tab order in a GUI presentation or the order in which choices are displayed in a Text UI.
+Each semantic control will need enough instance information for a complete GUI layout as per Qt or MFC but this can simply be ignored by simpler renderers.
+

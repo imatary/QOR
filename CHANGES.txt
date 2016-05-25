@@ -1,0 +1,7 @@
+10/03/2016
+Added large numbers of files locally from the previous stratified QOR project.
+All headers should now be present
+
+03/03/2016
+Added this file and other README type files
+Created GitHub repository https://github.com/mfaithfull/QOR

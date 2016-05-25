@@ -1,0 +1,16 @@
+CompilerQOR
+
+CompilerQOR is a shared library (.dll/.so) in modular builds and part of the unified shared library in monolithic builds
+CompilerQOR is platform (OS, Architecture) independent
+CompilerQOR provides abstraction of the host compiler, its capabilities and features.
+
+You do not normally need to link your applications or libraries against CompilerQOR but you can if you need
+access to Compiler intrinsic functions
+
+CompilerQOR is available in reduced but usable form at Strata-1. It is intended to be complete at Strata-2.
+If CompilerQOR is available at Strata-2 always use the Strata-2 or above builds as Strata1 may contain broken
+or incomplete implementations only sufficient to meets Strata-1 requirements.
+
+CompilerQOR also provides the QOR Preprocessor and Build Gen libraries as header only libraries.
+The QOR Preprocessor library is a development of the Boost Preprocessor library. 
+Build Gen is a preprocessor build script generator which leverages the power of the preprocessor library.

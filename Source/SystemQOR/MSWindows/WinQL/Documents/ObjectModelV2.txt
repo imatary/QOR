@@ -1,0 +1,58 @@
+
+DeviceManagerModel
+	"Setup Classes"
+		GUID-->CDeviceSetupClass
+		
+DeviceSetupClass
+	Properties
+		GUID
+		Machine
+		Name
+		UpperFilters
+		LowerFilters
+		Security
+		Security_SDS
+		DevType
+		Exclusive
+		Characteristcs
+		Local
+		Description
+		GUIDs
+	Instances
+		Properties
+			ID
+			Index
+			Info
+			PDOName
+			Location
+			Friendly Name
+			Manufacturer
+			DisplayName
+			Description
+			Parent
+			Service
+			SetupClassName
+			Driver
+		Interfaces
+			Properties
+				Active
+				Default
+				Removed
+				Path
+				InterfaceClassGUID
+				Index
+				UsageCount
+				
+CDeviceInterfaceClass
+	Properties
+		GUID
+		Machine
+	Instances
+		Properties
+			Active
+			Default
+			Removed
+			Path
+			InterfaceClassGUID
+			Index
+			UsageCount	

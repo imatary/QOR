@@ -1,0 +1,13 @@
+WinSharedBootstrap
+
+WinSharedBootstrap is a static library in modular builds and part of the unified shared library in monolithic builds
+WinSharedBootstrap is Microsoft Windows specific
+WinSharedBootstrap provides the entry point, startup and termination code for Windows shared libraries (.dll)
+WinSharedBootstrap is linked into all QOR Framework Dlls and Framework extension Dlls for Windows
+WinSharedBootstrap is intended to support 32bit and 64bit Dll builds
+WinSharedBootstrap is intended to support ANSI and UNICODE Dll builds
+WinSharedBootstrap belongs entirely in Strata-1. There are no plans to add anything to it above Strata-1.
+
+You do not need to link WinSharedBootstrap into your application (.exe) to use the QOR.
+You will however need to link it into any Dll you write to extend the QOR.
+

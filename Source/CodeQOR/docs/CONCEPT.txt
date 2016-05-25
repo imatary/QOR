@@ -1,0 +1,17 @@
+CodeQOR
+
+Generic utility code module
+
+Provides low level services to all the other modules including AOP interception, introspection and context.
+Provides basic data structures for use where the stl is not available or suitable
+Provides various forms of auto pointers and smart pointers for managing object lifetime
+Provides a Class Registry based factory system for factory pattern implementations
+Provides the infrastructure for Flyer pattern implementations
+Provides a basic Flyer based Error handling system based on Error Domains
+Provides templates configurable by Policy
+
+Contains only fully portable C++03, platform neutral, architecture neutral, code
+
+CodeQOR builds as a shared library in modular builds and as part of the single shared library in monolithic builds.
+
+CodeQOR is intended to be largely complete at Strata-2 but additions at Strata-3 will be required.

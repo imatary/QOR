@@ -1,0 +1,16 @@
+ArchQOR
+
+Strata-1 Stub code is in place. In looks like we'll need to extend it slightly otherwise we can't make the 
+necessary distinction between 32bit and 64bit targets for the OS specific libraries.
+
+Strata-2
+x86 support and a good deal of x64 support is implemented. JIT assembler ported from the AsmJIT project.
+TODO:
+The High level assembler design needs to be refactored to remove the separate intrinsics class
+Target feature requirement specification is needed so we can target specific x86 feature sets
+Host feature testing for meeting requirements is needed on top of the host feature reporting already done.
+A lot of code needs to be moved out of header inlines.
+Extensive tests are needed to exercise the low level and high level assemblers. 
+We need a real world assembly language project to port into Jit Asm to really show it working.
+ARM support is clearly the next big step. 
+Consider farming this out as a student project. The original x86 assembler was done as a GSoC project so an ARM equivalent should be plausible if pitched at the right level.

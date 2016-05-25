@@ -1,0 +1,37 @@
+//http://msdn.microsoft.com/en-us/library/windows/desktop/ms680313(v=vs.85).aspx
+//OVERLOADED _AMD64 = 0x8664,  seems to mean x64 app, 
+//           _EM64T = 0x8664,  AMD64 renamed by Intel to A-32e (later renamed EM64T, then yet again renamed to Intel 64)      
+//            _I386 = 0x14c,           means x32 app
+public enum MachineType : ushort
+{
+   IMAGE_FILE_MACHINE_UNKNOWN = 0x0,        
+   IMAGE_FILE_MACHINE_ALPHA = 0x184,       //Digital Equipment Corporation (DEC) Alpha (32-bit)
+   IMAGE_FILE_MACHINE_AM33 = 0x1d3,        //Matsushita AM33, now MN103 (32-bit) part of Panasonic Corporation
+   IMAGE_FILE_MACHINE_AMD64 = 0x8664,      //AMD (64-bit) - Advanced Micro Devices oR IS IT ??? OVERLOADED _AMD64 = 0x8664 - http://msdn.microsoft.com/en-us/library/windows/desktop/ms680313(v=vs.85).aspx  
+   IMAGE_FILE_MACHINE_ARM = 0x1c0,         //ARM little endian (32-bit), ARM Holdings, later versions 6+ used in iPhone, Microsoft Nokia N900
+   IMAGE_FILE_MACHINE_ARMV7 = 0x1c4,       //ARMv7 or IMAGE_FILE_MACHINE_ARMNT (or higher) Thumb mode only (32 bit). 
+   IMAGE_FILE_MACHINE_ARM64 = 0xaa64,      //ARM8+ (64-bit)
+   IMAGE_FILE_MACHINE_EBC = 0xebc,         //EFI byte code (32-bit), now (U)EFI or (Unified) Extensible Firmware Interface 
+   IMAGE_FILE_MACHINE_I386 = 0x14c,        //Intel 386 or later processors and compatible processors (32-bit)
+   IMAGE_FILE_MACHINE_I860 = 0x14d,        //Intel i860 (aka 80860) (32-bit) was a RISC microprocessor design introduced by Intel in 1989, this was depricated in 90's
+   IMAGE_FILE_MACHINE_IA64 = 0x200,        //Intel Itanium architecture processor family, (64-bit)
+   IMAGE_FILE_MACHINE_M68K = 0x268,        //Motorola 68000 Series (32-bit) CISC microprocessors
+   IMAGE_FILE_MACHINE_M32R = 0x9041,       //Mitsubishi M32R little endian (32-bit) now owned by Renesas Electronics Corporation
+   IMAGE_FILE_MACHINE_MIPS16 = 0x266,      //MIPS16 (16-bit instruction codes, 8to32bit bus)- Microprocessor without Interlocked Pipeline Stages Architecture
+   IMAGE_FILE_MACHINE_MIPSFPU = 0x366,     //MIPS with FPU, MIPS Technologies (32-bit) 
+   IMAGE_FILE_MACHINE_MIPSFPU16 = 0x466,   //MIPS16 with FPU (Floating Point Unit aka a math co-processesor)(16-bit instruction codes, 8to32bit bus)
+   IMAGE_FILE_MACHINE_POWERPC = 0x1f0,     //Power PC little endian, Performance Optimization With Enhanced RISC – Performance Computing (32-bit) one of the first
+   IMAGE_FILE_MACHINE_POWERPCFP = 0x1f1,   //Power PC with floating point support (FPU) (32-bit), designed by AIM Alliance (Apple, IBM, and Motorola)
+   IMAGE_FILE_MACHINE_POWERPCBE = 0x01F2,  //Power PC Big Endian (64?-bits)
+   IMAGE_FILE_MACHINE_R3000 = 0x0162,      //R3000 (32-bit) RISC processor
+   IMAGE_FILE_MACHINE_R4000 = 0x166,       //R4000 MIPS (64-bit) - claims to be first true 64-bit processor
+   IMAGE_FILE_MACHINE_R10000 = 0x0168,     //R10000 MIPS IV is a (64-bit) architecture, but the R10000 did not implement the entire physical or virtual address to reduce cost. Instead, it has a 40-bit physical address and a 44-bit virtual address, thus it is capable of addressing 1 TB of physical memory and 16 TB of virtual memory. These comments by metadataconsulting.ca
+   IMAGE_FILE_MACHINE_SH3 = 0x1a2,         //Hitachi SH-3 (32-bit) - SuperH processor (SH3) core family
+   IMAGE_FILE_MACHINE_SH3DSP = 0x1a3,      //Hitachi SH-3 DSP (32-bit)
+   IMAGE_FILE_MACHINE_SH4 = 0x1a6,         //Hitachi SH-4 (32-bit)
+   IMAGE_FILE_MACHINE_SH5 = 0x1a8,         //Hitachi SH-5, (64-bit) core with a 128-bit vector FPU (64 32-bit registers) and an integer unit which includes the SIMD support and 63 64-bit registers. 
+   IMAGE_FILE_MACHINE_TRICORE = 0x0520,    //Infineon AUDO (Automotive unified processor) (32-bit) - Tricore architecture a unified RISC/MCU/DSP microcontroller core
+   IMAGE_FILE_MACHINE_THUMB = 0x1c2,       //ARM or Thumb (interworking), (32-bit) core instruction set, used in Nintendo Gameboy Advance 
+   IMAGE_FILE_MACHINE_WCEMIPSV2 = 0x169,   //MIPS Windows Compact Edition v2
+   IMAGE_FILE_MACHINE_ALPHA64 = 0x284      //DEC Alpha AXP (64-bit) or IMAGE_FILE_MACHINE_AXP64
+}

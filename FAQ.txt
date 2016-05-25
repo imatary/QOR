@@ -1,0 +1,33 @@
+Frequently Asked Questions:
+
+
+Q.	What does QOR stand for?
+A.	Querysoft Open Runtime.
+
+Q.	What is the QOR?
+A.	A free, open source, C++, cross platform, advanced software framework.
+
+Q.	Is it done yet?
+A.	No. See STATUS.txt for the current status.
+
+Q.	Why would I use the QOR?
+A.	Because you want to write your application once and run it everywhere, forever, at full speed.
+	You want to be able to read, understand and change if necessary all the source in your product.
+	When a completely new hardware platform, Operating system or toolchain comes along you want to be there first with your existing code.
+
+Q.	How do I use the QOR?
+A.	1.	Read a little about the organization of the QOR and decide how you want to use.
+	2.	Configure it.
+	3.	Build it with your chosen Compiler for your chosen OS and hardware.
+	4.	Write your application against the QOR headers e.g. QOR/include/
+	5.	Link your application against the QOR runtime you built in step 3.
+
+Q.	What makes the QOR special?
+A.	The modular architecture and Aspect Oriented approach of the QOR mean it's easier to adapt to new platforms than other frameworks.
+	The Aspect separation of the QOR means even the simplect applications can take advantage of advanced interception techniques and the integrated unit test framework with minimal effort.
+	The QOR uses advanced C++ techniques so that you don't have to. It allows you to do as much or as little memory and object lifetime management as you want to.
+	The QOR is designed to be extended. It is modular even at the sub-Object level so you can replace just the parts you want without re-writing or duplicating thousands of lines of code.
+
+
+
+

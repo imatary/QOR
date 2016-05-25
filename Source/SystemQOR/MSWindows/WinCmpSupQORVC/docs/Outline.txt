@@ -1,0 +1,16 @@
+WinCmpSupQORVC
+
+WinCmpSupQORVC is a static library
+WinCmpSupQORVC is Microsoft Windows and Microsoft Visual C++ specific.
+WinCmpSupQORVC provides the language support code needed by Visual C++
+WinCmpSupQORVC is linked into all QOR Applications, Framework Dlls and Framework extension Dlls for Windows built with Visual C++
+WinCmpSupQORVC is intended to support 32bit and 64bit Dll builds
+WinCmpSupQORVC is intended to support ANSI and UNICODE Dll builds
+WinCmpSupQORVC is intended to support all versions of Visual C++ from Visual Studio 2002 onwards
+WinCmpSupQORVC is operational with Visual C++ 6 but VC 6 does not suport all the features of the dependent libraries
+WinCmpSupQORVC is required at Strata-1 but will not support all features of C++. It is intended to be complete at Strata-2.
+
+You will need to link WinCmpSupQORVC into your application (.exe) to use the QOR iff your application is built with Visual C++
+You will need to link WinCmpSupQORVC into any shared library (.dll) built with Visual C++ to use it as a QOR extension library.
+
+

@@ -1,0 +1,19 @@
+WinUsrExeBoot
+
+WinUsrExeBoot is a static library
+WinUsrExeBoot is Microsoft Windows specific
+WinUsrExeBoot provides the entry point, startup and termination code for Windows Exectuables (.exe)
+WinUsrExeBoot is intended to be linked into all QOR Application executables build for Windows
+WinUsrExeBoot is intended to support GUI and Console Application builds
+WinUsrExeBoot is intended to support 32bit and 64bit Application builds
+WinUsrExeBoot is intended to support ANSI and UNICODE Application builds
+WinUsrExeBoot belongs entirely in Strata-1. There are no plans to add anything to it above Strata-1.
+
+All Windows applications (.exe) built with the QOR must link with WinUsrExeBoot in order to be able to start.
+Do not link WinUsrExeBoot into any shared library (.dll)
+
+Note for application developers:-
+
+WinUsrExeBoot is the place to put a breakpoint if you wish to debug your entire executable from start to finish.
+Search for :- //NOTE: This is the entry point for all QOR Windows processes
+in Stub.cpp to find the first line at which a break point can be placed.

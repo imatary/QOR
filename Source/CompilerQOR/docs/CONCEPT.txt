@@ -1,0 +1,19 @@
+CompilerQOR
+
+Provides host compiler abstraction, i.e. makes the code work with lots of different Compilers
+
+Provides Compiler generic definitions and preprocessor macros
+Provides Compiler introspection, the code knows which compiler it was built with. The preprocessor knows what features the Compiler has and does not have.
+Provides an updated version of the Boost Preprocessor library
+
+
+All standards variations, special features, missing features and compiler specific items such as warnings and pragmas should be covered here.
+While it is not possible to make all Compilers behave the same or to add features to old Compilers that don't have them it is possible to provide a high level of code adaptation so that a wide range of Compilers can access almost all of the QOR code.
+
+All Strata-1 code must be available to all supported Compilers ergo for a Compiler to be supported it must build all Strata-1 code.
+
+CompilerQOR is built as a shared library in modular builds and as part of the single shared library in monolithic builds.
+
+CompilerQOR is intended to be complete at Strata-1 however this may change to Strata-2 if pre-processor based build script generation is introduced
+Compiler specific parsing of build logs for Code Coverage may also require CompilerQOR to be developed at Strata-2 or even Strata-3.
+

@@ -1,0 +1,69 @@
+
+Posum class hierarchy:
+
+CDescriptor	-->CFile-->CTerminal
+			-->CProcess-->CHostProcess
+			-->CSocket
+			-->CSharedMemoryItem
+			-->CSemaphore
+			-->CMessageQueue
+			-->CUser
+			-->CSemaphore
+			
+CHostSystem
+		.CFileSystem
+		.CClock
+		.CMemoryManager
+		.CSharedMemoryManager
+		.CResourceManager
+		.CMessenger
+		.CIPCNode
+		.CNetworkNode
+		.CInternetNode
+		.CErrorSystem
+		.CLibraryLoader
+		.CFloatingPointEnvironment
+		.CSystemMessage
+		.CMatch
+		.CGroup
+		.CIConv
+		.CIntergerEnvironment
+		.CNationalLanguageInfo
+		.CLibGen
+		.CLocale
+		.CMathOperations
+		.CMonetary
+		.CRegularExpressions
+		.CSheduler
+		.CSearch
+		.CSignaller
+		.CSysLog
+		
+CAsyncIOSession
+CFloatComplex
+CDoubleComplex
+CLongDoubleComplex
+CCharacter
+CWideCharacter
+CDirectory
+CDirectoryEntry
+CThread
+CThreadAttribute
+CBarrier
+CBarrierAttribute
+CConditionVariable
+CConditionVariableAttribute
+CMutex
+CMutexAttribute
+COnce
+CReadWriteLock
+CReadWriteLockAttribute
+CSpinLock
+CJump
+CString
+CWideString
+CStringCompare
+CTrace
+CTraceAttribute
+CTraceEvent
+CWordExp

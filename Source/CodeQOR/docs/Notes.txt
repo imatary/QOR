@@ -1,0 +1,43 @@
+Need to integrate and complete all types of strings including formatting and conversion, to and from numeric etc, collation, code page codec conversion and translation
+A standardised translation table type is needed, preferably one which does the mapping at compile time so lookup is fast.
+Codecs for lots of code pages, all Windows supported ones would be good.
+Locale data and implementation. C Library locale usage should be rebased on this to standardise it across platforms
+Do our own processing of the Unicode 8 data into our own table format for character properties, scripts, numerics etc
+Examine ICU as a possible 3rdparty
+Alter macros to conform to QOR_PP_ Standard and follow through with dependent code
+Provide explicit test executables for each class, even the simple ones, and each conceptual process such as error handling
+
+
+
+Consider a CTLRef with Locking and which Add Refs and Releases its target even if it doesn't own it.
+Can we provide a standard Ref or 2 at most for everything in the QOR?
+
+Need to sort out factories and memory management
+
+CProcessBase needs a Memory Manager with a default 'C' style Allocator which calls malloc, free and realloc internally.
+This should be overriden at the platform level with a lazy member that provides all the different memory types on the platform 
+Could we choose to use an Advanced Allocator which hands out objects or a Simple one which hands out memory?
+
+In this case we really do need default factories by Trait for everything as we have default Allocation now.
+
+Use the CDefaultInstancer template with Simple allocator by trait as the source.
+
+This should gives us a generalised type::factoryType.
+
+Do we then look in the Class Registry for a pre-exisiting or specialized instance of the factory type itself or do we just put a factory on the stack?
+
+This will depend on the factory. If type::factoryType::registered is true then we should defer to the Class Registry
+
+Consider if common basses for a lot of framework classes that do for example Thread awareness, instance locking, reference counting as a good idea or not?
+MFC got into lots of trouble that way but Qt doesn't much.
+
+Policy based members are an alternative but it's more dificult to ensure all the types have them that should.
+Could do with a set of 'rules' about having state, being locked to a single thread or not, being a 'resource' or not which should determine what we have.
+If these could be encoded as traits themselves then maybe the compiler would flag when we don't have the right members.
+
+Policies should determine the default Allocator, Instancer and Source and the default Thread Affinity object if any.
+Policies should be in every module namespace and should not be included unless building that module #ifdef them out to enforce the Policy of the including module when including headers from CodeQOR for example
+
+A reference counting policy to determine which if any internal reference counter is added
+A thread affinity policy to determine which if any thread affinity object is added
+A reference type policy to add reference provision with a Ref functor.

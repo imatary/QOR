@@ -1,0 +1,3 @@
+WinQL - High level Windows class library.
+
+A full featured object model covering the functionality of the Microsoft Windows Operating System.

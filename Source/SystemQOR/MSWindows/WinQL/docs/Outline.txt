@@ -1,0 +1,13 @@
+WinQL
+
+WinQL is a shared library (.dll) in modular builds and part of the unified shared library in monolithic builds
+WinQL is Microsoft Windows specific
+WinQL is a class library providing access to functionality from Microsoft's Win32 API.
+
+You can link your Application to WinQL if you are developing only for versions of Microsoft Windows.
+
+WinQL is available in reduced forms at Strata-1 and Strata-2. It is intended to be complete at Strata-3.
+If WinQL is available at Strata-3 always use the Strata-3 or above builds as Strata1-2 may contain broken
+or incomplete implementations only sufficient to meets their requirements.
+
+

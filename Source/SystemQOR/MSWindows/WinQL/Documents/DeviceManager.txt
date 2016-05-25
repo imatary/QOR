@@ -1,0 +1,25 @@
+//Device Manager
+
+Enumerators need a local list to hold Device Instances if they're going to own them as now.
+Need to make chldren of a device instance available as a device list if we're not going to forcibly enumerate everything.
+
+This will mean making each instance into a 'list' of its children or having it contain the list thus merging the enumerator and instance type hierarchies.
+
+System().Keyboards[ n ] | System().Keyboard == System.Keyboards[ 0 ]
+
+CKeyboard --|> CSharedKeyboard --|> CKeyboardDevice --|> CDeviceInterface
+					|											|-* CIODeviceFile
+					|											|-> CDeviceInstance
+					|												|- CDeviceInstanceModel
+					|
+					|- CKeyboardLayouts --* CKeyboardLayoutIterator --< CKeyboardLayout
+					|														|- CKeyboardLayoutHandle
+					|- CHotKeys --|> CTArray< CHotKey >
+
+Keyboard devices, those with GUID_DEVINTERFACE_KEYBOARD will need to be enumerated when System().Keyboards is constructed on access.
+For each keyboard a structure as above will be created referencing the CDeviceInstance already owned by its enumerator.
+The CSharedKeyboard will provide an interface to get a CKeyboardDeviceSession. This will provide the low level device specific IO controls from C:\WinDDK\7600.16385.1\inc\api\ntddkbd.h to query indicators etc
+
+System().Devices().Root()
+System().Devices().
+

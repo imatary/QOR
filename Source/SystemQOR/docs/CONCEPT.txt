@@ -1,0 +1,24 @@
+SystemQOR - The Operating System Abstraction library
+
+SystemQOR will provide a generic interface onto the System, its functionality and facilities, its capabilities, version, parameters, options and events.
+
+This interface may be used by application developers but is intended rather for use by generic QOR components that wish to interact with the Operating 
+System but do not want to care which Operating System it is they are interacting with.
+
+The SystemQOR will contain the platform specific implementation of the Posix interface for use by the CQOR interface library. 
+This implementation will also be available to other system specific code which may call it rather than routing calls through the generic wrapper.
+
+The additional functionality exposed will be that which is not covered by the Posix specification and cannot therefore be accessed via CQOR or PosumQOR.
+It will also be functionality that is not specific to any platform specialized backend portion of a particular QOR module .
+
+The SystemQOR folder within the project will contain not just the code for the SystemQOR library itself but all the system specific backends of QOR
+components and any and all other Operating System specific code such as Bootstraps and library loaders.
+
+Note: No Operating System dependent code should exist anywhere in the QOR outside of the SystemQOR folder and there should be no operating System specific 
+types required to use the SystemQOR interface itself.
+
+SystemQOR builds as a shared library in modular builds and as part of the single shared library in monolithic builds.
+
+SystemQOR is intended to be complete at Strata-3
+
+

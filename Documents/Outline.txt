@@ -1,0 +1,19 @@
+CQOR
+
+CQOR is a shared library (.dll/.so) in modular builds and part of the unified shared library in monolithic builds
+CQOR is platform (Compiler, OS, Architecture) independent
+CQOR provides an implementation of the 'C' standard library
+
+You can link your portable application or library to CQOR
+
+CQOR is available in reduced forms at Strata-1 and Strata-2. It is intended to be complete at Strata-3.
+If CQOR is available at Strata-3 always use the Strata-3 or above builds as Strata1-2 may contain broken
+or incomplete implementations only sufficient to meets their requirements.
+
+CQOR is thin standards compliance wrapper over platform specific and multiplatform implementations.
+
+On Microsoft Windows all C library implementations are dependent on and implemented in terms of the underlying
+API therefore new Windows specific code should avoid use of the C library to maximize performnce.
+This is true whether the QOR is used or not. It is recommended to use the QOR Posum library on Windows
+as a portable and performant alternative. The CQOR on Windows is implemented largely in terms
+of Posum. On Other platforms Posum is implemented in terms of the CQOR.

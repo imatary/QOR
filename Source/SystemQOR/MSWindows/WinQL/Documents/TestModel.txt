@@ -1,0 +1,30 @@
+
+WinQL Test Strategy:
+
+CodeServices ErrorSystem
+
+CodeServices Memory
+
+CodeServices Text
+
+Code Services Threading
+
+Code Services Module
+
+Code Services Locale
+
+Code Services FileSystem / FileSystem
+
+Code Services Resources
+
+Code Services Application
+
+System and OSServices Object model
+
+User Object Model
+
+Application Object Model
+
+IO
+
+Graphics

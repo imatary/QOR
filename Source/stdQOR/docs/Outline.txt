@@ -1,0 +1,13 @@
+stdQOR
+
+stdQOR is a shared library (.dll/.so) in modular builds and part of the unified shared library in monolithic builds
+stdQOR is platform (Compiler, OS, Architecture) independent
+stdQOR provides an implementation of the C++ standard library
+
+You can link your portable application or library to stdQOR
+
+stdQOR is available in reduced forms at Strata-1 and Strata-2. It is intended to be complete at Strata-3.
+If stdQOR is available at Strata-3 always use the Strata-3 or above builds as Strata1-2 may contain broken
+or incomplete implementations only sufficient to meets their requirements.
+
+stdQOR is a branch of the llvm libc++ project with the intent that the QOR will eventually be a libc++ target platform.

@@ -1,0 +1,16 @@
+stdQOR - The QOR standard library
+
+The QOR standard C++ library is intended to be a minimally changed port of the LLVM/clang/libc++ project. 
+This project is at the time of writing the newest and most easily ported standard library implementation. 
+It will continue to be at the cutting edge of C++ through C++14 while hopefully 
+maintaining a high degree of backward compatability. While the QOR cannot simply use libc++ out of the 
+box until and unless the QOR becomes a target platform of the the libc++ project itself we can incorporate
+it with minimal changes.
+
+Over time the QOR implementation may diverge from the LLVM implementation in order to maintain compatability
+with the set of already qualified compilers.
+
+stdQOR builds as a shared library in modular builds and as part of the single shared library in monolithic builds
+
+stdQOR is intended to be complete at Strata-3
+

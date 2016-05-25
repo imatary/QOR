@@ -1,0 +1,13 @@
+ArchQOR
+
+ArchQOR is a shared library (.dll/.so) in modular builds and part of the unified shared library in monolithic builds
+ArchQOR is platform (Compiler, OS) independent
+ArchQOR provides abstraction of the target architecture, its capabilities and features.
+
+You will need link your applications and libraries against ArchQOR.
+
+ArchQOR is available in stub form at Strata-1. It is intended to be complete at Strata-2.
+Always use the Strata-2 or above build unless you are developing specifically for Strata-1
+
+ArchQOR provides a Just In Time Assembler enabling QOR code to generate host specific machine language 
+functions at runtime from C++ analogues of that code.

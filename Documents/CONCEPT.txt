@@ -1,0 +1,18 @@
+CQOR - The QOR C Library.
+
+CQOR is intended to be a direct point by point implementation of the Posix specification, currently Posix 2008, to the extent that this is possible.
+As such it should be maximally compliant with the Posix specification.
+CQOR is also intended to be a direct replacement for glibc and MSVCRT, the two most widely used C Library implementations. 
+As such it needs to be a superset of Posix and of those libraries at the interface. It is not however intended to have or to maintain binary 
+compatibility with either of those libraries or any other. There are too many intractable inconsistencies between the current libraries and between
+those libraries and the specification to attempt such compatability. As such rebuilding code against the CQOR may require minor adjustments.
+These should be minimised to the extent possible.
+CQOR is intended to be mostly a single layer interface library over platform specific implementations within the SystemQOR library.
+Given this once CQOR is interface complete it should neither grow nor change very much becoming an effective Posix ABI which applications can rely on.
+
+CQOR is built as a shared library in modular builds and as part of the single shared library in monolithic builds.
+
+CQOR is intended to be complete at Strata-3
+
+
+

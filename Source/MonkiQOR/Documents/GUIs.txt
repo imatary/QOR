@@ -1,0 +1,21 @@
+
+Qurses
+Win32
+WPF
+GTK+/GTKmm
+Fox or TnFox
+Aqua - OSX
+Android
+iOS
+
+In all cases make sure to support all the native idioms, shortcut keys, accessibility and i18n support of the platform if we go for native look and feel.
+
+
+WidgetGUI developed from or even directly using Qt
+
+Build Duktape directly from source as a 3rd party DLL. Later we will need to interfere with it to add more builtin objects etc.
+
+Create C++ object wrappers, session like objects and a base class for script callable functors within MonkiQOR
+
+We will need to provide a window object. That in turn will need an XMLHttpRequest for AJAX
+

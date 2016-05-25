@@ -1,0 +1,356 @@
+Object Model
+
+CodeServices
+	DataStructures
+		CTHandleMap< class THandle, class TObject >
+		
+	nsWinQAPI::ErrorDomain
+	CHandle
+	CRAIISessionHandle : private CHandle
+	template< class TObject > class CTypedSessionHandle : public CRAIISessionHandle
+	CStringHelper : public CBaseStringHelper
+	CSyncHandle : public CHandle
+	CThreadHandle : public CSyncHandle
+	CSyncHandleSet
+	CThreadAffinity
+	template< class _tChar > class CString : public nsCodeQOR::CString< _tChar >
+	CSList
+	CSharedObjectLockFunctor
+	CSharedObjectUnlockFunctor
+	template< class T > class CTObjectLock
+	template< class T > class CSharedRef
+	template< class Tbase > class CSharedMember
+	template< class T >	class CSharedMemberAdaptor : private T
+	CWinQLPolicy
+	
+System
+
+	CSystem
+	
+	Machine
+
+	Devices
+		//Interfaces
+			-lookup by known GUID
+		//SetupClasses
+			-enumerated
+		//Instances
+			-lookup by device ID
+		//Drivers
+			-enumerated ( will need to work out how to get them all from WMI )
+		//Root
+			//ACPI Enumerator
+				//PCI Enumerator
+		//Keyboard - shortcut to primary keyboard device
+		//Mouse - shortcut to primary Mouse device
+		//Display - shortcut to primary display device
+		
+		CDeviceFile;
+		CIODeviceFile;
+		CDeviceHandle : public CHandle
+		CMessageWaitingIndicator
+		CBattery : public CDeviceInterface
+		CDeviceClass - CDeviceSetupClass
+		CDeviceClassCollection
+		CSetupAPIBase
+		template< class TKey, class TItem > class CTDeviceCollection : public nsMammut::CMapModel< TKey, TItem >, public CSetupAPIBase
+		CDeviceDriver
+		CDeviceEnumerator : public CDeviceInfoSetBase
+		CRootDeviceEnumerator
+			CIterator
+		CDeviceFile
+		CDeviceHandle : public CHandle
+		CDeviceInstance
+		CDeviceStringProperty : public nsMammut::CFunctionalProperty< CWString, CDeviceStringProperty >
+		CDeviceInstanceModel : public nsMammut::CMapModel< CTString, nsMammut::CModel >
+		CDeviceInstanceCollection
+		CDeviceInstanceEnumerator : public nsAppocrita::CController, public CDeviceInfoSetBase, public CSetupAPIBase
+		CDeviceInterface
+		CDeviceInterfaceClass
+		CDeviceInterfaceClassCollection
+		CDeviceInfoSetBase
+		CDeviceList : public CDeviceInfoSetBase
+		CDeviceManager
+		CSystemDeviceManager : private CDeviceManager
+		CDeviceSetupClassEnumerator : public nsAppocrita::CController, public CSetupAPIBase
+		CDeviceInterfaceList
+		CIODeviceFile : public CDeviceFile
+		CKeyboardLayout
+		CKeyboardLayouts
+		CHotKey
+		CHotKeys : public nsCodeQOR::CTArray< CHotKey*, CWinQLPolicy >
+		CKeyboard : private CPrivateKeyboard
+		CMouse : public CDeviceInterface
+		CDeviceNotification
+		CRawInput
+		CTape
+		
+	Locale
+		CSystemLocale : public CLocale
+	Information
+		CSystemInfo
+			CParameters
+		CSystemInfoHelper
+		CSystemParameterHelper
+		
+	Power		
+		CPowerRequest						
+		CSystemPowerManager : private CPowerManager
+			CPowerManager
+				CPowerScenarioCollection : public nsCodeQOR::CTArray< CPowerScenario*, CWinQLPolicy >
+					CPowerScenario
+						CPowerSettingCollection : public nsCodeQOR::CTArray< CPowerSetting, CWinQLPolicy >
+							CPowerSetting
+				CPowerSchemeCollection : public nsCodeQOR::CTArray< CPowerScheme*, CWinQLPolicy >
+					CPowerScheme
+				CPowerDeviceCollection : public nsCodeQOR::CTArray< CPowerDevice*, CWinQLPolicy >
+					CPowerDevice
+				CPowerHelper
+				CAdvancedPowerHelper
+				CPowerSettingNotification
+				CMessageWaitingIndicator
+				
+	Display? Should this be under devices
+		?Resolution?
+		?Monitor links?
+		?Other details and properties?
+
+	Performance
+		CPerformanceHelper
+		
+	Registry
+		CRegistryHelper
+		CRegKey
+		CRegistry : public CRegistryHelper
+			CProfile
+			CPrivateProfile : public CProfile
+			
+	Clipboard
+		CClipboardFormatHelper
+			CListener
+		CClipboardHelper
+		CClipboardSession
+		CClipboardViewerSession
+		CClipboard : public CClipboardHelper
+		
+	Log
+		CClassicEventProviderSession
+		CClassicEventControllerSession
+		CEventLogAccess
+		CEventLogClient : public CEventLogAccess
+		CBackupEventLog : public CEventLogAccess
+		CEventLogServer : public CEventLogAccess
+		
+	Security
+
+	UserAccounts
+		CUser
+		
+	LogonSession
+		CSession : public CSessionHelper
+			WindowStations
+				Desktops
+				
+	Time
+		CTimeHelper
+	Calendar
+		
+	FileSystem
+		Volume
+		Disk
+		Folder
+		CFile : public nsWin32::CDeviceFile
+		CFileHandle : public CDeviceHandle
+		CFileHelper
+		CDirectoryHelper
+		CChangeNotification
+		CMemFile
+		CBackup
+		
+	ProcessList
+        CRemoteProcess
+
+Application
+
+	CWin32Application
+		CAppRestart
+		CActCtx 
+		
+	Process
+		CAtExit : private CMutex
+		LibraryLoader
+		CProcess : public nsCodeQOR::CProcessBase, public CWinModule
+		class CTerminate : private CMutex
+		CProcessHelper
+		CSystemHelper - to be combined into a utility helper class
+		CDebuggingHelper
+		
+	Environment
+		CEnvironment
+		
+	ErrorSystem
+		CErrorSystem : public nsWin32::CErrorHelper
+		\-|>CErrorHeap
+		CExceptionFrame
+		CStructuredExceptionHelper
+	
+	Hooks
+		CHook
+		
+	Locale
+		CCalendarHelper
+		CLocaleHelper
+		
+	Memory ( CMemoryManager )
+		CHeap
+			DefaultHeap -
+			SpecialHeap[ ErrorHeap|ReserveHeap ]
+			PrivateHeap[ index ]
+			( Handle map from handle to Heap )				
+		CUserPhysicalPages
+			Physical
+		CExePageAllocator
+			Executable
+		CVirtualHelper
+			Virtual
+		CLocalHelper
+			Local
+		CGlobalHelper
+			Global
+		CWin32Allocator
+			Default Allocator			
+		template< typename TInstancer, typename T >	class CDefaultAllocator
+		template<typename T> class TlsEntry : protected nsWin32::nsCodeServices::CTLSHelper
+		CDefaultSource
+		AWE?
+		NUMA?
+		
+	Resources
+		CResourceUpdate
+		CResourceHelper
+	
+	Threads
+		Critical Section classes
+		Mutex classes
+		CThread : public nsCodeQOR::CThreadContextBase
+		CThreadResourceManager;
+		CThreadImpl : public nsCodeQOR::CThreadContextBase
+		CThreadState;
+		CThreadCRTState
+		CThreadExceptionState
+		template<typename T> class TlsEntry : protected CTLSHelper
+		CThreadPool
+		CThreadPoolHelper
+		CThreadPoolClanupGroup
+		CThreadPoolEnvironment
+		CThreadPoolIOSession
+		CThreadPoolWait
+		CThreadPoolWork
+		CInterlockedHelper
+		shared_long
+		CSRWLock
+		CSemaphore
+		CSessionSemaphore : public CSemaphore
+		CSessionSemaphoreLock
+		CGlobalSemaphore : public CSemaphore
+		CGlobalSemaphoreLock
+		CSemaphoreLock
+		CPrivateNamespace
+		CMutex
+		CMutexLock
+		CLock
+		CInitOnceHelper
+		CASyncInitOnce
+		CInitOnce
+		CFLSHelper
+		CFiber
+		CEvent
+		CSessionEvent 
+		CGlobalEvent 
+		CConditionVariable 
+		CBoundaryDescriptor
+		
+	Timers
+		CThreadPoolTimer
+		CWaitableTimer
+		CTimerQueue
+			CTimer
+		CTimer
+		
+	Modules
+		CDll : public CWinModule, public nsWinQAPI::CLibrary
+		CLibraryLoader
+		CModuleBootStrap
+		CProcessBootStrap : public CModuleBootStrap
+		CSharedBootStrap : public CModuleBootStrap
+		CModule : public CDll
+		
+	Security
+		CUserObject
+		CTrustee 
+		CSecurityAttributes
+		CLUID 
+		CLSAUnicodeString 
+		CLSAPolicy
+		CLSATrustedDomain : public CLSAPolicy
+		CLSAUnicodeStringArray
+		CAuthenticationInfo 
+		CNT4OWFAuthenticationInfo 
+		CClearAuthenticationInfo 
+		CVersionAuthenticationInfo 
+		CTrustedDomainAuthenticationInfo
+		CTranslatedName
+		CTrustInformation
+		CTrustedDomainInfoEx
+		CSecurityAuthority
+			CAccount
+			CSession
+				CTrustedDomainEnumeration
+				CTrustedDomainEnumerationEx
+				CPrivateData
+			CTrustedDomain : public CTrustedDomainInfoEx
+		CImpersonationSession
+		CSelfImpersonationSession : public CImpersonationSession
+		CNamedPipeClientImpersonationSession : public CImpersonationSession
+		CLoggedOnUserImpersonationSession : public CImpersonationSession
+		CAnonymousImpersonationSession : public CImpersonationSession
+		CExplicitAccessArray : public nsCodeQOR::CTArray< ExplicitAccess, CWinQLPolicy >
+		CSecurityDescriptor
+		CSIDIdentifierAuthority 
+		CSID
+		CWindowsAccountDomainSID : public CSID
+		CAccessToken
+		CAccessControlList
+		CWindowsAccessControlList
+		
+	User
+		CUser
+		
+	Console
+		CConsoleScreenBuffer
+		CSreenBuffer
+		CConsoleHelper
+		CConsole
+	GUI
+		CWinEventServer
+		CWinEvent
+		CWinEventClient
+		CActiveAccessibilityClient : public CWinEventClient
+		
+	IPC
+
+		Servers
+
+		Clients
+
+		DDE
+			CDDEAppInstance
+			CDDEStringItem
+			CDDEDataItem
+			CDDEDataAccess
+			CDDEClient
+				CConversation
+				CConversationList
+				CTransaction
+			CDDEServer
+			

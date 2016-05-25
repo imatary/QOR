@@ -1,0 +1,12 @@
+CodeQOR
+
+CodeQOR is a shared library (.dll/.so) in modular builds and part of the unified shared library in monolithic builds
+CodeQOR is platform (Compiler, OS, Architecture) independent
+CodeQOR provides basic facilities to rest of the QOR libraries and to QOR applications.
+
+You will need to link your QOR Application or QOR extension shared library with CodeQOR.
+
+CodeQOR is available in reduced but safe form at Strata-1. It is intended to be complete at Strata-2.
+Use the Strata-2 build where available to get all the features of CodeQOR.
+
+CodeQOR provides the framework Aspect Oriented Programming within the QOR and QOR applications.

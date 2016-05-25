@@ -1,0 +1,20 @@
+CodeQOR deals with memory allocation within the following conceptual framework:-
+
+Memory allocation is broken down into 3 roles:
+
+Allocator - handles allocation count and object initialization/destruction
+Instancer - handles singletons, limited instances, counted instances, flyers and other instancing patterns
+Source - handles raw memory blocks, OS interaction, pre-allocation and pooling
+
+An Allocator for type T is formed by template instantiation of an Allocator type with an Instancer type itself parameterised with a Source type.
+
+e.g. CDefaultAllocator< CDefaultInstancer< CDefaultSource, T >, T >
+
+An Allocator is still a single object as usual in this scheme but different Instancer and Source types can be plugged in to make use of reserved 
+heaps or instance pooling automatically.
+
+Sources always deals in counts of bytes and so don't need to consider the type being allocated. 
+The default Source manages memory using the default implementations of new[] and delete[] so using a default allocator as above is equivalent 
+to using C++ new and delete.
+
+

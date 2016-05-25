@@ -1,0 +1,293 @@
+PosumQOR
+
+System Databases
+		ndbm.h
+	
+Environment
+
+	Environement variables
+		stdlib.h:partial
+	System Name
+	System Version
+		sys/utsname.h	
+	Hardware Type
+	Quotas
+		ulimit.h
+	Usages
+		sys/resource.h
+		sys/param.h
+	Limits, resource, numeric etc
+		limits.h				
+		
+Dynamic Libraries
+		dlfcn.h
+		libgen.h
+
+Networking
+		netdb.h
+		netinet/in.h
+		netinet/tcp.h
+		net/if.h
+		arpa/inet.h
+	Sockets
+		sys/un.h
+		sys/socket.h
+		
+Comms
+	IPC
+		mqueue.h
+		sys/msg.h
+		sys/ipc.h
+	Shared Memory
+		sys/shm.h
+		sys/mman.h:partial
+	Serial
+		termios.h
+		unistd.h:partial
+I/O
+		poll.h
+		stropts.h
+		sys/uio.h
+		sys/select.h
+	AsyncIOSession
+		aio.h:aio_cancel
+		aio.h:aio_error
+		aio.h:aio_fsync
+		aio.h:aio_read
+		aio.h:aio_return
+		aio.h:aio_suspend
+		aio.h:aio_write
+		aio.h:lio_listio
+		
+User Account Security
+		unistd.h:partial
+		utmpx.h:partial
+		sys/acct.h
+	Groups
+		grp.h
+	Password
+		pwd.h
+		
+FileSystem
+	Permissions/Security
+		cpio.h
+	Paths and Folders
+		dirent.h
+		fnmatch.h
+		ftw.h
+		glob.h
+		stdlib.h:partial
+		unistd.h:partial
+	File
+		fcntl.h
+		stdio.h:most functions
+		unistd.h:partial
+		sys/stat.h
+		sys/statvfs.h
+		
+String Handling
+		ctype.h
+		inttypes.h:strtoimax
+		inttypes.h:strtoumax
+		inttypes.h:wcstoimax
+		inttypes.h:wcstoumax
+		regex.h
+		stdlib.h:partial
+		strdup.h
+		string.h:partial
+		strings.h
+		wchar.h
+		wctype.h
+		wordexp.h
+		
+I18n
+		iconv.h
+		langinfo.h
+		locale.h
+		monetary.h
+		nl_types.h
+		
+Debugging/Error Handling
+		errno.h
+		fmtmsg.h
+		setjmp.h		
+		stdlib.h:partial
+	Assertion failure error in Error Domain
+	A PosumAssert Macro to assert and raise Assertion failures
+		assert.h:__assert_fail
+		assert.h:__assert_perror_fail
+		assert.h:__assert
+		
+CMath
+		complex.h
+		float.h
+		math.h
+		tgmath.h
+		stdlib.h:partial
+	Floating point environment
+		fenv.h
+		inttypes.h:imaxabs
+		inttypes.h:imaxdiv
+
+Processes
+		spawn.h
+		stdio.h:spawn functions
+		stdlib.h:partial
+		unistd.h:partial
+		
+Threading
+		pthread.h
+		sched.h
+		semaphore.h
+		stdlib.h:partial
+		unistd.h:partial
+		sys/sem.h
+	Waiting
+		stdlib.h:partial
+		sys/wait.h
+		
+Search
+		search.h
+		
+Signals
+		signal.h
+		
+Memory Management
+		stdlib.h:partial
+		string.h:partial
+		unistd.h:partial
+		sys/mman.h:partial
+Logging
+		syslog.h
+		
+Tracing
+		trace.h
+		
+Time
+		time.h
+		utime.h
+		utmpx.h:partial
+		sys/utime.h
+		sys/times.h
+		sys/timeb.h
+		sys/time.h
+		
+		
+PosumQOR
+
+CEnvironemnt
+	.Limits
+	.Limits.MinLong64
+	
+	CResource
+		Usage
+		PerUserQuota
+
+	OSType
+	OSName
+	OSVersion
+	HardwareType
+	HardwareName
+	HardwareDescription
+	HardwareFeatures
+	std::map< CString, CString > representing environment variables
+
+Objects for Pthreads
+CScheduler
+
+CMath
+	members for math function with the ability to create nameed 'variables' which are remembered and can be passed to any of the functions
+CFloatEnvironment - floationg point environment related down to ArchQOR
+
+
+CLibraryLoader
+CLibrary
+
+CSignaller
+CSignalHandler
+
+CSpawner
+CForker
+
+CErrorHandler
+CError
+
+CTracer
+CLogger
+
+CPath
+CFolder
+CDescriptor
+CIODescriptor
+CFile
+CPipe
+CSocket
+CIOSession
+CSharedMemoryManager
+
+CChar
+CString
+CRegex
+CGlob
+
+CLocale
+
+CUser
+CUserGroup
+
+CClock
+CTimeZone
+CTimer
+
+
+CLogonSession?
+CPower?
+
+//------------------------------------------------------------
+Posum Classes and Concepts
+
+Posum Error is an integer
+Posum Limit is a Name Value pair
+
+Posum File is an integer descriptor
+Posum Asynchronous Session is a void*
+Posum Directory is a pointer
+Posum DirectoryEntry is a pointer
+Posum Stream is a pointer
+Posum Glob is an Object
+
+Posum Dynamic Library is an object over a name string
+Posum Code Symbol is a pointer over a name string in the context of a Posum Dynamic Library
+
+Posum Message Queue is an integer Descriptor
+Posum Thread and associated Sync objects are Objects
+Posum Semaphore is an integer Descriptor
+Posum Password is an Object
+Posum Search Object
+
+Posum Regex is an Object
+Posum Character is an unsigned integer
+Posum String is a char*
+Posum WideString is a wchar_t*
+Posum Message is a formatted String
+Posum WordExpansion is an Object
+Posum Locale is a void*
+
+Posum HostProcess is an Object
+	Posum TraceManager is a Process Object
+	Posum MemoryManager is a Process Object
+	Posum SignalManager is a Process Object
+	Posum Terminal is a Process object
+	Posum Environment
+
+Posum System is an Object
+	Posum Process Manager is a System Object
+	Posum Clock is a System object
+	Posum SysLog is a System object
+	Posum Scheduler is a System Object
+	Posum DBM is an Object
+	Posum NetDB is an Object
+	Posum Group is a descriptor
+	Posum Floating Point Environment is a System Object
+
+Implement base PosumImpl classes as wrappers over CQOR functions. Ideally all CQOR functions will be available through Posum

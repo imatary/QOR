@@ -1,0 +1,13 @@
+SystemQOR
+
+SystemQOR is a shared library (.dll/.so) in modular builds and part of the unified shared library in monolithic builds
+SystemQOR is platform (Compiler, OS, architecture) independent
+SystemQOR provides an operating system abstraction for functionality which falls outside Posix
+
+You can link your portable application or library to SystemQOR
+
+SystemQOR is available in reduced forms at Strata-1 and Strata-2. It is intended to be complete at Strata-3.
+If SystemQOR is available at Strata-3 always use the Strata-3 or above builds as Strata1-2 may contain broken
+or incomplete implementations only sufficient to meets their requirements.
+
+

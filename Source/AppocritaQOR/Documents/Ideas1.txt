@@ -1,0 +1,21 @@
+AppoctiaQOR : The generic layer Application library
+
+A single Application class rather than a hierarchy of alternatives.
+
+Functions to set/get a Role on the Application class to determine most of the necessary configuration and behaviour differences needed between types of application.
+
+Run function to operate the Executive in the main thread
+Start function to operate it on a separate thread.
+
+Application destructor will wait for parallel Executives to complete
+
+This will give us Unix Daemon like behaviour without having to fork, do the initial setup and wait, then Start a new Executive Thread whenever a client connects
+
+RunUI function for interactive applications which will load a UI description from file or resource and create a UI session attached to the next Executive to be launched
+
+StartUI function which will load a UI and launch it on a separate Thread with its command queue connected to the Executive
+
+
+The Applications job internally will be to scan the command queues of multiple clients until it's told by one of those queues to quit.
+Consider having a command queue for the parsed result of reading the command line itself. 
+A command queue for the parsed results of reading StdIn ( used for Console Apps ) and of course a command queue from each GUI thread

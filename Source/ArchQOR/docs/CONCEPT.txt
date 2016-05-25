@@ -1,0 +1,14 @@
+ArchQOR
+
+Architecture abstraction Module
+
+To provide as consistent as possible an interface to the target CPU.
+To provide a JIT assembler for creating target specific assembly level routines at runtime.
+To provide a High level JIT assembler for creating functions at runtime.
+
+The JIT assembler to support performance, adaptation to special or advanced hardware and low level intrinsic function support replacing compiler specific proprietory source.
+
+ArchQOR builds as a shared library in modular builds and as part of the single shared library in monolithic builds.
+
+ArchQOR is intended to be complete at Strata-2
+

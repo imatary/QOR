@@ -1,0 +1,5 @@
+System (nsWin32::CSystem)
+	Devices ( CDeviceManager )
+		Root ( CRootDeviceEnumerator )
+			( Name ) ( CDeviceEnumerator )
+		

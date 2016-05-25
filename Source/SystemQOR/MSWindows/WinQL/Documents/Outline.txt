@@ -1,0 +1,146 @@
+
+Outline WinQL Object Model
+
+Application/Controller
+	ResourceManager
+		MemoryManager->Process/MemoryManager
+		ThreadCoordinator->Process/Threads
+		PipelineManager--Bluefoot
+		IO & FileManager
+	Model
+		Environment->Process/Environment
+		Configuration
+		Locale
+	View
+		GUI
+		Theme
+		Console
+	Node
+		->System/Host
+		Protocols
+		Connections
+	Process
+		Environment
+		MemoryManager
+		AOPSystem
+		Handlers
+		Threads
+		Modules
+
+System
+	Info
+	Locale
+	DeviceManager
+	PowerManager
+	Keyboard
+	Mouse
+	Display
+	Performance Counter
+	Registry
+	Clipboard
+	Machine
+		cpuinfo
+		Logic
+			CPU
+			FPU
+			GPU
+		HLAssembler
+
+Application ( Objects specific to this application )
+	GDI-GUI
+	GDI-Graphical Objects
+	Qurses-GUI
+	Media Foundation objects
+	Audio Objects
+	Timers
+	Security Objects
+	IO Clients and Servers
+	Strings
+	Resources
+	COM Servers
+	COM Clients
+	Process Object
+		Environment
+		IO Descriptors
+		Time
+		Handles
+		Low level handlers for memory failures and termination
+		ErrorSystem and WinQL Error Domain
+		Memory Manager
+			Memory and Allocators
+	Threads and Sync Objects
+	Modules and Libraries			
+	Locale
+		
+System	( Objects representing System wide artifacts and resources, devices, desktops and the like )
+	User
+	Files
+	Resources
+	Processes
+	Event Log
+	Security
+
+	Locale;
+	Information;
+	DeviceManager;
+	PowerManager;
+	Keyboard;
+	Mouse;
+	Display;
+	PerformanceCounter;
+	Registry;
+	Clipboard;
+
+
+QOR memory management:
+
+Every object from the QOR should be able to be used without ever calling new or delete. i.e. 
+a factory method should be available for every creatable type which returns a smart pointer, 
+auto pointer or reference to that type such that the instance will be automatically cleaned up
+when the stack based reference goes out of scope.
+Every object from the QOR should be able to used by being instanced with new and delete or
+other manual heap allocation mechanisms like malloc except where the object is intended exclusively for use on the stack.
+
+This is an example of the more general priciple that the QOR should not require the developer
+to perform any onerous, difficult, risky or error prone tasks such as manual memory management.
+Neither should the QOR prevent the developer from doing any task which is possible with the C++
+language in their development environment, which may be assumed to be any task at all including
+onerous, difficult, risky and error prone tasks such as memory management.
+
+This is in turn based on the QOR assumption that the developers using the QOR are in no way
+inferior or less capable than those writing it, they merely have a different focus of activity.
+In fact they may actually be the same developers at a different time.
+Also on the QOR assumption that no developer is perfect and that aids such as smart pointers
+make it easier to produce maintainable code with a low bug count even for the most experienced and
+advanced developers.
+
+No developer is perfect
+No language is perfect
+No operating system is perfect
+No hardware platform is perfect
+No framework is perfect
+In software products nothing less than perfection is sufficient.
+
+
+Need to add OpenGL support as a priority, WinQAPI will need to support Opengl32.dll 
+
+Need A REG_MULTI_SZ class in the Registry section that can convert to and from a nsCodeQOR::CTArray< nsWin32::CTString >
+Make use of it in CDeviceClass::GetLowerFilters and CDeviceClass::GetUpperFilters
+
+Document object ownership in the Device Manager to ensure we don't leak.
+
+CThreadLocalDescriptorTable
+
+Register every handle with and get a descriptor in return
+
+CDescriptorTable at the process level to hand out blocks of unique descriptors to each thread on request
+
+The nsWin32 variant of CTLRef needs a Mutex adding so that only one Thread can have references to an object at a time.
+Need a macroised way to add thread affinity to objects themselves, just a standard member name for a ThreadContext*
+The nsWin32 standard Reference type should also Refcount even through it doesn't own the refrenced item so that every instance can be audited.
+
+The Resource manager should own all the per-type Handle tables such that it can enumerate every Windows object of each given type
+
+The descriptors can then be used for Posum integration.
+
+MemoryManager lazy member as part of the process right from CodeQOR upward

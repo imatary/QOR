@@ -1,0 +1,31 @@
+Q.	How does CompilerQOR know which Compiler is being used?
+
+A.	This is worked out during C Preprocessing so in fact CompilerQOR detects which C Preprocessor is being 
+used to expand its macros and from that which Compiler is about to be used to compile QOR code.
+Each compiler's C Preprocessor automatically includes some unique definitions without them having to be declared
+anywhere. For example the GNU C and C++ compilers define __GNUC__ automatically.
+By testing to see which of these pre-defines is present during preprocessing we can work out which compiler has 
+been invoked, like this:
+
+#	if defined(__GCCXML__)
+#	   define __QCMP_COMPILER	__QCMP_GCCXML		//GCC-XML emulates other compilers, it has to appear first here!
+#	elif defined(_CRAYC)
+#		define __QCMP_COMPILER	__QCMP_CRAYC		//EDG based Cray compiler
+#	elif defined __CUDACC__
+#		define __QCMP_COMPILER	__QCMP_NVIDIACUDA	//NVIDIA CUDA C++ compiler for GPU
+#	elif defined __COMO__
+#	   define __QCMP_COMPILER	__QCMP_COMEAU		//Comeau C++
+#	elif defined(__PATHSCALE__) && (__PATHCC__ >= 4)
+#		define __QCMP_COMPILER	__QCMP_PATHSCALE	//PathScale EKOPath compiler (has to come before clang and gcc)
+#	elif defined __clang__
+#		define __QCMP_COMPILER	__QCMP_CLANG		//Clang C++ emulates GCC, so it has to appear early.
+#	elif defined __DMC__
+#	   define __QCMP_COMPILER	__QCMP_DIGITALMARS	//Digital Mars C++
+#	elif defined(__INTEL_COMPILER) || defined(__ICL) || defined(__ICC) || defined(__ECC)
+#		define __QCMP_COMPILER	__QCMP_INTEL		//Intel
+#	elif defined __GNUC__
+#		define __QCMP_COMPILER	__QCMP_GCC			//GNU C++
+...
+
+This technique and the various unique definitions were taken from the Boost library headers, www.boost.org
+

@@ -1,0 +1,56 @@
+Sort out Module/WinModule/DLL hierarchy, remove Handle map if it's not necessary.
+ Complete Library Loader so it can act as a standard Application component, can load and unload Dlls and report where it loaded them from.
+ An application can then report the details of both the implicit and runtime dynamic dlls that it has loaded at any given time. Truly useful!
+
+ Need a series of tests for reference, handle and threading classes to ensure referential integrity and thread safety.
+
+ Need an Application Memory Manager which can at least keep track of how much memory of the various types is allocated.
+ Ideally it should be able to perform a memory audit showing what is allocated and the context from which it was allocated.
+
+
+ Consider if each application can have optional components for:
+ a GUI
+ a Console
+ a Desktop integration
+
+ If it activates any of these it is no longer a service application otherwise a Service Server should be available enabling the application to act as a Windows Service / Unix Daemon etc
+
+
+Application
+	App Restart needs testing.
+	App Recovery need integration with Generic layer application and testing
+	Activation Contexts need a thorough usage and practicality review
+	Resources need to actually be made useful by being able to read and write them
+	Remote process control and Job Objects need test cases and handle inheritance control to make them useful so for example apps can share a console robustly
+	Environment needs to have semantic level raised so it be used as backing for a Model, needs test cases
+	Command line parsing needs to be completed, generalised and tested.
+	At Exit handling needs to be unified across WinQL and non Windows libraries and tested.
+	The Library loader needs completing and integrating into Process
+	Memory management needs to be tied together with Memory Audit and tracking functionality.
+	TLS needs an upgrade as we need to make more use of it.
+	Memory mapped files need to be made convenient and make sense, including ones shared by processes as an IPC mechanism which needs testing
+	Socket IO needs completing as does most of the related Networking
+	The I18n stuff needs to be made useful by actual application to Strings, Dates, Times, Currency etc
+	Graphics needs testing, real understanding of Meta Files, thorough resource tracking on GDI objects with exhaustive tests. More use of Clipping Regions, transparency etc
+	Display needs to be moved out of Graphics to the Devices tree
+	ErrorSystem needs to be renamed Debugging. Proper tests needed for SEH handling. Completion of Windows Error codes.
+	Error Handling itself needs to be intercepted by a logging Flyer to log errors to a logging provider as they occur.
+	Serial Comms needs a Source and a Sink for Bluefoot integration and a way to test them.
+	DDE needs some serious thought as to how to map it's way of working onto our standardised IOServer and Protocol model.
+	The Local Atom Table is to become an optional member of Application
+
+Bootstrap
+	Need a shared library Bootstrap for Dlls that use the QOR but are not part of it, like QOR based ActiveX controls
+CodeServices
+	General removal of Handle Map usage
+Definitions
+	Probably just need acres of documentation as to what they're for. Consider changing header file names according to WinQL*.h convention if it can be done by global S&R
+Documents
+	A lot more documentation needed
+System
+	Devices is still a complete mess.
+	Event Logging is not connected to the Object Model and doesn't work
+	Locale needs a major review
+	All needs improving by practical usage examples
+	Consider a Registry Key based Source and Sink enabling Models to be loaded from and persisted to the Registry.
+

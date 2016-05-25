@@ -1,0 +1,25 @@
+Application
+
+Console Application
+Service Application
+System tray Application
+Desktop Application
+Touch Application
+Web Application
+
+Command Queue
+Controllers
+Views
+Models
+
+Semantic controls
+	2 state switch
+	n state switch
+	single select from a small set
+	single select from a large set
+	progress percentage
+	word edit
+	phrase edit
+	paragraph edit
+	document edit
+	

@@ -1,0 +1,44 @@
+
+Need a Code point to local 8-bit filter
+
+An equivalent of the Qt QTextStream would require generic Character and String classes that are UNICODE aware and convertible. Consider how Qt achieves this.
+Consider also where these should live?
+
+Consider a similar stream class simply for Bytes, CBfByteStream with overloaded operators for all the standard C++ types
+
+
+CBFMimeRecognizerFilter <|- CBFFilter
+will read up to 512 bytes without consuming them and work out what the mime type is if any. Need a way to supply Context and Default Type so we can follow algorithm at 
+https://mimesniff.spec.whatwg.org/#supplied-mime-type-detection-algorithm
+
+CBFMimeInputPipeline <|- CBFPipeline
+
+A Pipeline that sets itself up with just a CBFMimeRecognizerFilter then subscribes to that filters CMimeTypeRecognitionEvent in order to set up the necessary additional
+filters to interpret the type
+
+Need to reconsider the Protocol system in terms of where it attaches to the pipeline, how it gets feedback.
+
+Need default bases for caching, recognition and translation filters
+
+Consider a CBFTextStream or CBFTextReader which would be a CBFMimeInputPipeline with default text/plain type
+
+To facilitate all this we still need to be able to work in terms of Chars and Strings without having to worry about what they are. 
+It would be easier to default to UTF-8 if we had a self contained UTF-8 character that owned its own memory but wasn't larger than 4 bytes.
+As it is we might as well use UCS4/UTF-32/Unicode Code Points.
+
+We'll need a MIME registry which should probably be an independent part of CodeQOR, a per process object. It will need to include parsing and serialization for mime type
+designations themselves, mime group categories such as audio and application, the registration of default and runtime discovered types as well as pattern matching and 'magic'
+patterns for recognizing types from content. Associated classes such as parser/generator/serializer/handler might be recorded as well
+
+Will also need filter registration for Bluefoot so that we can configure a pipeline to gives us what we want from what we have once weve determined what we have.
+Each filter needs to register an OType that matches the units of its output and an OType that matches the units of its input
+
+1	Add a vector to a vector array or each filter that outputs the desired type
+
+2	Search the vector array for a vector of filters that ends with the desired type and begins with the source type
+
+3	Each vector that doesn't begin with the source type should be extended with each of the filters that produces its input type.
+
+4	Of all the matching vectors, the shortest or least cost should be chosen
+
+

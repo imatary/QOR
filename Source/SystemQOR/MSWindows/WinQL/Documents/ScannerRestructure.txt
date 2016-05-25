@@ -1,0 +1,7 @@
+
+Derive the base scanner class from IScanner
+Extend ICamera/IScanner so that the interface it mandates covers all the activity of the scanner
+Separate the Notifcation manager for Library level notifications from the per scanner callback interface IScannerObserver 
+IScannerObserver will manage the majority of the current notifications and be implemented directly on the CQtScannerProxy
+Library notifications will be raised on the Detection thread and all others on scanner specific threads avoiding lock contention
+

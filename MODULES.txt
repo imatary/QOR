@@ -1,0 +1,3 @@
+The QOR is a framework of interdependent modules usually built as co-dependent shared libraries.
+
+<modules list>

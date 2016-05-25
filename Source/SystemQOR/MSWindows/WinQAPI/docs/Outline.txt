@@ -1,0 +1,13 @@
+WinQAPI
+
+WinQAPI is a shared library (.dll) in modular builds and part of the unified shared library in monolithic builds
+WinQAPI is Microsoft Windows specific
+WinQAPI is a thin wrapper providing additional debugging and result checks over the Microsoft Windows Win32 API.
+
+You do not need to link WinQAPI into your applications or libraries. It is automatically loaded as part of the QOR on Windows
+
+WinQAPI is available in reduced forms at Strata-1 and Strata-2. It is intended to be complete at Strata-3.
+If WinQAPI is available at Strata-3 always use the Strata-3 or above builds as Strata1-2 may contain broken
+or incomplete implementations only sufficient to meets their requirements.
+
+

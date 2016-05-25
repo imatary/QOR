@@ -1,0 +1,31 @@
+//algorithm
+
+#ifndef STDQOR_ALGORITHM_H_3
+#define STDQOR_ALGORITHM_H_3
+
+#include "../libcxx/include/algorithm"
+
+
+//------------------------------------------------------------------------------
+namespace std
+{
+	//This is not implemented in libc++ but is needed by the WinCmpSupQORVC
+	//implementation of dynamic cast
+
+	//------------------------------------------------------------------------------
+	template< typename T, typename Pred >
+	T find_if_ptr( T first, T last, Pred pred )
+	{
+		for( ; first != last; ++first )
+		{
+			if( pred( first ) )
+			{
+				break;
+			}
+		}
+		return first;
+	}
+
+}//std
+
+#endif//STDQOR_ALGORITHM_H_3

@@ -1,0 +1,12 @@
+BluefootQOR will provide platform neutral pipelines and streaming functionality.
+
+Conceptually very similar to GStreamer it should ideally be able to interoperate with GStreamer on platforms where that is available.
+If so then interop with Media Foundation on Windows should also be possible.
+
+Bluefoot however is not just intended to handle large data pipes like video streams.
+It is intended to scale down to internal command pipelines, allocation stable message queues, command language parsers and chain of responsibility implementations for GUI application control.
+
+The pipeline concept is very generic and if it can be made simple enough to construct a pipeline, to insert filters, etc then the same GStreamer style apparatus can be used for many things.
+The only thing preventing this at the moment is the percieved heavy weight nature of GStreamer and the high level of complexity and high initial effort to construct anything useful with it.
+This is largely due to the opaque nature of GLib and the huge degree of memory management and raw pointer juggling that the 'C' based interface requires.
+

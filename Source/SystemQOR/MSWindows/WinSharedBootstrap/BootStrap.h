@@ -28,7 +28,7 @@
 #define SYSTEMQOR_MSW_SHARED_BOOTSTRAP_H_1
 
 #include "WinQL/WinQL.h"
-#include "WinQL/Application/Threading/WinQLCriticalSection.h"
+//#include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "SystemQOR.h"
 #include "SystemQOR/SharedBootStrap.h"
 
@@ -37,6 +37,8 @@
 class CWinQORSharedBootStrap : public CSharedBootStrap
 {
 public:
+
+	typedef void ( __QCMP_CALLCON* InitFunc )( void );
 
 	//--------------------------------------------------------------------------------
 	enum DllEntryOps
@@ -67,6 +69,7 @@ public:
 	CWinQORSharedBootStrap( void* hModule );
 	~CWinQORSharedBootStrap();
 
+	void InitTerm( InitFunc* pfbegin, InitFunc* pfend );
 	virtual void InitStatic( void );
 	static void InitializeSecurityCookie( void ) __QCMP_THROW;
 

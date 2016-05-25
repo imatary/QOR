@@ -26,9 +26,178 @@
 
 //Base CRT class for Cerrno
 
-#ifndef SYSTEMQOR_POSIX_ERRNO_H_3
-#define SYSTEMQOR_POSIX_ERRNO_H_3
+#ifndef SYSTEMQOR_POSIX_ERRNO_H_1
+#define SYSTEMQOR_POSIX_ERRNO_H_1
 
-#include "../../Strata-1/include/SystemQOR/Posix/Baseerrno.h"
+#include "SystemQOR.h"
+#ifdef errno
+#	undef errno
+#endif
+#include "CodeQOR/ErrorSystem/BaseErrorDomain.h"
+#undef errno
+#include QOR_SYS_PLATFORMTYPES(errno)
 
-#endif//SYSTEMQOR_POSIX_ERRNO_H_3
+#define errno ( f_errno() )
+#define __set_errno( e ) ( errno = ( e ) )
+
+//--------------------------------------------------------------------------------
+namespace nsBaseCRT
+{
+	//--------------------------------------------------------------------------------
+	class __QOR_INTERFACE( __QSYS ) Cerrno
+	{
+	public:
+
+		__QOR_DECLARE_OCLASS_ID( Cerrno );
+
+		Cerrno();
+		virtual ~Cerrno();
+		Cerrno& operator = ( unsigned int uiErr );
+		operator unsigned int();
+		operator int*( );
+
+	private:
+
+		unsigned int m_uiErr;
+
+		Cerrno( const Cerrno& );
+		Cerrno& operator = ( const Cerrno& );
+	};
+
+	//--------------------------------------------------------------------------------
+	__QCMP_INLINE void swap( Cerrno& __x, int& __y ) __QCMP_THROW
+	{
+		int z = __x;
+		__x = __y;
+		__y = z;
+	}
+
+	//--------------------------------------------------------------------------------
+	class __QOR_INTERFACE( __QSYS ) CCRTErrorDomain : public nsCodeQOR::CBaseErrorDomain
+	{
+	public:
+
+		__QOR_DECLARE_OCLASS_ID( CCRTErrorDomain );
+
+		//--------------------------------------------------------------------------------
+		enum E_Notes
+		{
+			CRT_UNKNOWNNOTE = nsCodeQOR::CBaseErrorDomain::MAX_NOTES,// First item must be = nsCodeQOR::CBaseErrorDomain::MAX_NOTES
+			MAXCRT_NOTES //Always last
+		};
+
+		//--------------------------------------------------------------------------------
+		enum E_Warnings
+		{
+			CRT_UNKNOWNWARN = nsCodeQOR::CBaseErrorDomain::MAX_WARNS,// First item must be = nsCodeQOR::CBaseErrorDomain::MAX_WARNS
+			MAXCRT_WARNS //Always last
+		};
+
+		//--------------------------------------------------------------------------------
+		enum E_Errors
+		{
+			CRT_UNKNOWNERROR = nsCodeQOR::CBaseErrorDomain::MAX_ERRORS,// First item must be = nsCodeQOR::CBaseErrorDomain::MAX_ERRORS
+			CRT_E2BIG,
+			CRT_EACCESS,
+			CRT_EADDRINUSE,
+			CRT_EADDRNOTAVAIL,
+			CRT_EAFNOSUPPORT,
+			CRT_EAGAIN,
+			CRT_EALREADY,
+			CRT_EBADF,
+			CRT_EBADMSG,
+			CRT_EBUSY,
+			CRT_ECANCELED,
+			CRT_ECHILD,
+			CRT_ECONNABORTED,
+			CRT_ECONNREFUSED,
+			CRT_ECONNRESET,
+			CRT_EDEADLK,
+			CRT_EDESTADDRREQ,
+			CRT_EDOM,
+			CRT_EDQUOT,
+			CRT_EEXIST,
+			CRT_EFAULT,
+			CRT_EFBIG,
+			CRT_EHOSTUNREACH,
+			CRT_EIDRM,
+			CRT_EILSEQ,
+			CRT_EINPROGRESS,
+			CRT_EINTR,
+			CRT_EINVAL,
+			CRT_EIO,
+			CRT_EISCONN,
+			CRT_EISDIR,
+			CRT_ELOOP,
+			CRT_EMFILE,
+			CRT_EMLINK,
+			CRT_EMSGSIZE,
+			CRT_EMULTIHOP,
+			CRT_ENAMETOOLONG,
+			CRT_ENETDOWN,
+			CRT_ENETRESET,
+			CRT_ENETUNREACH,
+			CRT_ENFILE,
+			CRT_ENOBUFS,
+			CRT_ENODATA,
+			CRT_ENODEV,
+			CRT_ENOENT,
+			CRT_ENOEXEC,
+			CRT_ENOLCK,
+			CRT_ENOLINK,
+			CRT_ENOMEM,
+			CRT_ENOMSG,
+			CRT_ENOPROTOOPT,
+			CRT_ENOSPC,
+			CRT_ENOSR,
+			CRT_ENOSTR,
+			CRT_ENOSYS,
+			CRT_ENOTCONN,
+			CRT_ENOTDIR,
+			CRT_ENOTEMPTY,
+			CRT_ENOTSOCK,
+			CRT_ENOTSUP,
+			CRT_ENOTTY,
+			CRT_ENXIO,
+			CRT_EOPNOTSUPP,
+			CRT_EOVERFLOW,
+			CRT_EPERM,
+			CRT_EPIPE,
+			CRT_EPROTO,
+			CRT_EPROTONOSUPPORT,
+			CRT_EPROTOTYPE,
+			CRT_ERANGE,
+			CRT_EROFS,
+			CRT_ESPIPE,
+			CRT_ESRCH,
+			CRT_ESTALE,
+			CRT_ETIME,
+			CRT_ETIMEDOUT,
+			CRT_ETXTBSY,
+			CRT_EWOULDBLOCK,
+			CRT_EXDEV,
+			CRT_ENOTRECOVERABLE,
+			CRT_EOWNERDEAD,
+			MAXCRT_ERRORS //Always last
+		};
+
+		CCRTErrorDomain();
+		virtual ~CCRTErrorDomain();
+
+		static int* ErrNo();
+
+		virtual const nsCodeQOR::CBaseErrorDomain::s_BaseError* NoteTemplate( unsigned int uiCode );
+		virtual const nsCodeQOR::CBaseErrorDomain::s_BaseError* WarningTemplate( unsigned int uiCode );
+		virtual const nsCodeQOR::CBaseErrorDomain::s_BaseError* ErrorTemplate( unsigned int uiCode );
+
+		static nsCodeQOR::CBaseErrorDomain::s_BaseError m_CRTNotes[ CCRTErrorDomain::MAXCRT_NOTES - nsCodeQOR::CBaseErrorDomain::MAX_NOTES ];
+		static nsCodeQOR::CBaseErrorDomain::s_BaseError m_CRTWarnings[ CCRTErrorDomain::MAXCRT_WARNS - nsCodeQOR::CBaseErrorDomain::MAX_WARNS ];
+		static nsCodeQOR::CBaseErrorDomain::s_BaseError m_CRTErrors[ CCRTErrorDomain::MAXCRT_ERRORS - nsCodeQOR::CBaseErrorDomain::MAX_ERRORS ];
+
+		static Cerrno m_errno;
+	};
+
+}//nsBaseCRT
+
+#endif//SYSTEMQOR_POSIX_ERRNO_H_1
+

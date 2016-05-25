@@ -26,24 +26,32 @@
 
 #include "SystemQOR.h"
 #include "SystemQOR/SharedBootStrap.h"
+#include QOR_SYS_QORHEADER1( Bootstrap, SharedBootStrap )
 
 //--------------------------------------------------------------------------------
 //Construct the object which represents the shared QOR library
-CSharedBootStrap::CSharedBootStrap( void* hModule ) : nsPlatform::CSharedBootStrap( hModule )
+CSharedBootStrap::CSharedBootStrap( void* hModule ) //: nsPlatform::CSharedBootStrap( hModule )
 {
-	
+	m_pInner = new nsPlatform::CSharedBootStrap( hModule );
 }
 
 //--------------------------------------------------------------------------------
-//Deconstruct the bootstrap to clean up at the end of the process
+//Destruct the bootstrap to clean up at the end of the process
 CSharedBootStrap::~CSharedBootStrap()
 {
-	
+	delete m_pInner;
 }
 
 //--------------------------------------------------------------------------------
 bool CSharedBootStrap::Booted( void )
 {
-	return m_bStaticInitialised;
+	return m_pInner->Booted();
 }
+
+//--------------------------------------------------------------------------------
+int CSharedBootStrap::atexit( void( *pFunc )( void ) )
+{
+	return m_pInner->atexit( pFunc );
+}
+
 

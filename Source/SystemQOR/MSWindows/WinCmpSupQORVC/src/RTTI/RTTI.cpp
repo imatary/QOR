@@ -25,7 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include "SystemQOR.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/RTTI/RTTI.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/RTTI/RTTI.h"
 #include <typeinfo>
 
 #if ( __QCMP_COMPILER == __QCMP_INTEL )

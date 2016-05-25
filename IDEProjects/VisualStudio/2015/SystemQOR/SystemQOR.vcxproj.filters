@@ -1,0 +1,1279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Common">
+      <UniqueIdentifier>{5a9e9103-3f97-48a0-ae7a-c0cdae38a448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MSWindows">
+      <UniqueIdentifier>{bf72f849-5b1e-4720-a932-0016df38911d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MSWindows\types">
+      <UniqueIdentifier>{2a7b87f7-880e-47da-ae6a-78e7ad05f1d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MSWindows\types\sys">
+      <UniqueIdentifier>{110eb40d-4e3a-4f52-b7cc-a4ea02f12413}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MSWindows\sys">
+      <UniqueIdentifier>{11ad78cb-477d-4f01-b299-15a9c4466380}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MSWindows\netinet">
+      <UniqueIdentifier>{3ed35508-378b-423d-b9c1-fd2682a4de1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MSWindows\net">
+      <UniqueIdentifier>{554069aa-7742-4167-af7f-8733bfaea69e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MSWindows\arpa">
+      <UniqueIdentifier>{9d4ffc65-9b9e-4e5d-ae88-f87bea39f943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Posix">
+      <UniqueIdentifier>{1acf4a72-80dd-4415-8d08-4b04b1555174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Posix\arpa">
+      <UniqueIdentifier>{0f8c3156-c7c9-4b6b-8a06-1cc8a684cb3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Posix\math">
+      <UniqueIdentifier>{3ebe6bcf-68c6-4497-8f8d-c5aa2a48b6d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Posix\net">
+      <UniqueIdentifier>{0bb788df-85fa-404a-994c-643122a7094e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Posix\netinet">
+      <UniqueIdentifier>{d8f14f14-16b0-4037-925e-d21a07024041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Posix\sys">
+      <UniqueIdentifier>{e1ebed41-3706-4dfa-88c1-43e1938eddbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MSWindows\versions">
+      <UniqueIdentifier>{1e20e95a-4e83-4153-ad02-662312a4cec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MSWindows\extensions">
+      <UniqueIdentifier>{a6bbd620-90a2-4c47-b91f-c192808e370a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MSWindows\winpthreads">
+      <UniqueIdentifier>{532a16b4-def4-464b-a5a8-1af260650a51}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Common\ExePageAllocator.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Common\SharedBootStrap.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Common\SystemQOR.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_aio.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_assert.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_complex.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_CRT0.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_ctype.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_dirent.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_dlfcn.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_errno.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_fcntl.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_fenv.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_fmtmsg.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_fnmatch.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_ftw.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_glob.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_grp.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_iconv.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_inttypes.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_langinfo.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_libgen.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_limits.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_locale.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_math.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_monetary.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_mqueue.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_ndbm.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_netdb.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_new.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_nl_types.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_poll.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_pthread.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_purecall.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_pwd.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_PX_sched.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_regex.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_search.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_semaphore.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_setjmp.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_signal.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_spawn.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_stdio.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_stdlib.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_string.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_strings.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_stropts.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_syslog.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_termios.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_time.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_trace.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_ucontext.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_ulimit.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_unistd.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_utime.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_utmpx.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_wchar.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_wctype.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_wordexp.cpp">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basepthread.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basepwd.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseregex.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basesched.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basesearch.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basesemaphore.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basesetjmp.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basesignal.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basespawn.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestdarg.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestdbool.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestddef.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestdint.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestdio.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestdlib.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestring.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestrings.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestropts.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basesyslog.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basetar.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basetermios.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basetgmath.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basetime.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basetrace.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseucontext.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseulimit.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseunistd.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseutime.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseutmpx.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basewchar.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basewctype.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basewordexp.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseaio.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseassert.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basecomplex.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basecpio.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\BaseCRT.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basectype.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basedirent.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basedlfcn.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseerrno.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basefcntl.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basefenv.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basefloat.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basefmtmsg.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basefnmatch.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseftw.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseglob.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basegrp.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseiconv.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseinttypes.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseiso646.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baselanginfo.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baselibgen.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baselimits.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baselocale.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basemath.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basemonetary.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basemqueue.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basendbm.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basenetdb.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basenl_types.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basepoll.cpp">
+      <Filter>Source Files\Posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseipc.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basemman.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basemsg.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseresource.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseselect.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basesem.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseshm.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basesocket.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basestat.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basestatvfs.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basesystime.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basetimeb.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basetimes.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basetypes.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseuio.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseun.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseutsname.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basewait.cpp">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\netinet\Basein.cpp">
+      <Filter>Source Files\Posix\netinet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\netinet\Basetcp.cpp">
+      <Filter>Source Files\Posix\netinet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\net\Baseif.cpp">
+      <Filter>Source Files\Posix\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\lib_ver.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\log.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\log1p.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\log10.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\logb.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\lrint.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\lround.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\matherr.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\modf.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\nan.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\nearbyint.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\nextafter.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\pow.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\rem_pio2.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\remainder.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\remquo.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\rint.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\round.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\scalb.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\scalbln.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\scalbn.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\signbit.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\signif.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\sin.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\sincos.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\sinh.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\sqrt.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\standard.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\tan.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\tanh.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\tgamma.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\trunc.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\acos.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\acosh.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\asin.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\asinh.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\atan.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\atan2.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\atanh.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\cabs.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\cbrt.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\ceil.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\copysign.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\cos.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\cosh.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\drem.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\erf.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\exp.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\exp2.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\expm1.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fabs.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fdim.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\finite.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\floor.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fma.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fmax.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fmin.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fmod.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fpclassify.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\frexp.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\gamma.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\hypot.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\ilogb.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\infconst.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\infinity.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\isinf.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\isinfd.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\isnan.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\isnand.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\j0.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\j1.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\jn.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\ldexp.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\lgamma.cpp">
+      <Filter>Source Files\Posix\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\arpa\Baseinet.cpp">
+      <Filter>Source Files\Posix\arpa</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_mman.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_msg.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_resource.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_select.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_sem.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_shm.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_socket.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_stat.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_statvfs.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_systime.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_timeb.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_times.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_uio.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_utsname.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_wait.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\arpa\MSW_inet.cpp">
+      <Filter>Source Files\MSWindows\arpa</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\extensions\strdup.cpp">
+      <Filter>Source Files\MSWindows\extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_barrier.cpp">
+      <Filter>Source Files\MSWindows\winpthreads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_clock.cpp">
+      <Filter>Source Files\MSWindows\winpthreads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_cond.cpp">
+      <Filter>Source Files\MSWindows\winpthreads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_dll_math.cpp">
+      <Filter>Source Files\MSWindows\winpthreads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_misc.cpp">
+      <Filter>Source Files\MSWindows\winpthreads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_mutex.cpp">
+      <Filter>Source Files\MSWindows\winpthreads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_nanosleep.cpp">
+      <Filter>Source Files\MSWindows\winpthreads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_rwlock.cpp">
+      <Filter>Source Files\MSWindows\winpthreads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_sched.cpp">
+      <Filter>Source Files\MSWindows\winpthreads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_sem.cpp">
+      <Filter>Source Files\MSWindows\winpthreads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_spinlock.cpp">
+      <Filter>Source Files\MSWindows\winpthreads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_thread.cpp">
+      <Filter>Source Files\MSWindows\winpthreads</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_acct.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_ipc.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_mman.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_msg.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_param.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_resource.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_select.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_sem.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_shm.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_socket.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_stat.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_statvfs.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_time.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_timeb.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_times.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_types.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_uio.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_un.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_uname.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_utsname.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_wait.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\netinet\MSW_in.h">
+      <Filter>Source Files\MSWindows\netinet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\netinet\MSW_tcp.h">
+      <Filter>Source Files\MSWindows\netinet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\net\MSW_if.h">
+      <Filter>Source Files\MSWindows\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\arpa\MSW_inet.h">
+      <Filter>Source Files\MSWindows\arpa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\sys\sys_types.h">
+      <Filter>Source Files\MSWindows\types\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseaio.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseassert.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basecomplex.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basecpio.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\BaseCRT.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basectype.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basedirent.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basedlfcn.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseerrno.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basefcntl.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basefenv.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basefloat.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basefmtmsg.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basefnmatch.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseftw.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseglob.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basegrp.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseiconv.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseinttypes.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseiso646.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baselanginfo.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baselibgen.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baselimits.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baselocale.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basemath.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basemonetary.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basemqueue.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basendbm.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basenetdb.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basenl_types.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basepoll.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basepthread.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basepwd.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseregex.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basesched.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basesearch.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basesemaphore.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basesetjmp.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basesignal.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basespawn.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestdarg.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestdbool.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestddef.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestdint.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestdio.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestdlib.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestring.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestrings.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestropts.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basesyslog.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basetar.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basetermios.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basetgmath.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basetime.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basetrace.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseucontext.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseulimit.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseunistd.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseutime.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseutmpx.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basewchar.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basewctype.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basewordexp.h">
+      <Filter>Source Files\Posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW__complex.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_aio.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_assert.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_cpio.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_CRT.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_ctype.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_dirent.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_dlfcn.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_errno.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_excpt.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_fcntl.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_fenv.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_float.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_fmtmsg.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_fnmatch.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_ftw.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_glob.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_grp.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_iconv.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_inttypes.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_iso646.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_langinfo.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_libgen.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_limits.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_locale.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_math.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_monetary.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_mqueue.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_ndbm.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_netdb.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_nl_types.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_poll.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_pthread.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_pwd.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_regex.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_sched.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_search.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_semaphore.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_setjmp.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_signal.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_spawn.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stdarg.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stdbool.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stddef.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stdint.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stdio.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stdlib.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_string.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_strings.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stropts.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_syslog.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_tar.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_tchar.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_termios.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_tgmath.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_time.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_trace.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_ucontext.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_ulimit.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_unistd.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_utime.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_utmpx.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_wchar.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_wctype.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_wordexp.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSWindows.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\WindowsVersion.h">
+      <Filter>Source Files\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SystemQOR\MSWindows\versions\Win9x.h">
+      <Filter>Source Files\MSWindows\versions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SystemQOR\MSWindows\versions\WinNT.h">
+      <Filter>Source Files\MSWindows\versions</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

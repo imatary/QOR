@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-#include "../SystemQOR/MSWindows/WinUsrExeBoot/include/BootStrap.h"
+#include "../Source/SystemQOR/MSWindows/WinUsrExeBoot/include/BootStrap.h"
 
 //The application code entry point will match one of these two names dependent on it being a GUI or Console application
 #ifdef  _WINDOWS

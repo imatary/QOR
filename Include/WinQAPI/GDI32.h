@@ -28,7 +28,7 @@
 #define _QSYS_API_WIN32_MODULES_GDI32_H_
 
 #include "Kernel32.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
 
 #if		( WINVER < 0x0400 )
 

@@ -80,7 +80,7 @@ get_terminate() _NOEXCEPT
 }
 
 #ifndef __EMSCRIPTEN__ // We provide this in JS
-_LIBCPP_NORETURN
+_LIBCPP_FUNC_VIS _LIBCPP_NORETURN
 void
 terminate() _NOEXCEPT
 {
@@ -138,11 +138,11 @@ const char* exception::what() const _NOEXCEPT
 #endif //LIBCXXRT
 #if !defined(_LIBCPPABI_VERSION) && !defined(__GLIBCXX__)
 
-bad_exception::~bad_exception() _NOEXCEPT
+_LIBCPP_FUNC_VIS bad_exception::~bad_exception() _NOEXCEPT
 {
 }
 
-const char* bad_exception::what() const _NOEXCEPT
+_LIBCPP_FUNC_VIS const char* bad_exception::what() const _NOEXCEPT
 {
   return "std::bad_exception";
 }
@@ -252,7 +252,7 @@ nested_exception::~nested_exception() _NOEXCEPT
 
 #endif
 
-_LIBCPP_NORETURN
+_LIBCPP_FUNC_VIS _LIBCPP_NORETURN
 void
 nested_exception::rethrow_nested() const
 {

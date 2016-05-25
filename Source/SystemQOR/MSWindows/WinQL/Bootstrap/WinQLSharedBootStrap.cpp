@@ -48,7 +48,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	//Deconstruct the bootstrap to clean up at the end of the process
+	//Destruct the bootstrap to clean up at the end of the process
 	CSharedBootStrap::~CSharedBootStrap()
 	{	
 	}

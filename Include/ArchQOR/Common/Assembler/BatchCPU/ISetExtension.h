@@ -39,26 +39,10 @@ namespace nsArch
 	{
 	public:
 
-		//------------------------------------------------------------------------------
-		CISetExtension()
-		{
-		}
-
-		//------------------------------------------------------------------------------
-		virtual ~CISetExtension()
-		{
-		}
-
-		//------------------------------------------------------------------------------
-		CISetExtension( const CISetExtension& src )
-		{
-		}
-
-		//------------------------------------------------------------------------------
-		CISetExtension& operator = ( const CISetExtension& src )
-		{
-			return *this;
-		}
+		CISetExtension();
+		virtual ~CISetExtension();
+		CISetExtension( const CISetExtension& src );
+		CISetExtension& operator = ( const CISetExtension& src );
 	};
 
 }//nsArch

@@ -26,7 +26,7 @@
 
 //Stub for starting a Windows executable
 //Build with _WINDOWS defined for GUI applications, without _WINDOWS defined for Console applications
-#include "../SystemQOR/MSWindows/WinUsrExeBoot/include/BootStrap.h"
+#include "../Source/SystemQOR/MSWindows/WinUsrExeBoot/include/BootStrap.h"
 #include <stdlib.h>
 #include <stdio.h>
 

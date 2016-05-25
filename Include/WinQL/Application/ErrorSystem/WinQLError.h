@@ -34,7 +34,7 @@
 #include <wchar.h>
 #include "WinQL/Application/ErrorSystem/WinQLFunctionContext.h"
 #include "WinQL/Application/ErrorSystem/WinQLSEH.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/Error.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/Error.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32

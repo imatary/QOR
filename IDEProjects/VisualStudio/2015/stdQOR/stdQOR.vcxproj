@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D2C48695-C151-48B0-B26E-E6B186165CC6}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>stdQOR</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>cxx_EXPORTS;_LIBCPP_DLL;__STDQOR;WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../Source/libcxx/include;../../../../include;</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <MinimalRebuild>false</MinimalRebuild>
+      <FloatingPointModel>Strict</FloatingPointModel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../QOR/Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies />
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;STDQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;STDQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;STDQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\algorithm.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\bind.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\chrono.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\condition_variable.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\debug.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\exception.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\future.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\hash.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\ios.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\iostream.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\locale.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\memory.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\mutex.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\new.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\optional.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\random.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\regex.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\shared_mutex.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\stdexcept.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\string.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\strstream.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\system_error.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\thread.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\typeinfo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\utility.cpp" />
+    <ClCompile Include="..\..\..\..\Source\libcxx\src\valarray.cpp" />
+    <ClCompile Include="..\..\..\..\Source\stdQOR\stdQOR.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Include\algorithm" />
+    <None Include="..\..\..\..\Include\array" />
+    <None Include="..\..\..\..\Include\atomic" />
+    <None Include="..\..\..\..\Include\bitset" />
+    <None Include="..\..\..\..\Include\cassert" />
+    <None Include="..\..\..\..\Include\ccomplex" />
+    <None Include="..\..\..\..\Include\cctype" />
+    <None Include="..\..\..\..\Include\cerrno" />
+    <None Include="..\..\..\..\Include\cfenv" />
+    <None Include="..\..\..\..\Include\cfloat" />
+    <None Include="..\..\..\..\Include\chrono" />
+    <None Include="..\..\..\..\Include\cinttypes" />
+    <None Include="..\..\..\..\Include\ciso646" />
+    <None Include="..\..\..\..\Include\climits" />
+    <None Include="..\..\..\..\Include\clocale" />
+    <None Include="..\..\..\..\Include\cmath" />
+    <None Include="..\..\..\..\Include\codecvt" />
+    <None Include="..\..\..\..\Include\complex" />
+    <None Include="..\..\..\..\Include\condition_variable" />
+    <None Include="..\..\..\..\Include\csetjmp" />
+    <None Include="..\..\..\..\Include\csignal" />
+    <None Include="..\..\..\..\Include\cstdarg" />
+    <None Include="..\..\..\..\Include\cstdbool" />
+    <None Include="..\..\..\..\Include\cstddef" />
+    <None Include="..\..\..\..\Include\cstdint" />
+    <None Include="..\..\..\..\Include\cstdio" />
+    <None Include="..\..\..\..\Include\cstdlib" />
+    <None Include="..\..\..\..\Include\cstring" />
+    <None Include="..\..\..\..\Include\ctgmath" />
+    <None Include="..\..\..\..\Include\ctime" />
+    <None Include="..\..\..\..\Include\cwchar" />
+    <None Include="..\..\..\..\Include\cwctype" />
+    <None Include="..\..\..\..\Include\deque" />
+    <None Include="..\..\..\..\Include\exception" />
+    <None Include="..\..\..\..\Include\forward_list" />
+    <None Include="..\..\..\..\Include\fstream" />
+    <None Include="..\..\..\..\Include\functional" />
+    <None Include="..\..\..\..\Include\future" />
+    <None Include="..\..\..\..\Include\initializer_list" />
+    <None Include="..\..\..\..\Include\iomanip" />
+    <None Include="..\..\..\..\Include\ios" />
+    <None Include="..\..\..\..\Include\iosfwd" />
+    <None Include="..\..\..\..\Include\iostream" />
+    <None Include="..\..\..\..\Include\istream" />
+    <None Include="..\..\..\..\Include\iterator" />
+    <None Include="..\..\..\..\Include\limits" />
+    <None Include="..\..\..\..\Include\list" />
+    <None Include="..\..\..\..\Include\locale" />
+    <None Include="..\..\..\..\Include\map" />
+    <None Include="..\..\..\..\Include\memory" />
+    <None Include="..\..\..\..\Include\mutex" />
+    <None Include="..\..\..\..\Include\new" />
+    <None Include="..\..\..\..\Include\numeric" />
+    <None Include="..\..\..\..\Include\ostream" />
+    <None Include="..\..\..\..\Include\queue" />
+    <None Include="..\..\..\..\Include\random" />
+    <None Include="..\..\..\..\Include\ratio" />
+    <None Include="..\..\..\..\Include\regex" />
+    <None Include="..\..\..\..\Include\scoped_allocator" />
+    <None Include="..\..\..\..\Include\set" />
+    <None Include="..\..\..\..\Include\shared_mutex" />
+    <None Include="..\..\..\..\Include\sstream" />
+    <None Include="..\..\..\..\Include\stack" />
+    <None Include="..\..\..\..\Include\stdexcept" />
+    <None Include="..\..\..\..\Include\streambuf" />
+    <None Include="..\..\..\..\Include\string" />
+    <None Include="..\..\..\..\Include\strstream" />
+    <None Include="..\..\..\..\Include\system_error" />
+    <None Include="..\..\..\..\Include\thread" />
+    <None Include="..\..\..\..\Include\tuple" />
+    <None Include="..\..\..\..\Include\typeindex" />
+    <None Include="..\..\..\..\Include\typeinfo" />
+    <None Include="..\..\..\..\Include\type_traits" />
+    <None Include="..\..\..\..\Include\unordered_map" />
+    <None Include="..\..\..\..\Include\unordered_set" />
+    <None Include="..\..\..\..\Include\utility" />
+    <None Include="..\..\..\..\Include\valarray" />
+    <None Include="..\..\..\..\Include\vector" />
+    <None Include="..\..\..\..\Include\__bit_reference" />
+    <None Include="..\..\..\..\Include\__config" />
+    <None Include="..\..\..\..\Include\__debug" />
+    <None Include="..\..\..\..\Include\__functional_03" />
+    <None Include="..\..\..\..\Include\__functional_base" />
+    <None Include="..\..\..\..\Include\__functional_base_03" />
+    <None Include="..\..\..\..\Include\__hash_table" />
+    <None Include="..\..\..\..\Include\__locale" />
+    <None Include="..\..\..\..\Include\__mutex_base" />
+    <None Include="..\..\..\..\Include\__refstring" />
+    <None Include="..\..\..\..\Include\__split_buffer" />
+    <None Include="..\..\..\..\Include\__sso_allocator" />
+    <None Include="..\..\..\..\Include\__std_stream" />
+    <None Include="..\..\..\..\Include\__tree" />
+    <None Include="..\..\..\..\Include\__tuple" />
+    <None Include="..\..\..\..\Include\__tuple_03" />
+    <None Include="..\..\..\..\Include\__undef_min_max" />
+    <None Include="..\..\..\..\Include\__undef___deallocate" />
+    <None Include="..\..\..\..\Source\libcxx\include\algorithm" />
+    <None Include="..\..\..\..\Source\libcxx\include\array" />
+    <None Include="..\..\..\..\Source\libcxx\include\atomic" />
+    <None Include="..\..\..\..\Source\libcxx\include\bitset" />
+    <None Include="..\..\..\..\Source\libcxx\include\cassert" />
+    <None Include="..\..\..\..\Source\libcxx\include\ccomplex" />
+    <None Include="..\..\..\..\Source\libcxx\include\cctype" />
+    <None Include="..\..\..\..\Source\libcxx\include\cerrno" />
+    <None Include="..\..\..\..\Source\libcxx\include\cfenv" />
+    <None Include="..\..\..\..\Source\libcxx\include\cfloat" />
+    <None Include="..\..\..\..\Source\libcxx\include\chrono" />
+    <None Include="..\..\..\..\Source\libcxx\include\cinttypes" />
+    <None Include="..\..\..\..\Source\libcxx\include\ciso646" />
+    <None Include="..\..\..\..\Source\libcxx\include\climits" />
+    <None Include="..\..\..\..\Source\libcxx\include\clocale" />
+    <None Include="..\..\..\..\Source\libcxx\include\cmath" />
+    <None Include="..\..\..\..\Source\libcxx\include\codecvt" />
+    <None Include="..\..\..\..\Source\libcxx\include\complex" />
+    <None Include="..\..\..\..\Source\libcxx\include\condition_variable" />
+    <None Include="..\..\..\..\Source\libcxx\include\csetjmp" />
+    <None Include="..\..\..\..\Source\libcxx\include\csignal" />
+    <None Include="..\..\..\..\Source\libcxx\include\cstdarg" />
+    <None Include="..\..\..\..\Source\libcxx\include\cstdbool" />
+    <None Include="..\..\..\..\Source\libcxx\include\cstddef" />
+    <None Include="..\..\..\..\Source\libcxx\include\cstdint" />
+    <None Include="..\..\..\..\Source\libcxx\include\cstdio" />
+    <None Include="..\..\..\..\Source\libcxx\include\cstdlib" />
+    <None Include="..\..\..\..\Source\libcxx\include\cstring" />
+    <None Include="..\..\..\..\Source\libcxx\include\ctgmath" />
+    <None Include="..\..\..\..\Source\libcxx\include\ctime" />
+    <None Include="..\..\..\..\Source\libcxx\include\cwchar" />
+    <None Include="..\..\..\..\Source\libcxx\include\cwctype" />
+    <None Include="..\..\..\..\Source\libcxx\include\deque" />
+    <None Include="..\..\..\..\Source\libcxx\include\exception" />
+    <None Include="..\..\..\..\Source\libcxx\include\forward_list" />
+    <None Include="..\..\..\..\Source\libcxx\include\fstream" />
+    <None Include="..\..\..\..\Source\libcxx\include\functional" />
+    <None Include="..\..\..\..\Source\libcxx\include\future" />
+    <None Include="..\..\..\..\Source\libcxx\include\initializer_list" />
+    <None Include="..\..\..\..\Source\libcxx\include\iomanip" />
+    <None Include="..\..\..\..\Source\libcxx\include\ios" />
+    <None Include="..\..\..\..\Source\libcxx\include\iosfwd" />
+    <None Include="..\..\..\..\Source\libcxx\include\iostream" />
+    <None Include="..\..\..\..\Source\libcxx\include\istream" />
+    <None Include="..\..\..\..\Source\libcxx\include\iterator" />
+    <None Include="..\..\..\..\Source\libcxx\include\limits" />
+    <None Include="..\..\..\..\Source\libcxx\include\list" />
+    <None Include="..\..\..\..\Source\libcxx\include\locale" />
+    <None Include="..\..\..\..\Source\libcxx\include\map" />
+    <None Include="..\..\..\..\Source\libcxx\include\memory" />
+    <None Include="..\..\..\..\Source\libcxx\include\module.modulemap" />
+    <None Include="..\..\..\..\Source\libcxx\include\mutex" />
+    <None Include="..\..\..\..\Source\libcxx\include\new" />
+    <None Include="..\..\..\..\Source\libcxx\include\numeric" />
+    <None Include="..\..\..\..\Source\libcxx\include\ostream" />
+    <None Include="..\..\..\..\Source\libcxx\include\queue" />
+    <None Include="..\..\..\..\Source\libcxx\include\random" />
+    <None Include="..\..\..\..\Source\libcxx\include\ratio" />
+    <None Include="..\..\..\..\Source\libcxx\include\regex" />
+    <None Include="..\..\..\..\Source\libcxx\include\scoped_allocator" />
+    <None Include="..\..\..\..\Source\libcxx\include\set" />
+    <None Include="..\..\..\..\Source\libcxx\include\shared_mutex" />
+    <None Include="..\..\..\..\Source\libcxx\include\sstream" />
+    <None Include="..\..\..\..\Source\libcxx\include\stack" />
+    <None Include="..\..\..\..\Source\libcxx\include\stdexcept" />
+    <None Include="..\..\..\..\Source\libcxx\include\streambuf" />
+    <None Include="..\..\..\..\Source\libcxx\include\string" />
+    <None Include="..\..\..\..\Source\libcxx\include\strstream" />
+    <None Include="..\..\..\..\Source\libcxx\include\system_error" />
+    <None Include="..\..\..\..\Source\libcxx\include\thread" />
+    <None Include="..\..\..\..\Source\libcxx\include\tuple" />
+    <None Include="..\..\..\..\Source\libcxx\include\typeindex" />
+    <None Include="..\..\..\..\Source\libcxx\include\typeinfo" />
+    <None Include="..\..\..\..\Source\libcxx\include\type_traits" />
+    <None Include="..\..\..\..\Source\libcxx\include\unordered_map" />
+    <None Include="..\..\..\..\Source\libcxx\include\unordered_set" />
+    <None Include="..\..\..\..\Source\libcxx\include\utility" />
+    <None Include="..\..\..\..\Source\libcxx\include\valarray" />
+    <None Include="..\..\..\..\Source\libcxx\include\vector" />
+    <None Include="..\..\..\..\Source\libcxx\include\__bit_reference" />
+    <None Include="..\..\..\..\Source\libcxx\include\__config" />
+    <None Include="..\..\..\..\Source\libcxx\include\__debug" />
+    <None Include="..\..\..\..\Source\libcxx\include\__functional_03" />
+    <None Include="..\..\..\..\Source\libcxx\include\__functional_base" />
+    <None Include="..\..\..\..\Source\libcxx\include\__functional_base_03" />
+    <None Include="..\..\..\..\Source\libcxx\include\__hash_table" />
+    <None Include="..\..\..\..\Source\libcxx\include\__locale" />
+    <None Include="..\..\..\..\Source\libcxx\include\__mutex_base" />
+    <None Include="..\..\..\..\Source\libcxx\include\__refstring" />
+    <None Include="..\..\..\..\Source\libcxx\include\__split_buffer" />
+    <None Include="..\..\..\..\Source\libcxx\include\__sso_allocator" />
+    <None Include="..\..\..\..\Source\libcxx\include\__std_stream" />
+    <None Include="..\..\..\..\Source\libcxx\include\__tree" />
+    <None Include="..\..\..\..\Source\libcxx\include\__tuple" />
+    <None Include="..\..\..\..\Source\libcxx\include\__tuple_03" />
+    <None Include="..\..\..\..\Source\libcxx\include\__undef_min_max" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\Source\libcxx\include\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Source\libcxx\include\complex.h" />
+    <ClInclude Include="..\..\..\..\Source\libcxx\include\tgmath.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

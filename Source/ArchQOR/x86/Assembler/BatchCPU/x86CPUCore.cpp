@@ -1738,6 +1738,51 @@ _EmitID:
 		}
 
 		//------------------------------------------------------------------------------
+		void Cx86CPUCore::SetEmitOptions( Cmp_unsigned__int32 EmitOptions )
+		{
+			m_uiEmitOptions = EmitOptions;
+		}
+
+		//------------------------------------------------------------------------------
+		void Cx86CPUCore::SetProperties( Cmp_unsigned__int32 Properties )
+		{
+			m_uiProperties = Properties;
+		}
+
+		// Emit Options
+
+		//Assert LOCK# Signal Prefix.
+		//
+		// This instruction causes the processor's LOCK# signal to be asserted
+		// during execution of the accompanying instruction (turns the
+		// instruction into an atomic instruction). In a multiprocessor environment,
+		// the LOCK# signal insures that the processor has exclusive use of any shared
+		// memory while the signal is asserted.
+		//
+		// The LOCK prefix can be prepended only to the following instructions and
+		// to those forms of the instructions that use a memory operand: ADD, ADC,
+		// AND, BTC, BTR, BTS, CMPXCHG, DEC, INC, NEG, NOT, OR, SBB, SUB, XOR, XADD,
+		// and XCHG. An undefined opcode exception will be generated if the LOCK
+		// prefix is used with any other instruction. The XCHG instruction always
+		// asserts the LOCK# signal regardless of the presence or absence of the LOCK
+		// prefix.
+		void Cx86CPUCore::lock()
+		{
+			m_uiEmitOptions |= EMIT_OPTION_LOCK_PREFIX;
+		}
+
+		//------------------------------------------------------------------------------
+		//Force REX prefix to be emitted.
+		// This option should be used carefully, because there are unencodable
+		// combinations. If you want to access ah, bh, ch or dh registers then you
+		// can't emit REX prefix and it will cause an illegal instruction error.
+		// Note REX prefix is only valid for X64/AMD64 platform.
+		void Cx86CPUCore::rex()
+		{
+			m_uiEmitOptions |= EMIT_OPTION_REX_PREFIX;
+		}
+
+		//------------------------------------------------------------------------------
 		char* dumpInstruction( char* buf, Cmp_unsigned__int32 code, Cmp_unsigned__int32 emitOptions, const COperand* o0, const COperand* o1, const COperand* o2, Cmp_unsigned__int32 memRegType ) __QCMP_THROW
 		{
 			if( emitOptions & EMIT_OPTION_REX_PREFIX )

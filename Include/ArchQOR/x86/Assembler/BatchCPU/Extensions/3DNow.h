@@ -28,7 +28,16 @@
 #define ARCHQOR_ISET_X86_3DNOW_H_2
 
 #include "CompilerQOR.h"
-#include "../x86ISetExtension.h"
+#include "ArchQOR/Common/Assembler/BatchCPU/FPUBase.h"
+#include "ArchQOR/x86/Assembler/BatchCPU/x86CPUCore.h"
+#include "ArchQOR/x86/Assembler/Operands/Registers/MMReg.h"
+#include "ArchQOR/x86/Assembler/Operands/Registers/XMMReg.h"
+#include "ArchQOR/x86/Assembler/Operands/Registers/GPReg.h"
+#include "ArchQOR/x86/Assembler/Operands/Mem.h"
+#include "ArchQOR/x86/Assembler/Operands/Registers/X87Reg.h"
+#include "ArchQOR/x86/Assembler/Operands/Imm.h"
+#include "ArchQOR/x86/Assembler/Operands/Label.h"
+#include "ArchQOR/x86/Assembler/BatchCPU/x86ISetExtension.h"
 
 //------------------------------------------------------------------------------
 namespace nsArch
@@ -41,360 +50,55 @@ namespace nsArch
 		{
 		public:
 
-			//------------------------------------------------------------------------------
-			C3DNOW(  Cx86CPUCore& refCPU ) : Cx86ISetExtension( refCPU )
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			virtual ~C3DNOW()
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			//Faster EMMS (3dNow!).
-			// Note Use only for early AMD processors where is only 3dNow! or SSE. If
-			// CPU contains SSE2, it's better to use emms() ( femms() is mapped
-			// to emms() ).
-			inline void femms()
-			{
-				m_PU._emitInstruction( INST_FEMMS );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP to Integer Convert (3dNow!).
-			inline void pf2id( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PF2ID, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP to Integer Convert (3dNow!).
-			inline void pf2id( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PF2ID, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			// Packed SP-FP to Integer Word Convert (3dNow!).
-			inline void pf2iw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PF2IW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			// Packed SP-FP to Integer Word Convert (3dNow!).
-			inline void pf2iw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PF2IW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Accumulate (3dNow!).
-			inline void pfacc( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFACC, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Accumulate (3dNow!).
-			inline void pfacc( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFACC, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Addition (3dNow!).
-			inline void pfadd( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFADD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Addition (3dNow!).
-			inline void pfadd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFADD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Compare - dst == src (3dNow!).
-			inline void pfcmpeq( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFCMPEQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Compare - dst == src (3dNow!).
-			inline void pfcmpeq( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFCMPEQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Compare - dst >= src (3dNow!).
-			inline void pfcmpge( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFCMPGE, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Compare - dst >= src (3dNow!).
-			inline void pfcmpge( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFCMPGE, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Compare - dst > src (3dNow!).
-			inline void pfcmpgt( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFCMPGT, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Compare - dst > src (3dNow!).
-			inline void pfcmpgt( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFCMPGT, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Maximum (3dNow!).
-			inline void pfmax( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFMAX, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Maximum (3dNow!).
-			inline void pfmax( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFMAX, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Minimum (3dNow!).
-			inline void pfmin( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFMIN, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Minimum (3dNow!).
-			inline void pfmin( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFMIN, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Multiply (3dNow!).
-			inline void pfmul( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFMUL, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Multiply (3dNow!).
-			inline void pfmul( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFMUL, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Negative Accumulate (3dNow!).
-			inline void pfnacc( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFNACC, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Negative Accumulate (3dNow!).
-			inline void pfnacc( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFNACC, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Mixed Accumulate (3dNow!).
-			inline void pfpnaxx( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFPNACC, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Mixed Accumulate (3dNow!).
-			inline void pfpnacc( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFPNACC, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reciprocal Approximation (3dNow!).
-			inline void pfrcp( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFRCP, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reciprocal Approximation (3dNow!).
-			inline void pfrcp( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFRCP, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reciprocal, First Iteration Step (3dNow!).
-			inline void pfrcpit1( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFRCPIT1, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reciprocal, First Iteration Step (3dNow!).
-			inline void pfrcpit1( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFRCPIT1, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reciprocal, Second Iteration Step (3dNow!).
-			inline void pfrcpit2( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFRCPIT2, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reciprocal, Second Iteration Step (3dNow!).
-			inline void pfrcpit2( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFRCPIT2, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reciprocal Square Root, First Iteration Step (3dNow!).
-			inline void pfrsqit1( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFRSQIT1, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reciprocal Square Root, First Iteration Step (3dNow!).
-			inline void pfrsqit1( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFRSQIT1, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reciprocal Square Root Approximation (3dNow!).
-			inline void pfrsqrt( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFRSQRT, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reciprocal Square Root Approximation (3dNow!).
-			inline void pfrsqrt( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFRSQRT, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Subtract (3dNow!).
-			inline void pfsub( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFSUB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Subtract (3dNow!).
-			inline void pfsub( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFSUB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reverse Subtract (3dNow!).
-			inline void pfsubr( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PFSUBR, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reverse Subtract (3dNow!).
-			inline void pfsubr( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PFSUBR, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DWords to SP-FP (3dNow!).
-			inline void pi2fd( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PI2FD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DWords to SP-FP (3dNow!).
-			inline void pi2fd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PI2FD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Words to SP-FP (3dNow!).
-			inline void pi2fw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PI2FW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Words to SP-FP (3dNow!).
-			inline void pi2fw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PI2FW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed swap DWord (3dNow!)
-			inline void pswapd( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSWAPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed swap DWord (3dNow!)
-			inline void pswapd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSWAPD, &dst, &src );
-			}
-
-			// [AMD only]		
-
-			//Prefetch (3dNow - Amd).
-			//
-			// Loads the entire 64-byte aligned memory sequence containing the
-			// specified memory address into the L1 data cache. The position of
-			// the specified memory address within the 64-byte cache line is
-			// irrelevant. If a cache hit occurs, or if a memory fault is detected,
-			// no bus cycle is initiated and the instruction is treated as a NOP.
-			inline void amd_prefetch( const CMem& mem )
-			{
-				m_PU._emitInstruction( INST_AMD_PREFETCH, &mem );
-			}
-
-			//------------------------------------------------------------------------------
-			//Prefetch and set cache to modified (3dNow - Amd).
-			//
-			// The PREFETCHW instruction loads the prefetched line and sets the
-			// cache-line state to Modified, in anticipation of subsequent data
-			// writes to the line. The PREFETCH instruction, by contrast, typically
-			// sets the cache-line state to Exclusive (depending on the hardware
-			// implementation).
-			inline void amd_prefetchw( const CMem& mem )
-			{
-				m_PU._emitInstruction( INST_AMD_PREFETCHW, &mem );
-			}
+			C3DNOW( Cx86CPUCore& refCPU );
+			virtual ~C3DNOW();
+			void femms();
+			void pf2id( const CMMReg& dst, const CMMReg& src );
+			void pf2id( const CMMReg& dst, const CMem& src );
+			void pf2iw( const CMMReg& dst, const CMMReg& src );
+			void pf2iw( const CMMReg& dst, const CMem& src );
+			void pfacc( const CMMReg& dst, const CMMReg& src );
+			void pfacc( const CMMReg& dst, const CMem& src );
+			void pfadd( const CMMReg& dst, const CMMReg& src );
+			void pfadd( const CMMReg& dst, const CMem& src );
+			void pfcmpeq( const CMMReg& dst, const CMMReg& src );
+			void pfcmpeq( const CMMReg& dst, const CMem& src );
+			void pfcmpge( const CMMReg& dst, const CMMReg& src );
+			void pfcmpge( const CMMReg& dst, const CMem& src );
+			void pfcmpgt( const CMMReg& dst, const CMMReg& src );
+			void pfcmpgt( const CMMReg& dst, const CMem& src );
+			void pfmax( const CMMReg& dst, const CMMReg& src );
+			void pfmax( const CMMReg& dst, const CMem& src );
+			void pfmin( const CMMReg& dst, const CMMReg& src );
+			void pfmin( const CMMReg& dst, const CMem& src );
+			void pfmul( const CMMReg& dst, const CMMReg& src );
+			void pfmul( const CMMReg& dst, const CMem& src );
+			void pfnacc( const CMMReg& dst, const CMMReg& src );
+			void pfnacc( const CMMReg& dst, const CMem& src );
+			void pfpnaxx( const CMMReg& dst, const CMMReg& src );
+			void pfpnacc( const CMMReg& dst, const CMem& src );
+			void pfrcp( const CMMReg& dst, const CMMReg& src );
+			void pfrcp( const CMMReg& dst, const CMem& src );
+			void pfrcpit1( const CMMReg& dst, const CMMReg& src );
+			void pfrcpit1( const CMMReg& dst, const CMem& src );
+			void pfrcpit2( const CMMReg& dst, const CMMReg& src );
+			void pfrcpit2( const CMMReg& dst, const CMem& src );
+			void pfrsqit1( const CMMReg& dst, const CMMReg& src );
+			void pfrsqit1( const CMMReg& dst, const CMem& src );
+			void pfrsqrt( const CMMReg& dst, const CMMReg& src );
+			void pfrsqrt( const CMMReg& dst, const CMem& src );
+			void pfsub( const CMMReg& dst, const CMMReg& src );
+			void pfsub( const CMMReg& dst, const CMem& src );
+			void pfsubr( const CMMReg& dst, const CMMReg& src );
+			void pfsubr( const CMMReg& dst, const CMem& src );
+			void pi2fd( const CMMReg& dst, const CMMReg& src );
+			void pi2fd( const CMMReg& dst, const CMem& src );
+			void pi2fw( const CMMReg& dst, const CMMReg& src );
+			void pi2fw( const CMMReg& dst, const CMem& src );
+			void pswapd( const CMMReg& dst, const CMMReg& src );
+			void pswapd( const CMMReg& dst, const CMem& src );
+			void amd_prefetch( const CMem& mem );
+			void amd_prefetchw( const CMem& mem );
 
 			__QCS_DECLARE_NONCOPYABLE( C3DNOW );
 		};

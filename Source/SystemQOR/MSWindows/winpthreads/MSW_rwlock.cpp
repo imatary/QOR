@@ -58,11 +58,11 @@
 #include <limits.h>
 #include "SystemQOR/MSWindows/types/pthread_types.h"
 #include "SystemQOR/MSWindows/MSW_pthread.h"
-#include "../SystemQOR/MSWindows/Winpthreads/details/thread.h"
-#include "../SystemQOR/MSWindows/Winpthreads/details/ref.h"
-#include "../SystemQOR/MSWindows/Winpthreads/details/rwlock.h"
-#include "../SystemQOR/MSWindows/Winpthreads/details/spinlock.h"
-#include "../SystemQOR/MSWindows/Winpthreads/details/misc.h"
+#include "../Source/SystemQOR/MSWindows/Winpthreads/details/thread.h"
+#include "../Source/SystemQOR/MSWindows/Winpthreads/details/ref.h"
+#include "../Source/SystemQOR/MSWindows/Winpthreads/details/rwlock.h"
+#include "../Source/SystemQOR/MSWindows/Winpthreads/details/spinlock.h"
+#include "../Source/SystemQOR/MSWindows/Winpthreads/details/misc.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32

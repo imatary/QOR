@@ -26,7 +26,7 @@
 
 #include "WinQAPI/WinQAPI.h"
 #include "SystemQOR.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/HandleCheck.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/HandleCheck.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWinQAPI

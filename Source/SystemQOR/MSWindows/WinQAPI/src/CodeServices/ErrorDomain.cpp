@@ -30,8 +30,8 @@
 #include "CodeQOR/ErrorSystem/What.h"
 #include "CodeQOR/ErrorSystem/Where.h"
 #include "CodeQOR/ErrorSystem/When.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/Error.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/Error.h"
 #include "WinQAPI/Kernel32.h"
 #include "WinQAPI/AdvAPI32.h"
 

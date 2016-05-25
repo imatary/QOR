@@ -25,8 +25,8 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include "WinQAPI/Kernel32.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/ReturnCheck.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/ReturnCheck.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWinQAPI

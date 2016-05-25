@@ -45,15 +45,8 @@ namespace nsx86
 	{
 	public:
 
-		//------------------------------------------------------------------------------
-		inline Ci286CPU( CCodeGeneratorBase* codeGenerator ) __QCMP_THROW : Ci186CPU( codeGenerator )
-		{
-		}
-
-		//------------------------------------------------------------------------------
-		inline virtual ~Ci286CPU() __QCMP_THROW
-		{
-		}
+		Ci286CPU( CCodeGeneratorBase* codeGenerator ) __QCMP_THROW;
+		~Ci286CPU() __QCMP_THROW;
 
 	private:
 

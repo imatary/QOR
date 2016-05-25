@@ -56,26 +56,10 @@ namespace nsArch
 
 		__QOR_DECLARE_OCLASS_ID(CAbstractAssembler);
 
-		//------------------------------------------------------------------------------
-		CAbstractAssembler()
-		{
-		}
-
-		//------------------------------------------------------------------------------
-		virtual ~CAbstractAssembler()
-		{
-		}
-
-		//------------------------------------------------------------------------------
-		CAbstractAssembler( const CAbstractAssembler& )
-		{
-		}
-
-		//------------------------------------------------------------------------------
-		CAbstractAssembler& operator = ( const CAbstractAssembler& )
-		{
-			return *this;
-		}
+		CAbstractAssembler();
+		virtual ~CAbstractAssembler();
+		CAbstractAssembler( const CAbstractAssembler& );
+		CAbstractAssembler& operator = ( const CAbstractAssembler& );
 
 		virtual Cmp_int_ptr getCodeSize() const __QCMP_THROW = 0;
 		virtual Cmp_uint_ptr relocCode( void* dst ) const __QCMP_THROW = 0;

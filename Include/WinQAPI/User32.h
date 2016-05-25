@@ -28,7 +28,7 @@
 #define WINQAPI_USER32_H_1
 
 #include "WinQAPI/Kernel32.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
 
 #if	( WINVER < 0x0600 )
 #	define UOI_HEAPSIZE    5

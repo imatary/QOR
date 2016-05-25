@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A0223D5D-9A2E-47C6-9D0B-026E31660910}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SystemQOR</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>__QSYS;WIN32;_DEBUG;_WINDOWS;_USRDLL;_LIBCPP_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../include</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <MinimalRebuild>false</MinimalRebuild>
+      <FloatingPointModel>Strict</FloatingPointModel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <DisableSpecificWarnings>4290;4201</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../QOR/Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies />
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;SYSTEMQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;SYSTEMQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;SYSTEMQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Common\ExePageAllocator.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Common\SharedBootStrap.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Common\SystemQOR.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\arpa\MSW_inet.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\extensions\strdup.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_aio.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_assert.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_complex.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_CRT0.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_ctype.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_dirent.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_dlfcn.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_errno.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_fcntl.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_fenv.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_fmtmsg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_fnmatch.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_ftw.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_glob.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_grp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_iconv.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_inttypes.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_langinfo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_libgen.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_limits.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_locale.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_math.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_monetary.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_mqueue.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_ndbm.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_netdb.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_new.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_nl_types.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_poll.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_pthread.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_purecall.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_pwd.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_PX_sched.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_regex.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_search.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_semaphore.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_setjmp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_signal.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_spawn.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_stdio.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_stdlib.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_string.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_strings.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_stropts.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_syslog.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_termios.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_time.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_trace.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_ucontext.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_ulimit.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_unistd.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_utime.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_utmpx.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_wchar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_wctype.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\MSW_wordexp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_mman.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_msg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_resource.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_select.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_sem.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_shm.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_socket.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_stat.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_statvfs.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_systime.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_timeb.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_times.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_uio.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_utsname.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_wait.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_barrier.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_clock.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_cond.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_dll_math.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_misc.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_mutex.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_nanosleep.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_rwlock.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_sched.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_sem.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_spinlock.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_thread.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\arpa\Baseinet.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseaio.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseassert.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basecomplex.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basecpio.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\BaseCRT.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basectype.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basedirent.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basedlfcn.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseerrno.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basefcntl.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basefenv.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basefloat.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basefmtmsg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basefnmatch.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseftw.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseglob.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basegrp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseiconv.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseinttypes.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseiso646.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baselanginfo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baselibgen.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baselimits.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baselocale.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basemath.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basemonetary.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basemqueue.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basendbm.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basenetdb.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basenl_types.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basepoll.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basepthread.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basepwd.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseregex.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basesched.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basesearch.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basesemaphore.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basesetjmp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basesignal.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basespawn.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestdarg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestdbool.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestddef.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestdint.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestdio.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestdlib.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestring.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestrings.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basestropts.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basesyslog.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basetar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basetermios.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basetgmath.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basetime.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basetrace.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseucontext.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseulimit.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseunistd.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseutime.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Baseutmpx.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basewchar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basewctype.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\Basewordexp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\acos.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\acosh.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\asin.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\asinh.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\atan.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\atan2.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\atanh.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\cabs.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\cbrt.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\ceil.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\copysign.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\cos.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\cosh.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\drem.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\erf.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\exp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\exp2.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\expm1.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fabs.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fdim.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\finite.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\floor.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fma.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fmax.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fmin.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fmod.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\fpclassify.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\frexp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\gamma.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\hypot.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\ilogb.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\infconst.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\infinity.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\isinf.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\isinfd.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\isnan.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\isnand.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\j0.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\j1.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\jn.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\ldexp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\lgamma.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\lib_ver.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\log.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\log10.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\log1p.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\logb.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\lrint.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\lround.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\matherr.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\modf.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\nan.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\nearbyint.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\nextafter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\pow.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\remainder.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\remquo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\rem_pio2.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\rint.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\round.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\scalb.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\scalbln.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\scalbn.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\signbit.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\signif.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\sin.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\sincos.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\sinh.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\sqrt.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\standard.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\tan.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\tanh.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\tgamma.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\math\trunc.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\netinet\Basein.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\netinet\Basetcp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\net\Baseif.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseipc.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basemman.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basemsg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseresource.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseselect.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basesem.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseshm.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basesocket.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basestat.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basestatvfs.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basesystime.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basetimeb.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basetimes.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basetypes.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseuio.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseun.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Baseutsname.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basewait.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\arpa\MSW_inet.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSWindows.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_aio.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_assert.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_cpio.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_CRT.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_ctype.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_dirent.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_dlfcn.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_errno.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_excpt.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_fcntl.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_fenv.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_float.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_fmtmsg.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_fnmatch.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_ftw.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_glob.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_grp.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_iconv.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_inttypes.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_iso646.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_langinfo.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_libgen.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_limits.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_locale.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_math.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_monetary.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_mqueue.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_ndbm.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_netdb.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_nl_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_poll.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_pthread.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_pwd.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_regex.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_sched.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_search.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_semaphore.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_setjmp.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_signal.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_spawn.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stdarg.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stdbool.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stddef.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stdint.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stdio.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stdlib.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_string.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_strings.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_stropts.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_syslog.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_tar.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_tchar.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_termios.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_tgmath.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_time.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_trace.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_ucontext.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_ulimit.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_unistd.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_utime.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_utmpx.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_wchar.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_wctype.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_wordexp.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW__complex.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\netinet\MSW_in.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\netinet\MSW_tcp.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\net\MSW_if.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_acct.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_ipc.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_mman.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_msg.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_param.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_resource.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_select.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_sem.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_shm.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_socket.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_stat.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_statvfs.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_time.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_timeb.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_times.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_uio.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_un.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_uname.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_utsname.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_wait.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\sys\sys_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\WindowsVersion.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseaio.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseassert.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basecomplex.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basecpio.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\BaseCRT.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basectype.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basedirent.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basedlfcn.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseerrno.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basefcntl.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basefenv.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basefloat.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basefmtmsg.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basefnmatch.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseftw.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseglob.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basegrp.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseiconv.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseinttypes.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseiso646.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baselanginfo.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baselibgen.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baselimits.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baselocale.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basemath.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basemonetary.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basemqueue.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basendbm.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basenetdb.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basenl_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basepoll.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basepthread.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basepwd.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseregex.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basesched.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basesearch.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basesemaphore.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basesetjmp.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basesignal.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basespawn.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestdarg.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestdbool.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestddef.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestdint.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestdio.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestdlib.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestring.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestrings.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basestropts.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basesyslog.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basetar.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basetermios.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basetgmath.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basetime.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basetrace.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseucontext.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseulimit.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseunistd.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseutime.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseutmpx.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basewchar.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basewctype.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basewordexp.h" />
+    <ClInclude Include="..\..\..\..\Source\SystemQOR\MSWindows\versions\Win9x.h" />
+    <ClInclude Include="..\..\..\..\Source\SystemQOR\MSWindows\versions\WinNT.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

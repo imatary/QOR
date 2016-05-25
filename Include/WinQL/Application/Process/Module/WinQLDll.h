@@ -33,8 +33,8 @@
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-#include "../SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/Library.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/Library.h"
 #include "WinQL/WinQL.h"
 #include "WinQL/Definitions/Handles.h"
 #include "WinQL/Application/Process/Module/WinQLModule.h"

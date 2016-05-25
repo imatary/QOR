@@ -24,7 +24,8 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/PE/Sections.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/PE/Sections.h"
+#include "CompilerQOR/Preprocessor/preprocessor/library.h"
 
 #define DLL_THREAD_ATTACH    2
 
@@ -37,6 +38,7 @@ static _CRTALLOC(".CRT$XDZ") _PVFV __xd_z = 0;
 //--------------------------------------------------------------------------------
 void __stdcall __dyn_tls_init( void* hDllHandle, unsigned long dwReason, void* lpreserved )
 {
+	QOR_PP_UNREF2( hDllHandle, lpreserved );
     _PVFV* pfunc;
 
     if( dwReason != DLL_THREAD_ATTACH ) 

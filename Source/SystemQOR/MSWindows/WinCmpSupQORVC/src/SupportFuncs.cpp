@@ -25,7 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include "SystemQOR.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/SupportFuncs.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/SupportFuncs.h"
 #include <stdlib.h>
 #include <new>
 #include "CodeQOR/Modules/LoadableModuleBase.h"
@@ -47,7 +47,6 @@ void __QCMP_CALLCON operator delete (void* pVoid) __QCMP_THROW
 {
 	free( pVoid );
 }
-
 /*
 //------------------------------------------------------------------------------
 void* __cdecl operator new (size_t Size) __QCMP_THROW
@@ -55,6 +54,40 @@ void* __cdecl operator new (size_t Size) __QCMP_THROW
 	return malloc( Size );
 }
 */
+
+#if ( __QCMP_COMPILER == __QCMP_MSVC && _MSC_VER >= 1900 )
+//------------------------------------------------------------------------------
+void __cdecl operator delete( void* ptr, unsigned int )
+{
+	::operator delete( ptr );
+}
+
+//------------------------------------------------------------------------------
+void __cdecl operator delete( void* ptr, unsigned __int64 )
+{
+	::operator delete( ptr );
+}
+
+//------------------------------------------------------------------------------
+void __cdecl operator delete[ ]( void* ptr, unsigned int )
+{
+	::operator delete[ ]( ptr );
+}
+
+//------------------------------------------------------------------------------
+void __cdecl operator delete[ ]( void* ptr, unsigned __int64 )
+{
+	::operator delete[ ]( ptr );
+}
+
+//------------------------------------------------------------------------------
+void operator delete[ ]( void* ptr ) __QCMP_THROW
+{
+	::operator delete( ptr );
+}
+#endif
+
+//------------------------------------------------------------------------------
 void* __QCMP_CALLCON operator new( std::size_t size )
 /*
 #if !__has_feature(cxx_noexcept)
@@ -90,3 +123,61 @@ extern "C" int __cdecl _purecall()
 	return 0;
 }
 
+#if ( _MSC_VER >= 1900 )
+
+//--------------------------------------------------------------------------------
+void __cdecl _Init_thread_header( int *pOnce )
+{
+	pOnce;
+}
+
+//--------------------------------------------------------------------------------
+void __cdecl _Init_thread_footer( int *pOnce )
+{
+	pOnce;
+}
+
+//--------------------------------------------------------------------------------
+void __cdecl _Init_thread_abort( int *pOnce )
+{
+	pOnce;
+}
+
+#endif//( _MSC_VER >= 1900 )
+
+__QCMP_STARTLINKAGE_C
+
+//--------------------------------------------------------------------------------
+int _cdecl _IsNonwritableInCurrentImage( unsigned char* pTarget )
+{
+	/*
+	int v2; // eax@2
+	int result = 0; // eax@3
+	unsigned int v4; // [sp-10h] [bp-28h]@1
+	unsigned int *v5; // [sp+0h] [bp-18h]@1
+	int v6; // [sp+8h] [bp-10h]@1
+	int(__cdecl *v7)(int, int, int, int); // [sp+Ch] [bp-Ch]@1
+	unsigned int v8; // [sp+10h] [bp-8h]@1
+	int v9; // [sp+14h] [bp-4h]@1
+	int v10; // [sp+18h] [bp+0h]@1
+
+	v7 = except_handler4;
+	v6 = a1;
+	v8 = _security_cookie ^ (unsigned int)&unk_FB2228;
+	v4 = (unsigned int)&v10 ^ _security_cookie;
+	v5 = &v4;
+	v9 = 0;
+	if (ValidateImageBase(16449536) && (v2 = FindPESection(16449536, a2 - 16449536)) != 0)
+	{
+	result = ~(unsigned __int8)(*(_DWORD *)(v2 + 36) >> 31) & 1;
+	v9 = -2;
+	}
+	else
+	{
+	result = 0;
+	}
+	*/
+	return 0;
+}
+
+__QCMP_ENDLINKAGE_C

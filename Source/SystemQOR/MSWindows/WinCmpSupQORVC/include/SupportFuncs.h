@@ -99,4 +99,6 @@ __forceinline bool __sync_bool_compare_and_swap( long volatile*, long, long )
 	return 0;
 }
 
+extern "C" int _Init_thread_epoch;
+
 #endif//WINCMPSUPVC_FUNCS_H_1

@@ -27,9 +27,9 @@
 #include "WinQL/WinQL.h"
 #include "SystemQOR.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/ExceptionHandling.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/Call.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/RTTI/RTTI.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/ExceptionHandling.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/Call.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/RTTI/RTTI.h"
 #include <string.h>
 #include <exception>
 

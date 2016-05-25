@@ -39,3 +39,5 @@ void InitThread( void )
         __dyn_tls_init_callback( 0, DLL_THREAD_ATTACH, 0 );
     }
 }
+
+int _Init_thread_epoch;

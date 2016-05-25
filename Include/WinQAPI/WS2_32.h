@@ -39,7 +39,7 @@
 #include <Ws2spi.h>
 #undef WIN32_NO_STATUS
 #include "WinQAPI/Kernel32.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
 
 #ifdef	__MINGW32__
 typedef addrinfo ADDRINFOA, *PADDRINFOA;

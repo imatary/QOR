@@ -26,9 +26,9 @@
 
 #include "WinQAPI/WinQAPI.h"
 #include "SystemQOR.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/StringChecks.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/Error.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/FunctionContext.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/StringChecks.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/Error.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/FunctionContext.h"
 #include "CodeQOR/ErrorSystem/ParamErrorDomain.h"
 #include "CodeQOR/Modules/ProcessBase.h"
 

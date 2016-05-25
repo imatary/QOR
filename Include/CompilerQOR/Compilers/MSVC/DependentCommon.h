@@ -80,5 +80,5 @@ namespace nsCompiler
 #endif
 
 //Pull in the declarations from the MSVC support library necessary to level up MSVC to minimum requirements for builtin functions and types
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/SupportFuncs.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/EH_Data.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/SupportFuncs.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/EH_Data.h"

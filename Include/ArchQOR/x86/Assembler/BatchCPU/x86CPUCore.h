@@ -403,17 +403,8 @@ namespace nsx86
 
 		LabelLink* _newLabelLink() __QCMP_THROW;
 
-		//------------------------------------------------------------------------------
-		inline void SetEmitOptions( Cmp_unsigned__int32 EmitOptions )
-		{
-			m_uiEmitOptions = EmitOptions;
-		}
-
-		//------------------------------------------------------------------------------
-		inline void SetProperties( Cmp_unsigned__int32 Properties )
-		{
-			m_uiProperties = Properties;
-		}
+		inline void SetEmitOptions( Cmp_unsigned__int32 EmitOptions );
+		inline void SetProperties( Cmp_unsigned__int32 Properties );
 
 		// Emit Options
 
@@ -432,10 +423,7 @@ namespace nsx86
 		// prefix is used with any other instruction. The XCHG instruction always
 		// asserts the LOCK# signal regardless of the presence or absence of the LOCK
 		// prefix.
-		inline void lock()
-		{
-			m_uiEmitOptions |= EMIT_OPTION_LOCK_PREFIX;
-		}
+		inline void lock();
 
 		//------------------------------------------------------------------------------
 		//Force REX prefix to be emitted.
@@ -443,10 +431,7 @@ namespace nsx86
 		// combinations. If you want to access ah, bh, ch or dh registers then you
 		// can't emit REX prefix and it will cause an illegal instruction error.
 		// Note REX prefix is only valid for X64/AMD64 platform.
-		inline void rex()
-		{
-			m_uiEmitOptions |= EMIT_OPTION_REX_PREFIX;
-		}
+		inline void rex();
 
 	protected:
 

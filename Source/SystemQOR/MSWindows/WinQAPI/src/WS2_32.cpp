@@ -26,7 +26,7 @@
 
 #include "WinQAPI/WinQAPI.h"
 #include "WinQAPI/WS2_32.h"
-#include "../SystemQOR/MSWindows/WINQAPI/include/ReturnCheck.h"
+#include "../Source/SystemQOR/MSWindows/WINQAPI/include/ReturnCheck.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWinQAPI

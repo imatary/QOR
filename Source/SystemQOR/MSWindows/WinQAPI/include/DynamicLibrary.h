@@ -33,7 +33,7 @@
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-#include "../SystemQOR/MSWindows/WinQAPI/include/Library.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/Library.h"
 #include "WinQAPI/Kernel32.h"
 
 //--------------------------------------------------------------------------------

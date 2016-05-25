@@ -32,7 +32,7 @@ __QCMP_WARNING_DISABLE( __QCMP_WARN_THIS_USED_IN_BASE_INIT_LIST, "Safe usage: sa
 __QCMP_WARNING_POP
 #include "WinQAPI/Kernel32.h"
 
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/PE/Sections.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/PE/Sections.h"
 
 _CRTALLOC(".CRT$XPX") static nsWin32::_PVFV pterm = nsWin32::CConsole::__termcon;
 

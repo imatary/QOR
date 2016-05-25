@@ -40,15 +40,8 @@ namespace nsArch
 		{
 		public:
 
-			//------------------------------------------------------------------------------
-			Ci786CPU( CCodeGeneratorBase* codeGenerator ) : Ci686CPU( codeGenerator )
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			virtual ~Ci786CPU() __QCMP_THROW
-			{
-			}
+			Ci786CPU( CCodeGeneratorBase* codeGenerator );
+			virtual ~Ci786CPU() __QCMP_THROW;
 
 		protected:
 
@@ -60,15 +53,8 @@ namespace nsArch
 		{
 		public:
 
-			//------------------------------------------------------------------------------
-			CP7FPU( Cx86CPUCore& refCPU ) : CP6FPU( refCPU )
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			virtual ~CP7FPU()
-			{
-			}
+			CP7FPU( Cx86CPUCore& refCPU );
+			virtual ~CP7FPU();
 
 			__QCS_DECLARE_NONCOPYABLE( CP7FPU );
 		};

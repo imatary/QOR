@@ -28,7 +28,7 @@
 #define WINQAPI_ADVAPI32_H_1
 
 #include "WinQAPI/Kernel32.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
 
 //#if(_MSC_VER < 1700 )
 #	ifndef __MINGW32__

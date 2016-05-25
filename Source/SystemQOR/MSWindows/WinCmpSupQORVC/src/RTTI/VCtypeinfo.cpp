@@ -25,7 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include "SystemQOR.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/RTTI/typeInfo.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/RTTI/typeInfo.h"
 #include <stdlib.h>
 #include <string.h>
 

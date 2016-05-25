@@ -41,169 +41,30 @@ namespace nsArch
 		{
 		public:
 
-			//------------------------------------------------------------------------------
-			CSSE3( Cx86CPUCore& refCPU ) : CSSE2( refCPU )
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			virtual ~CSSE3()
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Add/Subtract (SSE3).
-			inline void addsubpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_ADDSUBPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Add/Subtract (SSE3).
-			inline void addsubpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_ADDSUBPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Add/Subtract (SSE3).
-			inline void addsubps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_ADDSUBPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Add/Subtract (SSE3).
-			inline void addsubps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_ADDSUBPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Store Integer with Truncation (SSE3).
-			inline void fisttp( const CMem& dst )
-			{
-				m_PU._emitInstruction( INST_FISTTP, &dst );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Horizontal Add (SSE3).
-			inline void haddpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_HADDPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Horizontal Add (SSE3).
-			inline void haddpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_HADDPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Horizontal Add (SSE3).
-			inline void haddps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_HADDPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Horizontal Add (SSE3).
-			inline void haddps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_HADDPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Horizontal Subtract (SSE3).
-			inline void hsubpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_HSUBPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Horizontal Subtract (SSE3).
-			inline void hsubpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_HSUBPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Horizontal Subtract (SSE3).
-			inline void hsubps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_HSUBPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Horizontal Subtract (SSE3).
-			inline void hsubps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_HSUBPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Load Unaligned Integer 128 Bits (SSE3).
-			inline void lddqu( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_LDDQU, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------	
-			//Set Up Monitor Address (SSE3).
-			inline void monitor()
-			{
-				m_PU._emitInstruction( INST_MONITOR );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move One DP-FP and Duplicate (SSE3).
-			inline void movddup( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVDDUP, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move One DP-FP and Duplicate (SSE3).
-			inline void movddup( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVDDUP, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Packed SP-FP High and Duplicate (SSE3).
-			inline void movshdup( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVSHDUP, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Packed SP-FP High and Duplicate (SSE3).
-			inline void movshdup( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVSHDUP, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Packed SP-FP Low and Duplicate (SSE3).
-			inline void movsldup( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVSLDUP, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Packed SP-FP Low and Duplicate (SSE3).
-			inline void movsldup( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVSLDUP, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Monitor Wait (SSE3).
-			inline void mwait()
-			{
-				m_PU._emitInstruction( INST_MWAIT );
-			}
+			CSSE3( Cx86CPUCore& refCPU );
+			virtual ~CSSE3();
+			void addsubpd( const CXMMReg& dst, const CXMMReg& src );
+			void addsubpd( const CXMMReg& dst, const CMem& src );
+			void addsubps( const CXMMReg& dst, const CXMMReg& src );
+			void addsubps( const CXMMReg& dst, const CMem& src );
+			void fisttp( const CMem& dst );
+			void haddpd( const CXMMReg& dst, const CXMMReg& src );
+			void haddpd( const CXMMReg& dst, const CMem& src );
+			void haddps( const CXMMReg& dst, const CXMMReg& src );
+			void haddps( const CXMMReg& dst, const CMem& src );
+			void hsubpd( const CXMMReg& dst, const CXMMReg& src );
+			void hsubpd( const CXMMReg& dst, const CMem& src );
+			void hsubps( const CXMMReg& dst, const CXMMReg& src );
+			void hsubps( const CXMMReg& dst, const CMem& src );
+			void lddqu( const CXMMReg& dst, const CMem& src );
+			void monitor();
+			void movddup( const CXMMReg& dst, const CXMMReg& src );
+			void movddup( const CXMMReg& dst, const CMem& src );
+			void movshdup( const CXMMReg& dst, const CXMMReg& src );
+			void movshdup( const CXMMReg& dst, const CMem& src );
+			void movsldup( const CXMMReg& dst, const CXMMReg& src );
+			void movsldup( const CXMMReg& dst, const CMem& src );
+			void mwait();
 
 			__QCS_DECLARE_NONCOPYABLE( CSSE3 );
 		};
@@ -214,480 +75,74 @@ namespace nsArch
 		public:
 
 			//------------------------------------------------------------------------------
-			CSSSE3(  Cx86CPUCore& refCPU ) : CSSE3( refCPU )
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			virtual ~CSSSE3()
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SIGN (SSSE3).
-			inline void psignb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSIGNB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SIGN (SSSE3).
-			inline void psignb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSIGNB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SIGN (SSSE3).
-			inline void psignb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSIGNB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SIGN (SSSE3).
-			inline void psignb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSIGNB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SIGN (SSSE3).
-			inline void psignw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSIGNW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SIGN (SSSE3).
-			inline void psignw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSIGNW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SIGN (SSSE3).
-			inline void psignw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSIGNW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SIGN (SSSE3).
-			inline void psignw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSIGNW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SIGN (SSSE3).
-			inline void psignd( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSIGND, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SIGN (SSSE3).
-			inline void psignd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSIGND, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SIGN (SSSE3).
-			inline void psignd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSIGND, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SIGN (SSSE3).
-			inline void psignd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSIGND, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Add (SSSE3).
-			inline void phaddw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PHADDW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Add (SSSE3).
-			inline void phaddw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PHADDW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Add (SSSE3).
-			inline void phaddw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PHADDW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Add (SSSE3).
-			inline void phaddw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PHADDW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Add (SSSE3).
-			inline void phaddd( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PHADDD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Add (SSSE3).
-			inline void phaddd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PHADDD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Add (SSSE3).
-			inline void phaddd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PHADDD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Add (SSSE3).
-			inline void phaddd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PHADDD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Add and Saturate (SSSE3).
-			inline void phaddsw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PHADDSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Add and Saturate (SSSE3).
-			inline void phaddsw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PHADDSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Add and Saturate (SSSE3).
-			inline void phaddsw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PHADDSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Add and Saturate (SSSE3).
-			inline void phaddsw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PHADDSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Subtract (SSSE3).
-			inline void phsubw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PHSUBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Subtract (SSSE3).
-			inline void phsubw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PHSUBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Subtract (SSSE3).
-			inline void phsubw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PHSUBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Subtract (SSSE3).
-			inline void phsubw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PHSUBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Subtract (SSSE3).
-			inline void phsubd( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PHSUBD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Subtract (SSSE3).
-			inline void phsubd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PHSUBD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Subtract (SSSE3).
-			inline void phsubd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PHSUBD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Subtract (SSSE3).
-			inline void phsubd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PHSUBD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Subtract and Saturate (SSSE3).
-			inline void phsubsw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PHSUBSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Subtract and Saturate (SSSE3).
-			inline void phsubsw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PHSUBSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Subtract and Saturate (SSSE3).
-			inline void phsubsw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PHSUBSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Horizontal Subtract and Saturate (SSSE3).
-			inline void phsubsw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PHSUBSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Multiply and Add Packed Signed and Unsigned Bytes (SSSE3).
-			inline void pmaddubsw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMADDUBSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Multiply and Add Packed Signed and Unsigned Bytes (SSSE3).
-			inline void pmaddubsw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMADDUBSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Multiply and Add Packed Signed and Unsigned Bytes (SSSE3).
-			inline void pmaddubsw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMADDUBSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Multiply and Add Packed Signed and Unsigned Bytes (SSSE3).
-			inline void pmaddubsw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMADDUBSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Absolute Value (SSSE3).
-			inline void pabsb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PABSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Absolute Value (SSSE3).
-			inline void pabsb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PABSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Absolute Value (SSSE3).
-			inline void pabsb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PABSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Absolute Value (SSSE3).
-			inline void pabsb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PABSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Absolute Value (SSSE3).
-			inline void pabsw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PABSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Absolute Value (SSSE3).
-			inline void pabsw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PABSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Absolute Value (SSSE3).
-			inline void pabsw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PABSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Absolute Value (SSSE3).
-			inline void pabsw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PABSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Absolute Value (SSSE3).
-			inline void pabsd( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PABSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Absolute Value (SSSE3).
-			inline void pabsd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PABSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Absolute Value (SSSE3).
-			inline void pabsd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PABSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Absolute Value (SSSE3).
-			inline void pabsd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PABSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply High with Round and Scale (SSSE3).
-			inline void pmulhrsw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMULHRSW, &dst, &src );
-			}
-	
-			//------------------------------------------------------------------------------
-			//Packed Multiply High with Round and Scale (SSSE3).
-			inline void pmulhrsw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMULHRSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply High with Round and Scale (SSSE3).
-			inline void pmulhrsw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMULHRSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply High with Round and Scale (SSSE3).
-			inline void pmulhrsw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMULHRSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shuffle Bytes (SSSE3).
-			inline void pshufb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSHUFB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shuffle Bytes (SSSE3).
-			inline void pshufb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSHUFB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shuffle Bytes (SSSE3).
-			inline void pshufb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSHUFB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shuffle Bytes (SSSE3).
-			inline void pshufb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSHUFB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shuffle Bytes (SSSE3).
-			inline void palignr( const CMMReg& dst, const CMMReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PALIGNR, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shuffle Bytes (SSSE3).
-			inline void palignr( const CMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PALIGNR, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shuffle Bytes (SSSE3).
-			inline void palignr( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PALIGNR, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shuffle Bytes (SSSE3).
-			inline void palignr( const CXMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PALIGNR, &dst, &src, &imm8 );
-			}
-
-			// [Intel only]
-
-			//------------------------------------------------------------------------------
-			//Move Data After Swapping Bytes (SSE3 - Intel Atom).
-			inline void movbe( const CGPReg& dst, const CMem& src )
-			{
-				//assert(!dst.isGPB());
-				m_PU._emitInstruction( INST_MOVBE, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Data After Swapping Bytes (SSE3 - Intel Atom).
-			inline void movbe( const CMem& dst, const CGPReg& src )
-			{
-				//assert(!src.isGPB());
-				m_PU._emitInstruction( INST_MOVBE, &dst, &src );
-			}
+			CSSSE3( Cx86CPUCore& refCPU );
+			virtual ~CSSSE3();
+			void psignb( const CMMReg& dst, const CMMReg& src );
+			void psignb( const CMMReg& dst, const CMem& src );
+			void psignb( const CXMMReg& dst, const CXMMReg& src );
+			void psignb( const CXMMReg& dst, const CMem& src );
+			void psignw( const CMMReg& dst, const CMMReg& src );
+			void psignw( const CMMReg& dst, const CMem& src );
+			void psignw( const CXMMReg& dst, const CXMMReg& src );
+			void psignw( const CXMMReg& dst, const CMem& src );
+			void psignd( const CMMReg& dst, const CMMReg& src );
+			void psignd( const CMMReg& dst, const CMem& src );
+			void psignd( const CXMMReg& dst, const CXMMReg& src );
+			void psignd( const CXMMReg& dst, const CMem& src );
+			void phaddw( const CMMReg& dst, const CMMReg& src );
+			void phaddw( const CMMReg& dst, const CMem& src );
+			void phaddw( const CXMMReg& dst, const CXMMReg& src );
+			void phaddw( const CXMMReg& dst, const CMem& src );
+			void phaddd( const CMMReg& dst, const CMMReg& src );
+			void phaddd( const CMMReg& dst, const CMem& src );
+			void phaddd( const CXMMReg& dst, const CXMMReg& src );
+			void phaddd( const CXMMReg& dst, const CMem& src );
+			void phaddsw( const CMMReg& dst, const CMMReg& src );
+			void phaddsw( const CMMReg& dst, const CMem& src );
+			void phaddsw( const CXMMReg& dst, const CXMMReg& src );
+			void phaddsw( const CXMMReg& dst, const CMem& src );
+			void phsubw( const CMMReg& dst, const CMMReg& src );
+			void phsubw( const CMMReg& dst, const CMem& src );
+			void phsubw( const CXMMReg& dst, const CXMMReg& src );
+			void phsubw( const CXMMReg& dst, const CMem& src );
+			void phsubd( const CMMReg& dst, const CMMReg& src );
+			void phsubd( const CMMReg& dst, const CMem& src );
+			void phsubd( const CXMMReg& dst, const CXMMReg& src );
+			void phsubd( const CXMMReg& dst, const CMem& src );
+			void phsubsw( const CMMReg& dst, const CMMReg& src );
+			void phsubsw( const CMMReg& dst, const CMem& src );
+			void phsubsw( const CXMMReg& dst, const CXMMReg& src );
+			void phsubsw( const CXMMReg& dst, const CMem& src );
+			void pmaddubsw( const CMMReg& dst, const CMMReg& src );
+			void pmaddubsw( const CMMReg& dst, const CMem& src );
+			void pmaddubsw( const CXMMReg& dst, const CXMMReg& src );
+			void pmaddubsw( const CXMMReg& dst, const CMem& src );
+			void pabsb( const CMMReg& dst, const CMMReg& src );
+			void pabsb( const CMMReg& dst, const CMem& src );
+			void pabsb( const CXMMReg& dst, const CXMMReg& src );
+			void pabsb( const CXMMReg& dst, const CMem& src );
+			void pabsw( const CMMReg& dst, const CMMReg& src );
+			void pabsw( const CMMReg& dst, const CMem& src );
+			void pabsw( const CXMMReg& dst, const CXMMReg& src );
+			void pabsw( const CXMMReg& dst, const CMem& src );
+			void pabsd( const CMMReg& dst, const CMMReg& src );
+			void pabsd( const CMMReg& dst, const CMem& src );
+			void pabsd( const CXMMReg& dst, const CXMMReg& src );
+			void pabsd( const CXMMReg& dst, const CMem& src );
+			void pmulhrsw( const CMMReg& dst, const CMMReg& src );
+			void pmulhrsw( const CMMReg& dst, const CMem& src );
+			void pmulhrsw( const CXMMReg& dst, const CXMMReg& src );
+			void pmulhrsw( const CXMMReg& dst, const CMem& src );
+			void pshufb( const CMMReg& dst, const CMMReg& src );
+			void pshufb( const CMMReg& dst, const CMem& src );
+			void pshufb( const CXMMReg& dst, const CXMMReg& src );
+			void pshufb( const CXMMReg& dst, const CMem& src );
+			void palignr( const CMMReg& dst, const CMMReg& src, const CImm& imm8 );
+			void palignr( const CMMReg& dst, const CMem& src, const CImm& imm8 );
+			void palignr( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 );
+			void palignr( const CXMMReg& dst, const CMem& src, const CImm& imm8 );
+			void movbe( const CGPReg& dst, const CMem& src );
+			void movbe( const CMem& dst, const CGPReg& src );
 
 			__QCS_DECLARE_NONCOPYABLE( CSSSE3 );
 		};

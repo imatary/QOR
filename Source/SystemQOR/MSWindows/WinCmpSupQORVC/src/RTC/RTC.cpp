@@ -31,7 +31,7 @@
 
 #include "SystemQOR.h"
 #include "CodeQOR/Macros/codingmacros.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/RTC/RTC.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/RTC/RTC.h"
 
 //--------------------------------------------------------------------------------
 int _RTC_ErrorLevels[ 6 ] = { 1,1,1,1,1 };

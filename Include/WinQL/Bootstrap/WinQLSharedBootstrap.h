@@ -43,13 +43,12 @@ namespace nsWin32
 		int ProcessAttach( void );
 		int ProcessDetach( void );
 		bool ProcessAttached( void );
-
 		void* InstanceHandle( void );
-
-	protected:
 
 		CSharedBootStrap( void* hModule );
 		virtual ~CSharedBootStrap();
+
+	protected:
 
 		int m_iProcAttached;
 		void* m_hModule;

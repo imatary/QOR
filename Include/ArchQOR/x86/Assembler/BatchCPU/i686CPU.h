@@ -40,456 +40,71 @@ namespace nsArch
 		{
 		public:
 
-			//------------------------------------------------------------------------------
-			Ci686CPU( CCodeGeneratorBase* codeGenerator ) : Ci586CPU( codeGenerator )
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			inline virtual ~Ci686CPU() __QCMP_THROW
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			//Undefined instruction - Raise invalid opcode exception.
-			inline void ud2()
-			{
-				_emitInstruction( INST_UD2 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmov( CONDITION cc, const CGPReg& dst, const CGPReg& src )
-			{
-				_emitInstruction( ConditionToInstruction::toCMovCC( cc ), &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmov( CONDITION cc, const CGPReg& dst, const CMem& src )
-			{
-				_emitInstruction( ConditionToInstruction::toCMovCC( cc ), &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmova( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVA, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmova( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction(INST_CMOVA  , &dst, &src); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovae( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVAE , &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovae( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVAE , &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovb( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVB, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovb( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVB, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovbe( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVBE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovbe( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVBE , &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovc( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVC, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovc( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVC, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmove( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmove( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovg( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVG  , &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovg( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVG, &dst, &src );  
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovge( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVGE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovge( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVGE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovl( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVL, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovl( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVL, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovle( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVLE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovle( const CGPReg& dst, const CMem& src )
-			{ 
-				_emitInstruction( INST_CMOVLE , &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovna( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVNA , &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovna( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVNA , &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnae( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVNAE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnae( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVNAE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnb( const CGPReg& dst, const CGPReg& src ) 
-			{
-				_emitInstruction( INST_CMOVNB, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnb( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVNB, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnbe( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVNBE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnbe( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVNBE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnc( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVNC, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnc( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVNC, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovne( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVNE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovne( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVNE, &dst, &src );  
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovng( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVNG , &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovng( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVNG , &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnge( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVNGE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnge( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVNGE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnl( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVNL, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnl( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVNL, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnle( const CGPReg& dst, const CGPReg& src ) 
-			{  
-				_emitInstruction( INST_CMOVNLE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnle( const CGPReg& dst, const CMem& src )
-			{ 
-				_emitInstruction( INST_CMOVNLE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovno( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVNO , &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovno( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVNO, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnp( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVNP, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnp( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVNP, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovns( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVNS, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovns( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVNS, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnz( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVNZ, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovnz( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVNZ, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovo( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVO, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovo( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVO, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovp( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVP, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovp( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVP, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovpe( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVPE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovpe( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVPE, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovpo( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVPO, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovpo( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVPO , &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovs( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVS, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovs( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovz( const CGPReg& dst, const CGPReg& src ) 
-			{ 
-				_emitInstruction( INST_CMOVZ, &dst, &src ); 
-			}
-
-			//------------------------------------------------------------------------------
-			//Conditional Move.
-			inline void cmovz( const CGPReg& dst, const CMem& src )   
-			{ 
-				_emitInstruction( INST_CMOVZ, &dst, &src ); 
-			}
+			Ci686CPU( CCodeGeneratorBase* codeGenerator );
+			virtual ~Ci686CPU() __QCMP_THROW;
+			void ud2();
+			void cmov( CONDITION cc, const CGPReg& dst, const CGPReg& src );
+			void cmov( CONDITION cc, const CGPReg& dst, const CMem& src );
+			void cmova( const CGPReg& dst, const CGPReg& src );
+			void cmova( const CGPReg& dst, const CMem& src );
+			void cmovae( const CGPReg& dst, const CGPReg& src );
+			void cmovae( const CGPReg& dst, const CMem& src );
+			void cmovb( const CGPReg& dst, const CGPReg& src );
+			void cmovb( const CGPReg& dst, const CMem& src );
+			void cmovbe( const CGPReg& dst, const CGPReg& src );
+			void cmovbe( const CGPReg& dst, const CMem& src );
+			void cmovc( const CGPReg& dst, const CGPReg& src );
+			void cmovc( const CGPReg& dst, const CMem& src );
+			void cmove( const CGPReg& dst, const CGPReg& src );
+			void cmove( const CGPReg& dst, const CMem& src );
+			void cmovg( const CGPReg& dst, const CGPReg& src );
+			void cmovg( const CGPReg& dst, const CMem& src );
+			void cmovge( const CGPReg& dst, const CGPReg& src );
+			void cmovge( const CGPReg& dst, const CMem& src );
+			void cmovl( const CGPReg& dst, const CGPReg& src );
+			void cmovl( const CGPReg& dst, const CMem& src );
+			void cmovle( const CGPReg& dst, const CGPReg& src );
+			void cmovle( const CGPReg& dst, const CMem& src );
+			void cmovna( const CGPReg& dst, const CGPReg& src );
+			void cmovna( const CGPReg& dst, const CMem& src );
+			void cmovnae( const CGPReg& dst, const CGPReg& src );
+			void cmovnae( const CGPReg& dst, const CMem& src );
+			void cmovnb( const CGPReg& dst, const CGPReg& src );
+			void cmovnb( const CGPReg& dst, const CMem& src );
+			void cmovnbe( const CGPReg& dst, const CGPReg& src );
+			void cmovnbe( const CGPReg& dst, const CMem& src );
+			void cmovnc( const CGPReg& dst, const CGPReg& src );
+			void cmovnc( const CGPReg& dst, const CMem& src );
+			void cmovne( const CGPReg& dst, const CGPReg& src );
+			void cmovne( const CGPReg& dst, const CMem& src );
+			void cmovng( const CGPReg& dst, const CGPReg& src );
+			void cmovng( const CGPReg& dst, const CMem& src );
+			void cmovnge( const CGPReg& dst, const CGPReg& src );
+			void cmovnge( const CGPReg& dst, const CMem& src );
+			void cmovnl( const CGPReg& dst, const CGPReg& src );
+			void cmovnl( const CGPReg& dst, const CMem& src );
+			void cmovnle( const CGPReg& dst, const CGPReg& src );
+			void cmovnle( const CGPReg& dst, const CMem& src );
+			void cmovno( const CGPReg& dst, const CGPReg& src );
+			void cmovno( const CGPReg& dst, const CMem& src );
+			void cmovnp( const CGPReg& dst, const CGPReg& src );
+			void cmovnp( const CGPReg& dst, const CMem& src );
+			void cmovns( const CGPReg& dst, const CGPReg& src );
+			void cmovns( const CGPReg& dst, const CMem& src );
+			void cmovnz( const CGPReg& dst, const CGPReg& src );
+			void cmovnz( const CGPReg& dst, const CMem& src );
+			void cmovo( const CGPReg& dst, const CGPReg& src );
+			void cmovo( const CGPReg& dst, const CMem& src );
+			void cmovp( const CGPReg& dst, const CGPReg& src );
+			void cmovp( const CGPReg& dst, const CMem& src );
+			void cmovpe( const CGPReg& dst, const CGPReg& src );
+			void cmovpe( const CGPReg& dst, const CMem& src );
+			void cmovpo( const CGPReg& dst, const CGPReg& src );
+			void cmovpo( const CGPReg& dst, const CMem& src );
+			void cmovs( const CGPReg& dst, const CGPReg& src );
+			void cmovs( const CGPReg& dst, const CMem& src );
+			void cmovz( const CGPReg& dst, const CGPReg& src );
+			void cmovz( const CGPReg& dst, const CMem& src );
 
 		protected:
 
@@ -501,15 +116,8 @@ namespace nsArch
 		{
 		public:
 
-			//------------------------------------------------------------------------------
-			CP6FPU( Cx86CPUCore& refCPU ) : CPentiumFPU( refCPU )
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			virtual ~CP6FPU()
-			{
-			}
+			CP6FPU( Cx86CPUCore& refCPU );
+			virtual ~CP6FPU();
 
 			__QCS_DECLARE_NONCOPYABLE( CP6FPU );
 		};

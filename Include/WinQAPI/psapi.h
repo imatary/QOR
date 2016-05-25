@@ -28,7 +28,7 @@
 #define WINQAPI_PSAPI_H_1
 
 #define PSAPI_VERSION 1
-#include "../SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
 #include "WinQAPI/Kernel32.h"
 
 //--------------------------------------------------------------------------------

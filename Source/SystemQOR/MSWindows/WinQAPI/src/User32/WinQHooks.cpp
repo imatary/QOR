@@ -27,7 +27,7 @@
 //Hook functions
 
 #include "WinQAPI/User32.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/ReturnCheck.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/ReturnCheck.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWinQAPI

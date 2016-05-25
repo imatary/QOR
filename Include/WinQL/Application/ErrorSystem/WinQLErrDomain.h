@@ -27,7 +27,7 @@
 #ifndef WINQL_ERR_DOMAIN_H_1
 #define WINQL_ERR_DOMAIN_H_1
 
-#include "../SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32

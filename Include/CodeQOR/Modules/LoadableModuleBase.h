@@ -71,7 +71,7 @@ namespace nsCodeQOR
 
 }//nsCodeQOR
 
-extern nsCodeQOR::CLoadableModuleBase& ThisModule( void );				//Each and every module that includes this header must provide a ThisModule functions returning its module representative object
+extern nsCodeQOR::CLoadableModuleBase& ThisModule( void );				//Each and every module that includes this header must provide a ThisModule function returning its module representative object
 
 #endif//CODEQOR_MODULES_LOADABLEMODULEBASE_H_1
 

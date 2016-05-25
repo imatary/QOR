@@ -74,7 +74,7 @@ typedef NTSTATUS *PNTSTATUS;
 //#include <fibersapi.h>
 #endif
 
-#include "../SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
 #include "CodeQOR/Parameters/ParamChecking.h"
 #include "CodeQOR/Parameters/PChecks/IntRangeChecks.h"
 #include "CodeQOR/Parameters/PChecks/TRangeChecks.h"
@@ -84,11 +84,11 @@ typedef NTSTATUS *PNTSTATUS;
 #include "CodeQOR/Parameters/PChecks/StringChecks.h"
 #include "CodeQOR/Parameters/PChecks/FlagChecks.h"
 #include "CodeQOR/Parameters/InterParamChecks.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/HandleCheck.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/StringChecks.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/FlagChecks.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/PointerChecks.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/Library.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/HandleCheck.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/StringChecks.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/FlagChecks.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/PointerChecks.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/Library.h"
 
 #include "WinQAPI/WinQAPI.h"
 

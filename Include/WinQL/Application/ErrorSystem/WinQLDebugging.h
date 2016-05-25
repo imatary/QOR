@@ -35,7 +35,7 @@
 
 #include "WinQL/Definitions/Data.h"
 #include "WinQL/Application/Threading/WinQLThread.h"
-#include "SEH.h"
+//#include "SEH.h"
 #include "WinQL/Definitions/Constants.h"
 
 //--------------------------------------------------------------------------------

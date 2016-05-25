@@ -35,8 +35,8 @@
 #include "WinQL/Application/ErrorSystem/WinQLErrDomain.h"
 #include "WinQL/System/Clock/WinQLTime.h"
 #include "WinQL/Application/Process/Module/WinQLDll.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
 #include "WinQAPI/Kernel32.h"
 #include "WinQAPI/PSAPI.h"
 #include <limits.h>

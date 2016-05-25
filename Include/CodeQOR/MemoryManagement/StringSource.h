@@ -76,21 +76,24 @@ namespace nsCodeQOR
 			byte* TryAllocate( unsigned short usByteCount )
 			{
 				byte* pNew = 0;
+				/*TODO:
 				unsigned short usAllocation = ( ( usByteCount & 0xFFF0 ) + 16 );
 				unsigned long ulMapBitCount = usAllocation / 16;
 
 				unsigned short usAllocationCount = m_usAllocationsCount + 1;
 
 
-
+				*/
 				return pNew;
 			}
 
 			//--------------------------------------------------------------------------------
 			bool Free( byte* pData, unsigned short usByteCount )
 			{
+				/*TODO:
 				unsigned long ulFirstMapEntry = AddressToMap( pData );
 				unsigned long ulMapBitCount = ( ( usByteCount & 0xFFF0 ) + 16 ) / 16;
+				*/
 			}
 
 			//--------------------------------------------------------------------------------
@@ -104,7 +107,7 @@ namespace nsCodeQOR
 			//--------------------------------------------------------------------------------
 			unsigned long AddressToMap( byte* pData )
 			{
-				unsigned short usOffset = pData - m_StringBytes;
+				unsigned short usOffset = static_cast< unsigned short >( pData - m_StringBytes );
 				unsigned long ulMapEntry = usOffset / 128;
 				return ulMapEntry;
 			}

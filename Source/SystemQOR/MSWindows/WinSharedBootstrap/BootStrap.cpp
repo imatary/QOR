@@ -94,9 +94,23 @@ CWinQORSharedBootStrap::CWinQORSharedBootStrap( void* hModule ) : CSharedBootStr
 }
 
 //--------------------------------------------------------------------------------
-//Deconstruct the bootstrap to clean up when the library is unloaded
+//Destruct the bootstrap to clean up when the library is unloaded
 CWinQORSharedBootStrap::~CWinQORSharedBootStrap()
 {
+}
+
+//--------------------------------------------------------------------------------
+//Walk an initialisation/termination list of C or C++ objects
+void CWinQORSharedBootStrap::InitTerm( InitFunc* pfbegin, InitFunc* pfend )
+{
+	while( pfbegin < pfend )
+	{
+		if( *pfbegin != 0 )
+		{
+			( **pfbegin )( );
+		}
+		++pfbegin;
+	}
 }
 
 //--------------------------------------------------------------------------------

@@ -42,17 +42,10 @@ namespace nsArch
 		{
 		public:
 
-			//------------------------------------------------------------------------------
-			Cx86ISetExtension( Cx86CPUCore& refCPU ) : CISetExtension(), m_PU( refCPU )
-			{
-			}
+			Cx86ISetExtension( Cx86CPUCore& refCPU );
+			virtual ~Cx86ISetExtension();
 
-			//------------------------------------------------------------------------------
-			virtual ~Cx86ISetExtension()
-			{
-			}
-
-			__QCS_DECLARE_NONCOPYABLE( Cx86ISetExtension );
+		__QCS_DECLARE_NONCOPYABLE( Cx86ISetExtension );
 
 		protected:
 

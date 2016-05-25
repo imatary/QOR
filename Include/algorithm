@@ -3,7 +3,7 @@
 #ifndef STDQOR_ALGORITHM_H_3
 #define STDQOR_ALGORITHM_H_3
 
-#include "../libcxx/include/algorithm"
+#include "../Source/libcxx/include/algorithm"
 
 
 //------------------------------------------------------------------------------

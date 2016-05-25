@@ -30,10 +30,10 @@
 
 #ifndef _WIN64		//This doesn't apply to 64bit Windows
 
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/EH_Context.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/EH_GuardDescriptor.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/TranslatorGuard.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/EH_Data.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/EH_Context.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/EH_GuardDescriptor.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/TranslatorGuard.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/EH_Data.h"
 #include "CodeQOR/Threading/ThreadContext.h"
 #include <exception>
 

@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1BA6B52B-F3FE-4F5E-9913-049810CB90D1}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>WinQL</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>__WINQL;QOR_SYS_OS=QOR_SYS_MSW;WIN32;_DEBUG;_WINDOWS;_USRDLL;_LIBCPP_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../include;../../../../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH;$(FrameworkSdkDir)\include\um;$(FrameworkSdkDir)\include\shared</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <MinimalRebuild>false</MinimalRebuild>
+      <FloatingPointModel>Strict</FloatingPointModel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <DisableSpecificWarnings>4290;4201</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\QOR\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WinCmpSupQORVC.lib;QORModule.lib;CodeQOR.lib;CompilerQOR.lib;ArchQOR.lib;CQOR.lib;stdQOR.lib;SystemQOR.lib;WinQAPI.lib;WinSharedBootstrap.lib;kernel32.lib</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;WINQL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;WINQL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;WINQL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Backup\WinQLBackup.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Bluetooth\WinQLBluetoothAuthenticateSession.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Bluetooth\WinQLBluetoothClient.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Bluetooth\WinQLBluetoothFindDeviceSession.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Bluetooth\WinQLBluetoothFindRadioSession.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Bluetooth\WinQLBluetoothHost.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Bluetooth\WinQLBluetoothRemoteDevice.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\IPC\Atoms\WinQLAtoms.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\IPC\DDE\WinQLDDE.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\IPC\DDE\WinQLDDEAppInstance.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\IPC\DDE\WinQLDDEServer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\IPC\MailSlot\WinQLMailSlot.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\IPC\Pipe\WinQLPipe.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLAddressInfo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLAddressRegistration.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLNameInfo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLNameSpaceProvider.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLNetworkHost.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLProtocolFilter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLProviderChangeNotification.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLServiceClassRegistration.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLServiceInstanceRegistration.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLServiceLookup.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLSocket.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLSocketEvent.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLSocketHelper.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLTransportProvider.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Network\WinQLWinSockSession.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Node\WinQLCommsNode.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Comms\Serial\WinQLComm.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Console\WinQLConsole.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Console\WinQLConsoleAliases.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Console\WinQLConsoleHelper.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\Console\WinQLConsoleScreenBuffer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLDebugging.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLDOSError.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLErrDomain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLError.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLErrorHandling.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLExceptionFrame.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLExceptionImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLFlagChecks.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLFunctionContext.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLHandleCheck.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLParamErrorDomain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLParameterCheck.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLPointerChecks.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLSEH.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\ErrorSystem\WinQLStringChecks.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\WinQLActCtx.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\WinQLApplication.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\WinQLServiceApplication.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Bootstrap\WinQLModuleBootstrap.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Bootstrap\WinQLProcessBootstrap.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Bootstrap\WinQLSharedBootStrap.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\WinQL.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

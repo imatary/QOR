@@ -27,7 +27,7 @@
 #include "BootStrap.h"
 #include "SystemQOR/SharedBootStrap.h"
 #include <stdlib.h>
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH/excpt.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH/excpt.h"
 
 __QCMP_STARTLINKAGE_C
 

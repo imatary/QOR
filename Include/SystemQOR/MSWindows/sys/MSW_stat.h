@@ -30,7 +30,16 @@
 #include "SystemQOR/MSWindows/types/errno_types.h"
 #include "SystemQOR/MSWindows/types/time_types.h"
 
-#include "../../Strata-1/include/SystemQOR/MSWindows/sys/MSW_stat.h"
+#include "SystemQOR/MSWindows/types/errno_types.h"
+#include "SystemQOR/MSWindows/types/time_types.h"
+#include "SystemQOR/MSWindows/types/sys/sys_types.h"
+
+//--------------------------------------------------------------------------------
+namespace nsWin32
+{
+
+}//nsWin32
+
 #include "SystemQOR/Posix/sys/Basestat.h"
 
 //--------------------------------------------------------------------------------

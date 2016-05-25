@@ -41,160 +41,29 @@ namespace nsx86
 	{
 	public:
 
-		//------------------------------------------------------------------------------
-		inline Ci386CPU( CCodeGeneratorBase* codeGenerator ) __QCMP_THROW : Ci286CPU( codeGenerator )
-		{
-		}
+		Ci386CPU( CCodeGeneratorBase* codeGenerator ) __QCMP_THROW;
+		virtual ~Ci386CPU() __QCMP_THROW;
+		void db( Cmp_unsigned__int8 x ) __QCMP_THROW;
+		void dw( Cmp_unsigned__int16 x ) __QCMP_THROW;
+		void dd( Cmp_unsigned__int32 x ) __QCMP_THROW;
+		void dq( Cmp_unsigned__int64 x ) __QCMP_THROW;
+		void dint8( Cmp__int8 x ) __QCMP_THROW;
+		void duint8( Cmp_unsigned__int8 x ) __QCMP_THROW;
+		void dint16( Cmp__int16 x ) __QCMP_THROW;
+		void duint16( Cmp_unsigned__int16 x ) __QCMP_THROW;
+		void dint32( Cmp__int32 x ) __QCMP_THROW;
+		void duint32( Cmp_unsigned__int32 x ) __QCMP_THROW;
+		void dint64( Cmp__int64 x ) __QCMP_THROW;
+		void duint64( Cmp_unsigned__int64 x ) __QCMP_THROW;
+		void dsysint( Cmp_int_ptr x ) __QCMP_THROW;
+		void dsysuint( Cmp_uint_ptr x ) __QCMP_THROW;
+		void dfloat( float x ) __QCMP_THROW;
+		void ddouble( double x ) __QCMP_THROW;
+		void dptr( void* x ) __QCMP_THROW;
+		void dmm( const MMData& x ) __QCMP_THROW;
+		void dxmm( const XMMData& x ) __QCMP_THROW;
+		void data( const void* data, Cmp_uint_ptr size ) __QCMP_THROW;
 
-		//------------------------------------------------------------------------------
-		inline virtual ~Ci386CPU() __QCMP_THROW
-		{
-		}
-
-		// [Embed]
-
-		//------------------------------------------------------------------------------
-		//Add 8-bit integer data to the instuction stream.
-		inline void db( Cmp_unsigned__int8 x ) __QCMP_THROW 
-		{ 
-			embed( &x, 1 ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add 16-bit integer data to the instuction stream.
-		inline void dw( Cmp_unsigned__int16 x ) __QCMP_THROW 
-		{ 
-			embed( &x, 2 ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add 32-bit integer data to the instuction stream.
-		inline void dd( Cmp_unsigned__int32 x ) __QCMP_THROW 
-		{ 
-			embed( &x, 4 ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add 64-bit integer data to the instuction stream.
-		inline void dq( Cmp_unsigned__int64 x ) __QCMP_THROW 
-		{ 
-			embed( &x, 8 ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add 8-bit integer data to the instuction stream.
-		inline void dint8( Cmp__int8 x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof( Cmp__int8 ) ); 
-		}
-		
-		//------------------------------------------------------------------------------
-		//Add 8-bit integer data to the instuction stream.
-		inline void duint8( Cmp_unsigned__int8 x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof( Cmp_unsigned__int8 ) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add 16-bit integer data to the instuction stream.
-		inline void dint16( Cmp__int16 x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof( Cmp__int16 ) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add 16-bit integer data to the instuction stream.
-		inline void duint16( Cmp_unsigned__int16 x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof( Cmp_unsigned__int16 ) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add 32-bit integer data to the instuction stream.
-		inline void dint32( Cmp__int32 x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof(Cmp__int32) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add 32-bit integer data to the instuction stream.
-		inline void duint32( Cmp_unsigned__int32 x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof(Cmp_unsigned__int32) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add 64-bit integer data to the instuction stream.
-		inline void dint64( Cmp__int64 x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof(Cmp__int64) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add 64-bit integer data to the instuction stream.
-		inline void duint64( Cmp_unsigned__int64 x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof(Cmp_unsigned__int64) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add system-integer data to the instuction stream.
-		inline void dsysint( Cmp_int_ptr x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof(Cmp_int_ptr) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add system-integer data to the instuction stream.
-		inline void dsysuint( Cmp_uint_ptr x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof(Cmp_uint_ptr) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add float data to the instuction stream.
-		inline void dfloat( float x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof(float) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add double data to the instuction stream.
-		inline void ddouble( double x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof(double) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add pointer data to the instuction stream.
-		inline void dptr( void* x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof(void*) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add MM data to the instuction stream.
-		inline void dmm( const MMData& x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof(MMData) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add XMM data to the instuction stream.
-		inline void dxmm( const XMMData& x ) __QCMP_THROW 
-		{ 
-			embed( &x, sizeof(XMMData) ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add data to the instuction stream.
-		inline void data( const void* data, Cmp_uint_ptr size ) __QCMP_THROW 
-		{ 
-			embed( data, size ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Add data in a given structure instance to the instuction stream.
 		template< typename T >
 		inline void dstruct( const T& x ) __QCMP_THROW 
 		{ 
@@ -202,879 +71,135 @@ namespace nsx86
 		}
 
 		// [i386 Instructions]
-
-		//------------------------------------------------------------------------------
-		//Bit Scan Forward.
-		inline void bsf( const CGPReg& dst, const CGPReg& src )
-		{
-			//assert(!dst.isGPB());
-			_emitInstruction( INST_BSF, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit Scan Forward.
-		inline void bsf( const CGPReg& dst, const CMem& src )
-		{
-			//assert(!dst.isGPB());
-			_emitInstruction( INST_BSF, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit Scan Reverse.
-		inline void bsr( const CGPReg& dst, const CGPReg& src )
-		{
-			//assert(!dst.isGPB());
-			_emitInstruction( INST_BSR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit Scan Reverse.
-		inline void bsr( const CGPReg& dst, const CMem& src )
-		{
-			//assert(!dst.isGPB());
-			_emitInstruction( INST_BSR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test.
-		inline void bt( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_BT, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test.
-		inline void bt( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_BT, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test.
-		inline void bt( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_BT, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test.
-		inline void bt( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_BT, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test and complement.
-		inline void btc( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_BTC, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test and complement.
-		inline void btc( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_BTC, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test and complement.
-		inline void btc( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_BTC, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test and complement.
-		inline void btc( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_BTC, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test and reset.
-		inline void btr( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_BTR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test and reset.
-		inline void btr( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_BTR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test and reset.
-		inline void btr( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_BTR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test and reset.
-		inline void btr( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_BTR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test and set.
-		inline void bts( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_BTS, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test and set.
-		inline void bts( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_BTS, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test and set.
-		inline void bts( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_BTS, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Bit test and set.
-		inline void bts( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_BTS, &dst, &src );
-		}
-
-		//CWDE
-
-		//------------------------------------------------------------------------------
-		//Convert Word to DWord (Sign Extend).
-		// EAX <- Sign Extend AX
-		inline void cwde()
-		{
-			_emitInstruction( INST_CWDE );
-		}
-
-		//MOVZX
-
-		//------------------------------------------------------------------------------
-		//Move with Zero-Extend.
-		// This instruction copies the contents of the source operand (register
-		// or memory location) to the destination operand (register) and zero
-		// extends the value to 16 or 32-bits. The size of the converted value
-		// depends on the operand-size attribute.
-		inline void movzx( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_MOVZX, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move with Zero-Extend.
-		inline void movzx( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_MOVZX, &dst, &src );
-		}
-
-		//POPAD
+		void bsf( const CGPReg& dst, const CGPReg& src );
+		void bsf( const CGPReg& dst, const CMem& src );
+		void bsr( const CGPReg& dst, const CGPReg& src );
+		void bsr( const CGPReg& dst, const CMem& src );
+		void bt( const CGPReg& dst, const CGPReg& src );
+		void bt( const CGPReg& dst, const CImm& src );
+		void bt( const CMem& dst, const CGPReg& src );
+		void bt( const CMem& dst, const CImm& src );
+		void btc( const CGPReg& dst, const CGPReg& src );
+		void btc( const CGPReg& dst, const CImm& src );
+		void btc( const CMem& dst, const CGPReg& src );
+		void btc( const CMem& dst, const CImm& src );
+		void btr( const CGPReg& dst, const CGPReg& src );
+		void btr( const CGPReg& dst, const CImm& src );
+		void btr( const CMem& dst, const CGPReg& src );
+		void btr( const CMem& dst, const CImm& src );
+		void bts( const CGPReg& dst, const CGPReg& src );
+		void bts( const CGPReg& dst, const CImm& src );
+		void bts( const CMem& dst, const CGPReg& src );
+		void bts( const CMem& dst, const CImm& src );
+		void cwde();
+		void movzx( const CGPReg& dst, const CGPReg& src );
+		void movzx( const CGPReg& dst, const CMem& src );
 
 #if	( QOR_ARCH_WORDSIZE == 32 )
-		//------------------------------------------------------------------------------
-		//Pop All General-Purpose Registers.
-		//
-		// Pop EDI, ESI, EBP, EBX, EDX, ECX, and EAX.
-		inline void popad()
-		{
-			_emitInstruction( INST_POPAD );
-		}
+		void popad();
 #endif // ( QOR_ARCH_WORDSIZE == 32 )
-
-		//POPFD
-		//POPFQ
-
-		//------------------------------------------------------------------------------
-		//Pop Stack into EFLAGS Register (32-bit or 64-bit).
-		inline void popf()
-		{
-#if	( QOR_ARCH_WORDSIZE == 32 )
-			popfd();
-#else
-			popfq();
-#endif
-		}
-
-		//------------------------------------------------------------------------------
+		void popf();
 #if	( QOR_ARCH_WORDSIZE == 32 )
 		//Pop Stack into EFLAGS Register (32-bit).
-		inline void popfd() 
-		{ 
-			_emitInstruction( INST_POPFD ); 
-		}
+		void popfd();
 #else
 		//Pop Stack into EFLAGS Register (64-bit).
-		inline void popfq() 
-		{ 
-			_emitInstruction( INST_POPFQ ); 
-		}
+		void popfq();
 #endif
 
-
 #if	( QOR_ARCH_WORDSIZE == 32 )
-		//------------------------------------------------------------------------------
-		//Push All General-Purpose Registers.
-		//
-		// Push EAX, ECX, EDX, EBX, original ESP, EBP, ESI, and EDI.
-		inline void pushad()
-		{
-			_emitInstruction( INST_PUSHAD );
-		}
+		void pushad();
 #endif // ( QOR_ARCH_WORDSIZE == 32 )
 
-		//------------------------------------------------------------------------------
-		//Push EFLAGS Register (32-bit or 64-bit) onto the Stack.
-		inline void pushf()
-		{
+		inline void pushf();
 #if	( QOR_ARCH_WORDSIZE == 32 )
-			pushfd();
+		void pushfd();
 #else
-			pushfq();
-#endif
-		}
-
-		//------------------------------------------------------------------------------
-#if	( QOR_ARCH_WORDSIZE == 32 )
-		//Push EFLAGS Register (32-bit) onto the Stack.
-		inline void pushfd() 
-		{ 
-			_emitInstruction( INST_PUSHFD ); 
-		}
-#else
-		//Push EFLAGS Register (64-bit) onto the Stack.
-		inline void pushfq() 
-		{ 
-			_emitInstruction( INST_PUSHFQ ); 
-		}
+			inline void pushfq()
 #endif // ( QOR_ARCH_WORDSIZE == 32 )
-
-
-		//------------------------------------------------------------------------------
-		//Load ECX/RCX WORDs from DS:[ESI/RSI] to AX.
-		inline void rep_lodsw()
-		{
-			_emitInstruction( INST_REP_LODSW );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move ECX/RCX WORDs from DS:[ESI/RSI] to ES:[EDI/RDI].
-		inline void rep_movsw()
-		{
-			_emitInstruction( INST_REP_MOVSW );
-		}
-
-		//------------------------------------------------------------------------------
-		//Fill ECX/RCX WORDs at ES:[EDI/RDI] with AX.
-		inline void rep_stosw()
-		{
-			_emitInstruction( INST_REP_STOSW );
-		}
-
-		//------------------------------------------------------------------------------
-		//Repeated find nonmatching WORDs in ES:[EDI/RDI] and DS:[ESI/RDI].
-		inline void repe_cmpsw()
-		{
-			_emitInstruction( INST_REPE_CMPSW );
-		}
-
-		//------------------------------------------------------------------------------
-		//Find non-AX WORD starting at ES:[EDI/RDI].
-		inline void repe_scasw()
-		{
-			_emitInstruction( INST_REPE_SCASW );
-		}
-
-		//------------------------------------------------------------------------------
-		//Repeated find nonmatching WORDs in ES:[EDI/RDI] and DS:[ESI/RDI].
-		inline void repne_cmpsw()
-		{
-			_emitInstruction( INST_REPNE_CMPSW );
-		}
-
-		//------------------------------------------------------------------------------
-		//Find AX, starting at ES:[EDI/RDI].
-		inline void repne_scasw()
-		{
-			_emitInstruction( INST_REPNE_SCASW );
-		}
-
-		//SETcc
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void set( CONDITION cc, const CGPReg& dst )
-		{
-			//assert(dst.getSize() == 1);
-			_emitInstruction( ConditionToInstruction::toSetCC( cc ), &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void set( CONDITION cc, const CMem& dst )
-		{
-			//assert(dst.getSize() <= 1);
-			_emitInstruction( ConditionToInstruction::toSetCC( cc ), &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void seta( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETA, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void seta( const CMem& dst )   
-		{ 
-			//assert(dst.getSize() <= 1); 
-			_emitInstruction( INST_SETA, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setae( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETAE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setae( const CMem& dst )   
-		{ 
-			//assert(dst.getSize() <= 1); 
-			_emitInstruction( INST_SETAE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setb( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETB, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setb( const CMem& dst )   
-		{ 
-			//assert(dst.getSize() <= 1); 
-			_emitInstruction( INST_SETB, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setbe( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETBE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setbe( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETBE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setc( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 );
-			_emitInstruction( INST_SETC, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setc( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETC, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void sete( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void sete( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setg( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETG, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setg( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETG, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setge( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 ); 
-			_emitInstruction( INST_SETGE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setge( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETGE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setl( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 ); 
-			_emitInstruction( INST_SETL, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setl( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETL, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setle( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 ); 
-			_emitInstruction( INST_SETLE, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setle( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETLE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setna( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 ); 
-			_emitInstruction( INST_SETNA, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setna( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETNA , &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnae( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 ); 
-			_emitInstruction( INST_SETNAE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnae( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETNAE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnb( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 ); 
-			_emitInstruction( INST_SETNB, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnb( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETNB, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnbe( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 ); 
-			_emitInstruction( INST_SETNBE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnbe( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETNBE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnc( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 ); 
-			_emitInstruction( INST_SETNC, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnc( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETNC, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setne( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 ); 
-			_emitInstruction( INST_SETNE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setne( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETNE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setng( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 ); 
-			_emitInstruction( INST_SETNG , &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setng( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETNG, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnge( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 ); 
-			_emitInstruction( INST_SETNGE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnge( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETNGE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnl( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETNL , &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnl( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETNL, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnle( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 ); 
-			_emitInstruction( INST_SETNLE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnle( const CMem& dst )   
-		{ 
-			//assert( dst.getSize() <= 1 ); 
-			_emitInstruction( INST_SETNLE, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setno ( const CGPReg& dst ) 
-		{ 
-			//assert( dst.getSize() == 1 ); 
-			_emitInstruction( INST_SETNO, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setno( const CMem& dst )   
-		{ 
-			//assert(dst.getSize() <= 1); 
-			_emitInstruction( INST_SETNO, &dst ); 
-		}
-		
-		//------------------------------------------------------------------------------	
-		//Set Byte on Condition.
-		inline void setnp( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETNP, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnp( const CMem& dst )   
-		{ 
-			//assert(dst.getSize() <= 1); 
-			_emitInstruction( INST_SETNP, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setns( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETNS, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setns( const CMem& dst )   
-		{ 
-			//assert(dst.getSize() <= 1); 
-			_emitInstruction( INST_SETNS, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnz( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETNZ, &dst ); 
-		}
-		
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setnz( const CMem& dst )   
-		{ 
-			//assert(dst.getSize() <= 1); 
-			_emitInstruction( INST_SETNZ, &dst ); 
-		}
-		
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void seto( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETO, &dst ); 
-		}
-		
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void seto( const CMem& dst )   
-		{ 
-			//assert(dst.getSize() <= 1); 
-			_emitInstruction( INST_SETO, &dst ); 
-		}
-		
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setp( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETP, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setp( const CMem& dst )   
-		{ 
-			//assert(dst.getSize() <= 1); 
-			_emitInstruction( INST_SETP, &dst ); 
-		}
-		
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setpe( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETPE, &dst ); 
-		}
-			
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setpe( const CMem& dst )   
-		{ 
-			//assert(dst.getSize() <= 1); 
-			_emitInstruction( INST_SETPE, &dst ); 
-		}
-		
-		//------------------------------------------------------------------------------	
-		//Set Byte on Condition.
-		inline void setpo( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETPO, &dst ); 
-		}
-		
-		//------------------------------------------------------------------------------	
-		//Set Byte on Condition.
-		inline void setpo( const CMem& dst )   
-		{ 
-			//assert(dst.getSize() <= 1); 
-			_emitInstruction( INST_SETPO, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void sets( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETS, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void sets( const CMem& dst )   
-		{ 
-			//assert(dst.getSize() <= 1); 
-			_emitInstruction( INST_SETS, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setz( const CGPReg& dst ) 
-		{ 
-			//assert(dst.getSize() == 1); 
-			_emitInstruction( INST_SETZ, &dst ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Set Byte on Condition.
-		inline void setz( const CMem& dst )   
-		{ 
-			//assert(dst.getSize() <= 1); 
-			_emitInstruction( INST_SETZ, &dst ); 
-		}
-
-		//SHLD
-
-		//------------------------------------------------------------------------------
-		//Double Precision Shift Left.
-		// Note src2 register can be only cl register.
-		inline void shld( const CGPReg& dst, const CGPReg& src1, const CGPReg& src2 )
-		{
-			_emitInstruction( INST_SHLD, &dst, &src1, &src2 );
-		}
-
-		//------------------------------------------------------------------------------
-		//Double Precision Shift Left.
-		inline void shld( const CGPReg& dst, const CGPReg& src1, const CImm& src2 )
-		{
-			_emitInstruction( INST_SHLD, &dst, &src1, &src2 );
-		}
-
-		//------------------------------------------------------------------------------
-		//Double Precision Shift Left.
-		// Note src2 register can be only cl register.
-		inline void shld( const CMem& dst, const CGPReg& src1, const CGPReg& src2 )
-		{
-			_emitInstruction( INST_SHLD, &dst, &src1, &src2 );
-		}
-
-		//------------------------------------------------------------------------------
-		//Double Precision Shift Left.
-		inline void shld( const CMem& dst, const CGPReg& src1, const CImm& src2 )
-		{
-			_emitInstruction( INST_SHLD, &dst, &src1, &src2 );
-		}
-
-		//SHRD
-
-		//------------------------------------------------------------------------------
-		//Double Precision Shift Right.
-		// Note src2 register can be only cl register.
-		inline void shrd( const CGPReg& dst, const CGPReg& src1, const CGPReg& src2 )
-		{
-			_emitInstruction( INST_SHRD, &dst, &src1, &src2 );
-		}
-
-		//------------------------------------------------------------------------------
-		//Double Precision Shift Right.
-		inline void shrd( const CGPReg& dst, const CGPReg& src1, const CImm& src2 )
-		{
-			_emitInstruction( INST_SHRD, &dst, &src1, &src2 );
-		}
-
-		//------------------------------------------------------------------------------
-		//Double Precision Shift Right.
-		// Note src2 register can be only cl register.
-		inline void shrd( const CMem& dst, const CGPReg& src1, const CGPReg& src2 )
-		{
-			_emitInstruction( INST_SHRD, &dst, &src1, &src2 );
-		}
-
-		//------------------------------------------------------------------------------
-		//Double Precision Shift Right.
-		inline void shrd( const CMem& dst, const CGPReg& src1, const CImm& src2 )
-		{
-			_emitInstruction( INST_SHRD, &dst, &src1, &src2 );
-		}
+		inline void rep_lodsw();
+		void rep_movsw();
+		void rep_stosw();
+		void repe_cmpsw();
+		void repe_scasw();
+		void repne_cmpsw();
+		void repne_scasw();
+		void set( CONDITION cc, const CGPReg& dst );
+		void set( CONDITION cc, const CMem& dst );
+		void seta( const CGPReg& dst );
+		void seta( const CMem& dst );
+		void setae( const CGPReg& dst );
+		void setae( const CMem& dst );
+		void setb( const CGPReg& dst );
+		void setb( const CMem& dst );
+		void setbe( const CGPReg& dst );
+		void setbe( const CMem& dst );
+		void setc( const CGPReg& dst );
+		void setc( const CMem& dst );
+		void sete( const CGPReg& dst );
+		void sete( const CMem& dst );
+		void setg( const CGPReg& dst );
+		void setg( const CMem& dst );
+		void setge( const CGPReg& dst );
+		void setge( const CMem& dst );
+		void setl( const CGPReg& dst );
+		void setl( const CMem& dst );
+		void setle( const CGPReg& dst );
+		void setle( const CMem& dst );
+		void setna( const CGPReg& dst );
+		void setna( const CMem& dst );
+		void setnae( const CGPReg& dst );
+		void setnae( const CMem& dst );
+		void setnb( const CGPReg& dst );
+		void setnb( const CMem& dst );
+		void setnbe( const CGPReg& dst );
+		void setnbe( const CMem& dst );
+		void setnc( const CGPReg& dst );
+		void setnc( const CMem& dst );
+		void setne( const CGPReg& dst );
+		void setne( const CMem& dst );
+		void setng( const CGPReg& dst );
+		void setng( const CMem& dst );
+		void setnge( const CGPReg& dst );
+		void setnge( const CMem& dst );
+		void setnl( const CGPReg& dst );
+		void setnl( const CMem& dst );
+		void setnle( const CGPReg& dst );
+		void setnle( const CMem& dst );
+		void setno( const CGPReg& dst );
+		void setno( const CMem& dst );
+		void setnp( const CGPReg& dst );
+		void setnp( const CMem& dst );
+		void setns( const CGPReg& dst );
+		void setns( const CMem& dst );
+		void setnz( const CGPReg& dst );
+		void setnz( const CMem& dst );
+		void seto( const CGPReg& dst );
+		void seto( const CMem& dst );
+		void setp( const CGPReg& dst );
+		void setp( const CMem& dst );
+		void setpe( const CGPReg& dst );
+		void setpe( const CMem& dst );
+		void setpo( const CGPReg& dst );
+		void setpo( const CMem& dst );
+		void sets( const CGPReg& dst );
+		void sets( const CMem& dst );
+		void setz( const CGPReg& dst );
+		void setz( const CMem& dst );
+		void shld( const CGPReg& dst, const CGPReg& src1, const CGPReg& src2 );
+		void shld( const CGPReg& dst, const CGPReg& src1, const CImm& src2 );
+		void shld( const CMem& dst, const CGPReg& src1, const CGPReg& src2 );
+		void shld( const CMem& dst, const CGPReg& src1, const CImm& src2 );
+		void shrd( const CGPReg& dst, const CGPReg& src1, const CGPReg& src2 );
+		void shrd( const CGPReg& dst, const CGPReg& src1, const CImm& src2 );
+		void shrd( const CMem& dst, const CGPReg& src1, const CGPReg& src2 );
+		void shrd( const CMem& dst, const CGPReg& src1, const CImm& src2 );
 		
 	private:
 
 		Ci386CPU( const Ci386CPU& src );//no copy constructor
 		Ci386CPU& operator = ( const Ci386CPU& src );//no assignment
 	};
-
 
 }//nsx86
 }//nsArch

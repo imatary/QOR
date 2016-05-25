@@ -28,7 +28,7 @@
 #define WINQAPI_CS_RETURNCHECK_H_1
 
 #include "CodeQOR/Parameters/ParamChecking.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/FunctionContext.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/FunctionContext.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWinQAPI

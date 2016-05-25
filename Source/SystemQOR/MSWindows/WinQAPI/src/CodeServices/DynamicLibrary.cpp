@@ -25,9 +25,9 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include "WinQAPI/Kernel32.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/Error.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/FunctionContext.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/Error.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/FunctionContext.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWinQAPI

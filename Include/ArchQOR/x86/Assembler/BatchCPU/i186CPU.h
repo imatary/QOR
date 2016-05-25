@@ -45,33 +45,10 @@ namespace nsx86
 	{
 	public:
 
-		//------------------------------------------------------------------------------
-		inline Ci186CPU( CCodeGeneratorBase* codeGenerator ) __QCMP_THROW : Ci086CPU( codeGenerator )
-		{
-		}
-
-		//------------------------------------------------------------------------------
-		inline virtual ~Ci186CPU() __QCMP_THROW
-		{
-		}
-
-		//ENTER
-
-		//------------------------------------------------------------------------------
-		//Make Stack Frame for Procedure Parameters.
-		inline void enter( const CImm& imm16, const CImm& imm8 )
-		{
-			_emitInstruction( INST_ENTER, &imm16, &imm8 );
-		}
-
-		//LEAVE
-
-		//------------------------------------------------------------------------------
-		//High Level Procedure Exit.
-		inline void leave()
-		{
-			_emitInstruction( INST_LEAVE );
-		}
+		Ci186CPU( CCodeGeneratorBase* codeGenerator ) __QCMP_THROW;
+		virtual ~Ci186CPU() __QCMP_THROW;
+		void enter( const CImm& imm16, const CImm& imm8 );	//Make Stack Frame for Procedure Parameters.
+		void leave();	//High Level Procedure Exit.
 
 	private:
 

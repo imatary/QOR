@@ -41,759 +41,121 @@ namespace nsArch
 		{
 		public:
 
-			//------------------------------------------------------------------------------
-			CMMX( Cx86CPUCore& refCPU ) : Cx86ISetExtension( refCPU )
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			virtual ~CMMX()
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			//Empty MMX state.
-			inline void emms()
-			{
-				m_PU._emitInstruction( INST_EMMS );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move DWord (MMX).
-			inline void movd( const CMem& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move DWord (MMX).
-			inline void movd( const CGPReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move DWord (MMX).
-			inline void movd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move DWord (MMX).
-			inline void movd( const CMMReg& dst, const CGPReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move QWord (MMX).
-			inline void movq( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move QWord (MMX).
-			inline void movq( const CMem& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVQ, &dst, &src );
-			}
+			CMMX( Cx86CPUCore& refCPU );
+			virtual ~CMMX();
+			void emms();
+			void movd( const CMem& dst, const CMMReg& src );
+			void movd( const CGPReg& dst, const CMMReg& src );
+			void movd( const CMMReg& dst, const CMem& src );
+			void movd( const CMMReg& dst, const CGPReg& src );
+			void movq( const CMMReg& dst, const CMMReg& src );
+			void movq( const CMem& dst, const CMMReg& src );
 
 #	if ( QOR_ARCH_WORDSIZE == 64 )
-			//------------------------------------------------------------------------------
-			//Move QWord (MMX).
-			inline void movq( const CGPReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVQ, &dst, &src );
-			}
+			void movq( const CGPReg& dst, const CMMReg& src );
 #	endif
 
-			//------------------------------------------------------------------------------
-			//Move QWord (MMX).
-			inline void movq( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVQ, &dst, &src );
-			}
+			void movq( const CMMReg& dst, const CMem& src );
 
 #	if ( QOR_ARCH_WORDSIZE == 64 )
-			//------------------------------------------------------------------------------
-			//Move QWord (MMX).
-			inline void movq( const CMMReg& dst, const CGPReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVQ, &dst, &src );
-			}
+			void movq( const CMMReg& dst, const CGPReg& src );
 #	endif
-			//------------------------------------------------------------------------------
-			//Pack with Signed Saturation (MMX).
-			inline void packsswb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PACKSSWB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Pack with Signed Saturation (MMX).
-			inline void packsswb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PACKSSWB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Pack with Signed Saturation (MMX).
-			inline void packssdw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PACKSSDW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Pack with Signed Saturation (MMX).
-			inline void packssdw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PACKSSDW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Pack with Unsigned Saturation (MMX).
-			inline void packuswb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PACKUSWB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Pack with Unsigned Saturation (MMX).
-			inline void packuswb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PACKUSWB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed BYTE Add (MMX).
-			inline void paddb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed BYTE Add (MMX).
-			inline void paddb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed WORD Add (MMX).
-			inline void paddw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed WORD Add (MMX).
-			inline void paddw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DWORD Add (MMX).
-			inline void paddd( const CMMReg& dst, const CMMReg& src)
-			{
-				m_PU._emitInstruction( INST_PADDD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DWORD Add (MMX).
-			inline void paddd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add with Saturation (MMX).
-			inline void paddsb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add with Saturation (MMX).
-			inline void paddsb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add with Saturation (MMX).
-			inline void paddsw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add with Saturation (MMX).
-			inline void paddsw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add Unsigned with Saturation (MMX).
-			inline void paddusb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDUSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add Unsigned with Saturation (MMX).
-			inline void paddusb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDUSB, &dst, &src );
-			}
-			//------------------------------------------------------------------------------
-			//Packed Add Unsigned with Saturation (MMX).
-			inline void paddusw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDUSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add Unsigned with Saturation (MMX).
-			inline void paddusw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDUSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Logical AND (MMX).
-			inline void pand( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PAND, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Logical AND (MMX).
-			inline void pand( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PAND, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Logical AND Not (MMX).
-			inline void pandn( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PANDN, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Logical AND Not (MMX).
-			inline void pandn( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PANDN, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Equal (BYTES) (MMX).
-			inline void pcmpeqb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PCMPEQB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Equal (BYTES) (MMX).
-			inline void pcmpeqb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PCMPEQB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Equal (WORDS) (MMX).
-			inline void pcmpeqw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PCMPEQW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Equal (WORDS) (MMX).
-			inline void pcmpeqw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PCMPEQW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Equal (DWORDS) (MMX).
-			inline void pcmpeqd( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PCMPEQD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Equal (DWORDS) (MMX).
-			inline void pcmpeqd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PCMPEQD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Greater Than (BYTES) (MMX).
-			inline void pcmpgtb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PCMPGTB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Greater Than (BYTES) (MMX).
-			inline void pcmpgtb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PCMPGTB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Greater Than (WORDS) (MMX).
-			inline void pcmpgtw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PCMPGTW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Greater Than (WORDS) (MMX).
-			inline void pcmpgtw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PCMPGTW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Greater Than (DWORDS) (MMX).
-			inline void pcmpgtd( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PCMPGTD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Greater Than (DWORDS) (MMX).
-			inline void pcmpgtd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PCMPGTD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply High (MMX).
-			inline void pmulhw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMULHW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply High (MMX).
-			inline void pmulhw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMULHW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply Low (MMX).
-			inline void pmullw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMULLW, &dst, &src );
-			}
-	
-			//------------------------------------------------------------------------------
-			//Packed Multiply Low (MMX).
-			inline void pmullw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMULLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bitwise Logical OR (MMX).
-			inline void por( const CMMReg& dst, const CMMReg& src)
-			{
-				m_PU._emitInstruction( INST_POR, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bitwise Logical OR (MMX).
-			inline void por( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_POR, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply and Add (MMX).
-			inline void pmaddwd( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMADDWD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply and Add (MMX).
-			inline void pmaddwd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMADDWD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (MMX).
-			inline void pslld( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSLLD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (MMX).
-			inline void pslld( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSLLD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (MMX).
-			inline void pslld( const CMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSLLD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (MMX).
-			inline void psllq( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSLLQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (MMX).
-			inline void psllq( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSLLQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (MMX).
-			inline void psllq( const CMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSLLQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (MMX).
-			inline void psllw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSLLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (MMX).
-			inline void psllw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSLLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (MMX).
-			inline void psllw( const CMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSLLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Arithmetic (MMX).
-			inline void psrad( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSRAD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Arithmetic (MMX).
-			inline void psrad( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSRAD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Arithmetic (MMX).
-			inline void psrad( const CMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSRAD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Arithmetic (MMX).
-			inline void psraw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSRAW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Arithmetic (MMX).
-			inline void psraw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSRAW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Arithmetic (MMX).
-			inline void psraw( const CMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSRAW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (MMX).
-			inline void psrld( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSRLD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (MMX).
-			inline void psrld( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSRLD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (MMX).
-			inline void psrld( const CMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSRLD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (MMX).
-			inline void psrlq( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSRLQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (MMX).
-			inline void psrlq( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSRLQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (MMX).
-			inline void psrlq( const CMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSRLQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (MMX).
-			inline void psrlw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSRLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (MMX).
-			inline void psrlw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSRLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (MMX).
-			inline void psrlw( const CMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSRLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (MMX).
-			inline void psubb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (MMX).
-			inline void psubb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (MMX).
-			inline void psubw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (MMX).
-			inline void psubw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (MMX).
-			inline void psubd( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (MMX).
-			inline void psubd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Saturation (MMX).
-			inline void psubsb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Saturation (MMX).
-			inline void psubsb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Saturation (MMX).
-			inline void psubsw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Saturation (MMX).
-			inline void psubsw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Unsigned Saturation (MMX).
-			inline void psubusb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBUSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Unsigned Saturation (MMX).
-			inline void psubusb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBUSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Unsigned Saturation (MMX).
-			inline void psubusw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction(INST_PSUBUSW, &dst, &src);
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Unsigned Saturation (MMX).
-			inline void psubusw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBUSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed Data (MMX).
-			inline void punpckhbw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed Data (MMX).
-			inline void punpckhbw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed Data (MMX).
-			inline void punpckhwd( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHWD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed Data (MMX).
-			inline void punpckhwd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHWD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed Data (MMX).
-			inline void punpckhdq( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed Data (MMX).
-			inline void punpckhdq( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed Data (MMX).
-			inline void punpcklbw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed Data (MMX).
-			inline void punpcklbw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed Data (MMX).
-			inline void punpcklwd( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLWD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed Data (MMX).
-			inline void punpcklwd( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLWD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed Data (MMX).
-			inline void punpckldq( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed Data (MMX).
-			inline void punpckldq( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bitwise Exclusive OR (MMX).
-			inline void pxor( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PXOR, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bitwise Exclusive OR (MMX).
-			inline void pxor( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PXOR, &dst, &src );
-			}
+			void packsswb( const CMMReg& dst, const CMMReg& src );
+			void packsswb( const CMMReg& dst, const CMem& src );
+			void packssdw( const CMMReg& dst, const CMMReg& src );
+			void packssdw( const CMMReg& dst, const CMem& src );
+			void packuswb( const CMMReg& dst, const CMMReg& src );
+			void packuswb( const CMMReg& dst, const CMem& src );
+			void paddb( const CMMReg& dst, const CMMReg& src );
+			void paddb( const CMMReg& dst, const CMem& src );
+			void paddw( const CMMReg& dst, const CMMReg& src );
+			void paddw( const CMMReg& dst, const CMem& src );
+			void paddd( const CMMReg& dst, const CMMReg& src );
+			void paddd( const CMMReg& dst, const CMem& src );
+			void paddsb( const CMMReg& dst, const CMMReg& src );
+			void paddsb( const CMMReg& dst, const CMem& src );
+			void paddsw( const CMMReg& dst, const CMMReg& src );
+			void paddsw( const CMMReg& dst, const CMem& src );
+			void paddusb( const CMMReg& dst, const CMMReg& src );
+			void paddusb( const CMMReg& dst, const CMem& src );
+			void paddusw( const CMMReg& dst, const CMMReg& src );
+			void paddusw( const CMMReg& dst, const CMem& src );
+			void pand( const CMMReg& dst, const CMMReg& src );
+			void pand( const CMMReg& dst, const CMem& src );
+			void pandn( const CMMReg& dst, const CMMReg& src );
+			void pandn( const CMMReg& dst, const CMem& src );
+			void pcmpeqb( const CMMReg& dst, const CMMReg& src );
+			void pcmpeqb( const CMMReg& dst, const CMem& src );
+			void pcmpeqw( const CMMReg& dst, const CMMReg& src );
+			void pcmpeqw( const CMMReg& dst, const CMem& src );
+			void pcmpeqd( const CMMReg& dst, const CMMReg& src );
+			void pcmpeqd( const CMMReg& dst, const CMem& src );
+			void pcmpgtb( const CMMReg& dst, const CMMReg& src );
+			void pcmpgtb( const CMMReg& dst, const CMem& src );
+			void pcmpgtw( const CMMReg& dst, const CMMReg& src );
+			void pcmpgtw( const CMMReg& dst, const CMem& src );
+			void pcmpgtd( const CMMReg& dst, const CMMReg& src );
+			void pcmpgtd( const CMMReg& dst, const CMem& src );
+			void pmulhw( const CMMReg& dst, const CMMReg& src );
+			void pmulhw( const CMMReg& dst, const CMem& src );
+			void pmullw( const CMMReg& dst, const CMMReg& src );
+			void pmullw( const CMMReg& dst, const CMem& src );
+			void por( const CMMReg& dst, const CMMReg& src );
+			void por( const CMMReg& dst, const CMem& src );
+			void pmaddwd( const CMMReg& dst, const CMMReg& src );
+			void pmaddwd( const CMMReg& dst, const CMem& src );
+			void pslld( const CMMReg& dst, const CMMReg& src );
+			void pslld( const CMMReg& dst, const CMem& src );
+			void pslld( const CMMReg& dst, const CImm& src );
+			void psllq( const CMMReg& dst, const CMMReg& src );
+			void psllq( const CMMReg& dst, const CMem& src );
+			void psllq( const CMMReg& dst, const CImm& src );
+			void psllw( const CMMReg& dst, const CMMReg& src );
+			void psllw( const CMMReg& dst, const CMem& src );
+			void psllw( const CMMReg& dst, const CImm& src );
+			void psrad( const CMMReg& dst, const CMMReg& src );
+			void psrad( const CMMReg& dst, const CMem& src );
+			void psrad( const CMMReg& dst, const CImm& src );
+			void psraw( const CMMReg& dst, const CMMReg& src );
+			void psraw( const CMMReg& dst, const CMem& src );
+			void psraw( const CMMReg& dst, const CImm& src );
+			void psrld( const CMMReg& dst, const CMMReg& src );
+			void psrld( const CMMReg& dst, const CMem& src );
+			void psrld( const CMMReg& dst, const CImm& src );
+			void psrlq( const CMMReg& dst, const CMMReg& src );
+			void psrlq( const CMMReg& dst, const CMem& src );
+			void psrlq( const CMMReg& dst, const CImm& src );
+			void psrlw( const CMMReg& dst, const CMMReg& src );
+			void psrlw( const CMMReg& dst, const CMem& src );
+			void psrlw( const CMMReg& dst, const CImm& src );
+			void psubb( const CMMReg& dst, const CMMReg& src );
+			void psubb( const CMMReg& dst, const CMem& src );
+			void psubw( const CMMReg& dst, const CMMReg& src );
+			void psubw( const CMMReg& dst, const CMem& src );
+			void psubd( const CMMReg& dst, const CMMReg& src );
+			void psubd( const CMMReg& dst, const CMem& src );
+			void psubsb( const CMMReg& dst, const CMMReg& src );
+			void psubsb( const CMMReg& dst, const CMem& src );
+			void psubsw( const CMMReg& dst, const CMMReg& src );
+			void psubsw( const CMMReg& dst, const CMem& src );
+			void psubusb( const CMMReg& dst, const CMMReg& src );
+			void psubusb( const CMMReg& dst, const CMem& src );
+			void psubusw( const CMMReg& dst, const CMMReg& src );
+			void psubusw( const CMMReg& dst, const CMem& src );
+			void punpckhbw( const CMMReg& dst, const CMMReg& src );
+			void punpckhbw( const CMMReg& dst, const CMem& src );
+			void punpckhwd( const CMMReg& dst, const CMMReg& src );
+			void punpckhwd( const CMMReg& dst, const CMem& src );
+			void punpckhdq( const CMMReg& dst, const CMMReg& src );
+			void punpckhdq( const CMMReg& dst, const CMem& src );
+			void punpcklbw( const CMMReg& dst, const CMMReg& src );
+			void punpcklbw( const CMMReg& dst, const CMem& src );
+			void punpcklwd( const CMMReg& dst, const CMMReg& src );
+			void punpcklwd( const CMMReg& dst, const CMem& src );
+			void punpckldq( const CMMReg& dst, const CMMReg& src );
+			void punpckldq( const CMMReg& dst, const CMem& src );
+			void pxor( const CMMReg& dst, const CMMReg& src );
+			void pxor( const CMMReg& dst, const CMem& src );
 
 			__QCS_DECLARE_NONCOPYABLE( CMMX );
 		};
@@ -803,15 +165,8 @@ namespace nsArch
 		{
 		public:
 
-			//------------------------------------------------------------------------------
-			CMMXExt( Cx86CPUCore& refCPU ) : CMMX( refCPU )
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			virtual ~CMMXExt()
-			{
-			}
+			CMMXExt( Cx86CPUCore& refCPU );
+			virtual ~CMMXExt();
 
 			__QCS_DECLARE_NONCOPYABLE( CMMXExt );
 		};

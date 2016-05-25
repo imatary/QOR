@@ -131,6 +131,9 @@ namespace nsx86
 
 	private:
 
+		CECall();
+		CECall( const CECall& );
+
 		friend class Cx86HLAssembler;
 	};
 

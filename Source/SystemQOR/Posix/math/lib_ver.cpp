@@ -41,4 +41,4 @@ namespace nsBaseCRT
 #	endif
 #endif
 
-};//namespace nsBaseCRT
+}//namespace nsBaseCRT

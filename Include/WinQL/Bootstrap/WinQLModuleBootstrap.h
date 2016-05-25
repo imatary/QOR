@@ -42,19 +42,15 @@ namespace nsWin32
 
 		typedef void ( __QCMP_CALLCON* InitFunc)( void );
 
-		void InitTerm( InitFunc* pfbegin, InitFunc* pfend );
-		virtual void InitStatic( void ) = 0;
-		static void InitializeSecurityCookie( Cmp_uint_ptr& __security_cookie, Cmp_uint_ptr& __security_cookie_complement );
-
-		int atexit( void (*pFunc)(void) );
-		void doexit( void );
-
-	protected:
-
 		CModuleBootStrap();
 		virtual ~CModuleBootStrap();
 
-		bool m_bStaticInitialised;
+		void InitTerm( InitFunc* pfbegin, InitFunc* pfend );
+		virtual void InitStatic( void );
+		static void InitializeSecurityCookie( Cmp_uint_ptr& __security_cookie, Cmp_uint_ptr& __security_cookie_complement );
+		int atexit( void (*pFunc)(void) );
+		void doexit( void );
+		bool Booted( void );
 
 	private:
 
@@ -62,6 +58,7 @@ namespace nsWin32
 		void* m_apAtExit[ scui_AtExitPageSize ];
 		void** m_pAtExit;
 		int m_iAtExitIndex;
+		bool m_bStaticInitialised;
 	};
 
 }//nsWin32

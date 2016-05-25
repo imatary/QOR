@@ -3263,12 +3263,10 @@ namespace nsWin32
 	int Cwchar::_vsnprintf( char* buffer, size_t count, const char* format, va_list argptr )
 	{
 		_WINQ_FCONTEXT( "Cwchar::_vsnprintf" );
-		int Result = 0;
 		__QOR_PROTECT
 		{
 			return _vsnprintf_l( buffer, count, format, 0, argptr );
-		}
-		return Result;
+		}__QOR_ENDPROTECT
 	}
 
 	//--------------------------------------------------------------------------------

@@ -27,8 +27,8 @@
 #include "WinQL/WinQL.h"
 #include "SystemQOR.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/EH_Context.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/ExceptionHandling.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/EH_Context.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/ExceptionHandling.h"
 #include "CodeQOR/Modules/ProcessBase.h"
 
 #if ( __QCMP_COMPILER == __QCMP_INTEL )

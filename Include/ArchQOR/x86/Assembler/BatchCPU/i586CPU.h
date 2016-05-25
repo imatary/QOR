@@ -43,140 +43,24 @@ namespace nsArch
 		{
 		public:
 
-			//--------------------------------------------------------------------------------
-			Ci586CPU( CCodeGeneratorBase* codeGenerator ) : Ci486CPU( codeGenerator )
-			{
-			}
-
-			//--------------------------------------------------------------------------------
-			inline virtual ~Ci586CPU() __QCMP_THROW
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			//Compares the 64-bit value in EDX:EAX with the memory operand (Pentium).
-			//
-			// If the values are equal, then this instruction stores the 64-bit value
-			// in ECX:EBX into the memory operand and sets the zero flag. Otherwise,
-			// this instruction copies the 64-bit memory operand into the EDX:EAX
-			// registers and clears the zero flag.
-			inline void cmpxchg8b( const CMem& dst )
-			{
-				_emitInstruction( INST_CMPXCHG8B, &dst );
-			}
-
-			//------------------------------------------------------------------------------
-			//Read Time-Stamp Counter (Pentium).
-			inline void rdtsc()
-			{
-				_emitInstruction( INST_RDTSC );
-			}
-
-			//------------------------------------------------------------------------------
-			//Read Time-Stamp Counter and Processor ID (New).
-			inline void rdtscp()
-			{
-				_emitInstruction( INST_RDTSCP );
-			}
-
-		//------------------------------------------------------------------------------
-#if ( QOR_ARCH_WORDSIZE == 64 )
-		//Convert DWord to QWord (Sign Extend).
-		//
-		// RAX <- Sign Extend EAX
-		inline void cdqe()
-		{
-			_emitInstruction( INST_CDQE );
-		}
-#endif // 
-#if ( QOR_ARCH_WORDSIZE == 64 )
-		//Compares the 128-bit value in RDX:RAX with the memory operand (X64).
-		//
-		// If the values are equal, then this instruction stores the 128-bit value
-		// in RCX:RBX into the memory operand and sets the zero flag. Otherwise,
-		// this instruction copies the 128-bit memory operand into the RDX:RAX
-		// registers and clears the zero flag.
-		inline void cmpxchg16b(const CMem& dst)
-		{
-			_emitInstruction(INST_CMPXCHG16B, &dst);
-		}
-#endif // 
-#if ( QOR_ARCH_WORDSIZE == 64 )
-		
-		//------------------------------------------------------------------------------
-		//Move DWord to QWord with sign-extension.
-		inline void movsxd( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_MOVSXD, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move DWord to QWord with sign-extension.
-		// @overload
-		inline void movsxd( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_MOVSXD, &dst, &src );
-		}
-#endif // 
-#if ( QOR_ARCH_WORDSIZE == 64 )
-		//------------------------------------------------------------------------------
-		//Load ECX/RCX QWORDs from DS:[ESI/RSI] to RAX.
-		inline void rep_lodsq()
-		{
-			_emitInstruction( INST_REP_LODSQ );
-		}
-#endif // 
-#if ( QOR_ARCH_WORDSIZE == 64 )
-		//------------------------------------------------------------------------------
-		//Move ECX/RCX QWORDs from DS:[ESI/RSI] to ES:[EDI/RDI].
-		inline void rep_movsq()
-		{
-			_emitInstruction( INST_REP_MOVSQ );
-		}
-#endif // 
-#if ( QOR_ARCH_WORDSIZE == 64 )
-		//------------------------------------------------------------------------------
-		//Fill ECX/RCX QWORDs at ES:[EDI/RDI] with RAX.
-		inline void rep_stosq()
-		{
-			_emitInstruction( INST_REP_STOSQ );
-		}
-#endif // 
+			Ci586CPU( CCodeGeneratorBase* codeGenerator );
+			virtual ~Ci586CPU() __QCMP_THROW;
+			void cmpxchg8b( const CMem& dst );
+			void rdtsc();
+			void rdtscp();
 
 #if ( QOR_ARCH_WORDSIZE == 64 )
-		//------------------------------------------------------------------------------
-		//Repeated find nonmatching QWORDs in ES:[EDI/RDI] and DS:[ESI/RDI].
-		inline void repe_cmpsq()
-		{
-			_emitInstruction( INST_REPE_CMPSQ );
-		}
-#endif // 
-#if ( QOR_ARCH_WORDSIZE == 64 )
-		//------------------------------------------------------------------------------
-		//Find non-RAX QWORD starting at ES:[EDI/RDI].
-		inline void repe_scasq()
-		{
-			_emitInstruction( INST_REPE_SCASQ );
-		}
-#endif // 
-
-#if ( QOR_ARCH_WORDSIZE == 64 )
-		//------------------------------------------------------------------------------
-		//Repeated find nonmatching QWORDs in ES:[EDI/RDI] and DS:[ESI/RDI].
-		inline void repne_cmpsq()
-		{
-			_emitInstruction( INST_REPNE_CMPSQ );
-		}
-#endif // 
-
-
-#if ( QOR_ARCH_WORDSIZE == 64 )
-		//------------------------------------------------------------------------------
-		//Find RAX, starting at ES:[EDI/RDI].
-		inline void repne_scasq()
-		{
-			_emitInstruction( INST_REPNE_SCASQ );
-		}
+			void cdqe();
+			void cmpxchg16b( const CMem& dst );
+			void movsxd( const CGPReg& dst, const CGPReg& src );
+			void movsxd( const CGPReg& dst, const CMem& src );
+			void rep_lodsq();
+			void rep_movsq();
+			void rep_stosq();
+			void repe_cmpsq();
+			void repe_scasq();
+			void repne_cmpsq();
+			void repne_scasq();
 #endif // 
 		protected:
 
@@ -189,15 +73,8 @@ namespace nsArch
 		{
 		public:
 
-			//--------------------------------------------------------------------------------
-			CPentiumFPU( Cx86CPUCore& refCPU ) : C486FPU( refCPU )			
-			{
-			}
-
-			//--------------------------------------------------------------------------------
-			virtual ~CPentiumFPU()
-			{
-			}
+			CPentiumFPU( Cx86CPUCore& refCPU );
+			virtual ~CPentiumFPU();
 
 			__QCS_DECLARE_NONCOPYABLE( CPentiumFPU );
 		};

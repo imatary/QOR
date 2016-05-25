@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files\AdvAPI32">
+      <UniqueIdentifier>{0abb8ad5-b5ab-4b5e-837a-9d11b2e36bb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CodeServices">
+      <UniqueIdentifier>{72cf8397-6867-4394-a4e0-9538661a8bd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Kernel">
+      <UniqueIdentifier>{48da7bd8-19f6-4bef-b2a8-0e5ffdfcf2ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\User32">
+      <UniqueIdentifier>{276c5f52-a79a-4ce3-9a71-d69423522524}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\AdvAPI32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\BthProps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\ComCtl32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\GDI32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\MedFoundAPI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\MinGW32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\MMC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\OLE32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\OLEAut32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\OpenGL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\PowerProf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\PSAPI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\SetupAPI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\UxTheme.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\WinQAPI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\WS2_32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\WTSAPI32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\AdvAPI32\AccessControl.cpp">
+      <Filter>Source Files\AdvAPI32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\AdvAPI32\Authentication.cpp">
+      <Filter>Source Files\AdvAPI32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\AdvAPI32\Crypto.cpp">
+      <Filter>Source Files\AdvAPI32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\AdvAPI32\EventLogging.cpp">
+      <Filter>Source Files\AdvAPI32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\AdvAPI32\EventTracing.cpp">
+      <Filter>Source Files\AdvAPI32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\AdvAPI32\FileSystem.cpp">
+      <Filter>Source Files\AdvAPI32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\AdvAPI32\LocalSecAuth.cpp">
+      <Filter>Source Files\AdvAPI32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\AdvAPI32\Registry.cpp">
+      <Filter>Source Files\AdvAPI32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\AdvAPI32\Services.cpp">
+      <Filter>Source Files\AdvAPI32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\AdvAPI32\Session.cpp">
+      <Filter>Source Files\AdvAPI32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\CodeServices\DynamicLibrary.cpp">
+      <Filter>Source Files\CodeServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\CodeServices\ErrorDomain.cpp">
+      <Filter>Source Files\CodeServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\CodeServices\FlagChecks.cpp">
+      <Filter>Source Files\CodeServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\CodeServices\FunctionContext.cpp">
+      <Filter>Source Files\CodeServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\CodeServices\HandleCheck.cpp">
+      <Filter>Source Files\CodeServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\CodeServices\WQPointerChecks.cpp">
+      <Filter>Source Files\CodeServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\CodeServices\WQStringChecks.cpp">
+      <Filter>Source Files\CodeServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kActCtx.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kAppRecRestart.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kAtoms.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kBackup.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kComms.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kConsole.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kDebugging.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kDevice.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kDirectoryManagement.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kDiskManagement.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kDll.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kErrorHandling.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kFileManagement.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kHandle.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kMailSlot.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kMemory.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kMisc.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kMUI.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kNLS.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kPipe.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kPowerManagement.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kProcessThread.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kRegistry.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kResources.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kSEH.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kString.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kSynchronisation.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kSystem.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kSystemInfo.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kTerminalServices.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kTime.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kTimers.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kVolumeManagement.cpp">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQActiveAccessibility.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQAuthorization.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQBitmap.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQBrush.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQButtonCtrl.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQCaret.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQClipboard.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQComboBox.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQCoordTransform.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQCursor.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQDDE.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQDesktopWindowManager.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQDeviceContext.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQDeviceManagement.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQDialog.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQErrorHandling.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQFilledShapes.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQFontText.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQHooks.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQIcon.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQKeyboardAccelerator.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQKeyboardInput.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQListBox.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQMDI.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQMenu.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQMessages.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQMiscLowLevelClient.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQMouse.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQMultiMonitor.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQPainting.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQPowerManagement.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQPrinting.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQProcessThread.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQRawInput.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQRectangle.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQResource.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQScrollBar.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQShell.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQSynchronization.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQSystemInfo.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQSystemShutdown.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQTimer.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQWindow.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQWindowClass.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQWindowProc.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQWindowProperties.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WinQWndStationDesktop.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\User32\WQString.cpp">
+      <Filter>Source Files\User32</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

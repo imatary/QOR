@@ -27,10 +27,13 @@
 #ifndef SYSTEMQOR_SHAREDBOOTSTRAP_H_1
 #define SYSTEMQOR_SHAREDBOOTSTRAP_H_1
 
-#include QOR_SYS_QORHEADER1( Bootstrap, SharedBootStrap )
+namespace nsPlatform
+{
+	class CSharedBootStrap;
+}
 
 //--------------------------------------------------------------------------------
-class __QOR_INTERFACE( __QSYS ) CSharedBootStrap : public nsPlatform::CSharedBootStrap
+class __QOR_INTERFACE( __QSYS ) CSharedBootStrap //: public nsPlatform::CSharedBootStrap
 {
 
 protected:
@@ -41,8 +44,11 @@ protected:
 public:
 
 	bool Booted( void );
+	int atexit( void( *pFunc )( void ) );
 
 private:
+
+	nsPlatform::CSharedBootStrap* m_pInner;
 
 	CSharedBootStrap( const CSharedBootStrap& );
 	CSharedBootStrap& operator = ( const CSharedBootStrap& );

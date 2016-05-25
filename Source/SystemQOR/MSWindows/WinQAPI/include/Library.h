@@ -28,7 +28,7 @@
 #define WINQAPI_LIB_H_1
 
 #include "CodeQOR/ErrorSystem/Error.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
 
 //------------------------------------------------------------------------------
 __QCMP_WARNING_PUSH

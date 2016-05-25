@@ -25,9 +25,9 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include "WinQAPI/Kernel32.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/FlagChecks.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/Error.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/FunctionContext.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/FlagChecks.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/Error.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/FunctionContext.h"
 #include "CodeQOR/ErrorSystem/ParamErrorDomain.h"
 #include "CodeQOR/Modules/ProcessBase.h"
 

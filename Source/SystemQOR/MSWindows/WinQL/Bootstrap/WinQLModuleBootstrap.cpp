@@ -124,6 +124,17 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	bool CModuleBootStrap::Booted()
+	{
+		return m_bStaticInitialised;
+	}
+
+	//--------------------------------------------------------------------------------
+	void CModuleBootStrap::InitStatic( void )
+	{
+	}
+
+	//--------------------------------------------------------------------------------
 	//Set up the stack security Cookie to keep exception handling stack unwinding happy
 	void CModuleBootStrap::InitializeSecurityCookie( Cmp_uint_ptr& __security_cookie, Cmp_uint_ptr& __security_cookie_complement )
 	{

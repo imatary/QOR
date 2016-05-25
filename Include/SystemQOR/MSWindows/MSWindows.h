@@ -88,9 +88,9 @@
 #include "SystemQOR/MSWindows/WindowsVersion.h"
 
 #if ( _WIN32_WINNT > 0x0000 )
-#	include "../SystemQOR/MSWindows/Versions/WinNT.h"
+#	include "../Source/SystemQOR/MSWindows/Versions/WinNT.h"
 #elif ( _WIN32_WINDOWS > 0x0000 )
-#	include "../SystemQOR/MSWindows/Versions/Win9x.h"
+#	include "../Source/SystemQOR/MSWindows/Versions/Win9x.h"
 #else
 #	error "No Microsoft Windows version selected, please #define _QSYS_WIN_VERSION"
 #endif

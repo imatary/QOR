@@ -25,7 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include "WinQAPI/AdvAPI32.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/ReturnCheck.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/ReturnCheck.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWinQAPI

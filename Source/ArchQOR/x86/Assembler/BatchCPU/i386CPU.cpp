@@ -38,6 +38,1025 @@ namespace nsArch
 {
 	namespace nsx86
 	{
+		//------------------------------------------------------------------------------
+		Ci386CPU::Ci386CPU( CCodeGeneratorBase* codeGenerator ) __QCMP_THROW : Ci286CPU( codeGenerator )
+		{
+		}
+
+		//------------------------------------------------------------------------------
+		Ci386CPU::~Ci386CPU() __QCMP_THROW
+		{
+		}
+
+		// [Embed]
+
+		//------------------------------------------------------------------------------
+		//Add 8-bit integer data to the instruction stream.
+		void Ci386CPU::db( Cmp_unsigned__int8 x ) __QCMP_THROW
+		{
+			embed( &x, 1 );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add 16-bit integer data to the instruction stream.
+		void Ci386CPU::dw( Cmp_unsigned__int16 x ) __QCMP_THROW
+		{
+			embed( &x, 2 );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add 32-bit integer data to the instruction stream.
+		void Ci386CPU::dd( Cmp_unsigned__int32 x ) __QCMP_THROW
+		{
+			embed( &x, 4 );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add 64-bit integer data to the instruction stream.
+		void Ci386CPU::dq( Cmp_unsigned__int64 x ) __QCMP_THROW
+		{
+			embed( &x, 8 );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add 8-bit integer data to the instruction stream.
+		void Ci386CPU::dint8( Cmp__int8 x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( Cmp__int8 ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add 8-bit integer data to the instruction stream.
+		void Ci386CPU::duint8( Cmp_unsigned__int8 x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( Cmp_unsigned__int8 ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add 16-bit integer data to the instruction stream.
+		void Ci386CPU::dint16( Cmp__int16 x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( Cmp__int16 ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add 16-bit integer data to the instruction stream.
+		void Ci386CPU::duint16( Cmp_unsigned__int16 x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( Cmp_unsigned__int16 ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add 32-bit integer data to the instruction stream.
+		void Ci386CPU::dint32( Cmp__int32 x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( Cmp__int32 ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add 32-bit integer data to the instruction stream.
+		void Ci386CPU::duint32( Cmp_unsigned__int32 x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( Cmp_unsigned__int32 ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add 64-bit integer data to the instruction stream.
+		void Ci386CPU::dint64( Cmp__int64 x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( Cmp__int64 ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add 64-bit integer data to the instruction stream.
+		void Ci386CPU::duint64( Cmp_unsigned__int64 x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( Cmp_unsigned__int64 ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add system-integer data to the instruction stream.
+		void Ci386CPU::dsysint( Cmp_int_ptr x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( Cmp_int_ptr ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add system-integer data to the instruction stream.
+		void Ci386CPU::dsysuint( Cmp_uint_ptr x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( Cmp_uint_ptr ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add float data to the instruction stream.
+		void Ci386CPU::dfloat( float x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( float ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add double data to the instruction stream.
+		void Ci386CPU::ddouble( double x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( double ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add pointer data to the instruction stream.
+		void Ci386CPU::dptr( void* x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( void* ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add MM data to the instruction stream.
+		void Ci386CPU::dmm( const MMData& x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( MMData ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add XMM data to the instruction stream.
+		void Ci386CPU::dxmm( const XMMData& x ) __QCMP_THROW
+		{
+			embed( &x, sizeof( XMMData ) );
+		}
+
+		//------------------------------------------------------------------------------
+		//Add data to the instruction stream.
+		void Ci386CPU::data( const void* data, Cmp_uint_ptr size ) __QCMP_THROW
+		{
+			embed( data, size );
+		}
+
+		// [i386 Instructions]
+
+		//------------------------------------------------------------------------------
+		//Bit Scan Forward.
+		void Ci386CPU::bsf( const CGPReg& dst, const CGPReg& src )
+		{
+			//assert(!dst.isGPB());
+			_emitInstruction( INST_BSF, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit Scan Forward.
+		void Ci386CPU::bsf( const CGPReg& dst, const CMem& src )
+		{
+			//assert(!dst.isGPB());
+			_emitInstruction( INST_BSF, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit Scan Reverse.
+		void Ci386CPU::bsr( const CGPReg& dst, const CGPReg& src )
+		{
+			//assert(!dst.isGPB());
+			_emitInstruction( INST_BSR, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit Scan Reverse.
+		void Ci386CPU::bsr( const CGPReg& dst, const CMem& src )
+		{
+			//assert(!dst.isGPB());
+			_emitInstruction( INST_BSR, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test.
+		void Ci386CPU::bt( const CGPReg& dst, const CGPReg& src )
+		{
+			_emitInstruction( INST_BT, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test.
+		void Ci386CPU::bt( const CGPReg& dst, const CImm& src )
+		{
+			_emitInstruction( INST_BT, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test.
+		void Ci386CPU::bt( const CMem& dst, const CGPReg& src )
+		{
+			_emitInstruction( INST_BT, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test.
+		void Ci386CPU::bt( const CMem& dst, const CImm& src )
+		{
+			_emitInstruction( INST_BT, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test and complement.
+		void Ci386CPU::btc( const CGPReg& dst, const CGPReg& src )
+		{
+			_emitInstruction( INST_BTC, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test and complement.
+		void Ci386CPU::btc( const CGPReg& dst, const CImm& src )
+		{
+			_emitInstruction( INST_BTC, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test and complement.
+		void Ci386CPU::btc( const CMem& dst, const CGPReg& src )
+		{
+			_emitInstruction( INST_BTC, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test and complement.
+		void Ci386CPU::btc( const CMem& dst, const CImm& src )
+		{
+			_emitInstruction( INST_BTC, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test and reset.
+		void Ci386CPU::btr( const CGPReg& dst, const CGPReg& src )
+		{
+			_emitInstruction( INST_BTR, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test and reset.
+		void Ci386CPU::btr( const CGPReg& dst, const CImm& src )
+		{
+			_emitInstruction( INST_BTR, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test and reset.
+		void Ci386CPU::btr( const CMem& dst, const CGPReg& src )
+		{
+			_emitInstruction( INST_BTR, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test and reset.
+		void Ci386CPU::btr( const CMem& dst, const CImm& src )
+		{
+			_emitInstruction( INST_BTR, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test and set.
+		void Ci386CPU::bts( const CGPReg& dst, const CGPReg& src )
+		{
+			_emitInstruction( INST_BTS, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test and set.
+		void Ci386CPU::bts( const CGPReg& dst, const CImm& src )
+		{
+			_emitInstruction( INST_BTS, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test and set.
+		void Ci386CPU::bts( const CMem& dst, const CGPReg& src )
+		{
+			_emitInstruction( INST_BTS, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Bit test and set.
+		void Ci386CPU::bts( const CMem& dst, const CImm& src )
+		{
+			_emitInstruction( INST_BTS, &dst, &src );
+		}
+
+		//CWDE
+
+		//------------------------------------------------------------------------------
+		//Convert Word to DWord (Sign Extend).
+		// EAX <- Sign Extend AX
+		void Ci386CPU::cwde()
+		{
+			_emitInstruction( INST_CWDE );
+		}
+
+		//MOVZX
+
+		//------------------------------------------------------------------------------
+		//Move with Zero-Extend.
+		// This instruction copies the contents of the source operand (register
+		// or memory location) to the destination operand (register) and zero
+		// extends the value to 16 or 32-bits. The size of the converted value
+		// depends on the operand-size attribute.
+		void Ci386CPU::movzx( const CGPReg& dst, const CGPReg& src )
+		{
+			_emitInstruction( INST_MOVZX, &dst, &src );
+		}
+
+		//------------------------------------------------------------------------------
+		//Move with Zero-Extend.
+		void Ci386CPU::movzx( const CGPReg& dst, const CMem& src )
+		{
+			_emitInstruction( INST_MOVZX, &dst, &src );
+		}
+
+		//POPAD
+
+#if	( QOR_ARCH_WORDSIZE == 32 )
+		//------------------------------------------------------------------------------
+		//Pop All General-Purpose Registers.
+		//
+		// Pop EDI, ESI, EBP, EBX, EDX, ECX, and EAX.
+		void Ci386CPU::popad()
+		{
+			_emitInstruction( INST_POPAD );
+		}
+#endif // ( QOR_ARCH_WORDSIZE == 32 )
+
+		//POPFD
+		//POPFQ
+
+		//------------------------------------------------------------------------------
+		//Pop Stack into EFLAGS Register (32-bit or 64-bit).
+		void Ci386CPU::popf()
+		{
+#if	( QOR_ARCH_WORDSIZE == 32 )
+			popfd();
+#else
+			popfq();
+#endif
+		}
+
+		//------------------------------------------------------------------------------
+#if	( QOR_ARCH_WORDSIZE == 32 )
+		//Pop Stack into EFLAGS Register (32-bit).
+		void Ci386CPU::popfd()
+		{
+			_emitInstruction( INST_POPFD );
+		}
+#else
+		//Pop Stack into EFLAGS Register (64-bit).
+		void Ci386CPU::popfq()
+		{
+			_emitInstruction( INST_POPFQ );
+		}
+#endif
+
+
+#if	( QOR_ARCH_WORDSIZE == 32 )
+		//------------------------------------------------------------------------------
+		//Push All General-Purpose Registers.
+		//
+		// Push EAX, ECX, EDX, EBX, original ESP, EBP, ESI, and EDI.
+		void Ci386CPU::pushad()
+		{
+			_emitInstruction( INST_PUSHAD );
+		}
+#endif // ( QOR_ARCH_WORDSIZE == 32 )
+
+		//------------------------------------------------------------------------------
+		//Push EFLAGS Register (32-bit or 64-bit) onto the Stack.
+		void Ci386CPU::pushf()
+		{
+#if	( QOR_ARCH_WORDSIZE == 32 )
+			pushfd();
+#else
+			pushfq();
+#endif
+		}
+
+		//------------------------------------------------------------------------------
+#if	( QOR_ARCH_WORDSIZE == 32 )
+		//Push EFLAGS Register (32-bit) onto the Stack.
+		void Ci386CPU::pushfd()
+		{
+			_emitInstruction( INST_PUSHFD );
+		}
+#else
+		//Push EFLAGS Register (64-bit) onto the Stack.
+		void Ci386CPU::pushfq()
+		{
+			_emitInstruction( INST_PUSHFQ );
+		}
+#endif // ( QOR_ARCH_WORDSIZE == 32 )
+
+
+		//------------------------------------------------------------------------------
+		//Load ECX/RCX WORDs from DS:[ESI/RSI] to AX.
+		void Ci386CPU::rep_lodsw()
+		{
+			_emitInstruction( INST_REP_LODSW );
+		}
+
+		//------------------------------------------------------------------------------
+		//Move ECX/RCX WORDs from DS:[ESI/RSI] to ES:[EDI/RDI].
+		void Ci386CPU::rep_movsw()
+		{
+			_emitInstruction( INST_REP_MOVSW );
+		}
+
+		//------------------------------------------------------------------------------
+		//Fill ECX/RCX WORDs at ES:[EDI/RDI] with AX.
+		void Ci386CPU::rep_stosw()
+		{
+			_emitInstruction( INST_REP_STOSW );
+		}
+
+		//------------------------------------------------------------------------------
+		//Repeated find nonmatching WORDs in ES:[EDI/RDI] and DS:[ESI/RDI].
+		void Ci386CPU::repe_cmpsw()
+		{
+			_emitInstruction( INST_REPE_CMPSW );
+		}
+
+		//------------------------------------------------------------------------------
+		//Find non-AX WORD starting at ES:[EDI/RDI].
+		void Ci386CPU::repe_scasw()
+		{
+			_emitInstruction( INST_REPE_SCASW );
+		}
+
+		//------------------------------------------------------------------------------
+		//Repeated find nonmatching WORDs in ES:[EDI/RDI] and DS:[ESI/RDI].
+		void Ci386CPU::repne_cmpsw()
+		{
+			_emitInstruction( INST_REPNE_CMPSW );
+		}
+
+		//------------------------------------------------------------------------------
+		//Find AX, starting at ES:[EDI/RDI].
+		void Ci386CPU::repne_scasw()
+		{
+			_emitInstruction( INST_REPNE_SCASW );
+		}
+
+		//SETcc
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::set( CONDITION cc, const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1);
+			_emitInstruction( ConditionToInstruction::toSetCC( cc ), &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::set( CONDITION cc, const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1);
+			_emitInstruction( ConditionToInstruction::toSetCC( cc ), &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::seta( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETA, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::seta( const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1); 
+			_emitInstruction( INST_SETA, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setae( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETAE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setae( const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1); 
+			_emitInstruction( INST_SETAE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setb( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETB, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setb( const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1); 
+			_emitInstruction( INST_SETB, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setbe( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETBE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setbe( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETBE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setc( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 );
+			_emitInstruction( INST_SETC, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setc( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETC, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::sete( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::sete( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setg( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETG, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setg( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETG, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setge( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 ); 
+			_emitInstruction( INST_SETGE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setge( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETGE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setl( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 ); 
+			_emitInstruction( INST_SETL, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setl( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETL, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setle( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 ); 
+			_emitInstruction( INST_SETLE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setle( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETLE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setna( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 ); 
+			_emitInstruction( INST_SETNA, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setna( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETNA, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnae( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 ); 
+			_emitInstruction( INST_SETNAE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnae( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETNAE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnb( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 ); 
+			_emitInstruction( INST_SETNB, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnb( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETNB, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnbe( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 ); 
+			_emitInstruction( INST_SETNBE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnbe( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETNBE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnc( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 ); 
+			_emitInstruction( INST_SETNC, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnc( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETNC, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setne( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 ); 
+			_emitInstruction( INST_SETNE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setne( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETNE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setng( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 ); 
+			_emitInstruction( INST_SETNG, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setng( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETNG, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnge( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 ); 
+			_emitInstruction( INST_SETNGE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnge( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETNGE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnl( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETNL, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnl( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETNL, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnle( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 ); 
+			_emitInstruction( INST_SETNLE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnle( const CMem& dst )
+		{
+			//assert( dst.getSize() <= 1 ); 
+			_emitInstruction( INST_SETNLE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setno( const CGPReg& dst )
+		{
+			//assert( dst.getSize() == 1 ); 
+			_emitInstruction( INST_SETNO, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setno( const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1); 
+			_emitInstruction( INST_SETNO, &dst );
+		}
+
+		//------------------------------------------------------------------------------	
+		//Set Byte on Condition.
+		void Ci386CPU::setnp( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETNP, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnp( const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1); 
+			_emitInstruction( INST_SETNP, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setns( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETNS, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setns( const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1); 
+			_emitInstruction( INST_SETNS, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnz( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETNZ, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setnz( const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1); 
+			_emitInstruction( INST_SETNZ, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::seto( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETO, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::seto( const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1); 
+			_emitInstruction( INST_SETO, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setp( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETP, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setp( const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1); 
+			_emitInstruction( INST_SETP, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setpe( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETPE, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setpe( const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1); 
+			_emitInstruction( INST_SETPE, &dst );
+		}
+
+		//------------------------------------------------------------------------------	
+		//Set Byte on Condition.
+		void Ci386CPU::setpo( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETPO, &dst );
+		}
+
+		//------------------------------------------------------------------------------	
+		//Set Byte on Condition.
+		void Ci386CPU::setpo( const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1); 
+			_emitInstruction( INST_SETPO, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::sets( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETS, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::sets( const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1); 
+			_emitInstruction( INST_SETS, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setz( const CGPReg& dst )
+		{
+			//assert(dst.getSize() == 1); 
+			_emitInstruction( INST_SETZ, &dst );
+		}
+
+		//------------------------------------------------------------------------------
+		//Set Byte on Condition.
+		void Ci386CPU::setz( const CMem& dst )
+		{
+			//assert(dst.getSize() <= 1); 
+			_emitInstruction( INST_SETZ, &dst );
+		}
+
+		//SHLD
+
+		//------------------------------------------------------------------------------
+		//Double Precision Shift Left.
+		// Note src2 register can be only cl register.
+		void Ci386CPU::shld( const CGPReg& dst, const CGPReg& src1, const CGPReg& src2 )
+		{
+			_emitInstruction( INST_SHLD, &dst, &src1, &src2 );
+		}
+
+		//------------------------------------------------------------------------------
+		//Double Precision Shift Left.
+		void Ci386CPU::shld( const CGPReg& dst, const CGPReg& src1, const CImm& src2 )
+		{
+			_emitInstruction( INST_SHLD, &dst, &src1, &src2 );
+		}
+
+		//------------------------------------------------------------------------------
+		//Double Precision Shift Left.
+		// Note src2 register can be only cl register.
+		void Ci386CPU::shld( const CMem& dst, const CGPReg& src1, const CGPReg& src2 )
+		{
+			_emitInstruction( INST_SHLD, &dst, &src1, &src2 );
+		}
+
+		//------------------------------------------------------------------------------
+		//Double Precision Shift Left.
+		void Ci386CPU::shld( const CMem& dst, const CGPReg& src1, const CImm& src2 )
+		{
+			_emitInstruction( INST_SHLD, &dst, &src1, &src2 );
+		}
+
+		//SHRD
+
+		//------------------------------------------------------------------------------
+		//Double Precision Shift Right.
+		// Note src2 register can be only cl register.
+		void Ci386CPU::shrd( const CGPReg& dst, const CGPReg& src1, const CGPReg& src2 )
+		{
+			_emitInstruction( INST_SHRD, &dst, &src1, &src2 );
+		}
+
+		//------------------------------------------------------------------------------
+		//Double Precision Shift Right.
+		void Ci386CPU::shrd( const CGPReg& dst, const CGPReg& src1, const CImm& src2 )
+		{
+			_emitInstruction( INST_SHRD, &dst, &src1, &src2 );
+		}
+
+		//------------------------------------------------------------------------------
+		//Double Precision Shift Right.
+		// Note src2 register can be only cl register.
+		void Ci386CPU::shrd( const CMem& dst, const CGPReg& src1, const CGPReg& src2 )
+		{
+			_emitInstruction( INST_SHRD, &dst, &src1, &src2 );
+		}
+
+		//------------------------------------------------------------------------------
+		//Double Precision Shift Right.
+		void Ci386CPU::shrd( const CMem& dst, const CGPReg& src1, const CImm& src2 )
+		{
+			_emitInstruction( INST_SHRD, &dst, &src1, &src2 );
+		}
 	}//nsx86
 }//nsArch
 

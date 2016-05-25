@@ -27,7 +27,7 @@
 #ifndef WINQAPI_OPENGL_H_3
 #define WINQAPI_OPENGL_H_3
 
-#include "../SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
 #include "WinQAPI/Kernel32.h"
 #include <gl/Gl.h>
 

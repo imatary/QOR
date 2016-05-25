@@ -27,8 +27,8 @@
 #include "WinQL/WinQL.h"
 #include "SystemQOR.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/PE/Sections.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/TLS/TLS.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/PE/Sections.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/TLS/TLS.h"
 #include "WinQL/Application/ErrorSystem/WinQLSEH.h"
 #include <stdlib.h>
 

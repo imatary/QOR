@@ -257,6 +257,7 @@ namespace nsCodeQOR
 
 		The qt_hash functions must *never* change their results.
 	*/
+	/*
 	static unsigned int qt_hash( const Char* p, int n ) __QCMP_NO_THROW
 	{
 		unsigned int h = 0;
@@ -269,6 +270,7 @@ namespace nsCodeQOR
 		}
 		return h;
 	}
+	*/
 	/*
 	//--------------------------------------------------------------------------------
 	unsigned int qt_hash(const QString &key) __QCMP_NO_THROW
@@ -367,7 +369,7 @@ namespace nsCodeQOR
 	}
 
 	//--------------------------------------------------------------------------------
-	CHashData *CHashData::detach_helper(void (*node_duplicate)(Node *, void *), void (*node_delete)(Node *), int nodeSize, int nodeAlign)
+	CHashData *CHashData::detach_helper(void (*node_duplicate)(Node *, void *), void (*node_delete)(Node *), int inodeSize, int nodeAlign)
 	{
 		union 
 		{
@@ -381,7 +383,7 @@ namespace nsCodeQOR
 		d->buckets = 0;
 		d->ref = 1;//.initializeOwned();
 		d->size = size;
-		d->nodeSize = nodeSize;
+		d->nodeSize = inodeSize;
 		d->userNumBits = userNumBits;
 		d->numBits = numBits;
 		d->numBuckets = numBuckets;

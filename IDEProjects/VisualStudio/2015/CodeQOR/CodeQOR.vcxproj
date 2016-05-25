@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ClassReg\ClassReg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\CodePages\CodePage.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\CodeQOR.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\DataStructures\PODVector.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\DataStructures\THash.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\DataTypes\OTypes.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\BaseErrorDomain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\DefaultHandler.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\Error.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\ErrorPropertyBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\ExpectedHandler.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\IExceptionFrame.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\ParamErrorDomain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\What.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\When.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\Where.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Events\ThreadLocalEvent.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Events\ThreadLocalEventManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Events\ThreadLocalEventSink.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\CallInterceptor.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\DefaultInterceptor.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\EventInterceptor.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\FlyStrap.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\FlyStrapBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\BaseHeap.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\DefaultSource.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\FastBucket.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\FastHeap.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\FastPage.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\ManagedAllocator.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\SmallObjectBucket.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\SmallObjectHeap.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\SmallObjectPage.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\StringSource.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Modules\LoadableModuleBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Modules\ProcessBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Parameters\InterParamChecks.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Parameters\ParamRegister.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Parameters\PChecks\IntRangeChecks.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Parameters\PChecks\PointerChecks.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Parameters\PChecks\StringChecks.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Parameters\PChecks\TRangeChecks.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullLock.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullMutex.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullSection.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullSempahore.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\ACodeString.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\Char.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\Char16.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\Char32.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\Char8.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\CodeString.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\CQString.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\TExtString.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\UTF16Char.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\UTF16String.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\UTF32String.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\UTF8Char.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\UTF8String.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\WCodeString.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Threading\ThreadContext.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Tracing\CallContextBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Tracing\FunctionContextBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Tracing\ObjectContextBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Tracing\TraceFlyer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Utils\Utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\AbstractFactory.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\ClassReg.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\ClassRegEntry.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\ExternalClassReg.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\PoolFactory.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\SingletonFactory.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\TFlyer.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\TFlyerRegEntry.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\CodePages\CodePage.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\PODVector.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TArray.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TBitArray.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TBox.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TBuffer.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TCRef.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TFLink.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\THash.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TIndexedArray.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TLinkedList.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TLRef.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TMap.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TMapPair.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TPair.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TPointer.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TRangePair.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataTypes\GUID.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataTypes\OTypes.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataTypes\Property.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\BaseErrorDomain.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\DefaultHandler.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\Error.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\ExpectedHandler.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\IExceptionFrame.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\ParamErrorDomain.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\What.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\When.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\Where.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Events\ThreadLocalEvent.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Events\ThreadLocalEventManager.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Events\ThreadLocalEventSink.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\CallInterceptor.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\DefaultInterceptor.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\EventInterceptor.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\FlyStrap.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\FlyStrapBase.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\BaseHeap.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\DefaultAllocator.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\DefaultSource.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\FastBucket.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\FastHeap.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\FastPage.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\ManagedAllocator.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\SmallObjectBucket.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\SmallObjectHeap.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\SmallObjectPage.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\StringSource.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\TAllocator.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Modules\LibraryBase.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Modules\LoadableModuleBase.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Modules\ProcessBase.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\InterParamChecks.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\ParamChecking.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\ParamRegister.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\PChecks\FlagChecks.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\PChecks\IntRangeChecks.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\PChecks\PointerChecks.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\PChecks\StringChecks.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\PChecks\TRangeChecks.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\ReturnCheck.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\SyncObjects\NullLock.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\SyncObjects\NullMutex.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\SyncObjects\NullSection.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\SyncObjects\NullSemaphore.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\SyncObjects\SectionLock.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\ACodeString.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\Char.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\Char16.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\Char32.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\Char8.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\CodeString.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\TChar.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\TExtString.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\TString.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\unicode.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\unicodedata.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\UTF16Char.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\UTF16String.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\UTF32String.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\UTF8Char.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\UTF8String.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\WCodeString.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Threading\ThreadContext.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\CallContextBase.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\FunctionContextBase.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\ObjectContext.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\ObjectContextBase.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\ObjectPointer.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\ObjectPointerBase.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\TraceFlyer.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Traits\MemoryTraits.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Traits\Policy.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Traits\ReferenceTraits.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Utils\Utils.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3671F0E9-0565-444A-9A44-FB180060DC3B}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>CodeQOR</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>__CODE_QOR;WIN32;_DEBUG;_WINDOWS;_USRDLL;_LIBCPP_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../include</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <MinimalRebuild>false</MinimalRebuild>
+      <FloatingPointModel>Strict</FloatingPointModel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <DisableSpecificWarnings>4290;4201</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../QOR/Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WinCmpSupQORVC.lib;QORModule.lib;CompilerQOR.lib;ArchQOR.lib;SystemQOR.lib;CQOR.lib;stdQOR.lib;WinQL.lib;WinQAPI.lib;WinSharedBootstrap.lib;kernel32.lib</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;CODEQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CODEQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;CODEQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

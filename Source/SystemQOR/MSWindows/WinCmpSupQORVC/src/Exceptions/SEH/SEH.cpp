@@ -26,8 +26,8 @@
 
 #include "WinQL/WinQL.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH/SEH.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH/excpt.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH/SEH.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH/excpt.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 
 __QCMP_LINKAGE_C extern Cmp_uint_ptr __security_cookie;

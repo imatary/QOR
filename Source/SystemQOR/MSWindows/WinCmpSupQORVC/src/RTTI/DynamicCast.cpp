@@ -27,10 +27,10 @@
 #include "WinQL/WinQL.h"
 #include "SystemQOR.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/RTTI/RTTI.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/RTTI/RTTI.h"
 #include <algorithm>
 #include <typeinfo>
-#include "../SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH/excpt.h"
+#include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH/excpt.h"
 #include "WinQAPI/Kernel32.h"
 
 #define BCD_NOTVISIBLE              0x00000001 

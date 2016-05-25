@@ -41,58 +41,14 @@ namespace nsArch
 		{
 		public:
 
-			//--------------------------------------------------------------------------------
-			inline Ci486CPU( CCodeGeneratorBase* codeGenerator ) : Ci386CPU( codeGenerator )
-			{
-			}
-
-			//--------------------------------------------------------------------------------
-			inline virtual ~Ci486CPU() __QCMP_THROW
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			//Byte swap (32-bit or 64-bit registers only) (i486).
-			inline void bswap( const CGPReg& dst )
-			{
-				//assert(dst.getRegType() == REG_TYPE_GPD || dst.getRegType() == REG_TYPE_GPQ);
-				_emitInstruction( INST_BSWAP, &dst );
-			}
-
-			//------------------------------------------------------------------------------
-			//Compare and Exchange (i486).
-			inline void cmpxchg( const CGPReg& dst, const CGPReg& src )
-			{
-				_emitInstruction( INST_CMPXCHG, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Compare and Exchange (i486).
-			inline void cmpxchg( const CMem& dst, const CGPReg& src )
-			{
-				_emitInstruction( INST_CMPXCHG, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//CPU Identification (i486).
-			inline void cpuid()
-			{
-				_emitInstruction( INST_CPUID );
-			}
-
-			//------------------------------------------------------------------------------
-			//Exchange and Add.
-			inline void xadd( const CGPReg& dst, const CGPReg& src )
-			{
-				_emitInstruction( INST_XADD, &dst, &src );
-			}
-	
-			//------------------------------------------------------------------------------
-			//Exchange and Add.
-			inline void xadd( const CMem& dst, const CGPReg& src )
-			{
-				_emitInstruction( INST_XADD, &dst, &src );
-			}
+			Ci486CPU( CCodeGeneratorBase* codeGenerator );
+			virtual ~Ci486CPU() __QCMP_THROW;
+			void bswap( const CGPReg& dst );
+			void cmpxchg( const CGPReg& dst, const CGPReg& src );
+			void cmpxchg( const CMem& dst, const CGPReg& src );
+			void cpuid();
+			void xadd( const CGPReg& dst, const CGPReg& src );
+			void xadd( const CMem& dst, const CGPReg& src );
 
 		protected:
 
@@ -105,15 +61,8 @@ namespace nsArch
 		{
 		public:
 
-			//--------------------------------------------------------------------------------
-			C486FPU( Cx86CPUCore& refCPU ) : C387FPU( refCPU )
-			{
-			}
-
-			//--------------------------------------------------------------------------------
-			virtual ~C486FPU()
-			{
-			}
+			C486FPU( Cx86CPUCore& refCPU );
+			virtual ~C486FPU();
 
 			__QCS_DECLARE_NONCOPYABLE( C486FPU );
 		};

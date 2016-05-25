@@ -41,897 +41,142 @@ namespace nsArch
 		{
 		public:
 
-			//------------------------------------------------------------------------------
-			CSSE( Cx86CPUCore& refCPU ) : CMMXExt( refCPU )
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			virtual ~CSSE()
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Add (SSE).
-			inline void addps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_ADDPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Add (SSE).
-			inline void addps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_ADDPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Add (SSE).
-			inline void addss( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_ADDSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Add (SSE).
-			inline void addss( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_ADDSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical And Not For SP-FP (SSE).
-			inline void andnps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_ANDNPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical And Not For SP-FP (SSE).
-			inline void andnps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_ANDNPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical And For SP-FP (SSE).
-			inline void andps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_ANDPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical And For SP-FP (SSE).
-			inline void andps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_ANDPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Compare (SSE).
-			inline void cmpps( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_CMPPS, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Compare (SSE).
-			inline void cmpps( const CXMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_CMPPS, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Compare Scalar SP-FP Values (SSE).
-			inline void cmpss( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_CMPSS, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Compare Scalar SP-FP Values (SSE).
-			inline void cmpss( const CXMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_CMPSS, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar Ordered SP-FP Compare and Set EFLAGS (SSE).
-			inline void comiss( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_COMISS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar Ordered SP-FP Compare and Set EFLAGS (SSE).
-			inline void comiss( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_COMISS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Signed INT32 to Packed SP-FP Conversion (SSE).
-			inline void cvtpi2ps( const CXMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTPI2PS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Signed INT32 to Packed SP-FP Conversion (SSE).
-			inline void cvtpi2ps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTPI2PS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP to Packed INT32 Conversion (SSE).
-			inline void cvtps2pi( const CMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTPS2PI, &dst, &src );
-			}
-	
-			//------------------------------------------------------------------------------
-			//Packed SP-FP to Packed INT32 Conversion (SSE).
-			inline void cvtps2pi( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTPS2PI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar Signed INT32 to SP-FP Conversion (SSE).
-			inline void cvtsi2ss( const CXMMReg& dst, const CGPReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTSI2SS, &dst, &src );
-			}
-	
-			//------------------------------------------------------------------------------
-			//Scalar Signed INT32 to SP-FP Conversion (SSE).
-			inline void cvtsi2ss( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTSI2SS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP to Signed INT32 Conversion (SSE).
-			inline void cvtss2si( const CGPReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTSS2SI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP to Signed INT32 Conversion (SSE).
-			inline void cvtss2si( const CGPReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTSS2SI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP to Packed INT32 Conversion (truncate) (SSE).
-			inline void cvttps2pi( const CMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTTPS2PI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP to Packed INT32 Conversion (truncate) (SSE).
-			inline void cvttps2pi( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTTPS2PI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP to Signed INT32 Conversion (truncate) (SSE).
-			inline void cvttss2si( const CGPReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTTSS2SI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP to Signed INT32 Conversion (truncate) (SSE).
-			inline void cvttss2si( const CGPReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTTSS2SI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Divide (SSE).
-			inline void divps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_DIVPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Divide (SSE).
-			inline void divps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_DIVPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Divide (SSE).
-			inline void divss( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_DIVSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Divide (SSE).
-			inline void divss( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_DIVSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Load Streaming SIMD Extension Control/Status (SSE).
-			inline void ldmxcsr( const CMem& src )
-			{
-				m_PU._emitInstruction( INST_LDMXCSR, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Byte Mask Write (SSE).
-			// @note The default memory location is specified by DS:EDI.
-			inline void maskmovq( const CMMReg& data, const CMMReg& mask )
-			{
-				m_PU._emitInstruction( INST_MASKMOVQ, &data, &mask );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Maximum (SSE).
-			inline void maxps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MAXPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Maximum (SSE).
-			inline void maxps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MAXPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Maximum (SSE).
-			inline void maxss( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MAXSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Maximum (SSE).
-			inline void maxss( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MAXSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Minimum (SSE).
-			inline void minps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MINPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Minimum (SSE).
-			inline void minps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MINPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Minimum (SSE).
-			inline void minss( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MINSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Minimum (SSE).
-			inline void minss( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MINSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Aligned Packed SP-FP Values (SSE).
-			inline void movaps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVAPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Aligned Packed SP-FP Values (SSE).
-			inline void movaps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVAPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Aligned Packed SP-FP Values (SSE).
-			inline void movaps( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVAPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move DWord.
-			inline void movd( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move DWord.
-			inline void movd( const CGPReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move DWord.
-			inline void movd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move DWord.
-			inline void movd( const CXMMReg& dst, const CGPReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move QWord (SSE).
-			inline void movq( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move QWord (SSE).
-			inline void movq( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVQ, &dst, &src );
-			}
+			CSSE( Cx86CPUCore& refCPU );
+			virtual ~CSSE();
+			void addps( const CXMMReg& dst, const CXMMReg& src );
+			void addps( const CXMMReg& dst, const CMem& src );
+			void addss( const CXMMReg& dst, const CXMMReg& src );
+			void addss( const CXMMReg& dst, const CMem& src );
+			void andnps( const CXMMReg& dst, const CXMMReg& src );
+			void andnps( const CXMMReg& dst, const CMem& src );
+			void andps( const CXMMReg& dst, const CXMMReg& src );
+			void andps( const CXMMReg& dst, const CMem& src );
+			void cmpps( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 );
+			void cmpps( const CXMMReg& dst, const CMem& src, const CImm& imm8 );
+			void cmpss( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 );
+			void cmpss( const CXMMReg& dst, const CMem& src, const CImm& imm8 );
+			void comiss( const CXMMReg& dst, const CXMMReg& src );
+			void comiss( const CXMMReg& dst, const CMem& src );
+			void cvtpi2ps( const CXMMReg& dst, const CMMReg& src );
+			void cvtpi2ps( const CXMMReg& dst, const CMem& src );
+			void cvtps2pi( const CMMReg& dst, const CXMMReg& src );
+			void cvtps2pi( const CMMReg& dst, const CMem& src );
+			void cvtsi2ss( const CXMMReg& dst, const CGPReg& src );
+			void cvtsi2ss( const CXMMReg& dst, const CMem& src );
+			void cvtss2si( const CGPReg& dst, const CXMMReg& src );
+			void cvtss2si( const CGPReg& dst, const CMem& src );
+			void cvttps2pi( const CMMReg& dst, const CXMMReg& src );
+			void cvttps2pi( const CMMReg& dst, const CMem& src );
+			void cvttss2si( const CGPReg& dst, const CXMMReg& src );
+			void cvttss2si( const CGPReg& dst, const CMem& src );
+			void divps( const CXMMReg& dst, const CXMMReg& src );
+			void divps( const CXMMReg& dst, const CMem& src );
+			void divss( const CXMMReg& dst, const CXMMReg& src );
+			void divss( const CXMMReg& dst, const CMem& src );
+			void ldmxcsr( const CMem& src );
+			void maskmovq( const CMMReg& data, const CMMReg& mask );
+			void maxps( const CXMMReg& dst, const CXMMReg& src );
+			void maxps( const CXMMReg& dst, const CMem& src );
+			void maxss( const CXMMReg& dst, const CXMMReg& src );
+			void maxss( const CXMMReg& dst, const CMem& src );
+			void minps( const CXMMReg& dst, const CXMMReg& src );
+			void minps( const CXMMReg& dst, const CMem& src );
+			void minss( const CXMMReg& dst, const CXMMReg& src );
+			void minss( const CXMMReg& dst, const CMem& src );
+			void movaps( const CXMMReg& dst, const CXMMReg& src );
+			void movaps( const CXMMReg& dst, const CMem& src );
+			void movaps( const CMem& dst, const CXMMReg& src );
+			void movd( const CMem& dst, const CXMMReg& src );
+			void movd( const CGPReg& dst, const CXMMReg& src );
+			void movd( const CXMMReg& dst, const CMem& src );
+			void movd( const CXMMReg& dst, const CGPReg& src );
+			void movq( const CXMMReg& dst, const CXMMReg& src );
+			void movq( const CMem& dst, const CXMMReg& src );
 
 #	if ( QOR_ARCH_WORDSIZE == 64 )
-			//------------------------------------------------------------------------------
-			//Move QWord (SSE).
-			inline void movq( const CGPReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVQ, &dst, &src );
-			}
+			void movq( const CGPReg& dst, const CXMMReg& src );
 #	endif
-
-			//------------------------------------------------------------------------------
-			//Move QWord (SSE).
-			inline void movq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVQ, &dst, &src );
-			}
+			void movq( const CXMMReg& dst, const CMem& src );
 
 #	if ( QOR_ARCH_WORDSIZE == 64 )
-			//------------------------------------------------------------------------------
-			//Move QWord (SSE).
-			inline void movq( const CXMMReg& dst, const CGPReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVQ, &dst, &src );
-			}
+			void movq( const CXMMReg& dst, const CGPReg& src );
 #	endif // ASMJIT_X64
 
-			//------------------------------------------------------------------------------
-			//Move 64 Bits Non Temporal (SSE).
-			inline void movntq( const CMem& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVNTQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//High to Low Packed SP-FP (SSE).
-			inline void movhlps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVHLPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move High Packed SP-FP (SSE).
-			inline void movhps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVHPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move High Packed SP-FP (SSE).
-			inline void movhps( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVHPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Low to High Packed SP-FP (SSE).
-			inline void movlhps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVLHPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Low Packed SP-FP (SSE).
-			inline void movlps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVLPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Low Packed SP-FP (SSE).
-			inline void movlps( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVLPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Aligned Four Packed SP-FP Non Temporal (SSE).
-			inline void movntps( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVNTPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Scalar SP-FP (SSE).
-			inline void movss( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Scalar SP-FP (SSE).
-			inline void movss( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Scalar SP-FP (SSE).
-			inline void movss( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Unaligned Packed SP-FP Values (SSE).
-			inline void movups( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVUPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Unaligned Packed SP-FP Values (SSE).
-			inline void movups( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVUPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Unaligned Packed SP-FP Values (SSE).
-			inline void movups( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVUPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Multiply (SSE).
-			inline void mulps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MULPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Multiply (SSE).
-			inline void mulps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MULPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Multiply (SSE).
-			inline void mulss( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MULSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Multiply (SSE).
-			inline void mulss( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MULSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical OR for SP-FP Data (SSE).
-			inline void orps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_ORPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical OR for SP-FP Data (SSE).
-			inline void orps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_ORPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Average (SSE).
-			inline void pavgb( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PAVGB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Average (SSE).
-			inline void pavgb( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PAVGB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Average (SSE).
-			inline void pavgw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PAVGW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Average (SSE).
-			inline void pavgw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PAVGW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Extract Word (SSE).
-			inline void pextrw( const CGPReg& dst, const CMMReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PEXTRW, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Insert Word (SSE).
-			inline void pinsrw( const CMMReg& dst, const CGPReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PINSRW, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Insert Word (SSE).
-			inline void pinsrw( const CMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PINSRW, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Signed Integer Word Maximum (SSE).
-			inline void pmaxsw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMAXSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Signed Integer Word Maximum (SSE).
-			inline void pmaxsw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMAXSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Unsigned Integer Byte Maximum (SSE).
-			inline void pmaxub( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMAXUB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Unsigned Integer Byte Maximum (SSE).
-			inline void pmaxub( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMAXUB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Signed Integer Word Minimum (SSE).
-			inline void pminsw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMINSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Signed Integer Word Minimum (SSE).
-			inline void pminsw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMINSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Unsigned Integer Byte Minimum (SSE).
-			inline void pminub( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMINUB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Unsigned Integer Byte Minimum (SSE).
-			inline void pminub( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMINUB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Byte Mask To Integer (SSE).
-			inline void pmovmskb( const CGPReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMOVMSKB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply High Unsigned (SSE).
-			inline void pmulhuw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMULHUW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply High Unsigned (SSE).
-			inline void pmulhuw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMULHUW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Sum of Absolute Differences (SSE).
-			inline void psadbw( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSADBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Sum of Absolute Differences (SSE).
-			inline void psadbw( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSADBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shuffle word (SSE).
-			inline void pshufw( const CMMReg& dst, const CMMReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PSHUFW, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shuffle word (SSE).
-			inline void pshufw( const CMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PSHUFW, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reciprocal (SSE).
-			inline void rcpps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_RCPPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Reciprocal (SSE).
-			inline void rcpps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_RCPPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Reciprocal (SSE).
-			inline void rcpss( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_RCPSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Reciprocal (SSE).
-			inline void rcpss( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_RCPSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Prefetch (SSE).
-			inline void prefetch( const CMem& mem, const CImm& hint )
-			{
-				m_PU._emitInstruction( INST_PREFETCH, &mem, &hint );
-			}
-
-			//------------------------------------------------------------------------------
-			//Compute Sum of Absolute Differences (SSE).
-			inline void psadbw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSADBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Compute Sum of Absolute Differences (SSE).
-			inline void psadbw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSADBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Square Root Reciprocal (SSE).
-			inline void rsqrtps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_RSQRTPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Square Root Reciprocal (SSE).
-			inline void rsqrtps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_RSQRTPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Square Root Reciprocal (SSE).
-			inline void rsqrtss( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_RSQRTSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Square Root Reciprocal (SSE).
-			inline void rsqrtss( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_RSQRTSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Store fence (SSE).
-			inline void sfence()
-			{
-				m_PU._emitInstruction( INST_SFENCE );
-			}
-
-			//------------------------------------------------------------------------------
-			//Shuffle SP-FP (SSE).
-			inline void shufps( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_SHUFPS, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Shuffle SP-FP (SSE).
-			inline void shufps( const CXMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_SHUFPS, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Square Root (SSE).
-			inline void sqrtps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_SQRTPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Square Root (SSE).
-			inline void sqrtps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_SQRTPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Square Root (SSE).
-			inline void sqrtss( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_SQRTSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Square Root (SSE).
-			inline void sqrtss( const CXMMReg& dst, const CMem& src)
-			{
-				m_PU._emitInstruction( INST_SQRTSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Store Streaming SIMD Extension Control/Status (SSE).
-			inline void stmxcsr( const CMem& dst )
-			{
-				m_PU._emitInstruction( INST_STMXCSR, &dst );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Subtract (SSE).
-			inline void subps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_SUBPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed SP-FP Subtract (SSE).
-			inline void subps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_SUBPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Subtract (SSE).
-			inline void subss( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_SUBSS, &dst, &src );
-			}
-	
-			//------------------------------------------------------------------------------
-			//Scalar SP-FP Subtract (SSE).
-			inline void subss( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_SUBSS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unordered Scalar SP-FP compare and set EFLAGS (SSE).
-			inline void ucomiss( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_UCOMISS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unordered Scalar SP-FP compare and set EFLAGS (SSE).
-			inline void ucomiss( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_UCOMISS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed SP-FP Data (SSE).
-			inline void unpckhps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_UNPCKHPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Packed SP-FP Data (SSE).
-			inline void unpckhps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_UNPCKHPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack Low Packed SP-FP Data (SSE).
-			inline void unpcklps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_UNPCKLPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack Low Packed SP-FP Data (SSE).
-			inline void unpcklps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_UNPCKLPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical Xor for SP-FP Data (SSE).
-			inline void xorps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_XORPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical Xor for SP-FP Data (SSE).
-			inline void xorps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_XORPS, &dst, &src );
-			}
-
-			__QCS_DECLARE_NONCOPYABLE( CSSE );			
+			void movntq( const CMem& dst, const CMMReg& src );
+			void movhlps( const CXMMReg& dst, const CXMMReg& src );
+			void movhps( const CXMMReg& dst, const CMem& src );
+			void movhps( const CMem& dst, const CXMMReg& src );
+			void movlhps( const CXMMReg& dst, const CXMMReg& src );
+			void movlps( const CXMMReg& dst, const CMem& src );
+			void movlps( const CMem& dst, const CXMMReg& src );
+			void movntps( const CMem& dst, const CXMMReg& src );
+			void movss( const CXMMReg& dst, const CXMMReg& src );
+			void movss( const CXMMReg& dst, const CMem& src );
+			void movss( const CMem& dst, const CXMMReg& src );
+			void movups( const CXMMReg& dst, const CXMMReg& src );
+			void movups( const CXMMReg& dst, const CMem& src );
+			void movups( const CMem& dst, const CXMMReg& src );
+			void mulps( const CXMMReg& dst, const CXMMReg& src );
+			void mulps( const CXMMReg& dst, const CMem& src );
+			void mulss( const CXMMReg& dst, const CXMMReg& src );
+			void mulss( const CXMMReg& dst, const CMem& src );
+			void orps( const CXMMReg& dst, const CXMMReg& src );
+			void orps( const CXMMReg& dst, const CMem& src );
+			void pavgb( const CMMReg& dst, const CMMReg& src );
+			void pavgb( const CMMReg& dst, const CMem& src );
+			void pavgw( const CMMReg& dst, const CMMReg& src );
+			void pavgw( const CMMReg& dst, const CMem& src );
+			void pextrw( const CGPReg& dst, const CMMReg& src, const CImm& imm8 );
+			void pinsrw( const CMMReg& dst, const CGPReg& src, const CImm& imm8 );
+			void pinsrw( const CMMReg& dst, const CMem& src, const CImm& imm8 );
+			void pmaxsw( const CMMReg& dst, const CMMReg& src );
+			void pmaxsw( const CMMReg& dst, const CMem& src );
+			void pmaxub( const CMMReg& dst, const CMMReg& src );
+			void pmaxub( const CMMReg& dst, const CMem& src );
+			void pminsw( const CMMReg& dst, const CMMReg& src );
+			void pminsw( const CMMReg& dst, const CMem& src );
+			void pminub( const CMMReg& dst, const CMMReg& src );
+			void pminub( const CMMReg& dst, const CMem& src );
+			void pmovmskb( const CGPReg& dst, const CMMReg& src );
+			void pmulhuw( const CMMReg& dst, const CMMReg& src );
+			void pmulhuw( const CMMReg& dst, const CMem& src );
+			void psadbw( const CMMReg& dst, const CMMReg& src );
+			void psadbw( const CMMReg& dst, const CMem& src );
+			void pshufw( const CMMReg& dst, const CMMReg& src, const CImm& imm8 );;
+			void pshufw( const CMMReg& dst, const CMem& src, const CImm& imm8 );;
+			void rcpps( const CXMMReg& dst, const CXMMReg& src );
+			void rcpps( const CXMMReg& dst, const CMem& src );
+			void rcpss( const CXMMReg& dst, const CXMMReg& src );
+			void rcpss( const CXMMReg& dst, const CMem& src );
+			void prefetch( const CMem& mem, const CImm& hint );
+			void psadbw( const CXMMReg& dst, const CXMMReg& src );
+			void psadbw( const CXMMReg& dst, const CMem& src );
+			void rsqrtps( const CXMMReg& dst, const CXMMReg& src );
+			void rsqrtps( const CXMMReg& dst, const CMem& src );
+			void rsqrtss( const CXMMReg& dst, const CXMMReg& src );
+			void rsqrtss( const CXMMReg& dst, const CMem& src );
+			void sfence();
+			void shufps( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 );
+			void shufps( const CXMMReg& dst, const CMem& src, const CImm& imm8 );
+			void sqrtps( const CXMMReg& dst, const CXMMReg& src );
+			void sqrtps( const CXMMReg& dst, const CMem& src );
+			void sqrtss( const CXMMReg& dst, const CXMMReg& src );
+			void sqrtss( const CXMMReg& dst, const CMem& src );
+			void stmxcsr( const CMem& dst );
+			void subps( const CXMMReg& dst, const CXMMReg& src );
+			void subps( const CXMMReg& dst, const CMem& src );
+			void subss( const CXMMReg& dst, const CXMMReg& src );
+			void subss( const CXMMReg& dst, const CMem& src );
+			void ucomiss( const CXMMReg& dst, const CXMMReg& src );
+			void ucomiss( const CXMMReg& dst, const CMem& src );
+			void unpckhps( const CXMMReg& dst, const CXMMReg& src );
+			void unpckhps( const CXMMReg& dst, const CMem& src );
+			void unpcklps( const CXMMReg& dst, const CXMMReg& src );
+			void unpcklps( const CXMMReg& dst, const CMem& src );
+			void xorps( const CXMMReg& dst, const CXMMReg& src );
+			void xorps( const CXMMReg& dst, const CMem& src );
+
+			__QCS_DECLARE_NONCOPYABLE( CSSE );
 
 		};
 

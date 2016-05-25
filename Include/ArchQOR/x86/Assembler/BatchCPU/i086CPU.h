@@ -54,1760 +54,239 @@ namespace nsx86
 	{
 	public:
 
-		//------------------------------------------------------------------------------
-		inline Ci086CPU( CCodeGeneratorBase* codeGenerator ) __QCMP_THROW : Cx86CPUCore( codeGenerator )
-		{
-		}
-
-		//------------------------------------------------------------------------------
-		inline virtual ~Ci086CPU() __QCMP_THROW
-		{
-		}
-
-		//ADC
-
-		//------------------------------------------------------------------------------
-		//Add with Carry.
-		inline void adc( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_ADC, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Add with Carry.
-		inline void adc( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_ADC, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Add with Carry.
-		inline void adc( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_ADC, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Add with Carry.
-		inline void adc( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_ADC, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Add with Carry.
-		inline void adc( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_ADC, &dst, &src );
-		}
-
-		//ADD
-
-		//------------------------------------------------------------------------------
-		//Add.
-		inline void add( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_ADD, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Add.
-		inline void add( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_ADD, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Add.
-		inline void add( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_ADD, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Add.
-		inline void add( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_ADD, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Add.
-		inline void add( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_ADD, &dst, &src );
-		}
-
-		//AND
-
-		//------------------------------------------------------------------------------
-		//Logical And.
-		inline void and_( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_AND, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Logical And.
-		inline void and_( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_AND, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Logical And.
-		inline void and_( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_AND, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Logical And.
-		inline void and_( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_AND, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Logical And.
-		inline void and_( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_AND, &dst, &src );
-		}
-
-		//CALL
-
-		//------------------------------------------------------------------------------
-		//Call Procedure.
-		inline void call( const CGPReg& dst )
-		{
-			//assert(dst.isRegType(REG_TYPE_GPN));
-			_emitInstruction( INST_CALL, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Call Procedure.
-		inline void call( const CMem& dst )
-		{
-			_emitInstruction( INST_CALL, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Call Procedure.
-		inline void call( const CImm& dst )
-		{
-			_emitInstruction( INST_CALL, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Call Procedure.
-		inline void call( void* dst )
-		{
-			CImm imm( (Cmp_int_ptr)dst );
-			_emitInstruction( INST_CALL, &imm );
-		}
-
-		//------------------------------------------------------------------------------
-		//Call Procedure.
-		inline void call( const CLabel& label )
-		{
-			_emitInstruction( INST_CALL, &label );
-		}
-
-		//CBW
-
-		//------------------------------------------------------------------------------
-		//Convert Byte to Word (Sign Extend).
-		// AX <- Sign Extend AL
-		inline void cbw()
-		{
-			_emitInstruction( INST_CBW );
-		}
-
-		//CLC
-
-		//------------------------------------------------------------------------------
-		//Clear Carry flag
-		// This instruction clears the CF flag in the EFLAGS register.
-		inline void clc()
-		{
-			_emitInstruction( INST_CLC );
-		}
-
-		//CLD
-
-		//------------------------------------------------------------------------------
-		//Clear Direction flag
-		// This instruction clears the DF flag in the EFLAGS register.
-		inline void cld()
-		{
-			_emitInstruction( INST_CLD );
-		}
-
-		//CMC
-
-		//------------------------------------------------------------------------------
-		//Complement Carry Flag.
-		// This instruction complements the CF flag in the EFLAGS register.
-		// (CF = NOT CF)
-		inline void cmc()
-		{
-			_emitInstruction( INST_CMC );
-		}
-
-		//CMP
-
-		//------------------------------------------------------------------------------
-		//Compare Two Operands.
-		inline void cmp( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_CMP, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Compare Two Operands.
-		inline void cmp( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_CMP, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Compare Two Operands.
-		inline void cmp( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_CMP, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Compare Two Operands.
-		inline void cmp( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_CMP, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Compare Two Operands.
-		inline void cmp( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_CMP, &dst, &src );
-		}
-
-		//DAA
+		Ci086CPU( CCodeGeneratorBase* codeGenerator ) __QCMP_THROW;
+		virtual ~Ci086CPU() __QCMP_THROW;
+		void adc( const CGPReg& dst, const CGPReg& src );
+		void adc( const CGPReg& dst, const CMem& src );
+		void adc( const CGPReg& dst, const CImm& src );
+		void adc( const CMem& dst, const CGPReg& src );
+		void adc( const CMem& dst, const CImm& src );
+		void add( const CGPReg& dst, const CGPReg& src );
+		void add( const CGPReg& dst, const CMem& src );
+		void add( const CGPReg& dst, const CImm& src );
+		void add( const CMem& dst, const CGPReg& src );
+		void add( const CMem& dst, const CImm& src );
+		void and_( const CGPReg& dst, const CGPReg& src );
+		void and_( const CGPReg& dst, const CMem& src );
+		void and_( const CGPReg& dst, const CImm& src );
+		void and_( const CMem& dst, const CGPReg& src );
+		void and_( const CMem& dst, const CImm& src );
+		void call( const CGPReg& dst );
+		void call( const CMem& dst );
+		void call( const CImm& dst );
+		void call( void* dst );
+		void call( const CLabel& label );
+		void cbw();
+		void clc();
+		void cld();
+		void cmc();
+		void cmp( const CGPReg& dst, const CGPReg& src );
+		void cmp( const CGPReg& dst, const CMem& src );
+		void cmp( const CGPReg& dst, const CImm& src );
+		void cmp( const CMem& dst, const CGPReg& src );
+		void cmp( const CMem& dst, const CImm& src );
 
 #if	( QOR_ARCH_WORDSIZE == 32 )
-		//------------------------------------------------------------------------------
-		//Decimal adjust AL after addition
-		//
-		// This instruction adjusts the sum of two packed BCD values to create
-		// a packed BCD result.
-		//
-		// Note This instruction is only available in 32-bit mode.
-		inline void daa()
-		{
-			_emitInstruction( INST_DAA );
-		}
+		void daa();
 #endif
 
-		//DAS
+#if	( QOR_ARCH_WORDSIZE == 32 )
+		void das();
+#endif
+
+		void dec( const CGPReg& dst );
+		void dec( const CMem& dst );
+		void div( const CGPReg& src );
+		void div( const CMem& src );
+		void idiv( const CGPReg& src );
+		void idiv( const CMem& src );
+		void imul( const CGPReg& src );
+		void imul( const CMem& src );
+		void imul( const CGPReg& dst, const CGPReg& src );
+		void imul( const CGPReg& dst, const CMem& src );
+		void imul( const CGPReg& dst, const CImm& src );
+		void imul( const CGPReg& dst, const CGPReg& src, const CImm& imm );
+		void imul( const CGPReg& dst, const CMem& src, const CImm& imm );
+		void inc( const CGPReg& dst );
+		void inc( const CMem& dst );
+		void int3();
+
+		void j( CONDITION cc, const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void ja( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jae( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jb( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jbe( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jc( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void je( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jg( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jge( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jl( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jle( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jna( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jnae( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jnb( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jnbe( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jnc( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jne( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jng( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jnge( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jnl( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jnle( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jno( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jnp( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jns( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jnz( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jo( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jp( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jpe( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jpo( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void js( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jz( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_j( CONDITION cc, const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_ja( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jae( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jb( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jbe( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jc( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_je( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jg( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jge( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jl( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jle( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jna( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jnae( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jnb( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jnbe( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jnc( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jne( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jng( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jnge( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jnl( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jnle( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jno( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jnp( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jns( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jnz( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jo( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jp( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jpe( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jpo( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_js( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void short_jz( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE );
+		void jmp( const CGPReg& dst );
+		void jmp( const CMem& dst );
+		void jmp( const CImm& dst );
+		void jmp( void* dst );
+		void jmp( const CLabel& label );
+		void short_jmp( const CLabel& label );
+		void lea( const CGPReg& dst, const CMem& src );
+		void mov( const CGPReg& dst, const CGPReg& src );
+		void mov( const CGPReg& dst, const CMem& src );
+		void mov( const CGPReg& dst, const CImm& src );
+		void mov( const CMem& dst, const CGPReg& src );
+		void mov( const CMem& dst, const CImm& src );
+		void mov( const CGPReg& dst, const CSegmentReg& src );
+		void mov( const CMem& dst, const CSegmentReg& src );
+		void mov( const CSegmentReg& dst, const CGPReg& src );
+		void mov( const CSegmentReg& dst, const CMem& src );
+		void mov_ptr( const CGPReg& dst, void* src );
+		void mov_ptr( void* dst, const CGPReg& src );
+		void movsx( const CGPReg& dst, const CGPReg& src );
+		void movsx( const CGPReg& dst, const CMem& src );
+		void mul( const CGPReg& src );
+		void mul( const CMem& src );
+		void neg( const CGPReg& dst );
+		void neg( const CMem& dst );
+		void nop();
+		void not_( const CGPReg& dst );
+		void not_( const CMem& dst );
+		void or_( const CGPReg& dst, const CGPReg& src );
+		void or_( const CGPReg& dst, const CMem& src );
+		void or_( const CGPReg& dst, const CImm& src );
+		void or_( const CMem& dst, const CGPReg& src );
+		void or_( const CMem& dst, const CImm& src );
+		void pop( const CGPReg& dst );
+		void pop( const CMem& dst );
+		void push( const CGPReg& src );
+		void push( const CMem& src );
+		void push( const CImm& src );
+		void rcl( const CGPReg& dst, const CGPReg& src );
+		void rcl( const CGPReg& dst, const CImm& src );
+		void rcl( const CMem& dst, const CGPReg& src );
+		void rcl( const CMem& dst, const CImm& src );
+		void rcr( const CGPReg& dst, const CGPReg& src );
+		void rcr( const CGPReg& dst, const CImm& src );
+		void rcr( const CMem& dst, const CGPReg& src );
+		void rcr( const CMem& dst, const CImm& src );
+		void rep_lodsb();
+		void rep_lodsd();
+		void rep_movsb();
+		void rep_movsd();
+		void rep_stosb();
+		void rep_stosd();
+		void repe_cmpsb();
+		void repe_cmpsd();
+		void repe_scasb();
+		void repe_scasd();
+		void repne_cmpsb();
+		void repne_cmpsd();
+		void repne_scasb();
+		void repne_scasd();
+		void ret();
+		void ret( const CImm& imm16 );
+		void rol( const CGPReg& dst, const CGPReg& src );
+		void rol( const CGPReg& dst, const CImm& src );
+		void rol( const CMem& dst, const CGPReg& src );
+		void rol( const CMem& dst, const CImm& src );
+		void ror( const CGPReg& dst, const CGPReg& src );
+		void ror( const CGPReg& dst, const CImm& src );
+		void ror( const CMem& dst, const CGPReg& src );
+		void ror( const CMem& dst, const CImm& src );
 
 #if	( QOR_ARCH_WORDSIZE == 32 )
-		//------------------------------------------------------------------------------
-		//Decimal adjust AL after subtraction
-		//
-		// This instruction adjusts the result of the subtraction of two packed
-		// BCD values to create a packed BCD result.
-		//
-		// Note This instruction is only available in 32-bit mode.
-		inline void das()
-		{
-			_emitInstruction( INST_DAS );
-		}
+		void sahf();
 #endif // ( QOR_ARCH_WORDSIZE == 32 )
 
-		//DEC
-
-		//------------------------------------------------------------------------------
-		//Decrement by 1.
-		// Note This instruction can be slower than sub( dst, 1 )
-		inline void dec( const CGPReg& dst )
-		{
-			_emitInstruction( INST_DEC, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Decrement by 1.
-		// Note This instruction can be slower than sub(dst, 1)
-		inline void dec( const CMem& dst )
-		{
-			_emitInstruction( INST_DEC, &dst );
-		}
-
-		//DIV
-
-		//------------------------------------------------------------------------------
-		//Unsigned divide.
-		// This instruction divides (unsigned) the value in the AL, AX, or EAX
-		// register by the source operand and stores the result in the AX,
-		// DX:AX, or EDX:EAX registers.
-		inline void div( const CGPReg& src )
-		{
-			_emitInstruction( INST_DIV, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Unsigned divide.
-		inline void div( const CMem& src )
-		{
-			_emitInstruction( INST_DIV, &src );
-		}
-
-		//IDIV
-
-		//------------------------------------------------------------------------------
-		//Signed divide.
-		// This instruction divides (signed) the value in the AL, AX, or EAX
-		// register by the source operand and stores the result in the AX,
-		// DX:AX, or EDX:EAX registers.
-		inline void idiv( const CGPReg& src )
-		{
-			_emitInstruction( INST_IDIV, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Signed divide.
-		inline void idiv( const CMem& src )
-		{
-			_emitInstruction( INST_IDIV, &src );
-		}
-
-		//IMUL
-
-
-		//------------------------------------------------------------------------------
-		//Signed multiply.
-		// Source operand (in a general-purpose register or memory location)
-		// is multiplied by the value in the AL, AX, or EAX register (depending
-		// on the operand size) and the product is stored in the AX, DX:AX, or
-		// EDX:EAX registers, respectively.
-		inline void imul( const CGPReg& src )
-		{
-			_emitInstruction( INST_IMUL, &src );
-		}
-	
-		//------------------------------------------------------------------------------
-		inline void imul( const CMem& src )
-		{
-			_emitInstruction( INST_IMUL, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Signed multiply.
-		// Destination operand (the first operand) is multiplied by the source
-		// operand (second operand). The destination operand is a general-purpose
-		// register and the source operand is an immediate value, a general-purpose
-		// register, or a memory location. The product is then stored in the
-		// destination operand location.
-		inline void imul( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_IMUL, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Signed multiply.
-		inline void imul( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_IMUL, &dst, &src );
-		}
-	
-		//------------------------------------------------------------------------------
-		//Signed multiply.
-		inline void imul( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_IMUL, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Signed multiply.
-		// source operand ( which can be a general-purpose register or a memory
-		// location ) is multiplied by the second source operand (an immediate
-		// value). The product is then stored in the destination operand
-		// (a general-purpose register).
-		inline void imul( const CGPReg& dst, const CGPReg& src, const CImm& imm )
-		{
-			_emitInstruction( INST_IMUL, &dst, &src, &imm );
-		}
-
-		//------------------------------------------------------------------------------
-		inline void imul( const CGPReg& dst, const CMem& src, const CImm& imm )
-		{
-			_emitInstruction( INST_IMUL, &dst, &src, &imm );
-		}
-
-		//INC
-
-		//------------------------------------------------------------------------------
-		//Increment by 1.
-		// Note This instruction can be slower than add( dst, 1 )
-		inline void inc( const CGPReg& dst )
-		{
-			_emitInstruction( INST_INC, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Increment by 1.
-		// Note This instruction can be slower than add( dst, 1 )
-		inline void inc( const CMem& dst )
-		{
-			_emitInstruction( INST_INC, &dst );
-		}
-
-		//INT
-
-		//------------------------------------------------------------------------------
-		//Interrupt 3 - trap to debugger.
-		inline void int3()
-		{
-			_emitInstruction( INST_INT3 );
-		}
-
-		//Jcc
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition cc is met.
-		//
-		// This instruction checks the state of one or more of the status flags in
-		// the EFLAGS register (CF, OF, PF, SF, and ZF) and, if the flags are in the
-		// specified state (condition), performs a jump to the target instruction
-		// specified by the destination operand. A condition code (cc) is associated
-		// with each instruction to indicate the condition being tested for. If the
-		// condition is not satisfied, the jump is not performed and execution
-		// continues with the instruction following the Jcc instruction.
-		inline void j( CONDITION cc, const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE )
-		{
-			_emitJcc( ConditionToInstruction::toJCC( cc ), &label, hint );
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label if condition is met.
-		inline void ja( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JA, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jae( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JAE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jb( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JB, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jbe( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JBE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jc( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JC, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void je( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jg( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JG, &label, hint );
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jge( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JGE , &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jl( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JL, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jle( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JLE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jna( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNA, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jnae( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNAE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jnb( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNB , &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jnbe( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNBE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jnc( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNC, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jne( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jng( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNG, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jnge( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNGE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jnl( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNL, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jnle( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNLE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jno( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNO, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jnp( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNP, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jns( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNS, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jnz( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JNZ, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jo( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JO, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jp( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JP, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jpe( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JPE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jpo( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JPO, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void js( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JS, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump to label label if condition is met.
-		inline void jz( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitJcc( INST_JZ, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label label if condition cc is met.
-		inline void short_j( CONDITION cc, const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE )
-		{
-			m_uiEmitOptions |= EMIT_OPTION_SHORT_JUMP;
-			j( cc, label, hint );
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label label if condition is met.
-		inline void short_ja( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JA, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jae( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JAE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label label if condition is met.
-		inline void short_jb( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JB, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jbe( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JBE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jc( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JC, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_je( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jg( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JG, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jge( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JGE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jl( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JL, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jle( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JLE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jna( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNA, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jnae( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNAE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jnb( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNB, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jnbe( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNBE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jnc( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNC, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jne( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jng( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNG, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jnge( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNGE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jnl( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNL, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jnle( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNLE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jno( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNO, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jnp( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNP, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jns( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNS, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jnz( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JNZ, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jo( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JO, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jp( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JP, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jpe( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JPE, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jpo( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JPO, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_js( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JS, &label, hint ); 
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump to label if condition is met.
-		inline void short_jz( const CLabel& label, Cmp_unsigned__int32 hint = HINT_NONE ) 
-		{ 
-			_emitShortJcc( INST_JZ, &label, hint ); 
-		}
-
-		//JMP
-
-		//------------------------------------------------------------------------------
-		//Jump.
-		inline void jmp( const CGPReg& dst )
-		{
-			_emitInstruction( INST_JMP, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump.
-		inline void jmp( const CMem& dst )
-		{
-			_emitInstruction( INST_JMP, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump.
-		inline void jmp( const CImm& dst )
-		{
-			_emitInstruction( INST_JMP, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump.
-		inline void jmp( void* dst )
-		{
-			CImm imm( (Cmp_int_ptr)dst );
-			_emitInstruction( INST_JMP, &imm );
-		}
-
-		//------------------------------------------------------------------------------
-		//Jump.
-		// This instruction transfers program control to a different point
-		// in the instruction stream without recording return information.
-		// The destination (target) operand specifies the label of the
-		// instruction being jumped to.
-		inline void jmp( const CLabel& label )
-		{
-			_emitInstruction( INST_JMP, &label );
-		}
-
-		//------------------------------------------------------------------------------
-		//Short jump.
-		inline void short_jmp( const CLabel& label )
-		{
-			m_uiEmitOptions |= EMIT_OPTION_SHORT_JUMP;
-			_emitInstruction( INST_JMP, &label );
-		}
-
-		//LEA
-
-		//------------------------------------------------------------------------------
-		//Load Effective Address
-		//
-		// This instruction computes the effective address of the second
-		// operand (the source operand) and stores it in the first operand
-		// (destination operand). The source operand is a memory address
-		// (offset part) specified with one of the processors addressing modes.
-		// The destination operand is a general-purpose register.
-		inline void lea( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_LEA, &dst, &src );
-		}
-
-		//MOV
-
-		//------------------------------------------------------------------------------
-		//Move.
-		// This instruction copies the second operand (source operand) to the first
-		// operand (destination operand). The source operand can be an immediate
-		// value, general-purpose register, segment register, or memory location.
-		// The destination register can be a general-purpose register, segment
-		// register, or memory location. Both operands must be the same size, which
-		// can be a byte, a word, or a DWORD.
-		//
-		// Note To move MMX or SSE registers to/from GP registers or memory, use
-		// corresponding functions: movd(), movq(), etc. Passing MMX or SSE
-		// registers to mov() is illegal.
-		inline void mov( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_MOV, &dst, &src );
-		}
-	
-		//------------------------------------------------------------------------------
-		//Move.
-		inline void mov( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_MOV, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move.
-		inline void mov( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_MOV, &dst, &src );
-		}
-	
-		//------------------------------------------------------------------------------
-		//Move.
-		inline void mov( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_MOV, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move.
-		inline void mov( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_MOV, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move from segment register.
-		inline void mov( const CGPReg& dst, const CSegmentReg& src )
-		{
-			_emitInstruction( INST_MOV, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move from segment register.
-		inline void mov( const CMem& dst, const CSegmentReg& src )
-		{
-			_emitInstruction( INST_MOV, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move to segment register.
-		inline void mov( const CSegmentReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_MOV, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move to segment register.
-		inline void mov( const CSegmentReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_MOV, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move byte, word, dword or qword from absolute address src to AL, AX, EAX or RAX register.
-		inline void mov_ptr( const CGPReg& dst, void* src )
-		{
-			//assert(dst.getRegIndex() == 0);
-			CImm imm( (Cmp_int_ptr)src );
-			_emitInstruction( INST_MOV_PTR, &dst, &imm );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move byte, word, dword or qword from AL, AX, EAX or RAX register to absolute address dst.
-		inline void mov_ptr( void* dst, const CGPReg& src )
-		{
-			//assert(src.getRegIndex() == 0);
-			CImm imm( (Cmp_int_ptr)dst );
-			_emitInstruction( INST_MOV_PTR, &imm, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move with Sign-Extension.
-		// This instruction copies the contents of the source operand (register
-		// or memory location) to the destination operand (register) and sign
-		// extends the value to 16, 32 or 64-bits.
-		void movsx( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_MOVSX, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move with Sign-Extension.
-		void movsx( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_MOVSX, &dst, &src );
-		}
-
-		//MUL
-
-		//------------------------------------------------------------------------------
-		//Unsigned multiply.
-		// Source operand (in a general-purpose register or memory location)
-		// is multiplied by the value in the AL, AX, or EAX register (depending
-		// on the operand size) and the product is stored in the AX, DX:AX, or
-		// EDX:EAX registers, respectively.
-		inline void mul( const CGPReg& src )
-		{
-			_emitInstruction( INST_MUL, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Unsigned multiply.
-		inline void mul( const CMem& src )
-		{
-			_emitInstruction( INST_MUL, &src );
-		}
-
-		//NEG
-
-		//------------------------------------------------------------------------------
-		//Two's Complement Negation.
-		inline void neg( const CGPReg& dst )
-		{
-			_emitInstruction( INST_NEG, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//Two's Complement Negation.
-		inline void neg( const CMem& dst )
-		{
-			_emitInstruction( INST_NEG, &dst );
-		}
-
-		//NOP
-
-		//------------------------------------------------------------------------------
-		//No Operation.
-		// This instruction performs no operation. This instruction is a one-byte
-		// instruction that takes up space in the instruction stream but does not
-		// affect the machine context, except the EIP register. The NOP instruction
-		// is an alias mnemonic for the XCHG (E)AX, (E)AX instruction.
-		inline void nop()
-		{
-			_emitInstruction( INST_NOP );
-		}
-
-		//NOT
-
-		//------------------------------------------------------------------------------
-		//One's Complement Negation.
-		inline void not_( const CGPReg& dst )
-		{
-			_emitInstruction( INST_NOT, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		//One's Complement Negation.
-		inline void not_( const CMem& dst )
-		{
-			_emitInstruction( INST_NOT, &dst );
-		}
-
-		//OR
-
-		//------------------------------------------------------------------------------
-		//Logical Inclusive OR.
-		inline void or_( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_OR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Logical Inclusive OR.
-		inline void or_( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_OR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Logical Inclusive OR.
-		inline void or_( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_OR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Logical Inclusive OR.
-		inline void or_( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_OR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Logical Inclusive OR.
-		inline void or_( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_OR, &dst, &src );
-		}
-
-		//POP
-
-		//------------------------------------------------------------------------------
-		//Pop a Value from the Stack.
-		//
-		// This instruction loads the value from the top of the stack to the location
-		// specified with the destination operand and then increments the stack pointer.
-		// The destination operand can be a general purpose register, memory location,
-		// or segment register.
-		inline void pop( const CGPReg& dst )
-		{
-			//assert(dst.isRegType(REG_TYPE_GPW) || dst.isRegType(REG_TYPE_GPN));
-			_emitInstruction( INST_POP, &dst );
-		}
-
-		//------------------------------------------------------------------------------
-		inline void pop( const CMem& dst )
-		{
-			//assert(dst.getSize() == 2 || dst.getSize() == sizeof(Cmp_int_ptr));
-			_emitInstruction( INST_POP, &dst );
-		}
-
-		//PUSH
-
-		//------------------------------------------------------------------------------
-		//Push WORD/DWORD/QWORD Onto the Stack.
-		//
-		// Note 32-bit architecture pushed DWORD while 64-bit
-		// pushes QWORD. 64-bit mode not provides instruction to
-		// push 32-bit register/memory.
-		inline void push( const CGPReg& src )
-		{
-			//assert(src.isRegType(REG_TYPE_GPW) || src.isRegType(REG_TYPE_GPN));
-			_emitInstruction( INST_PUSH, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Push WORD/DWORD/QWORD Onto the Stack.
-		inline void push( const CMem& src )
-		{
-			//assert(src.getSize() == 2 || src.getSize() == sizeof(Cmp_int_ptr));
-			_emitInstruction( INST_PUSH, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Push WORD/DWORD/QWORD Onto the Stack.
-		inline void push( const CImm& src )
-		{
-			_emitInstruction( INST_PUSH, &src );
-		}
-
-		//RCL
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Left.
-		// Note src register can be only cl.
-		inline void rcl( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_RCL, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Left.
-		inline void rcl( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_RCL, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Left.
-		// Note src register can be only cl.
-		inline void rcl( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_RCL, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Left.
-		inline void rcl( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_RCL, &dst, &src );
-		}
-
-		//RCR
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Right.
-		// Note src register can be only cl.
-		inline void rcr( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_RCR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Right.
-		inline void rcr( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_RCR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Right.
-		// Note src register can be only cl.
-		inline void rcr( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_RCR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Right.
-		inline void rcr( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_RCR, &dst, &src );
-		}
-
-		//REPxx
-
-		//------------------------------------------------------------------------------
-		//Load ECX/RCX BYTEs from DS:[ESI/RSI] to AL.
-		inline void rep_lodsb()
-		{
-			_emitInstruction( INST_REP_LODSB );
-		}
-
-		//------------------------------------------------------------------------------
-		//Load ECX/RCX DWORDs from DS:[ESI/RSI] to EAX.
-		inline void rep_lodsd()
-		{
-			_emitInstruction( INST_REP_LODSD );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move ECX/RCX BYTEs from DS:[ESI/RSI] to ES:[EDI/RDI].
-		inline void rep_movsb()
-		{
-			_emitInstruction( INST_REP_MOVSB );
-		}
-
-		//------------------------------------------------------------------------------
-		//Move ECX/RCX DWORDs from DS:[ESI/RSI] to ES:[EDI/RDI].
-		inline void rep_movsd()
-		{
-			_emitInstruction( INST_REP_MOVSD );
-		}
-
-		//------------------------------------------------------------------------------
-		//Fill ECX/RCX BYTEs at ES:[EDI/RDI] with AL.
-		inline void rep_stosb()
-		{
-			_emitInstruction( INST_REP_STOSB );
-		}
-
-		//------------------------------------------------------------------------------
-		//Fill ECX/RCX DWORDs at ES:[EDI/RDI] with EAX.
-		inline void rep_stosd()
-		{
-			_emitInstruction( INST_REP_STOSD );
-		}
-
-		//------------------------------------------------------------------------------
-		//Repeated find nonmatching BYTEs in ES:[EDI/RDI] and DS:[ESI/RDI].
-		inline void repe_cmpsb()
-		{
-			_emitInstruction( INST_REPE_CMPSB );
-		}
-  
-		//------------------------------------------------------------------------------
-		//Repeated find nonmatching DWORDs in ES:[EDI/RDI] and DS:[ESI/RDI].
-		inline void repe_cmpsd()
-		{
-			_emitInstruction( INST_REPE_CMPSD );
-		}
-
-		//------------------------------------------------------------------------------
-		//Find non-AL BYTE starting at ES:[EDI/RDI].
-		inline void repe_scasb()
-		{
-			_emitInstruction( INST_REPE_SCASB );
-		}
-  
-		//------------------------------------------------------------------------------
-		//Find non-EAX DWORD starting at ES:[EDI/RDI].
-		inline void repe_scasd()
-		{
-			_emitInstruction( INST_REPE_SCASD );
-		}
-
-		//------------------------------------------------------------------------------
-		//Repeated find nonmatching BYTEs in ES:[EDI/RDI] and DS:[ESI/RDI].
-		inline void repne_cmpsb()
-		{
-			_emitInstruction( INST_REPNE_CMPSB );
-		}
-
-		//------------------------------------------------------------------------------
-		//Repeated find nonmatching DWORDs in ES:[EDI/RDI] and DS:[ESI/RDI].
-		inline void repne_cmpsd()
-		{
-			_emitInstruction( INST_REPNE_CMPSD );
-		}
-
-		//------------------------------------------------------------------------------
-		//Find AL, starting at ES:[EDI/RDI].
-		inline void repne_scasb()
-		{
-			_emitInstruction( INST_REPNE_SCASB );
-		}
-
-		//------------------------------------------------------------------------------
-		//Find EAX, starting at ES:[EDI/RDI].
-		inline void repne_scasd()
-		{
-			_emitInstruction( INST_REPNE_SCASD );
-		}
-
-		//RET
-
-		//------------------------------------------------------------------------------
-		//Return from Procedure.
-		inline void ret()
-		{
-			_emitInstruction( INST_RET );
-		}
-
-		//------------------------------------------------------------------------------
-		//Return from Procedure.
-		inline void ret( const CImm& imm16 )
-		{
-			_emitInstruction( INST_RET, &imm16 );
-		}
-
-		//ROL
-
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Left.
-		// Note src register can be only cl.
-		inline void rol( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_ROL, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Left.
-		inline void rol( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_ROL, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Left.
-		// Note src register can be only cl.
-		inline void rol( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_ROL, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Left.
-		inline void rol( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_ROL, &dst, &src );
-		}
-
-		//ROR
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Right.
-		// Note src register can be only cl.
-		inline void ror( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_ROR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Right.
-		inline void ror( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_ROR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Right.
-		// Note src register can be only cl.
-		inline void ror( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_ROR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Rotate Bits Right.
-		inline void ror( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_ROR, &dst, &src );
-		}
-
-		//SAHF
-
-#if	( QOR_ARCH_WORDSIZE == 32 )
-		//------------------------------------------------------------------------------
-		//Store AH into Flags.
-		inline void sahf()
-		{
-			_emitInstruction( INST_SAHF );
-		}
-#endif // ( QOR_ARCH_WORDSIZE == 32 )
-
-		//SBB
-
-		//------------------------------------------------------------------------------
-		//Integer subtraction with borrow.
-		inline void sbb( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_SBB, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Integer subtraction with borrow.
-		inline void sbb( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_SBB, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Integer subtraction with borrow.
-		inline void sbb( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_SBB, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Integer subtraction with borrow.
-		inline void sbb( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_SBB, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Integer subtraction with borrow.
-		inline void sbb( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_SBB, &dst, &src );
-		}
-
-		//SAL
-
-		//------------------------------------------------------------------------------
-		//Shift Bits Left.
-		// Note src register can be only cl.
-		inline void sal( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_SAL, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Shift Bits Left.
-		inline void sal( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_SAL, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Shift Bits Left.
-		// Note src register can be only cl.
-		inline void sal( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_SAL, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Shift Bits Left.
-		inline void sal( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_SAL, &dst, &src );
-		}
-
-		//SAR
-
-		//------------------------------------------------------------------------------
-		//Shift Bits Right.
-		// Note src register can be only cl.
-		inline void sar( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_SAR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Shift Bits Right.
-		inline void sar( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_SAR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Shift Bits Right.
-		// Note src register can be only cl.
-		inline void sar( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_SAR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Shift Bits Right.
-		inline void sar( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_SAR, &dst, &src );
-		}
-
-		//SHL
-
-		//------------------------------------------------------------------------------
-		//Shift Bits Left.
-		// Note src register can be only cl.
-		inline void shl( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_SHL, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Shift Bits Left.
-		inline void shl( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_SHL, &dst, &src );
-		}
-	
-		//------------------------------------------------------------------------------
-		//Shift Bits Left.
-		// Note src register can be only cl.
-		inline void shl( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_SHL, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Shift Bits Left.
-		inline void shl( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_SHL, &dst, &src );
-		}
-
-		//SHR
-
-		//------------------------------------------------------------------------------
-		//Shift Bits Right.
-		// Note src register can be only cl.
-		inline void shr( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_SHR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Shift Bits Right.
-		inline void shr( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_SHR, &dst, &src );
-		}
-	
-		//------------------------------------------------------------------------------
-		//Shift Bits Right.
-		// Note src register can be only cl.
-		inline void shr( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_SHR, &dst, &src );
-		}
-	
-		//------------------------------------------------------------------------------
-		//Shift Bits Right.
-		inline void shr( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_SHR, &dst, &src );
-		}
-
-		//STC
-
-		//------------------------------------------------------------------------------
-		//Set Carry Flag to 1.
-		inline void stc()
-		{
-			_emitInstruction( INST_STC );
-		}
-
-		//STD
-
-		//------------------------------------------------------------------------------
-		//Set Direction Flag to 1.
-		inline void std()
-		{
-			_emitInstruction( INST_STD );
-		}
-
-		//SUB
-
-		//------------------------------------------------------------------------------
-		//Subtract.
-		inline void sub( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_SUB, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Subtract.
-		inline void sub( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_SUB, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Subtract.
-		inline void sub( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_SUB, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Subtract.
-		inline void sub( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_SUB, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Subtract.
-		inline void sub( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_SUB, &dst, &src );
-		}
-
-		//TEST
-
-		//------------------------------------------------------------------------------
-		//Logical Compare.
-		inline void test( const CGPReg& op1, const CGPReg& op2 )
-		{
-			_emitInstruction( INST_TEST, &op1, &op2 );
-		}
-
-		//------------------------------------------------------------------------------
-		//Logical Compare.
-		inline void test( const CGPReg& op1, const CImm& op2 )
-		{
-			_emitInstruction( INST_TEST, &op1, &op2 );
-		}
-
-		//------------------------------------------------------------------------------
-		//Logical Compare.
-		inline void test( const CMem& op1, const CGPReg& op2 )
-		{
-			_emitInstruction( INST_TEST, &op1, &op2 );
-		}
-
-		//------------------------------------------------------------------------------
-		//Logical Compare.
-		inline void test( const CMem& op1, const CImm& op2 )
-		{
-			_emitInstruction( INST_TEST, &op1, &op2 );
-		}
-
-		//XCHG
-
-		//------------------------------------------------------------------------------
-		//Exchange Register/Memory with Register.
-		inline void xchg( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_XCHG, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Exchange Register/Memory with Register.
-		inline void xchg( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_XCHG, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Exchange Register/Memory with Register.
-		inline void xchg( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_XCHG, &src, &dst );
-		}
-
-		//XOR
-
-		//------------------------------------------------------------------------------
-		//Exchange Register/Memory with Register.
-		inline void xor_( const CGPReg& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_XOR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Exchange Register/Memory with Register.
-		inline void xor_( const CGPReg& dst, const CMem& src )
-		{
-			_emitInstruction( INST_XOR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Exchange Register/Memory with Register.
-		inline void xor_( const CGPReg& dst, const CImm& src )
-		{
-			_emitInstruction( INST_XOR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Exchange Register/Memory with Register.
-		inline void xor_( const CMem& dst, const CGPReg& src )
-		{
-			_emitInstruction( INST_XOR, &dst, &src );
-		}
-
-		//------------------------------------------------------------------------------
-		//Exchange Register/Memory with Register.
-		inline void xor_( const CMem& dst, const CImm& src )
-		{
-			_emitInstruction( INST_XOR, &dst, &src );
-		}
+		void sbb( const CGPReg& dst, const CGPReg& src );
+		void sbb( const CGPReg& dst, const CMem& src );
+		void sbb( const CGPReg& dst, const CImm& src );
+		void sbb( const CMem& dst, const CGPReg& src );
+		void sbb( const CMem& dst, const CImm& src );
+		void sal( const CGPReg& dst, const CGPReg& src );
+		void sal( const CGPReg& dst, const CImm& src );
+		void sal( const CMem& dst, const CGPReg& src );
+		void sal( const CMem& dst, const CImm& src );
+		void sar( const CGPReg& dst, const CGPReg& src );
+		void sar( const CGPReg& dst, const CImm& src );
+		void sar( const CMem& dst, const CGPReg& src );
+		void sar( const CMem& dst, const CImm& src );
+		void shl( const CGPReg& dst, const CGPReg& src );
+		void shl( const CGPReg& dst, const CImm& src );
+		void shl( const CMem& dst, const CGPReg& src );
+		void shl( const CMem& dst, const CImm& src );
+		void shr( const CGPReg& dst, const CGPReg& src );
+		void shr( const CGPReg& dst, const CImm& src );
+		void shr( const CMem& dst, const CGPReg& src );
+		void shr( const CMem& dst, const CImm& src );
+		void stc();
+		void std();
+		void sub( const CGPReg& dst, const CGPReg& src );
+		void sub( const CGPReg& dst, const CMem& src );
+		void sub( const CGPReg& dst, const CImm& src );
+		void sub( const CMem& dst, const CGPReg& src );
+		void sub( const CMem& dst, const CImm& src );
+		void test( const CGPReg& op1, const CGPReg& op2 );
+		void test( const CGPReg& op1, const CImm& op2 );
+		void test( const CMem& op1, const CGPReg& op2 );
+		void test( const CMem& op1, const CImm& op2 );
+		void xchg( const CGPReg& dst, const CGPReg& src );
+		void xchg( const CMem& dst, const CGPReg& src );
+		void xchg( const CGPReg& dst, const CMem& src );
+		void xor_( const CGPReg& dst, const CGPReg& src );
+		void xor_( const CGPReg& dst, const CMem& src );
+		void xor_( const CGPReg& dst, const CImm& src );
+		void xor_( const CMem& dst, const CGPReg& src );
+		void xor_( const CMem& dst, const CImm& src );
 
 	private:
 

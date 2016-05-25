@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C48815B3-1A74-4F29-967D-BA6B98DEECA6}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ArchQOR</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;__ARCHQOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../include</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <MinimalRebuild>false</MinimalRebuild>
+      <FloatingPointModel>Strict</FloatingPointModel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <DisableSpecificWarnings>4290;4201</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>WinCmpSupQORVC.lib;WinSharedBootstrap.lib;QORModule.lib;CompilerQOR.lib;CodeQOR.lib;CQOR.lib;stdQOR.lib;SystemQOR.lib;WinQL.lib;kernel32.lib</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <AdditionalLibraryDirectories>../QOR/Debug</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;ARCHQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;ARCHQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;ARCHQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\ArchQOR.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\AsmBuffer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\Assembler.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\BatchCPU\CPUBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\BatchCPU\FPUBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\BatchCPU\GPUBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\BatchCPU\ISetExtension.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\CodeGenerator.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\Logger.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\MemoryManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\MemoryManagerPrivate.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\MemoryMarker.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\VirtualMemory.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\VirtualMemoryManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Assembler\Zone.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\HLAssembler\EAlign.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\HLAssembler\EComment.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\HLAssembler\EData.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\HLAssembler\EDummy.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\HLAssembler\EFunctionEnd.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\HLAssembler\Emittable.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\HLAssembler\FunctionDefinition.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\HLAssembler\HighLevelAssemblerBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Common\Logic.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\Machine.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\Extensions\3DNow.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\Extensions\i387FPU.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\Extensions\MMX.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\Extensions\SSE.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\Extensions\SSE2.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\Extensions\SSE3.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\i086CPU.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\i186CPU.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\i286CPU.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\i386CPU.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\i486CPU.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\i586CPU.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\i686CPU.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\i786CPU.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\InstEmitter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\x86CPUCore.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\BatchCPU\x86ISetExtension.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Defs.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Imm.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Label.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Mem.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Operand.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Registers\BaseReg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Registers\GPReg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Registers\MMReg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Registers\SegmentReg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Registers\x87Reg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Registers\XMMReg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Variables\BaseVar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Variables\GPVar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Variables\MMVar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Variables\x87Var.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\Assembler\Operands\Variables\XMMVar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\CPUInfo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\Emittables\ECall.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\Emittables\EEpilog.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\Emittables\EFunction.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\Emittables\EInstruction.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\Emittables\EJmp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\Emittables\EProlog.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\Emittables\ERet.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\Emittables\ETarget.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\Emittables\EVariableHint.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\FunctionPrototype.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\HLAssembler.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\x86HLAContext.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\x86HLAIntrinsics.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\HLAssembler\x86HLAssembler.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\VendorPackage.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\x86Logic.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ArchQOR\x86\x86PCDefs.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\ArchitectureDetection.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Architectures.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\ArchitectureSelection.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\AsmBuffer.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\Assembler.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\BatchCPU\CPUBase.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\BatchCPU\FPUBase.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\BatchCPU\GPUBase.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\BatchCPU\ISetExtension.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\CodeGenerator.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\Logger.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\MemoryManager.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\MemoryManagerPrivate.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\MemoryMarker.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\VirtualMemory.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\VirtualMemoryManager.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Assembler\Zone.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Endian.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\HLAssembler\BaseVarData.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\HLAssembler\Defs.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\HLAssembler\Emittables\EAlign.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\HLAssembler\Emittables\EComment.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\HLAssembler\Emittables\EData.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\HLAssembler\Emittables\EDummy.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\HLAssembler\Emittables\EFunctionEnd.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\HLAssembler\Emittables\Emittable.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\HLAssembler\FunctionDefinition.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\HLAssembler\HighLevelAssembler.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\HLAssembler\HighLevelAssemblerBase.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\HLAssembler\HLAssemblerContext.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\HLAssembler\JITFunctor.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\LogicBase.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\Machine.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\VendorPackageBase.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\Common\WordSizeSelection.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\Extensions\3DNow.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\Extensions\i387FPU.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\Extensions\MMX.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\Extensions\SSE.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\Extensions\SSE2.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\Extensions\SSE3.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\Extensions\SSE4.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\Extensions\SSE5.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\i086CPU.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\i186CPU.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\i286CPU.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\i386CPU.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\i486CPU.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\i586CPU.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\i686CPU.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\i786CPU.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\InstEmitter.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\TrampolineWriter.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\x86CPUCore.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\BatchCPU\x86ISetExtension.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Defs.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Imm.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Label.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Mem.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Operand.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Registers\BaseReg.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Registers\GPReg.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Registers\MMReg.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Registers\SegmentReg.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Registers\X87Reg.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Registers\XMMReg.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Variables\BaseVar.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Variables\GPVar.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Variables\MMVar.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Variables\X87Var.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Assembler\Operands\Variables\XMMVar.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\CPUInfo.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\Extension.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\Emittables\ECall.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\Emittables\EEpilog.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\Emittables\EFunction.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\Emittables\EInstruction.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\Emittables\EJmp.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\Emittables\EProlog.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\Emittables\ERet.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\Emittables\ETarget.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\Emittables\EVariableHint.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\FunctionPrototype.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\HLAssembler.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\x86HLAContext.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\x86HLAIntrinsics.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\HLAssembler\x86HLAssembler.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\VendorPackage.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\x86.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\x86Definitions.h" />
+    <ClInclude Include="..\..\..\..\Include\ArchQOR\x86\x86Version.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

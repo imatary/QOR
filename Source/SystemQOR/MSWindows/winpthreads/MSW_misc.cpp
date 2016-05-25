@@ -51,7 +51,7 @@
 #if		(QOR_SYS_OS == QOR_SYS_MSW)
 
 #include "SystemQOR/MSWindows/MSW_pthread.h"
-#include "../SystemQOR/MSWindows/Winpthreads/details/misc.h"
+#include "../Source/SystemQOR/MSWindows/Winpthreads/details/misc.h"
 #include <sys/timeb.h>
 
 //--------------------------------------------------------------------------------

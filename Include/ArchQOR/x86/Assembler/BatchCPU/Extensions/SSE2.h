@@ -41,1765 +41,258 @@ namespace nsArch
 		{
 		public:
 
-			//------------------------------------------------------------------------------
-			CSSE2( Cx86CPUCore& refCPU ) : CSSE( refCPU )
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			virtual ~CSSE2()
-			{
-			}
-
-			//------------------------------------------------------------------------------
-			//DQWord Shift Right Logical (SSE2).
-			inline void psrldq( const CXMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSRLDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Add (SSE2).
-			inline void addpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_ADDPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Add (SSE2).
-			inline void addpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_ADDPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar DP-FP Add (SSE2).
-			inline void addsd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_ADDSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar DP-FP Add (SSE2).
-			inline void addsd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_ADDSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical And Not For DP-FP (SSE2).
-			inline void andnpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_ANDNPD, &dst, &src);
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical And Not For DP-FP (SSE2).
-			inline void andnpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_ANDNPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical And For DP-FP (SSE2).
-			inline void andpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_ANDPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical And For DP-FP (SSE2).
-			inline void andpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_ANDPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Flush Cache Line (SSE2).
-			inline void clflush( const CMem& mem )
-			{
-				m_PU._emitInstruction( INST_CLFLUSH, &mem );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Compare (SSE2).
-			inline void cmppd( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_CMPPD, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Compare (SSE2).
-			inline void cmppd( const CXMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_CMPPD, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Compare Scalar SP-FP Values (SSE2).
-			inline void cmpsd( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_CMPSD, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Compare Scalar SP-FP Values (SSE2).
-			inline void cmpsd( const CXMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_CMPSD, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar Ordered DP-FP Compare and Set EFLAGS (SSE2).
-			inline void comisd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_COMISD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar Ordered DP-FP Compare and Set EFLAGS (SSE2).
-			inline void comisd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_COMISD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed Dword Integers to Packed DP-FP Values (SSE2).
-			inline void cvtdq2pd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTDQ2PD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed Dword Integers to Packed DP-FP Values (SSE2).
-			inline void cvtdq2pd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTDQ2PD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed Dword Integers to Packed SP-FP Values (SSE2).
-			inline void cvtdq2ps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTDQ2PS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed Dword Integers to Packed SP-FP Values (SSE2).
-			inline void cvtdq2ps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTDQ2PS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed DP-FP Values to Packed Dword Integers (SSE2).
-			inline void cvtpd2dq( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTPD2DQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed DP-FP Values to Packed Dword Integers (SSE2).
-			inline void cvtpd2dq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTPD2DQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed DP-FP Values to Packed Dword Integers (SSE2).
-			inline void cvtpd2pi( const CMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTPD2PI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed DP-FP Values to Packed Dword Integers (SSE2).
-			inline void cvtpd2pi( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTPD2PI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed DP-FP Values to Packed SP-FP Values (SSE2).
-			inline void cvtpd2ps( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTPD2PS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed DP-FP Values to Packed SP-FP Values (SSE2).
-			inline void cvtpd2ps( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTPD2PS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed Dword Integers to Packed DP-FP Values (SSE2).
-			inline void cvtpi2pd( const CXMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTPI2PD, &dst, &src );
-			}
-	
-			//------------------------------------------------------------------------------
-			//Convert Packed Dword Integers to Packed DP-FP Values (SSE2).
-			inline void cvtpi2pd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTPI2PD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed SP-FP Values to Packed Dword Integers (SSE2).
-			inline void cvtps2dq( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTPS2DQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed SP-FP Values to Packed Dword Integers (SSE2).
-			inline void cvtps2dq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTPS2DQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed SP-FP Values to Packed DP-FP Values (SSE2).
-			inline void cvtps2pd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTPS2PD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Packed SP-FP Values to Packed DP-FP Values (SSE2).
-			inline void cvtps2pd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTPS2PD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Scalar DP-FP Value to Dword Integer (SSE2).
-			inline void cvtsd2si( const CGPReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTSD2SI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Scalar DP-FP Value to Dword Integer (SSE2).
-			inline void cvtsd2si( const CGPReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTSD2SI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Scalar DP-FP Value to Scalar SP-FP Value (SSE2).
-			inline void cvtsd2ss( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTSD2SS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Scalar DP-FP Value to Scalar SP-FP Value (SSE2).
-			inline void cvtsd2ss( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTSD2SS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Dword Integer to Scalar DP-FP Value (SSE2).
-			inline void cvtsi2sd( const CXMMReg& dst, const CGPReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTSI2SD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Dword Integer to Scalar DP-FP Value (SSE2).
-			inline void cvtsi2sd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTSI2SD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Scalar SP-FP Value to Scalar DP-FP Value (SSE2).
-			inline void cvtss2sd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTSS2SD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert Scalar SP-FP Value to Scalar DP-FP Value (SSE2).
-			inline void cvtss2sd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTSS2SD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert with Truncation Packed DP-FP Values to Packed Dword Integers (SSE2).
-			inline void cvttpd2pi( const CMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTTPD2PI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert with Truncation Packed DP-FP Values to Packed Dword Integers (SSE2).
-			inline void cvttpd2pi( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTTPD2PI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert with Truncation Packed DP-FP Values to Packed Dword Integers (SSE2).
-			inline void cvttpd2dq( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTTPD2DQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert with Truncation Packed DP-FP Values to Packed Dword Integers (SSE2).
-			inline void cvttpd2dq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTTPD2DQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert with Truncation Packed SP-FP Values to Packed Dword Integers (SSE2).
-			inline void cvttps2dq( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTTPS2DQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert with Truncation Packed SP-FP Values to Packed Dword Integers (SSE2).
-			inline void cvttps2dq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTTPS2DQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert with Truncation Scalar DP-FP Value to Signed Dword Integer (SSE2).
-			inline void cvttsd2si( const CGPReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_CVTTSD2SI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Convert with Truncation Scalar DP-FP Value to Signed Dword Integer (SSE2).
-			inline void cvttsd2si( const CGPReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_CVTTSD2SI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Divide (SSE2).
-			inline void divpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_DIVPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Divide (SSE2).
-			inline void divpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_DIVPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar DP-FP Divide (SSE2).
-			inline void divsd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_DIVSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar DP-FP Divide (SSE2).
-			inline void divsd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_DIVSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Load Fence (SSE2).
-			inline void lfence()
-			{
-				m_PU._emitInstruction( INST_LFENCE );
-			}
-
-			//------------------------------------------------------------------------------
-			//Store Selected Bytes of Double Quadword (SSE2).
-			// Target is DS:EDI.
-			inline void maskmovdqu( const CXMMReg& src, const CXMMReg& mask )
-			{
-				m_PU._emitInstruction( INST_MASKMOVDQU, &src, &mask );
-			}
-
-			//------------------------------------------------------------------------------
-			//Return Maximum Packed Double-Precision FP Values (SSE2).
-			inline void maxpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MAXPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Return Maximum Packed Double-Precision FP Values (SSE2).
-			inline void maxpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MAXPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Return Maximum Scalar Double-Precision FP Value (SSE2).
-			inline void maxsd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MAXSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Return Maximum Scalar Double-Precision FP Value (SSE2).
-			inline void maxsd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MAXSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Memory Fence (SSE2).
-			inline void mfence()
-			{
-				m_PU._emitInstruction( INST_MFENCE );
-			}
-
-			//------------------------------------------------------------------------------
-			//Return Minimum Packed DP-FP Values (SSE2).
-			inline void minpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MINPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Return Minimum Packed DP-FP Values (SSE2).
-			inline void minpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MINPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Return Minimum Scalar DP-FP Value (SSE2).
-			inline void minsd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MINSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Return Minimum Scalar DP-FP Value (SSE2).
-			inline void minsd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MINSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Aligned DQWord (SSE2).
-			inline void movdqa( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVDQA, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Aligned DQWord (SSE2).
-			inline void movdqa( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVDQA, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Aligned DQWord (SSE2).
-			inline void movdqa( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVDQA, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Unaligned Double Quadword (SSE2).
-			inline void movdqu( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVDQU, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Unaligned Double Quadword (SSE2).
-			inline void movdqu( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVDQU, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Unaligned Double Quadword (SSE2).
-			inline void movdqu( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVDQU, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Extract Packed SP-FP Sign Mask (SSE2).
-			inline void movmskps( const CGPReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVMSKPS, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Extract Packed DP-FP Sign Mask (SSE2).
-			inline void movmskpd( const CGPReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVMSKPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Scalar Double-Precision FP Value (SSE2).
-			inline void movsd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Scalar Double-Precision FP Value (SSE2).
-			inline void movsd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Scalar Double-Precision FP Value (SSE2).
-			inline void movsd( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Aligned Packed Double-Precision FP Values (SSE2).
-			inline void movapd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVAPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Aligned Packed Double-Precision FP Values (SSE2).
-			inline void movapd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVAPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Aligned Packed Double-Precision FP Values (SSE2).
-			inline void movapd( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVAPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Quadword from XMM to MMX Technology Register (SSE2).
-			inline void movdq2q( const CMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVDQ2Q, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Quadword from MMX Technology to XMM Register (SSE2).
-			inline void movq2dq( const CXMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVQ2DQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move High Packed Double-Precision FP Value (SSE2).
-			inline void movhpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVHPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move High Packed Double-Precision FP Value (SSE2).
-			inline void movhpd( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVHPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Low Packed Double-Precision FP Value (SSE2).
-			inline void movlpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVLPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Low Packed Double-Precision FP Value (SSE2).
-			inline void movlpd( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVLPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Store Double Quadword Using Non-Temporal Hint (SSE2).
-			inline void movntdq( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVNTDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Store Store DWORD Using Non-Temporal Hint (SSE2).
-			inline void movnti( const CMem& dst, const CGPReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVNTI, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Store Packed Double-Precision FP Values Using Non-Temporal Hint (SSE2).
-			inline void movntpd( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVNTPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Unaligned Packed Double-Precision FP Values (SSE2).
-			inline void movupd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVUPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Unaligned Packed Double-Precision FP Values (SSE2).
-			inline void movupd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MOVUPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Unaligned Packed Double-Precision FP Values (SSE2).
-			inline void movupd( const CMem& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MOVUPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Multiply (SSE2).
-			inline void mulpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MULPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Multiply (SSE2).
-			inline void mulpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MULPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar DP-FP Multiply (SSE2).
-			inline void mulsd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_MULSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar DP-FP Multiply (SSE2).
-			inline void mulsd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_MULSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical OR for DP-FP Data (SSE2).
-			inline void orpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_ORPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical OR for DP-FP Data (SSE2).
-			inline void orpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_ORPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Pack with Signed Saturation (SSE2).
-			inline void packsswb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PACKSSWB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Pack with Signed Saturation (SSE2).
-			inline void packsswb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PACKSSWB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Pack with Signed Saturation (SSE2).
-			inline void packssdw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PACKSSDW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Pack with Signed Saturation (SSE2).
-			inline void packssdw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PACKSSDW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Pack with Unsigned Saturation (SSE2).
-			inline void packuswb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PACKUSWB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Pack with Unsigned Saturation (SSE2).
-			inline void packuswb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PACKUSWB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed BYTE Add (SSE2).
-			inline void paddb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed BYTE Add (SSE2).
-			inline void paddb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed WORD Add (SSE2).
-			inline void paddw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed WORD Add (SSE2).
-			inline void paddw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DWORD Add (SSE2).
-			inline void paddd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DWORD Add (SSE2).
-			inline void paddd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed QWORD Add (SSE2).
-			inline void paddq( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed QWORD Add (SSE2).
-			inline void paddq( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed QWORD Add (SSE2).
-			inline void paddq( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed QWORD Add (SSE2).
-			inline void paddq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add with Saturation (SSE2).
-			inline void paddsb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add with Saturation (SSE2).
-			inline void paddsb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add with Saturation (SSE2).
-			inline void paddsw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add with Saturation (SSE2).
-			inline void paddsw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add Unsigned with Saturation (SSE2).
-			inline void paddusb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDUSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add Unsigned with Saturation (SSE2).
-			inline void paddusb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDUSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add Unsigned with Saturation (SSE2).
-			inline void paddusw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PADDUSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Add Unsigned with Saturation (SSE2).
-			inline void paddusw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PADDUSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Logical AND (SSE2).
-			inline void pand( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PAND, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Logical AND (SSE2).
-			inline void pand( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PAND, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Logical AND Not (SSE2).
-			inline void pandn( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PANDN, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Logical AND Not (SSE2).
-			inline void pandn( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PANDN, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Spin Loop Hint (SSE2).
-			inline void pause()
-			{
-				m_PU._emitInstruction( INST_PAUSE );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Average (SSE2).
-			inline void pavgb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PAVGB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Average (SSE2).
-			inline void pavgb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PAVGB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Average (SSE2).
-			inline void pavgw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PAVGW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Average (SSE2).
-			inline void pavgw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PAVGW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Equal (BYTES) (SSE2).
-			inline void pcmpeqb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PCMPEQB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Equal (BYTES) (SSE2).
-			inline void pcmpeqb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PCMPEQB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Equal (WORDS) (SSE2).
-			inline void pcmpeqw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PCMPEQW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Equal (WORDS) (SSE2).
-			inline void pcmpeqw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PCMPEQW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Equal (DWORDS) (SSE2).
-			inline void pcmpeqd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PCMPEQD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Equal (DWORDS) (SSE2).
-			inline void pcmpeqd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PCMPEQD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Greater Than (BYTES) (SSE2).
-			inline void pcmpgtb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PCMPGTB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Greater Than (BYTES) (SSE2).
-			inline void pcmpgtb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PCMPGTB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Greater Than (WORDS) (SSE2).
-			inline void pcmpgtw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PCMPGTW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Greater Than (WORDS) (SSE2).
-			inline void pcmpgtw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PCMPGTW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Greater Than (DWORDS) (SSE2).
-			inline void pcmpgtd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PCMPGTD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Compare for Greater Than (DWORDS) (SSE2).
-			inline void pcmpgtd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PCMPGTD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Signed Integer Word Maximum (SSE2).
-			inline void pmaxsw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMAXSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Signed Integer Word Maximum (SSE2).
-			inline void pmaxsw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMAXSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Unsigned Integer Byte Maximum (SSE2).
-			inline void pmaxub( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMAXUB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Unsigned Integer Byte Maximum (SSE2).
-			inline void pmaxub( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMAXUB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Signed Integer Word Minimum (SSE2).
-			inline void pminsw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMINSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Signed Integer Word Minimum (SSE2).
-			inline void pminsw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMINSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Unsigned Integer Byte Minimum (SSE2).
-			inline void pminub( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMINUB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Unsigned Integer Byte Minimum (SSE2).
-			inline void pminub( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMINUB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Move Byte Mask (SSE2).
-			inline void pmovmskb( const CGPReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMOVMSKB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply High (SSE2).
-			inline void pmulhw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMULHW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply High (SSE2).
-			inline void pmulhw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMULHW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply High Unsigned (SSE2).
-			inline void pmulhuw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMULHUW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply High Unsigned (SSE2).
-			inline void pmulhuw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMULHUW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply Low (SSE2).
-			inline void pmullw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMULLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply Low (SSE2).
-			inline void pmullw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMULLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply to QWORD (SSE2).
-			inline void pmuludq( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMULUDQ, &dst, &src );
-			}
-	
-			//------------------------------------------------------------------------------
-			//Packed Multiply to QWORD (SSE2).
-			inline void pmuludq( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMULUDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply to QWORD (SSE2).
-			inline void pmuludq( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMULUDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply to QWORD (SSE2).
-			inline void pmuludq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMULUDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bitwise Logical OR (SSE2).
-			inline void por( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_POR, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bitwise Logical OR (SSE2).
-			inline void por( const CXMMReg& dst, const CMem& src)
-			{
-				m_PU._emitInstruction( INST_POR, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (SSE2).
-			inline void pslld( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSLLD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (SSE2).
-			inline void pslld( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSLLD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (SSE2).
-			inline void pslld( const CXMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSLLD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (SSE2).
-			inline void psllq( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSLLQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (SSE2).
-			inline void psllq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSLLQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (SSE2).
-			inline void psllq( const CXMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSLLQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (SSE2).
-			inline void psllw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSLLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (SSE2).
-			inline void psllw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSLLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (SSE2).
-			inline void psllw( const CXMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSLLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Left Logical (SSE2).
-			inline void pslldq( const CXMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSLLDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Arithmetic (SSE2).
-			inline void psrad( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSRAD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Arithmetic (SSE2).
-			inline void psrad( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSRAD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Arithmetic (SSE2).
-			inline void psrad( const CXMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSRAD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Arithmetic (SSE2).
-			inline void psraw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSRAW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Arithmetic (SSE2).
-			inline void psraw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSRAW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Arithmetic (SSE2).
-			inline void psraw( const CXMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSRAW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (SSE2).
-			inline void psubb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (SSE2).
-			inline void psubb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (SSE2).
-			inline void psubw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (SSE2).
-			inline void psubw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (SSE2).
-			inline void psubd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (SSE2).
-			inline void psubd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (SSE2).
-			inline void psubq( const CMMReg& dst, const CMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (SSE2).
-			inline void psubq( const CMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (SSE2).
-			inline void psubq( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract (SSE2).
-			inline void psubq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply and Add (SSE2).
-			inline void pmaddwd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PMADDWD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Multiply and Add (SSE2).
-			inline void pmaddwd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PMADDWD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Shuffle Packed DWORDs (SSE2).
-			inline void pshufd( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PSHUFD, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Shuffle Packed DWORDs (SSE2).
-			inline void pshufd( const CXMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PSHUFD, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Shuffle Packed High Words (SSE2).
-			inline void pshufhw( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PSHUFHW, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Shuffle Packed High Words (SSE2).
-			inline void pshufhw( const CXMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PSHUFHW, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Shuffle Packed Low Words (SSE2).
-			inline void pshuflw( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PSHUFLW, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Shuffle Packed Low Words (SSE2).
-			inline void pshuflw( const CXMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PSHUFLW, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (SSE2).
-			inline void psrld( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSRLD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (SSE2).
-			inline void psrld( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSRLD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (SSE2).
-			inline void psrld( const CXMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSRLD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (SSE2).
-			inline void psrlq( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSRLQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (SSE2).
-			inline void psrlq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSRLQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (SSE2).
-			inline void psrlq( const CXMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSRLQ, &dst, &src );
-			}
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (SSE2).
-			inline void psrlw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSRLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (SSE2).
-			inline void psrlw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSRLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Shift Right Logical (SSE2).
-			inline void psrlw( const CXMMReg& dst, const CImm& src )
-			{
-				m_PU._emitInstruction( INST_PSRLW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Saturation (SSE2).
-			inline void psubsb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Saturation (SSE2).
-			inline void psubsb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Saturation (SSE2).
-			inline void psubsw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Saturation (SSE2).
-			inline void psubsw( const CXMMReg& dst, const CMem& src)
-			{
-				m_PU._emitInstruction( INST_PSUBSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Unsigned Saturation (SSE2).
-			inline void psubusb( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBUSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Unsigned Saturation (SSE2).
-			inline void psubusb( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBUSB, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Unsigned Saturation (SSE2).
-			inline void psubusw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PSUBUSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed Subtract with Unsigned Saturation (SSE2).
-			inline void psubusw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PSUBUSW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Data (SSE2).
-			inline void punpckhbw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Data (SSE2).
-			inline void punpckhbw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Data (SSE2).
-			inline void punpckhwd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHWD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Data (SSE2).
-			inline void punpckhwd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHWD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Data (SSE2).
-			inline void punpckhdq( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Data (SSE2).
-			inline void punpckhdq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Data (SSE2).
-			inline void punpckhqdq( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHQDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack High Data (SSE2).
-			inline void punpckhqdq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKHQDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack Low Data (SSE2).
-			inline void punpcklbw( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack Low Data (SSE2).
-			inline void punpcklbw( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLBW, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack Low Data (SSE2).
-			inline void punpcklwd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLWD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack Low Data (SSE2).
-			inline void punpcklwd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLWD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack Low Data (SSE2).
-			inline void punpckldq( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack Low Data (SSE2).
-			inline void punpckldq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack Low Data (SSE2).
-			inline void punpcklqdq(const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLQDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack Low Data (SSE2).
-			inline void punpcklqdq( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PUNPCKLQDQ, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bitwise Exclusive OR (SSE2).
-			inline void pxor( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_PXOR, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bitwise Exclusive OR (SSE2).
-			inline void pxor( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_PXOR, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Shuffle DP-FP (SSE2).
-			inline void shufpd( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_SHUFPD, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Shuffle DP-FP (SSE2).
-			inline void shufpd( const CXMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_SHUFPD, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Compute Square Roots of Packed DP-FP Values (SSE2).
-			inline void sqrtpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_SQRTPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Compute Square Roots of Packed DP-FP Values (SSE2).
-			inline void sqrtpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_SQRTPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Compute Square Root of Scalar DP-FP Value (SSE2).
-			inline void sqrtsd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_SQRTSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Compute Square Root of Scalar DP-FP Value (SSE2).
-			inline void sqrtsd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_SQRTSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Subtract (SSE2).
-			inline void subpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_SUBPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Packed DP-FP Subtract (SSE2).
-			inline void subpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_SUBPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar DP-FP Subtract (SSE2).
-			inline void subsd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_SUBSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar DP-FP Subtract (SSE2).
-			inline void subsd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_SUBSD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar Unordered DP-FP Compare and Set EFLAGS (SSE2).
-			inline void ucomisd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_UCOMISD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Scalar Unordered DP-FP Compare and Set EFLAGS (SSE2).
-			inline void ucomisd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_UCOMISD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack and Interleave High Packed Double-Precision FP Values (SSE2).
-			inline void unpckhpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_UNPCKHPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack and Interleave High Packed Double-Precision FP Values (SSE2).
-			inline void unpckhpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_UNPCKHPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack and Interleave Low Packed Double-Precision FP Values (SSE2).
-			inline void unpcklpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_UNPCKLPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Unpack and Interleave Low Packed Double-Precision FP Values (SSE2).
-			inline void unpcklpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_UNPCKLPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical OR for DP-FP Data (SSE2).
-			inline void xorpd( const CXMMReg& dst, const CXMMReg& src )
-			{
-				m_PU._emitInstruction( INST_XORPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Bit-wise Logical OR for DP-FP Data (SSE2).
-			inline void xorpd( const CXMMReg& dst, const CMem& src )
-			{
-				m_PU._emitInstruction( INST_XORPD, &dst, &src );
-			}
-
-			//------------------------------------------------------------------------------
-			//Insert Word (SSE2).
-			inline void pinsrw( const CXMMReg& dst, const CGPReg& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PINSRW, &dst, &src, &imm8 );
-			}
-
-			//------------------------------------------------------------------------------
-			//Insert Word (SSE2).
-			inline void pinsrw( const CXMMReg& dst, const CMem& src, const CImm& imm8 )
-			{
-				m_PU._emitInstruction( INST_PINSRW, &dst, &src, &imm8 );
-			}
+			CSSE2( Cx86CPUCore& refCPU );
+			virtual ~CSSE2();
+			void psrldq( const CXMMReg& dst, const CImm& src );
+			void addpd( const CXMMReg& dst, const CXMMReg& src );
+			void addpd( const CXMMReg& dst, const CMem& src );
+			void addsd( const CXMMReg& dst, const CXMMReg& src );
+			void addsd( const CXMMReg& dst, const CMem& src );
+			void andnpd( const CXMMReg& dst, const CXMMReg& src );
+			void andnpd( const CXMMReg& dst, const CMem& src );
+			void andpd( const CXMMReg& dst, const CXMMReg& src );
+			void andpd( const CXMMReg& dst, const CMem& src );
+			void clflush( const CMem& mem );
+			void cmppd( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 );
+			void cmppd( const CXMMReg& dst, const CMem& src, const CImm& imm8 );
+			void cmpsd( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 );
+			void cmpsd( const CXMMReg& dst, const CMem& src, const CImm& imm8 );
+			void comisd( const CXMMReg& dst, const CXMMReg& src );
+			void comisd( const CXMMReg& dst, const CMem& src );
+			void cvtdq2pd( const CXMMReg& dst, const CXMMReg& src );
+			void cvtdq2pd( const CXMMReg& dst, const CMem& src );
+			void cvtdq2ps( const CXMMReg& dst, const CXMMReg& src );
+			void cvtdq2ps( const CXMMReg& dst, const CMem& src );
+			void cvtpd2dq( const CXMMReg& dst, const CXMMReg& src );
+			void cvtpd2dq( const CXMMReg& dst, const CMem& src );
+			void cvtpd2pi( const CMMReg& dst, const CXMMReg& src );
+			void cvtpd2pi( const CMMReg& dst, const CMem& src );
+			void cvtpd2ps( const CXMMReg& dst, const CXMMReg& src );
+			void cvtpd2ps( const CXMMReg& dst, const CMem& src );
+			void cvtpi2pd( const CXMMReg& dst, const CMMReg& src );
+			void cvtpi2pd( const CXMMReg& dst, const CMem& src );
+			void cvtps2dq( const CXMMReg& dst, const CXMMReg& src );
+			void cvtps2dq( const CXMMReg& dst, const CMem& src );
+			void cvtps2pd( const CXMMReg& dst, const CXMMReg& src );
+			void cvtps2pd( const CXMMReg& dst, const CMem& src );
+			void cvtsd2si( const CGPReg& dst, const CXMMReg& src );
+			void cvtsd2si( const CGPReg& dst, const CMem& src );
+			void cvtsd2ss( const CXMMReg& dst, const CXMMReg& src );
+			void cvtsd2ss( const CXMMReg& dst, const CMem& src );
+			void cvtsi2sd( const CXMMReg& dst, const CGPReg& src );
+			void cvtsi2sd( const CXMMReg& dst, const CMem& src );
+			void cvtss2sd( const CXMMReg& dst, const CXMMReg& src );
+			void cvtss2sd( const CXMMReg& dst, const CMem& src );
+			void cvttpd2pi( const CMMReg& dst, const CXMMReg& src );
+			void cvttpd2pi( const CMMReg& dst, const CMem& src );
+			void cvttpd2dq( const CXMMReg& dst, const CXMMReg& src );
+			void cvttpd2dq( const CXMMReg& dst, const CMem& src );
+			void cvttps2dq( const CXMMReg& dst, const CXMMReg& src );
+			void cvttps2dq( const CXMMReg& dst, const CMem& src );
+			void cvttsd2si( const CGPReg& dst, const CXMMReg& src );
+			void cvttsd2si( const CGPReg& dst, const CMem& src );
+			void divpd( const CXMMReg& dst, const CXMMReg& src );
+			void divpd( const CXMMReg& dst, const CMem& src );
+			void divsd( const CXMMReg& dst, const CXMMReg& src );
+			void divsd( const CXMMReg& dst, const CMem& src );
+			void lfence();
+			void maskmovdqu( const CXMMReg& src, const CXMMReg& mask );
+			void maxpd( const CXMMReg& dst, const CXMMReg& src );
+			void maxpd( const CXMMReg& dst, const CMem& src );
+			void maxsd( const CXMMReg& dst, const CXMMReg& src );
+			void maxsd( const CXMMReg& dst, const CMem& src );
+			void mfence();
+			void minpd( const CXMMReg& dst, const CXMMReg& src );
+			void minpd( const CXMMReg& dst, const CMem& src );
+			void minsd( const CXMMReg& dst, const CXMMReg& src );
+			void minsd( const CXMMReg& dst, const CMem& src );
+			void movdqa( const CXMMReg& dst, const CXMMReg& src );
+			void movdqa( const CXMMReg& dst, const CMem& src );
+			void movdqa( const CMem& dst, const CXMMReg& src );
+			void movdqu( const CXMMReg& dst, const CXMMReg& src );
+			void movdqu( const CXMMReg& dst, const CMem& src );
+			void movdqu( const CMem& dst, const CXMMReg& src );
+			void movmskps( const CGPReg& dst, const CXMMReg& src );
+			void movmskpd( const CGPReg& dst, const CXMMReg& src );
+			void movsd( const CXMMReg& dst, const CXMMReg& src );
+			void movsd( const CXMMReg& dst, const CMem& src );
+			void movsd( const CMem& dst, const CXMMReg& src );
+			void movapd( const CXMMReg& dst, const CXMMReg& src );
+			void movapd( const CXMMReg& dst, const CMem& src );
+			void movapd( const CMem& dst, const CXMMReg& src );
+			void movdq2q( const CMMReg& dst, const CXMMReg& src );
+			void movq2dq( const CXMMReg& dst, const CMMReg& src );
+			void movhpd( const CXMMReg& dst, const CMem& src );
+			void movhpd( const CMem& dst, const CXMMReg& src );
+			void movlpd( const CXMMReg& dst, const CMem& src );
+			void movlpd( const CMem& dst, const CXMMReg& src );
+			void movntdq( const CMem& dst, const CXMMReg& src );
+			void movnti( const CMem& dst, const CGPReg& src );
+			void movntpd( const CMem& dst, const CXMMReg& src );
+			void movupd( const CXMMReg& dst, const CXMMReg& src );
+			void movupd( const CXMMReg& dst, const CMem& src );
+			void movupd( const CMem& dst, const CXMMReg& src );
+			void mulpd( const CXMMReg& dst, const CXMMReg& src );
+			void mulpd( const CXMMReg& dst, const CMem& src );
+			void mulsd( const CXMMReg& dst, const CXMMReg& src );
+			void mulsd( const CXMMReg& dst, const CMem& src );
+			void orpd( const CXMMReg& dst, const CXMMReg& src );
+			void orpd( const CXMMReg& dst, const CMem& src );
+			void packsswb( const CXMMReg& dst, const CXMMReg& src );
+			void packsswb( const CXMMReg& dst, const CMem& src );
+			void packssdw( const CXMMReg& dst, const CXMMReg& src );
+			void packssdw( const CXMMReg& dst, const CMem& src );
+			void packuswb( const CXMMReg& dst, const CXMMReg& src );
+			void packuswb( const CXMMReg& dst, const CMem& src );
+			void paddb( const CXMMReg& dst, const CXMMReg& src );
+			void paddb( const CXMMReg& dst, const CMem& src );
+			void paddw( const CXMMReg& dst, const CXMMReg& src );
+			void paddw( const CXMMReg& dst, const CMem& src );
+			void paddd( const CXMMReg& dst, const CXMMReg& src );
+			void paddd( const CXMMReg& dst, const CMem& src );
+			void paddq( const CMMReg& dst, const CMMReg& src );
+			void paddq( const CMMReg& dst, const CMem& src );
+			void paddq( const CXMMReg& dst, const CXMMReg& src );
+			void paddq( const CXMMReg& dst, const CMem& src );
+			void paddsb( const CXMMReg& dst, const CXMMReg& src );
+			void paddsb( const CXMMReg& dst, const CMem& src );
+			void paddsw( const CXMMReg& dst, const CXMMReg& src );
+			void paddsw( const CXMMReg& dst, const CMem& src );
+			void paddusb( const CXMMReg& dst, const CXMMReg& src );
+			void paddusb( const CXMMReg& dst, const CMem& src );
+			void paddusw( const CXMMReg& dst, const CXMMReg& src );
+			void paddusw( const CXMMReg& dst, const CMem& src );
+			void pand( const CXMMReg& dst, const CXMMReg& src );
+			void pand( const CXMMReg& dst, const CMem& src );
+			void pandn( const CXMMReg& dst, const CXMMReg& src );
+			void pandn( const CXMMReg& dst, const CMem& src );
+			void pause();
+			void pavgb( const CXMMReg& dst, const CXMMReg& src );
+			void pavgb( const CXMMReg& dst, const CMem& src );
+			void pavgw( const CXMMReg& dst, const CXMMReg& src );
+			void pavgw( const CXMMReg& dst, const CMem& src );
+			void pcmpeqb( const CXMMReg& dst, const CXMMReg& src );
+			void pcmpeqb( const CXMMReg& dst, const CMem& src );
+			void pcmpeqw( const CXMMReg& dst, const CXMMReg& src );
+			void pcmpeqw( const CXMMReg& dst, const CMem& src );
+			void pcmpeqd( const CXMMReg& dst, const CXMMReg& src );
+			void pcmpeqd( const CXMMReg& dst, const CMem& src );
+			void pcmpgtb( const CXMMReg& dst, const CXMMReg& src );
+			void pcmpgtb( const CXMMReg& dst, const CMem& src );
+			void pcmpgtw( const CXMMReg& dst, const CXMMReg& src );
+			void pcmpgtw( const CXMMReg& dst, const CMem& src );
+			void pcmpgtd( const CXMMReg& dst, const CXMMReg& src );
+			void pcmpgtd( const CXMMReg& dst, const CMem& src );
+			void pmaxsw( const CXMMReg& dst, const CXMMReg& src );
+			void pmaxsw( const CXMMReg& dst, const CMem& src );
+			void pmaxub( const CXMMReg& dst, const CXMMReg& src );
+			void pmaxub( const CXMMReg& dst, const CMem& src );
+			void pminsw( const CXMMReg& dst, const CXMMReg& src );
+			void pminsw( const CXMMReg& dst, const CMem& src );
+			void pminub( const CXMMReg& dst, const CXMMReg& src );
+			void pminub( const CXMMReg& dst, const CMem& src );
+			void pmovmskb( const CGPReg& dst, const CXMMReg& src );
+			void pmulhw( const CXMMReg& dst, const CXMMReg& src );
+			void pmulhw( const CXMMReg& dst, const CMem& src );
+			void pmulhuw( const CXMMReg& dst, const CXMMReg& src );
+			void pmulhuw( const CXMMReg& dst, const CMem& src );
+			void pmullw( const CXMMReg& dst, const CXMMReg& src );
+			void pmullw( const CXMMReg& dst, const CMem& src );
+			void pmuludq( const CMMReg& dst, const CMMReg& src );
+			void pmuludq( const CMMReg& dst, const CMem& src );
+			void pmuludq( const CXMMReg& dst, const CXMMReg& src );
+			void pmuludq( const CXMMReg& dst, const CMem& src );
+			void por( const CXMMReg& dst, const CXMMReg& src );
+			void por( const CXMMReg& dst, const CMem& src);
+			void pslld( const CXMMReg& dst, const CXMMReg& src );
+			void pslld( const CXMMReg& dst, const CMem& src );
+			void pslld( const CXMMReg& dst, const CImm& src );
+			void psllq( const CXMMReg& dst, const CXMMReg& src );
+			void psllq( const CXMMReg& dst, const CMem& src );
+			void psllq( const CXMMReg& dst, const CImm& src );
+			void psllw( const CXMMReg& dst, const CXMMReg& src );
+			void psllw( const CXMMReg& dst, const CMem& src );
+			void psllw( const CXMMReg& dst, const CImm& src );
+			void pslldq( const CXMMReg& dst, const CImm& src );
+			void psrad( const CXMMReg& dst, const CXMMReg& src );
+			void psrad( const CXMMReg& dst, const CMem& src );
+			void psrad( const CXMMReg& dst, const CImm& src );
+			void psraw( const CXMMReg& dst, const CXMMReg& src );
+			void psraw( const CXMMReg& dst, const CMem& src );
+			void psraw( const CXMMReg& dst, const CImm& src );
+			void psubb( const CXMMReg& dst, const CXMMReg& src );
+			void psubb( const CXMMReg& dst, const CMem& src );
+			void psubw( const CXMMReg& dst, const CXMMReg& src );
+			void psubw( const CXMMReg& dst, const CMem& src );
+			void psubd( const CXMMReg& dst, const CXMMReg& src );
+			void psubd( const CXMMReg& dst, const CMem& src );
+			void psubq( const CMMReg& dst, const CMMReg& src );
+			void psubq( const CMMReg& dst, const CMem& src );
+			void psubq( const CXMMReg& dst, const CXMMReg& src );
+			void psubq( const CXMMReg& dst, const CMem& src );
+			void pmaddwd( const CXMMReg& dst, const CXMMReg& src );
+			void pmaddwd( const CXMMReg& dst, const CMem& src );
+			void pshufd( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 );
+			void pshufd( const CXMMReg& dst, const CMem& src, const CImm& imm8 );
+			void pshufhw( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 );
+			void pshufhw( const CXMMReg& dst, const CMem& src, const CImm& imm8 );
+			void pshuflw( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 );
+			void pshuflw( const CXMMReg& dst, const CMem& src, const CImm& imm8 );
+			void psrld( const CXMMReg& dst, const CXMMReg& src );
+			void psrld( const CXMMReg& dst, const CMem& src );
+			void psrld( const CXMMReg& dst, const CImm& src );
+			void psrlq( const CXMMReg& dst, const CXMMReg& src );
+			void psrlq( const CXMMReg& dst, const CMem& src );
+			void psrlq( const CXMMReg& dst, const CImm& src );
+			void psrlw( const CXMMReg& dst, const CXMMReg& src );
+			void psrlw( const CXMMReg& dst, const CMem& src );
+			void psrlw( const CXMMReg& dst, const CImm& src );
+			void psubsb( const CXMMReg& dst, const CXMMReg& src );
+			void psubsb( const CXMMReg& dst, const CMem& src );
+			void psubsw( const CXMMReg& dst, const CXMMReg& src );
+			void psubsw( const CXMMReg& dst, const CMem& src);
+			void psubusb( const CXMMReg& dst, const CXMMReg& src );
+			void psubusb( const CXMMReg& dst, const CMem& src );
+			void psubusw( const CXMMReg& dst, const CXMMReg& src );
+			void psubusw( const CXMMReg& dst, const CMem& src );
+			void punpckhbw( const CXMMReg& dst, const CXMMReg& src );
+			void punpckhbw( const CXMMReg& dst, const CMem& src );
+			void punpckhwd( const CXMMReg& dst, const CXMMReg& src );
+			void punpckhwd( const CXMMReg& dst, const CMem& src );
+			void punpckhdq( const CXMMReg& dst, const CXMMReg& src );
+			void punpckhdq( const CXMMReg& dst, const CMem& src );
+			void punpckhqdq( const CXMMReg& dst, const CXMMReg& src );
+			void punpckhqdq( const CXMMReg& dst, const CMem& src );
+			void punpcklbw( const CXMMReg& dst, const CXMMReg& src );
+			void punpcklbw( const CXMMReg& dst, const CMem& src );
+			void punpcklwd( const CXMMReg& dst, const CXMMReg& src );
+			void punpcklwd( const CXMMReg& dst, const CMem& src );
+			void punpckldq( const CXMMReg& dst, const CXMMReg& src );
+			void punpckldq( const CXMMReg& dst, const CMem& src );
+			void punpcklqdq(const CXMMReg& dst, const CXMMReg& src );
+			void punpcklqdq( const CXMMReg& dst, const CMem& src );
+			void pxor( const CXMMReg& dst, const CXMMReg& src );
+			void pxor( const CXMMReg& dst, const CMem& src );
+			void shufpd( const CXMMReg& dst, const CXMMReg& src, const CImm& imm8 );
+			void shufpd( const CXMMReg& dst, const CMem& src, const CImm& imm8 );
+			void sqrtpd( const CXMMReg& dst, const CXMMReg& src );
+			void sqrtpd( const CXMMReg& dst, const CMem& src );
+			void sqrtsd( const CXMMReg& dst, const CXMMReg& src );
+			void sqrtsd( const CXMMReg& dst, const CMem& src );
+			void subpd( const CXMMReg& dst, const CXMMReg& src );
+			void subpd( const CXMMReg& dst, const CMem& src );
+			void subsd( const CXMMReg& dst, const CXMMReg& src );
+			void subsd( const CXMMReg& dst, const CMem& src );
+			void ucomisd( const CXMMReg& dst, const CXMMReg& src );
+			void ucomisd( const CXMMReg& dst, const CMem& src );
+			void unpckhpd( const CXMMReg& dst, const CXMMReg& src );
+			void unpckhpd( const CXMMReg& dst, const CMem& src );
+			void unpcklpd( const CXMMReg& dst, const CXMMReg& src );
+			void unpcklpd( const CXMMReg& dst, const CMem& src );
+			void xorpd( const CXMMReg& dst, const CXMMReg& src );
+			void xorpd( const CXMMReg& dst, const CMem& src );
+			void pinsrw( const CXMMReg& dst, const CGPReg& src, const CImm& imm8 );
+			void pinsrw( const CXMMReg& dst, const CMem& src, const CImm& imm8 );
 
 			__QCS_DECLARE_NONCOPYABLE( CSSE2 );
 		};

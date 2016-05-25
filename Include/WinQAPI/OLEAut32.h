@@ -27,7 +27,7 @@
 #ifndef _QSYS_API_WIN32_MODULES_OLEAUT_H_
 #define _QSYS_API_WIN32_MODULES_OLEAUT_H_
 
-#include "../SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
 #include "Kernel32.h"
 
 //--------------------------------------------------------------------------------

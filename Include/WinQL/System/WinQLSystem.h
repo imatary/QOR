@@ -32,6 +32,8 @@
 #include "SystemQOR.h"
 #include "CodeQOR/Instancing/STMember.h"
 #include "CodeQOR/ClassReg/ClassRegEntry.h"
+#include "SystemQOR/System.h"
+#include "WinQL/WinQL.h"
 #include "WinQL/System/Atoms/WinQLGlobalAtoms.h"
 #include "WinQL/System/Info/WinQLInfo.h"
 #include "WinQL/System/Locale/WinQLSystemLocale.h"
@@ -58,17 +60,21 @@
 namespace nsWin32
 {
 	//--------------------------------------------------------------------------------
-    class __QOR_INTERFACE( __WINQL ) CSystem //: public ::nsSystemQOR::COSystem
+    class __QOR_INTERFACE( __WINQL ) CSystem : public nsQOR::ISystem
 	{
 	public:
 
 		__QOR_DECLARE_OCLASS_ID( CSystem );
 
+		__QOR_IMPL_REF( CSystem );
+
+		static nsCodeQOR::CTExternalRegEntry< CSystem > RegEntry;
+
 		CSystem();
 		virtual ~CSystem();
 
-		virtual void SystemInit( void );
-		static CSystem& Instance( void );
+		virtual void Setup( nsQOR::IApplication& Application );
+		virtual void Shutdown( nsQOR::IApplication& Application );
 
 		CSharedMember< CSharedMemberAdaptor< nsArch::CMachine > > Machine;
 		CSharedMember< CSharedMemberAdaptor< CGlobalAtomTable > > AtomTable;

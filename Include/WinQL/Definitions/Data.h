@@ -85,7 +85,7 @@ __QCMP_WARNING_POP
 	{
 
 __QCMP_WARNING_PUSH
-__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, "Deliberate use of Microsoft extension" )
+__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, _QCMP_TXT("Deliberate use of Microsoft extension") )
 
 		struct __QCMP_NAMELESS_STRUCT
 		{
@@ -231,7 +231,7 @@ __QCMP_WARNING_POP
 	union CY 
 	{
 __QCMP_WARNING_PUSH
-__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, "Deliberate use of Microsoft extension" )
+__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, _QCMP_TXT("Deliberate use of Microsoft extension") )
 
 		struct __QCMP_NAMELESS_STRUCT
 		{
@@ -254,7 +254,7 @@ __QCMP_WARNING_POP
 		unsigned short wReserved;
 
 __QCMP_WARNING_PUSH
-__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, "Deliberate use of Microsoft extension" )
+__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, _QCMP_TXT("Deliberate use of Microsoft extension") )
 
 		union __QCMP_NAMELESS_STRUCT
 		{
@@ -598,7 +598,7 @@ __QCMP_WARNING_POP
 	struct Variant
     {
 __QCMP_WARNING_PUSH
-__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, "Deliberate use of Microsoft extension" )
+__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, _QCMP_TXT("Deliberate use of Microsoft extension") )
 
 		union
 		{
@@ -1206,6 +1206,9 @@ __QCMP_WARNING_POP
 		GUID* pElems;
 	} 	CACLSID;
 
+	__QCMP_WARNING_PUSH
+	__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, _QCMP_TXT("Deliberate use of Microsoft extension") )
+
 	typedef struct tagDEC
 	{
 		unsigned short wReserved;
@@ -1229,6 +1232,8 @@ __QCMP_WARNING_POP
 			unsigned long long Lo64;
 		};
 	} DECIMAL;
+
+	__QCMP_WARNING_POP
 
 	typedef struct tag_inner_PROPVARIANT
 	{
@@ -1319,7 +1324,7 @@ __QCMP_WARNING_POP
 	struct PROPVARIANT 
 	{
 __QCMP_WARNING_PUSH
-__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, "Deliberate use of Microsoft extension" )
+__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, _QCMP_TXT("Deliberate use of Microsoft extension") )
 				
 		union __QCMP_NAMELESS_STRUCT
 		{
@@ -2206,7 +2211,7 @@ __QCMP_WARNING_POP
 		unsigned long dmFields;
 
 __QCMP_WARNING_PUSH
-__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, "Deliberate use of Microsoft extension" )
+__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, _QCMP_TXT("Deliberate use of Microsoft extension") )
 		union __QCMP_NAMELESS_STRUCT
 		{
 		  // printer only fields

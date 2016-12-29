@@ -45,12 +45,11 @@ namespace nsBluefoot
 
 		__QOR_DECLARE_OCLASS_ID( CBFOutputProtocol );
 
-		CBFOutputProtocol();
+		CBFOutputProtocol() = delete;
+		CBFOutputProtocol( nsQOR::IApplication::ref_type Application );
 		virtual ~CBFOutputProtocol();
 		CBFOutputProtocol( const CBFOutputProtocol& src );
 		CBFOutputProtocol& operator = ( const CBFOutputProtocol& src);
-
-		virtual bool OnProtocolStateChange( void );				//single step the state machine
 
 		virtual void GetNextWriteCount( void );
 

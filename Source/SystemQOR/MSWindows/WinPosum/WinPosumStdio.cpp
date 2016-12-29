@@ -1,7 +1,10 @@
 //WinPosumStdio.cpp
 
 #include "WinPosum/WinPosumStdio.h"
+#define NOMINMAX
+#include "WinQAPI/Kernel32.h"
 #include <errno.h>
+#include <algorithm>
 
 //------------------------------------------------------------------------------
 namespace nsWin32
@@ -19,9 +22,91 @@ namespace nsWin32
 
 	//------------------------------------------------------------------------------
 	CPosumStdio::CPosumStdio() : m_uiNextStream( 0 ), m_uiInitialStreams( 20 ), m_uiMaxStreams( 512 ), m_bExitFlag( false ), m_umaskval( 0 ), m_fmode( 0 )
+	{		
+		//AllocateStreams( m_uiInitialStreams );		//allocate the initial m_uiInitialStreams streams
+
+		Initialize( CProcessHelper::StartupInfo() );
+	}
+
+	//------------------------------------------------------------------------------
+	void CPosumStdio::Initialize( const STARTUPINFO& StartupInfo )
 	{
-		//allocate the initial m_uiInitialStreams streams
-		AllocateStreams( m_uiInitialStreams );
+		if( ( StartupInfo.cbReserved2 != 0 ) && ( StartupInfo.lpReserved2 != NULL ) )
+		{
+			int iNumberOfIneritedHandles = *( (int*)( StartupInfo.lpReserved2 ) );
+
+			byte* pFileInfo = (byte*)( StartupInfo.lpReserved2 ) + sizeof( int );
+			intptr_t* pFileHandles = (intptr_t*)( pFileInfo + iNumberOfIneritedHandles );
+			iNumberOfIneritedHandles = std::min( static_cast<unsigned int>( iNumberOfIneritedHandles ), m_uiMaxStreams );
+
+			//AllocateStreams( std::max( static_cast< unsigned int >( iNumberOfIneritedHandles), m_uiInitialStreams ) );		//allocate the initial streams
+
+			//Validate and copy the passed handle information
+			for( int fh = 0; fh < iNumberOfIneritedHandles; fh++, pFileInfo++, pFileHandles++ )
+			{
+
+				//Copy the passed file info iff it appears to describe an open, valid file or device.
+				//Note that GetFileType cannot be called for pipe handles since it may 'hang' if there is blocked read pending on the pipe in the parent.
+
+				if( ( *pFileHandles != (intptr_t)Invalid_Handle_Value ) && ( *pFileHandles != _NO_CONSOLE_FILENO ) && ( *pFileInfo & FOPEN ) && ( ( *pFileInfo & FPIPE ) ||
+					( nsWinQAPI::CKernel32::GetFileType( (void*)*pFileHandles ) != File_Type_Unknown ) ) )
+				{
+					int Descriptor = *pFileHandles;
+					if( m_uiNextStream <= Descriptor )
+					{
+						m_uiNextStream = Descriptor + 1;
+					}
+
+					CPosumStream* pStream = new CPosumStream();
+					pStream->SetLowLevelFlags( *pFileInfo );
+					pStream->SetLowLevelFile( new CFile( CFileHandle( *pFileHandles ) ) );
+					m_DescriptorStreamMap.insert( std::make_pair( Descriptor, pStream ) );
+				}
+			}
+		}
+		//If valid HANDLE-s for standard input, output and error were not inherited, try to obtain them directly from the OS. 
+		//Also, set the appropriate bits in the osfile fields.
+		intptr_t stdfh;
+		unsigned long htype;
+
+		for ( int fh = 0 ; fh < STDIO_HANDLES_COUNT ; fh++ ) 
+		{
+			auto stream_it = m_DescriptorStreamMap.find( fh );
+			if( stream_it == m_DescriptorStreamMap.end() )
+			{
+				CPosumStream* pStream = new CPosumStream();
+				pStream->SetLowLevelFlags( (byte)( FOPEN | FTEXT ) );
+				if ( ((stdfh = (intptr_t)GetStdHandle( stdhndl(fh) )) != (intptr_t)INVALID_HANDLE_VALUE) && (stdfh!=((intptr_t)NULL)) && ((htype = GetFileType( (HANDLE)stdfh )) != FILE_TYPE_UNKNOWN) )
+			    {
+					// obtained a valid HANDLE from GetStdHandle
+					pStream->SetLowLevelFile( new CFile( CFileHandle( stdfh ) ) );
+
+					if( ( htype & 0xFF ) == FILE_TYPE_CHAR )
+					{
+						pStream->SetLowLevelFlags( (byte)( FOPEN | FTEXT | FDEV ) );
+					}
+					else if( ( htype & 0xFF ) == FILE_TYPE_PIPE )
+					{
+						pStream->SetLowLevelFlags( (byte)( FOPEN | FTEXT | FPIPE ) );
+					}
+			    }
+				else 
+				{
+					/* For stdin, stdout & stderr, if there is no valid HANDLE, treat the CRT handle as being open in text mode on a
+					device with _NO_CONSOLE_FILENO underlying it. We use this value different from _INVALID_HANDLE_VALUE to distinguish
+					between a failure in opening a file & a program run without a console.*/
+					pStream->SetLowLevelFlags( FOPEN | FTEXT | FDEV );
+					pStream->_file = _NO_CONSOLE_FILENO;
+				}
+				m_DescriptorStreamMap.insert( std::make_pair( fh, pStream ) );
+			}
+			else  
+			{
+				//handle was passed to us by parent process. make sure it is text mode.
+				stream_it->second->SetLowLevelFlags( FTEXT );
+			}
+		}
+
 	}
 
 	//------------------------------------------------------------------------------
@@ -61,7 +146,7 @@ namespace nsWin32
 
 		if( m_uiNextStream < m_uiMaxStreams )
 		{
-			m_DescriptorStreamMap.insert( std::make_pair( m_uiNextStream, CPosumStream() ) );
+			m_DescriptorStreamMap.insert( std::make_pair( m_uiNextStream, new CPosumStream() ) );
 			m_VecFreeLRUList.push_back( m_uiNextStream );
 			m_uiNextStream++;
 		}
@@ -145,7 +230,7 @@ namespace nsWin32
 
 		CCriticalSectionLock MapLock( m_MapSection );
 
-		std::map< const int, CPosumStream >::iterator it = m_DescriptorStreamMap.begin();
+		std::map< const int, CPosumStream* >::iterator it = m_DescriptorStreamMap.begin();
 
 		it++;
 		it++;
@@ -153,9 +238,9 @@ namespace nsWin32
 
 		while( it != m_DescriptorStreamMap.end() )
 		{
-			if( it->second.IsInUse() )
+			if( (*it).second->IsInUse() )
 			{
-				CPosumStream& Stream( it->second );
+				CPosumStream& Stream( *((*it).second) );
 
 				if( Stream.fclose() != EOF )
 				{
@@ -176,13 +261,13 @@ namespace nsWin32
 	   int count = 0;
 	   int err = 0;
 
-		std::map< const int, CPosumStream >::iterator it = m_DescriptorStreamMap.begin();
+		std::map< const int, CPosumStream* >::iterator it = m_DescriptorStreamMap.begin();
 
 		while( it != m_DescriptorStreamMap.end() )
 		{
-			if( it->second.IsInUse() )
+			if( (*it).second->IsInUse() )
 			{
-				CPosumStream& Stream( it->second );
+				CPosumStream& Stream( *((*it).second) );
 
 				Stream.flockfile();
 
@@ -548,13 +633,13 @@ namespace nsWin32
 		CCriticalSectionLock MapLock( m_MapSection );
 		CCriticalSectionLock ListLock( m_FreeListSection );
 
-		std::map< const int, CPosumStream >::iterator it = m_DescriptorStreamMap.begin();
+		std::map< const int, CPosumStream* >::iterator it = m_DescriptorStreamMap.begin();
 
 		while( it != m_DescriptorStreamMap.end() )
 		{
-			if( it->second.IsInUse() )
+			if( (*it).second->IsInUse() )
 			{
-				CPosumStream& Stream( it->second );
+				CPosumStream& Stream( *((*it).second) );
 
 				Stream.flockfile();
 
@@ -621,7 +706,7 @@ namespace nsWin32
 			uiStream = m_VecFreeLRUList.front();
 			m_VecFreeLRUList.pop_front();
 
-			retval = &( m_DescriptorStreamMap.find( uiStream )->second );
+			retval = m_DescriptorStreamMap.find( uiStream )->second;
 		}
 
 		if( retval != NULL )
@@ -643,7 +728,7 @@ namespace nsWin32
 		CCriticalSectionLock MapLock( m_MapSection );
 		CCriticalSectionLock ListLock( m_FreeListSection );
 
-		retval = &( m_DescriptorStreamMap.find( static_cast< unsigned int >( fd ) )->second );
+		retval = m_DescriptorStreamMap.find( static_cast< unsigned int >( fd ) )->second;
 		
 		std::deque< int >::iterator it = m_VecFreeLRUList.begin();
 

@@ -92,7 +92,7 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CDeviceInterfaceClassCollection );
 
-		CDeviceInterfaceClassCollection( const char* szMachine = 0 );
+		CDeviceInterfaceClassCollection( const mxTCHAR* szMachine = 0 );
 		CDeviceInterfaceClassCollection( const CDeviceInterfaceClassCollection& src );
 		CDeviceInterfaceClassCollection& operator = ( const CDeviceInterfaceClassCollection& src );
 		~CDeviceInterfaceClassCollection();
@@ -101,7 +101,7 @@ namespace nsWin32
 
 		nsCodeQOR::CTLRef< CDeviceInterfaceClass > RegisterInterfaceClass( nsCodeQOR::__mxGUID* GUID );
 
-		const char* m_szMachine;
+		const mxTCHAR* m_szMachine;
 
 	private:
 

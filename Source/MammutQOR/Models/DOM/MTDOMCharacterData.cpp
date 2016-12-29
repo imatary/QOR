@@ -93,7 +93,7 @@ namespace nsMammut
 	//------------------------------------------------------------------------------
 	CDOMString CCharacterData::SubStringData(unsigned long ulOffset, unsigned long ulCount)
 	{
-		return m_Data.Value().Mid( ulOffset, ulCount );
+		return m_Data.Value().Mid( static_cast<unsigned short>(ulOffset), static_cast< short >( ulCount ) );
 	}
 
 	//------------------------------------------------------------------------------
@@ -105,19 +105,19 @@ namespace nsMammut
 	//------------------------------------------------------------------------------
 	void CCharacterData::InsertData( unsigned long ulOffset, CDOMString& arg )
 	{
-		m_Data.Value().Insert( ulOffset, arg );
+		m_Data.Value().Insert( static_cast< unsigned short >( ulOffset ), arg );
 	}
 
 	//------------------------------------------------------------------------------
 	void CCharacterData::DeleteData( unsigned long ulOffset, unsigned long ulCount )
 	{
-		m_Data.Value().Remove( ulOffset, ulCount );
+		m_Data.Value().Remove( static_cast< unsigned short >( ulOffset ), static_cast< unsigned short >( ulCount ) );
 	}
 
 	//------------------------------------------------------------------------------
 	void CCharacterData::ReplaceData( unsigned long ulOffset, unsigned long ulCount, CDOMString& arg )
 	{
-		m_Data.Value().Replace( ulOffset, ulCount, arg );
+		m_Data.Value().Replace( static_cast< unsigned short >( ulOffset ), static_cast< unsigned short >( ulCount ), arg );
 	}
 
 	//------------------------------------------------------------------------------

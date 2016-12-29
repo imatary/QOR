@@ -1,0 +1,489 @@
+Generating Builds with Microsoft Visual C++
+Building project: QOR
+Building Target: ..\..\..\Build\QOR\X86_32\MSW\WIN7
+Building Form: Modular
+Building Config: ASCII
+Building Type: Debug
+Building Library: WinCmpSupQORVC
+Building Library: QORModule
+Building Library: WinSharedBootstrap
+Building Library: WinUsrExeBoot
+Building Module: CodeQOR
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/CodeQOR.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/CodeQOR.exp
+Building Module: ArchQOR
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/ArchQOR.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/ArchQOR.exp
+Building Module: CompilerQOR
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/CompilerQOR.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/CompilerQOR.exp
+Building Module: SystemQOR
+MSW_thread.obj : warning LNK4078: multiple '.CRT' sections found with different attributes (D0300040)
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/SystemQOR.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/SystemQOR.exp
+Building Module: CQOR
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/CQOR.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/CQOR.exp
+Building Module: stdQOR
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/stdQOR.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/stdQOR.exp
+Building Module: PosumQOR
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/PosumQOR.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/PosumQOR.exp
+Building Module: WinPosumQOR
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/WinPosumQOR.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/WinPosumQOR.exp
+Building Module: MonkiQOR
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/MonkiQOR.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/MonkiQOR.exp
+Building Module: AppocritaQOR
+cl.exe /c /I "../../../include" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"_APPOCRITA" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHa  /MDd /GS /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/vc140.pdb"  /Gd  /errorReport:queue ../../../Source/AppocritaQOR/AppocritaQOR.cpp
+AppocritaQOR.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+d:\develop\github\qor\include\../Source/libcxx/include/type_traits(1126): warning C4324: 'std::aligned_storage<12,8>::type': structure was padded due to alignment specifier
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(650): note: see reference to class template instantiation 'std::aligned_storage<12,8>::type' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(723): note: see reference to class template instantiation 'std::function<_Rp(void)>' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3338): warning C4201: nonstandard extension used: nameless struct/union
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3330): note: while compiling class template member function 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const'
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2394): note: see reference to function template instantiation 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const' being compiled
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2352): note: see reference to class template instantiation 'std::__scalar_hash<long double,2>' being compiled
+cl.exe /c /I "../../../include" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"_APPOCRITA" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHa  /MDd /GS /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/vc140.pdb"  /Gd  /errorReport:queue ../../../Source/AppocritaQOR/Application.cpp
+Application.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+d:\develop\github\qor\include\../Source/libcxx/include/type_traits(1126): warning C4324: 'std::aligned_storage<12,8>::type': structure was padded due to alignment specifier
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(650): note: see reference to class template instantiation 'std::aligned_storage<12,8>::type' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(723): note: see reference to class template instantiation 'std::function<_Rp(void)>' being compiled
+QOR_CC:__thiscall nsQOR::CApplication::CApplication(void)
+QOR_CC:__thiscall nsQOR::CApplication::~CApplication(void)
+QOR_CC:void __thiscall nsQOR::CApplication::SetRole(class nsCodeQOR::CTLRef<class nsQOR::IRole>)
+QOR_CC:void __thiscall nsQOR::CApplication::SetWorkflow(class nsCodeQOR::CTLRef<class nsQOR::IWorkflow>)
+QOR_CC:class nsCodeQOR::CTLRef<class nsQOR::IWorkflow> __thiscall nsQOR::CApplication::GetWorkflow(void)
+QOR_CC:void __thiscall nsQOR::CApplication::Setup(void)
+QOR_CC:void __thiscall nsQOR::CApplication::Shutdown(void)
+QOR_CC:int __thiscall nsQOR::CApplication::Run(void)
+QOR_CC:int __thiscall nsQOR::CApplication::Run(class nsCodeQOR::CTLRef<class nsQOR::IWorkflow>)
+QOR_CC:void __thiscall nsQOR::CApplication::EnqueueEvent(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CApplication::Stop(void)
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3338): warning C4201: nonstandard extension used: nameless struct/union
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3330): note: while compiling class template member function 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const'
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2394): note: see reference to function template instantiation 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const' being compiled
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2352): note: see reference to class template instantiation 'std::__scalar_hash<long double,2>' being compiled
+cl.exe /c /I "../../../include" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"_APPOCRITA" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHa  /MDd /GS /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/vc140.pdb"  /Gd  /errorReport:queue ../../../Source/AppocritaQOR/Controller.cpp
+Controller.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+cl.exe /c /I "../../../include" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"_APPOCRITA" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHa  /MDd /GS /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/vc140.pdb"  /Gd  /errorReport:queue ../../../Source/AppocritaQOR/Role.cpp
+Role.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+d:\develop\github\qor\include\../Source/libcxx/include/type_traits(1126): warning C4324: 'std::aligned_storage<12,8>::type': structure was padded due to alignment specifier
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(650): note: see reference to class template instantiation 'std::aligned_storage<12,8>::type' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(723): note: see reference to class template instantiation 'std::function<_Rp(void)>' being compiled
+QOR_CC:__thiscall nsQOR::CRole::CRole(const struct nsCodeQOR::__mxGUID *)
+QOR_CC:__thiscall nsQOR::CRole::~CRole(void)
+QOR_CC:void __thiscall nsQOR::CRole::Setup(class nsQOR::IApplication &)
+QOR_CC:void __thiscall nsQOR::CRole::Shutdown(class nsQOR::IApplication &)
+QOR_CC:const struct nsCodeQOR::__mxGUID *__cdecl nsQOR::CRole::CmdLineTool(void)
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3338): warning C4201: nonstandard extension used: nameless struct/union
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3330): note: while compiling class template member function 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const'
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2394): note: see reference to function template instantiation 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const' being compiled
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2352): note: see reference to class template instantiation 'std::__scalar_hash<long double,2>' being compiled
+cl.exe /c /I "../../../include" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"_APPOCRITA" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHa  /MDd /GS /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/vc140.pdb"  /Gd  /errorReport:queue ../../../Source/AppocritaQOR/Event.cpp
+Event.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+d:\develop\github\qor\include\../Source/libcxx/include/type_traits(1126): warning C4324: 'std::aligned_storage<12,8>::type': structure was padded due to alignment specifier
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(650): note: see reference to class template instantiation 'std::aligned_storage<12,8>::type' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(723): note: see reference to class template instantiation 'std::function<_Rp(void)>' being compiled
+QOR_CC:__thiscall nsQOR::CEvent::CEvent(class nsQOR::IApplication &)
+QOR_CC:void __thiscall nsQOR::CEvent::OnSignaled(void)
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3338): warning C4201: nonstandard extension used: nameless struct/union
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3330): note: while compiling class template member function 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const'
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2394): note: see reference to function template instantiation 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const' being compiled
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2352): note: see reference to class template instantiation 'std::__scalar_hash<long double,2>' being compiled
+cl.exe /c /I "../../../include" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"_APPOCRITA" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHa  /MDd /GS /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/vc140.pdb"  /Gd  /errorReport:queue ../../../Source/AppocritaQOR/State.cpp
+State.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+QOR_CC:__thiscall nsQOR::CState::CState(class nsCodeQOR::CTLRef<class nsQOR::IWorkflow>)
+QOR_CC:void __thiscall nsQOR::CState::OnEnter(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CState::OnLeave(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CState::OnSuspend(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CState::OnResume(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:bool __thiscall nsQOR::CState::HandleEvent(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:__thiscall nsQOR::CCompoundState::CCompoundState(class nsCodeQOR::CTLRef<class nsQOR::IWorkflow>)
+QOR_CC:bool __thiscall nsQOR::CCompoundState::HandleEvent(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+cl.exe /c /I "../../../include" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"_APPOCRITA" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHa  /MDd /GS /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/vc140.pdb"  /Gd  /errorReport:queue ../../../Source/AppocritaQOR/SubSystem.cpp
+SubSystem.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+QOR_CC:__thiscall nsQOR::CSubSystem::CSubSystem(const struct nsCodeQOR::__mxGUID *)
+QOR_CC:__thiscall nsQOR::CSubSystem::~CSubSystem(void)
+QOR_CC:void __thiscall nsQOR::CSubSystem::Setup(class nsQOR::IApplication &)
+QOR_CC:void __thiscall nsQOR::CSubSystem::Shutdown(class nsQOR::IApplication &)
+cl.exe /c /I "../../../include" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"_APPOCRITA" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHa  /MDd /GS /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/vc140.pdb"  /Gd  /errorReport:queue ../../../Source/AppocritaQOR/Workflow.cpp
+Workflow.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+QOR_CC:__thiscall nsQOR::CWorkflow::CWorkflow(void)
+QOR_CC:__thiscall nsQOR::CWorkflow::CWorkflow(class nsCodeQOR::CTLRef<class nsQOR::IApplication>)
+QOR_CC:__thiscall nsQOR::CWorkflow::~CWorkflow(void)
+QOR_CC:__thiscall nsQOR::CWorkflow::CWorkflow(const class nsQOR::CWorkflow &)
+QOR_CC:class nsQOR::CWorkflow &__thiscall nsQOR::CWorkflow::operator =(const class nsQOR::CWorkflow &)
+QOR_CC:void __thiscall nsQOR::CWorkflow::SetApplication(class nsCodeQOR::CTLRef<class nsQOR::IApplication>)
+QOR_CC:class nsCodeQOR::CTLRef<class nsQOR::IApplication> __thiscall nsQOR::CWorkflow::GetApplication(void) const
+QOR_CC:class nsCodeQOR::CTLRef<class nsQOR::IState> __thiscall nsQOR::CWorkflow::CurrentState(void) const
+QOR_CC:void __thiscall nsQOR::CWorkflow::SetState(class nsCodeQOR::CTLRef<class nsQOR::IState>,class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CWorkflow::PushState(class nsCodeQOR::CTLRef<class nsQOR::IState>,class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CWorkflow::PopState(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:class nsCodeQOR::CTLRef<class nsQOR::IState> __thiscall nsQOR::CWorkflow::InitialState(void) const
+QOR_CC:bool __thiscall nsQOR::CWorkflow::DefaultHandleEvent(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+cl.exe /c /I "../../../include" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"_APPOCRITA" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHa  /MDd /GS /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/vc140.pdb"  /Gd  /errorReport:queue ../../../Source/AppocritaQOR/Workflows/CmdLineIPOWorkflow.cpp
+CmdLineIPOWorkflow.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+d:\develop\github\qor\include\../Source/libcxx/include/type_traits(1126): warning C4324: 'std::aligned_storage<12,8>::type': structure was padded due to alignment specifier
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(650): note: see reference to class template instantiation 'std::aligned_storage<12,8>::type' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(723): note: see reference to class template instantiation 'std::function<_Rp(void)>' being compiled
+QOR_CC:__thiscall nsQOR::CCmdLineIPOWorkflow::CCmdLineIPOWorkflow(class nsQOR::IApplication &)
+QOR_CC:__thiscall nsQOR::CCmdLineIPOWorkflow::CCmdLineIPOWorkflow(const class nsQOR::CCmdLineIPOWorkflow &)
+QOR_CC:__thiscall nsQOR::CCmdLineIPOWorkflow::~CCmdLineIPOWorkflow(void)
+QOR_CC:class nsQOR::CCmdLineIPOWorkflow &__thiscall nsQOR::CCmdLineIPOWorkflow::operator =(const class nsQOR::CCmdLineIPOWorkflow &)
+QOR_CC:class nsCodeQOR::CTLRef<class nsQOR::IState> __thiscall nsQOR::CCmdLineIPOWorkflow::InitialState(void)
+QOR_CC:bool __thiscall nsQOR::CApplicationStartupState::HandleEvent(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CApplicationStartupState::OnEnter(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CApplicationStartupState::OnLeave(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CCmdLineInputState::OnEnter(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:bool __thiscall nsQOR::CCmdLineInputState::HandleEvent(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CCmdLineInputState::OnLeave(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:bool __thiscall nsQOR::CProcessingState::HandleEvent(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CProcessingState::OnEnter(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CProcessingState::OnLeave(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:bool __thiscall nsQOR::CCmdLineOutputState::HandleEvent(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CCmdLineOutputState::OnEnter(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+QOR_CC:void __thiscall nsQOR::CCmdLineOutputState::OnLeave(class nsCodeQOR::CTLRef<class nsQOR::IEvent>)
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3338): warning C4201: nonstandard extension used: nameless struct/union
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3330): note: while compiling class template member function 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const'
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2394): note: see reference to function template instantiation 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const' being compiled
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2352): note: see reference to class template instantiation 'std::__scalar_hash<long double,2>' being compiled
+cl.exe /c /I "../../../include" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"_APPOCRITA" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHa  /MDd /GS /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/vc140.pdb"  /Gd  /errorReport:queue ../../../Source/AppocritaQOR/SubSystems/Threading.cpp
+Threading.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+d:\develop\github\qor\include\../Source/libcxx/include/type_traits(1126): warning C4324: 'std::aligned_storage<12,8>::type': structure was padded due to alignment specifier
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(650): note: see reference to class template instantiation 'std::aligned_storage<12,8>::type' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(723): note: see reference to class template instantiation 'std::function<_Rp(void)>' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3338): warning C4201: nonstandard extension used: nameless struct/union
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3330): note: while compiling class template member function 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const'
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2394): note: see reference to function template instantiation 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const' being compiled
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2352): note: see reference to class template instantiation 'std::__scalar_hash<long double,2>' being compiled
+cl.exe /c /I "../../../include" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"_APPOCRITA" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHa  /MDd /GS /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/vc140.pdb"  /Gd  /errorReport:queue ../../../Source/AppocritaQOR/SubSystems/Thread.cpp
+Thread.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+d:\develop\github\qor\include\../Source/libcxx/include/type_traits(1126): warning C4324: 'std::aligned_storage<12,8>::type': structure was padded due to alignment specifier
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(650): note: see reference to class template instantiation 'std::aligned_storage<12,8>::type' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(723): note: see reference to class template instantiation 'std::function<_Rp(void)>' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3338): warning C4201: nonstandard extension used: nameless struct/union
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3330): note: while compiling class template member function 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const'
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2394): note: see reference to function template instantiation 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const' being compiled
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2352): note: see reference to class template instantiation 'std::__scalar_hash<long double,2>' being compiled
+cl.exe /c /I "../../../include" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"_APPOCRITA" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHa  /MDd /GS /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/vc140.pdb"  /Gd  /errorReport:queue ../../../Source/AppocritaQOR/SubSystems/Bluetooth.cpp
+Bluetooth.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+d:\develop\github\qor\include\../Source/libcxx/include/type_traits(1126): warning C4324: 'std::aligned_storage<12,8>::type': structure was padded due to alignment specifier
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(650): note: see reference to class template instantiation 'std::aligned_storage<12,8>::type' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(723): note: see reference to class template instantiation 'std::function<_Rp(void)>' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3338): warning C4201: nonstandard extension used: nameless struct/union
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3330): note: while compiling class template member function 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const'
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2394): note: see reference to function template instantiation 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const' being compiled
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2352): note: see reference to class template instantiation 'std::__scalar_hash<long double,2>' being compiled
+cl.exe /c /I "../../../include" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"_APPOCRITA" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHa  /MDd /GS /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR/vc140.pdb"  /Gd  /errorReport:queue ../../../Source/AppocritaQOR/Applications/CmdLineApp.cpp
+CmdLineApp.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+d:\develop\github\qor\include\../Source/libcxx/include/type_traits(1126): warning C4324: 'std::aligned_storage<12,8>::type': structure was padded due to alignment specifier
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(650): note: see reference to class template instantiation 'std::aligned_storage<12,8>::type' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(723): note: see reference to class template instantiation 'std::function<_Rp(void)>' being compiled
+QOR_CC:__thiscall nsQOR::CCmdLineApp::CCmdLineApp(void)
+QOR_CC:__thiscall nsQOR::CCmdLineApp::~CCmdLineApp(void)
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3338): warning C4201: nonstandard extension used: nameless struct/union
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3330): note: while compiling class template member function 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const'
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2394): note: see reference to function template instantiation 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const' being compiled
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2352): note: see reference to class template instantiation 'std::__scalar_hash<long double,2>' being compiled
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR.exp
+Building Module: MammutQOR
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/MammutQOR.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/MammutQOR.exp
+Building Module: BluefootQOR
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/BluefootQOR.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/BluefootQOR.exp
+Building Module: WINQAPI
+MinGW32.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/WinQAPI.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/WinQAPI.exp
+Building Module: WinQL
+WinQLThreadImpl.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+WinQLFileHandle.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/WinQL.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/WinQL.exp
+Building Module: WinQLGUI
+WinQLFrameWindowView.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+WinQLInteractiveWindowView.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+WinQLOwnerView.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+WinQLParentView.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+WinQLRenderedWindowView.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+WinQLRowView.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+WinQLLayoutController.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+WinQLRowContainer.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+   Creating library ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/WinQLGUI.lib and object ../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/WinQLGUI.exp
+Linking Module: CodeQOR
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Linking Module: ArchQOR
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Linking Module: CompilerQOR
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Linking Module: SystemQOR
+MSW_thread.obj : warning LNK4078: multiple '.CRT' sections found with different attributes (D0300040)
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+LINK : warning LNK4092: shared writable section '.CRT' contains relocations; image may not run correctly
+Linking Module: CQOR
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Linking Module: stdQOR
+WinCmpSupQORVC.lib(SupportFuncs.obj) : warning LNK4217: locally defined symbol ??0bad_alloc@std@@QAE@XZ (public: __thiscall std::bad_alloc::bad_alloc(void)) imported in function "void * __cdecl operator new(unsigned int)" (??2@YAPAXI@Z)
+WinCmpSupQORVC.lib(SupportFuncs.obj) : warning LNK4217: locally defined symbol ?get_new_handler@std@@YAP6AXXZXZ (void (__cdecl*__cdecl std::get_new_handler(void))(void)) imported in function "void * __cdecl operator new(unsigned int)" (??2@YAPAXI@Z)
+WinCmpSupQORVC.lib(Throw.obj) : warning LNK4217: locally defined symbol ?terminate@std@@YAXXZ (void __cdecl std::terminate(void)) imported in function __CxxThrowException@8
+WinCmpSupQORVC.lib(Catch.obj) : warning LNK4049: locally defined symbol ?terminate@std@@YAXXZ (void __cdecl std::terminate(void)) imported
+WinCmpSupQORVC.lib(ExceptionHandling.obj) : warning LNK4049: locally defined symbol ?terminate@std@@YAXXZ (void __cdecl std::terminate(void)) imported
+WinCmpSupQORVC.lib(EH_GuardDescriptor.obj) : warning LNK4049: locally defined symbol ?terminate@std@@YAXXZ (void __cdecl std::terminate(void)) imported
+WinCmpSupQORVC.lib(Catch.obj) : warning LNK4217: locally defined symbol ??0logic_error@std@@QAE@PBD@Z (public: __thiscall std::logic_error::logic_error(char const *)) imported in function "protected: void __thiscall std::__vector_base_common<1>::__throw_length_error(void)const " (?__throw_length_error@?$__vector_base_common@$00@std@@IBEXXZ)
+WinCmpSupQORVC.lib(EH_GuardDescriptor.obj) : warning LNK4049: locally defined symbol ??0logic_error@std@@QAE@PBD@Z (public: __thiscall std::logic_error::logic_error(char const *)) imported
+WinCmpSupQORVC.lib(Catch.obj) : warning LNK4217: locally defined symbol ??_7length_error@std@@6B@ (const std::length_error::`vftable') imported in function "protected: void __thiscall std::__vector_base_common<1>::__throw_length_error(void)const " (?__throw_length_error@?$__vector_base_common@$00@std@@IBEXXZ)
+WinCmpSupQORVC.lib(EH_GuardDescriptor.obj) : warning LNK4049: locally defined symbol ??_7length_error@std@@6B@ (const std::length_error::`vftable') imported
+WinCmpSupQORVC.lib(DynamicCast.obj) : warning LNK4217: locally defined symbol ??0bad_cast@std@@QAE@XZ (public: __thiscall std::bad_cast::bad_cast(void)) imported in function ___RTDynamicCast
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Linking Module: PosumQOR
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Linking Module: WinPosumQOR
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Linking Module: MonkiQOR
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Linking Module: AppocritaQOR
+LINK : D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/AppocritaQOR.dll not found or not built by the last incremental link; performing full link
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Linking Module: MammutQOR
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Linking Module: BluefootQOR
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Linking Module: WINQAPI
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Linking Module: WinQL
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Linking Module: WinQLGUI
+WinSharedBootstrap.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Building Application: Fandango
+cl.exe /c /I "../../../include" /I "../../../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\um" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\shared" /I "C:\Program Files (x86)\Windows Kits\8.1\Include\winrt"   /Zi /nologo /W4 /WX- /MP /Od /Ob2  /Oy- /X /D"QOR" /D"QOR_SYS_OS=QOR_SYS_MSW" /D"WIN32" /D"_USRDLL" /D"_WINDLL" /D"_LIBCPP_DLL" /D"" /D"_DEBUG"    /D"QOR_PROJECT QOR" /D"QOR_ARCHITECTURE=X86_32" /D"QOR_OS=MSW" /D"QOR_SYS_OS_VER=WIN7" /D"QOR_BUILD_FORM=Modular" /D"QOR_CONFIG_HEADER=ASCII" /D"QOR_BUILD_TYPE=Debug" /Gm- /EHsc /RTCsu /MDd /GS- /fp:strict /Zc:wchar_t /Zc:forScope /Zc:threadSafeInit- /Zc:sizedDealloc- /Zc:implicitNoexcept- /GR  /Fo"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Fandango/" /Fd"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Fandango/vc140.pdb"  /Gd  /errorReport:queue ../../../Test/Fandango/Fandango.cpp
+Fandango.cpp
+MSVC Targetting ASCII platform.
+MSVC Targetting x86 platform.
+Compiler runtime type information enabled.
+Compiler multiple threading support enabled.
+Target Architecture Intel x86-32
+Target is a 32bit CPU or a 64bit CPU in 32 bit mode.
+Target i686 instruction set.
+Target Architecture extended instruction set SSE3 required.
+Target Operating System: Microsoft Windows 
+Version: Windows 7 with Internet Explorer 8 is minimum target.
+d:\develop\github\qor\include\../Source/libcxx/include/type_traits(1126): warning C4324: 'std::aligned_storage<12,8>::type': structure was padded due to alignment specifier
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(650): note: see reference to class template instantiation 'std::aligned_storage<12,8>::type' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/__functional_03(723): note: see reference to class template instantiation 'std::function<_Rp(void)>' being compiled
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3338): warning C4201: nonstandard extension used: nameless struct/union
+d:\develop\github\qor\include\../Source/libcxx/include/memory(3330): note: while compiling class template member function 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const'
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2394): note: see reference to function template instantiation 'size_t std::__scalar_hash<long double,2>::operator ()(_Tp) throw() const' being compiled
+        with
+        [
+            _Tp=long double
+        ]
+d:\develop\github\qor\include\../Source/libcxx/include/functional(2352): note: see reference to class template instantiation 'std::__scalar_hash<long double,2>' being compiled
+link.exe /ErrorReport:prompt /SubSystem:CONSOLE /Machine:X86 /TLBID:1 /PDB:"D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Fandango/Fandango.pdb" /OUT:"D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Fandango.exe" /INCREMENTAL /NOLOGO /NODEFAULTLIB /DEBUG /NXCOMPAT /LibPath:"..\..\..\Build\QOR\X86_32\MSW\WIN7\Modular\ASCII\Debug" /LibPath:"C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86" /LibPath:"C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86" /LibPath:"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\Lib\um\x86"   "QORModule.lib" "WinCmpSupQORVC.lib" "ArchQOR.lib" "CodeQOR.lib" "CQOR.lib" "SystemQOR.lib" "WinQAPI.lib" "WinQL.lib" "WinQLGUI.lib" "WinPosumQOR.lib" "PosumQOR.lib" "stdQOR.lib" "MammutQOR.lib" "AppocritaQOR.lib" "MonkiQOR.lib" "BluefootQOR.lib" "kernel32.lib" "WinUsrExeBoot.lib"   /MANIFEST /ManifestFile:"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Fandango.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" @../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Fandangoobjlist.txt
+LINK : D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Fandango.exe not found or not built by the last incremental link; performing full link
+   Creating library D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Fandango.lib and object D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Fandango.exp
+WinUsrExeBoot.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Building Application: Qosh
+link.exe /ErrorReport:prompt /SubSystem:CONSOLE /Machine:X86 /TLBID:1 /PDB:"D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Qosh/Qosh.pdb" /OUT:"D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Qosh.exe" /INCREMENTAL /NOLOGO /NODEFAULTLIB /DEBUG /NXCOMPAT /LibPath:"..\..\..\Build\QOR\X86_32\MSW\WIN7\Modular\ASCII\Debug"   "QORModule.lib" "WinCmpSupQORVC.lib" "ArchQOR.lib" "CodeQOR.lib" "CQOR.lib" "SystemQOR.lib" "WinQAPI.lib" "WinQL.lib" "WinQLGUI.lib" "stdQOR.lib" "AppocritaQOR.lib" "kernel32.lib" "WinUsrExeBoot.lib"   /MANIFEST /ManifestFile:"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Qosh.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" @../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Qoshobjlist.txt
+   Creating library D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Qosh.lib and object D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/Qosh.exp
+WinUsrExeBoot.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes
+Building Application: TeaForTwo
+link.exe /ErrorReport:prompt /SubSystem:CONSOLE /Machine:X86 /TLBID:1 /PDB:"D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/TeaForTwo/TeaForTwo.pdb" /OUT:"D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/TeaForTwo.exe" /INCREMENTAL /NOLOGO /NODEFAULTLIB /DEBUG /NXCOMPAT /LibPath:"..\..\..\Build\QOR\X86_32\MSW\WIN7\Modular\ASCII\Debug" /LibPath:"D:\Tools\Microsoft Visual Studio 14.0\VC\lib" /LibPath:"D:\Tools\Microsoft Visual Studio 14.0\VC\atlmfc\lib" /LibPath:"C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86" /LibPath:"C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86" /LibPath:"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\Lib\um\x86"   "QORModule.lib" "WinCmpSupQORVC.lib" "ArchQOR.lib" "CodeQOR.lib" "CQOR.lib" "SystemQOR.lib" "AppocritaQOR.lib" "WinQAPI.lib" "WinQL.lib" "WinQLGUI.lib" "stdQOR.lib" "kernel32.lib" "WinUsrExeBoot.lib"   /MANIFEST /ManifestFile:"../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/TeaForTwo.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" @../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/TeaForTwoobjlist.txt
+   Creating library D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/TeaForTwo.lib and object D:\Develop\github\QOR\Source\BuildQOR\Cmd/../../../Build/QOR/X86_32/MSW/WIN7/Modular/ASCII/Debug/TeaForTwo.exp
+WinUsrExeBoot.lib(BootStrap.obj) : warning LNK4254: section '.CRT' (40000040) merged into '.data' (C0000040) with different attributes

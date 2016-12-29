@@ -28,8 +28,9 @@
 
 #include <limits.h>
 #include "CodeQOR/ErrorSystem/Error.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
+#include "AppocritaQOR/Controller.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/Application/Process/WinQLProcess.h"
 #include "WinQL/Application/Process/WinQLJob.h"

@@ -128,7 +128,7 @@ namespace nsWin32
 						m_ArrayDeviceInterfaces.Append( pDeviceInterface );	//Add it to the Interface class
 						if( !RefDevInst.IsNull() )							//Add it to the DeviceInstance
 						{
-							RefDevInst->Interfaces().Append( pDeviceInterface );
+							RefDevInst->Interfaces().push_back( pDeviceInterface );
 						}
 					}
 

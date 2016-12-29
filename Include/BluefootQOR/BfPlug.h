@@ -70,8 +70,8 @@ namespace nsBluefoot
 		virtual void OnDisconnectionError( void );
 		bool IsConnected( void );
 		virtual const bool AsyncConnection( void ) const;
-		void SetConnectionProtocol( CBFProtocol::refType refProtocol );
-		CBFProtocol::refType Protocol( void );
+		void SetConnectionProtocol( CBFProtocol::ref_type refProtocol );
+		CBFProtocol::ref_type Protocol( void );
 		virtual void* GetSyncObject( void );
 		virtual void SetSyncObject( void* pSyncObject );
 
@@ -79,7 +79,7 @@ namespace nsBluefoot
 
 	protected:
 		
-		CBFProtocol::refType m_refProtocol;
+		CBFProtocol::ref_type m_refProtocol;
 		bool m_bConnected;
 
 	private:

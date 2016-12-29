@@ -52,6 +52,14 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CHandle::CHandle( int h )
+	{
+		_WINQ_FCONTEXT( "CHandle::CHandle" );
+		m_h = (void*)(static_cast< Cmp_int_ptr >( h ));
+		m_pObject = 0;
+	}
+
+	//--------------------------------------------------------------------------------
 	CHandle::CHandle( const CHandle& src )
 	{
 		*this = src;
@@ -108,7 +116,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CHandle::IsInvalid( void )
+	bool CHandle::IsInvalid( void ) const
 	{
 		_WINQ_FCONTEXT( "CHandle::IsNull" );
 		return ( m_h == Invalid_Handle_Value ) ? true : false;

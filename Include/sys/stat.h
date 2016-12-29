@@ -31,7 +31,7 @@
 #include QOR_SYS_PLATFORMSYSTYPES(stat)
 #include QOR_SYS_PLATFORMTYPES(stddef)
 
-typedef nsPlatform::stat stat;
+typedef nsPlatform::file_stat stat;
 typedef nsPlatform::blkcnt_t blkcnt_t;
 typedef nsPlatform::blksize_t blksize_t;
 typedef nsPlatform::dev_t dev_t;
@@ -44,6 +44,7 @@ typedef nsPlatform::off_t off_t;
 typedef nsPlatform::time_t time_t;
 typedef nsPlatform::timespec timespec;
 typedef nsPlatform::errno_t errno_t;
+typedef nsPlatform::sstat sstat;
 typedef nsPlatform::sstat _sstat;
 typedef nsPlatform::sstat64 __sstat64;
 typedef nsPlatform::sstati64 _sstati64;
@@ -125,9 +126,7 @@ __QCMP_STARTLINKAGE_C
 	__QOR_INTERFACE( __CQOR ) int mkfifoat( int, const char*, ::mode_t );
 	__QOR_INTERFACE( __CQOR ) int mknod( const char*, ::mode_t, ::dev_t );
 	__QOR_INTERFACE( __CQOR ) int mknodat( int, const char*, ::mode_t, ::dev_t );
-__QCMP_ENDLINKAGE_C
-	__QOR_INTERFACE( __CQOR ) int _stat( const char* __QCMP_RESTRICT, stat* __QCMP_RESTRICT );
-__QCMP_STARTLINKAGE_C
+	//__QOR_INTERFACE( __CQOR ) int _stat( const char* __QCMP_RESTRICT, stat* __QCMP_RESTRICT );
 	__QOR_INTERFACE( __CQOR ) ::mode_t umask( ::mode_t );
 	__QOR_INTERFACE( __CQOR ) int utimensat( int, const char*, const ::timespec[ 2 ], int );
 

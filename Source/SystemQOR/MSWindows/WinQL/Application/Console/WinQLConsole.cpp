@@ -46,7 +46,7 @@ namespace
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-	CCRTFile* CConsole::s_pConsoleInput = (CCRTFile*)(-2);	// console input
+	//CCRTFile* CConsole::s_pConsoleInput = (CCRTFile*)(-2);	// console input
 	CCRTFile* CConsole::s_pConsoleOutput = (CCRTFile*)(-2);	// console output
 
 	using namespace nsWinQAPI;
@@ -65,9 +65,214 @@ namespace nsWin32
 		return bResolved;
 	}
 
+	__QOR_IMPLEMENT_OCLASS_LUID( CConsoleController );
+
+	//------------------------------------------------------------------------------
+	CConsoleController::CConsoleController() : nsQOR::CController()
+	{
+		_WINQ_FCONTEXT( "CConsoleController::CConsoleController" );
+	}
+
+	//------------------------------------------------------------------------------
+	CConsoleController::~CConsoleController()
+	{
+		_WINQ_FCONTEXT( "CConsoleController::~CConsoleController" );
+	}
+
+	//------------------------------------------------------------------------------
+	CConsoleController::CConsoleController( const CConsoleController& src )
+	{
+		_WINQ_FCONTEXT( "CConsoleController::CConsoleController" );
+	}
+
+	//------------------------------------------------------------------------------
+	CConsoleController& CConsoleController::operator = ( const CConsoleController& src )
+	{
+		_WINQ_FCONTEXT( "CConsoleController::operator =" );
+		return *this;
+	}
+
+	//------------------------------------------------------------------------------
+	bool CConsoleController::HandleCtrl( unsigned long Ctrl )
+	{
+		_WINQ_FCONTEXT( "CConsoleController::HandleCtrl" );
+		bool bHandled = false;
+		switch( Ctrl )
+		{
+		case CTRL_C_EVENT:
+			bHandled = OnCtrlC();
+			break;
+		case CTRL_CLOSE_EVENT:
+			bHandled = OnClose();
+			break;
+		case CTRL_BREAK_EVENT:
+			bHandled = OnBreak();
+			break;
+		case CTRL_LOGOFF_EVENT:
+			bHandled = OnLogOff();
+			break;
+		case CTRL_SHUTDOWN_EVENT:
+			bHandled = OnShutdown();
+			break;
+		default:
+			bHandled = OnUnknownCtrl();
+		}
+		return bHandled;
+	}
+
+	//------------------------------------------------------------------------------
+	void CConsoleController::HandleEvent( InputRecord& Event )
+	{
+		_WINQ_FCONTEXT( "CConsoleController::HandleEvent" );
+		switch( Event.EventType )
+		{
+		case KEY_EVENT:
+			OnKeyEvent( Event.Event.KeyEvent );
+			break;
+		case MOUSE_EVENT:
+			OnMouseEvent( Event.Event.MouseEvent );
+			break;
+		case WINDOW_BUFFER_SIZE_EVENT:
+			OnWindowBufferSizeEvent( Event.Event.WindowBufferSizeEvent );
+			break;
+		case FOCUS_EVENT:
+			OnFocusEvent( Event.Event.FocusEvent );
+			break;
+		case MENU_EVENT:
+			OnMenuEvent( Event.Event.MenuEvent );
+			break;
+		}
+	}
+
+	//------------------------------------------------------------------------------
+	void CConsoleController::OnKeyEvent( KeyEventRecord& KeyEvent )
+	{
+		_WINQ_FCONTEXT( "CConsoleController::OnKeyEvent" );
+	}
+
+	//------------------------------------------------------------------------------
+	void CConsoleController::OnMouseEvent( MouseEventRecord& MouseEvent )
+	{
+		_WINQ_FCONTEXT( "CConsoleController::OnMouseEvent" );
+	}
+
+	//------------------------------------------------------------------------------
+	void CConsoleController::OnWindowBufferSizeEvent( WindowBufferSizeRecord& WindowBufferSizeEvent )
+	{
+		_WINQ_FCONTEXT( "CConsoleController::OnWindowBufferSizeEvent" );
+	}
+
+	//------------------------------------------------------------------------------
+	void CConsoleController::OnFocusEvent( FocusEventRecord& FocusEvent )
+	{
+		_WINQ_FCONTEXT( "CConsoleController::OnFocusEvent" );
+	}
+
+	//------------------------------------------------------------------------------
+	void CConsoleController::OnMenuEvent( MenuEventRecord& MenuEvent )
+	{
+		_WINQ_FCONTEXT( "CConsoleController::OnMenuEvent" );
+	}
+
+	//------------------------------------------------------------------------------
+	bool CConsoleController::OnCtrlC()
+	{
+		_WINQ_FCONTEXT( "CConsoleController::OnCtrlC" );
+		return false;
+	}
+
+	//------------------------------------------------------------------------------
+	bool CConsoleController::OnClose()
+	{
+		_WINQ_FCONTEXT( "CConsoleController::OnClose" );
+		return false;
+	}
+
+	//------------------------------------------------------------------------------
+	bool CConsoleController::OnBreak()
+	{
+		_WINQ_FCONTEXT( "CConsoleController::OnBreak" );
+		return false;
+	}
+
+	//------------------------------------------------------------------------------
+	bool CConsoleController::OnLogOff()
+	{
+		_WINQ_FCONTEXT( "CConsoleController::OnLogOff" );
+		return false;
+	}
+
+	//------------------------------------------------------------------------------
+	bool CConsoleController::OnShutdown()
+	{
+		_WINQ_FCONTEXT( "CConsoleController::OnShutdown" );
+		return false;
+	}
+
+	//------------------------------------------------------------------------------
+	bool CConsoleController::OnUnknownCtrl()
+	{
+		_WINQ_FCONTEXT( "CConsoleController::OnUnknownCtrl" );
+		return false;
+	}
+
+
+	__QOR_IMPLEMENT_OCLASS_LUID( CConsoleInput );
+
+	//------------------------------------------------------------------------------
+	CConsoleInput::CConsoleInput() : CWaitableObject( nsWinQAPI::CKernel32::GetStdHandle( nsWin32::Std_Input_Handle ) )
+	{
+		_WINQ_FCONTEXT( "CConsoleInput::CConsoleInput" );
+	}
+
+	//------------------------------------------------------------------------------
+	CConsoleInput::~CConsoleInput()
+	{
+		_WINQ_FCONTEXT( "CConsoleInput::~CConsoleInput" );
+	}
+
+	//------------------------------------------------------------------------------
+	CConsoleInput::CConsoleInput( const CConsoleInput& src ) : CWaitableObject( src )
+	{
+		_WINQ_FCONTEXT( "CConsoleInput::CConsoleInput" );
+	}
+
+	//------------------------------------------------------------------------------
+	CConsoleInput& CConsoleInput::operator = ( const CConsoleInput& src ) 
+	{
+		_WINQ_FCONTEXT( "CConsoleInput::operator =" );
+		CWaitableObject::operator=( src );
+		return *this;
+	}
+
+	//------------------------------------------------------------------------------
+	bool CConsoleInput::OnCtrl( unsigned long ulCtrl )
+	{
+		_WINQ_FCONTEXT( "CConsoleInput::OnCtrl" );
+		bool bHandled = Controller().HandleCtrl( ulCtrl );
+		return bHandled;
+	}
+
+	//------------------------------------------------------------------------------
+	void CConsoleInput::OnSignaled( void )
+	{
+		_WINQ_FCONTEXT( "CConsoleInput::OnSignaled" );
+		unsigned long ulEventCount = 0;
+		nsWinQAPI::CKernel32::ReadConsoleInput( m_Handle.Use(), reinterpret_cast< ::PINPUT_RECORD>( m_InputBuffer ), scuiBufferSize, &ulEventCount );
+
+		for( unsigned long ulEvent = 0; ulEvent < ulEventCount; ulEvent++ )
+		{
+			Controller().HandleEvent( m_InputBuffer[ ulEvent ] );
+		}
+	}
+
+
+	__QOR_IMPLEMENT_OCLASS_LUID( CConsole );
+
 	//--------------------------------------------------------------------------------
 	CConsole::CConsole() : m_Win32DefaultScreenBuffer( 0,0 )
 	{	
+		_WINQ_FCONTEXT( "CConsole::CConsole" );
 #ifndef _CONSOLE
 		CConsole::__initconin();
 		CConsole::__initconout();
@@ -85,17 +290,17 @@ namespace nsWin32
 		__QCS_ATTACH_REF_PROP_RO( CConsole, Window, GetWindow );
 		__QCS_ATTACH_REF_PROP_RO( CConsole, NumberOfMouseButtons, GetNumberOfMouseButtons );
 		__QCS_ATTACH_REF_PROP_RO( CConsole, ScreenBuffer, GetScreenBuffer );
-		/*
-		__QCS_REF_PROP( CConsole, CFileHandle,				InputStdHandle			);
-		__QCS_REF_PROP( CConsole, CFileHandle,				OutputStdHandle			);
-		__QCS_REF_PROP( CConsole, CFileHandle,				ErrorStdHandle			);		
-		*/
+		__QCS_ATTACH_REF_PROP_RO( CConsole, InputStdHandle, GetInputStdHandle );
+
+		m_Helper.SetCtrlHandler( (nsWin32::CtrlHandlerCallback)&CtrlHandler, true );
+
 		g_pConsole = this;
 	}
 
 	//------------------------------------------------------------------------------
 	CConsole::~CConsole()
 	{
+		_WINQ_FCONTEXT( "CConsole::~CConsole" );
 #ifndef _CONSOLE
 		CConsole::__termcon();
 #endif
@@ -103,9 +308,29 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	CConsole::refType CConsole::TheWin32Console()
+	int __stdcall CConsole::CtrlHandler(unsigned long CtrlType )
 	{
-		CConsole::refType Ref;
+		_WINQ_SFCONTEXT( "CConsole::CtrlHandler" );
+		int iResult = 0;
+		if( g_pConsole )
+		{
+			iResult = g_pConsole->InputStdHandle()->OnCtrl( CtrlType ) ? 1 : 0;
+		}
+		return iResult;
+	}
+
+	//------------------------------------------------------------------------------
+	CConsoleInput::ref_type CConsole::GetInputStdHandle()
+	{
+		_WINQ_FCONTEXT( "CConsole::GetInputStdHandle" );
+		return m_ConsoleInput.Ref();
+	}
+
+	//------------------------------------------------------------------------------
+	CConsole::ref_type CConsole::TheWin32Console()
+	{
+		_WINQ_SFCONTEXT( "CConsole::TheWin32Console" );
+		CConsole::ref_type Ref;
 		if( g_pConsole == 0 )
 		{
 			Ref.Attach( new CConsole(), true );
@@ -117,11 +342,12 @@ namespace nsWin32
 		return Ref;
 	}
 	
+	/*
 	//--------------------------------------------------------------------------------
 	nsWin32::CCRTFile* CConsole::ConsoleInputFile()
 	{
 		return CConsole::s_pConsoleInput;
-	}
+	}*/
 
 	//--------------------------------------------------------------------------------
 	nsWin32::CCRTFile* CConsole::ConsoleOutputFile()
@@ -132,6 +358,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CConsole::eConsoleDisplayMode CConsole::GetDisplayMode( void )
 	{
+		_WINQ_FCONTEXT( "CConsole::GetDisplayMode" );
 		unsigned long ulDisplayMode = 0;
 		m_Helper.GetDisplayMode( ulDisplayMode );
 		return static_cast< eConsoleDisplayMode >( ulDisplayMode );
@@ -140,6 +367,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	bool CConsole::SetDisplayMode( const eConsoleDisplayMode& Mode )
 	{
+		_WINQ_FCONTEXT( "CConsole::SetDisplayMode" );
 		bool bResult = false;
 		Coord NewScreenBufferDimensions;
 		NewScreenBufferDimensions.X = 0;
@@ -148,50 +376,11 @@ namespace nsWin32
 		bResult = m_Win32DefaultScreenBuffer.SetDisplayMode( ulDisplayMode, NewScreenBufferDimensions ) ? true : false;
 		return bResult;
 	}
-/*
-	//------------------------------------------------------------------------------
-	void* CConsole::GetInputHandle( void )
-	{
-		return m_Win32DefaultScreenBuffer.
-	}
-
-	//------------------------------------------------------------------------------
-	bool CConsole::SetInputHandle( void* const& InputHandle )
-	{
-		bool bResult = false;
-		return bResult;
-	}
-
-	//------------------------------------------------------------------------------
-	void* CConsole::GetOutputHandle( void )
-	{
-		return 0;//
-	}
-
-	//------------------------------------------------------------------------------
-	bool CConsole::SetOutputHandle( void* const& OutputHandle )
-	{
-		bool bResult = false;
-		return bResult;
-	}
-
-	//------------------------------------------------------------------------------
-	void* CConsole::GetErrHandle( void )
-	{
-		return 0;//
-	}
-
-	//------------------------------------------------------------------------------
-	bool CConsole::SetErrHandle( void* const& ErrHandle )
-	{
-		bool bResult = false;
-		return bResult;
-	}
-*/
 	
 	//------------------------------------------------------------------------------
 	CTString CConsole::GetTitleText( void )
 	{
+		_WINQ_FCONTEXT( "CConsole::GetTitleText" );
 		CTString strTitle;
 		strTitle.Reserve( 255 );
 		m_Helper.GetTitle( strTitle );
@@ -199,20 +388,23 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	bool CConsole::SetTitleText( const CTString& Title )
+	bool CConsole::SetTitleText( const CTString& _Title )
 	{
-		return m_Helper.SetTitle( Title );
+		_WINQ_FCONTEXT( "CConsole::SetTitleText" );
+		return m_Helper.SetTitle( _Title );
 	}
 	
 	//------------------------------------------------------------------------------
 	CCodePage CConsole::GetOutputCodePage( void )
 	{
+		_WINQ_FCONTEXT( "CConsole::GetOutputCodePage" );
 		return m_Helper.GetOutputCP();
 	}
 	
 	//------------------------------------------------------------------------------
 	bool CConsole::SetOutputCodePage( const CCodePage& OutputCP )
 	{
+		_WINQ_FCONTEXT( "CConsole::SetOutputCodePage" );
 		bool bResult = false;// m_Helper.SetOutputCP(OutputCP);
 		return bResult;
 	}
@@ -220,12 +412,14 @@ namespace nsWin32
 	//------------------------------------------------------------------------------
 	CCodePage CConsole::GetInputCodePage( void )
 	{
+		_WINQ_FCONTEXT( "CConsole::GetInputCodePage" );
 		return m_Helper.GetCP();
 	}
 
 	//------------------------------------------------------------------------------
 	bool CConsole::SetInputCodePage( const CCodePage& InputCP )
 	{
+		_WINQ_FCONTEXT( "CConsole::SetInputCodePage" );
 		bool bResult = m_Helper.SetCP( InputCP );
 		return bResult;
 	}
@@ -233,6 +427,7 @@ namespace nsWin32
 	//------------------------------------------------------------------------------
 	CTString CConsole::GetOriginalTitle( void )
 	{
+		_WINQ_FCONTEXT( "CConsole::GetOriginalTitle" );
 		CTString strTitle;
 		strTitle.Reserve( 255 );
 		unsigned long ulLen = m_Helper.GetOriginalTitle( strTitle() );
@@ -243,21 +438,24 @@ namespace nsWin32
 	//------------------------------------------------------------------------------
 	ConsoleHistoryInfo CConsole::GetHistoryInfo( void )
 	{
+		_WINQ_FCONTEXT( "CConsole::GetHistoryInfo" );
 		ConsoleHistoryInfo Info;
 		m_Helper.GetHistoryInfo( Info );
 		return Info;
 	}
 
 	//------------------------------------------------------------------------------
-	bool CConsole::SetHistoryInfo( const ConsoleHistoryInfo& HistoryInfo )
+	bool CConsole::SetHistoryInfo( const ConsoleHistoryInfo& _HistoryInfo )
 	{
-		bool bResult = m_Helper.SetHistoryInfo( HistoryInfo );
+		_WINQ_FCONTEXT( "CConsole::SetHistoryInfo" );
+		bool bResult = m_Helper.SetHistoryInfo( _HistoryInfo );
 		return bResult;
 	}
 
 	//------------------------------------------------------------------------------
 	ConsoleSelectionInfo CConsole::GetSelectionInfo( void )
 	{
+		_WINQ_FCONTEXT( "CConsole::GetSelectionInfo" );
 		ConsoleSelectionInfo Info;
 		m_Helper.GetSelectionInfo( Info );
 		return Info;
@@ -266,12 +464,14 @@ namespace nsWin32
 	//------------------------------------------------------------------------------
 	COSWindow::refType CConsole::GetWindow( void )
 	{
+		_WINQ_FCONTEXT( "CConsole::GetWindow" );
 		return m_Helper.GetWindow();
 	}
 	
 	//------------------------------------------------------------------------------
 	unsigned long CConsole::GetNumberOfMouseButtons( void )
 	{
+		_WINQ_FCONTEXT( "CConsole::GetNumberOfMouseButtons" );
 		unsigned long ulResult = 0;
 		m_Helper.GetNumberOfMouseButtons( ulResult );
 		return ulResult;
@@ -280,6 +480,7 @@ namespace nsWin32
 	//------------------------------------------------------------------------------
 	CConsoleScreenBuffer::refType CConsole::GetScreenBuffer()
 	{
+		_WINQ_FCONTEXT( "CConsole::GetScreenBuffer" );
 		return m_Win32DefaultScreenBuffer.Ref();
 	}
 	
@@ -287,7 +488,7 @@ namespace nsWin32
 	void CConsole::__initconin()
 	{
 		_WINQ_SFCONTEXT( "CConsole::__initconin" );
-		if( s_pConsoleInput == (nsWin32::CFile*)(-2) )
+		//if( s_pConsoleInput == (nsWin32::CFile*)(-2) )
 		{
 			CConsStartContHandler ErrHandler;
 			nsWin32::CConsoleHelper ConsoleHelper;
@@ -295,11 +496,11 @@ namespace nsWin32
 			if( hstdin.IsNull() || hstdin.IsInvalid() )
 			{
 				ConsoleHelper.Alloc();
-				s_pConsoleInput = new nsWin32::CCRTFile( "CONIN$", Generic_Read | Generic_Write, File_Share_Read| File_Share_Write, 0, Open_Existing, 0, 0 );
+				//s_pConsoleInput = new nsWin32::CCRTFile( "CONIN$", Generic_Read | Generic_Write, File_Share_Read| File_Share_Write, 0, Open_Existing, 0, 0 );
 			}
 			else
 			{
-				s_pConsoleInput = new nsWin32::CCRTFile( hstdin );
+				//s_pConsoleInput = new nsWin32::CCRTFile( hstdin );
 			}
 		}
 	}
@@ -335,12 +536,13 @@ namespace nsWin32
 			s_pConsoleOutput = 0;
 		}
 
+		/*
 		if( s_pConsoleInput > 0 )
 		{
 			delete s_pConsoleInput;
 			s_pConsoleInput = 0;
 		}
-
+		*/
 	}
 
 }//nsWin32

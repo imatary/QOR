@@ -315,7 +315,7 @@ __QCMP_WARNING_POP//( __QCMP_WARN_THIS_USED_IN_BASE_INIT_LIST )
 	}
 
 	//--------------------------------------------------------------------------------
-	CRectangle& CPaintDC::PaintingRectangle( void )
+	CRectangle CPaintDC::PaintingRectangle( void )
 	{
 		CRectangle rc( m_PS.rcPaint.left, m_PS.rcPaint.top, m_PS.rcPaint.right, m_PS.rcPaint.bottom );
 		return rc;

@@ -34,7 +34,7 @@
 #include "BluefootQOR/Filters/UTF8CodePointFilter.h"
 #include "BluefootQOR/Filters/UTF16CodePointFilter.h"
 #include "BluefootQOR/Sinks/StringSink.h"
-#include "CodeQOR/Events/ThreadLocalEventSink.h"
+#include "AppocritaQOR/Event.h"
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot
@@ -42,7 +42,7 @@ namespace nsBluefoot
 	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFTextReader;
 
 	//------------------------------------------------------------------------------
-	class CRecognizerEventSink : public nsCodeQOR::CThreadLocalEventSink
+	class CRecognizerEventSink : public nsQOR::CEventSink
 	{
 	public:
 

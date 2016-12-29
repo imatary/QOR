@@ -186,7 +186,7 @@ namespace nsWin32
 
 			m_RootTemplate.cdit = static_cast< unsigned short >( m_ItemList.GetCount() );
 
-			for( int i = 1; i <= m_ItemList.GetCount(); i++ )
+			for( unsigned int i = 1; i <= m_ItemList.GetCount(); i++ )
 			{
 				CDlgItem* pItem = m_ItemList.GetItem( i );
 				
@@ -229,7 +229,7 @@ namespace nsWin32
 			*pData = 0;
 			pData += sizeof( TCHAR );
 			
-			for( int i = 1; i <= m_ItemList.GetCount(); i++ )
+			for( unsigned int i = 1; i <= m_ItemList.GetCount(); i++ )
 			{
 				CDlgItem* pItem = m_ItemList.GetItem( i );
 				pData = (unsigned char*)( ( ( Cmp_ulong_ptr )pData + 3 ) & ~3 );

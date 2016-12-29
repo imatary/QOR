@@ -28,7 +28,7 @@
 #include "CodeQOR/Text/UTF8String.h"
 #include "CodeQOR/Text/UTF16String.h"
 #include "CodeQOR/Text/UTF32String.h"
-
+#include "AppocritaQOR/Event.h"
 //------------------------------------------------------------------------------
 namespace nsCodeQOR
 {

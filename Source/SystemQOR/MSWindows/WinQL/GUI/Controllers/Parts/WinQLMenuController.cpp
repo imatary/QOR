@@ -25,6 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include "CompilerQOR.h"
+#include "SystemQOR/System.h"
 __QCMP_WARNING_PUSH
 __QCMP_WARNING_DISABLE( __QCMP_WARN_THIS_USED_IN_BASE_INIT_LIST, "Safe usage: stored in member for later use" )
 #include "WinQL/GUI/Controllers/Parts/MenuController.h"
@@ -39,7 +40,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CMenuController );
 
 	//--------------------------------------------------------------------------------
-	CMenuController::CMenuController( nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent ) : CBaseWindowPartController( pModelItem, pParent )
+	CMenuController::CMenuController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CBaseWindowPartController( pModelItem, Parent )
 	{
 		_WINQ_FCONTEXT( "CMenuController::CMenuController" );
 	}
@@ -148,7 +149,7 @@ namespace nsWin32
 				unsigned short wItemID = static_cast< unsigned short >( -1 );
 				int iIndex = 0;
 
-				if( System().Information(QOR_PP_SHARED_OBJECT_ACCESS).IsWindows98orME() )
+				if( TheSystem().As< nsWin32::CSystem >()->Information(QOR_PP_SHARED_OBJECT_ACCESS).IsWindows98orME() )
 				{
 					wItemID = LoWord( wParam );
 					iIndex = static_cast< int >( HiWord( wParam ) );

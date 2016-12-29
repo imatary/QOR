@@ -315,7 +315,7 @@ namespace nsWin32
 					CTSLocalServer::SessionInfo Info;
 					Info.SessionId = ppSessionInfo[ ulIndex ]->SessionId;
 					Info.State = static_cast< CTSLocalServer::eConnectStateClass >( ppSessionInfo[ ulIndex ]->State );
-					Info.strWinStationName = ppSessionInfo[ ulIndex ]->pWinStationName;
+					Info.strWinStationName = CTString( ppSessionInfo[ ulIndex ]->pWinStationName );
 					Sessions.Append( Info );
 				}				
 			}
@@ -354,7 +354,7 @@ namespace nsWin32
 					CTSLocalServer::ProcessInfo Info;
 					Info.ProcessId = ppProcessInfo[ ulIndex ]->ProcessId;
 					Info.SessionId = ppProcessInfo[ ulIndex ]->SessionId;
-					Info.strProcessName = ppProcessInfo[ ulIndex ]->pProcessName;
+					Info.strProcessName = CTString( ppProcessInfo[ ulIndex ]->pProcessName );
 					Processes.Append( Info );
 				}				
 			}
@@ -781,11 +781,13 @@ namespace nsWin32
 		SecurityLayer = pConfig->SecurityLayer;
 		MinEncryptionLevel = pConfig->MinEncryptionLevel;   
 		UserAuthentication = pConfig->UserAuthentication;
-		m_strComment = pConfig->Comment;
-		m_strLogonUserName = pConfig->LogonUserName;
-		m_strLogonDomain = pConfig->LogonDomain;
-		m_strWorkDirectory = pConfig->WorkDirectory;
-		m_strInitialProgram = pConfig->InitialProgram;
+		m_strComment = CWString( (const wchar_t*)(pConfig->Comment), static_cast< unsigned short >( 61 ) ).toTString();
+		m_strLogonUserName = CWString( (const wchar_t*)( pConfig->LogonUserName ), static_cast< unsigned short >( 21 ) ).toTString();;
+		m_strLogonDomain = CWString( (const wchar_t*)( pConfig->LogonDomain ), static_cast< unsigned short >( 18 ) ).toTString();
+		CWString tmp( (const wchar_t*)( pConfig->WorkDirectory ), static_cast<unsigned short>( MAX_PATH + 1 ) );
+		m_strWorkDirectory = tmp.toTString();
+		CWString tmp2( (const wchar_t*)( pConfig->InitialProgram ), static_cast<unsigned short>( MAX_PATH + 1 ) );
+		m_strInitialProgram = tmp2.toTString();
 	}
 
 	//--------------------------------------------------------------------------------

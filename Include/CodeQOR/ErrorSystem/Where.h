@@ -62,8 +62,8 @@ namespace nsCodeQOR
 		CObjectContextBase& GetObjectContext( void );
 		void SetObjectContext( CObjectContextBase& ObjContext );
 		CBaseErrorDomain* GetDomain( void ) const;
-		CThreadContextBase* GetThreadContext( void ) const;
-		void SetThreadContext( CThreadContextBase* pThreadContext );		
+		nsQOR::IThread::ref_type GetThreadContext( void ) const;
+		void SetThreadContext( nsQOR::IThread::ref_type pThreadContext );
 		CLoadableModuleBase* GetModuleContext( void ) const;
 		void SetModuleContext( CLoadableModuleBase* pModuleContext );
 		CProcessBase* GetProcessContext( void ) const;
@@ -78,7 +78,7 @@ namespace nsCodeQOR
 		const char* m_szFile;
 		CObjectContextBase m_ObjContext;
 		nsCodeQOR::CBaseErrorDomain* m_pDomain;
-		CThreadContextBase* m_pThreadContext;		
+		nsQOR::IThread::ref_type m_pThreadContext;
 		CLoadableModuleBase* m_pModuleContext;
 		CProcessBase* m_pProcessContext;
 		bool m_bInException;//TODO: probably should be an exception context pointer

@@ -43,7 +43,6 @@
 namespace nsWin32
 {
 	//--------------------------------------------------------------------------------
-	//CDeviceFile is only available as a base class
 	class __QOR_INTERFACE( __WINQL ) CDeviceFile
 	{	
 
@@ -54,13 +53,26 @@ namespace nsWin32
 		virtual ~CDeviceFile();
 		nsCodeQOR::CTCRef< CDeviceHandle > Handle();
 
-	protected:
-
-		CDeviceHandle m_Handle;
-
-		CDeviceFile();
 		CDeviceFile( const TCHAR* pDeviceName, unsigned long dwDesiredAccess, unsigned long dwShareMode, unsigned long dwFlagsAndAttributes );
 		CDeviceFile( CDeviceHandle& hExisting );
+
+		virtual bool Read( void* lpBuffer, unsigned long nNumberOfBytesToRead, unsigned long* lpNumberOfBytesRead, nsWin32::LPOVERLAPPED lpOverlapped );
+		virtual bool ReadEx( void* lpBuffer, unsigned long nNumberOfBytesToRead, nsWin32::LPOVERLAPPED lpOverlapped, nsWin32::LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine );
+		virtual bool Write( const void* lpBuffer, unsigned long nNumberOfBytesToWrite, unsigned long* lpNumberOfBytesWritten, nsWin32::LPOVERLAPPED lpOverlapped );
+		virtual bool WriteEx( const void* lpBuffer, unsigned long nNumberOfBytesToWrite, nsWin32::LPOVERLAPPED lpOverlapped, nsWin32::LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine );
+		virtual bool IsOpen( void );
+		virtual bool FlushBuffers( void );
+		virtual unsigned long GetType( void );
+		virtual bool SetEOF( void );
+		virtual Cmp__int64 Seek( Cmp__int64 pos, int mthd );
+		virtual Cmp__int64 Tell( void );
+		virtual bool SupportsPosition( void );
+
+	protected:
+
+		CDeviceFile();
+
+		CDeviceHandle m_Handle;
 
 	private:
 

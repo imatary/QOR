@@ -40,7 +40,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CWinCtrlParentController );
 
 	//--------------------------------------------------------------------------------
-	CWinCtrlParentController::CWinCtrlParentController( nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent ) : CBaseWindowPartController( pModelItem, pParent )
+	CWinCtrlParentController::CWinCtrlParentController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CBaseWindowPartController( pModelItem, Parent )
 	{
 		_WINQ_FCONTEXT( "CWinCtrlParentController:CWinCtrlParentController" );
 	}

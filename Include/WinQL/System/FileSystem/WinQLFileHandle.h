@@ -40,6 +40,8 @@
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
+	typedef CDeviceHandle CFileHandle;
+	/*
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CFileHandle : public CDeviceHandle
 	{
@@ -56,7 +58,7 @@ namespace nsWin32
 		CFileHandle& operator = ( int iFile );
 		virtual ~CFileHandle();
 	};
-
+	*/
 }//nsWin32
 
 #endif//WINQL_FILEHANDLE_H_3

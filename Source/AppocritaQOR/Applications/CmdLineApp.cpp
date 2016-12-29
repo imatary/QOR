@@ -1,6 +1,6 @@
-//ThreadLocalEventSink.h
+//CmdLineApp.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,42 +24,24 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Event consumer for Thread Local Event.
+#include "AppocritaQOR/Applications/CmdLineApp.h"
+#include "CodeQOR/Tracing/FunctionContextBase.h"
 
-#ifndef CODEQOR_EVENTSINK_THREADLOCAL_H_3
-#define CODEQOR_EVENTSINK_THREADLOCAL_H_3
-
-#include "CompilerQOR.h"
-
-#ifdef	__QCMP_OPTIMIZEINCLUDE
-#pragma	__QCMP_OPTIMIZEINCLUDE
-#endif//__QCMP_OPTIMIZEINCLUDE
-
-#include "CodeQOR.h"
-
-//--------------------------------------------------------------------------------
-namespace nsCodeQOR
+//------------------------------------------------------------------------------
+namespace nsQOR
 {
-	class __QOR_INTERFACE( __CODEQOR ) CThreadLocalEvent;
+	__QOR_IMPLEMENT_OCLASS_LUID( CCmdLineApp );
 
-	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __CODEQOR ) CThreadLocalEventSink
+	//------------------------------------------------------------------------------
+	CCmdLineApp::CCmdLineApp() : CApplication( CRole::CmdLineTool() )
+	,	m_Workflow( *this )
 	{
-	public:
+		__QCS_MEMBER_FCONTEXT( "CCmdLineApp::CCmdLineApp" );
+	}
 
-		CThreadLocalEventSink( CThreadLocalEvent* pEvent = 0 );
-		virtual ~CThreadLocalEventSink();
-		virtual void operator()( void ) = 0;
-		bool Connect( CThreadLocalEvent* pEvent );
-		void Disconnect();
-
-	protected:
-
-		bool m_bConnected;
-		CThreadLocalEvent* m_pEvent;
-
-	};
-
-}//nsCodeQOR
-
-#endif//CODEQOR_EVENTSINK_THREADLOCAL_H_3
+	//------------------------------------------------------------------------------
+	CCmdLineApp::~CCmdLineApp()
+	{
+		__QCS_MEMBER_FCONTEXT( "CCmdLineApp::~CCmdLineApp" );
+	}
+}//nsAppocrita

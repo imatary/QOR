@@ -43,7 +43,7 @@ __QCMP_STARTLINKAGE_C
 //Generate an IPC key
 __QOR_INTERFACE( __CQOR ) key_t ftok( const char* path, int id )
 {
-	::stat st;
+	::_sstat st;
 	if( _stat( path, &st ) < 0 ) 
 	{
 		return -1;

@@ -74,7 +74,7 @@ namespace nsWin32
 
 				if( !bResult && pPipeConnector->Protocol() )
 				{
-					pPipeConnector->Protocol()->OnReadError();
+					pPipeConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadError();
 				}
 			}
 			else
@@ -91,11 +91,11 @@ namespace nsWin32
 				{
 					if( bResult )
 					{
-						pPipeConnector->Protocol()->OnReadSuccess( ulNumberOfUnitsRead );
+						pPipeConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadSuccess( ulNumberOfUnitsRead );
 					}
 					else
 					{
-						pPipeConnector->Protocol()->OnReadError();
+						pPipeConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadError();
 					}
 				}
 			}

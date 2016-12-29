@@ -1,6 +1,6 @@
 //SystemSelection.h
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2015, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,7 +29,14 @@
 #ifndef SYSTEMQOR_SYSTEMSELECTION_H_1
 #define SYSTEMQOR_SYSTEMSELECTION_H_1
 
-#include "SystemQOR/Config/OSDetection.h"
+#include "SystemQOR/Config/SupportedOSList.h"
+
+#ifdef QOR_OS
+#	undef QOR_SYS_OS		//TODO: Make this unnecessary by removing the preprocessor definition of QOR_SYS_OS in favour of QOR_OS
+#	define QOR_SYS_OS QOR_PP_CAT(QOR_SYS_,QOR_OS)
+#else
+#	include "SystemQOR/Config/OSDetection.h"
+#endif
 
 #	if		( QOR_SYS_OS==QOR_SYS_MSW )
 
@@ -44,10 +51,14 @@
 #		define QOR_CONFIG_DEFINES_OS2 QOR_PP_LIST_APPEND( QOR_CONFIG_DEFINES_OS1, ("WIN32") )
 #		ifndef _CONSOLE
 #			define QOR_CONFIG_DEFINES_OS3 QOR_PP_LIST_APPEND( QOR_CONFIG_DEFINES_OS2, ("_WINDOWS") )
+#		else
+#			define QOR_CONFIG_DEFINES_OS3 QOR_CONFIG_DEFINES_OS2
 #		endif
 #		ifndef _LIB
 #			define QOR_CONFIG_DEFINES_OS4 QOR_PP_LIST_APPEND( QOR_CONFIG_DEFINES_OS3, ("_USRDLL") )
 #			define QOR_CONFIG_DEFINES_OS QOR_PP_LIST_APPEND( QOR_CONFIG_DEFINES_OS4, ("_WINDLL") )
+#		else
+#			define QOR_CONFIG_DEFINES_OS QOR_CONFIG_DEFINES_OS3
 #		endif
 
 #	elif	( QOR_SYS_OS == QOR_SYS_LINUX )
@@ -241,22 +252,18 @@
 
 #	else
 
-#		error "No Operating System Selected! #define QOR_SYS_OS preprocessor symbol e.g QOR_SYS_OS=QOR_SYS_UNIX"
+#		error "No Operating System Selected! #define QOR_OS preprocessor symbol e.g QOR_OS=UNIX"
 
 #	endif
-
-//__QCMP_MESSAGE( "System namespace " QOR_PP_STRINGIZE( nsPlatform ) )
-//__QCMP_MESSAGE( "System folder " QOR_PP_STRINGIZE( QOR_SYS_PLATFORMFOLDER ) )
 
 #		define QOR_SYS_SYSTEMPATH					QOR_PP_CAT(SystemQOR/,QOR_PP_CAT(QOR_SYS_PLATFORMFOLDER,/))
 #       define QOR_SYS_HEADER						QOR_PP_CAT(QOR_SYS_PLATFORMFOLDER,.h)
 #		define QOR_SYS_PLATFORMHEADER( _X )			__QCMP_PATHIFY3( SystemQOR,QOR_SYS_PLATFORMFOLDER, QOR_PP_CAT(QOR_SYS_PLATFORMABBR,_X) )
-#		define QOR_SYS_PLATFORMTYPES( _X )			__QCMP_PATHIFY5( SystemQOR,QOR_SYS_PLATFORMFOLDER,types,sys,sys_types.h )//__QCMP_PATHIFY4( SystemQOR,QOR_SYS_PLATFORMFOLDER,types, QOR_PP_CAT(_X,_types.h) )
-//#		define QOR_SYS_PLATFORMSYSTYPES( _X )		__QCMP_PATHIFY5( SystemQOR,QOR_SYS_PLATFORMFOLDER,types,sys,QOR_PP_CAT(_X,_types.h) )
+#		define QOR_SYS_PLATFORMTYPES( _X )			__QCMP_PATHIFY5( SystemQOR,QOR_SYS_PLATFORMFOLDER,types,sys,sys_types.h )
 #		define QOR_SYS_PLATFORMSYSTYPES( _X )		__QCMP_PATHIFY5( SystemQOR,QOR_SYS_PLATFORMFOLDER,types,sys,sys_types.h )
-#		define QOR_SYS_PLATFORMNETINETTYPES( _X )	__QCMP_PATHIFY5( SystemQOR,QOR_SYS_PLATFORMFOLDER,types,sys,sys_types.h )//__QCMP_PATHIFY5( SystemQOR,QOR_SYS_PLATFORMFOLDER,types,netinet,QOR_PP_CAT(_X,_types.h) )
-#		define QOR_SYS_PLATFORMNETTYPES( _X )		__QCMP_PATHIFY5( SystemQOR,QOR_SYS_PLATFORMFOLDER,types,sys,sys_types.h )//__QCMP_PATHIFY5( SystemQOR,QOR_SYS_PLATFORMFOLDER,types,net,QOR_PP_CAT(_X,_types.h) )
-#		define QOR_SYS_PLATFORMARPATYPES( _X )		__QCMP_PATHIFY5( SystemQOR,QOR_SYS_PLATFORMFOLDER,types,sys,sys_types.h )//__QCMP_PATHIFY5( SystemQOR,QOR_SYS_PLATFORMFOLDER,types,arpa,QOR_PP_CAT(_X,_types.h) )
+#		define QOR_SYS_PLATFORMNETINETTYPES( _X )	__QCMP_PATHIFY5( SystemQOR,QOR_SYS_PLATFORMFOLDER,types,sys,sys_types.h )
+#		define QOR_SYS_PLATFORMNETTYPES( _X )		__QCMP_PATHIFY5( SystemQOR,QOR_SYS_PLATFORMFOLDER,types,sys,sys_types.h )
+#		define QOR_SYS_PLATFORMARPATYPES( _X )		__QCMP_PATHIFY5( SystemQOR,QOR_SYS_PLATFORMFOLDER,types,sys,sys_types.h )
 #		define QOR_SYS_PLATFORMSYSHEADER( _X )		__QCMP_PATHIFY4( SystemQOR,QOR_SYS_PLATFORMFOLDER,sys,QOR_PP_CAT( QOR_SYS_PLATFORMABBR, _X ) )
 #		define QOR_SYS_PLATFORMARPAHEADER( _X )		__QCMP_PATHIFY4( SystemQOR,QOR_SYS_PLATFORMFOLDER,arpa,QOR_PP_CAT( QOR_SYS_PLATFORMABBR, _X ) )
 #		define QOR_SYS_PLATFORMNETHEADER( _X )		__QCMP_PATHIFY4( SystemQOR,QOR_SYS_PLATFORMFOLDER,net,QOR_PP_CAT( QOR_SYS_PLATFORMABBR, _X ) )

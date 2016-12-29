@@ -31,7 +31,7 @@
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-#include "WinQL/FileSystem/FileHandle.h"
+#include "WinQL/System/FileSystem/WinQLFileHandle.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32

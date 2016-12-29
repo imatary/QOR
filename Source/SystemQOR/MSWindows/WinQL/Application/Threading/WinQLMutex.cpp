@@ -49,7 +49,7 @@ namespace nsWin32
 #			if ( _WIN32_WINNT >= 0x0600 )
 			if( dwMajorVersion >= 6 )
 			{
-				m_h = CKernel32::Instance().CreateMutexEx( reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpMutexAttributes ), lpName, dwFlags, dwDesiredAccess, bAlreadyExists );
+				m_h = CKernel32::CreateMutexEx( reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpMutexAttributes ), lpName, dwFlags, dwDesiredAccess, bAlreadyExists );
 			}
 			else
 			{

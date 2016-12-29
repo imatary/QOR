@@ -54,9 +54,9 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CInteractiveWindowController );
 
-		CInteractiveWindowController( nsMammut::CModel* pModelItem = 0, nsAppocrita::CCompoundController* pParent = 0 );
+		CInteractiveWindowController( nsMammut::CModel* pModelItem = 0, nsQOR::CController::ref_type Parent = 0 );
 		virtual ~CInteractiveWindowController();
-		bool SetModel( nsMammut::CModel* pModelItem );
+		void SetModel( nsMammut::CModel* pModelItem );
 
 		virtual bool ProcessMessage( COSWindow& Window, Cmp_long_ptr& lResult, unsigned int uMsg, Cmp_uint_ptr wParam, Cmp_long_ptr lParam );
 		bool HandleMessage( COSWindow& Window, Cmp_long_ptr& lResult, unsigned int uMsg, Cmp_uint_ptr wParam, Cmp_long_ptr lParam );

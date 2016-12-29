@@ -29,7 +29,7 @@
 #include "CompilerQOR.h"
 #include "CodeQOR/Tracing/FunctionContextBase.h"
 #include "CodeQOR/ErrorSystem/What.h"
-
+#include "AppocritaQOR/Event.h"
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
 {

@@ -42,7 +42,7 @@ public:
 	__QOR_DECLARE_OCLASS_ID( CExePageAllocator );
 
 	CExePageAllocator();
-	~CExePageAllocator();
+	virtual ~CExePageAllocator();
 	//CExePageAllocator( const CExePageAllocator& );
 	//CExePageAllocator& operator = ( const CExePageAllocator& );
 };

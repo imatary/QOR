@@ -41,7 +41,7 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CFrameMenuController );
 
-		CFrameMenuController( nsMammut::CModel* pModelItem = 0, nsAppocrita::CController* pParent = 0 );
+		CFrameMenuController( nsMammut::CModel* pModelItem = 0, nsQOR::CController::ref_type Parent = 0 );
 		virtual ~CFrameMenuController();
 
 		virtual void OnInitMenu( COSWindow& Window, CMenu::refType Menu );

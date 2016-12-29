@@ -29,12 +29,12 @@
 #ifndef BLUEFOOT_XML_SAX_ATTRIBUTES_H_3
 #define BLUEFOOT_XML_SAX_ATTRIBUTES_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-//
-#include "CompilerQOR.h"
 #include "CodeQOR/Text/TString.h"
 #include <vector>
 

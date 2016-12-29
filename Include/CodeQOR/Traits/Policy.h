@@ -61,13 +61,12 @@ public:
 	__QCMP_STATIC_CONSTANT( unsigned char, MAX_ERROR_PARAMETERS = 10 );
 
 	//Synchronization policy, CodeQOR does not understand threading as it's platform ignorant
-	//Do not use the Code QOR sync policy anywhere where multi threading may occur
+	//Do not use the CodeQOR sync policy anywhere where multi threading may occur
 	typedef nsCodeQOR::CNullSection										TThreadSyncSinglePrimitive;
 	typedef nsCodeQOR::CNullSemaphore									TThreadSyncMultiPrimitive;
 	typedef nsCodeQOR::CNullMutex										TThreadWaitableSinglePrimitive;
 	typedef nsCodeQOR::CSectionLock< TThreadSyncSinglePrimitive >		TThreadSyncSingleLock;
 	typedef nsCodeQOR::CNullLock										TThreadLock;
-
 	typedef nsCodeQOR::CDefaultSource									TAllocationSource;
 };
 

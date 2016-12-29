@@ -28,8 +28,9 @@
 
 #include <limits.h>
 #include "CodeQOR/ErrorSystem/Error.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
+#include "AppocritaQOR/Controller.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/Application/Process/WinQLProcess.h"
 #include "WinQL/Application/Threading/WinQLThread.h"
@@ -117,10 +118,13 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	void CProcessHelper::GetStartupInfoT( nsWin32::LPSTARTUPINFO lpStartupInfo )
+	nsWin32::STARTUPINFO CProcessHelper::StartupInfo()
 	{
-		_WINQ_FCONTEXT( "CProcessHelper::GetStartupInfo" );
-		CKernel32::GetStartupInfo( reinterpret_cast< ::LPSTARTUPINFO >( lpStartupInfo ) );
+		_WINQ_SFCONTEXT( "CProcessHelper::GetStartupInfo" );
+		nsWin32::STARTUPINFO StartupInfo;
+		StartupInfo.cb = sizeof( nsWin32::STARTUPINFO );		
+		CKernel32::GetStartupInfo( reinterpret_cast< ::LPSTARTUPINFO >( &StartupInfo ) );
+		return StartupInfo;
 	}
 
 	//--------------------------------------------------------------------------------

@@ -44,7 +44,7 @@ namespace nsWin32
 
 		CDragListParentController();
 		virtual ~CDragListParentController();
-		virtual bool SetModel( nsMammut::CModel* pModelItem );
+		virtual void SetModel( nsMammut::CModel* pModelItem );
 
 		bool ProcessMessage( COSWindow& Window, Cmp_long_ptr& lResult, unsigned int uMsg, Cmp_uint_ptr wParam, Cmp_long_ptr lParam );
 

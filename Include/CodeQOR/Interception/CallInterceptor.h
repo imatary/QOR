@@ -40,6 +40,7 @@
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
 {
+	class __QOR_INTERFACE( __CODEQOR ) CCallContextBase;
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __CODEQOR ) CCallInterceptor : public CTFlyer< CCallInterceptor, CFlyStrapBase >
 	{
@@ -69,9 +70,9 @@ namespace nsCodeQOR
 #if     ( ( __QCMP_COMPILER != __QCMP_CLANG ) && ( __QCMP_COMPILER != __QCMP_INTEL ) )
 #	if	( !__QCMP_FEATURE_TEMPLATE_MEMBER_TEMPLATES_MSVC_BUGGED )
 #		if( __QCMP_COMPILER == __QCMP_CODEGEAR )
-template<> __QOR_INTERFACE( __CODEQOR ) nsCodeQOR::sTOB< nsCodeQOR::CTFlyerRegEntry< nsCodeQOR::CCallInterceptor > >	nsCodeQOR::CTFlyer< nsCodeQOR::CCallInterceptor, nsCodeQOR::CFlyStrapBase >::RegEntry;
+//template<> __QOR_INTERFACE( __CODEQOR ) nsCodeQOR::sTOB< nsCodeQOR::CTFlyerRegEntry< nsCodeQOR::CCallInterceptor > >	nsCodeQOR::CTFlyer< nsCodeQOR::CCallInterceptor, nsCodeQOR::CFlyStrapBase >::RegEntry;
 #		else
-template<> __QOR_INTERFACE( __CODEQOR ) nsCodeQOR::sTOB< nsCodeQOR::CTFlyerRegEntry< nsCodeQOR::CCallInterceptor > >	nsCodeQOR::CTFlyer< nsCodeQOR::CCallInterceptor, nsCodeQOR::CFlyStrapBase >::RegEntry((void*)(0));
+//template<> __QOR_INTERFACE( __CODEQOR ) nsCodeQOR::sTOB< nsCodeQOR::CTFlyerRegEntry< nsCodeQOR::CCallInterceptor > >	nsCodeQOR::CTFlyer< nsCodeQOR::CCallInterceptor, nsCodeQOR::CFlyStrapBase >::RegEntry((void*)(0));
 #		endif
 #	endif
 #endif//( ( __QCMP_COMPILER != __QCMP_CLANG ) && ( __QCMP_COMPILER != __QCMP_INTEL ) )

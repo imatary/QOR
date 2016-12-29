@@ -27,6 +27,7 @@
 #include "CompilerQOR.h"
 #include "CodeQOR/Text/Char.h"
 #include "CodeQOR/Text/TString.h"
+#include "AppocritaQOR/Event.h"
 
 #define FLAG( x ) ( 1 << ( x ) )
 //------------------------------------------------------------------------------

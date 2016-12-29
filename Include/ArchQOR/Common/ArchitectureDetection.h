@@ -29,73 +29,46 @@
 #ifndef ARCHQOR_ARCHITECTURE_DETECTION_H_1
 #define ARCHQOR_ARCHITECTURE_DETECTION_H_1
 
-#include "Architectures.h"
-
-//TEMP:
-//#	define QOR_ARCH QOR_ARCH_Z
-//#	define QOR_ARCH_ROOT_FOLDER	Zarch
-
 #ifndef QOR_ARCH
 #if defined(i386) || defined(__i386__) || defined(__i486__) || defined(__i586__) || defined(__i686__) || defined(__i386) || defined(_M_IX86) || defined(_X86_) ||  defined(__THW_INTEL__) || defined(__I86__) ||  defined(__INTEL__)
 #	define QOR_ARCH	QOR_ARCH_X86_32
-#	define QOR_ARCH_ROOT_FOLDER	x86
 #elif defined(__x86_64) || defined(__x86_64__) || defined(__amd64__) || defined(__amd64) || defined(_M_X64)
 #	define QOR_ARCH	QOR_ARCH_X86_64
-#	define QOR_ARCH_ROOT_FOLDER	x86
 #elif defined(__SYSC_ZARCH__)
 #	define QOR_ARCH QOR_ARCH_Z
-#	define QOR_ARCH_ROOT_FOLDER	Zarch
 #elif defined(__s390__) || defined(__s390x__)
 #	define QOR_ARCH QOR_ARCH_SYS390
-#	define QOR_ARCH_ROOT_FOLDER	SYS390
 #elif defined(__370__) || defined(__THW_370__)
 #	define QOR_ARCH QOR_ARCH_SYS370
-#	define QOR_ARCH_ROOT_FOLDER	SYS370
 #elif defined( __sh__ )
 #	define QOR_ARCH QOR_ARCH_SUPERH
-#	define QOR_ARCH_ROOT_FOLDER	SuperH
 #elif defined( __sparc__ ) || defined( __sparc )
 #	define QOR_ARCH QOR_ARCH_SPARC
-#	define QOR_ARCH_ROOT_FOLDER	Sparc
 #elif defined(__THW_RS6000) || defined(_IBMR2) || defined(_POWER) || defined(_ARCH_PWR) || defined(_ARCH_PWR2)
 #	define QOR_ARCH QOR_ARCH_RS6K
-#	define QOR_ARCH_ROOT_FOLDER	RS6000
 #elif defined(pyr)
 #	define QOR_ARCH QOR_ARCH_PYRAMID
-#	define QOR_ARCH_ROOT_FOLDER	Pyramid
 #elif defined(__powerpc) || defined(__powerpc__) || defined(__POWERPC__) || defined(__ppc__) || defined(_M_PPC) || defined(_ARCH_PPC) || defined(__PPCGECKO__) || defined(__PPCBROADWAY__) || defined(_XENON)
 #	define QOR_ARCH QOR_ARCH_PPC
-#	define QOR_ARCH_ROOT_FOLDER	PPC
 #elif defined(__hppa__) || defined(__hppa) || defined(__HPPA__)
 #	define QOR_ARCH QOR_ARCH_PARISC
-#	define QOR_ARCH_ROOT_FOLDER	PARISC
 #elif defined(__mips__) || defined(__mips) || defined(__MIPS__)
 #	define QOR_ARCH	QOR_ARCH_MIPS
-#	define QOR_ARCH_ROOT_FOLDER	MIPS
 #elif defined(__m68k__) || defined(M68000)
 #	define QOR_ARCH	QOR_ARCH_M68K
-#	define QOR_ARCH_ROOT_FOLDER	M68K
 #elif defined(__ia64__) || defined(_IA64) || defined(__IA64__) || defined(__ia64) || defined(_M_IA64) || defined(__itanium__)
 #	define QOR_ARCH	QOR_ARCH_IA64
-#	define QOR_ARCH_ROOT_FOLDER	IA64
 #elif defined(__convex__)
 #	define QOR_ARCH QOR_ARCH_CONVEX
-#	define QOR_ARCH_ROOT_FOLDER	Convex
 #elif defined(__bfin__) || defined(__BFIN__) || defined(bfin) || defined(BFIN)
 #	define QOR_ARCH	QOR_ARCH_BLACKFIN
-#	define QOR_ARCH_ROOT_FOLDER	Blackfin
 #elif defined(__arm__) || defined(__arm64) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) || defined(__TARGET_ARCH_THUMB) || defined(_M_ARM)
 #	define QOR_ARCH QOR_ARCH_ARM
-#	define QOR_ARCH_ROOT_FOLDER	Arm
 #elif defined(__alpha__) || defined(__alpha) || defined(_M_ALPHA)
 #	define QOR_ARCH QOR_ARCH_ALPHA
-#	define QOR_ARCH_ROOT_FOLDER	Alpha
 #else
-#	error Target architecture could not be determine from compiler predefinitions. define QOR_ARCH or modify __FILE__:
+#	error Target architecture could not be determine from host compiler predefinitions. define QOR_ARCHITECTURE or modify __FILE__:
 #endif
 #endif//!defined(QOR_ARCH)
-
-#	define QOR_ARCH_VERSION_INCLUDE QOR_PP_STRINGIZE( QOR_PP_CAT(ArchQOR/,QOR_PP_CAT(QOR_ARCH_ROOT_FOLDER,QOR_PP_CAT(/,QOR_PP_CAT(QOR_ARCH_ROOT_FOLDER,Version.h)))) )
-#	define QOR_ARCH_CLASS_INCLUDE QOR_PP_STRINGIZE( QOR_PP_CAT(ArchQOR/,QOR_PP_CAT(QOR_ARCH_ROOT_FOLDER,QOR_PP_CAT(/,QOR_PP_CAT(QOR_ARCH_ROOT_FOLDER,.h)))) )
 
 #endif//ARCHQOR_ARCHITECTURE_DETECTION_H_1

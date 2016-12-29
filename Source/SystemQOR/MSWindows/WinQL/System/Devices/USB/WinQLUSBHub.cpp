@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "SystemQOR/System.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "WinQL/Definitions/Constants.h"
@@ -65,7 +66,7 @@ namespace nsWin32
 		CTString strHubName(  m_strPath.GetBuffer() + 4, m_strPath.Len() - 4 ); 
 		m_strHubName = strHubName.toUpper();
 		
-		CSystem::Instance().Devices( QOR_PP_SHARED_OBJECT_ACCESS ).RegisterUSBHub( m_strHubName, this );
+		TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).RegisterUSBHub( m_strHubName, this );
 	}
 
 	//--------------------------------------------------------------------------------

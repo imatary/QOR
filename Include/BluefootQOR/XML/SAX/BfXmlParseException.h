@@ -46,7 +46,7 @@ namespace nsBluefoot
 		
 		__QOR_DECLARE_OCLASS_ID( CXmlParseException );
 
-		explicit CXmlParseException( const nsCodeQOR::CString& name = nsCodeQOR::CString(), int c = -1, int l = -1, const nsCodeQOR::CUCS2String& p = nsCodeQOR::CUCS2String(), const nsCodeQOR::CUCS2String& s = nsCodeQOR::CUCS2String() );
+		explicit CXmlParseException( const nsCodeQOR::CUCS2String& name = nsCodeQOR::CUCS2String(), int c = -1, int l = -1, const nsCodeQOR::CUCS2String& p = nsCodeQOR::CUCS2String(), const nsCodeQOR::CUCS2String& s = nsCodeQOR::CUCS2String() );
 		CXmlParseException( const CXmlParseException &other );
 		CXmlParseException& operator = ( const CXmlParseException &other );
 		~CXmlParseException();

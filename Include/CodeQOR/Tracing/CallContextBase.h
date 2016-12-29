@@ -39,6 +39,7 @@
 #include "CodeQOR/DataStructures/TLinkedList.h"
 #include "CodeQOR/Instancing/STMember.h"
 #include "CodeQOR.h"
+#include "AppocritaQOR/SubSystems/IThread.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
@@ -135,7 +136,7 @@ namespace nsCodeQOR
 			m_ReturnValue = ReturnValue;
 		}
 
-		CCallContextBase();
+		CCallContextBase( nsQOR::IThread::ref_type ThreadContext );
 		virtual ~CCallContextBase();
 
 		virtual void CallMade( CFunctionContextBase* );			//Called when the child function contect is constructed, the call has reached the child function
@@ -153,6 +154,7 @@ namespace nsCodeQOR
 		CParameterBase m_aParameters[ 10 ];
 		CParameterBase m_ReturnValue;							//Return value
 		unsigned char m_ucParamCount;
+		nsQOR::IThread::ref_type m_ThreadContext;
 	};
 
 }//nsCodeQOR

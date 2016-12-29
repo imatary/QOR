@@ -31,23 +31,5 @@
 #include <errno.h>
 #include <stdlib.h>
 #include "SystemQOR/MSWindows/MSW_assert.h"
-#include "CodeQOR/Tracing/FunctionContextBase.h"
-
-//--------------------------------------------------------------------------------
-namespace nsWin32
-{
-	//--------------------------------------------------------------------------------
-	Cassert::Cassert()
-	{
-		__QCS_MEMBER_FCONTEXT( "Cassert::Cassert" );
-	}
-
-	//--------------------------------------------------------------------------------
-	Cassert::~Cassert()
-	{
-		__QCS_MEMBER_FCONTEXT( "Cassert::~Cassert" );
-	}
-
-}//nsWin32
 
 #endif//(QOR_SYS_OS == QOR_SYS_MSW)

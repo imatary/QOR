@@ -52,6 +52,10 @@ namespace nsWin32
 
 		virtual bool Read( unsigned long& ulNumberOfBytesRead, unsigned long ulNumberOfUnitsToRead );
 		virtual bool IsAtEnd( void );
+
+	private:
+
+		bool m_bEOF;
 	};
 
 }//nsWin32

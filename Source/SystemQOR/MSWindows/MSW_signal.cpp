@@ -29,6 +29,7 @@
 #if		(QOR_SYS_OS == QOR_SYS_MSW)
 
 #include "SystemQOR/MSWindows/MSW_signal.h"
+#include "errno.h"
 #include "WinQL/WinQL.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 
@@ -123,11 +124,27 @@ namespace nsWin32
 
 	//--------------------------------------------------------------------------------
 	//set and get signal alternate stack context
-	int Csignal::sigaltstack( const stack_t*, stack_t* )
+	int Csignal::sigaltstack( const stack_t* ss, stack_t* old )
 	{
 		//TODO: implement the alternate signal stack for the current thread, muchos mysteryoso?!?
 		int iResult = -1;
-		return iResult;
+
+		if( ss ) 
+		{
+			if( ss->ss_size < MinSigStackSize ) 
+			{
+				errno = ENOMEM;
+				return -1;
+			}
+			if( ss->ss_flags & ~SSDisable ) 
+			{
+				errno = EINVAL;
+				return -1;
+			}
+		}
+		//return syscall( SYS_sigaltstack, ss, old );
+
+		return 0;
 	}
 
 	//--------------------------------------------------------------------------------

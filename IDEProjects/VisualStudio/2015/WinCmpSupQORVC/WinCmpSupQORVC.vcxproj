@@ -27,7 +27,15 @@
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Exceptions\ExceptionHandling.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Exceptions\SEH\SEH.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Exceptions\Throw.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ftol2.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\InitThread.c" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\lldiv.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\lldvrm.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\llmul.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\llrem.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\llshl.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\llshr.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ltod3.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Memory\StackCheck.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\PE\LoadConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\RTC\RTC.cpp" />
@@ -39,9 +47,12 @@
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\TLS\TLSDyn.c" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\TLS\TLSSupport.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\TLS\TLS_DTor.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ulldiv.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ulldvrm.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ullrem.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ullshr.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Exceptions\SEH\safeseh.asm" />
     <CustomBuild Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Intrinsics.asm">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <FileType>Document</FileType>

@@ -27,7 +27,7 @@
 //A class for overriding an existing window type by message interception
 
 #ifdef	__QCMP_OPTIMIZEINCLUDE
-		__QCMP_OPTIMIZEINCLUDE
+#pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #ifndef WINQL_WND_SUBCLASS_H_3

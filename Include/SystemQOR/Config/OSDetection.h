@@ -24,10 +24,10 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-#include "SystemQOR/Config/SupportedOSList.h"
 
 //Determine QOR_SYS_OS 
 //See- http://sourceforge.net/p/predef/wiki/OperatingSystems/
+
 
 #ifndef QOR_SYS_OS
 

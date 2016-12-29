@@ -126,7 +126,7 @@ namespace nsWin32
 				return false;
 			}
 
-			CDeviceInstance* pInstance = new CDeviceInstance( strDeviceID, m_InfoSet, DevInfo, uiIndex );	
+			/*CDeviceInstance* pInstance = */new CDeviceInstance( strDeviceID, m_InfoSet, DevInfo, uiIndex );	
 		
 		}
 						

@@ -38,13 +38,13 @@ namespace nsWin32
 	class __QOR_INTERFACE( __WINQL_GUI ) COSWindow;
 
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL_GUI ) CBaseWindowPartController : public nsAppocrita::CController
+	class __QOR_INTERFACE( __WINQL_GUI ) CBaseWindowPartController : public nsQOR::CController
 	{
 	public:
 
 		__QOR_DECLARE_OCLASS_ID( CBaseWindowPartController );
 
-		CBaseWindowPartController( nsMammut::CModel* pModelItem = 0, nsAppocrita::CController* pParent = 0 );
+		CBaseWindowPartController( nsMammut::CModel* pModelItem = 0, nsQOR::CController::ref_type Parent = 0 );
 		virtual ~CBaseWindowPartController();
 		virtual CBaseWindowPartController* HookController( CBaseWindowPartController* pController );
 		bool ProcessHook( COSWindow& Window, Cmp_long_ptr& lResult, unsigned int uMsg, Cmp_uint_ptr wParam, Cmp_long_ptr lParam );

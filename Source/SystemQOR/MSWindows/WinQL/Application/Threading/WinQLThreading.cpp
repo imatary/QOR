@@ -28,7 +28,6 @@
 #include "WinQL/Application/Process/WinQLProcessHelper.h"
 #include "WinQAPI/Kernel32.h"
 
-
 //------------------------------------------------------------------------------
 namespace nsWin32
 {

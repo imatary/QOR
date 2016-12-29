@@ -70,7 +70,6 @@ CBootStrap* g_pBootStrap;
 //Construct a Windows process bootstrap
 CBootStrap::CBootStrap() : nsWin32::CProcessBootStrap()
 {
-	//Initialize all the statics
 	g_pBootStrap = this;
 	InitTerm( CInit_a, CInit_z );		//Initialise 'C' statics so the process can use 'C' code if desired
 	InitTerm( CppInit_a, CppInit_z );	//Initialise C++ statics belonging to this process module

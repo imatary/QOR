@@ -238,7 +238,10 @@
     <ClCompile Include="..\..\..\..\Source\CQOR\unistd.cpp" />
     <ClCompile Include="..\..\..\..\Source\CQOR\utime.cpp" />
     <ClCompile Include="..\..\..\..\Source\CQOR\utmpx.cpp" />
-    <ClCompile Include="..\..\..\..\Source\CQOR\wchar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\wchar.cpp">
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ShowIncludes>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\Source\CQOR\wctype.cpp" />
     <ClCompile Include="..\..\..\..\Source\CQOR\wordexp.cpp" />
   </ItemGroup>

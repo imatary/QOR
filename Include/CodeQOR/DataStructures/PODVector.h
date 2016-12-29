@@ -56,7 +56,6 @@ namespace nsCodeQOR
 	// - Non-copyable (designed to be non-copyable, we want it)
 	// - No copy-on-write (some implementations of stl can use it)
 	// - Optimized for working only with POD types
-	// - Uses ASMJIT_... memory management macros
 	template <typename T>
 	class PodVector
 	{
@@ -70,7 +69,7 @@ namespace nsCodeQOR
 
 		//--------------------------------------------------------------------------------
 		// Destroy PodVector and free all data.
-		~PodVector() __QCMP_THROW
+		inline ~PodVector() __QCMP_THROW
 		{
 			PodVector_Free( _data );
 		}
@@ -108,7 +107,7 @@ namespace nsCodeQOR
 
 		//--------------------------------------------------------------------------------
 		// Clear vector data, but not free internal buffer.
-		void clear() __QCMP_THROW
+		inline void clear() __QCMP_THROW
 		{
 			_length = 0;
 		}
@@ -117,14 +116,10 @@ namespace nsCodeQOR
 		// Clear vector data and free internal buffer.
 		void free() __QCMP_THROW
 		{
-			if (_data)
-			{
-				PodVector_Free( _data );
-				//::free/*ASMJIT_FREE*/(_data);
-				_data = 0;
-				_length = 0;
-				_capacity = 0;
-			}
+			PodVector_Free( _data );
+			_data = 0;
+			_length = 0;
+			_capacity = 0;
 		}
 
 		//--------------------------------------------------------------------------------

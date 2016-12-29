@@ -33,7 +33,7 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CBFInputProtocol::CBFInputProtocol() : CBFProtocol()
+	CBFInputProtocol::CBFInputProtocol( nsQOR::IApplication::ref_type Application ) : CBFProtocol( Application )
 	{
 	}
 
@@ -55,28 +55,6 @@ namespace nsBluefoot
 			CBFProtocol::operator = ( src );
 		}
 		return *this;
-	}
-
-	//------------------------------------------------------------------------------
-	bool CBFInputProtocol::OnProtocolStateChange( void )
-	{
-		bool bResult = ( m_eState != m_eNextState );
-
-		m_eState = m_eNextState;
-
-		switch( m_eNextState )
-		{
-		case Stopped:
-			bResult = false;
-			break;
-		case Reading:
-			bResult = Read();
-			break;
-		case Writing:
-			bResult = false;
-			break;
-		}
-		return bResult;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -104,37 +82,43 @@ namespace nsBluefoot
 	//--------------------------------------------------------------------------------
 	void CBFInputProtocol::OnConnectionError( void )
 	{
-		m_eNextState = Stopped;
+		SetState( m_StoppedState.Ref(), 0 );
 	}
 
 	//--------------------------------------------------------------------------------
 	void CBFInputProtocol::OnConnected( void )
 	{
-		m_eNextState = Reading;
+		SetState( m_ReadingState.Ref(), 0 );
 	}
 
 	//--------------------------------------------------------------------------------
 	void CBFInputProtocol::OnDisconnectionError( void )
 	{
-		m_eNextState = Stopped;
+		SetState( m_StoppedState.Ref(), 0 );
 	}
 
 	//--------------------------------------------------------------------------------
 	void CBFInputProtocol::OnDisconnected( void )
 	{
-		m_eNextState = Stopped;
+		SetState( m_StoppedState.Ref(), 0 );
 	}
 
 	//--------------------------------------------------------------------------------
 	void CBFInputProtocol::OnReadSuccess( unsigned long ulUnitsRead )
 	{
-		m_eNextState = Reading;
+		SetState( m_ReadingState.Ref(), 0 );
 	}
 
 	//--------------------------------------------------------------------------------
 	void CBFInputProtocol::OnReadError( void )
 	{
-		m_eNextState = Stopped;
+		SetState( m_StoppedState.Ref(), 0 );
+	}
+
+	//--------------------------------------------------------------------------------
+	void CBFInputProtocol::OnEndOfData( void )
+	{
+		SetState( m_StoppedState.Ref(), 0 );
 	}
 
 }//nsBluefoot

@@ -186,9 +186,6 @@
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\CompilerSelection.h">
       <Filter>Source Files\Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\CompilerTypes.h">
-      <Filter>Source Files\Common</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\PreCompiler.h">
       <Filter>Source Files\Common</Filter>
     </ClInclude>
@@ -209,9 +206,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\Version.h">
       <Filter>Source Files\Compilers\MSVC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildOpts.h">
-      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\Builtins.h">
       <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
@@ -1113,6 +1107,24 @@
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\xor.h">
       <Filter>Source Files\Preprocessor\logical</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildAsmCmdLine.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildCmpCmdLine.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildLibCmdLine.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildLnkCmdLine.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildOpts.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\CompileCmd.pph">
@@ -1195,6 +1207,12 @@
     </None>
     <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\Intrinsics.inl">
       <Filter>Source Files\Compilers\MSVC\VC6</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\ModuleHeader.pph">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\AssembleCmd.pph">
+      <Filter>Source Files\Compilers\MSVC</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -25,9 +25,8 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include "CompilerQOR.h"
-#include "CodeQOR/ErrorSystem/Error.h"
 #include "CodeQOR/ClassReg/ClassReg.h"
-#include "CodeQOR/Modules/LoadableModuleBase.h"
+#include "string.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR

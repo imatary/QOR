@@ -169,11 +169,10 @@ namespace nsCodeQOR
 			return *this;
 		}
 
-		//------------------------------------------------------------------------------
-		//Default virtual destructor frees array data
+		//------------------------------------------------------------------------------		
 		virtual ~CTArray()
 		{
-			Free();		// if m_ArrayData hasn't been freed we must free it
+			Free();		//Default virtual destructor frees array data
 		}
 
 		//------------------------------------------------------------------------------
@@ -195,7 +194,11 @@ namespace nsCodeQOR
 		//The caller should acquire access to this array before calling the [] operator
 		Type& operator[]( unsigned long k ) const
 		{
-			//TODO: This should throw if k is out of range
+			if( k >= m_ulMaxSize )
+			{
+				//TODO: This should throw properly if k is out of range
+				throw "Array element out of range.";
+			}
 			return m_ArrayData[ k ];
 		}
 

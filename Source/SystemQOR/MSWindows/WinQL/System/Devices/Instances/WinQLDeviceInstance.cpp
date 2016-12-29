@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "SystemQOR/System.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
@@ -48,7 +49,7 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CDeviceInstance::CDeviceInstance" );
 		memset( &m_Info, sizeof( SP_DevInfo_Data ), 0 );
-		CSystem::Instance().Devices(QOR_PP_SHARED_OBJECT_ACCESS).RegisterInstance( m_strID, this );
+		TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS).RegisterInstance( m_strID, this );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -59,7 +60,7 @@ namespace nsWin32
 	,	m_strID( strID )
 	{
 		_WINQ_FCONTEXT( "CDeviceInstance::CDeviceInstance" );
-		CSystem::Instance().Devices(QOR_PP_SHARED_OBJECT_ACCESS).RegisterInstance( m_strID, this );
+		TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS).RegisterInstance( m_strID, this );
 
 	}
 
@@ -72,7 +73,7 @@ namespace nsWin32
 	,	m_strID( strID )
 	{
 		_WINQ_FCONTEXT( "CDeviceInstance::CDeviceInstance" );
-		CSystem::Instance().Devices(QOR_PP_SHARED_OBJECT_ACCESS).RegisterInstance( m_strID, this );
+		TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS).RegisterInstance( m_strID, this );
 	}
 
 	//--------------------------------------------------------------------------------

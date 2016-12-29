@@ -46,19 +46,19 @@ namespace nsWin32
 	struct CreateStruct;
 
     //--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL_GUI ) CBaseWindowController : public nsAppocrita::CCompoundController
+	class __QOR_INTERFACE( __WINQL_GUI ) CBaseWindowController : public nsQOR::CController
 	{
 	public:
 
 		__QOR_DECLARE_OCLASS_ID( CBaseWindowController );
 
-		CBaseWindowController( nsMammut::CModel* pModel = 0, nsAppocrita::CCompoundController* pParent = 0 );
+		CBaseWindowController( nsMammut::CModel* pModel = 0, nsQOR::CController::ref_type Parent = 0 );
 		virtual ~CBaseWindowController();
 
-		virtual bool SetModel( nsMammut::CModel* pModelItem );
+		virtual void SetModel( nsMammut::CModel* pModelItem );
 
         //--------------------------------------------------------------------------------
-        template< class TView > void CreateView( CController* pController = 0 )
+        template< class TView > void CreateView( nsQOR::CController* pController = 0 )
         {
             TView* pView = new TView();
             pView->SetModel( m_pModel );

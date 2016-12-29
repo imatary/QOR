@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "SystemQOR/System.h"
 #include "WinQL/WinQL.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
@@ -45,7 +46,7 @@ namespace nsWin32
 		{
 			TCHAR* pEnd = 0;
 			unsigned long ulCodePage = _tcstoul( strCodePage, &pEnd, 0 );
-			bResult = CSystem::Instance().Locale()().AddCodePage( static_cast< unsigned int >( ulCodePage ) );
+			bResult = TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SHARED_OBJECT_ACCESS).AddCodePage( static_cast< unsigned int >( ulCodePage ) );
 		}__QOR_ENDPROTECT
 		return bResult;
 	}

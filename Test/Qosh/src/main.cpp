@@ -141,7 +141,7 @@ int main( int c, char* v[], char* e[] )
 
 #endif
 
-	if (eq((const unsigned char*)"jsh", simple((unsigned char*)*v)) || eq((const unsigned char*)"-jsh", simple((unsigned char*)*v)))
+	if (v && (eq((const unsigned char*)"jsh", simple((unsigned char*)*v)) || eq((const unsigned char*)"-jsh", simple((unsigned char*)*v))) )
 	{
 		flags |= monitorflg;
 	}
@@ -215,7 +215,10 @@ int main( int c, char* v[], char* e[] )
 	}
 
 	//number of positional parameters
-	replace( &cmdadr, dolv[ 0 ] );	// cmdadr is $0 
+	if( dolv && &cmdadr )
+	{
+		replace( &cmdadr, dolv[ 0 ] );	// cmdadr is $0 
+	}
 
 	//set pidname '$$'
 	assnum( &pidadr, (long)mypid );
@@ -537,7 +540,7 @@ void chkmail( void )
 			*save = 0;
 		}
 
-		if( *start && stat( (const char *)start, &statb ) >= 0 ) 
+		if( *start && _stat( (const char *)start, &statb ) >= 0 ) 
 		{
 			if( statb.st_size && *ptr && statb.st_mtime != *ptr ) 
 			{

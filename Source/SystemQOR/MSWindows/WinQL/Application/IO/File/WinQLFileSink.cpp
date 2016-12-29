@@ -74,7 +74,7 @@ namespace nsWin32
 
 				if( !bResult && pFileConnector->Protocol() )
 				{
-					pFileConnector->Protocol()->OnWriteError();
+					pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteError();
 				}
 
 			}
@@ -97,11 +97,11 @@ namespace nsWin32
 				{
 					if( bResult )
 					{
-						pFileConnector->Protocol()->OnWriteSuccess();
+						pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteSuccess();
 					}
 					else
 					{
-						pFileConnector->Protocol()->OnWriteError();
+						pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteError();
 					}
 				}
 			}

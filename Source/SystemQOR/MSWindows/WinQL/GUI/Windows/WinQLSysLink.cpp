@@ -118,14 +118,7 @@ namespace nsWin32
 
 		if( pHdr != 0 )
 		{
-			switch ( pHdr->m_uiCode )
-			{
-			default:
-				{
-					lResult = OnUnknownNotification( pHdr );
-				}
-				break;
-			}
+			lResult = OnUnknownNotification( pHdr );
 		}
 		return lResult;
 	}

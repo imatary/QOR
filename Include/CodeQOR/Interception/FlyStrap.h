@@ -38,6 +38,8 @@
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
 {
+	class __QOR_INTERFACE( __CODEQOR ) CCallContextBase;
+
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __CODEQOR ) CFlyStrap : public CFlyStrapBase
 	{

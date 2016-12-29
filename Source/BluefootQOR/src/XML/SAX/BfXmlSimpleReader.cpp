@@ -362,7 +362,7 @@ namespace nsBluefoot
 		CXmlNamespaceSupport namespaceSupport;
 
 		// error string
-		nsCodeQOR::CUCS2String error;
+		nsCodeQOR::CString error;
 
 		// arguments for parse functions (this is needed to allow incremental
 		// parsing)
@@ -3051,14 +3051,14 @@ namespace nsBluefoot
 					} 
 					else 
 					{
-						reportParseError( nsCodeQOR::CUCS2String( _TXT( XMLERR_UNEXPECTEDCHARACTER ) ) );
+						reportParseError( nsCodeQOR::CString( _TXT( XMLERR_UNEXPECTEDCHARACTER ) ) );
 						return false;
 					}
 				case Done:
 					return true;
 				case -1:
 					// Error
-					reportParseError( nsCodeQOR::CUCS2String( _TXT( XMLERR_UNEXPECTEDCHARACTER ) ) );
+					reportParseError( nsCodeQOR::CString( _TXT( XMLERR_UNEXPECTEDCHARACTER ) ) );
 					return false;
 			}
 
@@ -5785,7 +5785,7 @@ namespace nsBluefoot
 	{
 		// temporary variables (only used in very local context, so they don't interfere with incremental parsing)
 		unsigned int tmp;
-		bool ok;
+		//bool ok;
 
 		const signed char Init             =  0;
 		const signed char SRef             =  1; // start of a reference
@@ -6266,7 +6266,7 @@ namespace nsBluefoot
 
 		if( parseStack==0 || parseStack->empty() ) 
 		{
-			Done = parseString_s.Len();
+			Done = static_cast< char >( parseString_s.Len() );
 			state = 0;
 		} 
 		else 
@@ -6359,7 +6359,7 @@ namespace nsBluefoot
 		}
 		int n = std::max( parameterEntities.size(), entities.size() );
 
-		if( xmlRefStack.size() > n + 1 ) 
+		if( xmlRefStack.size() > size_t(n + 1) ) 
 		{
 			// recursive entities
 			reportParseError( nsCodeQOR::CString( _TXT( XMLERR_RECURSIVEENTITIES ) ) );
@@ -6520,12 +6520,17 @@ namespace nsBluefoot
 		{
 			if( this->error.IsEmpty() ) 
 			{
-				const CXmlParseException ex( nsCodeQOR::CString( _TXT( XMLERR_OK ) ), columnNr+1, lineNr+1, thisPublicId, thisSystemId );
+				nsCodeQOR::CUCS2String strError;
+				nsCodeQOR::ExtAssignFromAString( strError, _ATXT( XMLERR_OK ) );
+				
+				const CXmlParseException ex( strError, columnNr+1, lineNr+1, thisPublicId, thisSystemId );
 				errorHnd->FatalError(ex);
 			} 
 			else 
 			{
-				const CXmlParseException ex( this->error, columnNr+1, lineNr+1, thisPublicId, thisSystemId );
+				nsCodeQOR::CUCS2String strError;
+				//TODO: nsCodeQOR::ExtAssignFromAString( strError, this->error.GetBuffer() );
+				const CXmlParseException ex( strError, columnNr+1, lineNr+1, thisPublicId, thisSystemId );
 				errorHnd->FatalError(ex);
 			}
 		}

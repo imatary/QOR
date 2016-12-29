@@ -60,11 +60,12 @@ namespace nsWin32
 
 		CDeviceHandle();
 		CDeviceHandle( void* h );
+		CDeviceHandle( int h );
 		CDeviceHandle( const CDeviceHandle& src );
 		CDeviceHandle& operator = ( const CDeviceHandle& src );
 		virtual ~CDeviceHandle();
 
-		void* Use( void );
+		void* Use( void ) const;
 
 		unsigned long AddRef( void ) const ;
 		unsigned long Release( void );

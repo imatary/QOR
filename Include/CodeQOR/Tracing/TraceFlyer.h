@@ -79,7 +79,7 @@ namespace nsCodeQOR
 }//nsCodeQOR
 
 #if     ( !__QCMP_FEATURE_TEMPLATE_MEMBER_TEMPLATES_MSVC_BUGGED )
-template<> __QOR_INTERFACE( __CODEQOR ) nsCodeQOR::sTOB< nsCodeQOR::CTFlyerRegEntry< nsCodeQOR::CTraceFlyer > >		nsCodeQOR::CTFlyer< nsCodeQOR::CTraceFlyer, nsCodeQOR::CTraceFlyerBase >::RegEntry((void*)(0));
+//template<> __QOR_INTERFACE( __CODEQOR ) nsCodeQOR::sTOB< nsCodeQOR::CTFlyerRegEntry< nsCodeQOR::CTraceFlyer > >		nsCodeQOR::CTFlyer< nsCodeQOR::CTraceFlyer, nsCodeQOR::CTraceFlyerBase >::RegEntry((void*)(0));
 #endif//( !__QCMP_FEATURE_TEMPLATE_MEMBER_TEMPLATES_MSVC_BUGGED )
 
 

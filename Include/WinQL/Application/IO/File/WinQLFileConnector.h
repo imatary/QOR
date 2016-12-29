@@ -34,7 +34,7 @@
 #include "BluefootQOR/BfPlug.h"
 #include "BluefootQOR/BfConnection.h"
 #include "BluefootQOR/BfBuffer.h"
-#include "WinQL/System/FileSystem/WinQLFile.h"
+#include "WinQL/System/Devices/WinQLDeviceFile.h"
 #include "WinQL/Application/IO/WinQLOverlappedHandler.h"
 #include "WinQL/Application/ErrorSystem/WinQLErrorHandling.h"
 #include "WinQL/Application/IO/File/WinQLFileSource.h"
@@ -74,11 +74,11 @@ namespace nsWin32
 		unsigned long GetFlags( void );
 		SECURITY_ATTRIBUTES* GetSecurity( void );
 
-		nsCodeQOR::CTLRef< CFile > File( void );
+		nsCodeQOR::CTLRef< CDeviceFile > File( void );
 
 	protected:
 
-		CFile* m_pFile;
+		CDeviceFile* m_pFile;
 		SECURITY_ATTRIBUTES* m_pSecurity;
 		CTString m_strFileName;
 		unsigned long m_ulAccess;

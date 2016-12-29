@@ -93,7 +93,7 @@ namespace nsCodeQOR
 	class __QOR_INTERFACE( __CODEQOR ) CWhat;
 	class __QOR_INTERFACE( __CODEQOR ) CWhere;
 	class __QOR_INTERFACE( __CODEQOR ) CWhen;
-	class __QOR_INTERFACE( __CODEQOR ) CThreadContextBase;
+	//class __QOR_INTERFACE( __CODEQOR ) CThreadContextBase;
 	class __QOR_INTERFACE( __CODEQOR ) CProcessBase;
 	class __QOR_INTERFACE( __CODEQOR ) CLoadableModuleBase;
 

@@ -28,7 +28,7 @@
 #define WIN32_FLOAT_TYPES_H_3
 
 #include "SystemQOR/MSWindows/types/errno_types.h"
-#include "WinQL/Definitions/Data.h"
+//#include "WinQL/Definitions/Data.h"
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {

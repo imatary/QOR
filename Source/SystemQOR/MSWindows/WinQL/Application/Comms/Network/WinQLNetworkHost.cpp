@@ -31,19 +31,19 @@
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-	//__QOR_IMPLEMENT_OCLASS_LUID( CSocketConnector );
+	__QOR_IMPLEMENT_OCLASS_LUID( CNetworkHost );
 
 	//--------------------------------------------------------------------------------
 	CNetworkHost::CNetworkHost() : m_WS32Library( nsWinQAPI::CWS2_32::Instance() ), m_pProtocolInfo( 0 ), m_ulProtocolCount( 0 )
 	{
-		//_WINQ_FCONTEXT( "CSocketConnector::CSocketConnector" );
+		_WINQ_FCONTEXT( "CNetworkHost::CNetworkHost" );
 		EnumerateProtocols();
 	}
 
 	//--------------------------------------------------------------------------------
 	CNetworkHost::~CNetworkHost()
 	{
-		//_WINQ_FCONTEXT( "CSocketConnector::~CSocketConnector" );
+		_WINQ_FCONTEXT( "CNetworkHost::~CNetworkHost" );
 		m_ulProtocolCount = 0;
 		delete [] m_pProtocolInfo;
 	}
@@ -51,17 +51,21 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	void CNetworkHost::EnumerateProtocols()
 	{
+		_WINQ_FCONTEXT( "CNetworkHost::EnumerateProtocols" );
 		unsigned long ulBufferLength = 0;
 		int iResult = m_WS32Library.WSAEnumProtocols( 0, 0, &ulBufferLength );
 
-		m_pProtocolInfo = new nsWin32::WSAProtocolInfo[ ulBufferLength / sizeof( nsWin32::WSAProtocolInfo ) ];
-
-		m_ulProtocolCount = m_WS32Library.WSAEnumProtocols( 0, reinterpret_cast< ::LPWSAPROTOCOL_INFO >( m_pProtocolInfo ), &ulBufferLength );
+		if( iResult != SOCKET_ERROR )
+		{
+			m_pProtocolInfo = new nsWin32::WSAProtocolInfo[ ulBufferLength / sizeof( nsWin32::WSAProtocolInfo ) ];
+			m_ulProtocolCount = m_WS32Library.WSAEnumProtocols( 0, reinterpret_cast<::LPWSAPROTOCOL_INFO>( m_pProtocolInfo ), &ulBufferLength );
+		}
 	}
 
 	//--------------------------------------------------------------------------------
 	WSAProtocolInfo* CNetworkHost::GetProtocols( unsigned long& ulProtocolCount )
 	{
+		_WINQ_FCONTEXT( "CNetworkHost::GetProtocols" );
 		ulProtocolCount = m_ulProtocolCount;
 		return m_pProtocolInfo;
 	}

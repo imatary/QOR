@@ -29,8 +29,8 @@
 #include "CodeQOR/Text/Char16.h"
 #include "CodeQOR/Text/Char32.h"
 #include "CodeQOR/Text/Char8.h"
-#include "CodeQOR/Threading/ThreadContext.h"
 #include "CodeQOR/CodePages/CodePage.h"
+#include "AppocritaQOR/SubSystems/Thread.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
@@ -77,7 +77,7 @@ namespace nsCodeQOR
 	CChar16::CChar16( const CChar8& ch8 )
 	{
 		CCodePage* pCodePage = 0;
-		CThreadContextBase* pCurrentThread = CThreadContextBase::GetCurrent();
+		nsQOR::IThread::ref_type pCurrentThread = nsQOR::CThread::GetCurrent();
 		if( pCurrentThread )
 		{
 			pCodePage = pCurrentThread->GetCodePage();
@@ -110,7 +110,8 @@ namespace nsCodeQOR
 	CChar16::CChar16( const byte& ch )
 	{
 		CCodePage* pCodePage = 0;
-		CThreadContextBase* pCurrentThread = CThreadContextBase::GetCurrent();
+
+		nsQOR::IThread::ref_type pCurrentThread = nsQOR::CThread::GetCurrent();
 		if( pCurrentThread )
 		{
 			pCodePage = pCurrentThread->GetCodePage();
@@ -170,10 +171,10 @@ namespace nsCodeQOR
 	CChar8 CChar16::ToLocal8Bit( void ) const
 	{
 		CChar8 c;
-		CCodePage* pCodePage = CThreadContextBase::GetCurrent()->GetCodePage();
-		if( pCodePage )
+		nsQOR::IThread::ref_type pCurrentThread = nsQOR::CThread::GetCurrent();
+		if( pCurrentThread && pCurrentThread->GetCodePage() )
 		{
-			c = static_cast< unsigned char >( pCodePage->Encode( Unicode() ) );
+			c = static_cast< unsigned char >( pCurrentThread->GetCodePage()->Encode( Unicode() ) );
 		}
 		else
 		{
@@ -261,7 +262,8 @@ namespace nsCodeQOR
 	const char CChar16::ToAscii() const
 	{
 		CCodePage* pCodePage = 0;
-		CThreadContextBase* pCurrentThread = CThreadContextBase::GetCurrent();
+		nsQOR::IThread::ref_type pCurrentThread = nsQOR::CThread::GetCurrent();
+
 		if( pCurrentThread )
 		{
 			pCodePage = pCurrentThread->GetCodePage();
@@ -281,7 +283,8 @@ namespace nsCodeQOR
 	CChar16 CChar16::FromAscii( char c )
 	{
 		CCodePage* pCodePage = 0;
-		CThreadContextBase* pCurrentThread = CThreadContextBase::GetCurrent();
+		nsQOR::IThread::ref_type pCurrentThread = nsQOR::CThread::GetCurrent();
+
 		if( pCurrentThread )
 		{
 			pCodePage = pCurrentThread->GetCodePage();

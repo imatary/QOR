@@ -26,7 +26,7 @@ namespace nsMammut
 
 		virtual int Apply( CModel& model );
 		virtual CModel& Detach( void );
-		virtual int Start( void );
+		virtual int Start( void );		
 	};
 
 };

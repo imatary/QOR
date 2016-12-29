@@ -104,6 +104,8 @@ namespace nsWin32
 
 		bool m_bDefault;
 		void*  m_hHeap;
+
+		__QCS_DECLARE_NONCOPYABLE( CHeap );
 	};
 
 }//nsWin32

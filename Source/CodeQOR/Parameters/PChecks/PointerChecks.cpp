@@ -29,6 +29,7 @@
 #include "CodeQOR/Parameters/ParamChecking.h"
 #include "CodeQOR/Parameters/PChecks/PointerChecks.h"
 #include "CodeQOR/ErrorSystem/ParamErrorDomain.h"
+#include "AppocritaQOR/Event.h"
 
 //--------------------------------------------------------------------------------
 namespace nsParamChecking

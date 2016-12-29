@@ -39,7 +39,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CFrameScrollController );
 
 	//--------------------------------------------------------------------------------
-	CFrameScrollController::CFrameScrollController( nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent ) : CScrollController( pModelItem, pParent )
+	CFrameScrollController::CFrameScrollController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CScrollController( pModelItem, Parent )
 	{
 		_WINQ_FCONTEXT( "CFrameScrollController::CFrameScrollController" );
 	}

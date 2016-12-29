@@ -86,7 +86,7 @@ operator new(size_t size, const std::nothrow_t&) _NOEXCEPT
     return p;
 }
 
-_LIBCPP_WEAK /*_LIBCPP_NEW_DELETE_VIS*/
+_LIBCPP_WEAK _LIBCPP_NEW_DELETE_VIS
 void* __cdecl operator new[](size_t size)
 #if !__has_feature(cxx_noexcept)
     throw(std::bad_alloc)
@@ -135,24 +135,24 @@ void __cdecl operator delete(void* ptr, size_t) _NOEXCEPT
 {
 	::operator delete(ptr);
 }
-
-_LIBCPP_WEAK /*_LIBCPP_NEW_DELETE_VIS*/
+/*
+_LIBCPP_WEAK _LIBCPP_NEW_DELETE_VIS
 void __cdecl operator delete[] (void* ptr) _NOEXCEPT
 {
     ::operator delete (ptr);
 }
-
+*/
 _LIBCPP_WEAK /*_LIBCPP_NEW_DELETE_VIS*/
 void
 operator delete[] (void* ptr, const std::nothrow_t&) _NOEXCEPT
 {
-    ::operator delete[](ptr);
+    ::operator delete(ptr);
 }
 
 _LIBCPP_WEAK /*_LIBCPP_NEW_DELETE_VIS*/
 void __cdecl operator delete[](void* ptr, std::size_t) _NOEXCEPT
 {
-	::operator delete[](ptr);
+	::operator delete(ptr);
 }
 
 #endif // !__GLIBCXX__

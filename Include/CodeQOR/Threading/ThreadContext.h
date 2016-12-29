@@ -35,14 +35,14 @@
 
 #include "CodeQOR/Tracing/CallContextBase.h"
 #include "CodeQOR/Instancing/STMember.h"
-#include "CodeQOR/Events/ThreadLocalEventManager.h"
+//#include "CodeQOR/Events/ThreadLocalEventManager.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
 {
-	class __QOR_INTERFACE( __CODEQOR ) CBaseErrorDomain;
-	class __QOR_INTERFACE( __CODEQOR ) CFunctionContextBase;
-	class __QOR_INTERFACE( __CODEQOR ) CCodePage;
+	//class __QOR_INTERFACE( __CODEQOR ) CBaseErrorDomain;
+	//class __QOR_INTERFACE( __CODEQOR ) CFunctionContextBase;
+	//class __QOR_INTERFACE( __CODEQOR ) CCodePage;
 
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __CODEQOR ) CExceptionContextBase
@@ -69,7 +69,7 @@ namespace nsCodeQOR
 		nsCompiler::EH::ExceptData m_DummyExceptData;
 #endif
 	};
-
+	/*
     //--------------------------------------------------------------------------------
     class __QOR_INTERFACE( __CODEQOR ) CThreadContextBase
     {
@@ -128,7 +128,7 @@ namespace nsCodeQOR
 		CTMap< mxGUID*, void*, CCodeQORPolicy > m_ClassThreadMap;
 		bool m_bTraceEnabled;
     };
-
+	*/
 }//nsCodeQOR
 
 #endif//CODEQOR_THREADCONTEXT_H_3

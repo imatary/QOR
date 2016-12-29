@@ -98,6 +98,7 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <MinimalRebuild>false</MinimalRebuild>
+      <ShowIncludes>true</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -155,15 +156,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Source\CompilerQOR\CompilerQOR.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CompilerQOR\CompilerQOR.cpp">
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ShowIncludes>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR.h" />
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\Compiler.h" />
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\CompilerFeatures.h" />
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\CompilerPath.h" />
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\Compilers.h" />
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\CompilerSelection.h" />
-    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\CompilerTypes.h" />
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\PreCompiler.h" />
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\PreConfig.h" />
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\clang\clang.h" />
@@ -212,6 +216,10 @@
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\MSVC12.h" />
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\UnBuiltins.h" />
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\Unfeature.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildAsmCmdLine.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildCmpCmdLine.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildLibCmdLine.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildLnkCmdLine.h" />
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildOpts.h" />
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\Builtins.h" />
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\Intrinsics.h" />
@@ -474,6 +482,7 @@
     <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\wstringize.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\AssembleCmd.pph" />
     <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\CompileCmd.pph" />
     <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\DelayLinkCmd.pph" />
     <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\ExportObjectName.pph" />
@@ -483,6 +492,7 @@
     <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\LibraryHeader.pph" />
     <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\LinkCmd.pph" />
     <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\LinkCmd2.pph" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\ModuleHeader.pph" />
     <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\Builtins.inl" />
     <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\Intrinsics.inl" />
     <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\Builtins.inl" />

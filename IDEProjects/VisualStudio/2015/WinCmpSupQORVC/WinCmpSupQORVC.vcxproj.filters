@@ -94,11 +94,42 @@
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\SupportFuncs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Exceptions\SEH\safeseh.asm">
-      <Filter>Source Files\Exceptions\StructuredExceptionHandling</Filter>
-    </None>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ftol2.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\lldiv.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\lldvrm.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\llmul.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\llrem.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\llshl.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\llshr.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ulldiv.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ulldvrm.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ullrem.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ullshr.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ltod3.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Intrinsics.asm">

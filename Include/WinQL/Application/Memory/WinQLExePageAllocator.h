@@ -54,7 +54,7 @@ namespace nsWin32
 		__QOR_DECLARE_OCLASS_ID(CExePageAllocator);
 
 		CExePageAllocator();
-		~CExePageAllocator();
+		virtual ~CExePageAllocator();
 
 		virtual void* Alloc( nsCodeQOR::CProcessBase* pProcess, Cmp_uint_ptr length, Cmp_uint_ptr* allocated, bool canExecute );
 		virtual void Free( nsCodeQOR::CProcessBase* pProcess, void* addr, Cmp_uint_ptr /* length */ );
@@ -67,7 +67,6 @@ namespace nsWin32
 	};
 
 }//nsWin32
-
 
 #endif//WINQL_EXEPAGEALLOCATOR_H_1
 

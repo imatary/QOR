@@ -28,52 +28,64 @@
 #define SYSTEMQOR_MSW_SHARED_BOOTSTRAP_H_1
 
 #include "WinQL/WinQL.h"
-//#include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "SystemQOR.h"
 #include "SystemQOR/SharedBootStrap.h"
+#include "WinQL/Bootstrap/WinQLModuleBootstrap.h"
 
-//class container for module global bootstrap code and data that must be linked into every QOR module built as a Windows DLL
-//--------------------------------------------------------------------------------
-class CWinQORSharedBootStrap : public CSharedBootStrap
+namespace nsWin32
 {
-public:
-
-	typedef void ( __QCMP_CALLCON* InitFunc )( void );
-
+	//class container for module global bootstrap code and data that must be linked into every QOR module built as a Windows DLL
 	//--------------------------------------------------------------------------------
-	enum DllEntryOps
+	class CWinQORSharedBootStrap : public ::CSharedBootStrap, public CModuleBootStrap
 	{
-		eProcessDetach = 0,
-		eProcessAttach,
-		eThreadAttach,
-		eThreadDetach
-	};
+	public:
 
-	// C initializers
+		typedef void ( __QCMP_CALLCON* InitFunc )( void );
+
+		//--------------------------------------------------------------------------------
+		enum DllEntryOps
+		{
+			eProcessDetach = 0,
+			eProcessAttach,
+			eThreadAttach,
+			eThreadDetach
+		};
+
+		// C initializers
 #pragma __QCMP_DATA_SEGMENT(".CRT$XIA")
-	static InitFunc CInit_a[] __attribute__((section (".CRT$XIA")));
+		static InitFunc CInit_a[ ] __attribute__( ( section( ".CRT$XIA" ) ) );
 #pragma __QCMP_DATA_SEGMENT(".CRT$XIZ")
-	static InitFunc CInit_z[] __attribute__((section (".CRT$XIZ")));
+		static InitFunc CInit_z[ ] __attribute__( ( section( ".CRT$XIZ" ) ) );
 
-	// C++ initializers
+		// C++ initializers
 #pragma __QCMP_DATA_SEGMENT(".CRT$XCA")
-	static InitFunc CppInit_a[] __attribute__((section (".CRT$XCA")));
+		static InitFunc CppInit_a[ ] __attribute__( ( section( ".CRT$XCA" ) ) );
 #pragma __QCMP_DATA_SEGMENT(".CRT$XCZ")
-	static InitFunc CppInit_z[] __attribute__((section (".CRT$XCZ")));
+		static InitFunc CppInit_z[ ] __attribute__( ( section( ".CRT$XCZ" ) ) );
 
 #pragma __QCMP_DATA_SEGMENT()
 
-	void* operator new( size_t );
-	void operator delete( void* );
+		void* operator new( size_t );
+		void operator delete( void* );
 
-	CWinQORSharedBootStrap( void* hModule );
-	~CWinQORSharedBootStrap();
+		CWinQORSharedBootStrap( void* hModule );
+		~CWinQORSharedBootStrap();
 
-	void InitTerm( InitFunc* pfbegin, InitFunc* pfend );
-	virtual void InitStatic( void );
-	static void InitializeSecurityCookie( void ) __QCMP_THROW;
+		int ProcessAttach( void );
+		int ProcessDetach( void );
+		bool ProcessAttached( void );
+		void* InstanceHandle( void );
+		void InitTerm( InitFunc* pfbegin, InitFunc* pfend );
+		virtual void InitStatic( void );
+		static void InitializeSecurityCookie( void ) __QCMP_THROW;
 
-};
+	protected:
+
+		int m_iProcAttached;
+		void* m_hModule;
+	};
+
+}//nsWin32
 
 #endif//SYSTEMQOR_MSW_SHARED_BOOTSTRAP_H_1
 

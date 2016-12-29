@@ -101,12 +101,11 @@ namespace nsWin32
 	//----------------------------------------------------------------------
 	static int inc_test( long volatile* p )
 	{
-		nsWin32::CThreadHelper ThreadHelper;
 		long tmp = 1;
 		while( nsWin32::CInterlockedHelper::CompareExchangeAcquire( p, tmp, 0 ) == 0 )
 		{
 			//YieldProcessor ();
-			ThreadHelper.Sleep( 0 );
+			CThread::GetCurrent()->Sleep( 0 );
 			tmp = 1;
 		}
 		return 0;
@@ -189,7 +188,6 @@ namespace nsWin32
 		  return r;
 	  }
 
-	  nsWin32::CThreadHelper ThreadHelper;
 	  _l = (spin_t *)*l;
 	  while (*l != NULL)
 		{
@@ -198,7 +196,7 @@ namespace nsWin32
 			{
 		  inc_test (&_l->l);
 		  if (wait_lock)
-			ThreadHelper.Sleep (0);
+			  CThread::GetCurrent()->Sleep (0);
 		}
 		  while (--wait_lock >= 0);
 		  if (dec_test (&_l->l))
@@ -249,7 +247,7 @@ namespace nsWin32
 	int _spin_lite_lock( spin_t* l )
 	{
 		CHECK_SPINLOCK_LITE( l );
-		nsWin32::CThreadHelper ThreadHelper;
+		
 		//nsWin32::nsSync::CInterlockedHelper InterlockedHelper;
 		while( 1 )
 		{
@@ -259,7 +257,7 @@ namespace nsWin32
 				inc_test( &l->l );
 				if( wait_lock )
 				{
-					ThreadHelper.Sleep( 0 );
+					CThread::GetCurrent()->Sleep( 0 );
 				}
 			}
 			while( --wait_lock >= 0 );

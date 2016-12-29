@@ -33,7 +33,7 @@
 #include <errno.h>
 #include <wctype.h>
 #include "CodeQOR/DataTypes/OTypes.h"
-
+#include "SystemQOR/System.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 
 //--------------------------------------------------------------------------------

@@ -109,7 +109,7 @@ namespace nsCodeQOR
     typedef __QOR_INTERFACE( __CODEQOR ) CTFlyer< CDefaultNoteHandler, CDefaultHandler > CDefaultNoteHandlerBase;
 
 }//nsCodeQOR
-
+/*
 #if     ( ( __QCMP_COMPILER == __QCMP_MSVC ) && ( !__QCMP_FEATURE_TEMPLATE_MEMBER_TEMPLATES_MSVC_BUGGED ) )
 template<> nsCodeQOR::sTOB< nsCodeQOR::CTFlyerRegEntry< nsCodeQOR::CDefaultFatalHandler > >	nsCodeQOR::CTFlyer< nsCodeQOR::CDefaultFatalHandler, nsCodeQOR::CDefaultHandler >::RegEntry((void*)(0));
 template<> nsCodeQOR::sTOB< nsCodeQOR::CTFlyerRegEntry< nsCodeQOR::CDefaultSeriousHandler > > nsCodeQOR::CTFlyer< nsCodeQOR::CDefaultSeriousHandler, nsCodeQOR::CDefaultHandler >::RegEntry((void*)(0));
@@ -117,5 +117,5 @@ template<> nsCodeQOR::sTOB< nsCodeQOR::CTFlyerRegEntry< nsCodeQOR::CDefaultConti
 template<> nsCodeQOR::sTOB< nsCodeQOR::CTFlyerRegEntry< nsCodeQOR::CDefaultWarningHandler > > nsCodeQOR::CTFlyer< nsCodeQOR::CDefaultWarningHandler, nsCodeQOR::CDefaultHandler >::RegEntry((void*)(0));
 template<> nsCodeQOR::sTOB< nsCodeQOR::CTFlyerRegEntry< nsCodeQOR::CDefaultNoteHandler > > nsCodeQOR::CTFlyer< nsCodeQOR::CDefaultNoteHandler, nsCodeQOR::CDefaultHandler >::RegEntry((void*)(0));
 #endif//( __QCMP_COMPILER == __QCMP_MSVC && ( !__QCMP_FEATURE_TEMPLATE_MEMBER_TEMPLATES_MSVC_BUGGED ) )
-
+*/
 #endif//CODEQOR_ERR_DEFAULTHANDLER_H_1

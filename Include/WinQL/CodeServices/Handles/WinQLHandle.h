@@ -47,6 +47,7 @@ namespace nsWin32
 
 		CHandle();
 		CHandle( void* h );
+		CHandle( int h );
 		virtual ~CHandle();
 		CHandle( const CHandle& );
 		CHandle& operator = ( const CHandle& );
@@ -59,7 +60,7 @@ namespace nsWin32
 		bool SetInformation( unsigned long dwMask, unsigned long dwFlags );
 		virtual void Close( void );
 		bool IsNull( void ) const;
-		bool IsInvalid( void );
+		bool IsInvalid( void ) const;
 		void Drop( void );
 		virtual void* Use( void ) const;
 
@@ -78,7 +79,7 @@ namespace nsWin32
 			return const_cast< CHandle& >( *this );
 		}
 
-		bool operator == ( CHandle& Cmp )
+		bool operator == ( const CHandle& Cmp )
 		{
 			return ( m_pObject == Cmp.m_pObject || m_h == Cmp.m_h ) ? true : false;
 		}

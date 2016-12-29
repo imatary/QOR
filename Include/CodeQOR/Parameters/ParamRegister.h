@@ -34,6 +34,7 @@
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "CodeQOR/Modules/ProcessBase.h"
+#include "CodeQOR/Tracing/CallContextBase.h"
 
 //--------------------------------------------------------------------------------
 namespace nsParamChecking

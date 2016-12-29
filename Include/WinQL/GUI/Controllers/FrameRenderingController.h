@@ -41,7 +41,7 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CFrameRenderingController );
 
-		CFrameRenderingController( nsMammut::CModel* pModelItem = 0, nsAppocrita::CController* pParent = 0 );
+		CFrameRenderingController( nsMammut::CModel* pModelItem = 0, nsQOR::CController::ref_type Parent = 0 );
 		virtual ~CFrameRenderingController();
 		virtual void OnSize( COSWindow& Window, Cmp_uint_ptr wParam, Cmp_long_ptr lParam );
 		virtual long OnEraseBackground( COSWindow& Window, CDeviceContext& refDC );

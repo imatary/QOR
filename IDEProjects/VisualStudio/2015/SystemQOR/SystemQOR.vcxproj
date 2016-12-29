@@ -102,7 +102,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../QOR/Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies />
+      <AdditionalDependencies>deliberately_prevent_linking.lib</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\SystemQOR\Common\ExePageAllocator.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\Common\SharedBootStrap.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Common\System.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\Common\SystemQOR.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\arpa\MSW_inet.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\extensions\strdup.cpp" />
@@ -219,7 +220,7 @@
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_msg.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_resource.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_select.cpp" />
-    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_sem.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_sys_sem.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_shm.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_socket.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_stat.cpp" />
@@ -403,6 +404,11 @@
     <ClCompile Include="..\..\..\..\Source\SystemQOR\Posix\sys\Basewait.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Config\OSDetection.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Config\SupportedOSList.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Config\SystemSelection.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\ExePageAllocator.h" />
     <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\arpa\MSW_inet.h" />
     <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSWindows.h" />
     <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\MSW_aio.h" />
@@ -494,8 +500,72 @@
     <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_uname.h" />
     <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_utsname.h" />
     <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_wait.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\aio_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\assert_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\cpio_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\ctype_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\dirent_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\dlfcn_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\errno_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\fcntl_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\fenv_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\float_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\fmtmsg_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\fnmatch_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\ftw_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\glob_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\grp_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\iconv_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\inttypes_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\iso646_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\langinfo_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\libgen_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\limits_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\locale_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\math_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\monetary_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\mqueue_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\ndbm_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\netdb_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\nl_types_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\NOT_locale_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\poll_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\pthread_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\pwd_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\regex_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\sched_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\search_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\semaphore_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\setjmp_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\signal_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\spawn_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stdarg_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stdbool_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stddef_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stdint_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stdio_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stdlib_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\strings_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\string_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stropts_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\syslog_types.h" />
     <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\sys\sys_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\tar_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\termios_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\tgmath_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\time_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\trace_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\ucontext_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\ulimit_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\unistd_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\utime_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\utmpx_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\wchar_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\wctype_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\wordexp_types.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\_complex_types.h" />
     <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\WindowsVersion.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\arpa\Baseinet.h" />
     <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseaio.h" />
     <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Baseassert.h" />
     <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basecomplex.h" />
@@ -559,6 +629,29 @@
     <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basewchar.h" />
     <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basewctype.h" />
     <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\Basewordexp.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\netinet\Basein.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\netinet\Basetcp.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\net\Baseif.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseipc.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basemman.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basemsg.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseresource.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseselect.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basesem.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseshm.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basesocket.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basestat.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basestatvfs.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basetime.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basetimeb.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basetimes.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basetypes.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseuio.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseun.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseutsname.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basewait.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\SharedBootStrap.h" />
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\System.h" />
     <ClInclude Include="..\..\..\..\Source\SystemQOR\MSWindows\versions\Win9x.h" />
     <ClInclude Include="..\..\..\..\Source\SystemQOR\MSWindows\versions\WinNT.h" />
   </ItemGroup>

@@ -33,18 +33,22 @@
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-#include "CodeQOR/DataStructures/TLRef.h"
+//#include "CodeQOR/DataStructures/TLRef.h"
 
 #define __QOR_DECLARE_REF_TYPE( _T ) typedef nsCodeQOR::reference_type< _T >::type ref_type
+
+#define __QOR_IMPL_REF( _T ) __QOR_DECLARE_REF_TYPE( _T);\
+ref_type Ref( void ) const { return ref_type( this ); }
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
 {	
+	template< class T > class CTLRef;
 	//Use template overrides to set up a reference type strategy for a particular type
 
 	//--------------------------------------------------------------------------------
-	///This template provides a default reference choice for all types
-	///Overload it for any type for which you need to change the form of reference
+	//This template provides a default reference choice for all types
+	//Overload it for any type for which you need to change the form of reference
 	template< class T >
 	struct reference_type
 	{

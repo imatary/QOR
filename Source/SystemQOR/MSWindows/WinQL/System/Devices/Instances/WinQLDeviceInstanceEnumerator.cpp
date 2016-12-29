@@ -47,13 +47,13 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CDeviceInstanceEnumerator );
 
 	//--------------------------------------------------------------------------------
-	CDeviceInstanceEnumerator::CDeviceInstanceEnumerator() : nsAppocrita::CController(), CSetupAPIBase()
+	CDeviceInstanceEnumerator::CDeviceInstanceEnumerator() : nsQOR::CController(), CSetupAPIBase()
 	{		
 		//SetModelType( CDeviceInstanceCM::ClassID() );		//The associated Model is a DeviceInstance Collection Model
 	}
 
 	//--------------------------------------------------------------------------------
-	CDeviceInstanceEnumerator::CDeviceInstanceEnumerator( const CDeviceInstanceEnumerator& src ) : nsAppocrita::CController( src ), CSetupAPIBase( src )
+	CDeviceInstanceEnumerator::CDeviceInstanceEnumerator( const CDeviceInstanceEnumerator& src ) : nsQOR::CController( src ), CSetupAPIBase( src )
 	{
 	}
 
@@ -62,7 +62,7 @@ namespace nsWin32
 	{
 		if( &src != this )
 		{
-			nsAppocrita::CController::operator = ( src );
+			nsQOR::CController::operator = ( src );
 		}
 		return *this;
 	}

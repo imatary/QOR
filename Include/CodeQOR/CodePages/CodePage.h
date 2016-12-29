@@ -36,8 +36,8 @@
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "CodeQOR/Text/Char.h"
-#include "CodeQOR/DataStructures/TArray.h"
-#include "CodeQOR/Text/CodeString.h"
+//#include "CodeQOR/DataStructures/TArray.h"
+#include "CodeQOR/Text/TString.h"
 
 //------------------------------------------------------------------------------
 namespace nsCodeQOR

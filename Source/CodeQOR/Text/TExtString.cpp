@@ -27,7 +27,7 @@
 #include "CodeQOR/Text/Char.h"
 #include "CodeQOR/Text/TExtString.h"
 #include "CodeQOR/Text/TString.h"
-
+#include "AppocritaQOR/Event.h"
 #include <stdlib.h>
 
 //------------------------------------------------------------------------------

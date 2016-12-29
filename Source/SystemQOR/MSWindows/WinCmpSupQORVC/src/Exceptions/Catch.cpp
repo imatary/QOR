@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "AppocritaQOR/SubSystems/Threading.h"
 #include "WinQL/WinQL.h"
 #include "SystemQOR.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
@@ -170,7 +171,8 @@ namespace nsCompiler
 
 				if ( !context.ExceptionObject().IsValid() )
 				{
-					ValidContext = nsCodeQOR::CThreadContextBase::GetCurrent()->ExceptionContext()->CurrentException();
+					nsQOR::IThreading* pThreading = TheApplication()->GetRole()->GetSubSystem( nsQOR::IThread::ClassID() ).As< nsQOR::IThreading >();
+					ValidContext = pThreading->GetCurrent()->ExceptionContext()->CurrentException();
 
 					if ( !ValidContext.IsValid() )
 					{

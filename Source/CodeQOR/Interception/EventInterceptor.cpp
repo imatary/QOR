@@ -28,7 +28,7 @@
 #include "CodeQOR/Traits/Policy.h"
 #include "CodeQOR/Interception/FlyStrap.h"
 
-template<> nsCodeQOR::CEventInterceptorRegEntry  nsCodeQOR::CEventInterceptorBase::RegEntry( (void*)(0));
+//template<> nsCodeQOR::CEventInterceptorRegEntry  nsCodeQOR::CEventInterceptorBase::RegEntry( (void*)(0));
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR

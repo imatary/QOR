@@ -33,6 +33,7 @@
 #include "CodeQOR/DataStructures/TLRef.h"
 #include "CodeQOR/Tracing/FunctionContextBase.h"
 #include "CodeQOR/Text/Char16.h"
+#include "AppocritaQOR/Event.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR

@@ -60,7 +60,7 @@ namespace nsWinPosum
 
 	private:
 
-		nsWin32::CThreadHelper m_ThreadHelper;
+		//nsWin32::CThreadHelper m_ThreadHelper;
 		nsWin32::CInterlockedHelper m_InterlockedHelper;
 		nsWin32::CWin32Allocator m_Win32Allocator;
 		nsWin32::CSystemInfo m_SystemInfo;

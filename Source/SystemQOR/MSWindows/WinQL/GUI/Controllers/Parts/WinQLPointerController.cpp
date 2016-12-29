@@ -37,7 +37,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CPointerController );
 
 	//--------------------------------------------------------------------------------
-	CPointerController::CPointerController( nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent ) : CBaseWindowPartController( pModelItem, pParent )
+	CPointerController::CPointerController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CBaseWindowPartController( pModelItem, Parent )
 	{
 		_WINQ_FCONTEXT( "CPointerController::CPointerController" );
 	}

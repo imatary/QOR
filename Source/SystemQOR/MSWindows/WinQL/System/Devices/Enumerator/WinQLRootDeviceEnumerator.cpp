@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "SystemQOR/System.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
@@ -54,7 +55,7 @@ namespace nsWin32
 		unsigned long ulInitLength = 256;		
 		unsigned long ulResult = 0;
 		CDeviceEnumerator* pEnumerator = new CDeviceEnumerator( strEnumerator );
-		CSystem::Instance().Devices( QOR_PP_SHARED_OBJECT_ACCESS ).RegisterEnumerator( strEnumerator, pEnumerator );
+		TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).RegisterEnumerator( strEnumerator, pEnumerator );
 		do
 		{
 			unsigned long ulLength = ulInitLength;
@@ -70,7 +71,7 @@ namespace nsWin32
 				{
 					strEnumerator.ValidateBuffer( static_cast< unsigned short >( ulLength ) );
 					pEnumerator = new CDeviceEnumerator( strEnumerator );
-					CSystem::Instance().Devices( QOR_PP_SHARED_OBJECT_ACCESS ).RegisterEnumerator( strEnumerator, pEnumerator );
+					TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).RegisterEnumerator( strEnumerator, pEnumerator );
 				}
 				else
 				{

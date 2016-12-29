@@ -33,6 +33,7 @@ __QCMP_WARNING_DISABLE( __QCMP_WARN_THIS_USED_IN_BASE_INIT_LIST, "Safe usage: sa
 #include "WinQL/GUI/Theme/ThemeData.h"
 __QCMP_WARNING_POP
 #include "WinQL/System/WinQLSystem.h"
+#include "SystemQOR/System.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -110,7 +111,7 @@ namespace nsWin32
 	bool CUser::CanIWriteAPowerScheme( void )
 	{
 		_WINQ_FCONTEXT( "CUser::CanIWriteAPowerScheme" );
-		return CSystem::Instance().Power(QOR_PP_SHARED_OBJECT_ACCESS).CanUserWriteAPowerScheme();
+		return TheSystem().As< nsWin32::CSystem >()->Power(QOR_PP_SHARED_OBJECT_ACCESS).CanUserWriteAPowerScheme();
 	}
 
 }//nsWin32

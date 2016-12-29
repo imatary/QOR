@@ -25,6 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include <errno.h>
+#include "SystemQOR/System.h"
 #include "WinQL/Application/ErrorSystem/WinQLErrorHandling.h"
 #include "WinQL/Application/Threading/WinQLThread.h"
 #include "WinQL/CodeServices/Locale/WinQLSetLoc.h"
@@ -645,7 +646,7 @@ namespace nsWin32
 			{
 				return 0;
 			}
-			else
+			else if( strCountry.Len() > 0 )
 			{
 				strncpy( lpOutStr->m_szCountry, strCountry.GetBuffer(), CLC_ID::MAX_CTRY_LEN );
 			}
@@ -674,7 +675,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	int CSetLoc::_stricmp ( const char* dst, const char* src )
 	{
-		if ( CSystem::Instance().Locale()().LocaleChanged() == false )
+		if ( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 		{				
 			//_VALIDATE_RETURN(dst != NULL, EINVAL, _NLSCMPERROR);
 			//_VALIDATE_RETURN(src != NULL, EINVAL, _NLSCMPERROR);
@@ -717,7 +718,7 @@ namespace nsWin32
 	int CSetLoc::_strnicmp ( const char* dst, const char* src, size_t count )
 	{
 
-		if ( CSystem::Instance().Locale()().LocaleChanged() == false )
+		if ( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 		{
 			// validation section
 			//_VALIDATE_RETURN(dst != NULL, EINVAL, _NLSCMPERROR);

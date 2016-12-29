@@ -181,7 +181,7 @@ namespace nsBluefoot
 					case 2:
 						m_RecognitionEvent.BOMType() = CBOMRecognizedEvent::eUTF8;
 					}
-					m_RecognitionEvent(); //BOM Matched
+					m_RecognitionEvent.OnSignaled(); //BOM Matched
 					m_bRecognized = true;
 				}
 			}
@@ -189,7 +189,7 @@ namespace nsBluefoot
 			{
 				RejectBOM( ulBOMBytes );
 				m_RecognitionEvent.BOMType() = CBOMRecognizedEvent::eNone;
-				m_RecognitionEvent();//No BOM
+				m_RecognitionEvent.OnSignaled();//No BOM
 				m_bRecognized = true;
 			}
 		}

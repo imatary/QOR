@@ -38,7 +38,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( COwnerController );
 
 	//--------------------------------------------------------------------------------
-	COwnerController::COwnerController( nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent ) : CBaseWindowPartController( pModelItem, pParent )
+	COwnerController::COwnerController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CBaseWindowPartController( pModelItem, Parent )
 	{
 		_WINQ_FCONTEXT( "COwnerController::COwnerController" );
 	}
@@ -50,10 +50,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool COwnerController::SetModel( nsMammut::CModel* pModelItem )
+	void COwnerController::SetModel( nsMammut::CModel* pModelItem )
 	{
 		_WINQ_FCONTEXT( "COwnerController::SetModel" );
-		bool bResult = false;
         /*
 		CWindowView* pBaseWindowModel = reinterpret_cast< CWindowView* >( pModelItem );
 		if( pBaseWindowModel != 0 )
@@ -61,11 +60,10 @@ namespace nsWin32
 			COwnerView* pOwnerModel = 0;
 			if( pBaseWindowModel->QueryInterface( COwnerView::IID_IOwnerView, reinterpret_cast< void** >( &pOwnerModel ) ) == S_OK )
 			{*/
-				bResult = CController::SetModel( pModelItem );
+				CController::SetModel( pModelItem );
 		/*	}					
 		}
 */
-		return bResult;
 	}
 
 	//--------------------------------------------------------------------------------

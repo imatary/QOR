@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "CompilerQOR/Common/PreCompiler.h"		//Setup Compiler definitions and preprocessor
 #include "ArchQOR/Common/Endian.h"
 #include "x86Definitions.h"
 
@@ -31,31 +32,31 @@
 #	define QOR_ARCH_WORDSIZE 32
 #	define QOR_ARCH_ENDIAN	QOR_ARCH_BYTE_LITTLE_ENDIAN
 #   if defined(__I86__)
-#       define QOR_ARCH_X86 QOR_VERSION_NUMBER(__I86__,0,0)
+#       define QOR_ARCH_X86 QOR_PP_VERSION_NUMBER(__I86__,0,0)
 #   endif
 #   if defined(_M_IX86)
-#       define QOR_ARCH_X86 QOR_PP_VERSION_MAKE_10_VV00(_M_IX86)
+#       define QOR_ARCH_X86 QOR_PP_EXPAND( QOR_PP_VERSION_MAKE_10_VV00(_M_IX86) )
 #   endif
 #   if defined(__i786__)
-#       define QOR_ARCH_X86 QOR_VERSION_NUMBER(7,0,0)
+#       define QOR_ARCH_X86 QOR_PP_VERSION_NUMBER(7,0,0)
 #	endif
 #   if defined(__i686__)
-#       define QOR_ARCH_X86 QOR_VERSION_NUMBER(6,0,0)
+#       define QOR_ARCH_X86 QOR_PP_VERSION_NUMBER(6,0,0)
 #   endif
 #   if defined(__i586__)
-#       define QOR_ARCH_X86 QOR_VERSION_NUMBER(5,0,0)
+#       define QOR_ARCH_X86 QOR_PP_VERSION_NUMBER(5,0,0)
 #   endif
 #   if defined(__i486__)
-#       define QOR_ARCH_X86 QOR_VERSION_NUMBER(4,0,0)
+#       define QOR_ARCH_X86 QOR_PP_VERSION_NUMBER(4,0,0)
 #   endif
 #   if defined(__i386__)
-#       define QOR_ARCH_X86 QOR_VERSION_NUMBER(3,0,0)
+#       define QOR_ARCH_X86 QOR_PP_VERSION_NUMBER(3,0,0)
 #   endif
 #	define QOR_ARCH_NAME "Intel x86-32"
 #elif( QOR_ARCH == QOR_ARCH_X86_64 )
 #	define QOR_ARCH_WORDSIZE 64
 #	define QOR_ARCH_ENDIAN	QOR_ARCH_BYTE_LITTLE_ENDIAN
 #	define QOR_ARCH_NAME "Intel x86-64"
-#	define QOR_ARCH_X86 QOR_VERSION_NUMBER(64,0,0)
+#	define QOR_ARCH_X86 QOR_PP_VERSION_NUMBER(64,0,0)
 #endif
 

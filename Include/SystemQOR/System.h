@@ -1,6 +1,6 @@
 //System.h
 
-// Copyright Querysoft Limited 2013, 2015
+// Copyright Querysoft Limited 2013, 2015, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,29 +29,55 @@
 
 #include "SystemQOR.h"
 #include "CodeQOR/DataTypes/GUID.h"
+#include "AppocritaQOR/SubSystem.h"
 
 //------------------------------------------------------------------------------
 namespace nsQOR
 {
+	class __QOR_INTERFACE( __APPOCRITA ) IApplication;
+
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __QSYS ) CSystem
+	class __QOR_INTERFACE( __QSYS ) ISystem : public ISubSystem
 	{
 	public:
 
-		static const nsCodeQOR::mxGUID* ClassID(void);
-		static const char* TypeName(void);
+		__QOR_DECLARE_OCLASS_ID( ISystem );
+
+		__QOR_IMPL_REF( ISystem );
+
+		ISystem();
+		virtual ~ISystem(){};
+
+		virtual void Setup( IApplication& Application ) = 0;
+		virtual void Shutdown( IApplication& Application ) = 0;
+
+	private:
+
+		ISystem( const ISystem& ) = delete;
+		ISystem& operator = ( const ISystem& ) = delete;
+	};
+
+	//------------------------------------------------------------------------------
+	class __QOR_INTERFACE( __QSYS ) CSystem : public CSubSystem
+	{
+	public:
+
+		__QOR_DECLARE_OCLASS_ID( CSystem );
+
+		__QOR_IMPL_REF( CSystem );
 
 		CSystem();
-		CSystem( const CSystem& src );
-		CSystem& operator = ( const CSystem& src );
+		CSystem( const CSystem& src ) = delete;
+		CSystem& operator = ( const CSystem& src ) = delete;
 		virtual ~CSystem();
 
-		virtual void Init( void );
+		virtual void Setup( IApplication& Application );
+		virtual void Shutdown( IApplication& Application );
 
 	};
 
-	__QOR_INTERFACE( __QSYS ) CSystem& System();
+}//nsQOR
 
-}
+__QOR_INTERFACE( __QSYS ) nsQOR::ISystem::ref_type TheSystem( void );
 
 #endif//SYSTEMQOR_SYSTEM_H_2

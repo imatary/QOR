@@ -40,6 +40,15 @@
 
 __QCMP_STARTLINKAGE_C
 
+	extern int _cdecl QORStaticInit( void );
+
+	//------------------------------------------------------------------------------
+	__QCMP_EXPORT int _cdecl QORinit( void )
+	{
+		QORStaticInit();
+		return 1;
+	}
+
 	//------------------------------------------------------------------------------
 	//This gives the CQOR library a unique identity
 	__QCMP_EXPORT nsCodeQOR::mxGUID* QORidentity( void )
@@ -56,6 +65,7 @@ nsCodeQOR::CLoadableModuleBase& ThisModule( void )
 	static nsCodeQOR::CLoadableModuleBase CQORModule( "Querysoft Open Runtime 'C' library (CQOR)" );
 	return CQORModule;
 }
+
 
 #	endif//_USRDLL
 #endif//QOR_MONOLITHIC

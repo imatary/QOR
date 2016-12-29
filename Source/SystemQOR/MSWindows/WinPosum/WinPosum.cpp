@@ -10,6 +10,15 @@
 
 __QCMP_STARTLINKAGE_C
 
+extern int _cdecl QORStaticInit( void );
+
+//------------------------------------------------------------------------------
+__QCMP_EXPORT int _cdecl QORinit( void )
+{
+	QORStaticInit();
+	return 1;
+}
+
 //------------------------------------------------------------------------------
 __QCMP_EXPORT nsCodeQOR::mxGUID* QORidentity(void)
 {

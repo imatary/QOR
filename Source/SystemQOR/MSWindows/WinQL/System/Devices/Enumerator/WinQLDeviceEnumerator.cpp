@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "SystemQOR/System.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
@@ -113,7 +114,7 @@ namespace nsWin32
 								ulError = ::GetLastError();
 							}
 
-							CDeviceInstance* pDeviceInstance = CSystem::Instance().Devices(QOR_PP_SHARED_OBJECT_ACCESS).DeviceFromID( strDeviceInstance );
+							CDeviceInstance* pDeviceInstance = TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS).DeviceFromID( strDeviceInstance );
 						
 							if( pDeviceInstance == 0 )
 							{

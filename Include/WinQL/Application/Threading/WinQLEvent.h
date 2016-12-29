@@ -35,12 +35,13 @@
 #include "WinQL/Definitions/Security.h"
 #include "WinQL/System/Info/WinQLSystemInfo.h"
 #include "WinQL/CodeServices/Handles/WinQLSyncHandle.h"
+#include "WinQL/Application/Threading/WinQLWaitableObject.h"
 
 //------------------------------------------------------------------------------
 namespace nsWin32
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL ) CEvent
+	class __QOR_INTERFACE( __WINQL ) CEvent : public CWaitableObject
 	{
 	public:
 
@@ -65,8 +66,8 @@ namespace nsWin32
 		bool Pulse( void );
 		bool Reset( void );
 		bool Set( void );
-		nsCodeQOR::CTCRef< CSyncHandle > Handle( void );
-		unsigned long Wait( unsigned long dwMilliseconds, bool bAlertable = false );
+		//nsCodeQOR::CTCRef< CSyncHandle > Handle( void );
+		//unsigned long Wait( unsigned long dwMilliseconds, bool bAlertable = false );
 
 	protected:
 
@@ -74,7 +75,7 @@ namespace nsWin32
 
 	private:
 
-		CSyncHandle m_Handle;
+		//CSyncHandle m_Handle;
 
 		CEvent& operator = ( const CEvent& );
 	};

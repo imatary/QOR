@@ -30,6 +30,7 @@
 #include "CodeQOR/Tracing/FunctionContextBase.h"
 #include "CodeQOR/Modules/ProcessBase.h"
 #include "SystemQOR/SharedBootStrap.h"
+#include "AppocritaQOR/SubSystems/Thread.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
@@ -55,27 +56,30 @@ namespace nsCodeQOR
 	//--------------------------------------------------------------------------------
 	//A function context is being created
 	//These should only ever be created on the stack
-	CFunctionContextBase::CFunctionContextBase( const char* szFuncName, const char* szFile, unsigned int uiLine ) : m_szFuncName( szFuncName ), m_szFile( szFile )
+	CFunctionContextBase::CFunctionContextBase( const char* szFuncName, const char* szFile, unsigned int uiLine ) : 
+	  m_uiLocked( 0 )
+	, m_iTraceDepth( 0 )
+	, m_szFuncName( szFuncName )
+	, m_szFile( szFile )
+	, m_uiLine( uiLine )
+	, m_pParent( 0 )
+	, m_pThread( nsQOR::CThread::GetCurrent() )
+	, m_CallContext( m_pThread )
 	{
-		m_uiLocked = 0;
-		m_iTraceDepth = 0;
-		m_szFile = szFile;
-		m_pParent = 0;
-		m_pThread = 0;
-		m_uiLine = uiLine;
 		Init();
 	}
 
 	//--------------------------------------------------------------------------------
 	CFunctionContextBase::CFunctionContextBase( CObjectContextBase ObjContext, const char* szFuncName, const char* szFile, unsigned int uiLine ) : m_ObjContext( ObjContext )
+	, m_uiLocked( 0 )
+	, m_iTraceDepth( 0 )
+	, m_szFuncName( szFuncName )
+	, m_szFile( szFile )
+	, m_uiLine( uiLine )
+	, m_pParent( 0 )
+	, m_pThread( nsQOR::CThread::GetCurrent() )
+	, m_CallContext( m_pThread )
 	{
-		m_uiLocked = 0;
-		m_iTraceDepth = 0;
-		m_szFuncName = szFuncName;
-		m_szFile = szFile;
-		m_pParent = 0;
-		m_pThread = 0;
-		m_uiLine = uiLine;
 		Init();
 	}
 
@@ -133,7 +137,9 @@ namespace nsCodeQOR
 		{
 			m_uiLocked++;
 			m_iTraceDepth = 0;
-			m_pThread = CThreadContextBase::GetCurrent();
+
+			m_pThread = nsQOR::CThread::GetCurrent();
+
 			if( m_pThread )
 			{
 				m_pParent = m_pThread->RegisterFunctionContext( this );
@@ -147,7 +153,7 @@ namespace nsCodeQOR
 					m_iTraceDepth = m_pParent->m_iTraceDepth + 1;
 					if( m_pParent->CallContext() )
 					{
-						m_pParent->CallContext()->CallMade( this );//Tell calling context we have reached sub function body
+						m_pParent->CallContext()->CallMade( this );//Tell calling context we have reached called function body
 					}
 				}
 			}
@@ -180,13 +186,15 @@ namespace nsCodeQOR
 	}
 
 	//--------------------------------------------------------------------------------
-	CFunctionContextBase::CFunctionContextBase()
+	CFunctionContextBase::CFunctionContextBase() : m_uiLocked( 0 )
+	, m_iTraceDepth( 0 )
+	, m_szFuncName( 0 )
+	, m_szFile( 0 )
+	, m_uiLine( 0 )
+	, m_pParent( 0 )
+	, m_pThread( nsQOR::CThread::GetCurrent() )
+	, m_CallContext( m_pThread )
 	{
-		m_uiLocked = 0;
-		m_iTraceDepth = 0;
-		m_szFuncName = 0;
-		m_szFile = 0;
-		m_pParent = 0;
 		Init();
 	}
 
@@ -199,8 +207,8 @@ namespace nsCodeQOR
 			if( pCleanup != 0 )
 			{
 				pCleanup->Cleanup();
-			}
-			delete pCleanup;
+				delete pCleanup;
+			}			
 		}
 	}
 
@@ -257,18 +265,14 @@ namespace nsCodeQOR
 	//--------------------------------------------------------------------------------
 	CFunctionContextBase* CFunctionContextBase::GetCurrent()
 	{
-		CProcessBase* pProcess = CProcessBase::ThisProcess();
-		CThreadContextBase* pThread = 0;
-		if( pProcess != 0 )
-		{
-			pThread = pProcess->ThreadContext();
-		}
+		nsQOR::IThread::ref_type pThreadContext = nsQOR::CThread::GetCurrent();
 
 		CFunctionContextBase* pFunctionContext = 0;
-		if( pThread != 0 )
+		if( pThreadContext )
 		{
-			pFunctionContext = pThread->FunctionContext();
+			pFunctionContext = pThreadContext->FunctionContext();
 		}
+
 		return pFunctionContext;
 	}
 

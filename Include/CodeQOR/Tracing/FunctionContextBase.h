@@ -40,6 +40,7 @@
 #include "CodeQOR.h"
 #include "CodeQOR/Tracing/ObjectContextBase.h"
 #include "CodeQOR/Tracing/ObjectContext.h"
+#include "AppocritaQOR/SubSystems/IThread.h"
 
 //Declare a __QCS_FCONTEXT macro which will only take effect if context traking is switched on
 //It will make use of any compiler function naming support
@@ -68,7 +69,7 @@
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
 {
-	class __QOR_INTERFACE( __CODEQOR ) CThreadContextBase;
+	//class __QOR_INTERFACE( __CODEQOR ) CThreadContextBase;
 
 	//--------------------------------------------------------------------------------
 	//A base only class to allow all CCleanup types to be stored in a homogeneous container
@@ -172,9 +173,9 @@ namespace nsCodeQOR
 		CFunctionContextBase* m_pParent;
 		CCleanupList m_Cleanups;
 		CObjectContextBase m_ObjContext;
-		unsigned int m_uiLine;
+		unsigned int m_uiLine;		
+		nsQOR::IThread::ref_type m_pThread;
 		CCallContextBase m_CallContext;
-		CThreadContextBase* m_pThread;
 
 		virtual void Init();
 

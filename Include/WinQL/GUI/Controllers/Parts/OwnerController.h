@@ -42,9 +42,9 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( COwnerController );
 
-		COwnerController( nsMammut::CModel* pModelItem = 0, nsAppocrita::CController* pParent = 0 );
+		COwnerController( nsMammut::CModel* pModelItem = 0, nsQOR::CController::ref_type Parent = 0 );
 		virtual ~COwnerController();
-		virtual bool SetModel( nsMammut::CModel* pModelItem );
+		virtual void SetModel( nsMammut::CModel* pModelItem );
 		virtual bool ProcessMessage( COSWindow& Window, Cmp_long_ptr& lResult, unsigned int uMsg, Cmp_uint_ptr wParam, Cmp_long_ptr lParam );
 
 		virtual void OnEnterIdle( COSWindow& Window, Cmp_uint_ptr wReason, COSWindow::refType CauseWnd );

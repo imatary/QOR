@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "SystemQOR/System.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/System/Atoms/WinQLGlobalAtoms.h"
 #include "WinQL/System/WinQLSystem.h"
@@ -83,15 +84,16 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned int CGlobalAtomTable::GetName( const CGlobalAtom& Atom, TCHAR* lpBuffer, int nSize )
+	CTString CGlobalAtomTable::GetName( const CGlobalAtom& Atom )
 	{
 		_WINQ_FCONTEXT( "CGlobalAtomTable::GetName" );
-		unsigned int uiResult = 0;
+		CTString strName;
 		__QOR_PROTECT
-		{
-			uiResult = CKernel32::GlobalGetAtomName( Atom.m_usAtom, lpBuffer, nSize );
+		{			
+			unsigned int uiResult = CKernel32::GlobalGetAtomName( Atom.m_usAtom, strName.GetBufferSetLength( MAX_PATH ), MAX_PATH );
+			strName.ValidateBuffer( static_cast< unsigned short >( uiResult ) );
 		}__QOR_ENDPROTECT
-		return uiResult;
+		return strName;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -118,24 +120,28 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CGlobalAtom::CGlobalAtom( const CGlobalAtom & src )
+	{
+		_WINQ_FCONTEXT( "CGlobalAtom::CGlobalAtom" );
+		if( &src != this )
+		{
+			m_usAtom = src.m_usAtom;
+			( const_cast< CGlobalAtom& >( src ) ).m_usAtom = 0;
+		}
+	}
+
+	//--------------------------------------------------------------------------------
 	CGlobalAtom::CGlobalAtom( const CTString& strName, bool bUseExisting ) : m_usAtom( 0 )
 	{
 		_WINQ_FCONTEXT( "CGlobalAtom::CGlobalAtom" );
 		if( bUseExisting )
 		{
-			*this = CSystem::Instance().AtomTable( QOR_PP_SHARED_OBJECT_ACCESS ).Find( strName );
+			*this = TheSystem().As< nsWin32::CSystem >()->AtomTable( QOR_PP_SHARED_OBJECT_ACCESS ).Find( strName );
 		}
 		if( m_usAtom == 0 )
 		{
-			*this = CSystem::Instance().AtomTable( QOR_PP_SHARED_OBJECT_ACCESS ).Add( strName );
+			*this = TheSystem().As< nsWin32::CSystem >()->AtomTable( QOR_PP_SHARED_OBJECT_ACCESS ).Add( strName );
 		}		
-	}
-
-	//--------------------------------------------------------------------------------
-	CGlobalAtom::CGlobalAtom( const CGlobalAtom& src ) : m_usAtom( src.m_usAtom )
-	{
-		_WINQ_FCONTEXT( "CGlobalAtom::CGlobalAtom" );
-		(const_cast< CGlobalAtom& >( src )).m_usAtom = 0;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -144,7 +150,7 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CGlobalAtom::~CGlobalAtom" );
 		if( m_usAtom != 0 )
 		{
-			CSystem::Instance().AtomTable( QOR_PP_SHARED_OBJECT_ACCESS ).Delete( *this );
+			TheSystem().As< nsWin32::CSystem >()->AtomTable( QOR_PP_SHARED_OBJECT_ACCESS ).Delete( *this );
 		}
 	}
 
@@ -161,8 +167,7 @@ namespace nsWin32
 	CTString CGlobalAtom::GetName( void )
 	{
 		_WINQ_FCONTEXT( "CGlobalAtom::GetName" );
-		CTString strName;
-		strName.ValidateBuffer( static_cast< unsigned short >( CSystem::Instance().AtomTable( QOR_PP_SHARED_OBJECT_ACCESS ).GetName( *this, strName.GetBufferSetLength( 256 ), 256 ) ) );
+		CTString strName = TheSystem().As< nsWin32::CSystem >()->AtomTable( QOR_PP_SHARED_OBJECT_ACCESS ).GetName( *this );
 		return strName;
 	}
 

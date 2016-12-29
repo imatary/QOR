@@ -50,10 +50,10 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CDragListParentController::SetModel( nsMammut::CModel* pModelItem )
+	void CDragListParentController::SetModel( nsMammut::CModel* pModelItem )
 	{
 		_WINQ_FCONTEXT( "CDragListParentController::SetModel" );
-		return CBaseWindowController::SetModel( pModelItem );
+		CBaseWindowController::SetModel( pModelItem );
 	}
 
 	//--------------------------------------------------------------------------------

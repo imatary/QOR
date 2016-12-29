@@ -59,7 +59,7 @@ namespace nsCodeQOR
 		CFlyStrap* pNext = Next( (CFlyStrap*)(0) );
 		if( pNext != 0 )
 		{
-			pNext->CallPre( pCall, pFunction );
+			bResult = pNext->CallPre( pCall, pFunction );
 		}
 		return bResult;
 	}

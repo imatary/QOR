@@ -46,16 +46,23 @@
 //_WTXT for embedded strings that are always UNICODE subject to compiler support
 //_TXT for embedded strings that follow __QOR_UNICODE
 
-//Use _T for embedded strings that remain raw, i.e. not objects, but follow __QOR_UNICODE where possible
+//Use _T for embedded strings that remain raw, i.e. not objects, but follow __QOR_UNICODE by using _TXT where possible
 
 #	define _ATXT( _X ) ( nsCodeQOR::CACodeString( _X ) )
 
-#if ( __QOR_UNICODE && __QCMP_EXTENSION( Unicode_Const_Str_Conversion ) )        //Enable unicode strings in the code on compilers that support it e.g. Visual C++
+//Enable unicode strings in the code on compilers that support it e.g. Visual C++
+#if ( __QCMP_EXTENSION( Unicode_Const_Str_Conversion ) ) 
 #	define _WTXT( _X ) ( nsCodeQOR::CWCodeString( L##_X ) )
-#	define _T( _X ) L##_X
-#else   
+#else
 #	define _WTXT( _X ) ( nsCodeQOR::CACodeString( _X ) )
-#	define _T( _X ) _X
+#endif
+
+#ifndef _T
+#	if ( __QOR_UNICODE )
+#		define _T( _X ) L##_X
+#	else   
+#		define _T( _X ) _X
+#	endif
 #endif
 
 //--------------------------------------------------------------------------------

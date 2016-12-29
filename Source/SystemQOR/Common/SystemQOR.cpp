@@ -27,7 +27,6 @@
 #define __QCMP_REPORTCONIG	__QCS_YES_
 
 #include "SystemQOR.h"
-#include "SystemQOR/System.h"
 #include "CodeQOR/DataTypes/GUID.h"
 #include "CodeQOR/Modules/LoadableModuleBase.h"
 #include "CodeQOR/Tracing/FunctionContextBase.h"
@@ -47,6 +46,16 @@ __QCMP_STARTLINKAGE_C
 		return &SystemQOR;
 	}
 #else
+
+	extern int _cdecl QORStaticInit( void );
+
+	//------------------------------------------------------------------------------
+	__QCMP_EXPORT int _cdecl QORinit( void )
+	{
+		QORStaticInit();
+		return 1;
+	}
+
 	//------------------------------------------------------------------------------
 	//This gives the SystemQOR library a unique identity
 	__QCMP_EXPORT nsCodeQOR::mxGUID* QORidentity( void )
@@ -78,59 +87,7 @@ nsCodeQOR::CLoadableModuleBase& ThisModule( void )
 {
 	return MonolithicQORModule;
 }
+
 #endif//QOR_MONOTHILIC
-
 #endif//_USRDLL
-
-//------------------------------------------------------------------------------
-namespace nsQOR
-{
-	CSystem* g_pSystem = 0;
-
-	__QOR_IMPLEMENT_OCLASS_LUID( CSystem );
-
-	//------------------------------------------------------------------------------
-	CSystem::CSystem()
-	{
-		__QCS_MEMBER_FCONTEXT( "CSystem::CSystem" );
-		g_pSystem = this;
-	}
-
-	//------------------------------------------------------------------------------
-	CSystem::CSystem( const CSystem& src )
-	{
-		__QCS_MEMBER_FCONTEXT( "CSystem::CSystem" );
-		if( &src != this )
-		{
-			*this = src;
-		}
-	}
-
-	//------------------------------------------------------------------------------
-	CSystem& CSystem::operator = ( const CSystem& src )
-	{
-		__QCS_MEMBER_FCONTEXT( "CSystem::operator =" );
-		return *this;
-	}
-
-	//------------------------------------------------------------------------------
-	CSystem::~CSystem()
-	{
-		__QCS_MEMBER_FCONTEXT( "CSystem::~CSystem" );
-	}
-
-	//--------------------------------------------------------------------------------
-	void CSystem::Init( void )
-	{
-		__QCS_MEMBER_FCONTEXT( "CSystem::Init" );
-	}
-
-	//--------------------------------------------------------------------------------
-	__QOR_INTERFACE( __QSYS ) CSystem& System( void )
-	{
-		__QCS_FCONTEXT( "System" );
-		return *g_pSystem;
-	}
-
-}//nsQOR
 

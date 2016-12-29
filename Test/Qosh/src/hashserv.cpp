@@ -461,7 +461,7 @@ chk_access(register unsigned char *name, mode_t mode, int regflag)
 		flag = 1;
 	}
 	ftype = statb.st_mode & S_IFMT;
-	if (stat((char *)name, &statb) == 0) {
+	if (_stat((char *)name, &statb) == 0) {
 		ftype = statb.st_mode & S_IFMT;
 		if(mode == S_IEXEC && regflag && ftype != S_IFREG)
 			return(2);

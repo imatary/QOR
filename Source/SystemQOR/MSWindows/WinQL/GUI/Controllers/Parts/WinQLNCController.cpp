@@ -37,7 +37,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CNCController );
 
 	//--------------------------------------------------------------------------------
-	CNCController::CNCController( nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent ) : CBaseWindowPartController( pModelItem, pParent )
+	CNCController::CNCController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CBaseWindowPartController( pModelItem, Parent )
 	{
 		_WINQ_FCONTEXT( "CNCController::CNCController" );
 	}
@@ -49,10 +49,11 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CNCController::SetModel( nsMammut::CModel* pModelItem )
+	void CNCController::SetModel( nsMammut::CModel* pModelItem )
 	{
 		_WINQ_FCONTEXT( "CNCController::SetModel" );
-		return NCRenderer().SetModel( pModelItem ) && CController::SetModel( pModelItem );
+		NCRenderer().SetModel( pModelItem );
+		CController::SetModel( pModelItem );
 	}
 
 	//--------------------------------------------------------------------------------

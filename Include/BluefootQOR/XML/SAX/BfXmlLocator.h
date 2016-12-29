@@ -29,9 +29,13 @@
 #ifndef BLUEFOOT_XML_SAX_LOCATOR_H_3
 #define BLUEFOOT_XML_SAX_LOCATOR_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
+
+#include "CodeQOR/ClassReg/ClassReg.h"
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot

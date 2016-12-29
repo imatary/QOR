@@ -376,9 +376,6 @@
     <None Include="..\..\..\..\Source\libcxx\include\__undef_min_max" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\..\Source\libcxx\include\CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\libcxx\include\complex.h" />
     <ClInclude Include="..\..\..\..\Source\libcxx\include\tgmath.h" />
   </ItemGroup>

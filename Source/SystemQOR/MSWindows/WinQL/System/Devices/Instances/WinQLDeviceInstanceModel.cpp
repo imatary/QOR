@@ -1,6 +1,6 @@
 //WinQLDeviceInstanceModel.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -42,19 +42,19 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CDeviceInstanceModel::CDeviceInstanceModel( nsMammut::CModel* pContainer ) : BaseName( pContainer )
 	,	m_Properties( this )
-	,	m_ID					(	&m_Properties, CTString( "ID"				) )
-	,	m_ulIndex				(	&m_Properties, CTString( "Index"				) )
-	,	m_Info					(	&m_Properties, CTString( "Info"				) )	
-	,	m_PDOName				(	this, CTString( "PDOName"			) )
-	,	m_Location				(	this, CTString( "Location"			) )
-	,	m_FriendlyName			(	this, CTString( "Friendly Name"		) )
-	,	m_Manufacturer			(	this, CTString( "Manufacturer"		) )
-	,	m_DisplayName			(	this, CTString( "DisplayName"		) )
-	,	m_Description			(	this, CTString( "Description"		) )
-	,	m_Parent				(	this, CTString( "Parent"			) )
-	,	m_Service				(	this, CTString( "Service"			) )
-	,	m_SetupClassName		(	this, CTString( "SetupClassName"	) )
-	,	m_Driver				(	this, CTString( "Driver"			) )
+	,	m_ID					(	&m_Properties, CTString( _TXT( "ID"			) ) )
+	,	m_ulIndex				(	&m_Properties, CTString( _TXT( "Index"		) ) )
+	,	m_Info					(	&m_Properties, CTString( _TXT( "Info"		) ) )
+	,	m_PDOName				(	this, CTString( _TXT( "PDOName"				) ) )
+	,	m_Location				(	this, CTString( _TXT( "Location"			) ) )
+	,	m_FriendlyName			(	this, CTString( _TXT( "Friendly Name"		) ) )
+	,	m_Manufacturer			(	this, CTString( _TXT( "Manufacturer"		) ) )
+	,	m_DisplayName			(	this, CTString( _TXT( "DisplayName"			) ) )
+	,	m_Description			(	this, CTString( _TXT( "Description"			) ) )
+	,	m_Parent				(	this, CTString( _TXT( "Parent"				) ) )
+	,	m_Service				(	this, CTString( _TXT( "Service"				) ) )
+	,	m_SetupClassName		(	this, CTString( _TXT( "SetupClassName"		) ) )
+	,	m_Driver				(	this, CTString( _TXT( "Driver"				) ) )
 	{
 		Initialize();
 	}
@@ -62,19 +62,19 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CDeviceInstanceModel::CDeviceInstanceModel( const CDeviceInstanceModel& src) : BaseName( src.m_pContainer )
 	,	m_Properties( this )
-	,	m_ID					(	&m_Properties, CTString( "ID"				) )
-	,	m_ulIndex				(	&m_Properties, CTString( "Index"				) )
-	,	m_Info					(	&m_Properties, CTString( "Info"				) )	
-	,	m_PDOName				(	this, CTString( "PDOName"			) )
-	,	m_Location				(	this, CTString( "Location"			) )
-	,	m_FriendlyName			(	this, CTString( "Friendly Name"		) )
-	,	m_Manufacturer			(	this, CTString( "Manufacturer"		) )
-	,	m_DisplayName			(	this, CTString( "DisplayName"		) )
-	,	m_Description			(	this, CTString( "Description"		) )
-	,	m_Parent				(	this, CTString( "Parent"			) )
-	,	m_Service				(	this, CTString( "Service"			) )
-	,	m_SetupClassName		(	this, CTString( "SetupClassName"	) )
-	,	m_Driver				(	this, CTString( "Driver"			) )
+	,	m_ID					(	&m_Properties, CTString( _TXT( "ID"			) ) )
+	,	m_ulIndex				(	&m_Properties, CTString( _TXT( "Index"		) ) )
+	,	m_Info					(	&m_Properties, CTString( _TXT( "Info"		) ) )	
+	,	m_PDOName				(	this, CTString( _TXT( "PDOName"				) ) )
+	,	m_Location				(	this, CTString( _TXT( "Location"			) ) )
+	,	m_FriendlyName			(	this, CTString( _TXT( "Friendly Name"		) ) )
+	,	m_Manufacturer			(	this, CTString( _TXT( "Manufacturer"		) ) )
+	,	m_DisplayName			(	this, CTString( _TXT( "DisplayName"			) ) )
+	,	m_Description			(	this, CTString( _TXT( "Description"			) ) )
+	,	m_Parent				(	this, CTString( _TXT( "Parent"				) ) )
+	,	m_Service				(	this, CTString( _TXT( "Service"				) ) )
+	,	m_SetupClassName		(	this, CTString( _TXT( "SetupClassName"		) ) )
+	,	m_Driver				(	this, CTString( _TXT( "Driver"				) ) )
 	{		
 		Initialize();
 		*this = src;
@@ -103,7 +103,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CDeviceStringProperty::CDeviceStringProperty( CDeviceInstanceModel* pModel, const nsCodeQOR::CTString& strName, unsigned long ulPropertyIndex ) :
+	CDeviceStringProperty::CDeviceStringProperty( CDeviceInstanceModel* pModel, const CTString& strName, unsigned long ulPropertyIndex ) :
 		BaseName(dynamic_cast< nsMammut::CModel* >(pModel), strName, this), m_pModel(pModel), m_ulPropertyIndex(ulPropertyIndex)
 	{
 	}

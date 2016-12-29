@@ -659,7 +659,7 @@ setup_env(void)
 {
 	register char **e = environ;
 
-	while (*e)
+	while (e && *e)
 		setname((unsigned char*)*e++, N_ENVNAM);
 }
 

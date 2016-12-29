@@ -67,7 +67,7 @@ namespace nsWin32
 
 				if( !bResult && pMailSlotConnector->Protocol() )
 				{
-					pMailSlotConnector->Protocol()->OnWriteError();
+					pMailSlotConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteError();
 				}
 
 			}
@@ -90,11 +90,11 @@ namespace nsWin32
 				{
 					if( bResult )
 					{
-						pMailSlotConnector->Protocol()->OnWriteSuccess();
+						pMailSlotConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteSuccess();
 					}
 					else
 					{
-						pMailSlotConnector->Protocol()->OnWriteError();
+						pMailSlotConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteError();
 					}
 				}
 			}

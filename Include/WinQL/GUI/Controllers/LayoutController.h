@@ -36,7 +36,7 @@
 namespace nsWin32
 {
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL_GUI ) CLayoutController : public nsAppocrita::CController
+	class __QOR_INTERFACE( __WINQL_GUI ) CLayoutController : public nsQOR::CController
 	{
 	public:
 
@@ -46,7 +46,7 @@ namespace nsWin32
 		}
 
 		//--------------------------------------------------------------------------------
-		CLayoutController( nsMammut::CModel* pModelItem ) : nsAppocrita::CController( pModelItem )
+		CLayoutController( nsMammut::CModel* pModelItem ) : nsQOR::CController( pModelItem )
 		{
 		}
 

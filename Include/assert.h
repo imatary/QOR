@@ -24,6 +24,8 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "CompilerQOR.h"
+
 #if defined __cplusplus
     #define __ASSERT_VOID_CAST static_cast<void>
 #else

@@ -33,6 +33,11 @@
 
 //Control header for Windows versions
 __QCMP_MESSAGE( "Target Operating System: Microsoft Windows " )
+
+#ifdef QOR_SYS_OS_VER
+#	define _QSYS_WIN_VERSION QOR_PP_CAT( _QSYS_MSWVER_,QOR_SYS_OS_VER )
+#endif
+
 #	ifndef _QSYS_WIN_VERSION	
 __QCMP_MESSAGE( "No minimum Windows version set. Defaulting to Windows 7." )
 #		define _QSYS_WIN_VERSION	_QSYS_MSWVER_WIN7
@@ -165,6 +170,24 @@ __QCMP_MESSAGE( "Version: Windows 7 with Internet Explorer 8 is minimum target."
 #											define _WIN32_WINNT 0x0601
 #											define _WIN32_IE	0x0800
 #											define NTDDI_VERSION 0x06010000
+#										else
+#											if	( _QSYS_WIN_VERSION == _QSYS_MSWVER_WIN8 )
+__QCMP_MESSAGE( "Version: Windows 8 with Internet Explorer 8 is minimum target." )
+#												define _WIN32_WINDOWS 0x0500
+#												define WINVER		0x0602
+#												define _WIN32_WINNT 0x0602
+#												define _WIN32_IE	0x0800
+#												define NTDDI_VERSION 0x06020000
+#											else
+#												if	( _QSYS_WIN_VERSION == _QSYS_MSWVER_WIN10 )
+__QCMP_MESSAGE( "Version: Windows 10 with Internet Explorer 8 is minimum target." )
+#													define _WIN32_WINDOWS 0x0500
+#													define WINVER		0x0603
+#													define _WIN32_WINNT 0x0603
+#													define _WIN32_IE	0x0800
+#													define NTDDI_VERSION 0x06030000
+#												endif
+#											endif
 #										endif
 #									endif
 #								endif

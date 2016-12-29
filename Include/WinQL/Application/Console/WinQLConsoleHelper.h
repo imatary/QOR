@@ -1,6 +1,6 @@
-//WInQLConsoleHelper.h
+//WinQLConsoleHelper.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -39,7 +39,6 @@
 #include "CodeQOR/DataTypes/Property.h"
 #include "CodeQOR/ErrorSystem/DefaultHandler.h"
 #include "WinQL/System/FileSystem/WinQLFileHandle.h"
-//#include "WinQL/System/FileSystem/WinQLCRTFile.h"
 #include "CodeQOR/DataStructures/TArray.h"
 #include "WinQL/CodeServices/Text/WinQLCodePage.h"
 #include "WinQL/CodeServices/Text/WinString.h"

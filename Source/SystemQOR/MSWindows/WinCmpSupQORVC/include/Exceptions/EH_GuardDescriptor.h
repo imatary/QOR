@@ -103,6 +103,7 @@ namespace nsCompiler
 
 			class CatchGuardRN;
 			
+			nsQOR::IThread* GetThreadContext( void );
 			void* CallCatchBlock( ExceptionContext& context, void* handlerAddress );
 			void* CallCatchBlock2( void* handlerAddress );
 			void __stdcall JumpToContinuation( void* target );

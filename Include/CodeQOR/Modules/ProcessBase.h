@@ -39,9 +39,9 @@
 #include "CodeQOR/MemoryManagement/BaseHeap.h"
 #include "CodeQOR/ClassReg/ClassReg.h"
 #include "CodeQOR/ClassReg/ExternalClassReg.h"
-#include "CodeQOR/Threading/ThreadContext.h"
 #include "CodeQOR/Modules/LoadableModuleBase.h"
 #include "CodeQOR.h"
+#include "AppocritaQOR/SubSystems/IThread.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
@@ -50,7 +50,7 @@ namespace nsCodeQOR
 	//Base class representing the running process
     class __QOR_INTERFACE( __CODEQOR ) CProcessBase : public CLoadableModuleBase
     {
-		friend class CThreadContextBase;
+		//friend class CThreadContextBase;
 
     public:
 
@@ -62,8 +62,8 @@ namespace nsCodeQOR
 		virtual bool RegisterLibrary( CLibraryBase* pLibrary );
 		virtual void UnregisterLibrary( CLibraryBase* pLibrary );
 		virtual void StaticLibraryList( void( pCallback )( CLibraryBase*, void* ), void* pContext );		
-		virtual CThreadContextBase* ThreadContext( void );
-		virtual void SetMainThread( CThreadContextBase* pMainThread );
+		virtual nsQOR::IThread::ref_type ThreadContext( void );
+		virtual void SetMainThread( nsQOR::IThread::ref_type MainThread );
 		virtual Cmp_uint_ptr Identifier( void );
 
 		virtual CClassReg& ClassReg( void );									//Return the Class Registry for this process
@@ -71,7 +71,8 @@ namespace nsCodeQOR
 
 	protected:
 
-		CThreadContextBase* m_pMainThreadContext;
+		nsQOR::IThread::ref_type m_MainThread;
+		//CThreadContextBase* m_pMainThreadContext;
 		
 	private:
 

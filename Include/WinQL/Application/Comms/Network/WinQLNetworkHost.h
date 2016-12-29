@@ -1,6 +1,6 @@
 //WinQLNetworkHost.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -52,6 +52,8 @@ namespace nsWin32
 	class __QOR_INTERFACE( __WINQL ) CNetworkHost
 	{
 	public:
+
+		__QOR_DECLARE_OCLASS_ID( CNetworkHost );
 
 		CNetworkHost();
 		~CNetworkHost();

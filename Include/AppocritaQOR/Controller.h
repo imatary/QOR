@@ -1,6 +1,6 @@
 //Controller.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -34,77 +34,41 @@
 #define APPOCRITAQOR_CONTROLLER_H_3
 
 #include "SystemQOR.h"
-#include "MammutQOR/Model.h"
-#include "CodeQOR/DataStructures/TLinkedList.h"
-#include "CodeQOR/Instancing/TMemberPtr.h"
-#include <map>
+#include "AppocritaQOR/IController.h"
+#include <vector>
 
-//------------------------------------------------------------------------------
-namespace nsMonki
+ //------------------------------------------------------------------------------
+namespace nsQOR
 {
-	class __QOR_INTERFACE( __MONKI ) CView;
-}//nsMonki
-
-//------------------------------------------------------------------------------
-namespace nsAppocrita
-{
-	
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __APPOCRITA ) CController
+	class __QOR_INTERFACE( __APPOCRITA ) CController : public IController
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CController > refType;
-		typedef std::map< nsCodeQOR::mxGUID, refType > childMapType;
-		typedef std::map< nsCodeQOR::mxGUID, nsCodeQOR::CClassInstanceFactory* > factoryMapType;
+		__QOR_DECLARE_OCLASS_ID( CController );
 
 		CController();
-		CController( nsMammut::CModel* pModel, CController* pParent = 0 );
+		CController( nsMammut::CModel* pModel, ref_type Parent = 0 );
 		virtual ~CController();
 
-		virtual void SetParent( CController* pParent );
-		virtual CController* GetParent( void );
+		virtual void SetParent( ref_type Parent );
+		virtual ref_type GetParent( void );
 
-		virtual void SetModelType( const nsCodeQOR::mxGUID* );
-		virtual bool SetModel( nsMammut::CModel* pModel );
+		virtual void SetModel( nsMammut::CModel* pModel );
 		virtual nsMammut::CModel* GetModel( void );
-		
-		virtual void SetChildFactory( const nsCodeQOR::mxGUID* pClassID, nsCodeQOR::CClassInstanceFactory* pFactory );
-		virtual refType Child( const nsCodeQOR::mxGUID*, unsigned int uiIndex = 0 );
+
+		virtual void AddChild( ref_type Child );
+		virtual void RemoveChild( ref_type Child );
 
 	protected:
 
-		//virtual nsMonki::CView* CreateView( void );
-
-		CController* m_pParent;		//If this controller is part of a hierarchy of controllers it will have a parent
-		//nsMonki::CView* m_pView;				//The view if any that this controller connects to the model
-		nsMammut::CModel* m_pModel;			//The Model or View-State this controller manages
-
-		nsCodeQOR::CSTMember< factoryMapType > m_FactoryMap;
-		nsCodeQOR::CSTMember< childMapType > m_ChildMap;
-		nsCodeQOR::CTMemberPtr< nsMammut::CModel > m_Model;
+		ref_type m_Parent;				//If this controller is part of a hierarchy of controllers it will have a parent
+		nsMammut::CModel* m_pModel;		//The Model this controller manages
+		std::vector< IController* > m_Children;
 
 	};
 
-	//template class std::move_iterator< nsAppocrita::CController** >;
-	//template class std::reverse_iterator< std::__wrap_iter< nsAppocrita::CController **> >;
-	//template class std::allocator< CController* >;
-	//template struct std::pointer_traits< nsAppocrita::CController * const *>;
-	//template class std::vector< CController* >;
-	typedef nsCodeQOR::CTLinkedList< CController >/*std::vector< CController* >*/ CBaseControllerVector;
-
-	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __APPOCRITA ) CCompoundController : public CController, public CBaseControllerVector
-	{
-	public:
-
-		CCompoundController();
-		CCompoundController( nsMammut::CModel* pModel, CCompoundController* pParent = 0 );
-		virtual ~CCompoundController();
-
-	};
-
-}//nsAppocrita
+}//nsQOR
 
 #endif//APPOCRITAQOR_CONTROLLER_H_3
 

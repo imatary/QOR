@@ -42,8 +42,8 @@ namespace nsWin32
 		Cftw();
 		virtual ~Cftw();
 
-        virtual int ftw( const char* szPath, int ( *fn )( const char*, const stat*, int ), int ndirs );
-        virtual int nftw( const char* szPath, int ( *fn )( const char*, const stat*, int, FTW* ), int fd_limit, int flags );
+        virtual int ftw( const char* szPath, int ( *fn )( const char*, const file_stat*, int ), int ndirs );
+        virtual int nftw( const char* szPath, int ( *fn )( const char*, const file_stat*, int, FTW* ), int fd_limit, int flags );
 
 	private:
 

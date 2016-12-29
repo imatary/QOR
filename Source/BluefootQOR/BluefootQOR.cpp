@@ -1,6 +1,6 @@
 //BluefootQOR.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013. 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -35,6 +35,15 @@
 
 __QCMP_STARTLINKAGE_C
 
+	extern int _cdecl QORStaticInit( void );
+
+	//------------------------------------------------------------------------------
+	__QCMP_EXPORT int _cdecl QORinit( void )
+	{
+		QORStaticInit();
+		return 1;
+	}
+
 	//------------------------------------------------------------------------------
 	//This gives the QOR Pipeline library (BluefootQOR) a unique identity and marks it as a QOR module
 	//with delayed static initialization and an accessible Module Context
@@ -49,7 +58,7 @@ __QCMP_ENDLINKAGE_C
 	//------------------------------------------------------------------------------
 	nsCodeQOR::CLoadableModuleBase& ThisModule( void )
 	{
-		static nsCodeQOR::CLoadableModuleBase BluefootQORModule( "Querysoft Open Runtime Pipeline Library (Bluefoot)" );
+		static nsCodeQOR::CLoadableModuleBase BluefootQORModule( "Querysoft Open Runtime Bluefoot Pipeline Library" );
 		return BluefootQORModule;
 	}
 

@@ -51,13 +51,13 @@ namespace nsWin32
 	class __QOR_INTERFACE(__WINQL) CDeviceInstanceModel;
 
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE(__WINQL) CDeviceStringProperty : public nsMammut::CFunctionalProperty< CWString, CDeviceStringProperty >
+	class __QOR_INTERFACE(__WINQL) CDeviceStringProperty : public nsMammut::CFunctionalProperty< CTString, CDeviceStringProperty >
 	{
 	public:
 
-		typedef nsMammut::CFunctionalProperty< CWString, CDeviceStringProperty > BaseName;
+		typedef nsMammut::CFunctionalProperty< CTString, CDeviceStringProperty > BaseName;
 
-		CDeviceStringProperty(CDeviceInstanceModel* pModel, const nsCodeQOR::CTString& strName, unsigned long ulPropertyIndex = 0);
+		CDeviceStringProperty(CDeviceInstanceModel* pModel, const CTString& strName, unsigned long ulPropertyIndex = 0);
 
 		//--------------------------------------------------------------------------------
 		~CDeviceStringProperty()

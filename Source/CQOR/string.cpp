@@ -291,7 +291,7 @@ __QOR_INTERFACE( __CQOR ) int strcoll( const char* s1, const char* s2 )
 ///
 __QOR_INTERFACE( __CQOR ) int strncmp( const char* s1, const char* s2, size_t n )
 {
-    __QCS_FCONTEXT( "strncmp" );
+    //__QCS_FCONTEXT( "strncmp" );
 
     int iResult = 0;
     __QCS_PROTECT

@@ -5,9 +5,21 @@
 
 ASSUME fs: NOTHING 
 
+ZERO SEGMENT 
+
+__except_list EQU 0
+@feat		 EQU	 1
+
+ZERO ENDS
+
 EXTRN __except_handler4:NEAR
 EXTRN ___security_cookie:NEAR
 EXTRN @__security_check_cookie@4:NEAR
+EXTRN ?CatchGuardHandler@GuardDescriptor@EH@nsCompiler@@CA?AW4_EXCEPTION_DISPOSITION@nsWin32@@PAVExceptionRecord@23@PAVCatchGuardRN@123@PAUCONTEXT@5@PAX@Z:NEAR
+EXTRN ?UnwindHandler@SEH@nsCompiler@@YA?AW4_EXCEPTION_DISPOSITION@@PAVExceptionRecord@12@PAVExceptionFrame@12@PAUCONTEXT@nsWin32@@PAX@Z:NEAR
+
+.safeseh    ?CatchGuardHandler@GuardDescriptor@EH@nsCompiler@@CA?AW4_EXCEPTION_DISPOSITION@nsWin32@@PAVExceptionRecord@23@PAVCatchGuardRN@123@PAUCONTEXT@5@PAX@Z			
+.safeseh    ?UnwindHandler@SEH@nsCompiler@@YA?AW4_EXCEPTION_DISPOSITION@@PAVExceptionRecord@12@PAVExceptionFrame@12@PAUCONTEXT@nsWin32@@PAX@Z
 
 PUBLIC __tls_array
 PUBLIC __fltused
@@ -27,13 +39,6 @@ PUBLIC __EH_epilog3_catch_GS
 __tls_array	 EQU	 2ch
 __fltused	 EQU	 9876h
 __ldused	 EQU	 9876h
-
-ZERO SEGMENT 
-
-__except_list EQU 0
-@feat		 EQU	 1
-
-ZERO ENDS
 
 .CODE
 

@@ -27,6 +27,7 @@
 #include "CompilerQOR.h"
 #include "CodeQOR/ErrorSystem/ParamErrorDomain.h"
 #include "CodeQOR/Text/CodeString.h"
+#include "AppocritaQOR/Event.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR

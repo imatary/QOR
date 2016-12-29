@@ -73,7 +73,7 @@ namespace nsBluefoot
 		m_bConnected = true;
 		if( !m_refProtocol.IsNull() )
 		{
-			m_refProtocol->OnConnected();
+			m_refProtocol.As< CBFProtocol >()->OnConnected();
 		}
 	}
 
@@ -84,7 +84,7 @@ namespace nsBluefoot
 		m_bConnected = false;
 		if( !m_refProtocol.IsNull() )
 		{
-			m_refProtocol->OnConnectionError();
+			m_refProtocol.As< CBFProtocol >()->OnConnectionError();
 		}
 	}
 
@@ -95,7 +95,7 @@ namespace nsBluefoot
 		m_bConnected = false;
 		if( !m_refProtocol.IsNull() )
 		{
-			m_refProtocol->OnDisconnected();
+			m_refProtocol.As< CBFProtocol >()->OnDisconnected();
 		}
 	}
 
@@ -106,7 +106,7 @@ namespace nsBluefoot
 		m_bConnected = false;
 		if( !m_refProtocol.IsNull() )
 		{
-			m_refProtocol->OnDisconnectionError();
+			m_refProtocol.As<CBFProtocol>()->OnDisconnectionError();
 		}
 	}
 
@@ -125,18 +125,17 @@ namespace nsBluefoot
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBFPlug::SetConnectionProtocol( CBFProtocol::refType refProtocol )
+	void CBFPlug::SetConnectionProtocol( CBFProtocol::ref_type refProtocol )
 	{
 		//_WINQ_FCONTEXT( "CBFPlug::SetConnectionProtocol" );
 		m_refProtocol = refProtocol;
 	}
 
 	//--------------------------------------------------------------------------------
-	CBFProtocol::refType CBFPlug::Protocol( void )
+	CBFProtocol::ref_type CBFPlug::Protocol( void )
 	{
 		//_WINQ_FCONTEXT( "CBFPlug::Protocol" );
-		CBFProtocol::refType ref( m_refProtocol.operator nsBluefoot::CBFProtocol *(), false );
-		return ref;
+		return m_refProtocol->Ref();
 	}
 
 	//--------------------------------------------------------------------------------

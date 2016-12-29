@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "SystemQOR/System.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
@@ -92,18 +93,18 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CDeviceNode::GetInstance" );
 		CTString strDeviceInstance = m_Session.GetDeviceInstanceID( m_DevInst );
-		m_pInstance = CSystem::Instance().Devices( QOR_PP_SHARED_OBJECT_ACCESS ).DeviceFromID( strDeviceInstance );
+		m_pInstance = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).DeviceFromID( strDeviceInstance );
 
 		if( m_pInstance == 0 )
 		{
 			CTString strEnumerator = m_Session.GetDevNodeEnumerator( m_DevInst );
 
-			CDeviceEnumerator::refType Enumerator = CSystem::Instance().Devices( QOR_PP_SHARED_OBJECT_ACCESS ).EnumeratorFromName( strEnumerator.Ref() );
+			CDeviceEnumerator::refType Enumerator = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).EnumeratorFromName( strEnumerator.Ref() );
 
 			if( !Enumerator.IsNull() )
 			{
 				Enumerator->Enumerate();
-				m_pInstance = CSystem::Instance().Devices( QOR_PP_SHARED_OBJECT_ACCESS ).DeviceFromID( strDeviceInstance );
+				m_pInstance = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).DeviceFromID( strDeviceInstance );
 			}
 		}
 
@@ -117,7 +118,7 @@ namespace nsWin32
 		CTString strDescription = m_Session.GetDevNodeDescription( m_DevInst );
 		if( strDescription.IsEmpty() && GetInstance() != 0 )
 		{
-			strDescription = GetInstance()->GetDisplayName();
+			strDescription = GetInstance()->GetDisplayName().toTString();
 		}
 		else if( strDescription.IsEmpty() )
 		{

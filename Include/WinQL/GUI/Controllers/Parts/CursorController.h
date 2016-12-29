@@ -42,7 +42,7 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CCursorController );
 
-		CCursorController( nsMammut::CModel* pModelItem = 0, nsAppocrita::CController* pParent = 0 );
+		CCursorController( nsMammut::CModel* pModelItem = 0, nsQOR::CController::ref_type pParent = 0 );
 		virtual ~CCursorController();
 
 		virtual bool ProcessMessage( COSWindow& Window, Cmp_long_ptr& lResult, unsigned int uMsg, Cmp_uint_ptr wParam, Cmp_long_ptr lParam );

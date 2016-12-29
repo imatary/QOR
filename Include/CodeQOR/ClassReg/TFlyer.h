@@ -53,22 +53,13 @@ namespace nsCodeQOR
 
 	public:
 	
-		static sTOB< CTFlyerRegEntry< T > > RegEntry;		//The one Registry entry for all Flyers of this type
-
-		//------------------------------------------------------------------------------
-		static sTOB< CTFlyerRegEntry< T > >& GetRegEntry( void )
-		{
-			sTOB< CTFlyerRegEntry< T > >& ref = CTFlyer< T, Base >::RegEntry;
-			return ref;
-		}
-
 		//------------------------------------------------------------------------------	
 		CTFlyer() : m_pPrevious( 0 )
 		{			
 			//When a Flyer is constructed configure the 
 			//Registry entry to return this one as the
 			//instance. Think of this as a Push			
-			GetRegEntry()->Configure( (T*)this );
+			CTFlyerRegEntry< T >::Configure( (T*)this );
 		}
 
 		//------------------------------------------------------------------------------	
@@ -77,7 +68,7 @@ namespace nsCodeQOR
 			//When a Flyer is destructed configure the
 			//Registry entry to return the previous
 			//flyer instance. Think of this as a Pop			
-			GetRegEntry()->Unconfigure( (T*)this );
+			CTFlyerRegEntry< T >::Unconfigure( (T*)this );
 		}
  
 	};

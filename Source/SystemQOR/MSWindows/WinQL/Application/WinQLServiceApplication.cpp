@@ -76,7 +76,7 @@ namespace nsWin32
 	{
 		refType TheService = TheWin32Application();
 
-		TheService.As<CWin32Service>()->m_StatusHandle = CSystem::Instance().Services( QOR_PP_SHARED_OBJECT_ACCESS ).RegisterCtrlHandler( TheService.As<CWin32Service>()->m_strName, ServiceCtrlHandler );
+		TheService.As<CWin32Service>()->m_StatusHandle = CSystem::TheSystem()->Services( QOR_PP_SHARED_OBJECT_ACCESS ).RegisterCtrlHandler( TheService.As<CWin32Service>()->m_strName, ServiceCtrlHandler );
 
 		if( TheService.As<CWin32Service>()->m_StatusHandle == 0 )
 		{
@@ -123,7 +123,7 @@ namespace nsWin32
 			{ 0, 0 }
 		};
 
-		return CSystem::Instance().Services( QOR_PP_SHARED_OBJECT_ACCESS ).StartCtrlDispatcher( serviceTable );
+		return CSystem::TheSystem()->Services( QOR_PP_SHARED_OBJECT_ACCESS ).StartCtrlDispatcher( serviceTable );
 	}
 
 
@@ -280,7 +280,7 @@ namespace nsWin32
 		m_Status.dwCheckPoint =  ( ( ulCurrentState == eRunning ) ||  ( ulCurrentState == eStopped ) ) ?  0 : ulCheckPoint++; 
  
 		// Report the status of the service to the SCM.
-		CSystem::Instance().Services( QOR_PP_SHARED_OBJECT_ACCESS ).SetStatus( m_StatusHandle, &m_Status );
+		CSystem::TheSystem()->Services( QOR_PP_SHARED_OBJECT_ACCESS ).SetStatus( m_StatusHandle, &m_Status );
 	} 
  
 	//-------------------------------------------------------------------------------- 
@@ -315,7 +315,7 @@ namespace nsWin32
 		CTString strPath = ( dynamic_cast< CProcess* >( CProcess::ThisProcess() ) )->GetFileName();
       
 		// Open the local default service control manager database 
-		CServiceControlSession::refType ServiceControlSession = CSystem::Instance().Services( QOR_PP_SHARED_OBJECT_ACCESS ).OpenSession( 
+		CServiceControlSession::refType ServiceControlSession = CSystem::TheSystem()->Services( QOR_PP_SHARED_OBJECT_ACCESS ).OpenSession(
 			CTString( _TXT( "" ) ), CTString( _TXT( "" ) ), SCManagerConnect | SCManagerCreate );
 		
 		// Install the service into SCM by calling CreateService 
@@ -327,7 +327,7 @@ namespace nsWin32
 	void CWin32Service::Uninstall( void )
 	{
 		//Open the local default service control manager database 
-		CServiceControlSession::refType ServiceControlSession = CSystem::Instance().Services( QOR_PP_SHARED_OBJECT_ACCESS ).OpenSession( CTString( _TXT( "" ) ), CTString( _TXT( "" ) ), SCManagerConnect );
+		CServiceControlSession::refType ServiceControlSession = CSystem::TheSystem()->Services( QOR_PP_SHARED_OBJECT_ACCESS ).OpenSession( CTString( _TXT( "" ) ), CTString( _TXT( "" ) ), SCManagerConnect );
 
 		SERVICE_STATUS ssSvcStatus = {}; 
  

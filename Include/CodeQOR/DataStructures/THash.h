@@ -43,14 +43,6 @@
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
 {
-	/*
-	class QBitArray;
-	class QByteArray;
-	class QString;
-	class QStringRef;
-	class QLatin1String;
-	*/
-
 	//--------------------------------------------------------------------------------
 	__QOR_INTERFACE( __CODEQOR )  unsigned int qHashBits( const void* p, size_t size, unsigned int seed = 0 ) __QCMP_NO_THROW;
 
@@ -132,15 +124,6 @@ namespace nsCodeQOR
 		return qHash(key.Unicode(), seed); 
 	}
 
-		/*
-	__QOR_INTERFACE( __CODEQOR )  unsigned int qHash(const QByteArray &key, unsigned int seed = 0) __QCMP_NO_THROW;
-	__QOR_INTERFACE( __CODEQOR )  unsigned int qHash(const QString &key, unsigned int seed = 0) __QCMP_NO_THROW;
-	__QOR_INTERFACE( __CODEQOR )  unsigned int qHash(const QStringRef &key, unsigned int seed = 0) __QCMP_NO_THROW;
-	__QOR_INTERFACE( __CODEQOR )  unsigned int qHash(const QBitArray &key, unsigned int seed = 0) __QCMP_NO_THROW;
-	__QOR_INTERFACE( __CODEQOR )  unsigned int qHash(QLatin1String key, unsigned int seed = 0) __QCMP_NO_THROW;
-	__QOR_INTERFACE( __CODEQOR )  unsigned int qt_hash(const QString &key) __QCMP_NO_THROW;
-	__QOR_INTERFACE( __CODEQOR )  unsigned int qt_hash(const QStringRef &key) __QCMP_NO_THROW;
-	*/
 	//--------------------------------------------------------------------------------
 	template< class T > __QCMP_INLINE unsigned int qHash( const T* key, unsigned int seed = 0 ) __QCMP_NO_THROW
 	{
@@ -249,8 +232,6 @@ namespace nsCodeQOR
 	{
 		return true;
 	}
-
-	//Q_DECLARE_TYPEINFO(CHashDummyValue, Q_MOVABLE_TYPE | Q_DUMMY_TYPE);
 
 	//--------------------------------------------------------------------------------
 	template< class Key, class T >
@@ -420,9 +401,6 @@ namespace nsCodeQOR
 			return !d->ref.isShared(); 
 		}
 
-	//#if QT_SUPPORTS(UNSHARABLE_CONTAINERS)
-		//__QCMP_INLINE void setSharable(bool sharable) { if (!sharable) detach(); if (d != &CHashData::shared_null) d->sharable = sharable; }
-	//#endif
 		__QCMP_INLINE bool isSharedWith(const CTHash<Key, T> &other) const { return d == other.d; }
 
 		void clear();
@@ -1393,9 +1371,6 @@ namespace nsCodeQOR
 		}
 		return n;
 	}
-
-	//Q_DECLARE_ASSOCIATIVE_ITERATOR(Hash)
-	//Q_DECLARE_MUTABLE_ASSOCIATIVE_ITERATOR(Hash)
 
 }// nsCodeQOR
 

@@ -805,7 +805,7 @@ namespace nsWinQAPI
 			CCheckParam< LPCTSTR, CTStringKernelObjNameOrNullCheck< LPCTSTR > >::TType lpName,
 			bool& bAlreadyExists );
 
-		HANDLE CreateMutexEx(
+		static HANDLE CreateMutexEx(
 			CCheckParam< ::SECURITY_ATTRIBUTES*, CTNullOrReadablePointerCheck< sizeof( ::SECURITY_ATTRIBUTES ) > >::TType lpMutexAttributes,
 			CCheckParam< LPCTSTR, CTStringKernelObjNameOrNullCheck< LPCTSTR > >::TType lpName,
 			CCheckParam< int, nsParamChecking::CTIntRangeCheck< 0, 1 > >::TType dwFlags,

@@ -27,6 +27,7 @@
 //Support for checking conditions involving more than one of the parameters on a call
 
 #include "CompilerQOR.h"
+#include "AppocritaQOR/SubSystems/Thread.h"
 #include "CodeQOR/Tracing/FunctionContextBase.h"
 #include "CodeQOR/Parameters/InterParamChecks.h"
 #include "CodeQOR/Modules/ProcessBase.h"
@@ -37,9 +38,8 @@ namespace nsCodeQOR
 	//--------------------------------------------------------------------------------
 	CInterCheckBase::CInterCheckBase()
 	{
-		nsCodeQOR::CProcessBase* pProcessContext = nsCodeQOR::CProcessBase::ThisProcess();
-		nsCodeQOR::CThreadContextBase* pThreadContext = ( pProcessContext == 0 ) ? 0 : pProcessContext->ThreadContext();
-		nsCodeQOR::CFunctionContextBase* pFunctionContext = ( pThreadContext == 0 ) ? 0 : pThreadContext->FunctionContext();
+		nsQOR::IThread::ref_type pThreadContext = nsQOR::CThread::GetCurrent();
+		nsCodeQOR::CFunctionContextBase* pFunctionContext = ( pThreadContext.IsNull() ) ? 0 : pThreadContext->FunctionContext();
 		nsCodeQOR::CCallContextBase* pCallContext = ( pFunctionContext == 0 ) ? 0 : pFunctionContext->CallContext();
 		if( pCallContext != 0 )
 		{
@@ -56,14 +56,16 @@ namespace nsCodeQOR
 	CParameterBase* CInterCheckBase::GetParameter( int iParam )
 	{		
 		nsCodeQOR::CParameterBase* pParamBase = 0;
-		nsCodeQOR::CProcessBase* pProcessContext = nsCodeQOR::CProcessBase::ThisProcess();
-		nsCodeQOR::CThreadContextBase* pThreadContext = ( pProcessContext == 0 ) ? 0 : pProcessContext->ThreadContext();
-		nsCodeQOR::CFunctionContextBase* pFunctionContext = ( pThreadContext == 0 ) ? 0 : pThreadContext->FunctionContext();
-		nsCodeQOR::CCallContextBase* pCallContext = ( pFunctionContext == 0 ) ? 0 : pFunctionContext->CallContext();
-
-		if( pCallContext != 0 )
+		nsQOR::IThread::ref_type pThreadContext = nsQOR::CThread::GetCurrent();
+		if( pThreadContext )
 		{
-			pParamBase = &(pCallContext->Parameters()[ iParam ]);
+			nsCodeQOR::CFunctionContextBase* pFunctionContext = ( pThreadContext.IsNull() ) ? 0 : pThreadContext->FunctionContext();
+			nsCodeQOR::CCallContextBase* pCallContext = ( pFunctionContext == 0 ) ? 0 : pFunctionContext->CallContext();
+
+			if( pCallContext != 0 )
+			{
+				pParamBase = &( pCallContext->Parameters()[ iParam ] );
+			}
 		}
 		return pParamBase;
 	}

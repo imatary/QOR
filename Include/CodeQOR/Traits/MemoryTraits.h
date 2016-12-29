@@ -35,9 +35,9 @@
 
 #include "CodeQOR/Traits/Policy.h"
 
-#define _new( _T ) mem_traits< _T >::CTAllocator::Allocate()
+#define _new( _T ) nsCodeQOR::mem_traits< _T >::CTAllocator::Allocate()
 #define _new_ref( _T, _NAME ) _T##::ref_type _NAME( _new( _T ), true );
-#define _delete( _T, _pT ) mem_traits< _T >::CTAllocator::Free( _pT )
+#define _delete( _T, _pT ) nsCodeQOR::mem_traits< _T >::CTAllocator::Free( _pT )
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
@@ -47,8 +47,8 @@ namespace nsCodeQOR
 	template< class TInstancer, typename T > class CDefaultAllocator;
 	
 	//--------------------------------------------------------------------------------
-	///This template provides a default allocator choice for all types
-	///Overload it for any type for which you need to change the allocator
+	//This template provides a default allocator choice for all types
+	//Overload it for any type for which you need to change the allocator
 	template< class T >
 	struct mem_traits
 	{
@@ -60,5 +60,21 @@ namespace nsCodeQOR
 	};
 
 }//nsCodeQOR
+
+#include "CodeQOR/Traits/ReferenceTraits.h"
+
+template< class T >
+typename nsCodeQOR::reference_type< T >::type new_ref( void )
+{
+	return typename nsCodeQOR::reference_type< T >::type ( nsCodeQOR::mem_traits< T >::CTAllocator::Allocate(), true );
+}
+
+template< class T, typename A >
+typename nsCodeQOR::reference_type< T >::type new_ref( A a )
+{
+	T* pT = nsCodeQOR::mem_traits< T >::CTAllocator::RawAllocate();
+	new ( pT )T(a);
+	return typename nsCodeQOR::reference_type< T >::type( pT, true );
+}
 
 #endif//CODEQOR_TRAITS_MEM_H_1

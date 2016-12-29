@@ -26,6 +26,7 @@
 
 #include "WinQL/WinQL.h"
 #include "SystemQOR.h"
+#include "CodeQOR/Threading/ThreadContext.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/EH_Context.h"
 #include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/ExceptionHandling.h"

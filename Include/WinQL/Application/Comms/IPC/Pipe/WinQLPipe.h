@@ -37,7 +37,7 @@
 
 #include "WinQL/CodeServices/Handles/WinQLHandle.h"
 #include "WinQL/System/Security/WinQLSecurity.h"
-#include "WinQL/System/Devices/WinQLDevice.h"
+#include "WinQL/System/Devices/WinQLDeviceFile.h"
 #include "WinQL/CodeServices/Text/WinString.h"
 
 //--------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ namespace nsWin32
 	__QCMP_STATIC_CONSTANT( unsigned long, Pipe_Reject_Remote_Clients = 0x00000008 );
 
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL ) CPipe
+	class __QOR_INTERFACE( __WINQL ) CPipe : public CDeviceFile
 	{
 	public:
 
@@ -82,6 +82,7 @@ namespace nsWin32
 		__QOR_DECLARE_OCLASS_ID( CPipe );
 
 		CPipe();
+		CPipe( CDeviceHandle& hExisting );
 		virtual ~CPipe();
 
 		static bool Instance( void** hReadPipe, void** hWritePipe, nsWin32::LPSECURITY_ATTRIBUTES lpPipeAttributes, unsigned long nSize );
@@ -110,7 +111,7 @@ namespace nsWin32
 		bool GetServerSessionId( unsigned long& pServerSessionId );
 		bool IsBlocking( bool& bIsBlocking ) const;
 		bool IsClient( bool& bIsClient ) const;
-		bool IsOpen( void ) const;
+		bool IsOpen( void );
 		bool IsServer( bool& bIsServer ) const;
 		bool IsMessaging( bool& bIsMessaging ) const;
 		bool Open( const TCHAR* lpszServerName, const TCHAR* lpszPipeName, unsigned long DesiredAccess, unsigned long ShareMode, nsWin32::SECURITY_ATTRIBUTES* pSecurityAttributes, unsigned long FlagsAndAttributes );
@@ -126,11 +127,11 @@ namespace nsWin32
 		bool Write( const void* pBuffer, unsigned long NumberOfBytesToWrite, unsigned long& NumberOfBytesWritten, OVERLAPPED* pOverlapped );
 		bool Write( const void* pBuffer, unsigned long NumberOfBytesToWrite, nsWin32::OVERLAPPED* pOverLapped, nsWin32::LPOVERLAPPED_COMPLETION_ROUTINE pCompletionRoutine );
 		bool GetOverlappedResult( nsWin32::OVERLAPPED& Overlapped, unsigned long& ulNumberOfBytesTransferred, bool bWait );
-		void* Handle( void );
+		//void* Handle( void );
 
 	protected:
 
-		void* m_hPipe;
+		//void* m_hPipe;
 
 	};
 

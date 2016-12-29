@@ -39,9 +39,11 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CBaseWindowController );
 
 	//--------------------------------------------------------------------------------
-	CBaseWindowController::CBaseWindowController( nsMammut::CModel* pModel, nsAppocrita::CCompoundController* pParent ) : nsAppocrita::CCompoundController( pModel, pParent ), m_pNextHookController( 0 )
+	CBaseWindowController::CBaseWindowController( nsMammut::CModel* pModel, nsQOR::CController::ref_type Parent ) : nsQOR::CController(), m_pNextHookController( 0 )
 	{
 		_WINQ_FCONTEXT( "CBaseWindowController::CBaseWindowController" );
+		SetParent( Parent );
+		SetModel( pModel );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -51,17 +53,15 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CBaseWindowController::SetModel( nsMammut::CModel* pModelItem )
+	void CBaseWindowController::SetModel( nsMammut::CModel* pModelItem )
 	{
-		bool bResult = nsAppocrita::CController::SetModel( pModelItem )
-			&& Style().SetModel( pModelItem )
-			&& User().SetModel( pModelItem )
-			&& BaseText().SetModel( pModelItem )
-			&& Owner().SetModel( pModelItem )
-			&& Timer().SetModel( pModelItem )
-			&& DeviceChange().SetModel( pModelItem );
-
-		return bResult;
+		nsQOR::CController::SetModel( pModelItem );
+		Style().SetModel( pModelItem );
+		User().SetModel( pModelItem );
+		BaseText().SetModel( pModelItem );
+		Owner().SetModel( pModelItem );
+		Timer().SetModel( pModelItem );
+		DeviceChange().SetModel( pModelItem );
 	}
 
 	//--------------------------------------------------------------------------------

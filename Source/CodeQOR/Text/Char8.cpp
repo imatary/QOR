@@ -29,6 +29,7 @@
 #include "CodeQOR/Text/Char16.h"
 #include "CodeQOR/Text/Char32.h"
 #include "CodeQOR/Text/Char8.h"
+#include "AppocritaQOR/Event.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR

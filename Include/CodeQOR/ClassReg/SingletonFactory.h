@@ -55,18 +55,6 @@ namespace nsCodeQOR
 		}
 
 		//--------------------------------------------------------------------------------
-		T* Create( void )
-		{			
-			return mem_traits< T >::CTAllocator::Allocate();
-		}
-
-		//--------------------------------------------------------------------------------
-		virtual void Dispose( T* pT )
-		{
-			return mem_traits< T >::CTAllocator::Free( pT );
-		}
-
-		//--------------------------------------------------------------------------------
 		virtual void* Instance( void )
 		{
 			TPolicy::TThreadSyncSingleLock Lock( m_Section );
@@ -108,6 +96,18 @@ namespace nsCodeQOR
 		long m_lInstanceCount;
 
 	private:
+
+		//--------------------------------------------------------------------------------
+		T* Create( void )
+		{
+			return mem_traits< T >::CTAllocator::Allocate();
+		}
+
+		//--------------------------------------------------------------------------------
+		virtual void Dispose( T* pT )
+		{
+			return mem_traits< T >::CTAllocator::Free( pT );
+		}
 
 		TPolicy::TThreadSyncSinglePrimitive m_Section;
 

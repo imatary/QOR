@@ -1,6 +1,6 @@
 //SharedBootStrap.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -27,13 +27,14 @@
 #ifndef SYSTEMQOR_SHAREDBOOTSTRAP_H_1
 #define SYSTEMQOR_SHAREDBOOTSTRAP_H_1
 
+//--------------------------------------------------------------------------------
 namespace nsPlatform
 {
 	class CSharedBootStrap;
 }
 
 //--------------------------------------------------------------------------------
-class __QOR_INTERFACE( __QSYS ) CSharedBootStrap //: public nsPlatform::CSharedBootStrap
+class __QOR_INTERFACE( __QSYS ) CSharedBootStrap
 {
 
 protected:

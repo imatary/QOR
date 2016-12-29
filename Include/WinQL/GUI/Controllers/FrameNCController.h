@@ -41,7 +41,7 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CFrameNCController );
 
-		CFrameNCController( nsMammut::CModel* pModelItem = 0, nsAppocrita::CController* pParent = 0 );
+		CFrameNCController( nsMammut::CModel* pModelItem = 0, nsQOR::CController::ref_type Parent = 0 );
 		virtual ~CFrameNCController();
 		virtual void OnNCActivate( COSWindow& Window, Cmp_long_ptr& lResult, Cmp_uint_ptr wParam, Cmp_long_ptr lParam );
 

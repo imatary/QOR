@@ -63,6 +63,15 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CSyncHandle::CSyncHandle( CSyncHandle::ref_type src ) : CHandle( src->Handle() ),
+		m_SourceProcess( nsWinQAPI::CKernel32::Instance().GetCurrentProcess() )
+		, m_ulRefCount( 0 )
+		, m_bCanBeSignaled( false )
+	{
+		_WINQ_FCONTEXT( "CSyncHandle::CSyncHandle" );
+	}
+
+	//--------------------------------------------------------------------------------
 	CSyncHandle::CSyncHandle( const CSyncHandle& src ) : CHandle( 0 ), 
 		m_SourceProcess( nsWinQAPI::CKernel32::Instance().GetCurrentProcess() )
 	,	m_ulRefCount( 0 )
@@ -138,7 +147,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CSyncHandle::CanBeSignaled( void )
+	bool CSyncHandle::CanBeSignaled( void ) const
 	{
 		_WINQ_FCONTEXT( "CSyncHandle::CanBeSignaled" );
 		return m_bCanBeSignaled;

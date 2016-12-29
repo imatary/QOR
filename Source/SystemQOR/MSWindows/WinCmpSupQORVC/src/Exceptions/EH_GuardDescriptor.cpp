@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "AppocritaQOR/SubSystems/Threading.h"
 #include "WinQL/WinQL.h"
 #include "SystemQOR.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
@@ -121,8 +122,9 @@ namespace nsCompiler
 		int GuardDescriptor::FrameUnwindFilter( nsWin32::EXCEPTION_POINTERS* pExPtrs )
 		{
 			if ( pExPtrs->ExceptionRecord->ExceptionCode == CPP_EXCEPTION )
-			{				
-				nsCodeQOR::CThreadContextBase::GetCurrent()->ExceptionContext()->ProcessingThrow() = 0;
+			{
+				nsQOR::IThreading* pThreading = TheApplication()->GetRole()->GetSubSystem( nsQOR::IThread::ClassID() ).As< nsQOR::IThreading >();
+				pThreading->GetCurrent()->ExceptionContext()->ProcessingThrow() = 0;
 				std::terminate();
 			}
 			return nsWin32::Exception_Continue_Search;
@@ -132,7 +134,7 @@ namespace nsCompiler
 		void GuardDescriptor::FrameUnwindToState( int targetState )
 		{
 			int curState = m_pRN->state;			
-			int& ProcessingThrow = nsCodeQOR::CProcessBase::ThisProcess()->ThreadContext()->ExceptionContext()->ProcessingThrow();
+			int& ProcessingThrow = GetThreadContext()->ExceptionContext()->ProcessingThrow();
 			++ProcessingThrow;
 			__try 
 			{
@@ -203,17 +205,23 @@ namespace nsCompiler
 		}
 
 		//--------------------------------------------------------------------------------
+		nsQOR::IThread* GuardDescriptor::GetThreadContext()
+		{
+			nsQOR::IThread* ThreadContext = nsCodeQOR::CProcessBase::ThisProcess()->ThreadContext().Detach();
+			return ThreadContext;
+		}
+
+		//--------------------------------------------------------------------------------
 		void* GuardDescriptor::CallCatchBlock( ExceptionContext& context, void* handlerAddress )
 		{			
-			//nsCodeQOR::IThread* const pThreadData = nsCodeQOR::IThread::GetCurrent();
-			nsCodeQOR::CThreadContextBase* pThreadContext = nsCodeQOR::CProcessBase::ThisProcess()->ThreadContext();
+			nsQOR::IThread* ThreadContext = GetThreadContext();
 			void* continuationAddress = handlerAddress;
 			bool ExceptionObjectDestroyed = false;
 			
 			void* const saveESP = m_pRN->GetStack();
-			const ExceptionContext SavedContext = pThreadContext->ExceptionContext()->CurrentException();                                         
+			const ExceptionContext SavedContext = ThreadContext->ExceptionContext()->CurrentException();                                         
 
-			pThreadContext->ExceptionContext()->CurrentException() = reinterpret_cast< ExceptData& >( context );
+			ThreadContext->ExceptionContext()->CurrentException() = reinterpret_cast< ExceptData& >( context );
 
 			__try
 			{
@@ -243,7 +251,7 @@ namespace nsCompiler
 			__finally
 			{
 				m_pRN->SetStack( saveESP );				
-				pThreadContext->ExceptionContext()->CurrentException() = *( reinterpret_cast< const ExceptData* >( &SavedContext ) );
+				ThreadContext->ExceptionContext()->CurrentException() = *( reinterpret_cast< const ExceptData* >( &SavedContext ) );
 				if ( context.IsCppException() && !ExceptionObjectDestroyed && continuationAddress != 0 && IsToBeDestroyed( context.ExceptionObject() ) )
 				{
 					context.ExceptionObject().Destruct( _abnormal_termination() != 0 );
@@ -292,7 +300,8 @@ namespace nsCompiler
 		//--------------------------------------------------------------------------------
 		bool GuardDescriptor::IsToBeDestroyed( const ThrownObject& object ) const
 		{			
-			for( const FrameInfo* pInfo = reinterpret_cast< const FrameInfo* >( nsCodeQOR::CThreadContextBase::GetCurrent()->ExceptionContext()->FrameInfoChain() ); pInfo != 0; pInfo = pInfo->Next() )
+			nsQOR::IThreading* pThreading = TheApplication()->GetRole()->GetSubSystem( nsQOR::IThread::ClassID() ).As< nsQOR::IThreading >();
+			for( const FrameInfo* pInfo = reinterpret_cast< const FrameInfo* >( pThreading->GetCurrent()->ExceptionContext()->FrameInfoChain() ); pInfo != 0; pInfo = pInfo->Next() )
 			{
 				if( pInfo->Object() == object )
 				{

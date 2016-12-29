@@ -36,7 +36,7 @@
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 __QCMP_WARNING_PUSH
-__QCMP_WARNING_DISABLE( __QCMP_WARN_UNARY_MINUS_APPLIED_TO_UNSIGNED )
+__QCMP_WARNING_DISABLE( __QCMP_WARN_UNARY_MINUS_APPLIED_TO_UNSIGNED, _QCMP_TXT("") )
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR

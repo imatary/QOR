@@ -132,7 +132,7 @@ template<> wchar_t UTF16Char::To_wchar() const
 //--------------------------------------------------------------------------------
 template<> bool UTF16Char::isalnum() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Alpha|Digit ) ? true : false;
 	}
@@ -145,7 +145,7 @@ template<> bool UTF16Char::isalnum() const
 //--------------------------------------------------------------------------------
 template<> bool UTF16Char::isalpha() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Alpha ) ? true : false;
 	}
@@ -165,7 +165,7 @@ template<> bool UTF16Char::ascii_isalpha() const
 //--------------------------------------------------------------------------------
 template<> bool UTF16Char::isblank() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Blank ) ? true : false;
 	}
@@ -178,7 +178,7 @@ template<> bool UTF16Char::isblank() const
 //--------------------------------------------------------------------------------
 template<> bool UTF16Char::iscntrl() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Control ) ? true : false;
 	}
@@ -191,7 +191,7 @@ template<> bool UTF16Char::iscntrl() const
 //--------------------------------------------------------------------------------
 template<> bool UTF16Char::isdigit() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Digit ) ? true : false;
 	}
@@ -204,7 +204,7 @@ template<> bool UTF16Char::isdigit() const
 //--------------------------------------------------------------------------------
 template<> bool UTF16Char::isgraph() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Punct | Alpha | Digit ) ? true : false;
 	}
@@ -217,7 +217,7 @@ template<> bool UTF16Char::isgraph() const
 //--------------------------------------------------------------------------------
 template<> bool UTF16Char::islower() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Lower ) ? true : false;
 	}
@@ -230,7 +230,7 @@ template<> bool UTF16Char::islower() const
 //--------------------------------------------------------------------------------
 template<> bool UTF16Char::isprint() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Blank | Punct | Alpha | Digit ) ? true : false;
 	}
@@ -243,7 +243,7 @@ template<> bool UTF16Char::isprint() const
 //--------------------------------------------------------------------------------
 template<> bool UTF16Char::ispunct() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Punct ) ? true : false;
 	}
@@ -256,7 +256,7 @@ template<> bool UTF16Char::ispunct() const
 //--------------------------------------------------------------------------------
 template<> bool UTF16Char::isspace() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Space ) ? true : false;
 	}
@@ -269,7 +269,7 @@ template<> bool UTF16Char::isspace() const
 //--------------------------------------------------------------------------------
 template<> bool UTF16Char::isupper() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Upper ) ? true : false;
 	}
@@ -282,7 +282,7 @@ template<> bool UTF16Char::isupper() const
 //--------------------------------------------------------------------------------
 template<> bool UTF16Char::isxdigit() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Hex ) ? true : false;
 	}
@@ -301,7 +301,7 @@ template<> int UTF16Char::toascii() const
 //--------------------------------------------------------------------------------
 template<> int UTF16Char::tolower() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return ascii_tolower();
 	}
@@ -321,7 +321,7 @@ template<> int UTF16Char::ascii_tolower() const
 //--------------------------------------------------------------------------------
 template<> int UTF16Char::toupper() const
 {
-	if( CSystem::Instance().Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
 	{
 		return ascii_toupper();
 	}

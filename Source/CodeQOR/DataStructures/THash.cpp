@@ -26,7 +26,7 @@
 
 
 #include <stdlib.h>
-
+#include "AppocritaQOR/Event.h"
 #include "CodeQOR/DataStructures/THash.h"
 
 /*#include <qbitarray.h>

@@ -50,6 +50,7 @@ namespace nsWin32
 		return base + (over > 0 ? pageSize - over : 0);
 	}
 
+	//------------------------------------------------------------------------------
 	VirtualMemoryLocal::VirtualMemoryLocal() __QCMP_THROW
 	{
 		::SYSTEM_INFO info;
@@ -91,11 +92,13 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CExePageAllocator::CExePageAllocator()
 	{
+		__QCS_FCONTEXT( "CExePageAllocator::CExePageAllocator" );
 	}
 
 	//--------------------------------------------------------------------------------
 	CExePageAllocator::~CExePageAllocator()
 	{
+		__QCS_FCONTEXT( "CExePageAllocator::~CExePageAllocator" );
 	}
 
 	//--------------------------------------------------------------------------------

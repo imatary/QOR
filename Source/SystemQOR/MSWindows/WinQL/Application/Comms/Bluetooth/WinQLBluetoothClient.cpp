@@ -1,6 +1,6 @@
 //WinQLBluetoothClient.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -40,13 +40,24 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CBluetoothClient::CBluetoothClient( nsCodeQOR::mxGUID& ServiceUUID ) : m_ServiceUUID( ServiceUUID )
 	{
-		CWin32Application::TheWin32Application()->CommsNode().BluetoothHost().RegisterServiceClient( ServiceUUID , this );
+		nsQOR::IRole::ref_type Role = CWin32Application::TheWin32Application()->GetRole();
+		CCommsNode* pCommsNode = Role->GetSubSystem( CCommsNode::ClassID() ).As< CCommsNode >();
+		if( pCommsNode )
+		{
+			pCommsNode->BluetoothHost().RegisterServiceClient( ServiceUUID, this );
+		}
 	}
 
 	//--------------------------------------------------------------------------------
 	CBluetoothClient::~CBluetoothClient()
 	{
-		CWin32Application::TheWin32Application()->CommsNode().BluetoothHost().UnregisterServiceClient( m_ServiceUUID , this );
+		nsQOR::IRole::ref_type Role = CWin32Application::TheWin32Application()->GetRole();
+		CCommsNode* pCommsNode = Role->GetSubSystem( CCommsNode::ClassID() ).As< CCommsNode >();
+
+		if( pCommsNode != 0 )
+		{
+			pCommsNode->BluetoothHost().UnregisterServiceClient( m_ServiceUUID, this );
+		}
 	}
 
 	//--------------------------------------------------------------------------------

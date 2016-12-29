@@ -33,8 +33,8 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CBFProtocol::CBFProtocol() : m_eState( Stopped )
-	,	m_eNextState( Stopped )
+	CBFProtocol::CBFProtocol( nsQOR::IApplication::ref_type Application) : nsQOR::CWorkflow( Application ), m_StoppedState( Ref() ), m_ReadingState( Ref() ), m_WritingState( Ref() )
+	,	m_NextState( &m_StoppedState )
 	,	m_ulDataSize( 0 )
 	,	m_pInPipe( 0 )
 	,	m_pOutPipe( 0 )
@@ -47,7 +47,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBFProtocol::CBFProtocol(const CBFProtocol& src)
+	CBFProtocol::CBFProtocol(const CBFProtocol& src) : CBFProtocol( src.GetApplication() )
 	{
 		*this = src;
 	}
@@ -59,6 +59,12 @@ namespace nsBluefoot
 		{
 		}
 		return *this;
+	}
+
+	//------------------------------------------------------------------------------
+	nsQOR::IState::ref_type CBFProtocol::InitialState() const
+	{
+		return m_StoppedState.Ref();
 	}
 
 	//------------------------------------------------------------------------------
@@ -86,38 +92,27 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFProtocol::Run( void )
+	bool CBFProtocol::OnProtocolStateChanged( void )
 	{
-		while( OnProtocolStateChange() )
+		bool bResult = false;
+		nsQOR::IState::ref_type Current = CurrentState();
+
+		if( Current == m_WritingState.Ref() )
 		{
-		}
-	}
-
-	//------------------------------------------------------------------------------
-	bool CBFProtocol::OnProtocolStateChange( void )
-	{
-		bool bResult = ( m_eState != m_eNextState );
-
-		m_eState = m_eNextState;
-
-		switch( m_eNextState )
-		{
-		case Stopped:
-			break;
-		case Reading:
-			bResult = Read();
-			break;
-		case Writing:
 			bResult = Write();
-			break;
 		}
+		else if( Current == m_ReadingState.Ref() )
+		{
+			bResult = Read();
+		}
+
 		return bResult;
 	}
 
 	//--------------------------------------------------------------------------------
 	void CBFProtocol::GetNextReadCount( void )
 	{
-		//_WINQ_FCONTEXT( "CIOProtocol::GetNextReadCount" );
+		//__QCS_MEMBER_FCONTEXT( "CBFProtocol::GetNextReadCount" );
 		m_ulDataSize = 0;
 	}
 
@@ -192,6 +187,11 @@ namespace nsBluefoot
 
 	//--------------------------------------------------------------------------------
 	void CBFProtocol::OnWriteError( void )
+	{
+	}
+
+	//--------------------------------------------------------------------------------
+	void CBFProtocol::OnEndOfData( void )
 	{
 	}
 

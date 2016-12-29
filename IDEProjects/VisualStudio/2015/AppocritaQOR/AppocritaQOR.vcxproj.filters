@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Applications">
+      <UniqueIdentifier>{d3443ec5-0f6e-4277-a7da-003654ff846e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Workflows">
+      <UniqueIdentifier>{de47f852-ddc0-48ae-9b3e-bdce9868965b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SubSystems">
+      <UniqueIdentifier>{be3c3dd0-9c48-48f3-83cd-f67d0507914b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interfaces">
+      <UniqueIdentifier>{a2e01a64-5db8-4961-a4b0-270c84ffd95c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\AppocritaQOR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\Controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\Role.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\SubSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\Workflow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\Workflows\CmdLineIPOWorkflow.cpp">
+      <Filter>Source Files\Workflows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\State.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\SubSystems\Threading.cpp">
+      <Filter>Source Files\SubSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\SubSystems\Thread.cpp">
+      <Filter>Source Files\SubSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\Applications\CmdLineApp.cpp">
+      <Filter>Source Files\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\SubSystems\Bluetooth.cpp">
+      <Filter>Source Files\SubSystems</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Application.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\AppocritaQOR.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Controller.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Workflow.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Role.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystem.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Workflows\CmdLineIPOWorkflow.h">
+      <Filter>Source Files\Workflows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Event.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\State.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\Threading.h">
+      <Filter>Source Files\SubSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\IThread.h">
+      <Filter>Source Files\SubSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\IThreading.h">
+      <Filter>Source Files\SubSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\Thread.h">
+      <Filter>Source Files\SubSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Applications\CmdLineApp.h">
+      <Filter>Source Files\Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\IApplication.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\IController.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\IEvent.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\IRole.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\IState.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\ISubSystem.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\IWorkflow.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\Bluetooth.h">
+      <Filter>Source Files\SubSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\IBluetooth.h">
+      <Filter>Source Files\SubSystems</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -4,15 +4,15 @@
 #include "AppocritaQOR/Controller.h"
 #include "MonkiQOR/View.h"
 //------------------------------------------------------------------------------
-namespace nsAppocrita
+namespace nsQOR
 {
 	//------------------------------------------------------------------------------
-	CController::CController() : m_pModel( 0 ), m_pParent( 0 )
+	CController::CController() : m_pModel( 0 ), m_Parent( 0 )
 	{
 	}
 
 	//------------------------------------------------------------------------------
-	CController::CController( nsMammut::CModel* pModel, CController* pParent ) : m_pModel( pModel ), m_pParent( pParent )
+	CController::CController( nsMammut::CModel* pModel, CController::ref_type Parent ) : m_pModel( pModel ), m_Parent( Parent )
 	{
 	}
 
@@ -22,27 +22,21 @@ namespace nsAppocrita
 	}
 
 	//------------------------------------------------------------------------------
-	CController* CController::GetParent( void )
+	CController::ref_type CController::GetParent( void )
 	{
-		return m_pParent;
+		return m_Parent->Ref();
 	}
 
 	//------------------------------------------------------------------------------
-	void CController::SetParent( CController* pParent )
+	void CController::SetParent( CController::ref_type Parent )
 	{
-		m_pParent = pParent;
+		m_Parent = Parent->Ref();
 	}
 
 	//------------------------------------------------------------------------------
-	void CController::SetModelType( const nsCodeQOR::mxGUID* )
-	{
-	}
-
-	//------------------------------------------------------------------------------
-	bool CController::SetModel( nsMammut::CModel* pModel )
+	void CController::SetModel( nsMammut::CModel* pModel )
 	{
 		m_pModel = pModel;
-		return true;
 	}
 
 	//------------------------------------------------------------------------------
@@ -50,44 +44,22 @@ namespace nsAppocrita
 	{
 		return m_pModel;
 	}
-	/*
+
 	//------------------------------------------------------------------------------
-	nsMonki::CView* CController::GetView( void )
+	void CController::AddChild( CController::ref_type Child )
 	{
-		return m_pView;
+		m_Children.push_back( Child.operator->() );
 	}
 
 	//------------------------------------------------------------------------------
-	nsMonki::CView* CController::CreateView( void )
+	void CController::RemoveChild( CController::ref_type Child )
 	{
-		return 0;
-	}
-	*/
-	void CController::SetChildFactory( const nsCodeQOR::mxGUID* pClassID, nsCodeQOR::CClassInstanceFactory* pFactory )
-	{
-	}
-
-	//------------------------------------------------------------------------------
-	CController::refType CController::Child( const nsCodeQOR::mxGUID*, unsigned int uiIndex )
-	{
-		refType Ref;
-		return Ref;
+		IController* pTarget = Child.operator->();
+		m_Children.erase( std::remove_if( m_Children.begin(), m_Children.end(), [ pTarget ]( IController* Element)->bool
+		{ 
+			return Element == pTarget;
+		} ), m_Children.end() );
 	}
 
-	//------------------------------------------------------------------------------
-	CCompoundController::CCompoundController() : CController(), CBaseControllerVector()
-	{
-	}
-
-	//------------------------------------------------------------------------------
-	CCompoundController::CCompoundController( nsMammut::CModel* pModel, CCompoundController* pParent ) : CController( pModel, pParent ), CBaseControllerVector()
-	{
-	}
-
-	//------------------------------------------------------------------------------
-	CCompoundController::~CCompoundController()
-	{
-	}
-
-}//nsAppocrita
+}//nsQOR
 

@@ -355,7 +355,7 @@ namespace nsWin32
 		CPaintDC( CWindowHandle::refType hWnd );
 		virtual ~CPaintDC();
 
-		CRectangle& PaintingRectangle( void );
+		CRectangle PaintingRectangle( void );
 		bool IsSessionErase( void );
 		bool IsSessionRestore( void );
 		bool IsSessionIncUpdate( void );

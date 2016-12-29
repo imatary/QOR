@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Module identity and moodule-global object for CodeQOR
+//Module identity and module-global object for CodeQOR
 
 #include "CodeQOR/DataTypes/GUID.h"
 #include "CodeQOR/Modules/LoadableModuleBase.h"
@@ -32,9 +32,17 @@
 //------------------------------------------------------------------------------
 //Only for shared library builds as one of a network of shared libraries
 #ifndef QOR_MONOLITHIC
-#	ifdef _USRDLL
 
 __QCMP_STARTLINKAGE_C
+
+	extern int _cdecl QORStaticInit( void );
+
+	//------------------------------------------------------------------------------
+	__QCMP_EXPORT int _cdecl QORinit( void )
+	{
+		QORStaticInit();
+		return 1;
+	}
 
 	//------------------------------------------------------------------------------
 	//export a unique identifier for the CodeQOR module
@@ -53,5 +61,4 @@ __QCMP_ENDLINKAGE_C
 		return CodeQORModule;
 	}
 
-#	endif//_USRDLL
 #endif//QOR_MONOLITHIC

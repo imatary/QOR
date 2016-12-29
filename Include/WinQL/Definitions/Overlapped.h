@@ -38,7 +38,7 @@ namespace nsWin32
 		Cmp_ulong_ptr InternalHigh;
 
 		__QCMP_WARNING_PUSH
-			__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, "Deliberate use of Microsoft extension" )
+			__QCMP_WARNING_DISABLE( __QCMP_WARN_NAMELESS_STRUCTUNION, _QCMP_TXT("Deliberate use of Microsoft extension") )
 
 		union __QCMP_NAMELESS_STRUCT
 		{

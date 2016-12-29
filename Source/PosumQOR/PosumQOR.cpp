@@ -36,6 +36,15 @@
 
 __QCMP_STARTLINKAGE_C
 
+	extern int _cdecl QORStaticInit( void );
+
+	//------------------------------------------------------------------------------
+	__QCMP_EXPORT int _cdecl QORinit( void )
+	{
+		QORStaticInit();
+		return 1;
+	}
+
 	//------------------------------------------------------------------------------
 	//This gives the Posum QOR library a unique identity and marks it as a QOR module
 	//with delayed static initialization and an accessible Module Context

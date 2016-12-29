@@ -37,9 +37,11 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CBaseWindowPartController );
 
 	//--------------------------------------------------------------------------------
-	CBaseWindowPartController::CBaseWindowPartController( nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent ) : nsAppocrita::CController( pModelItem, pParent )
+	CBaseWindowPartController::CBaseWindowPartController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : nsQOR::CController()
 	{
 		_WINQ_FCONTEXT( "CBaseWindowPartController::CBaseWindowPartController" );
+		SetParent( Parent );
+		SetModel( pModelItem );
 		m_pNextHookController = 0;
 	}
 

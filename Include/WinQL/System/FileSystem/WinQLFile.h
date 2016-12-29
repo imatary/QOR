@@ -130,7 +130,7 @@ __QCMP_WARNING_POP
 
 		bool CancelIo( void );
 		bool CancelIoEx( nsWin32::LPOVERLAPPED lpOverlapped );
-		bool FlushBuffers();
+		//bool FlushBuffers();
 		bool GetBandwidthReservation( unsigned long* lpPeriodMilliseconds, unsigned long* lpBytesPerPeriod, int* pDiscardable, unsigned long* lpTransferSize, unsigned long* lpNumOutstandingRequests );
 		bool GetInformation( nsWin32::LPBY_HANDLE_FILE_INFORMATION lpFileInformation );
 		bool GetInformationEx( nsWin32::FILE_INFO_BY_HANDLE_CLASS FileInformationClass, void* lpFileInformation, unsigned long dwBufferSize );
@@ -140,8 +140,8 @@ __QCMP_WARNING_POP
 		unsigned long GetFinalPathName( TCHAR* lpszFilePath, unsigned long cchFilePath, unsigned long dwFlags );
 		bool Lock( unsigned long dwFileOffsetLow, unsigned long dwFileOffsetHigh, unsigned long nNumberOfBytesToLockLow, unsigned long nNumberOfBytesToLockHigh );
 		bool LockEx( unsigned long dwFlags, unsigned long dwReserved, unsigned long nNumberOfBytesToLockLow, unsigned long nNumberOfBytesToLockHigh, nsWin32::LPOVERLAPPED lpOverlapped );
-		bool Read( void* lpBuffer, unsigned long nNumberOfBytesToRead, unsigned long* lpNumberOfBytesRead, nsWin32::LPOVERLAPPED lpOverlapped );
-		bool ReadEx( void* lpBuffer, unsigned long nNumberOfBytesToRead, nsWin32::LPOVERLAPPED lpOverlapped, nsWin32::LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine );
+		//bool Read( void* lpBuffer, unsigned long nNumberOfBytesToRead, unsigned long* lpNumberOfBytesRead, nsWin32::LPOVERLAPPED lpOverlapped );
+		//bool ReadEx( void* lpBuffer, unsigned long nNumberOfBytesToRead, nsWin32::LPOVERLAPPED lpOverlapped, nsWin32::LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine );
 		bool ReadScatter( nsWin32::FILE_SEGMENT_ELEMENT aSegmentArray[], unsigned long nNumberOfBytesToRead, unsigned long* lpReserved, nsWin32::LPOVERLAPPED lpOverlapped );
 		CFile& ReOpen( unsigned long dwDesiredAccess, unsigned long dwShareMode, unsigned long dwFlags );
 		bool SetEOF();
@@ -155,12 +155,24 @@ __QCMP_WARNING_POP
 		bool SetValidData( Cmp_long_long ValidDataLength );
 		bool Unlock( unsigned long dwFileOffsetLow, unsigned long dwFileOffsetHigh, unsigned long nNumberOfBytesToUnlockLow, unsigned long nNumberOfBytesToUnlockHigh );
 		bool UnlockEx( unsigned long dwReserved, unsigned long nNumberOfBytesToUnlockLow, unsigned long nNumberOfBytesToUnlockHigh, nsWin32::LPOVERLAPPED lpOverlapped );
-		bool Write( const void* lpBuffer, unsigned long nNumberOfBytesToWrite, unsigned long* lpNumberOfBytesWritten, nsWin32::LPOVERLAPPED lpOverlapped );
-		bool WriteEx( const void* lpBuffer, unsigned long  nNumberOfBytesToWrite, nsWin32::LPOVERLAPPED lpOverlapped, nsWin32::LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine );
+		//bool Write( const void* lpBuffer, unsigned long nNumberOfBytesToWrite, unsigned long* lpNumberOfBytesWritten, nsWin32::LPOVERLAPPED lpOverlapped );
+		//bool WriteEx( const void* lpBuffer, unsigned long  nNumberOfBytesToWrite, nsWin32::LPOVERLAPPED lpOverlapped, nsWin32::LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine );
 		bool WriteGather( nsWin32::FILE_SEGMENT_ELEMENT aSegmentArray[], unsigned long nNumberOfBytesToWrite, unsigned long* lpReserved, nsWin32::LPOVERLAPPED lpOverlapped );
-		bool IsOpen( void );
+		Cmp__int64 Seek( Cmp__int64 pos, int mthd );
+		bool SupportsPosition( void );
 
 	private:
+
+		//--------------------------------------------------------------------------------
+		typedef union doubleint
+		{
+			Cmp__int64 bigint;
+			struct
+			{
+				unsigned long lowerhalf;
+				long upperhalf;
+			} twoints;
+		} DINT;
 
 		CFile( const CFile& );
 		CFile& operator = ( const CFile& );

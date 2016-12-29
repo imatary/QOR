@@ -1,6 +1,6 @@
 //SystemQOR.h
 
-// Copyright Querysoft Limited 2013, 2015
+// Copyright Querysoft Limited 2013, 2015, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -32,8 +32,6 @@
 #include "SystemQOR/Config/SupportedOSList.h"	//Include the list of supported Operating Systems
 #include "ArchQOR.h"							//Reference ArchQOR for Architecture base + compiler + config
 #include "SystemQOR/Config/SystemSelection.h"	//Select the Operating System support to include
-//#include "SystemQOR/SystemQORPolicy.h"
-#include "SystemQOR/System.h"
 
 #ifdef QOR_SYS_SYSTEMHEADER
 #	include QOR_SYS_SYSTEMHEADER					//include everything needed to support and use the selected OS

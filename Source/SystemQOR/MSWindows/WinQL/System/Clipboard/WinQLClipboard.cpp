@@ -350,6 +350,13 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
+	CClipboard::refType CClipboard::Ref( void )
+	{
+		_WINQ_FCONTEXT( "CClipboard::Ref" );
+		return refType( this );
+	}
+
+	//------------------------------------------------------------------------------
 	nsCodeQOR::CTLRef< CClipboardViewerSession > CClipboard::ViewerSession( COSWindow::refType refWindow )
 	{
 		_WINQ_FCONTEXT( "CClipboard::ViewerSession" );

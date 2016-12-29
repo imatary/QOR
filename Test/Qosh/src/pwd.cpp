@@ -199,7 +199,7 @@ cwd2(void)
 			char c;
 			while((c = *pcwd++) != SLASH && c != '\0');
 			*--pcwd = '\0';
-			if (lstat((char *)cwdname, &stat1) == -1
+			if (lstat((char *)cwdname, ( ::stat*)(&stat1)) == -1
 		    	|| (stat1.st_mode & S_IFMT) == S_IFLNK) {
 				didpwd = FALSE;
 				*pcwd = c;
@@ -211,7 +211,7 @@ cwd2(void)
 		}
 		didpwd = TRUE;
 	} else 
-		if (stat((char *)cwdname, &stat1) == -1) {
+		if (_stat((char *)cwdname, &stat1) == -1) {
 			didpwd = FALSE;
 			return;
 		}
@@ -220,7 +220,7 @@ cwd2(void)
 	 * consist of symbolic links with ".."
 	 */
 
-	if (stat(".", &stat2) == -1
+	if (_stat(".", &stat2) == -1
 	    || stat1.st_dev != stat2.st_dev
 	    || stat1.st_ino != stat2.st_ino)
 		didpwd = FALSE;

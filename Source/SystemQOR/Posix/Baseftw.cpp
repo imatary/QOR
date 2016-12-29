@@ -47,7 +47,7 @@ namespace nsBaseCRT
 	}
 	
 	//--------------------------------------------------------------------------------
-    int Cftw::ftw( const char* szPath, int ( *fn )( const char*, const stat*, int ), int ndirs )
+    int Cftw::ftw( const char* szPath, int ( *fn )( const char*, const file_stat*, int ), int ndirs )
 	{
 		__QCS_MEMBER_FCONTEXT( "Cftw::ftw" );
 		errno = ENOSYS;
@@ -55,7 +55,7 @@ namespace nsBaseCRT
 	}
 
 	//--------------------------------------------------------------------------------
-    int Cftw::nftw( const char* szPath, int ( *fn )( const char*, const stat*, int, FTW* ), int fd_limit, int flags )
+    int Cftw::nftw( const char* szPath, int ( *fn )( const char*, const file_stat*, int, FTW* ), int fd_limit, int flags )
 	{
 		__QCS_MEMBER_FCONTEXT( "Cftw::nftw" );
 		errno = ENOSYS;

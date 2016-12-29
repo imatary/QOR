@@ -37,7 +37,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CDeviceChangeController );
 
 	//--------------------------------------------------------------------------------
-	CDeviceChangeController::CDeviceChangeController( nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent ) : CBaseWindowPartController( pModelItem, pParent )
+	CDeviceChangeController::CDeviceChangeController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CBaseWindowPartController( pModelItem, Parent )
 	{
 		_WINQ_FCONTEXT( "CDeviceChangeController::CDeviceChangeController" );
 	}

@@ -35,7 +35,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CFileSource );
 
 	//--------------------------------------------------------------------------------
-	CFileSource::CFileSource( CFileConnector* pFileConnector ) : CIOSource( pFileConnector )
+	CFileSource::CFileSource( CFileConnector* pFileConnector ) : CIOSource( pFileConnector ), m_bEOF( false )
 	{
 		_WINQ_FCONTEXT( "CFileSource::CFileSource" );
 	}
@@ -64,27 +64,36 @@ namespace nsWin32
 
 				if( !bResult && pFileConnector->Protocol() )
 				{
-					pFileConnector->Protocol()->OnReadError();
+					pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadError();
 				}
 			}
 			else
 			{				
+				m_bEOF = false;
 				if( pFileConnector->File()->Read( pBuffer, ulNumberOfUnitsToRead * GetBuffer()->GetUnitSize(), &ulNumberOfUnitsRead, 0 ) )
 				{
 					ulNumberOfUnitsRead /= GetBuffer()->GetUnitSize();
 					GetBuffer()->WriteAcknowledge( ulNumberOfUnitsRead );
-					bResult = ulNumberOfUnitsRead > 0 ? true : false;
+					bResult = true;
 				}
 
-				if( pFileConnector->Protocol() )
+				if( bResult && ulNumberOfUnitsRead == 0 )
+				{
+					m_bEOF = true;
+					if( pFileConnector->Protocol() )
+					{
+						pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnEndOfData();
+					}
+				}
+				else if( pFileConnector->Protocol() )
 				{
 					if( bResult )
 					{
-						pFileConnector->Protocol()->OnReadSuccess( ulNumberOfUnitsRead );
+						pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadSuccess( ulNumberOfUnitsRead );
 					}
 					else
 					{
-						pFileConnector->Protocol()->OnReadError();
+						pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadError();
 					}
 				}
 			}
@@ -96,13 +105,7 @@ namespace nsWin32
 	bool CFileSource::IsAtEnd( void )
 	{
 		_WINQ_FCONTEXT( "CFileSource::IsAtEnd" );
-		bool bResult = true;
-		CFileConnector* pFileConnector = dynamic_cast< CFileConnector* >( m_pIOSourceConnector );
-		if( pFileConnector && pFileConnector->IsConnected() )
-		{
-			bResult = false;//TODO:!pFileConnector->File()->IsAtEOF();
-		}
-		return bResult;
+		return m_bEOF;
 	}
 
 }//nsWin32

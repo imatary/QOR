@@ -41,7 +41,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CRenderingController );
 
 	//--------------------------------------------------------------------------------
-	CRenderingController::CRenderingController( nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent ) : CBaseWindowPartController( pModelItem, pParent )
+	CRenderingController::CRenderingController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CBaseWindowPartController( pModelItem, Parent )
 	{
 		_WINQ_FCONTEXT( "CRenderingController::CRenderingController" );
 	}

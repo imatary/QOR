@@ -235,6 +235,8 @@ namespace nsWin32
 		int _fflush_nolock( void );
 		int _fclose_nolock( void );
 		void ResetStreamData( void );
+		void SetLowLevelFlags( byte Flags );
+		void SetLowLevelFile( CFile* pFile );
 
 	private:
 
@@ -332,6 +334,22 @@ namespace nsWin32
 
 		static char sachLookupTrailBytes[ 256 ];
 		static void* _stdbuf[ 2 ];// = { NULL, NULL};
+
+/*struct __crt_lowio_handle_data
+{
+    CRITICAL_SECTION           lock;
+    intptr_t                   osfhnd;          // underlying OS file HANDLE
+    __int64                    startpos;        // File position that matches buffer start
+    unsigned char              osfile;          // Attributes of file (e.g., open in text mode?)
+    __crt_lowio_text_mode      textmode;
+    __crt_lowio_pipe_lookahead _pipe_lookahead;
+
+    uint8_t unicode          : 1; // Was the file opened as unicode?
+    uint8_t utf8translations : 1; // Buffer contains translations other than CRLF
+    uint8_t dbcsBufferUsed   : 1; // Is the dbcsBuffer in use?
+    char    dbcsBuffer;           // Buffer for the lead byte of DBCS when converting from DBCS to Unicode
+};
+*/
 	};
 
 }//nsWin32

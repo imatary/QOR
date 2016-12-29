@@ -39,7 +39,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CFrameMenuController );
 
 	//--------------------------------------------------------------------------------
-	CFrameMenuController::CFrameMenuController( nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent ) : CMenuController( pModelItem, pParent )
+	CFrameMenuController::CFrameMenuController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CMenuController( pModelItem, Parent )
 	{
 		_WINQ_FCONTEXT( "CFrameMenuController::CFrameMenuController" );
 	}

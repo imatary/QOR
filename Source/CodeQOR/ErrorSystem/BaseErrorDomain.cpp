@@ -24,12 +24,12 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "AppocritaQOR/Event.h"
 #include "SystemQOR.h"
 #include "CodeQOR/ErrorSystem/BaseErrorDomain.h"
 #include "CodeQOR/ErrorSystem/What.h"
 #include "CodeQOR/ErrorSystem/Where.h"
 #include "CodeQOR/ErrorSystem/When.h"
-#include "CodeQOR/DataStructures/TBuffer.h"
 #include "CodeQOR/Text/CodeString.h"
 #include "CodeQOR/Text/Char.h"
 #include "CodeQOR/Modules/ProcessBase.h"
@@ -160,7 +160,7 @@ namespace nsCodeQOR
 #if( __QOR_UNICODE )
 				//strDescription.ValidateBuffer( static_cast< unsigned short > ( swprintf( strDescription.GetBufferSetLength( static_cast< unsigned short >( MAX_ERRTEXT ) ), MAX_ERRTEXT, pTemplate->pText, ppszParts[ 0 ], ppszParts[ 1 ], ppszParts[ 2 ], ppszParts[ 3 ], ppszParts[ 4 ], ppszParts[ 5 ], ppszParts[ 6 ], ppszParts[ 7 ], ppszParts[ 8 ], ppszParts[ 9 ] ) ) );
 #else
-				strDescription.ValidateBuffer( static_cast<unsigned short>( sprintf( strDescription.GetBufferSetLength( MAX_ERRTEXT ), pTemplate->pText, ppszParts[ 0 ], ppszParts[ 1 ], ppszParts[ 2 ], ppszParts[ 3 ], ppszParts[ 4 ], ppszParts[ 5 ], ppszParts[ 6 ], ppszParts[ 7 ], ppszParts[ 8 ], ppszParts[ 9 ] ) ) );
+				strDescription.ValidateBuffer( static_cast<unsigned short>( sprintf( (char*)(strDescription.GetBufferSetLength( MAX_ERRTEXT )), pTemplate->pText, ppszParts[ 0 ], ppszParts[ 1 ], ppszParts[ 2 ], ppszParts[ 3 ], ppszParts[ 4 ], ppszParts[ 5 ], ppszParts[ 6 ], ppszParts[ 7 ], ppszParts[ 8 ], ppszParts[ 9 ] ) ) );
 #endif
 				strDescription.ReleaseBuffer();
 				bResult = true;

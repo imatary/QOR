@@ -30,7 +30,7 @@
 #define WINQL_GUI_WND_EDIT_H_3
 
 #ifdef	__QCMP_OPTIMIZEINCLUDE
-		__QCMP_OPTIMIZEINCLUDE
+#pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "WinQL/GUI/Views/WindowView.h"

@@ -20,7 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\CodeQOR\ClassReg\ClassReg.cpp" />
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\CodePages\CodePage.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\CodePages\CodePage.cpp">
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ShowIncludes>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\Source\CodeQOR\CodeQOR.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\DataStructures\PODVector.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\DataStructures\THash.cpp" />
@@ -35,9 +38,6 @@
     <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\What.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\When.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\Where.cpp" />
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\Events\ThreadLocalEvent.cpp" />
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\Events\ThreadLocalEventManager.cpp" />
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\Events\ThreadLocalEventSink.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\CallInterceptor.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\DefaultInterceptor.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\EventInterceptor.cpp" />
@@ -64,13 +64,12 @@
     <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullLock.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullMutex.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullSection.cpp" />
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullSempahore.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullSemaphore.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\ACodeString.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\Char.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\Char16.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\Char32.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\Char8.cpp" />
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\CodeString.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\CQString.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\TExtString.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\UTF16Char.cpp" />
@@ -79,7 +78,6 @@
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\UTF8Char.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\UTF8String.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\WCodeString.cpp" />
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\Threading\ThreadContext.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Tracing\CallContextBase.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Tracing\FunctionContextBase.cpp" />
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Tracing\ObjectContextBase.cpp" />
@@ -100,7 +98,6 @@
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TArray.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TBitArray.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TBox.h" />
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TBuffer.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TCRef.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TFLink.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\THash.h" />
@@ -112,6 +109,7 @@
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TPair.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TPointer.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TRangePair.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TRef.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataTypes\GUID.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataTypes\OTypes.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataTypes\Property.h" />
@@ -124,9 +122,6 @@
     <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\What.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\When.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\Where.h" />
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\Events\ThreadLocalEvent.h" />
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\Events\ThreadLocalEventManager.h" />
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\Events\ThreadLocalEventSink.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\CallInterceptor.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\DefaultInterceptor.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\EventInterceptor.h" />
@@ -178,7 +173,6 @@
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\UTF8Char.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\UTF8String.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\WCodeString.h" />
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\Threading\ThreadContext.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\CallContextBase.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\FunctionContextBase.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\ObjectContext.h" />

@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "AppocritaQOR/Event.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/Application/Threading/WinQLThread.h"
 #include "WinQL/CodeServices/Locale/WinQLLocale.h"
@@ -63,7 +64,7 @@ namespace nsWin32
 		m_bCloseHandle = false;					//Don't close the handle later as it's not ours
 		t_pCurrentWin32Thread = this;
 		m_Name = 0;
-		m_pImpl = 0;
+		m_pLocalEventManager = 0;
 	}
 
 	//------------------------------------------------------------------------------
@@ -77,7 +78,7 @@ namespace nsWin32
 			m_hThread = CKernel32::OpenThread( dwDesiredAccess, bInheritHandle ? TRUE : FALSE, dwThreadId );
 			m_bCloseHandle = true;
 			m_Name = 0;
-			m_pImpl = 0;
+			m_pLocalEventManager = 0;
 		}__QOR_ENDPROTECT
 	}
 
@@ -98,7 +99,7 @@ namespace nsWin32
 
 			m_bCloseHandle = false;
 			m_Name = 0;
-			m_pImpl = 0;
+			m_pLocalEventManager = 0;
 		}__QOR_ENDPROTECT
 	}
 
@@ -121,7 +122,7 @@ namespace nsWin32
 
 			m_bCloseHandle = false;
 			m_Name = 0;
-			m_pImpl = 0;
+			m_pLocalEventManager = 0;
 		}__QOR_ENDPROTECT
 	}
 
@@ -215,12 +216,23 @@ namespace nsWin32
 	CThread::~CThread()
 	{
 		_WINQ_FCONTEXT( "CThread::~CThread" );
+		delete m_pLocalEventManager;
 		if( !m_bCloseHandle )			//If we don't want the handle to be automatically closed then we need to explicitly drop it
 		{
 			m_hThread.Drop();
-		}
+		}		
 	}
 	
+	//------------------------------------------------------------------------------
+	nsQOR::CEventManager& CThread::LocalEventManager( void )
+	{
+		if( m_pLocalEventManager == 0 )
+		{
+			m_pLocalEventManager = new nsQOR::CEventManager();
+		}
+		return *m_pLocalEventManager;
+	}
+
 	//------------------------------------------------------------------------------
 	CThreadResourceManager& CThread::ResourceManager( void )
 	{
@@ -654,21 +666,24 @@ namespace nsWin32
 			ptmbci = UpdatetMBCInfo();
 		}
 	}
-	
-	//------------------------------------------------------------------------------
-	nsCodeQOR::CThreadContextBase* CThread::GetCurrentImpl( void )
-	{
-		if( t_pCurrentWin32Thread )
-		{
-			return t_pCurrentWin32Thread->m_pImpl;
-		}
-		return 0;
-	}
 
 	//------------------------------------------------------------------------------
-	void CThread::SetCurrentImpl( nsCodeQOR::CThreadContextBase* pImpl )
+	unsigned long CThread::Sleep( unsigned long ulMilliseconds, bool bAlertable )
 	{
-		t_pCurrentWin32Thread->m_pImpl = pImpl;
+		_WINQ_FCONTEXT( "CThreading::Sleep" );
+		unsigned long dwResult = 0;
+		__QOR_PROTECT
+		{
+			if( bAlertable )
+			{
+				dwResult = CKernel32::SleepEx( ulMilliseconds, bAlertable ? TRUE : FALSE );
+			}
+			else
+			{
+				CKernel32::Sleep( ulMilliseconds );
+			}
+		}__QOR_ENDPROTECT
+		return dwResult;
 	}
 
 }//nsWin32

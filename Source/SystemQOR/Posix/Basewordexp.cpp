@@ -37,14 +37,12 @@ namespace nsBaseCRT
 	Cwordexp::Cwordexp()
 	{
 		__QCS_MEMBER_FCONTEXT("Cwordexp::Cwordexp");
-		errno = ENOSYS;
 	}
 
 	//--------------------------------------------------------------------------------
 	Cwordexp::~Cwordexp()
 	{
 		__QCS_MEMBER_FCONTEXT("Cwordexp::~Cwordexp");
-		errno = ENOSYS;
 	}
 
 	//--------------------------------------------------------------------------------

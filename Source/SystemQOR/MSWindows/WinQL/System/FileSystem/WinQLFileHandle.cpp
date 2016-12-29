@@ -32,6 +32,7 @@
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
+	/*
 	using namespace nsWinQAPI;
 
 	__QOR_IMPLEMENT_OCLASS_LUID( CFileHandle );
@@ -91,5 +92,5 @@ namespace nsWin32
 	CFileHandle::~CFileHandle()
 	{
 	}
-
+*/
 }//nsWin32

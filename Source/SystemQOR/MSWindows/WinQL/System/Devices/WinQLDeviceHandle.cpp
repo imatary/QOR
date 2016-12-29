@@ -56,6 +56,14 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CDeviceHandle::CDeviceHandle( int h ) : CHandle( h )
+		, m_ulRefCount( 1 )
+	{
+		_WINQ_FCONTEXT( "CDeviceHandle::CDeviceHandle" );
+		Init();
+	}
+
+	//--------------------------------------------------------------------------------
 	CDeviceHandle::CDeviceHandle( const CDeviceHandle& src ) : CHandle( src.ptr() )
 	,	m_ulRefCount( 1 )
 	{
@@ -93,7 +101,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void* CDeviceHandle::Use()
+	void* CDeviceHandle::Use() const
 	{
 		_WINQ_FCONTEXT( "CDeviceHandle::Use" );
 		return ptr();

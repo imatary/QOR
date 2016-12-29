@@ -1505,6 +1505,10 @@ namespace nsWin32
 
 	__QCMP_STATIC_CONSTANT( unsigned int, SAOnStack = 0x08000000 );
 
+	__QCMP_STATIC_CONSTANT( int, SSOnStack = 1 );
+	__QCMP_STATIC_CONSTANT( int, SSDisable = 2 );
+	
+
 #   define _pxcptinfoptrs  (*__pxcptinfoptrs())
 
 	//--------------------------------------------------------------------------------
@@ -2522,7 +2526,7 @@ namespace nsWin32
 	};
 
 	//--------------------------------------------------------------------------------
-	struct stat
+	struct file_stat
 	{
 		unsigned int     st_dev;
 		unsigned short     st_ino;
@@ -2535,10 +2539,10 @@ namespace nsWin32
 		time_t st_atim;
 		time_t st_mtim;
 		time_t st_ctim;
-		unsigned long/*blksize_t*/ st_blksize;
-		Cmp_unsigned__int64/*blkcnt_t*/ st_blocks;
+		unsigned long  st_blksize;
+		Cmp_unsigned__int64  st_blocks;
 	};
-
+	
 	//--------------------------------------------------------------------------------
 	struct _stat32i64
 	{
@@ -2590,8 +2594,8 @@ namespace nsWin32
 		void( *gl_closedir )( void * );
 		struct dirent *( *gl_readdir )( void * );
 		void *( *gl_opendir )( const char * );
-		int( *gl_lstat )( const char *, stat* );
-		int( *gl_stat )( const char *, stat* );
+		int( *gl_lstat )( const char *, file_stat* );
+		int( *gl_stat )( const char *, file_stat* );
 	} glob_t;
 
 	/*
@@ -2722,7 +2726,7 @@ namespace nsWin32
 	} _FPQ64;
 
 	__QCMP_WARNING_PUSH
-		__QCMP_WARNING_DISABLE( __QCMP_WARN_STRUCTURE_PADDED_DUE_TO_ALIGN, "Noise" );
+		__QCMP_WARNING_DISABLE( __QCMP_WARN_STRUCTURE_PADDED_DUE_TO_ALIGN, _QCMP_TXT("Noise") );
 	//--------------------------------------------------------------------------------
 	typedef struct
 	{

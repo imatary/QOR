@@ -37,24 +37,21 @@ namespace nsCodeQOR
 	//--------------------------------------------------------------------------------
 	__QOR_INTERFACE( __CODEQOR ) char* mycpy(char* dst, const char* src, Cmp_uint_ptr len) __QCMP_THROW
 	{
-		if( src == 0 )
+		if( src != 0 )
 		{
-			return dst;
-		}
-
-		if( len == (Cmp_uint_ptr)-1 )
-		{
-			while( *src )
+			if( len == (Cmp_uint_ptr)-1 )
 			{
-				*dst++ = *src++;
+				while( *src )
+				{
+					*dst++ = *src++;
+				}
+			}
+			else
+			{
+				memcpy( dst, src, len );
+				dst += len;
 			}
 		}
-		else
-		{
-			memcpy( dst, src, len );
-			dst += len;
-		}
-
 		return dst;
 	}
 

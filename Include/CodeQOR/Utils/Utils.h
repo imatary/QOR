@@ -110,14 +110,7 @@ namespace nsCodeQOR
 	//--------------------------------------------------------------------------------
 	static inline Cmp_unsigned__int32 maskUpToIndex( Cmp_unsigned__int32 x )
 	{
-		if( x >= 32 )
-		{
-			return 0xFFFFFFFF;
-		}
-		else
-		{
-			return ( 1U << x ) - 1;
-		}
+		return x >= 32 ? 0xFFFFFFFF : ( 1U << x ) - 1;
 	}
 
 	//--------------------------------------------------------------------------------

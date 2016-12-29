@@ -34,8 +34,8 @@ namespace nsCodeQOR
 	// Destroy PodVector and free all data.
 	__QOR_INTERFACE( __CODEQOR ) void PodVector_Free( void* _data ) __QCMP_THROW
 	{
-		if (_data) ::free/*ASMJIT_FREE*/(_data);
-		_data = 0;
+		if (_data) ::free(_data);
 	}
+
 }//nsCodeQOR
 

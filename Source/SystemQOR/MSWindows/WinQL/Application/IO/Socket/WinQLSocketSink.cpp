@@ -66,7 +66,7 @@ namespace nsWin32
 
 				if( !bResult && pSocketConnector->Protocol() )
 				{
-					pSocketConnector->Protocol()->OnWriteError();
+					pSocketConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteError();
 				}
 
 			}
@@ -83,11 +83,11 @@ namespace nsWin32
 				{
 					if( bResult )
 					{
-						pSocketConnector->Protocol()->OnWriteSuccess();
+						pSocketConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteSuccess();
 					}
 					else
 					{
-						pSocketConnector->Protocol()->OnWriteError();
+						pSocketConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteError();
 					}
 				}
 			}

@@ -31,25 +31,50 @@ __QCMP_WARNING_DISABLE( __QCMP_WARN_THIS_USED_IN_BASE_INIT_LIST, "Safe usage: sa
 #include "WinQL/System/FileSystem/WinQLCRTFile.h"
 __QCMP_WARNING_POP
 #include "WinQL/Application/WinQLApplication.h"
+#include "WinQAPI/User32.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-	__QOR_IMPLEMENT_OCLASS_LUID( CWin32Application );
+	__QOR_IMPLEMENT_OCLASS_GUID( CWin32Application, 0x11110951, 0xEBB7, 0x4B5D, 0x84, 0xFD, 0x56, 0x71, 0xA0, 0x73, 0xD0, 0x62 );
+	nsCodeQOR::CTExternalRegEntry< CWin32Application > CWin32Application::RegEntry;
+	CWin32Application::ref_type g_Win32Application( 0 );
 
-	CWin32Application::refType g_Win32Application( 0 );
+
+	//Implement a special waitable event for handling high level application events
+	//--------------------------------------------------------------------------------
+	CApplicationEvent::CApplicationEvent( CWin32Application& Application ) : CEvent(0, 0, CEvent::_CREATE_EVENT_MANUAL_RESET, EVENT_MODIFY_STATE | SYNCHRONIZE, 0 )
+	, m_Application( Application )
+	{
+	}
 
 	//--------------------------------------------------------------------------------
-	CWin32Application::refType CWin32Application::TheWin32Application( void )
+	CApplicationEvent::~CApplicationEvent()
+	{
+	}
+
+	//--------------------------------------------------------------------------------
+	void CApplicationEvent::OnSignaled( void )
+	{
+		m_Application.ProcessEvent();//Cause the next high level application event to be processed
+		this->Reset();//Reset this trigger event to enable processing the next high level event
+	}
+
+	//--------------------------------------------------------------------------------
+	CWin32Application::ref_type CWin32Application::TheWin32Application( void )
 	{
 		return g_Win32Application;
 	}
 
 	//--------------------------------------------------------------------------------
 	CWin32Application::CWin32Application() :
-		m_Role( eOffice )
+		m_bStopping( false )
+	,	m_ulIdleWaitMillseconds( 100 )
+	,	m_AppEvent( *this )
+	,	m_pWorkflow( nullptr )
 	{
 		g_Win32Application.Attach( this, false );
+		AddWaitableObject( m_AppEvent.Ref() );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -59,21 +84,41 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CConsole::refType CWin32Application::Console( void )
+	nsCodeQOR::CTLRef< CProcess > CWin32Application::Process( void )
+	{
+		return nsCodeQOR::CTLRef< CProcess >( nsWin32::ThisProcess(), false );
+	}
+
+	//--------------------------------------------------------------------------------
+	CConsole::ref_type CWin32Application::Console( void )
 	{
 		return CConsole::TheWin32Console();
 	}
 
 	//--------------------------------------------------------------------------------
-	void CWin32Application::SetRole( CWin32Application::eRole Role )
+	void CWin32Application::SetRole( nsQOR::IRole::ref_type Role )
 	{
 		m_Role = Role;
 	}
 
 	//--------------------------------------------------------------------------------
-	CWin32Application::eRole CWin32Application::GetRole( void )
+	nsQOR::IRole::ref_type CWin32Application::GetRole( void )
 	{
 		return m_Role;
+	}
+
+	//Workflow integration
+	//If the application uses a Wrokflow it is integrated here and processes all application events
+	//--------------------------------------------------------------------------------
+	void CWin32Application::SetWorkflow( nsQOR::IWorkflow::ref_type pWorkflow )
+	{
+		m_pWorkflow = pWorkflow;
+	}
+
+	//--------------------------------------------------------------------------------
+	nsQOR::IWorkflow::ref_type CWin32Application::GetWorkflow( void )
+	{
+		return m_pWorkflow;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -108,6 +153,191 @@ namespace nsWin32
 	void CWin32Application::ClearAutoRecovery( void )
 	{
 		m_Recovery.Dispose();
+	}
+
+	//------------------------------------------------------------------------------
+	void CWin32Application::SetOuter( IApplication::ref_type OuterApplication )
+	{
+		m_OuterApplication = OuterApplication;
+	}
+
+	//--------------------------------------------------------------------------------
+	void CWin32Application::Setup( void )
+	{
+		_WINQ_FCONTEXT( "CWin32Application::Setup" );
+		if( !m_OuterApplication.IsNull() )
+		{
+			m_OuterApplication->Setup();
+		}
+	}
+
+	//--------------------------------------------------------------------------------
+	void CWin32Application::Shutdown( void )
+	{
+		_WINQ_FCONTEXT( "CWin32Application::Shutdown" );
+		if( !m_OuterApplication.IsNull() )
+		{
+			m_OuterApplication->Shutdown();
+		}
+	}
+
+	//--------------------------------------------------------------------------------
+	int CWin32Application::Run( nsQOR::CWorkflow::ref_type pWorkflow )
+	{
+		_WINQ_FCONTEXT( "CWin32Application::Run" );
+
+		SetWorkflow( pWorkflow );
+
+		return Run();
+	}
+
+	//--------------------------------------------------------------------------------
+	int CWin32Application::Run( void )
+	{
+		_WINQ_FCONTEXT( "CWin32Application::Run" );
+
+		if( !m_Role.IsNull() )
+		{
+			m_Role->Setup( *this );
+		}
+
+		if( m_pWorkflow )
+		{
+			m_pWorkflow->PushState( m_pWorkflow->InitialState(), nullptr );
+		}
+
+		RunLoop();
+
+		if( !m_Role.IsNull() )
+		{
+			m_Role->Shutdown( *this );
+		}
+		return 0;
+	}
+
+	//--------------------------------------------------------------------------------
+	void CWin32Application::RunLoop()
+	{
+		_WINQ_FCONTEXT( "CWin32Application::RunLoop" );
+		unsigned long ulWaitResult = (unsigned long)( -1 );
+		nsWinQAPI::CUser32& User32( nsWinQAPI::CUser32::Instance() );
+
+		while( !m_bStopping )
+		{
+			unsigned long ulCount = m_Handles.size();
+
+			ulWaitResult = User32.MsgWaitForMultipleObjectsEx( ulCount, (const HANDLE*)( m_Handles.data() ), m_ulIdleWaitMillseconds, QS_ALLINPUT, MWMO_ALERTABLE | MWMO_INPUTAVAILABLE );
+
+			switch( ulWaitResult )
+			{
+			case Wait_Failed:
+			{
+				//quit
+				unsigned long ulError = nsWinQAPI::CKernel32::GetLastError();
+				m_bStopping = true;
+			}
+			break;
+			case Wait_Timeout:
+				//idle
+				OnIdle();
+				break;
+			case Wait_IO_Completion:
+				break;
+			default:
+				if( ulWaitResult >= Wait_Abandoned_0 && ulWaitResult < ( Wait_Abandoned_0 + ulCount ) )
+				{
+					//A mutex being waited on has been abandoned
+				}
+				else if( ulWaitResult >= Wait_Object_0 && ulWaitResult < ( Wait_Object_0 + ulCount ) )
+				{
+					//A handle being waited on has been signalled
+					CWaitableObject::ref_type WaitableObject = m_VecWaitableObjects.at( ulWaitResult - Wait_Object_0 )->Ref();
+
+					if( !WaitableObject.IsNull() )
+					{
+						WaitableObject->OnSignaled();
+					}
+				}
+				else if( ulWaitResult == ( Wait_Object_0 + ulCount ) )
+				{
+					//Defer to Message Handler
+					m_bStopping = !m_MessageHandler().RouteMessage();
+				}
+			}
+		}
+	}
+
+	//--------------------------------------------------------------------------------
+	void CWin32Application::OnIdle( void )
+	{
+		//Defer OnIdle processing to Workflow
+		if (m_pWorkflow)
+		{
+			m_pWorkflow->OnIdle();
+		}
+	}
+
+	//--------------------------------------------------------------------------------
+	void CWin32Application::Stop( void )
+	{
+		_WINQ_FCONTEXT( "CWin32Application::Stop" );
+		m_bStopping = true;
+	}
+
+	//--------------------------------------------------------------------------------
+	void CWin32Application::AddWaitableObject( CWaitableObject::ref_type WaitableObject )
+	{
+		_WINQ_FCONTEXT( "CWin32Application::AddWaitableObject" );
+		if( m_VecWaitableObjects.size() < MAXIMUM_WAIT_OBJECTS )
+		{
+			m_VecWaitableObjects.push_back( WaitableObject );
+			m_Handles.push_back( WaitableObject->Handle()->Use() );
+		}
+	}
+
+	//--------------------------------------------------------------------------------
+	void CWin32Application::RemoveWaitableObject( CWaitableObject::ref_type WaitableObject )
+	{
+		_WINQ_FCONTEXT( "CWin32Application::RemoveWaitableObject" );
+		m_Handles.erase( std::remove( m_Handles.begin(), m_Handles.end(), WaitableObject->Handle()->Use() ), m_Handles.end() );		
+		m_VecWaitableObjects.erase( std::remove( m_VecWaitableObjects.begin(), m_VecWaitableObjects.end(), WaitableObject ), m_VecWaitableObjects.end() );
+	}
+
+	//--------------------------------------------------------------------------------
+	unsigned long CWin32Application::GetIdleWaitMilliseconds()
+	{
+		return m_ulIdleWaitMillseconds;
+	}
+
+	//--------------------------------------------------------------------------------
+	void CWin32Application::SetIdleWaitMilliseconds( unsigned long ulMilliseconds )
+	{
+		m_ulIdleWaitMillseconds = ulMilliseconds;
+	}
+
+	//--------------------------------------------------------------------------------
+	//Process an application level event from the queue
+	void CWin32Application::ProcessEvent( void )
+	{
+		_WINQ_FCONTEXT( "CWin32Application::ProcessEvent" );
+		while( m_AppEventQueue.size() > 0 )
+		{
+			nsQOR::IEvent* pEvent = m_AppEventQueue.front();
+			m_AppEventQueue.pop_front();
+			if( m_pWorkflow && m_pWorkflow->CurrentState() )
+			{
+				m_pWorkflow->CurrentState()->HandleEvent( pEvent );
+			}
+		}
+	}
+
+	//--------------------------------------------------------------------------------
+	//Use triggering of an internal event to process an a high level application event through the queue
+	void CWin32Application::EnqueueEvent( nsQOR::IEvent::ref_type pEvent )
+	{
+		_WINQ_FCONTEXT( "CWin32Application::EnqueueEvent" );
+		m_AppEventQueue.push_back( pEvent.operator->() );
+		m_AppEvent.Set();
 	}
 
 	/*

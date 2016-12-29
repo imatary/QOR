@@ -33,7 +33,7 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CBFOutputProtocol::CBFOutputProtocol() : CBFProtocol()
+	CBFOutputProtocol::CBFOutputProtocol( nsQOR::IApplication::ref_type Application ) : CBFProtocol( Application )
 	{
 	}
 
@@ -55,28 +55,6 @@ namespace nsBluefoot
 			CBFProtocol::operator = ( src );
 		}
 		return *this;
-	}
-
-	//------------------------------------------------------------------------------
-	bool CBFOutputProtocol::OnProtocolStateChange( void )
-	{
-		bool bResult = ( m_eState != m_eNextState );
-
-		m_eState = m_eNextState;
-
-		switch( m_eNextState )
-		{
-		case Stopped:
-			bResult = false;
-			break;
-		case Reading:
-			bResult = false;
-			break;
-		case Writing:
-			bResult = Write();
-			break;
-		}
-		return bResult;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -104,37 +82,37 @@ namespace nsBluefoot
 	//--------------------------------------------------------------------------------
 	void CBFOutputProtocol::OnConnectionError( void )
 	{
-		m_eNextState = Stopped;
+		SetState( m_StoppedState.Ref(), 0 );
 	}
 
 	//--------------------------------------------------------------------------------
 	void CBFOutputProtocol::OnConnected( void )
 	{
-		m_eNextState = Writing;
+		SetState( m_WritingState.Ref(), 0 );
 	}
 
 	//--------------------------------------------------------------------------------
 	void CBFOutputProtocol::OnDisconnectionError( void )
 	{
-		m_eNextState = Stopped;
+		SetState( m_StoppedState.Ref(), 0 );
 	}
 
 	//--------------------------------------------------------------------------------
 	void CBFOutputProtocol::OnDisconnected( void )
 	{
-		m_eNextState = Stopped;
+		SetState( m_StoppedState.Ref(), 0 );
 	}
 
 	//--------------------------------------------------------------------------------
 	void CBFOutputProtocol::OnWriteSuccess( void )
 	{
-		m_eNextState = Writing;
+		SetState( m_WritingState.Ref(), 0 );
 	}
 
 	//--------------------------------------------------------------------------------
 	void CBFOutputProtocol::OnWriteError( void )
 	{
-		m_eNextState = Stopped;
+		SetState( m_StoppedState.Ref(), 0 );
 	}
 
 }//nsBluefoot

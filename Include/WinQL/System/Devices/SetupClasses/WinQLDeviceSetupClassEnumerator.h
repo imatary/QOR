@@ -50,7 +50,7 @@
 namespace nsWin32
 {
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL ) CDeviceSetupClassEnumerator : public nsAppocrita::CController, public CSetupAPIBase
+	class __QOR_INTERFACE( __WINQL ) CDeviceSetupClassEnumerator : public nsQOR::CController, public CSetupAPIBase
 	{
 	public:
 

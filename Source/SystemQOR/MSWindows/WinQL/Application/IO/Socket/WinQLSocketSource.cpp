@@ -81,7 +81,7 @@ namespace nsWin32
 				if( !bResult && pSocketConnector->Protocol() )
 				{
 					unsigned long ulLastError = pSocketConnector->Socket().GetLastError();
-					pSocketConnector->Protocol()->OnReadError();
+					pSocketConnector->Protocol().As<nsBluefoot::CBFProtocol>()->OnReadError();
 				}
 			}
 			else
@@ -107,11 +107,11 @@ namespace nsWin32
 				{
 					if( bResult )
 					{
-						pSocketConnector->Protocol()->OnReadSuccess( ulNumberOfUnitsRead );
+						pSocketConnector->Protocol().As<nsBluefoot::CBFProtocol>()->OnReadSuccess( ulNumberOfUnitsRead );
 					}
 					else
 					{
-						pSocketConnector->Protocol()->OnReadError();
+						pSocketConnector->Protocol().As<nsBluefoot::CBFProtocol>()->OnReadError();
 					}
 				}
 			}

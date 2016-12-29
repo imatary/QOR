@@ -32,10 +32,11 @@
 #include "SystemQOR.h"
 #include "CodeQOR/Instancing/STMember.h"
 #include "CodeQOR/ClassReg/ClassRegEntry.h"
-//#include "AppocritaQOR/Application.h"
-//#include "AppocritaQOR/Applications/AbstractTerminalApp.h"
-//#include "MonkiQOR/GUI.h"
+#include "AppocritaQOR/Application.h"
+#include "AppocritaQOR/Workflow.h"
+#include "WinQL/Application/Threading/WinQLEvent.h"
 #include "WinQL/Application/ErrorSystem/WinQLErrorSystem.h"
+#include "AppocritaQOR/Role.h"
 #include "WinQL/Application/Console/WinQLConsole.h"
 //#include "WinQL/OSGUI/GUI.h"
 //#include "WinQL/Application/Process/WinQLEnvironment.h"
@@ -48,39 +49,54 @@
 #include "WinQL/Application/RecoveryAndRestart/WinQLAppRestart.h"
 #include "WinQL/Application/Comms/IPC/Atoms/WinQLAtoms.h"
 #include "WinQL/Application/Comms/Node/WinQLCommsNode.h"
+#include "WinQL/GUI/MessageHandler.h"
+#include "algorithm"
+#include "vector"
+
 
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
+	class __QOR_INTERFACE( __WINQL ) CWin32Application;
+
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL ) CWin32Application
+	class __QOR_INTERFACE( __WINQL ) CApplicationEvent : public CEvent
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CWin32Application > refType;
+		CApplicationEvent( CWin32Application& Application );
+		virtual ~CApplicationEvent();
 
-		//--------------------------------------------------------------------------------
-		enum eRole
-		{
-			eService,
-			eConsole,
-			eOffice,
-			eSysTray,
-			eGame,
-			eTool,
-			eCOMServer,
-		};
+		virtual void OnSignaled( void );
+
+	private:
+
+		CApplicationEvent();
+
+		CWin32Application& m_Application;
+	};
+
+	//--------------------------------------------------------------------------------
+	class __QOR_INTERFACE( __WINQL ) CWin32Application : public nsQOR::IApplication
+	{
+		friend class CApplicationEvent;
+
+	public:
 
 		__QOR_DECLARE_OCLASS_ID( CWin32Application );
+
+		static nsCodeQOR::CTExternalRegEntry< CWin32Application > RegEntry;
 
 		CWin32Application();
 		virtual ~CWin32Application();
 
+		nsCodeQOR::CTLRef< CProcess > Process( void );
+
 		//Command Line
 		//CEnvironment::refType Environment( void );
 		
-		CConsole::refType Console( void );			//Console - optional
+		CConsole::ref_type Console( void );			//Console - optional
 		//DesktopEnvironment - optional
 
 		bool SetAutoRestart( const CWString& strCommandLine, unsigned long ulFlags  );
@@ -105,25 +121,50 @@ namespace nsWin32
 		CUser::refType User( void );
 		//CGUI::refType GUI( void );		
 
-		static refType TheWin32Application( void );
+		static ref_type TheWin32Application( void );
 
-		//virtual int Run( void );
 
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			refType ref( this, false );
-			return ref;
-		}
+		virtual void SetRole( nsQOR::IRole::ref_type Role );
+		virtual nsQOR::IRole::ref_type GetRole( void );
 
-		void SetRole( eRole Role );
-		eRole GetRole( void );
+		virtual void SetWorkflow( nsQOR::IWorkflow::ref_type pWorkflow );
+		virtual nsQOR::IWorkflow::ref_type GetWorkflow( void );
+		virtual void SetOuter( IApplication::ref_type Application );
+		virtual void Setup( void );
+		virtual void Shutdown( void );
+
+		virtual int Run( void );															//main loop
+		virtual int Run( nsQOR::IWorkflow::ref_type pWorkflow );
+		virtual void EnqueueEvent( nsQOR::IEvent::ref_type pEvent );
+		virtual void Stop( void );															//call to break main loop on next event
+
+		void OnIdle( void );
+		void AddWaitableObject( CWaitableObject::ref_type );
+		void RemoveWaitableObject( CWaitableObject::ref_type );
+
+		unsigned long GetIdleWaitMilliseconds( void );
+		void SetIdleWaitMilliseconds( unsigned long ulMilliseconds );
 
 	private:
 
-		eRole m_Role;
+		void ProcessEvent( void );
+
 		CAppRestart::refType m_Restart;
 		CAppRecovery::refType m_Recovery;
+		nsQOR::IRole::ref_type m_Role;
+		nsQOR::IWorkflow::ref_type m_pWorkflow;
+
+		nsCodeQOR::CSTMember< CMessageHandler > m_MessageHandler;
+		
+		std::vector< const void* > m_Handles;
+		std::vector< CWaitableObject* > m_VecWaitableObjects;
+		std::deque< nsQOR::IEvent* > m_AppEventQueue;
+		unsigned long m_ulIdleWaitMillseconds;
+		bool m_bStopping;															//flag to break out of run loop
+		CApplicationEvent m_AppEvent;
+		IApplication::ref_type m_OuterApplication;									//gives access to the generic layer IApplication derived outer instance ( reverse pimpl )
+
+		void RunLoop( void );
 	};
 
 }//nsWin32

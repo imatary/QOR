@@ -39,7 +39,7 @@
 #include "CodeQOR/DataStructures/TLRef.h"
 #include "MammutQOR/Model/ModelIterator.h"
 
-namespace nsAppocrita
+namespace nsQOR
 {
 	class __QOR_INTERFACE( __APPOCRITA ) CController;
 }//nsAppocrita
@@ -75,8 +75,8 @@ namespace nsMammut
 		CModel& CModel::operator = ( const CModel& src );
 		virtual refType Clone( void );
                     
-		void SetController( nsAppocrita::CController* pController );
-		nsAppocrita::CController* GetController( void ) const;
+		void SetController( nsQOR::CController* pController );
+		nsQOR::CController* GetController( void ) const;
 
 		//Provide iteration over items
         iterator begin( void ) const;
@@ -93,7 +93,7 @@ namespace nsMammut
 
     protected:
 
-		nsAppocrita::CController* m_pController;
+		nsQOR::CController* m_pController;
         //provide containment for items
 
 	private:

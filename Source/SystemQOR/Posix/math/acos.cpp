@@ -297,4 +297,4 @@ __QCMP_WARNING_POP
 
 #endif//defined(_DOUBLE_IS_32BITS)
 
-};//namespace nsBaseCRT
+}//namespace nsBaseCRT

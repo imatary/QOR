@@ -46,14 +46,14 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-    int Cftw::ftw( const char*, int ( * )( const char*, const stat*, int ), int )
+    int Cftw::ftw( const char*, int ( * )( const char*, const file_stat*, int ), int )
     {
 		//TODO: Forward to Posum File System Iterator
         return 0;
     }
 
     //--------------------------------------------------------------------------------
-    int Cftw::nftw( const char*, int ( * )( const char*, const stat*, int, FTW* ), int, int )
+    int Cftw::nftw( const char*, int ( * )( const char*, const file_stat*, int, FTW* ), int, int )
     {
 		//TODO: Forward to Posum File System Iterator
         return 0;

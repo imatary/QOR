@@ -33,40 +33,61 @@
 #include "CodeQOR/Macros/ClassIdentityMacros.h"
 #include "CodeQOR/DataStructures/TLRef.h"
 #include "BfPipeline.h"
+#include "AppocritaQOR/Workflow.h"
+#include "AppocritaQOR/State.h"
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot
 {
 	
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFProtocol
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFProtocol : public nsQOR::CWorkflow
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CBFProtocol > refType;
+		//--------------------------------------------------------------------------------
+		class StoppedState : public nsQOR::CState
+		{
+		public:
+			StoppedState( IWorkflow::ref_type pWorkflow  ) : nsQOR::CState( pWorkflow )
+			{
+			}
+		}m_StoppedState;
 
 		//--------------------------------------------------------------------------------
-		enum eState
+		class ReadingState : public nsQOR::CState
 		{
-			Stopped,
-			Reading,
-			Writing
-		};
+		public:
+			ReadingState( IWorkflow::ref_type pWorkflow ) : nsQOR::CState( pWorkflow )
+			{
+			}
+		}m_ReadingState;
+		
+		//--------------------------------------------------------------------------------
+		class WritingState : public nsQOR::CState
+		{
+		public:
+			WritingState( IWorkflow::ref_type pWorkflow ) : nsQOR::CState( pWorkflow )
+			{
+			}
+		}m_WritingState;
 
 		__QOR_DECLARE_OCLASS_ID( CBFProtocol );
 
-		CBFProtocol();
+		CBFProtocol() = delete;
+		CBFProtocol( nsQOR::IApplication::ref_type Application );
 		virtual ~CBFProtocol();
 		CBFProtocol(const CBFProtocol& src);
 		CBFProtocol& operator = (const CBFProtocol& src);
+
+		virtual nsQOR::IState::ref_type InitialState( void ) const;
 
 		void SetOutPipe( CBFPipeline* pOutPipe );
 		CBFPipeline* GetOutPipe( void );
 		void SetInPipe( CBFPipeline* pInPipe );
 		CBFPipeline* GetInPipe( void );
 
-		virtual void Run( void );								//crank the state machine until there's no data or its in the Stopped state.
-		virtual bool OnProtocolStateChange( void );				//single step the state machine
+		virtual bool OnProtocolStateChanged( void );			//single step the state machine
 
 		virtual void GetNextReadCount( void );
 		virtual void GetNextWriteCount( void );
@@ -79,6 +100,7 @@ namespace nsBluefoot
 		virtual void OnReadError( void );
 		virtual void OnWriteSuccess( void );
 		virtual void OnWriteError( void );
+		virtual void OnEndOfData( void );
 		virtual bool Read( void );
 		virtual bool Write( void );
 
@@ -86,15 +108,9 @@ namespace nsBluefoot
 		virtual bool OnRead( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite = 1 ){ return false; }
 		virtual bool OnWrite( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead = 1 ){ return false; }
 
-		refType Ref( void )
-		{
-			return refType( this );
-		}
-
 	protected:
 
-		eState m_eState;
-		eState m_eNextState;
+		nsQOR::CState::ref_type m_NextState;
 		unsigned long m_ulDataSize;		
 		CBFPipeline* m_pInPipe;
 		CBFPipeline* m_pOutPipe;

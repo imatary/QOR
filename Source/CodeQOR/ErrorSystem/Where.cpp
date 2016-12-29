@@ -29,7 +29,7 @@
 #include "CompilerQOR.h"
 #include "CodeQOR/Tracing/FunctionContextBase.h"
 #include "CodeQOR/ErrorSystem/Where.h"
-
+#include "AppocritaQOR/Event.h"
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
 {
@@ -145,15 +145,18 @@ namespace nsCodeQOR
 	}
 
 	//------------------------------------------------------------------------------
-	CThreadContextBase* CWhere::GetThreadContext( void ) const
+	nsQOR::IThread::ref_type CWhere::GetThreadContext( void ) const
 	{
 		return m_pThreadContext;
 	}
 
 	//------------------------------------------------------------------------------
-	void CWhere::SetThreadContext( CThreadContextBase* pThreadContext )
+	void CWhere::SetThreadContext( nsQOR::IThread::ref_type pThreadContext )
 	{
-		m_pThreadContext = pThreadContext;
+		if( !pThreadContext.IsNull() )
+		{
+			m_pThreadContext = pThreadContext->Ref();
+		}
 	}
 
 	//------------------------------------------------------------------------------

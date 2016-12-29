@@ -42,7 +42,7 @@ __QCMP_STARTLINKAGE_C
 
 		if( ulReason == 1 )//On process attach the first thing that must be done is to init the stack cookie to keep Windows and MSVC compiler injected code ( ideally there should be none ) happy
 		{
-			CWinQORSharedBootStrap::InitializeSecurityCookie();
+			nsWin32::CWinQORSharedBootStrap::InitializeSecurityCookie();
 		}
 
 		int iRetCode = -1;
@@ -72,19 +72,19 @@ __QCMP_STARTLINKAGE_C
 	{
 		switch( ulReason )
 		{
-		case CWinQORSharedBootStrap::eProcessAttach:	//Start-up code. A process has loaded this module
+		case nsWin32::CWinQORSharedBootStrap::eProcessAttach:	//Start-up code. A process has loaded this module
 			{
 				//Create Dll bootstrap object on process global heap and increment process attachment notification
-				g_pBootStrap = new CWinQORSharedBootStrap( hDllHandle );
+				g_pBootStrap = new nsWin32::CWinQORSharedBootStrap( hDllHandle );
 				break;
 			}
 
-		case CWinQORSharedBootStrap::eProcessDetach:	//Shutdown code. A process is unloading this module
+		case nsWin32::CWinQORSharedBootStrap::eProcessDetach:	//Shutdown code. A process is unloading this module
 			{
 				// decrement process attach notification and free bootstrap object when count goes to 0
-				if ( g_pBootStrap && g_pBootStrap->ProcessAttached() && ( g_pBootStrap->ProcessDetach() == 0 ) )
+				if ( g_pBootStrap && (( nsWin32::CWinQORSharedBootStrap*)g_pBootStrap)->ProcessAttached() && ( ( ( nsWin32::CWinQORSharedBootStrap*)g_pBootStrap )->ProcessDetach() == 0 ) )
 				{
-					delete ( reinterpret_cast< CWinQORSharedBootStrap* >( g_pBootStrap ) );//cast ensures we call custom delete matching new above
+					delete ( reinterpret_cast< nsWin32::CWinQORSharedBootStrap* >( g_pBootStrap ) );//cast ensures we call custom delete matching new above
 					g_pBootStrap = 0;
 				}
 				else
@@ -93,12 +93,12 @@ __QCMP_STARTLINKAGE_C
 				}
 				break;
 			}
-		case CWinQORSharedBootStrap::eThreadAttach:
+		case nsWin32::CWinQORSharedBootStrap::eThreadAttach:
 			{
 				break;
 			}
 
-		case CWinQORSharedBootStrap::eThreadDetach:
+		case nsWin32::CWinQORSharedBootStrap::eThreadDetach:
 			{
 				break;
 			}
@@ -168,18 +168,21 @@ __QCMP_STARTLINKAGE_C
 #endif//__MINGW32__
 
 	//------------------------------------------------------------------------------
-	__QCMP_EXPORT int QORinit( void )
+	int _cdecl QORStaticInit( void )
 	{
-		g_pBootStrap->InitStatic();
+		( ( nsWin32::CWinQORSharedBootStrap* )g_pBootStrap )->InitStatic();
 
 #ifdef	__GNUC__
-      __main ();
+		__main();
 #endif
 
 		return 0;
 	}
-
+	
 __QCMP_ENDLINKAGE_C
+
+
+
 
 
 

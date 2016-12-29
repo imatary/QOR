@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "SystemQOR/System.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "WinQL/Definitions/Constants.h"
@@ -128,9 +129,9 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CUSBHostController::GetRootHub" );
 
-		CWString strRootHub = GetRootHubName();
+		CTString strRootHub = GetRootHubName().toTString();
 
-		CUSBHub* pHub = CSystem::Instance().Devices( QOR_PP_SHARED_OBJECT_ACCESS ).USBHubFromName( strRootHub );
+		CUSBHub* pHub = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).USBHubFromName( strRootHub );
 
 		return pHub;
 	}

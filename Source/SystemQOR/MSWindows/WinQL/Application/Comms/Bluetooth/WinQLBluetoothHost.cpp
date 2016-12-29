@@ -1,6 +1,6 @@
 //WinQLBluetoothHost.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -25,6 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include "CodeQOR/ClassReg/ClassReg.h"
+#include "SystemQOR/System.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/Application/Comms/Bluetooth/WinQLBluetoothHost.h"
 #include "WinQL/System/Devices/Interfaces/WinQLDeviceInterfaceClass.h"
@@ -423,7 +424,7 @@ namespace nsWin32
 	void CBluetoothHost::EnumerateRadios( void )
 	{
 		_WINQ_FCONTEXT( "CBluetoothHost::EnumerateRadios" );
-		CDeviceInterfaceClass::refType BluetoothRadios = CSystem::Instance().Devices( QOR_PP_SHARED_OBJECT_ACCESS ).InterfaceClassFromGUID( CDeviceManager::GUID_BTHPORT_DEVICE_INTERFACE );
+		CDeviceInterfaceClass::refType BluetoothRadios = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).InterfaceClassFromGUID( CDeviceManager::GUID_BTHPORT_DEVICE_INTERFACE );
 
 		if( !BluetoothRadios.IsNull() )
 		{
@@ -563,7 +564,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CBluetoothHost::CBluetoothDeviceChangeController );
 
 	//--------------------------------------------------------------------------------
-	CBluetoothHost::CBluetoothDeviceChangeController::CBluetoothDeviceChangeController( CBluetoothHost& Host, nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent ) : CDeviceChangeController( pModelItem, pParent ), m_Host( Host )
+	CBluetoothHost::CBluetoothDeviceChangeController::CBluetoothDeviceChangeController( CBluetoothHost& Host, nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CDeviceChangeController( pModelItem, Parent ), m_Host( Host )
 	{
 		_WINQ_FCONTEXT( "CBluetoothDeviceChangeController::CBluetoothDeviceChangeController" );
 	}

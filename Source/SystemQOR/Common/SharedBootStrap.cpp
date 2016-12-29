@@ -30,7 +30,7 @@
 
 //--------------------------------------------------------------------------------
 //Construct the object which represents the shared QOR library
-CSharedBootStrap::CSharedBootStrap( void* hModule ) //: nsPlatform::CSharedBootStrap( hModule )
+CSharedBootStrap::CSharedBootStrap( void* hModule )
 {
 	m_pInner = new nsPlatform::CSharedBootStrap( hModule );
 }

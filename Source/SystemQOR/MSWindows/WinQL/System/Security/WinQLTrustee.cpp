@@ -25,9 +25,9 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include "SystemQOR.h"
-#include "SystemQOR/MSWindows/MSW_tchar.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/System/Security/WinQLTrustee.h"
+#include "SystemQOR/MSWindows/MSW_tchar.h"
 #include "WinQAPI/AdvAPI32.h"
 
 using namespace nsWinQAPI;

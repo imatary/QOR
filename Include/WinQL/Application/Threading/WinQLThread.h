@@ -35,6 +35,7 @@
 
 #include "CodeQOR/Text/CodeString.h"
 #include "CodeQOR/Threading/ThreadContext.h"
+#include "AppocritaQOR/SubSystems/Thread.h"
 #include "WinQL/Definitions/Handles.h"
 #include "WinQL/Definitions/Constants.h"
 #include "WinQL/Definitions/Data.h"
@@ -78,8 +79,10 @@ namespace nsWin32
 	__QOR_INTERFACE( __WINQL ) CThread* GetCurrentWin32Thread( void );
 
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL ) CThread : public nsCodeQOR::CThreadContextBase, public CThreadHelper
+	class __QOR_INTERFACE( __WINQL ) CThread : public nsQOR::CThread
 	{
+		friend class __QOR_INTERFACE( __WINQL ) CThreading;
+
 	public:
 
 		__QOR_DECLARE_OCLASS_ID( CThread );
@@ -192,20 +195,23 @@ namespace nsWin32
 			return m_ThreadData.LocaleData().LocaleInfoPtr();
 		}
 
-		static nsCodeQOR::CThreadContextBase* GetCurrentImpl( void );
-		static void SetCurrentImpl( nsCodeQOR::CThreadContextBase* pImpl );
+		//static nsCodeQOR::CThreadContextBase* GetCurrentImpl( void );
+		//static void SetCurrentImpl( nsCodeQOR::CThreadContextBase* pImpl );
 
 		void UpdateLocale( CThreadLocaleInfo*& ptloci );		
 		void UpdateMBCodePage( CMBCInfo*& ptmbci );
 		CThreadLocaleInfo* UpdateLocaleInfo();
 		CMBCInfo* UpdatetMBCInfo();
 
-		nsCodeQOR::CThreadContextBase* m_pImpl;
+		nsQOR::CEventManager& LocalEventManager( void );
+		//nsCodeQOR::CThreadContextBase* m_pImpl;
 
 		void AddRef( void );
 		void Release( void );
 
 		CThreadResourceManager& ResourceManager( void );
+
+		virtual unsigned long Sleep( unsigned long ulMilliseconds, bool bAlertable = false );
 
 	protected:
 

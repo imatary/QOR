@@ -34,7 +34,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "SystemQOR.h"
+//#include "SystemQOR.h"
 #include QOR_SYS_PLATFORMTYPES(wchar)
 
 typedef nsPlatform::FILE FILE;

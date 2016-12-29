@@ -31,7 +31,9 @@
 #include <algorithm>
 #include <typeinfo>
 #include "../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH/excpt.h"
-#include "WinQAPI/Kernel32.h"
+#if defined(_WIN64) && !defined(_M_CEE_PURE)
+#	include "WinQAPI/Kernel32.h"
+#endif
 
 #define BCD_NOTVISIBLE              0x00000001 
 #define BCD_AMBIGUOUS               0x00000002

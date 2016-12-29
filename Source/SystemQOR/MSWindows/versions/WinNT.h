@@ -27,7 +27,8 @@
 #ifndef SYSTEMQOR_MSWINDOWS_WINNT_H_1
 #define SYSTEMQOR_MSWINDOWS_WINNT_H_1
 
-#include "SystemQOR/System.h"
+#include "SystemQOR.h"
+//#include "SystemQOR/System.h"
 
 //------------------------------------------------------------------------------
 namespace nsSystemQOR

@@ -59,7 +59,7 @@ namespace nsCodeQOR
 		//--------------------------------------------------------------------------------
 		template< class T > operator T*( void )
 		{
-			if( &T::ClassID == GetClassID() )
+			if( *(T::ClassID()) == *(GetClassID()()) )
 			{
 				return reinterpret_cast< T* >( m_p );
 			}

@@ -37,7 +37,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CKeyboardInputController );
 
 	//--------------------------------------------------------------------------------
-	CKeyboardInputController::CKeyboardInputController( nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent ) : CBaseWindowPartController( pModelItem, pParent )
+	CKeyboardInputController::CKeyboardInputController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CBaseWindowPartController( pModelItem, Parent )
 	{
 		_WINQ_FCONTEXT( "CKeyboardInputController::CKeyboardInputController" );
 	}

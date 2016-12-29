@@ -41,17 +41,17 @@ __QCMP_ENDLINKAGE_C
 
 // C initializers
 #pragma __QCMP_DATA_SEGMENT(".CRT$XIA")
-CWinQORSharedBootStrap::InitFunc CWinQORSharedBootStrap::CInit_a[] __attribute__((section (".CRT$XIA"))) = { 0 };
+nsWin32::CWinQORSharedBootStrap::InitFunc nsWin32::CWinQORSharedBootStrap::CInit_a[] __attribute__((section (".CRT$XIA"))) = { 0 };
 
 #pragma __QCMP_DATA_SEGMENT(".CRT$XIZ")
-CWinQORSharedBootStrap::InitFunc CWinQORSharedBootStrap::CInit_z[] __attribute__((section (".CRT$XIZ"))) = { 0 };
+nsWin32::CWinQORSharedBootStrap::InitFunc nsWin32::CWinQORSharedBootStrap::CInit_z[] __attribute__((section (".CRT$XIZ"))) = { 0 };
 
 // C++ initializers
 #pragma __QCMP_DATA_SEGMENT(".CRT$XCA")
-CWinQORSharedBootStrap::InitFunc CWinQORSharedBootStrap::CppInit_a[] __attribute__((section (".CRT$XCA"))) = { 0 };
+nsWin32::CWinQORSharedBootStrap::InitFunc nsWin32::CWinQORSharedBootStrap::CppInit_a[] __attribute__((section (".CRT$XCA"))) = { 0 };
 
 #pragma __QCMP_DATA_SEGMENT(".CRT$XCZ")
-CWinQORSharedBootStrap::InitFunc CWinQORSharedBootStrap::CppInit_z[] __attribute__((section (".CRT$XCZ"))) = { 0 };
+nsWin32::CWinQORSharedBootStrap::InitFunc nsWin32::CWinQORSharedBootStrap::CppInit_z[] __attribute__((section (".CRT$XCZ"))) = { 0 };
 
 #pragma __QCMP_DEFAULT_DATA_SEGMENT		//Puts subsequent declarations into the default segment
 
@@ -67,71 +67,104 @@ CWinQORSharedBootStrap::InitFunc CWinQORSharedBootStrap::CppInit_z[] __attribute
 
 nsCodeQOR::CLibraryBase WindowsSharedLibraryBootstrapLibrary( "Windows DLL Bootstrap library", false );
 
-//The Windows shared library bootstrap has its own new and delete so that process heap memory can be used even if the process module 
-//itself has not yet been initialized. Windows loads implicitly linked DLLs before calling the entry point of the main executable
-//We could create a private heap but this way is cleaner.
-//--------------------------------------------------------------------------------
-void* CWinQORSharedBootStrap::operator new( size_t )
+namespace nsWin32
 {
-	HANDLE hHeap = ::GetProcessHeap();
-	Cmp_unsigned__int32 uiFlags = 0x00000008;//Zero memory
-	return ::HeapAlloc( hHeap, uiFlags, sizeof( CWinQORSharedBootStrap ) );
-}
-
-//--------------------------------------------------------------------------------
-void CWinQORSharedBootStrap::operator delete( void* pInstance )
-{
-	HANDLE hHeap = ::GetProcessHeap();
-	Cmp_unsigned__int32 uiFlags = 0x00000000;
-	::HeapFree( hHeap, uiFlags, pInstance );
-}
-
-//--------------------------------------------------------------------------------
-//Construct the bootstrap object
-CWinQORSharedBootStrap::CWinQORSharedBootStrap( void* hModule ) : CSharedBootStrap( hModule )
-{
-	ProcessAttach();
-}
-
-//--------------------------------------------------------------------------------
-//Destruct the bootstrap to clean up when the library is unloaded
-CWinQORSharedBootStrap::~CWinQORSharedBootStrap()
-{
-}
-
-//--------------------------------------------------------------------------------
-//Walk an initialisation/termination list of C or C++ objects
-void CWinQORSharedBootStrap::InitTerm( InitFunc* pfbegin, InitFunc* pfend )
-{
-	while( pfbegin < pfend )
+	//The Windows shared library bootstrap has its own new and delete so that process heap memory can be used even if the process module 
+	//itself has not yet been initialized. Windows loads implicitly linked DLLs before calling the entry point of the main executable
+	//We could create a private heap but this way is cleaner.
+	//--------------------------------------------------------------------------------
+	void* CWinQORSharedBootStrap::operator new( size_t )
 	{
-		if( *pfbegin != 0 )
-		{
-			( **pfbegin )( );
-		}
-		++pfbegin;
+		HANDLE hHeap = ::GetProcessHeap();
+		Cmp_unsigned__int32 uiFlags = 0x00000008;//Zero memory
+		return ::HeapAlloc( hHeap, uiFlags, sizeof( CWinQORSharedBootStrap ) );
 	}
-}
 
-//--------------------------------------------------------------------------------
-//Initialise all the C and C++ static objects. 
-//This is called by the Process after all implicitly linked libraries are loaded
-// which allows static objects to depend on other libraries.
-void CWinQORSharedBootStrap::InitStatic()
-{
-	InitTerm( CInit_a, CInit_z );
-	InitTerm( CppInit_a, CppInit_z );
-	m_bStaticInitialised = true;
-}
+	//--------------------------------------------------------------------------------
+	void CWinQORSharedBootStrap::operator delete( void* pInstance )
+	{
+		HANDLE hHeap = ::GetProcessHeap();
+		Cmp_unsigned__int32 uiFlags = 0x00000000;
+		::HeapFree( hHeap, uiFlags, pInstance );
+	}
 
-//--------------------------------------------------------------------------------
-//Set up the stack security Cookie to keep exception handling stack unwinding happy
-//The MSVC compiler encrypts this cookie into every stack frame and checks it when unwinding
-//or walking the stack for garbage collection if we ever integrate with any .NET code
-void CWinQORSharedBootStrap::InitializeSecurityCookie() __QCMP_THROW
-{
-	CSharedBootStrap::InitializeSecurityCookie( __security_cookie, __security_cookie_complement );
-}
+	//--------------------------------------------------------------------------------
+	//Construct the bootstrap object
+	CWinQORSharedBootStrap::CWinQORSharedBootStrap( void* hModule ) : ::CSharedBootStrap( hModule ), CModuleBootStrap()
+	{
+		m_iProcAttached = 0;
+		m_hModule = hModule;
+		ProcessAttach();
+	}
+
+	//--------------------------------------------------------------------------------
+	//Destruct the bootstrap to clean up when the library is unloaded
+	CWinQORSharedBootStrap::~CWinQORSharedBootStrap()
+	{
+	}
+
+	//--------------------------------------------------------------------------------
+	//Walk an initialisation/termination list of C or C++ objects
+	void CWinQORSharedBootStrap::InitTerm( InitFunc* pfbegin, InitFunc* pfend )
+	{
+		while( pfbegin < pfend )
+		{
+			if( *pfbegin != 0 )
+			{
+				( **pfbegin )( );
+			}
+			++pfbegin;
+		}
+	}
+
+	//--------------------------------------------------------------------------------
+	//Initialise all the C and C++ static objects. 
+	//This is called by the Process after all implicitly linked libraries are loaded
+	// which allows static objects to depend on other libraries.
+	void CWinQORSharedBootStrap::InitStatic()
+	{
+		InitTerm( CInit_a, CInit_z );
+		InitTerm( CppInit_a, CppInit_z );
+		m_bStaticInitialised = true;
+	}
+
+	//--------------------------------------------------------------------------------
+	//Set up the stack security Cookie to keep exception handling stack unwinding happy
+	//The MSVC compiler encrypts this cookie into every stack frame and checks it when unwinding
+	//or walking the stack for garbage collection if we ever integrate with any .NET code
+	void CWinQORSharedBootStrap::InitializeSecurityCookie() __QCMP_THROW
+	{
+		CModuleBootStrap::InitializeSecurityCookie( __security_cookie, __security_cookie_complement );
+	}
+
+	//--------------------------------------------------------------------------------
+	//Increment the process attach count
+	int CWinQORSharedBootStrap::ProcessAttach()
+	{
+		return ++m_iProcAttached;
+	}
+
+	//--------------------------------------------------------------------------------
+	//Decrement the process attach count
+	int CWinQORSharedBootStrap::ProcessDetach()
+	{
+		return --m_iProcAttached;
+	}
+
+	//--------------------------------------------------------------------------------
+	//Is the process attached ?
+	bool CWinQORSharedBootStrap::ProcessAttached()
+	{
+		return m_iProcAttached > 0 ? true : false;
+	}
+
+	//--------------------------------------------------------------------------------
+	void* CWinQORSharedBootStrap::InstanceHandle( void )
+	{
+		return m_hModule;
+	}
+
+}//nsWin32
 
 //--------------------------------------------------------------------------------
 int atexit( void (*pFunc)( void ) )

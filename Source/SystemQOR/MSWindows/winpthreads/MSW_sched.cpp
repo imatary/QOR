@@ -279,8 +279,7 @@ namespace nsWin32
 	//----------------------------------------------------------------------
 	int sched_yield(void)
 	{
-		nsWin32::CThreadHelper ThreadHelper;
-		ThreadHelper.Sleep( 0 );
+		CThread::GetCurrent()->Sleep( 0 );
 		return 0;
 	}
 

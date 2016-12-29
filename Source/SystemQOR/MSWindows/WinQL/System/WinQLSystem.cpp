@@ -28,7 +28,6 @@
 
 #include "WinQL/WinQL.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
-#include "SystemQOR/System.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/System/WinQLSystem.h"
 #include "WinQL/Application/Process/WinQLProcess.h"
@@ -38,15 +37,14 @@
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-	CSystem OperatingSystem;				//Represents the Windows instance
+	//CSystem OperatingSystem;				//Represents the Windows instance
 
-	__QOR_IMPLEMENT_OCLASS_LUID( CSystem );
+	__QOR_IMPLEMENT_EXTERNAL_FACTORY( CSystem, 0xa6eb5841, 0x95ca, 0x4008, 0xb8, 0x4f, 0xb8, 0xd0, 0x6b, 0xbf, 0xb6, 0x14 );
 
 	//--------------------------------------------------------------------------------
-	CSystem::CSystem()
+	CSystem::CSystem() : nsQOR::ISystem()
 	{
-		_WINQ_FCONTEXT( "CSystem::CSystem" );
-		Machine.Configure( TheMachine() );
+		_WINQ_FCONTEXT( "CSystem::CSystem" );		
 	}
 
 	//--------------------------------------------------------------------------------
@@ -56,28 +54,15 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CSystem::SystemInit()
-	{		
-	}
-
-	//--------------------------------------------------------------------------------
-	CSystem& CSystem::Instance( void )
+	void CSystem::Setup( nsQOR::IApplication& Application )
 	{
-		return OperatingSystem;
+		Machine.Configure( TheMachine() );
 	}
-/*
+	
 	//--------------------------------------------------------------------------------
-	__QOR_INTERFACE( __WINQL ) CSystem& System( void )
+	void CSystem::Shutdown( nsQOR::IApplication& Application )
 	{
-		return reinterpret_cast< CSystem& >( nsSystemQOR::System() );
 	}
-*/
-	//--------------------------------------------------------------------------------
-	/*
-	int CSystem::MulDiv( int nNumber, int nNumerator, int nDenominator )
-	{
-		return nsWinQAPI::CKernel32::MulDiv( nNumber, nNumerator, nDenominator );
-	}*/
 
 	//--------------------------------------------------------------------------------
 	CKeyboard::refType CSystem::Keyboard(unsigned int uiUnit)

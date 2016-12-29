@@ -31,7 +31,7 @@
 #include QOR_SYS_PLATFORMTYPES(ftw)
 
 typedef nsPlatform::FTW FTW;
-typedef nsPlatform::stat stat;
+typedef nsPlatform::file_stat stat;
 
 #define FTW_F			( nsPlatform::FTWFile )				//File. 
 #define FTW_D			( nsPlatform::FTWDirectory )		//Directory. 

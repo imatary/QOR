@@ -29,6 +29,7 @@
 #include "CodeQOR/Parameters/PChecks/IntRangeChecks.h"
 #include "CodeQOR/ErrorSystem/ParamErrorDomain.h"
 #include "CodeQOR/Tracing/ObjectContextBase.h"
+#include "AppocritaQOR/Event.h"
 
 //--------------------------------------------------------------------------------
 namespace nsParamChecking

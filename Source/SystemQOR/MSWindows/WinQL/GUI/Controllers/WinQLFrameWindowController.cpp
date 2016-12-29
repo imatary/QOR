@@ -41,7 +41,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CFrameWindowController );
 
 	//--------------------------------------------------------------------------------
-	CFrameWindowController::CFrameWindowController( nsMammut::CModel* pModelItem, nsAppocrita::CCompoundController* pParent ) : CInteractiveWindowController( pModelItem, pParent )
+	CFrameWindowController::CFrameWindowController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CInteractiveWindowController( pModelItem, Parent )
 	{
 		_WINQ_FCONTEXT( "CFrameWindowController::CFrameWindowController" );
 	}
@@ -53,7 +53,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CFrameWindowController::SetModel( nsMammut::CModel* pModelItem )
+	void CFrameWindowController::SetModel( nsMammut::CModel* pModelItem )
 	{
 		_WINQ_FCONTEXT( "CFrameWindowController::SetModel" );
 
@@ -62,7 +62,7 @@ namespace nsWin32
 		Scroll.Configure( &FrameScrollController() );
 		Menu.Configure( &FrameMenuController() );
 
-		return CInteractiveWindowController::SetModel( pModelItem );						
+		CInteractiveWindowController::SetModel( pModelItem );						
 	}
 
 	//--------------------------------------------------------------------------------

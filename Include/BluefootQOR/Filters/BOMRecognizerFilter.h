@@ -30,14 +30,15 @@
 //Defines a filter to recognize Byte Order Marks
 
 #include "BluefootQOR/BfFilter.h"
-#include "CodeQOR/Events/ThreadLocalEvent.h"
+#include "AppocritaQOR/Event.h"
+#include "AppocritaQOR/Application.h"
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot
 {
 
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBOMRecognizedEvent : public nsCodeQOR::CThreadLocalEvent
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBOMRecognizedEvent : public nsQOR::CEvent
 	{
 	public:
 
@@ -51,16 +52,17 @@ namespace nsBluefoot
 		};
 
 		//------------------------------------------------------------------------------
-		CBOMRecognizedEvent()
+		CBOMRecognizedEvent() : nsQOR::CEvent( *TheApplication() )
 		{
 			m_BOMType = eNone;
 		}
 
+		/*
 		//------------------------------------------------------------------------------
-		CBOMRecognizedEvent( const CBOMRecognizedEvent& Src )
+		CBOMRecognizedEvent( const CBOMRecognizedEvent& Src ) : nsQOR::CEvent( Src )
 		{
 			*this = Src;
-		}
+		}*/
 
 		//------------------------------------------------------------------------------
 		CBOMRecognizedEvent& operator = ( const CBOMRecognizedEvent& Src )

@@ -59,6 +59,9 @@ namespace nsQOR
 		virtual IRole::ref_type GetRole( void ) = 0;
 		virtual void SetWorkflow( nsCodeQOR::CTLRef< IWorkflow > ) = 0;
 		virtual nsCodeQOR::CTLRef< IWorkflow > GetWorkflow( void ) = 0;
+		virtual void SetOuter( IApplication::ref_type ) = 0;
+		virtual void Setup( void ) = 0;
+		virtual void Shutdown( void ) = 0;
 		virtual int Run( void ) = 0;
 		virtual int Run( nsCodeQOR::CTLRef< IWorkflow > ) = 0;
 		virtual void EnqueueEvent( nsCodeQOR::CTLRef< IEvent > pEvent ) = 0;

@@ -33,6 +33,7 @@
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "AppocritaQOR/SubSystems/Threading.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "WinQL/Definitions/IO.h"
 #include "WinQL/Application/Process/WinQLProcessHelper.h"
@@ -96,7 +97,7 @@ namespace nsWin32
 		CProcess();
 		virtual ~CProcess();
 
-		virtual nsCodeQOR::CThreadContextBase* ThreadContext( void );
+		virtual nsQOR::IThread::ref_type ThreadContext( void );
 		
 		//Exit this process with the supplied return code
 		void Exit( unsigned int uExitCode );
@@ -126,19 +127,10 @@ namespace nsWin32
 		}
 
 		//------------------------------------------------------------------------------
-		void GetStartupInfo( nsWin32::LPSTARTUPINFO lpStartupInfo )
+		nsWin32::STARTUPINFO StartupInfo()
 		{
-			m_Win32Helper.GetStartupInfoT( lpStartupInfo );
+			return m_Win32Helper.StartupInfo();
 		}
-
-
-		/*
-		//--------------------------------------------------------------------------------
-		CAtExit& AtExitList() 
-		{ 
-			return m_AtExitList; 
-		}
-		*/
 
 		//--------------------------------------------------------------------------------
 		CTerminate& TerminateHandler() 
@@ -189,7 +181,6 @@ namespace nsWin32
 
 	private:
 					
-		//CRemoteProcess* m_pRemoteProcess;
 		CProcessHelper m_Win32Helper;
 		InstanceHandle m_hInstance;
 

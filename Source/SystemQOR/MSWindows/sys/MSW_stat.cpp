@@ -80,7 +80,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int Cstat::fstat( int, nsWin32::stat* )
+	int Cstat::fstat( int, nsWin32::file_stat* )
 	{
 		__QCS_MEMBER_FCONTEXT( "Cstat::fstat" );
 		int iResult = 0;
@@ -91,7 +91,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int Cstat::fstatat( int, const char* __QCMP_RESTRICT, nsWin32::stat* __QCMP_RESTRICT, int )
+	int Cstat::fstatat( int, const char* __QCMP_RESTRICT, nsWin32::file_stat* __QCMP_RESTRICT, int )
 	{
 		__QCS_MEMBER_FCONTEXT( "Cstat::fstatat" );
 		int iResult = 0;
@@ -113,7 +113,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int Cstat::lstat( const char* __QCMP_RESTRICT, nsWin32::stat* __QCMP_RESTRICT )
+	int Cstat::lstat( const char* __QCMP_RESTRICT, nsWin32::file_stat* __QCMP_RESTRICT )
 	{
 		__QCS_MEMBER_FCONTEXT( "Cstat::lstat" );
 		int iResult = 0;
@@ -190,7 +190,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int Cstat::stat( const char* __QCMP_RESTRICT, nsWin32::stat* __QCMP_RESTRICT )
+	int Cstat::stat( const char* __QCMP_RESTRICT, nsWin32::file_stat* __QCMP_RESTRICT )
 	{
 		__QCS_MEMBER_FCONTEXT( "Cstat::stat" );
 		int iResult = 0;

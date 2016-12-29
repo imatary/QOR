@@ -33,6 +33,7 @@
 #include "CodeQOR/ClassReg/ClassReg.h"
 #include "CodeQOR/ClassReg/ExternalClassReg.h"
 #include "CodeQOR/Modules/ProcessBase.h"
+#include "AppocritaQOR/Event.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR

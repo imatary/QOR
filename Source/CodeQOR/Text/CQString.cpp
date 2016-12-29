@@ -29,6 +29,7 @@
 #include "SystemQOR.h"
 #include <new>
 #include "CodeQOR/Text/TString.h"
+#include "AppocritaQOR/Event.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR

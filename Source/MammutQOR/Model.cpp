@@ -120,13 +120,13 @@ __QCMP_WARNING_POP
 	}
 
 	//------------------------------------------------------------------------------
-	void CModel::SetController( nsAppocrita::CController* pController )
+	void CModel::SetController( nsQOR::CController* pController )
 	{
 		m_pController = pController;
 	}
 
 	//------------------------------------------------------------------------------
-	nsAppocrita::CController* CModel::GetController( void ) const
+	nsQOR::CController* CModel::GetController( void ) const
 	{
 		return m_pController;
 	}

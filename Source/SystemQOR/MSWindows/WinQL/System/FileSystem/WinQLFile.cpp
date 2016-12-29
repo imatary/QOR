@@ -26,6 +26,7 @@
 
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/Application/ErrorSystem/WinQLErrDomain.h"
+#include "WinQL/Application/ErrorSystem/WinQLErrorHandling.h"
 #include "WinQL/System/FileSystem/WinQLFile.h"
 #include "WinQAPI/Kernel32.h"
 
@@ -78,7 +79,7 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CFile::CFile" );
 		__QOR_PROTECT
 		{
-			(dynamic_cast< CFileHandle&>(m_Handle)) = CKernel32::OpenFile( lpFileName, reinterpret_cast< ::LPOFSTRUCT >( lpReOpenBuff ), uStyle );
+			m_Handle = CKernel32::OpenFile( lpFileName, reinterpret_cast< ::LPOFSTRUCT >( lpReOpenBuff ), uStyle );
 		}__QOR_ENDPROTECT
 	}
 
@@ -127,7 +128,7 @@ namespace nsWin32
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
-
+/*
 	//--------------------------------------------------------------------------------
 	bool CFile::FlushBuffers()
 	{
@@ -139,7 +140,7 @@ namespace nsWin32
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
-
+*/
 	//--------------------------------------------------------------------------------
 	bool CFile::GetBandwidthReservation( unsigned long* lpPeriodMilliseconds, unsigned long* lpBytesPerPeriod, int* pDiscardable, unsigned long* lpTransferSize, unsigned long* lpNumOutstandingRequests )
 	{
@@ -247,7 +248,7 @@ namespace nsWin32
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
-
+/*
 	//--------------------------------------------------------------------------------
 	bool CFile::Read( void* lpBuffer, unsigned long nNumberOfBytesToRead, unsigned long* lpNumberOfBytesRead, nsWin32::LPOVERLAPPED lpOverlapped )
 	{
@@ -271,7 +272,7 @@ namespace nsWin32
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
-
+*/
 	//--------------------------------------------------------------------------------
 	bool CFile::ReadScatter( nsWin32::FILE_SEGMENT_ELEMENT aSegmentArray[], unsigned long nNumberOfBytesToRead, unsigned long* lpReserved, nsWin32::LPOVERLAPPED lpOverlapped )
 	{
@@ -426,7 +427,7 @@ namespace nsWin32
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
-
+/*
 	//--------------------------------------------------------------------------------
 	bool CFile::Write( const void* lpBuffer, unsigned long nNumberOfBytesToWrite, unsigned long* lpNumberOfBytesWritten, nsWin32::LPOVERLAPPED lpOverlapped )
 	{
@@ -450,7 +451,7 @@ namespace nsWin32
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
-
+*/
 	//--------------------------------------------------------------------------------
 	bool CFile::WriteGather( nsWin32::FILE_SEGMENT_ELEMENT aSegmentArray[], unsigned long nNumberOfBytesToWrite, unsigned long* lpReserved, nsWin32::LPOVERLAPPED lpOverlapped )
 	{
@@ -470,9 +471,25 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CFile::IsOpen()
+	Cmp__int64 CFile::Seek( Cmp__int64 iPos, int iMethod )
 	{
-		return ( !Handle()->IsInvalid() && !Handle()->IsNull() );
+		CErrorHelper ErrorHelper;
+		DINT NewPos;				// new file position
+		unsigned long ulErr;		// error code from API call
+		NewPos.bigint = iPos;
+
+		if( ( ( NewPos.twoints.lowerhalf = SetPointer( NewPos.twoints.lowerhalf, &( NewPos.twoints.upperhalf ), iMethod ) ) == -1L ) && ( ( ulErr = ErrorHelper.GetLastError() ) != NO_ERROR ) )
+		{
+			return( __QCMP_i64_SUFFIX( -1 ) );
+		}
+
+		return( NewPos.bigint );	// return
+	}
+	
+	//--------------------------------------------------------------------------------
+	bool CFile::SupportsPosition()
+	{
+		return true;
 	}
 
 }//nsWin32

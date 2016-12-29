@@ -28,6 +28,7 @@
 #include "CodeQOR/ErrorSystem/BaseErrorDomain.h"
 #include "CodeQOR/Traits/Policy.h"
 #include "CodeQOR/Instancing/TInstancePtr.h"
+#include "AppocritaQOR/SubSystems/Thread.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
@@ -45,13 +46,21 @@ namespace nsCodeQOR
 	//--------------------------------------------------------------------------------
 	CTraceFlyer::CTraceFlyer() : m_pRegisteredTraceProvider( 0 )
 	{
-		CThreadContextBase::GetCurrent()->SetTraceEnabled( true );
+		nsQOR::IThread::ref_type pCurrentThread = nsQOR::CThread::GetCurrent();
+		if( pCurrentThread )
+		{
+			pCurrentThread->SetTraceEnabled( true );
+		}
 	}
 
 	//--------------------------------------------------------------------------------
 	CTraceFlyer::~CTraceFlyer()
 	{
-		CThreadContextBase::GetCurrent()->SetTraceEnabled( false );
+		nsQOR::IThread::ref_type pCurrentThread = nsQOR::CThread::GetCurrent();
+		if( pCurrentThread )
+		{
+			pCurrentThread->SetTraceEnabled( false );
+		}
 	}
 
 	//--------------------------------------------------------------------------------

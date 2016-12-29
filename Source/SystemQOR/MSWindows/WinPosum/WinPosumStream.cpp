@@ -1325,6 +1325,25 @@ namespace nsWin32
 	//------------------------------------------------------------------------------
 	CPosumStream::CPosumStream()
 	{
+		_ptr = 0;
+		_cnt = 0;
+		_base = 0;
+		_flag = 0;
+		_file = 0;
+		_charbuf = 0;
+		_bufsiz = 0;
+		_tmpfname = 0;
+
+		m_chFlags = 0;				// attributes of file (e.g., open in text mode?)
+		m_chPipe = 0;				// one char buffer for void*s opened on pipes
+		m_chTextMode = 0;			// __IOINFO_TM_ANSI or __IOINFO_TM_UTF8 or __IOINFO_TM_UTF16LE
+		m_bchUnicode = 0;			// Was the file opened as unicode?		
+		m_i64StartPos = 0;			// File position that matches buffer start
+		m_bUTF8Translations = false;// Buffer contains translations other than CRLF
+		m_dbcsBuffer = 0;			// Buffer for the lead byte of dbcs when converting from dbcs to unicode
+		m_dbcsBufferUsed = false;	// Bool for the lead byte buffer is used or not
+		m_lRefCount = 0;			//Count of external references
+		m_pFile = 0;				//WinQL layer file object
 	}
 
 	//------------------------------------------------------------------------------
@@ -1338,18 +1357,19 @@ namespace nsWin32
 	{
 		if( &src != this )
 		{
-			if( m_chFlags & _IOLOCKED )
+			if( _flag & _IOLOCKED )
 			{
 				funlockfile();
 			}
 
-			m_chFlags = src.m_chFlags;
+			_flag = src._flag;
 
-			if( m_chFlags & _IOLOCKED )
+			if( _flag & _IOLOCKED )
 			{
 				flockfile();
 			}
 
+			m_chFlags = src.m_chFlags;
 			m_chPipe = src.m_chPipe;
 			m_chTextMode = src.m_chTextMode;
 			m_bchUnicode = src.m_bchUnicode;
@@ -1363,7 +1383,6 @@ namespace nsWin32
 			_ptr = src._ptr;
 			_cnt = src._cnt;
 			_base = src._base;
-			_flag = src._flag;
 			_file = src._file;
 			_charbuf = src._charbuf;
 			_bufsiz = src._bufsiz;
@@ -1410,6 +1429,18 @@ namespace nsWin32
         m_dbcsBuffer = '\0';
         m_dbcsBufferUsed = false;
 		m_pFile = 0;
+	}
+
+	//------------------------------------------------------------------------------
+	void CPosumStream::SetLowLevelFlags( byte Flags )
+	{
+		m_chFlags = Flags;
+	}
+
+	//------------------------------------------------------------------------------
+	void CPosumStream::SetLowLevelFile( CFile* pFile )
+	{
+		m_pFile = pFile;
 	}
 
 	//------------------------------------------------------------------------------
@@ -2100,7 +2131,7 @@ namespace nsWin32
 
                 fileaccess &= ~Generic_Read;
 
-                if( ( osfh = __createFile( path, fileaccess, fileshare, &SecurityAttributes, filecreate, fileattrib, fileattribflags ) ) == (void*)(-1) )
+                if( ( m_pFile = __createFile( path, fileaccess, fileshare, &SecurityAttributes, filecreate, fileattrib, fileattribflags ) ) == (void*)(-1) )
                 {
                     /* OS call to open/create file failed! map the error, release the lock, and return -1. note that it's not necessary to
                      * call _free_osfhnd (it hasn't been used yet), but we do need to clear the FOPEN that was set by _alloc_osfhnd.

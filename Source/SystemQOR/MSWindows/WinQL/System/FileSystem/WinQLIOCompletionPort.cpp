@@ -24,9 +24,9 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-#include "WinQL/CodeServices/ErrorSystem/Error.h"
-#include "WinQL/CodeServices/ErrorSystem/Win32ErrDomain.h"
-#include "WinQL/FileSystem/IOCompletionPort.h"
+#include "WinQL/Application/ErrorSystem/WinQLError.h"
+#include "WinQL/Application/ErrorSystem/WinQLErrDomain.h"
+#include "WinQL/System/FileSystem/WinQLIOCompletionPort.h"
 #include "WinQAPI/Kernel32.h"
 
 //--------------------------------------------------------------------------------

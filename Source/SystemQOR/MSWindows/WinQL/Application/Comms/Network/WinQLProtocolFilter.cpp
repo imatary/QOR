@@ -58,32 +58,37 @@ namespace nsWin32
 	{
 		std::vector< int > VecResult;
 		unsigned long ulProtocolCount = 0;
-		WSAProtocolInfo* pProtocol = CWin32Application::TheWin32Application()->CommsNode().NetworkHost().GetProtocols( ulProtocolCount );
+		nsQOR::IRole::ref_type Role = CWin32Application::TheWin32Application()->GetRole();
+		CCommsNode* pCommsNode = Role->GetSubSystem( CCommsNode::ClassID() ).As< CCommsNode >();
 
-		bool bIncluded = true;
-		for( unsigned long ulProtocol = 0; ulProtocol < ulProtocolCount; ulProtocol++ )
+		if( pCommsNode != 0 )
 		{
-			if( m_bAddressFamily && ( pProtocol->iAddressFamily != m_FilterData.iAddressFamily ) )
-			{
-				bIncluded = false;
-			}
+			WSAProtocolInfo* pProtocol = pCommsNode->NetworkHost().GetProtocols( ulProtocolCount );
 
-			if( m_bType && ( pProtocol->iSocketType != m_FilterData.iSocketType ) )
+			bool bIncluded = true;
+			for( unsigned long ulProtocol = 0; ulProtocol < ulProtocolCount; ulProtocol++ )
 			{
-				bIncluded = false;
-			}
+				if( m_bAddressFamily && ( pProtocol->iAddressFamily != m_FilterData.iAddressFamily ) )
+				{
+					bIncluded = false;
+				}
 
-			if( m_bProtocol && ( pProtocol->iProtocol != m_FilterData.iProtocol ) )
-			{
-				bIncluded = false;
-			}
+				if( m_bType && ( pProtocol->iSocketType != m_FilterData.iSocketType ) )
+				{
+					bIncluded = false;
+				}
 
-			if( bIncluded )
-			{
-				VecResult.push_back( ulProtocol );
+				if( m_bProtocol && ( pProtocol->iProtocol != m_FilterData.iProtocol ) )
+				{
+					bIncluded = false;
+				}
+
+				if( bIncluded )
+				{
+					VecResult.push_back( ulProtocol );
+				}
 			}
 		}
-
 		return VecResult;
 	}
 

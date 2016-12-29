@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Models">
+      <UniqueIdentifier>{d9568837-b267-486c-82df-c8c5242766c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model">
+      <UniqueIdentifier>{b25f13a1-e6d2-48c1-ac52-a43c4384d5a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models\DOM">
+      <UniqueIdentifier>{2d7f2100-2a0a-464a-9219-70d528bfa7ce}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\MammutQOR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\ModelObserver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model\MBitSetIterator.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model\MProperty.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model\MPropertyBitSet.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model\MPropertyIterator.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model\MPropertySet.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model\MTypes.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMAttr.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMCDATASection.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMCharacterData.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMComment.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMDocument.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMDocumentFragment.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMDocumentType.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMElement.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMEntity.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMEntityReference.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMNode.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMNotation.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMProcessingInstruction.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMText.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTXMLDOM.cpp">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Action.h">
+      <Filter>Source Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Model.h">
+      <Filter>Source Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\ModelObserver.h">
+      <Filter>Source Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Transaction.h">
+      <Filter>Source Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Workflow.h">
+      <Filter>Source Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\AppConfigModel.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DocumentModel.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\MapModel.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\MediaStreamModel.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\RuntimeAppModel.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\SQLDbModel.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\SysUIIntegrationModel.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\UserPreferencesModel.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\VectorModel.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMAttr.h">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMCharacterData.h">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMDocument.h">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMDocumentFragment.h">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMDocumentType.h">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMElement.h">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMEntity.h">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMEntityReference.h">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMNode.h">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMNotation.h">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMProcessingInstruction.h">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMText.h">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTXMLDOM.h">
+      <Filter>Source Files\Models\DOM</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

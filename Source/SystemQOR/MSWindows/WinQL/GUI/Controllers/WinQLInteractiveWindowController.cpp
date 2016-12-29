@@ -37,7 +37,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CInteractiveWindowController );
 
 	//--------------------------------------------------------------------------------
-	CInteractiveWindowController::CInteractiveWindowController( nsMammut::CModel* pModelItem, nsAppocrita::CCompoundController* pParent ) : CRenderedWindowController( pModelItem, pParent )
+	CInteractiveWindowController::CInteractiveWindowController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CRenderedWindowController( pModelItem, Parent )
 	{
 		_WINQ_FCONTEXT( "CInteractiveWindowController::CInteractiveWindowController" );
 	}
@@ -49,7 +49,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CInteractiveWindowController::SetModel( nsMammut::CModel* pModelItem )
+	void CInteractiveWindowController::SetModel( nsMammut::CModel* pModelItem )
 	{	
 		_WINQ_FCONTEXT( "CInteractiveWindowController::SetModel" );
 
@@ -65,7 +65,6 @@ namespace nsWin32
 		ClipboardOwner().SetModel( pModelItem );
 		Parent().SetModel( pModelItem );
 		CRenderedWindowController::SetModel( pModelItem );	
-		return true;
 	}
 
 	//--------------------------------------------------------------------------------

@@ -48,7 +48,7 @@ namespace nsWinQAPI
 }
 
 //--------------------------------------------------------------------------------
-namespace nsAppocrita
+namespace nsQOR
 {
 	class __QOR_INTERFACE( __APPOCRITA ) CController;
 }

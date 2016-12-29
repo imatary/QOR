@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F477CD2B-44AA-4CA7-AE12-BC3ED093C45D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>WinQLGUI</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>QOR_SYS_OS=QOR_SYS_MSW;_LIBCPP_DLL;WIN32;_DEBUG;_WINDOWS;_USRDLL;__WINQL_GUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>../../../../include;../../../../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH;$(FrameworkSdkDir)\include\um;$(FrameworkSdkDir)\include\shared</AdditionalIncludeDirectories>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\QOR\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WinCmpSupQORVC.lib;QORModule.lib;CodeQOR.lib;CompilerQOR.lib;ArchQOR.lib;CQOR.lib;stdQOR.lib;SystemQOR.lib;WinQAPI.lib;WinQL.lib;WinSharedBootstrap.lib;kernel32.lib</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;WINQLGUI_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;WINQLGUI_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;WINQLGUI_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLBaseTextController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLBaseWindowPartController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLClipboardOwnerController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLCommonCtrlParentController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLCursorController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLDeviceChangeController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLDragAndDropController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLFocusController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLHelpController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLIconizedController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLIMEController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLKeyboardInputController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLMenuController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLNCController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLNCPointerController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLNCRenderController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLOwnerController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLParentController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLPointerController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLRenderingController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLScrollController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLStyleController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLTextController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLTimerController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLUserController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\Parts\WinQLWinCtrlParentController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLAppWindowController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLBaseWindowController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLButtonController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLChildFrameController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLContainerController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLDragListParentController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLFrameMenuController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLFrameNCController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLFrameRenderingController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLFrameScrollController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLFrameWindowController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLInteractiveWindowController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLLayoutController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLMDIFrameClientController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLMDIFrameRenderingController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLMDIFrameWindowController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLNCButtonController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLRenderedWindowController.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLRowContainer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Theme\WinQLBufferedAnimation.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Theme\WinQLBufferPaintSession.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Theme\WinQLPanningFeedback.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Theme\WinQLThemeData.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLBrushFactory.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLCursorFactory.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLDialogView.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLFrameWindowClassFactory.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLFrameWindowView.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLIconFactory.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLInteractiveWindowView.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLMDIChildFrameView.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLMDIFrameView.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLMenuFactory.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLOwnerView.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLParentView.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLRenderedWindowView.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLRowView.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLWinCtrlViews.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLWindowClassFactory.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLWindowView.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Views\WinQLWorkspaceView.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\VisualModels\WinQLBitmapModel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\VisualModels\WinQLBrushModel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\VisualModels\WinQLButtonVisMod.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\VisualModels\WinQLCursorModel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\VisualModels\WinQLFrameWindowClassModel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\VisualModels\WinQLFrameWindowModel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\VisualModels\WinQLFrameWindowStyleModel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\VisualModels\WinQLIconModel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\VisualModels\WinQLMenuModel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\VisualModels\WinQLWindowClassModel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\VisualModels\WinQLWindowLayoutModel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\VisualModels\WinQLWindowModel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\VisualModels\WinQLWindowStyleModel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLAnimate.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLButton.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLComboBox.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLComboBoxEx.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLDateTimePicker.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLDialogFactory.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLDragListBox.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLEdit.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLFrameClient.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLFrameWindow.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLHeader.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLHotKey.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLIPAddress.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLListBox.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLListCtrl.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLMDIChildFrame.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLMDIClientWindow.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLMDIFrameWindow.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLMonthCalendar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLPager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLProgressBar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLRebar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLScrollBar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLStatic.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLStatusBar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLSubclassWindow.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLSysLink.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLTab.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLToolbar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLToolTip.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLTrackbar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLTreeView.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Windows\WinQLUpDown.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQL-GUI.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLAcceleratorTable.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLCaret.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLCommonCtrl.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLCursor.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLDeferWindowPos.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLDesktop.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLDialog.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLDragDropReg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLGUI.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLIcon.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLImageList.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLMenu.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLMessageBox.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLMessageHandler.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLMultilingual.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLPaintSession.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLWindow.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLWindowClass.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLWindowFactory.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLWindowStation.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

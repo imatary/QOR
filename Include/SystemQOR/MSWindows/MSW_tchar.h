@@ -2283,15 +2283,17 @@
      #endif  /* _INTERNAL_IFSTRIP_ */
  
  #endif  /* _UNICODE */
- 
- 
- /* Generic text macros to be used with string literals and character constants.
-    Will also allow symbolic constants that resolve to same. */
- 
- #define _T(x)       __T(x)
- #define _TEXT(x)    __T(x)
- 
- 
+ 				  
  __QCMP_ENDLINKAGE_C
+
+/* Generic text macros to be used with string literals and character constants.
+Will also allow symbolic constants that resolve to same. */
+
+#ifndef _T
+#	define _T(x)       __T(x)
+#endif
+#ifndef _TEXT
+#	define _TEXT(x)    __T(x)
+#endif
  
  #endif  /* _INC_TCHAR */

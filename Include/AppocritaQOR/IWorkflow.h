@@ -60,6 +60,7 @@ namespace nsQOR
 		virtual void PopState( IEvent::ref_type pEvent ) = 0;
 		virtual IState::ref_type InitialState( void ) const = 0;
 		virtual bool DefaultHandleEvent( IEvent::ref_type pEvent ) = 0;
+		virtual void OnIdle(void) = 0;
 	};
 }//nsQOR
 

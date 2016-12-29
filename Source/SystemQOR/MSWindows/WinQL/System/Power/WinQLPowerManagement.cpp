@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "SystemQOR/System.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/System/Power/WinQLPowerManagement.h"
 #include "WinQL/System/Devices/WinQLIODevice.h"
@@ -462,9 +463,9 @@ namespace nsWin32
 					SettingBuffer.ValidateBuffer( static_cast< unsigned short >( ulBufferSize ) );
 					if( ulBufferSize == sizeof( ::GUID ) )
 					{
-						nsCodeQOR::__mxGUID guid = * ( reinterpret_cast< nsCodeQOR::mxGUID* >( SettingBuffer.GetBuffer() ) );
+						nsCodeQOR::__mxGUID aguid = * ( reinterpret_cast< nsCodeQOR::mxGUID* >( SettingBuffer.GetBuffer() ) );
 						SettingBuffer.ReleaseBuffer();					
-						CPowerSetting PowerSetting( this, guid );
+						CPowerSetting PowerSetting( this, aguid );
 						Append( PowerSetting );
 					}
 					ulIndex++;
@@ -1127,7 +1128,7 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CPowerSchemeCollection::CPowerSchemeCollection" );
 
-		if( CSystem::Instance().Information(QOR_PP_SHARED_OBJECT_ACCESS).GetOSVerNumber() < 6 )
+		if( TheSystem().As< nsWin32::CSystem >()->Information(QOR_PP_SHARED_OBJECT_ACCESS).GetOSVerNumber() < 6 )
 		{
 			m_Library.EnumPwrSchemes( (::PWRSCHEMESENUMPROC)&StaticEnumProcV1, reinterpret_cast< LPARAM >( this ) );	
 		}

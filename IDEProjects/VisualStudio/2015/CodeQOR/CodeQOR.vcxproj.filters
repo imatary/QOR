@@ -11,9 +11,6 @@
     <Filter Include="Source Files\Tracing">
       <UniqueIdentifier>{bc6b6bf4-edf3-4a1a-9534-60577529d769}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Threading">
-      <UniqueIdentifier>{09422ad6-8f07-4a6a-9382-d54b693e521a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Text">
       <UniqueIdentifier>{4766577f-fdf6-4aa9-af80-1ab4f72080ad}</UniqueIdentifier>
     </Filter>
@@ -37,9 +34,6 @@
     </Filter>
     <Filter Include="Source Files\ErrorSystem">
       <UniqueIdentifier>{59f23478-81a3-4413-8d98-6d71fec4b6ff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Events">
-      <UniqueIdentifier>{fcae294d-5525-4372-b19e-c90f408d34e0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Interception">
       <UniqueIdentifier>{795aae3e-93c7-4b3d-b5c2-250e5502c486}</UniqueIdentifier>
@@ -76,9 +70,6 @@
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Tracing\TraceFlyer.cpp">
       <Filter>Source Files\Tracing</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\Threading\ThreadContext.cpp">
-      <Filter>Source Files\Threading</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\ACodeString.cpp">
       <Filter>Source Files\Text</Filter>
     </ClCompile>
@@ -92,9 +83,6 @@
       <Filter>Source Files\Text</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\Char32.cpp">
-      <Filter>Source Files\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\CodeString.cpp">
       <Filter>Source Files\Text</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\CQString.cpp">
@@ -128,9 +116,6 @@
       <Filter>Source Files\SyncObjects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullSection.cpp">
-      <Filter>Source Files\SyncObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullSempahore.cpp">
       <Filter>Source Files\SyncObjects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Parameters\InterParamChecks.cpp">
@@ -202,15 +187,6 @@
     <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\FlyStrapBase.cpp">
       <Filter>Source Files\Interception</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\Events\ThreadLocalEvent.cpp">
-      <Filter>Source Files\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\Events\ThreadLocalEventManager.cpp">
-      <Filter>Source Files\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\Events\ThreadLocalEventSink.cpp">
-      <Filter>Source Files\Events</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\BaseErrorDomain.cpp">
       <Filter>Source Files\ErrorSystem</Filter>
     </ClCompile>
@@ -256,6 +232,9 @@
     <ClCompile Include="..\..\..\..\Source\CodeQOR\ClassReg\ClassReg.cpp">
       <Filter>Source Files\ClassReg</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullSemaphore.cpp">
+      <Filter>Source Files\SyncObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\AbstractFactory.h">
@@ -295,9 +274,6 @@
       <Filter>Source Files\DataStructures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TBox.h">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TBuffer.h">
       <Filter>Source Files\DataStructures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TCRef.h">
@@ -368,15 +344,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\Where.h">
       <Filter>Source Files\ErrorSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\Events\ThreadLocalEvent.h">
-      <Filter>Source Files\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\Events\ThreadLocalEventManager.h">
-      <Filter>Source Files\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\Events\ThreadLocalEventSink.h">
-      <Filter>Source Files\Events</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\CallInterceptor.h">
       <Filter>Source Files\Interception</Filter>
@@ -531,9 +498,6 @@
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\WCodeString.h">
       <Filter>Source Files\Text</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\Threading\ThreadContext.h">
-      <Filter>Source Files\Threading</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\CallContextBase.h">
       <Filter>Source Files\Tracing</Filter>
     </ClInclude>
@@ -566,6 +530,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Traits\ReferenceTraits.h">
       <Filter>Source Files\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TRef.h">
+      <Filter>Source Files\DataStructures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

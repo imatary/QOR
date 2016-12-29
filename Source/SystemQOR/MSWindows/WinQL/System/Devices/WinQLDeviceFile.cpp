@@ -82,4 +82,109 @@ namespace nsWin32
 		m_Handle = hExisting;
 	}
 
+	//--------------------------------------------------------------------------------
+	bool CDeviceFile::Read( void* lpBuffer, unsigned long nNumberOfBytesToRead, unsigned long* lpNumberOfBytesRead, nsWin32::LPOVERLAPPED lpOverlapped )
+	{
+		_WINQ_FCONTEXT( "CDeviceFile::Read" );
+		bool bResult = false;
+		__QOR_PROTECT
+		{
+			bResult = CKernel32::ReadFile( m_Handle.Use(), lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
+		}__QOR_ENDPROTECT
+		return bResult;
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CDeviceFile::ReadEx( void* lpBuffer, unsigned long nNumberOfBytesToRead, nsWin32::LPOVERLAPPED lpOverlapped, nsWin32::LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine )
+	{
+		_WINQ_FCONTEXT( "CDeviceFile::ReadEx" );
+		bool bResult = false;
+		__QOR_PROTECT
+		{
+			bResult = CKernel32::ReadFileEx( m_Handle.Use(), lpBuffer, nNumberOfBytesToRead, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ), reinterpret_cast< ::LPOVERLAPPED_COMPLETION_ROUTINE >( lpCompletionRoutine ) ) ? true : false;
+		}__QOR_ENDPROTECT
+		return bResult;
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CDeviceFile::Write( const void* lpBuffer, unsigned long nNumberOfBytesToWrite, unsigned long* lpNumberOfBytesWritten, nsWin32::LPOVERLAPPED lpOverlapped )
+	{
+		_WINQ_FCONTEXT( "CDeviceFile::Write" );
+		bool bResult = false;
+		__QOR_PROTECT
+		{
+			bResult = CKernel32::WriteFile( m_Handle.Use(), lpBuffer, nNumberOfBytesToWrite, lpNumberOfBytesWritten, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
+		}__QOR_ENDPROTECT
+		return bResult;
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CDeviceFile::WriteEx( const void* lpBuffer, unsigned long nNumberOfBytesToWrite, nsWin32::LPOVERLAPPED lpOverlapped, nsWin32::LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine )
+	{
+		_WINQ_FCONTEXT( "CDeviceFile::WriteEx" );
+		bool bResult = false;
+		__QOR_PROTECT
+		{
+			bResult = CKernel32::WriteFileEx( m_Handle.Use(), lpBuffer, nNumberOfBytesToWrite, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ), reinterpret_cast< ::LPOVERLAPPED_COMPLETION_ROUTINE >( lpCompletionRoutine ) ) ? true : false;
+		}__QOR_ENDPROTECT
+		return bResult;
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CDeviceFile::IsOpen()
+	{
+		_WINQ_FCONTEXT( "CDeviceFile::IsOpen" );
+		return ( !Handle()->IsInvalid() && !Handle()->IsNull() );
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CDeviceFile::FlushBuffers()
+	{
+		_WINQ_FCONTEXT( "CDeviceFile::FlushBuffers" );
+		bool bResult = false;
+		__QOR_PROTECT
+		{
+			bResult = CKernel32::FlushFileBuffers( m_Handle.Use() ) ? true : false;
+		}__QOR_ENDPROTECT
+		return bResult;
+	}
+
+	//--------------------------------------------------------------------------------
+	unsigned long CDeviceFile::GetType()
+	{
+		_WINQ_FCONTEXT( "CDeviceFile::GetType" );
+		unsigned long ulResult = File_Type_Unknown;
+		__QOR_PROTECT
+		{
+			ulResult = CKernel32::GetFileType( m_Handle.Use() );
+		}__QOR_ENDPROTECT
+		return ulResult;			
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CDeviceFile::SetEOF()
+	{
+		_WINQ_FCONTEXT( "CDeviceFile::SetEOF" );
+		//Base Device File does not support setting physical file length
+		return false;
+	}
+
+	//--------------------------------------------------------------------------------
+	Cmp__int64 CDeviceFile::Seek( Cmp__int64 pos, int mthd )
+	{
+		return -1;
+	}
+
+	//--------------------------------------------------------------------------------
+	Cmp__int64 CDeviceFile::Tell()
+	{
+		return Seek( 0, File_Current );
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CDeviceFile::SupportsPosition( void )
+	{
+		return false;
+	}
+
 }//nsWin32

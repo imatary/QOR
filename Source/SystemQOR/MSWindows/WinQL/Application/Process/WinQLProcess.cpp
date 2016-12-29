@@ -28,8 +28,9 @@
 
 #include <limits.h>
 #include "CodeQOR/ErrorSystem/Error.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
-#include "../SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
+#include "AppocritaQOR/Controller.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
+#include "../Source/SystemQOR/MSWindows/WinQAPI/include/DynamicLibrary.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/Application/Process/WinQLProcess.h"
 #include "WinQL/Application/Process/WinQLJob.h"
@@ -61,10 +62,10 @@ namespace nsWin32
 	}
 		
 	//--------------------------------------------------------------------------------
-	nsCodeQOR::CThreadContextBase* CProcess::ThreadContext( void )
+	nsQOR::IThread::ref_type CProcess::ThreadContext( void )
 	{
 		//NOTE: Can't have function context here because this is required by function context initialisation
-		return t_pCurrentWin32Thread;
+		return t_pCurrentWin32Thread->Ref();
 	}
 
 	//--------------------------------------------------------------------------------

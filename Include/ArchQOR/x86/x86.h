@@ -33,9 +33,22 @@
 #ifndef QOR_ARCH_X86
 __QCMP_MESSAGE( "Target instruction set level not set. Defaulting to i786." )
 #	define QOR_ARCH_X86 QOR_PP_VERSION_NUMBER(7,0,0)
+#else
+//__QCMP_MESSAGE( QOR_PP_STRINGIZE( QOR_PP_EXPAND( QOR_ARCH_X86 ) ) )
 #endif
 
-#if ( QOR_ARCH_X86 == QOR_PP_VERSION_NUMBER(7,0,0) )
+#if( QOR_ARCH_X86 == QOR_PP_VERSION_NUMBER( 64, 0, 0 ) )
+#	define QOR_ARCH_X86_MMX_REQUIRED
+__QCMP_MESSAGE( "Target i786 instruction set." )
+#	include "ArchQOR/x86/Assembler/BatchCPU/i786CPU.h"
+namespace nsArch
+{
+	typedef nsx86::Ci786CPU CMainInstructionSet;
+	typedef nsx86::CP7FPU CFloatingPointUnit;
+#	define QOR_ARCH_X87_FPU_EXTENSION_CLASS ,public CFloatingPointUnit
+#	define QOR_ARCH_X87_FPU_EXTENSION_INIT ,CFloatingPointUnit( (Cx86CPUCore&)(*this) )
+}
+#elif ( QOR_ARCH_X86 == QOR_PP_VERSION_NUMBER(7,0,0) )
 #	define QOR_ARCH_X86_MMX_REQUIRED
 __QCMP_MESSAGE( "Target i786 instruction set." )
 #	include "ArchQOR/x86/Assembler/BatchCPU/i786CPU.h"
@@ -139,7 +152,7 @@ namespace nsArch
 			__QOR_DECLARE_OCLASS_ID( CCPU );
 
 			__QCMP_WARNING_PUSH
-				__QCMP_WARNING_DISABLE( __QCMP_WARN_THIS_USED_IN_BASE_INIT_LIST, "" )
+				__QCMP_WARNING_DISABLE( __QCMP_WARN_THIS_USED_IN_BASE_INIT_LIST, _QCMP_TXT("") )
 
 				//--------------------------------------------------------------------------------
 				CCPU( nsArch::CCodeGeneratorBase* codeGenerator ) : CMainInstructionSet( codeGenerator ) QARCH_SECONDARY_ISET_INIT

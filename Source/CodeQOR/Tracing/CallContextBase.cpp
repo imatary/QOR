@@ -67,9 +67,10 @@ namespace nsCodeQOR
 	}
 
 	//--------------------------------------------------------------------------------
-	CCallContextBase::CCallContextBase()
+	CCallContextBase::CCallContextBase( nsQOR::IThread::ref_type ThreadContext )
 	{
 		m_ucParamCount = 0;
+		m_ThreadContext = ThreadContext;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -131,15 +132,14 @@ namespace nsCodeQOR
 			m_pParameters().Clear();	//Delete all the parameter nodes without deferencing or deleting any of the parameters they refered to
 		}
 		*/
-		//delete m_ReturnValue;
-		//m_ReturnValue = 0;
+
 		m_ReturnValue.Clear();
 		m_ucParamCount = 0;
-		if( CThreadContextBase::GetCurrent() )
+		if( !m_ThreadContext.IsNull() )
 		{
-			if( CThreadContextBase::GetCurrent()->FunctionContext() )
+			if( m_ThreadContext->FunctionContext() )
 			{
-				CThreadContextBase::GetCurrent()->FunctionContext()->Unlock();
+				m_ThreadContext->FunctionContext()->Unlock();
 			}
 		}
 	}

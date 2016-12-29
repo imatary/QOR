@@ -37,7 +37,7 @@ namespace nsBluefoot
 	//------------------------------------------------------------------------------
 	CXmlParseException::CXmlParseException( const nsCodeQOR::CUCS2String& name, int c, int l, const nsCodeQOR::CUCS2String& p, const nsCodeQOR::CUCS2String& s )
 	{
-		__QCS_MEMBER_FCONTEXT( "CXmlParseException::CXmlParseException" );
+		__QCS_MEMBER_FCONTEXT( _TXT("CXmlParseException::CXmlParseException") );
 		m_Msg = name;
 		m_Column = c;
 		m_Line = l;
@@ -48,14 +48,14 @@ namespace nsBluefoot
 	//------------------------------------------------------------------------------
 	CXmlParseException::CXmlParseException( const CXmlParseException& Src )
 	{
-		__QCS_MEMBER_FCONTEXT( "CXmlParseException::CXmlParseException" );
+		__QCS_MEMBER_FCONTEXT( _TXT("CXmlParseException::CXmlParseException") );
 		*this = Src;
 	}
 
 	//------------------------------------------------------------------------------
 	CXmlParseException& CXmlParseException::operator = ( const CXmlParseException& Src )
 	{
-		__QCS_MEMBER_FCONTEXT( "CXmlParseException::operator =" );
+		__QCS_MEMBER_FCONTEXT( _TXT("CXmlParseException::operator =") );
 		if( &Src != this )
 		{
 			m_Msg = Src.m_Msg;
@@ -70,14 +70,14 @@ namespace nsBluefoot
 	//------------------------------------------------------------------------------
 	CXmlParseException::~CXmlParseException()
 	{
-		__QCS_MEMBER_FCONTEXT( "CXmlParseException::~CXmlParseException" );
+		__QCS_MEMBER_FCONTEXT( _TXT("CXmlParseException::~CXmlParseException") );
 	}
 
 	//------------------------------------------------------------------------------
 	//Returns the error message
 	nsCodeQOR::CUCS2String CXmlParseException::Message() const
 	{
-		__QCS_MEMBER_FCONTEXT( "CXmlParseException::Message" );
+		__QCS_MEMBER_FCONTEXT( _TXT("CXmlParseException::Message") );
 		return m_Msg;
 	}
 
@@ -85,7 +85,7 @@ namespace nsBluefoot
 	//Returns the column number where the error occurred.
 	int CXmlParseException::ColumnNumber() const
 	{
-		__QCS_MEMBER_FCONTEXT( "CXmlParseException::ColumnNumber" );
+		__QCS_MEMBER_FCONTEXT( _TXT("CXmlParseException::ColumnNumber") );
 		return m_Column;
 	}
 
@@ -93,7 +93,7 @@ namespace nsBluefoot
 	//Returns the line number where the error occurred.
 	int CXmlParseException::LineNumber() const
 	{
-		__QCS_MEMBER_FCONTEXT( "CXmlParseException::LineNumber" );
+		__QCS_MEMBER_FCONTEXT( _TXT("CXmlParseException::LineNumber") );
 		return m_Line;
 	}
 
@@ -101,7 +101,7 @@ namespace nsBluefoot
 	//Returns the public identifier where the error occurred.
 	nsCodeQOR::CUCS2String CXmlParseException::PublicId() const
 	{
-		__QCS_MEMBER_FCONTEXT( "CXmlParseException::PublicId" );
+		__QCS_MEMBER_FCONTEXT( _TXT("CXmlParseException::PublicId") );
 		return m_Pub;
 	}
 
@@ -109,7 +109,7 @@ namespace nsBluefoot
 	//Returns the system identifier where the error occurred.
 	nsCodeQOR::CUCS2String CXmlParseException::SystemId() const
 	{
-		__QCS_MEMBER_FCONTEXT( "CXmlParseException::SystemId" );
+		__QCS_MEMBER_FCONTEXT( _TXT("CXmlParseException::SystemId") );
 		return m_Sys;
 	}
 

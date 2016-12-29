@@ -205,9 +205,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	nsCodeQOR::CTLRef< CFile > CFileConnector::File( void )
+	nsCodeQOR::CTLRef< CDeviceFile > CFileConnector::File( void )
 	{
-		return nsCodeQOR::CTLRef< CFile >( m_pFile );
+		return nsCodeQOR::CTLRef< CDeviceFile >( m_pFile );
 	}
 
 }//nsWin32

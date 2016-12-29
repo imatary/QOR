@@ -199,6 +199,8 @@ namespace nsWin32
 
 	public:
 
+		typedef CSharedRef< CClipboard > refType;
+
 		__QCMP_STATIC_CONSTANT( unsigned int, CF_Text				= 1		 );
 		__QCMP_STATIC_CONSTANT( unsigned int, CF_Bitmap          	= 2		 );
 		__QCMP_STATIC_CONSTANT( unsigned int, CF_MetaFilePict    	= 3		 );
@@ -235,6 +237,8 @@ namespace nsWin32
 
 		CClipboard();
 		~CClipboard();
+
+		refType Ref( void );
 
 		nsCodeQOR::CTLRef< CClipboardViewerSession > ViewerSession( COSWindow::refType refWindow );
 		nsCodeQOR::CTLRef< CClipboardSession > Session( COSWindow::refType refWindow );

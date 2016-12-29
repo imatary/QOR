@@ -1,4 +1,4 @@
-//SupportedOsList.h
+//SupportedOSList.h
 
 // Copyright Querysoft Limited 2015
 //
@@ -57,7 +57,8 @@
 #define QOR_SYS_VMS				27
 #define QOR_SYS_MSW				28
 
-
+#define QOR_SYS_OPERATINGSYSTEMS (AIX)(AmigaOS)(Android)(BeOS)(BSD)(ChromeOS)(CygWin)(Haiku)(HPUX)(Inferno)(iOS)(IRIX)\
+(Kolibrios)(Linux)(MacOS)(Minix)(OS400)(OSX)(Plan9)(Posix)(QNX)(SANOS)(SkyOS)(Solaris)(Syllable)(Unix)(VMS)(Windows)
 /*
 For each OS we need -
 Preprocessor detection method

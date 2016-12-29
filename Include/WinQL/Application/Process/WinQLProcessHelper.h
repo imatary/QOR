@@ -67,7 +67,7 @@ namespace nsWin32
 		TCHAR* GetCommandLineT( void );
 		void* GetEnvironmentStringsT( void );
 		unsigned long GetEnvironmentVariableT( const TCHAR* lpName, TCHAR* lpBuffer, unsigned long nSize );
-		void GetStartupInfoT( nsWin32::LPSTARTUPINFO lpStartupInfo );
+		static nsWin32::STARTUPINFO StartupInfo( void );
 		bool SetEnvironmentVariableT( const TCHAR* lpName, const TCHAR* lpValue );
 		unsigned int WinExec( const char* lpCmdLine, unsigned int uCmdShow );
 		unsigned long LoadModule( const char* lpModuleName, void* lpParameterBlock );
@@ -105,7 +105,7 @@ namespace nsWin32
 		CProcessThreadAttributeList& operator = ( const CProcessThreadAttributeList& );
 	};
 
-
+	/*
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CThreadHelper
 	{
@@ -124,7 +124,7 @@ namespace nsWin32
 		bool SwitchToThread( void );
 		unsigned long GetCurrentProcessorNumber( void );
 	};
-
+	*/
 }//nsWin32
 
 #endif//WINQL_CS_THREADING_H_3

@@ -32,6 +32,11 @@
 #include "CompilerQOR.h"							//Source Compiler definition and framework config
 #include "ArchQOR/Common/ArchitectureSelection.h"	//Select the basic target architecture
 
+__QCMP_MESSAGE( "Target Architecture " QOR_ARCH_NAME )
+
+#include "ArchQOR/Common/WordSizeSelection.h"
+#include QOR_ARCH_CLASS_INCLUDE
+
 #include "CodeQOR/Modules/LoadableModuleBase.h"
 
 //------------------------------------------------------------------------------

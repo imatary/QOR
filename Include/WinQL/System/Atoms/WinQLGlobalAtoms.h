@@ -54,6 +54,7 @@ namespace nsWin32
 		__QOR_DECLARE_OCLASS_ID( CGlobalAtom );
 
 		CGlobalAtom( const CTString& strName, bool bUseExisting = false );
+		CGlobalAtom( const CGlobalAtom& src );
 		~CGlobalAtom();
 
 		CTString GetName( void );
@@ -68,7 +69,7 @@ namespace nsWin32
 
 	protected:
 
-		CGlobalAtom( const CGlobalAtom& src );
+		
 		CGlobalAtom( unsigned short );
 
 		unsigned short m_usAtom;
@@ -95,7 +96,7 @@ namespace nsWin32
 		CGlobalAtom Add ( const TCHAR* lpString );
 		void Delete ( CGlobalAtom& Atom );
 		CGlobalAtom Find ( const TCHAR* lpString );
-		unsigned int GetName ( const CGlobalAtom& Atom, TCHAR* lpBuffer, int nSize );
+		CTString GetName( const CGlobalAtom& Atom );		
 
 		refType Ref( void );
 

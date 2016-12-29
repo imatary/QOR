@@ -35,7 +35,26 @@
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TCRef.h"
 #include "WinQL/CodeServices/Handles/WinQLHandle.h"
+
+//--------------------------------------------------------------------------------
+namespace nsWin32
+{
+	class __QOR_INTERFACE( __WINQL ) CSyncHandle;
+}
+
+//--------------------------------------------------------------------------------
+namespace nsCodeQOR
+{
+	template<>
+	struct reference_type< nsWin32::CSyncHandle >
+	{
+	public:
+
+		typedef nsCodeQOR::CTCRef< nsWin32::CSyncHandle > type;
+	};
+}
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -46,20 +65,32 @@ namespace nsWin32
 	public:
 
 		__QOR_DECLARE_OCLASS_ID( CSyncHandle );
+		__QOR_DECLARE_REF_TYPE( CSyncHandle );
 
 		CSyncHandle();
 		CSyncHandle( void* h, bool bCanBeSignaled = false );
 		virtual ~CSyncHandle();
 		CSyncHandle( const CSyncHandle& );
+		CSyncHandle( CSyncHandle::ref_type src );
 		CSyncHandle& operator = ( const CSyncHandle& );
 		CSyncHandle& operator = ( void* pOSHandle );
+
+		ref_type Ref( void )
+		{
+			return ref_type( this );
+		}
+
+		bool operator == ( const CSyncHandle& cmp )
+		{
+			return CHandle::operator==( cmp );
+		}
 
 		void* Use( void );
 
 		unsigned long AddRef( void );
 		unsigned long Release( void );
 
-		bool CanBeSignaled( void );
+		bool CanBeSignaled( void ) const;
 		void SetCanBeSignaled( bool bSignalable );
 
 	protected:

@@ -37,6 +37,7 @@
 
 #include "ClassRegEntry.h"
 #include "CodeQOR/Instancing/sTOB.h"
+#include "AppocritaQOR/SubSystems/Thread.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
@@ -101,7 +102,7 @@ namespace nsCodeQOR
 		//Configure the thread data with this instance
 		static bool Configure( T* pInstance )
 		{
-			CThreadContextBase* pThread = CThreadContextBase::GetCurrent();
+			nsQOR::IThread::ref_type pThread = nsQOR::CThread::GetCurrent();
 			
 			if( pThread )
 			{
@@ -123,9 +124,9 @@ namespace nsCodeQOR
 		{
 			if( pInstance != 0 )
 			{
-				CThreadContextBase* pThread = CThreadContextBase::GetCurrent();
+				nsQOR::IThread::ref_type pThread = nsQOR::CThread::GetCurrent();
 
-				if( pThread )
+				if( !pThread.IsNull() )
 				{
 					pThread->ClassThreadMap().Insert( T::ClassID(), pInstance->m_pPrevious );
 					return true;
@@ -140,9 +141,9 @@ namespace nsCodeQOR
 		{
 			void* pInstance = 0;
 			
-			CThreadContextBase* pThread = CThreadContextBase::GetCurrent();
+			nsQOR::IThread::ref_type pThread = nsQOR::CThread::GetCurrent();
 
-			if( pThread )
+			if( !pThread.IsNull() )
 			{
 				pInstance = pThread->ClassThreadMap().Find( T::ClassID() );
 			}

@@ -109,6 +109,25 @@
 																					\
 	__QOR_IMPLEMENT_OCLASS_LUID( myClass );											\
 	_FACTORY_CLASS_ myClass::RegEntry
-
+	
+	//--------------------------------------------------------------------------------
+	//Implementation to provide an externally accessible factory configured to create class instance
+#	define __QOR_IMPLEMENT_EXTERNAL_FACTORY(										\
+	myClass, _G1, _G2, _G3,															\
+	_G41, _G42, _G43, _G44, _G45, _G46, _G47, _G48)									\
+																					\
+    const nsCodeQOR::mxGUID* myClass::ClassID()										\
+	{																				\
+        static const nsCodeQOR::mxGUID classID = {_G1, _G2, _G3,					\
+	{_G41, _G42, _G43, _G44, _G45, _G46, _G47, _G48} };								\
+        return &classID;															\
+    }																				\
+																					\
+	const char* myClass::TypeName()													\
+	{																				\
+		return #myClass ;															\
+	}																				\
+																					\
+	nsCodeQOR::CTExternalRegEntry< myClass > myClass::RegEntry
 
 #endif//CODEQOR_CLASSIDENTITYMACROS_H_1

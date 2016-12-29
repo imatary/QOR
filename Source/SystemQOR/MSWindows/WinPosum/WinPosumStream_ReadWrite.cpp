@@ -5,6 +5,7 @@
 #include "WinQL/CodeServices/Locale/WinQLLocale.h"
 #include "WinQL/Definitions/Errors.h"
 #include "WinQL/Application/ErrorSystem/WinQLDOSError.h"
+#include "WinQL/Application/SubSystems/WinQLTerminal.h"
 #include <errno.h>
 #include <assert.h>
 #include <stdlib.h>
@@ -157,13 +158,15 @@ namespace nsWin32
         if( _isatty(fh) && ( m_chFlags & FTEXT ) )
         {
             unsigned long dwMode;
-			fromConsole = CWin32Application::TheWin32Application()->Console()->ScreenBuffer()->GetInputMode( dwMode );
+			CTerminal* pTerminal = CWin32Application::TheWin32Application()->GetRole()->GetSubSystem( CTerminal::ClassID() ).As< CTerminal >();
+			fromConsole = pTerminal->Console()->ScreenBuffer()->GetInputMode( dwMode );
         }
 
         // read the data from Console
         if( fromConsole && ( tmode == __IOINFO_TM_UTF16LE ) )
         {
-			if( !CWin32Application::TheWin32Application()->Console()->ScreenBuffer()->Read( buffer, cnt / 2, reinterpret_cast< unsigned long* >( &os_read ), 0 ) )
+			CTerminal* pTerminal = CWin32Application::TheWin32Application()->GetRole()->GetSubSystem( CTerminal::ClassID() ).As< CTerminal >();
+			if( !pTerminal->Console()->ScreenBuffer()->Read( buffer, cnt / 2, reinterpret_cast< unsigned long* >( &os_read ), 0 ) )
             {
                 CDOSError::MapError( m_ErrorHelper.GetLastError() );
                 retval = -1;
@@ -1321,13 +1324,15 @@ namespace nsWin32
 
 			isCLocale = ( GetCurrentWin32Thread()->LocaleInfoPtr()->Category( CLocale::LCCTYPE ).CatLocale() == NULL ) ? true : false;
 			
-            toConsole = CWin32Application::TheWin32Application()->Console()->ScreenBuffer()->GetInputMode( dwMode );
+			CTerminal* pTerminal = CWin32Application::TheWin32Application()->GetRole()->GetSubSystem( CTerminal::ClassID() ).As< CTerminal >();
+            toConsole = pTerminal->Console()->ScreenBuffer()->GetInputMode( dwMode );
         }
 
         // don't need double conversion if it's ANSI mode C locale
         if( toConsole && !( isCLocale && ( tmode == __IOINFO_TM_ANSI ) ) ) 
 		{			
-            unsigned int consoleCP = CWin32Application::TheWin32Application()->Console()->OutputCodePage().ID();
+			CTerminal* pTerminal = CWin32Application::TheWin32Application()->GetRole()->GetSubSystem( CTerminal::ClassID() ).As< CTerminal >();
+            unsigned int consoleCP = pTerminal->Console()->OutputCodePage().ID();
             char mboutbuf[ MBLenMax ];
             wchar_t tmpchar = 0;
             int size = 0;

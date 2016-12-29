@@ -32,7 +32,7 @@
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "BfConnection.h"
-
+#include "CodeQOR/DataStructures/TLinkedList.h"
 //--------------------------------------------------------------------------------
 namespace nsBluefoot
 {

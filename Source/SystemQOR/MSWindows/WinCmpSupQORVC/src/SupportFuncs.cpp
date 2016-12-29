@@ -1,6 +1,6 @@
 //SupportFuncs.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -57,10 +57,10 @@ void* __cdecl operator new (size_t Size) __QCMP_THROW
 
 #if ( __QCMP_COMPILER == __QCMP_MSVC && _MSC_VER >= 1900 )
 //------------------------------------------------------------------------------
-void __cdecl operator delete( void* ptr, unsigned int )
-{
-	::operator delete( ptr );
-}
+//void __cdecl operator delete( void* ptr, unsigned int )
+//{
+//	::operator delete( ptr );
+//}
 
 //------------------------------------------------------------------------------
 void __cdecl operator delete( void* ptr, unsigned __int64 )
@@ -69,15 +69,15 @@ void __cdecl operator delete( void* ptr, unsigned __int64 )
 }
 
 //------------------------------------------------------------------------------
-void __cdecl operator delete[ ]( void* ptr, unsigned int )
-{
-	::operator delete[ ]( ptr );
-}
+//void __cdecl operator delete[ ]( void* ptr, unsigned int )
+//{
+//	::operator delete[ ]( ptr );
+//}
 
 //------------------------------------------------------------------------------
 void __cdecl operator delete[ ]( void* ptr, unsigned __int64 )
 {
-	::operator delete[ ]( ptr );
+	::operator delete( ptr );
 }
 
 //------------------------------------------------------------------------------

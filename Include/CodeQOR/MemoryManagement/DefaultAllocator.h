@@ -50,7 +50,25 @@ namespace nsCodeQOR
         {
         public:
 
-                //--------------------------------------------------------------------------------
+			//--------------------------------------------------------------------------------
+			static T* RawAllocate( unsigned int uiCount = 1 )
+			{
+				TInstancer Instancer;
+				T* pResult = 0;
+				if( uiCount == 1 )
+				{
+					pResult = Instancer.Instance();
+				}
+				else
+				{
+					byte* pMemory = Instancer.Source().Source( sizeof( unsigned int ) + ( sizeof( T ) * uiCount ) );
+					*( reinterpret_cast< unsigned int* >( pMemory ) ) = uiCount;
+					pResult = reinterpret_cast< T* >( pMemory + sizeof( unsigned int ) );
+				}
+				return pResult;
+			}
+
+			//--------------------------------------------------------------------------------
                 static T* Allocate( unsigned int uiCount = 1 )
                 {
 						TInstancer Instancer;

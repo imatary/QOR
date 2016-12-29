@@ -184,7 +184,7 @@ e3(void)
 			if (ucb_builtins) {
 				sstat statb;
 			
-				return(stat((char *)nxtarg(0), &statb) >= 0 &&
+				return(_stat((char *)nxtarg(0), &statb) >= 0 &&
 					(statb.st_mode & S_IFMT) != S_IFDIR);
 			}
 			else
@@ -257,7 +257,7 @@ ftype(const unsigned char *f, int field)
 {
 	sstat statb;
 
-	if (stat((char *)f, &statb) < 0)
+	if (_stat((char *)f, &statb) < 0)
 		return(0);
 	if ((statb.st_mode & field) == field)
 		return(1);
@@ -269,7 +269,7 @@ filtyp(const unsigned char *f, int field)
 {
 	sstat statb;
 	typedef int(*fstat)( const char*, sstat*);
-	fstat statf = (field == S_IFLNK) ? lstat : stat;
+	fstat statf = (field == S_IFLNK) ? (fstat)lstat : _stat;
 
 	if ((*statf)((const char*)f, &statb) < 0)
 		return(0);
@@ -286,7 +286,7 @@ fsizep(const unsigned char *f)
 {
 	sstat statb;
 
-	if (stat((char *)f, &statb) < 0)
+	if (_stat((char *)f, &statb) < 0)
 		return(0);
 	return(statb.st_size > 0);
 }

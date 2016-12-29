@@ -148,14 +148,13 @@ namespace nsWin32
 		}
 		*/
 
-		nsWin32::CThreadHelper ThreadHelper;
 	  *sem = NULL;
 	  sv->value = SEM_VALUE_MAX;
 	  pthread_mutex_unlock(&sv->vlock);
-	  ThreadHelper.Sleep( 0 );
+	  CThread::GetCurrent()->Sleep( 0 );
 	  while( pthread_mutex_destroy( &sv->vlock ) == EBUSY )
 	  {
-		ThreadHelper.Sleep( 0 );
+		  CThread::GetCurrent()->Sleep( 0 );
 	  }
 	  sv->valid = DEAD_SEM;
 	  free (sv);

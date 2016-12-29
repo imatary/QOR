@@ -45,12 +45,13 @@ namespace nsBluefoot
 
 		__QOR_DECLARE_OCLASS_ID( CBFInputProtocol );
 
-		CBFInputProtocol();
+		CBFInputProtocol() = delete;
+		CBFInputProtocol( nsQOR::IApplication::ref_type Application );
 		virtual ~CBFInputProtocol();
 		CBFInputProtocol(const CBFInputProtocol& src);
 		CBFInputProtocol& operator = (const CBFInputProtocol& src);
 
-		virtual bool OnProtocolStateChange( void );				//single step the state machine
+		//virtual bool OnProtocolStateChange( void );				//single step the state machine
 
 		virtual void GetNextReadCount( void );
 
@@ -61,6 +62,7 @@ namespace nsBluefoot
 		virtual void OnReadSuccess( unsigned long ulUnitsRead );
 		virtual void OnReadError( void );
 		virtual bool Read( void );
+		virtual void OnEndOfData( void );
 
 		refType Ref( void )
 		{

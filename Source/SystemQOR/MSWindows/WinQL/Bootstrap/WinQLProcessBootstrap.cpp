@@ -51,9 +51,10 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CProcessBootStrap::CProcessBootStrap() : CModuleBootStrap(), m_szCommandLine( 0 )
 	{
-		nsWin32::CProcessHelper ProcessHelper;
-		m_StartupInfo.cb = sizeof( nsWin32::STARTUPINFO );
-		ProcessHelper.GetStartupInfoT( &m_StartupInfo );
+		m_iArgCount = 0;
+		m_pArgsList = 0;
+		m_pEnvList = 0;
+		m_StartupInfo = nsWin32::CProcessHelper::StartupInfo();
 		InitStatic();//Initialise the process object and QOR library statics.
 	}
 
@@ -917,7 +918,7 @@ namespace nsWin32
 			},
 
 			{
-				{ 0x307b9e3e, 0x4d4b, 0x41d0, { 0xa0, 0xaf, 0x6f, 0x37, 0x9f, 0xf4, 0xda, 0x68 } }, //PosumQOR is dependent on
+				{ 0xc36f2544, 0x5965, 0x4414,{ 0x80, 0x3f, 0xe2, 0x16, 0xb7, 0x19, 0x78, 0x3d } }, //PosumQOR is dependent on
 					{ 0xdd8152fd, 0xcdd8, 0x4c26, { 0xb3, 0x55, 0x0, 0xd5, 0x79, 0x55, 0xb8, 0x7a } }, //ArchQOR
 					nullGUID, nullGUID, nullGUID
 			},
@@ -962,6 +963,24 @@ namespace nsWin32
 				{ 0x131ac44c, 0xe028, 0x4436, { 0x96, 0x61, 0xe6, 0x83, 0xb4, 0xe1, 0x3c, 0x31 } },	//BluefootQOR is dependent on
 					{ 0xdd8152fd, 0xcdd8, 0x4c26, { 0xb3, 0x55, 0x0, 0xd5, 0x79, 0x55, 0xb8, 0x7a } }, //ArchQOR
 					nullGUID, nullGUID, nullGUID
+			},
+
+			{
+				{ 0x6d8a9cb5, 0x7ab7, 0x47f1,{ 0x87, 0x9c, 0x55, 0x9e, 0x94, 0xfa, 0x86, 0xa4 } },	//MonkiQOR is dependent on
+				{ 0xdd8152fd, 0xcdd8, 0x4c26,{ 0xb3, 0x55, 0x0, 0xd5, 0x79, 0x55, 0xb8, 0x7a } }, //ArchQOR
+				nullGUID, nullGUID, nullGUID
+			},
+
+			{
+				{ 0x8519f0c2, 0xd864, 0x4477,{ 0xbb, 0x36, 0xa0, 0xed, 0xbc, 0x0b, 0xb5, 0x05 } },	//CompilerQOR is dependent on
+				{ 0xdd8152fd, 0xcdd8, 0x4c26,{ 0xb3, 0x55, 0x0, 0xd5, 0x79, 0x55, 0xb8, 0x7a } }, //ArchQOR
+				nullGUID, nullGUID, nullGUID
+			},
+
+			{
+				{ 0x36dbc0c9, 0xb4cf, 0x4b8d,{ 0x91, 0xec, 0xd0, 0x63, 0xd4, 0xce, 0x7, 0x7a } },	//WinQAPI is dependent on
+				{ 0xdd8152fd, 0xcdd8, 0x4c26,{ 0xb3, 0x55, 0x0, 0xd5, 0x79, 0x55, 0xb8, 0x7a } }, //ArchQOR
+				nullGUID, nullGUID, nullGUID
 			},
 			nullGUID,
 		};
@@ -1062,7 +1081,14 @@ namespace nsWin32
 		while( iEntry <= static_cast< int >( InitFuncList.GetCount() ) )
 		{
 			nsCodeQOR::CTPair< nsCodeQOR::__mxGUID, nsWinQAPI::CLibrary::DefProc >* pEntry = InitFuncList.GetItem( iEntry++ );
-			( pEntry->Second() )();
+			if( pEntry->Second() != 0 )
+			{
+				( pEntry->Second() )( );
+			}
+			else
+			{
+				pEntry = pEntry;//No QORInit on a QOR Module!
+			}
 		}
 
 	}

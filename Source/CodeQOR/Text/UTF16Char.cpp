@@ -26,7 +26,7 @@
 
 #include "CompilerQOR.h"
 #include "CodeQOR/Text/UTF16Char.h"
-
+#include "AppocritaQOR/Event.h"
 //------------------------------------------------------------------------------
 namespace nsCodeQOR
 {

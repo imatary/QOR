@@ -8,6 +8,9 @@
     <Filter Include="Source Files\support">
       <UniqueIdentifier>{a6b2d53c-1119-49d8-912b-fece7a584096}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\wrapper">
+      <UniqueIdentifier>{28a48ccd-25b9-46b6-aa82-97846a748eb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\stdQOR\stdQOR.cpp">
@@ -93,121 +96,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\Include\__bit_reference">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__config">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__debug">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__functional_03">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__functional_base">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__functional_base_03">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__hash_table">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__locale">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__mutex_base">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__refstring">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__split_buffer">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__sso_allocator">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__std_stream">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__tree">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__tuple">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__tuple_03">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__undef___deallocate">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\__undef_min_max">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="..\..\..\..\Include\algorithm">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\array">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\atomic">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\bitset">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\cassert">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\ccomplex">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\cctype">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\cerrno">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\cfenv">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\cfloat">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\chrono">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\cinttypes">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\ciso646">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\climits">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\clocale">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\cmath">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\codecvt">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\complex">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\condition_variable">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\csetjmp">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Include\csignal">
       <Filter>Source Files</Filter>
     </None>
     <None Include="..\..\..\..\Include\cstdarg">
@@ -427,9 +316,6 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="..\..\..\..\Source\libcxx\include\__tuple_03">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\Source\libcxx\include\__undef_min_max">
       <Filter>Source Files</Filter>
     </None>
     <None Include="..\..\..\..\Source\libcxx\include\algorithm">
@@ -669,11 +555,123 @@
     <None Include="..\..\..\..\Source\libcxx\include\vector">
       <Filter>Source Files</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\..\..\..\Source\libcxx\include\CMakeLists.txt">
-      <Filter>Source Files</Filter>
-    </Text>
+    <None Include="..\..\..\..\Include\__bit_reference">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__config">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__debug">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__functional_03">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__functional_base">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__functional_base_03">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__hash_table">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__locale">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__mutex_base">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__refstring">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__split_buffer">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__sso_allocator">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__std_stream">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__tree">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__tuple">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__tuple_03">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__undef___deallocate">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\libcxx\include\__undef_min_max">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\__undef_min_max">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\array">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\atomic">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\bitset">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\cassert">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\ccomplex">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\cctype">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\cerrno">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\cfenv">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\cfloat">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\chrono">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\cinttypes">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\ciso646">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\climits">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\clocale">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\cmath">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\codecvt">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\complex">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\condition_variable">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\csetjmp">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\csignal">
+      <Filter>Source Files\wrapper</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\libcxx\include\complex.h">

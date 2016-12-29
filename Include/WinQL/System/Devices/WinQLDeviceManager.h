@@ -203,7 +203,7 @@ namespace nsWin32
 		CDeviceManager& CDeviceManager::operator = ( const CDeviceManager& src );
 
 	};
-
+/*
 #ifndef __WINQL
 
 	__QOR_INTERFACE( __WINQL ) nsCodeQOR::mxGUID __QCMP_DECLARE_MERGE_INITIALIZERS CDeviceManager::GUID_DEVICE_BATTERY		 = { 0x72631E54, 0x78A4, 0x11D0, { 0xBC, 0xF7, 0x00, 0xAA, 0x00, 0xB7, 0xB3, 0x2A } };
@@ -212,7 +212,7 @@ namespace nsWin32
 
 	__QOR_INTERFACE( __WINQL ) nsCodeQOR::mxGUID __QCMP_DECLARE_MERGE_INITIALIZERS CDeviceManager::GUID_BTHPORT_DEVICE_INTERFACE		 =	{ 0x0850302A, 0xB344, 0x4fda, { 0x9B, 0xE9, 0x90, 0x57, 0x6B, 0x8D, 0x46, 0xF0 } };
 #endif
-
+*/
 }//nsWin32
 
 #endif//WINQL_DEVICEMANAGER_H_3

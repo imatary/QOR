@@ -1,6 +1,6 @@
-//ThreadLocalEvent.h
+//WinQLProtocolServerRole.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,10 +24,10 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Event for consumption on the same thread as it is raised.
+//WinQL Application Role for Protocol Server
 
-#ifndef CODEQOR_EVENT_THREADLOCAL_H_3
-#define CODEQOR_EVENT_THREADLOCAL_H_3
+#ifndef WINQL_APPROLEPROTOCOLSERVER_H_1
+#define WINQL_APPROLEPROTOCOLSERVER_H_1
 
 #include "CompilerQOR.h"
 
@@ -35,27 +35,37 @@
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-#include "CodeQOR.h"
+#include "CodeQOR/ClassReg/ExternalClassReg.h"
+#include "AppocritaQOR/Role.h"
+#include "WinQL/Application/Subsystems/WinQLThreading.h"
 
 //--------------------------------------------------------------------------------
-namespace nsCodeQOR
+namespace nsWin32
 {
-	class __QOR_INTERFACE( __CODEQOR ) CThreadContextBase;
-
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __CODEQOR ) CThreadLocalEvent
+	class __QOR_INTERFACE( __WINQL ) CProtocolServerRole : public nsQOR::CRoleImplBase
 	{
 	public:
 
-		CThreadLocalEvent();				//construct and publish event in Thread Context Event Manager
-		virtual ~CThreadLocalEvent();		//revoke event in Thread Context Event Manager
-		void operator()( void );			//raise an event instance in the Event Manager. All current synchronous subscribers will be notified before call returns
+		__QOR_DECLARE_OCLASS_ID( CProtocolServerRole );
+
+		__QOR_IMPL_REF( CProtocolServerRole );
+
+		static nsCodeQOR::CTExternalRegEntry< CProtocolServerRole > RegEntry;
+
+		CProtocolServerRole();
+		virtual ~CProtocolServerRole();
+		CProtocolServerRole( const CProtocolServerRole& src );
+		CProtocolServerRole& operator = ( const CProtocolServerRole& src );
+
+		virtual void Setup( nsQOR::IApplication& );
+		virtual void Shutdown( nsQOR::IApplication& );
 
 	private:
 
-		CThreadContextBase* m_pContext;
+		nsQOR::CThreading m_Threading;
 	};
 
-}//nsCodeQOR
+}//nsWin32
 
-#endif//CODEQOR_EVENT_THREADLOCAL_H_3
+#endif//WINQL_APPROLEPROTOCOLSERVER_H_1

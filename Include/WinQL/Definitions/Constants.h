@@ -102,6 +102,7 @@ namespace nsWin32
 	__QCMP_STATIC_CONSTANT( unsigned long, Std_Output_Handle = ( (unsigned long) -11 ) );
 	__QCMP_STATIC_CONSTANT( unsigned long, Std_Error_Handle = ( (unsigned long) -12 ) );
 
+	//File seek constants
 	__QCMP_STATIC_CONSTANT( long, File_Begin = 0 );
 	__QCMP_STATIC_CONSTANT( long, File_Current = 1 );
 	__QCMP_STATIC_CONSTANT( long, File_End = 2);

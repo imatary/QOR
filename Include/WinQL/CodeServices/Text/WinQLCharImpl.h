@@ -35,10 +35,10 @@
 namespace nsWin32
 {
 	
-#	include "../SystemQOR/MSWindows/WinQL/CodeServices/Text/CharImpl/Char_SBS.inl"
-#	include "../SystemQOR/MSWindows/WinQL/CodeServices/Text/CharImpl/Char_SBU.inl"
-#	include "../SystemQOR/MSWindows/WinQL/CodeServices/Text/CharImpl/Char_UTF16.inl"
-#	include "../SystemQOR/MSWindows/WinQL/CodeServices/Text/CharImpl/Char_UTF32.inl"
+#	include "../Source/SystemQOR/MSWindows/WinQL/CodeServices/Text/CharImpl/Char_SBS.inl"
+#	include "../Source/SystemQOR/MSWindows/WinQL/CodeServices/Text/CharImpl/Char_SBU.inl"
+#	include "../Source/SystemQOR/MSWindows/WinQL/CodeServices/Text/CharImpl/Char_UTF16.inl"
+#	include "../Source/SystemQOR/MSWindows/WinQL/CodeServices/Text/CharImpl/Char_UTF32.inl"
 //TODO: #	include "../SystemQOR/MSWindows/WinQL/CodeServices/Text/Char_UN.inl"
 //TODO: #	include "../SystemQOR/MSWindows/WinQL/CodeServices/Text/Char_I.inl"
 

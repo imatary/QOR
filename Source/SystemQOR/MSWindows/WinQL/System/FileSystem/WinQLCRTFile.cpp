@@ -56,7 +56,7 @@ namespace nsWin32
 	using namespace nsWinQAPI;
 
 	//TODO: These belong in fcntl_types.h
-
+	/*
 	__QCMP_STATIC_CONSTANT( int, OReadOnly =		0x00000 );			//open for reading only
 	__QCMP_STATIC_CONSTANT( int, OWriteOnly =		0x00001 );			//open for writing only
 	__QCMP_STATIC_CONSTANT( int, OReadWrite =		0x00002 );			//open for reading and writing
@@ -81,7 +81,7 @@ namespace nsWin32
 	__QCMP_STATIC_CONSTANT( int, OCloseOnExec =		1 );
 
 	__QCMP_STATIC_CONSTANT( int, ONonBlocking =		0 );				//Non-blocking mode.
-
+	*/
 	CCRTFile CCRTFile::_iob[ _IOB_ENTRIES ];
 
 	CCRTFile::TFileDescriptorMap CCRTFile::s_FileDescriptorMap;
@@ -131,7 +131,7 @@ namespace nsWin32
 			if( i == 0 )
 			{
 				CConsole::__initconin();
-				pFile = CConsole::ConsoleInputFile();
+				//pFile = CConsole::ConsoleInputFile();
 				pFile->_flag |= _IORW;
 			}
 
@@ -233,7 +233,7 @@ namespace nsWin32
 
 				if( fh == 0 )
 				{
-					pnewFile = CConsole::ConsoleInputFile();
+					//pnewFile = CConsole::ConsoleInputFile();
 				}
 				else
 				{
@@ -928,7 +928,7 @@ done:
 
         return( Seeki64( *pPos, SEEK_SET ) );
 	}
-
+	/*
 	//--------------------------------------------------------------------------------
 	long int CCRTFile::Tell( void )
 	{
@@ -940,7 +940,7 @@ done:
         lResult = TellNoLock();
         return lResult;
 	}
-
+	*/
 	//--------------------------------------------------------------------------------
 	off_t CCRTFile::TellO( void )
 	{

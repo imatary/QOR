@@ -38,7 +38,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CParentController );
 
 	//--------------------------------------------------------------------------------
-	CParentController::CParentController( nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent ) : CBaseWindowPartController( pModelItem, pParent )
+	CParentController::CParentController( nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent ) : CBaseWindowPartController( pModelItem, Parent )
 	{
 		_WINQ_FCONTEXT( "CParentController::CParentController" );
 	}
@@ -50,11 +50,11 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CParentController::SetModel( nsMammut::CModel* pModelItem )
+	void CParentController::SetModel( nsMammut::CModel* pModelItem )
 	{
 		_WINQ_FCONTEXT( "CParentController::SetModel" );
-		return nsAppocrita::CController::SetModel( pModelItem )
-			&& WinCtrlParent().SetModel( pModelItem );
+		nsQOR::CController::SetModel( pModelItem );
+		WinCtrlParent().SetModel( pModelItem );
 	}
 
 	//--------------------------------------------------------------------------------

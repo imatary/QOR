@@ -239,6 +239,40 @@ __QCMP_STARTLINKAGE_C
 		return ExceptionHandler( pExcept, pFrame, pContext, pDC );
 	}
 
+	//--------------------------------------------------------------------------------
+	static void msvcrt_local_unwind4( unsigned long* cookie, ExceptionFrame* frame, int trylevel, void *ebp )
+	{
+		/*
+		EXCEPTION_REGISTRATION_RECORD reg;
+		const SCOPETABLE_V4 *scopetable = get_scopetable_v4( frame, *cookie );
+		TRACE( "(%p,%d,%d)\n", frame, frame->trylevel, trylevel );
+
+		// Register a handler in case of a nested exception
+		reg.Handler = MSVCRT_nested_handler;
+		reg.Prev = NtCurrentTeb()->Tib.ExceptionList;
+		__wine_push_frame( &reg );
+		
+		while( frame->trylevel != -2 && frame->trylevel != trylevel )
+		{
+			int level = frame->trylevel;
+			frame->trylevel = scopetable->entries[ level ].previousTryLevel;
+			if( !scopetable->entries[ level ].lpfnFilter )
+			{
+				TRACE( "__try block cleanup level %d handler %p ebp %p\n", level, scopetable->entries[ level ].lpfnHandler, ebp );
+				call_unwind_func( scopetable->entries[ level ].lpfnHandler, ebp );
+			}
+		}
+		__wine_pop_frame( &reg );
+		TRACE( "unwound OK\n" );
+		*/
+	}
+
+	//--------------------------------------------------------------------------------
+	void __cdecl _local_unwind4( unsigned long* cookie, ExceptionFrame* frame, int trylevel )
+	{
+		msvcrt_local_unwind4( cookie, frame, trylevel, frame->EBP() );
+	}
+
 __QCMP_ENDLINKAGE_C
 
 #endif//_WIN64

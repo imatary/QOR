@@ -31,6 +31,7 @@
 #include "PosumQOR.h"
 #include "SystemQOR.h"
 #include "PosumQOR/MSWindows/WinMemoryManager.h"
+#include "WinQL/Application/Threading/WinQLThread.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWinPosum
@@ -56,7 +57,7 @@ namespace nsWinPosum
 	{
 		while( m_InterlockedHelper.CompareExchange( sl, 1, 0 ) != 0 ) 
 		{
-			m_ThreadHelper.Sleep( 0 );
+			nsWin32::CThread::GetCurrent()->Sleep( 0 );
 		}
 		return 0;
 	}

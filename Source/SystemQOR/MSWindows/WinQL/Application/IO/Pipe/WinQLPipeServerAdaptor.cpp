@@ -81,7 +81,7 @@ namespace nsWin32
 		m_bConnected = true;
 		if( Protocol() )
 		{
-			Protocol()->OnConnected();
+			Protocol().As< nsBluefoot::CBFProtocol >()->OnConnected();
 		}
 	}
 
@@ -99,7 +99,7 @@ namespace nsWin32
 
 		if( !AsyncConnection() && Protocol() )
 		{
-			bDisconnected ? Protocol()->OnDisconnected() : Protocol()->OnDisconnectionError();
+			bDisconnected ? Protocol().As< nsBluefoot::CBFProtocol >()->OnDisconnected() : Protocol().As< nsBluefoot::CBFProtocol >()->OnDisconnectionError();
 		}		
 	}
 

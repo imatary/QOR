@@ -115,7 +115,7 @@ namespace nsx86
 #if	( QOR_ARCH_WORDSIZE == 32 )
 		void pushfd();
 #else
-			inline void pushfq()
+		inline void pushfq();
 #endif // ( QOR_ARCH_WORDSIZE == 32 )
 		inline void rep_lodsw();
 		void rep_movsw();

@@ -30,6 +30,7 @@
 #include "CodeQOR/Tracing/FunctionContextBase.h"
 #include "CodeQOR/Parameters/ParamRegister.h"
 #include "CodeQOR/Modules/ProcessBase.h"
+#include "AppocritaQOR/SubSystems/Thread.h"
 
 //--------------------------------------------------------------------------------
 namespace nsParamChecking
@@ -93,17 +94,19 @@ namespace nsParamChecking
 	//--------------------------------------------------------------------------------
 	void CReturnRegister::OnAssignment( void )
 	{
-		nsCodeQOR::CProcessBase* pProcessContext = nsCodeQOR::CProcessBase::ThisProcess();
-		nsCodeQOR::CThreadContextBase* pThreadContext = ( pProcessContext == 0 ) ? 0 : pProcessContext->ThreadContext();
-		nsCodeQOR::CFunctionContextBase* pFunctionContext = ( pThreadContext == 0 ) ? 0 : pThreadContext->FunctionContext();
-		nsCodeQOR::CFunctionContextBase* pParent = ( pFunctionContext == 0 ) ? 0 : pFunctionContext->GetParent();
-		nsCodeQOR::CCallContextBase* pCallContext = ( pParent == 0 ) ? 0 : pParent->CallContext();
-
-		if( pCallContext != 0 )
+		nsQOR::IThread::ref_type pThreadContext = nsQOR::CThread::GetCurrent();
+		if( pThreadContext )
 		{
-			pFunctionContext->Lock();
-			pCallContext->OnReturnAssignment();
-			pFunctionContext->Unlock();
+			nsCodeQOR::CFunctionContextBase* pFunctionContext = ( pThreadContext.IsNull() ) ? 0 : pThreadContext->FunctionContext();
+			nsCodeQOR::CFunctionContextBase* pParent = ( pFunctionContext == 0 ) ? 0 : pFunctionContext->GetParent();
+			nsCodeQOR::CCallContextBase* pCallContext = ( pParent == 0 ) ? 0 : pParent->CallContext();
+
+			if( pCallContext != 0 )
+			{
+				pFunctionContext->Lock();
+				pCallContext->OnReturnAssignment();
+				pFunctionContext->Unlock();
+			}
 		}
 	}
 

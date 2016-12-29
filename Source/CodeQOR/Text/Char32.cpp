@@ -30,6 +30,7 @@
 #include "CodeQOR/Text/Char16.h"
 #include "CodeQOR/Text/Char8.h"
 #include "CodeQOR/CodePages/CodePage.h"
+#include "AppocritaQOR/SubSystems/Thread.h"
 
 //------------------------------------------------------------------------------
 namespace nsCodeQOR
@@ -178,10 +179,11 @@ namespace nsCodeQOR
 	CChar8 CChar32::ToLocal8Bit( void ) const
 	{
 		CChar8 c;
-		CCodePage* pCodePage = CThreadContextBase::GetCurrent()->GetCodePage();
-		if( pCodePage )
+		nsQOR::IThread::ref_type pCurrentThread = nsQOR::CThread::GetCurrent();
+
+		if( pCurrentThread->GetCodePage() )
 		{
-			c = static_cast< unsigned char >( pCodePage->Encode( m ) );
+			c = static_cast< unsigned char >( pCurrentThread->GetCodePage()->Encode( m ) );
 		}
 		else
 		{

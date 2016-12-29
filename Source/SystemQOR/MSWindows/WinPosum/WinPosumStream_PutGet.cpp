@@ -448,12 +448,12 @@ done: ;
 		unsigned long cchWritten = 0;
 
 		// write character to console file handle
-
+		/*TODO:
 		if( !CWin32Application::TheWin32Application()->Console()->ScreenBuffer()->Write( &ch, 1, &cchWritten ) )
 		{
 			return WEOF;
 		}
-
+		*/
 		return ch;
 	}
 

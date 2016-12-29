@@ -53,7 +53,7 @@ namespace nsBaseCRT
 		__QCS_FCONTEXT("Csys_ipc::ftok");
 		errno = ENOSYS;
 
-		::stat st;
+		::sstat st;
 		if( _stat( path, &st ) < 0 )
 		{
 			return -1;

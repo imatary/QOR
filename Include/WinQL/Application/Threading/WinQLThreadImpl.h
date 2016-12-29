@@ -35,6 +35,7 @@
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
+	/*
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CThreadImpl : public nsCodeQOR::CThreadContextBase
 	{
@@ -62,7 +63,7 @@ namespace nsWin32
 		void* m_pFrameInfoChain;
 		void* m_pImpl;
 	};
-
+	*/
 }//nswin32
 
 #endif//WINQL_CS_THREADIMPL_H_1

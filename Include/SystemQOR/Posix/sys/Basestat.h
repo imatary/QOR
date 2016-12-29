@@ -37,7 +37,7 @@
 namespace nsBaseCRT
 {
 	using nsPlatform::mode_t;
-	using nsPlatform::stat;
+	using nsPlatform::file_stat;
 	using nsPlatform::timespec;
 	using nsPlatform::dev_t;
 	using nsPlatform::errno_t;	
@@ -55,17 +55,17 @@ namespace nsBaseCRT
 		virtual int chmod( const char*, mode_t );
 		virtual int fchmod( int, mode_t );
 		virtual int fchmodat( int, const char*, mode_t, int );
-		virtual int fstat( int, stat* );
-		virtual int fstatat( int, const char* __QCMP_RESTRICT, stat* __QCMP_RESTRICT, int );
+		virtual int fstat( int, file_stat* );
+		virtual int fstatat( int, const char* __QCMP_RESTRICT, file_stat* __QCMP_RESTRICT, int );
 		virtual int futimens( int, const timespec[ 2 ] );
-		virtual int lstat( const char* __QCMP_RESTRICT, stat* __QCMP_RESTRICT );
+		virtual int lstat( const char* __QCMP_RESTRICT, file_stat* __QCMP_RESTRICT );
 		virtual int mkdir( const char*, mode_t );
 		virtual int mkdirat( int, const char*, mode_t );
 		virtual int mkfifo( const char*, mode_t );
 		virtual int mkfifoat( int, const char*, mode_t );
 		virtual int mknod( const char*, mode_t, dev_t );
 		virtual int mknodat( int, const char*, mode_t, dev_t );
-		virtual int stat( const char* __QCMP_RESTRICT, stat* __QCMP_RESTRICT );
+		virtual int stat( const char* __QCMP_RESTRICT, file_stat* __QCMP_RESTRICT );
 		virtual mode_t umask( mode_t );
 		virtual int utimensat( int, const char*, const timespec[ 2 ], int );
 		virtual int _umask( int pmode );

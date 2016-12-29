@@ -27,6 +27,7 @@
 #include "AppocritaQOR/AppocritaQOR.h"
 #include "CodeQOR/DataTypes/GUID.h"
 #include "CodeQOR/Modules/LoadableModuleBase.h"
+#include "AppocritaQOR/Application.h"
 
 //------------------------------------------------------------------------------
 //Only for shared library builds as one of a network of codependent shared libraries
@@ -34,6 +35,15 @@
 #	ifdef _USRDLL
 
 __QCMP_STARTLINKAGE_C
+
+	extern int _cdecl QORStaticInit( void );
+
+	//------------------------------------------------------------------------------
+	__QCMP_EXPORT int _cdecl QORinit( void )
+	{
+		QORStaticInit();
+		return 1;
+	}
 
 	//------------------------------------------------------------------------------
 	//This gives the QOR Controller library (AppocritaQOR) a unique identity and marks it as a QOR module

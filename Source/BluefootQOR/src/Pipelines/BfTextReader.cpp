@@ -33,7 +33,7 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CRecognizerEventSink::CRecognizerEventSink( CBFTextReader* pContainer ) : m_pContainer( pContainer )
+	CRecognizerEventSink::CRecognizerEventSink( CBFTextReader* pContainer ) : CEventSink( m_pEvent ), m_pContainer( pContainer )
 	{
 	}
 
@@ -42,7 +42,7 @@ namespace nsBluefoot
 	{
 		if( m_pContainer )
 		{
-			m_pContainer->OnRecognizerEvent( dynamic_cast< CBOMRecognizedEvent* >( m_pEvent )->BOMType() );
+			m_pContainer->OnRecognizerEvent( m_pEvent.As< CBOMRecognizedEvent >()->BOMType() );
 		}
 	}
 

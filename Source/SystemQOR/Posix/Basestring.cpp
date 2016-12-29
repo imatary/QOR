@@ -988,7 +988,7 @@ namespace nsBaseCRT
     //--------------------------------------------------------------------------------
     int Cstring::strncmp( const char* s1, const char* s2, size_t n )
     {
-        __QCS_FCONTEXT( "Cstring::strncmp" );
+        //__QCS_FCONTEXT( "Cstring::strncmp" );
 
         if( n == 0 )
         {

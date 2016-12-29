@@ -52,7 +52,7 @@ namespace nsWin32
 		void doexit( void );
 		bool Booted( void );
 
-	private:
+	protected:
 
 		__QCMP_STATIC_CONSTANT( unsigned int, scui_AtExitPageSize = 20 );
 		void* m_apAtExit[ scui_AtExitPageSize ];

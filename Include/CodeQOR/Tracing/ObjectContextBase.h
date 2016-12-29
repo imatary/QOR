@@ -52,7 +52,7 @@ namespace nsCodeQOR
 #	define __QCS_TYPE_OF( _CLASS ) template<> struct nsCodeQOR::type_of< &(_CLASS::ClassID) >{ typedef _CLASS type; }
 
 	//--------------------------------------------------------------------------------
-	//A class for tracking the objects making calls and being called
+	//A class for tracking the objects that are making calls and being called
 	class __QOR_INTERFACE( __CODEQOR ) CObjectContextBase
 	{
 	public:
@@ -83,7 +83,7 @@ namespace nsCodeQOR
 	private:
 
 		typedef CObjectPointer< CObjectContextBase > ObjectContextBasePointer;
-		byte m_Backing[ sizeof( ObjectContextBasePointer ) +sizeof( double ) ];
+		byte m_Backing[ sizeof( ObjectContextBasePointer ) + sizeof( double ) ];
 
 		byte* Local_memcpy( byte* s1, const byte* s2, size_t n );
 	};

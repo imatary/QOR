@@ -30,6 +30,7 @@
 #include "CodeQOR/ErrorSystem/What.h"
 #include "CodeQOR/ErrorSystem/Where.h"
 #include "CodeQOR/ErrorSystem/When.h"
+#include <new>
 #include "../Source/SystemQOR/MSWindows/WinQAPI/include/ErrorDomain.h"
 #include "../Source/SystemQOR/MSWindows/WinQAPI/include/Error.h"
 #include "WinQAPI/Kernel32.h"
@@ -51,7 +52,7 @@ namespace nsWinQAPI
     }
 
 	//--------------------------------------------------------------------------------
-	CErrorDomain* ErrorDomainPtr( void )
+	__QOR_INTERFACE( __WINQAPI ) CErrorDomain* ErrorDomainPtr( void )
 	{
 		return &_ErrorDomain;
 	}

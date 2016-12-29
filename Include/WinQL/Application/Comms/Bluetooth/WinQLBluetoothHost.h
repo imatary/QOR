@@ -1,6 +1,6 @@
 //WinQLBluetoothHost.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -87,7 +87,7 @@ namespace nsWin32
 
 			__QOR_DECLARE_OCLASS_ID( CBluetoothDeviceChangeController );
 
-			CBluetoothDeviceChangeController( CBluetoothHost& Host, nsMammut::CModel* pModelItem, nsAppocrita::CController* pParent );
+			CBluetoothDeviceChangeController( CBluetoothHost& Host, nsMammut::CModel* pModelItem, nsQOR::CController::ref_type Parent );
 			~CBluetoothDeviceChangeController();
 
 			virtual long OnDeviceChange( COSWindow& Window, Cmp_uint_ptr wParam, Cmp_long_ptr lParam );

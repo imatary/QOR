@@ -386,7 +386,7 @@ namespace nsWin32
 
 		pthread_mutex_lock( &mtx_pthr_locked );
 		t = pthr_root;
-		nsWin32::CThreadHelper ThreadHelper;
+
 		while( t != NULL )
 		{
 			_pthread_v* sv = t;
@@ -395,7 +395,7 @@ namespace nsWin32
 			{
 				pthread_mutex_unlock( &mtx_pthr_locked );
 				pthread_cancel( t->x );
-				ThreadHelper.Sleep( 0 );
+				CThread::GetCurrent()->Sleep( 0 );
 				pthread_mutex_lock( &mtx_pthr_locked );
 				t = pthr_root;
 				continue;
@@ -403,7 +403,7 @@ namespace nsWin32
 			else if( sv->x != 0 && sv->valid != DEAD_THREAD )
 			{
 				pthread_mutex_unlock( &mtx_pthr_locked );
-				ThreadHelper.Sleep( 0 );
+				CThread::GetCurrent()->Sleep( 0 );
 				pthread_mutex_lock( &mtx_pthr_locked );
 				continue;
 			}
@@ -671,12 +671,11 @@ namespace nsWin32
 	int Cpthread::delay_np( const timespec* interval )
 	{
 		unsigned long to = ( !interval ? 0 : dwMilliSecs ( time_in_ms_from_timespec( interval ) ) );
-		_pthread_v* s = __pthread_self_lite ();
-		nsWin32::CThreadHelper ThreadHelper;
+		_pthread_v* s = __pthread_self_lite ();		
 		if( !to )
 		{
 			pthread_testcancel ();
-			ThreadHelper.Sleep( 0 );
+			CThread::GetCurrent()->Sleep( 0 );
 			pthread_testcancel ();
 			return 0;
 		}
@@ -687,7 +686,7 @@ namespace nsWin32
 		}
 		else
 		{
-			ThreadHelper.Sleep( to );
+			CThread::GetCurrent()->Sleep( to );
 		}
 		pthread_testcancel ();
 		return 0;
@@ -699,11 +698,11 @@ namespace nsWin32
 	int Cpthread::delay_np_ms( unsigned long to )
 	{
 		_pthread_v* s = __pthread_self_lite();
-		nsWin32::CThreadHelper ThreadHelper;
+		
 		if( !to )
 		{
 			pthread_testcancel();
-			ThreadHelper.Sleep( 0 );
+			CThread::GetCurrent()->Sleep( 0 );
 			pthread_testcancel();
 			return 0;
 		}
@@ -715,7 +714,7 @@ namespace nsWin32
 		}
 		else
 		{
-			ThreadHelper.Sleep( to );
+			CThread::GetCurrent()->Sleep( to );
 		}
 		pthread_testcancel ();
 		return 0;
@@ -1694,11 +1693,10 @@ namespace nsWin32
 			pthread_mutex_unlock( &tv->p_clock );
 			pthread_mutex_destroy( &tv->p_clock );
 		}
-
-		nsWin32::CThreadHelper ThreadHelper;
+		
 		while( pthread_mutex_unlock( &mtx_pthr_locked ) == 0 )
 		{
-			ThreadHelper.Sleep( 0 );
+			CThread::GetCurrent()->Sleep( 0 );
 		}
 		//_endthreadex (rslt);
 		return rslt;
@@ -1729,7 +1727,7 @@ namespace nsWin32
 		tv->func = func;
 		tv->p_state = PTHREAD_DEFAULT_ATTR;
 		//TODO: tv->h->SetHandle( Invalid_Handle_Value );
-		nsWin32::CThreadHelper ThreadHelper;
+		//nsWin32::CThreadHelper ThreadHelper;
 		// We retry it here a few times, as events are a limited resource ...
 		do
 		{
@@ -1738,7 +1736,7 @@ namespace nsWin32
 			{
 				break;
 			}
-			ThreadHelper.Sleep( ( !redo ? 0 : 20 ) );
+			CThread::GetCurrent()->Sleep( ( !redo ? 0 : 20 ) );
 		}
 		while( ++redo <= 4 );
 
@@ -1830,7 +1828,7 @@ namespace nsWin32
 			tv->h = thrd;
 			thrd->Resume();
 		}
-		ThreadHelper.Sleep( 0 );
+		CThread::GetCurrent()->Sleep( 0 );
 		return 0;
 	}
 	

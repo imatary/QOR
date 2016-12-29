@@ -43,7 +43,7 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CDeviceChangeController );
 
-		CDeviceChangeController( nsMammut::CModel* pModelItem = 0, nsAppocrita::CController* pParent = 0 );
+		CDeviceChangeController( nsMammut::CModel* pModelItem = 0, nsQOR::CController::ref_type Parent = 0 );
 		virtual ~CDeviceChangeController();
 		virtual bool ProcessMessage( COSWindow& Window, Cmp_long_ptr& lResult, unsigned int uMsg, Cmp_uint_ptr wParam, Cmp_long_ptr lParam );
 		virtual long OnDeviceChange( COSWindow& Window, Cmp_uint_ptr wParam, Cmp_long_ptr lParam );

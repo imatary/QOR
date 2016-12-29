@@ -37,7 +37,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CEvent );
 
 	//--------------------------------------------------------------------------------
-	CEvent::CEvent( nsWin32::LPSECURITY_ATTRIBUTES lpEventAttributes, const TCHAR* lpName, unsigned long dwFlags, unsigned long dwDesiredAccess, bool* pbAlreadyExists )
+	CEvent::CEvent( nsWin32::LPSECURITY_ATTRIBUTES lpEventAttributes, const TCHAR* lpName, unsigned long dwFlags, unsigned long dwDesiredAccess, bool* pbAlreadyExists ) : CWaitableObject()
 	{
 		_WINQ_FCONTEXT( "CEvent::CEvent" );
 		__QOR_PROTECT
@@ -64,7 +64,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CEvent::CEvent( unsigned long dwDesiredAccess, bool bInheritHandle, const TCHAR* lpName )
+	CEvent::CEvent( unsigned long dwDesiredAccess, bool bInheritHandle, const TCHAR* lpName ) : CWaitableObject()
 	{
 		_WINQ_FCONTEXT( "CEvent::CEvent" );
 		__QOR_PROTECT
@@ -75,14 +75,14 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CEvent::CEvent( CSyncHandle& ExistingHandle )
+	CEvent::CEvent( CSyncHandle& ExistingHandle ) : CWaitableObject( ExistingHandle.Ref() )
 	{
 		_WINQ_FCONTEXT( "CEvent::CEvent" );
-		m_Handle = ExistingHandle;
 	}
 
 	//--------------------------------------------------------------------------------
-	CEvent::CEvent( const CEvent& Src, E_EVT_COPY_CONSTRUCT_OPTS Opt ) : m_bAlreadyExists( Src.m_bAlreadyExists )
+	CEvent::CEvent( const CEvent& Src, E_EVT_COPY_CONSTRUCT_OPTS Opt ) : CWaitableObject( Src )
+		, m_bAlreadyExists( Src.m_bAlreadyExists )
 	{
 		_WINQ_FCONTEXT( "CEvent::CEvent" );
 		__QOR_PROTECT
@@ -147,7 +147,7 @@ namespace nsWin32
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
-
+	/*
 	//--------------------------------------------------------------------------------
 	nsCodeQOR::CTCRef< CSyncHandle > CEvent::Handle()
 	{
@@ -176,7 +176,7 @@ namespace nsWin32
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
-
+	*/
 	//--------------------------------------------------------------------------------
 	CSessionEvent::CSessionEvent( TCHAR* pszName, SECURITY_ATTRIBUTES* pEventSecurity, unsigned long dwFlags, unsigned long dwAccessDesired ) :
 	CEvent( pEventSecurity, CTString( _TXT("Local\\" ) ).Append( pszName ), dwFlags, dwAccessDesired )

@@ -27,7 +27,7 @@
 //Implements a very basic Process representative object
 
 #include "CodeQOR/Modules/ProcessBase.h"
-
+#include "AppocritaQOR/Event.h"
 extern nsCodeQOR::CLoadableModuleBase& ThisModule();
 
 //--------------------------------------------------------------------------------
@@ -61,19 +61,20 @@ namespace nsCodeQOR
     CProcessBase::CProcessBase() : CLoadableModuleBase( "The Process" )
     {
 		_pThisProcess = this;
-		m_pMainThreadContext = 0;
+		//m_pMainThreadContext = 0;
     }
 
     //--------------------------------------------------------------------------------
     CProcessBase::CProcessBase( const char* szProcessName ) : CLoadableModuleBase( szProcessName )
     {
-		m_pMainThreadContext = 0;
+		//m_pMainThreadContext = 0;
     }
 
 	//--------------------------------------------------------------------------------
     CProcessBase::~CProcessBase()
     {
-		m_pMainThreadContext = 0;
+		m_MainThread.Detach();
+		//m_pMainThreadContext = 0;
 		_pThisProcess = 0;
     }
 
@@ -109,15 +110,18 @@ namespace nsCodeQOR
 	}
 
 	//--------------------------------------------------------------------------------
-	CThreadContextBase* CProcessBase::ThreadContext( void )
+	nsQOR::IThread::ref_type CProcessBase::ThreadContext( void )
 	{
-		return m_pMainThreadContext;
+		return m_MainThread;
 	}
 
 	//--------------------------------------------------------------------------------
-	void CProcessBase::SetMainThread( CThreadContextBase* pMainThread )
+	void CProcessBase::SetMainThread( nsQOR::IThread::ref_type MainThread )
 	{
-		m_pMainThreadContext = pMainThread;
+		if( !MainThread.IsNull() )
+		{
+			m_MainThread = MainThread->Ref();
+		}
 	}
 
 	//--------------------------------------------------------------------------------
@@ -129,16 +133,12 @@ namespace nsCodeQOR
 	//--------------------------------------------------------------------------------
 	CClassReg& CProcessBase::ClassReg( void )											//Return the Class Registry for this process
 	{
-		//static CClassReg sClassReg;
-		//return sClassReg;
 		return m_ClassReg;
 	}
 
 	//--------------------------------------------------------------------------------
 	CExternalClassReg& CProcessBase::ExternalClassReg( void )							//Return the External Class Registry for this process
 	{
-		//static CExternalClassReg sExternalClassReg;
-		//return sExternalClassReg;
 		return m_ExternalClassReg;
 	}
 

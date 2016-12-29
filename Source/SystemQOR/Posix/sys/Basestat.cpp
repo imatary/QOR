@@ -70,7 +70,7 @@ namespace nsBaseCRT
 	}
 
 	//--------------------------------------------------------------------------------
-	int Csys_stat::fstat( int, nsPlatform::stat* )
+	int Csys_stat::fstat( int, nsPlatform::file_stat* )
 	{
 		__QCS_FCONTEXT("Csys_stat::fstat");
 		errno = ENOSYS;
@@ -78,7 +78,7 @@ namespace nsBaseCRT
 	}
 
 	//--------------------------------------------------------------------------------
-	int Csys_stat::fstatat( int, const char* __QCMP_RESTRICT, nsPlatform::stat* __QCMP_RESTRICT, int )
+	int Csys_stat::fstatat( int, const char* __QCMP_RESTRICT, nsPlatform::file_stat* __QCMP_RESTRICT, int )
 	{
 		__QCS_FCONTEXT("Csys_stat::fstatat");
 		errno = ENOSYS;
@@ -94,7 +94,7 @@ namespace nsBaseCRT
 	}
 
 	//--------------------------------------------------------------------------------
-	int Csys_stat::lstat( const char* __QCMP_RESTRICT, nsPlatform::stat* __QCMP_RESTRICT )
+	int Csys_stat::lstat( const char* __QCMP_RESTRICT, nsPlatform::file_stat* __QCMP_RESTRICT )
 	{
 		__QCS_FCONTEXT("Csys_stat::lstat");
 		errno = ENOSYS;
@@ -150,7 +150,7 @@ namespace nsBaseCRT
 	}
 
 	//--------------------------------------------------------------------------------
-	int Csys_stat::stat( const char* __QCMP_RESTRICT, nsPlatform::stat* __QCMP_RESTRICT )
+	int Csys_stat::stat( const char* __QCMP_RESTRICT, nsPlatform::file_stat* __QCMP_RESTRICT )
 	{
 		__QCS_FCONTEXT("Csys_stat::stat");
 		errno = ENOSYS;

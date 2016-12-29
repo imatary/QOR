@@ -28,6 +28,7 @@
 
 #include "CompilerQOR.h"
 #include "CodeQOR/Tracing/ObjectContextBase.h"
+#include "AppocritaQOR/Event.h"
 #include <string.h>
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR

@@ -1,6 +1,6 @@
-//WInQLConsole.h
+//WinQLConsole.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -37,6 +37,8 @@
 #include "WinQL/System/FileSystem/WinQLCRTFile.h"
 #include "WinQL/Application/Console/WinQLConsoleScreenBuffer.h"
 #include "WinQL/Application/Console/WinQLConsoleHelper.h"
+#include "WinQL/Application/Threading/WinQLWaitableObject.h"
+#include "AppocritaQOR/Controller.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -56,11 +58,70 @@ namespace nsWin32
 	};
 
 	//--------------------------------------------------------------------------------
+	class __QOR_INTERFACE( __WINQL ) CConsoleController : public nsQOR::CController
+	{
+	public:
+
+		__QOR_DECLARE_OCLASS_ID( CConsoleController );
+
+		CConsoleController();
+		virtual ~CConsoleController();
+		CConsoleController( const CConsoleController& src );
+		CConsoleController& operator = ( const CConsoleController& );
+
+		virtual bool HandleCtrl( unsigned long Ctrl );
+		virtual void HandleEvent( InputRecord& Event );
+		virtual void OnKeyEvent( KeyEventRecord& KeyEvent );
+		virtual void OnMouseEvent( MouseEventRecord& MouseEvent );
+		virtual void OnWindowBufferSizeEvent( WindowBufferSizeRecord& WindowBufferSizeEvent );
+		virtual void OnFocusEvent( FocusEventRecord& FocusEvent );
+		virtual void OnMenuEvent( MenuEventRecord& MenuEvent );
+		virtual bool OnCtrlC( void );
+		virtual bool OnClose( void );
+		virtual bool OnBreak( void );
+		virtual bool OnLogOff( void );
+		virtual bool OnShutdown( void );
+		virtual bool OnUnknownCtrl( void );
+	};
+
+	//--------------------------------------------------------------------------------
+	class __QOR_INTERFACE( __WINQL ) CConsoleInput : public CWaitableObject
+	{
+	public:
+
+		__QOR_DECLARE_OCLASS_ID( CConsoleInput );
+
+		__QOR_DECLARE_REF_TYPE( CConsoleInput );
+
+		CConsoleInput();
+		virtual ~CConsoleInput();
+		CConsoleInput( const CConsoleInput& );
+		CConsoleInput& operator = ( const CConsoleInput& );
+
+		bool operator == ( const CConsoleInput& cmp )
+		{
+			return m_Handle == cmp.m_Handle;
+		}
+
+		virtual bool OnCtrl( unsigned long ulCtrl );
+		virtual void OnSignaled( void );
+
+		nsCodeQOR::CSTMember< CConsoleController > Controller;
+
+	protected:
+
+		static const unsigned int scuiBufferSize = 65536 / sizeof( InputRecord );
+		InputRecord m_InputBuffer[ scuiBufferSize ];
+
+	};
+
+	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE(__WINQL) CConsole
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CConsole > refType;
+		__QOR_DECLARE_OCLASS_ID( CConsole );
+		__QOR_IMPL_REF( CConsole );
 
 		//--------------------------------------------------------------------------------
 		enum eConsoleDisplayMode
@@ -88,7 +149,7 @@ namespace nsWin32
 		//Properties
 
 		__QCS_REF_PROP(CConsole, eConsoleDisplayMode, DisplayMode);
-		__QCS_REF_PROP(CConsole, CFileHandle, InputStdHandle);
+		__QCS_REF_PROP(CConsole, CConsoleInput::ref_type, InputStdHandle);
 		__QCS_REF_PROP(CConsole, CFileHandle, OutputStdHandle);
 		__QCS_REF_PROP(CConsole, CFileHandle, ErrorStdHandle);
 		__QCS_REF_PROP(CConsole, CTString, Title);
@@ -99,8 +160,7 @@ namespace nsWin32
 		__QCS_REF_PROP(CConsole, ConsoleSelectionInfo, SelectionInfo);//Read only
 		__QCS_REF_PROP(CConsole, COSWindow::refType, Window);//Read only
 		__QCS_REF_PROP(CConsole, unsigned long, NumberOfMouseButtons);//Read only
-		__QCS_REF_PROP(CConsole, CConsoleScreenBuffer::refType, ScreenBuffer);
-		//Add Ctrl Event Handler/Generator stuff	
+		__QCS_REF_PROP(CConsole, CConsoleScreenBuffer::refType, ScreenBuffer);	
 
 #		include "WinQLConsoleAliases.h"
 
@@ -109,7 +169,8 @@ namespace nsWin32
 		CConsole();
 		~CConsole();
 
-		static refType TheWin32Console(void);
+		static ref_type TheWin32Console(void);
+		static int __stdcall CtrlHandler( unsigned long CtrlType );
 
 	protected:
 
@@ -135,20 +196,23 @@ namespace nsWin32
 		unsigned long GetNumberOfMouseButtons(void);
 		CConsoleScreenBuffer::refType GetScreenBuffer(void);
 
+		CConsoleInput::ref_type GetInputStdHandle( void );
+
 		CConsoleScreenBuffer m_Win32DefaultScreenBuffer;
 
 	public:
 
 		CConsoleHelper m_Helper;
+		CConsoleInput m_ConsoleInput;
 
 		static void __initconin(void);
 		static void __initconout(void);
 		static void __termcon(void);
 
-		static CCRTFile* ConsoleInputFile(void);
+		//static CCRTFile* ConsoleInputFile(void);
 		static CCRTFile* ConsoleOutputFile(void);
 
-		static CCRTFile* s_pConsoleInput;// console input
+		//static CCRTFile* s_pConsoleInput;// console input
 		static CCRTFile* s_pConsoleOutput;// console output
 
 	};

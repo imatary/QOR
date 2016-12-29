@@ -56,6 +56,9 @@
     <Filter Include="Source Files\MSWindows\winpthreads">
       <UniqueIdentifier>{532a16b4-def4-464b-a5a8-1af260650a51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Common\Config">
+      <UniqueIdentifier>{e6558c31-d110-421c-b5e2-b82fc0fcad38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\SystemQOR\Common\ExePageAllocator.cpp">
@@ -724,9 +727,6 @@
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_select.cpp">
       <Filter>Source Files\MSWindows\sys</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_sem.cpp">
-      <Filter>Source Files\MSWindows\sys</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_shm.cpp">
       <Filter>Source Files\MSWindows\sys</Filter>
     </ClCompile>
@@ -799,6 +799,12 @@
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\winpthreads\MSW_thread.cpp">
       <Filter>Source Files\MSWindows\winpthreads</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\Common\System.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\sys\MSW_sys_sem.cpp">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_acct.h">
@@ -820,9 +826,6 @@
       <Filter>Source Files\MSWindows\sys</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_select.h">
-      <Filter>Source Files\MSWindows\sys</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_sem.h">
       <Filter>Source Files\MSWindows\sys</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_shm.h">
@@ -1274,6 +1277,285 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\SystemQOR\MSWindows\versions\WinNT.h">
       <Filter>Source Files\MSWindows\versions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\ExePageAllocator.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\SharedBootStrap.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\System.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Config\OSDetection.h">
+      <Filter>Source Files\Common\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Config\SupportedOSList.h">
+      <Filter>Source Files\Common\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Config\SystemSelection.h">
+      <Filter>Source Files\Common\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseipc.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basemman.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basemsg.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseresource.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseselect.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basesem.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseshm.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basesocket.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basestat.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basestatvfs.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basetime.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basetimeb.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basetimes.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basetypes.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseuio.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseun.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Baseutsname.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\sys\Basewait.h">
+      <Filter>Source Files\Posix\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\netinet\Basein.h">
+      <Filter>Source Files\Posix\netinet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\netinet\Basetcp.h">
+      <Filter>Source Files\Posix\netinet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\net\Baseif.h">
+      <Filter>Source Files\Posix\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\Posix\arpa\Baseinet.h">
+      <Filter>Source Files\Posix\arpa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\sys\MSW_sem.h">
+      <Filter>Source Files\MSWindows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\setjmp_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\signal_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\spawn_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stdarg_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stdbool_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stddef_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stdint_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stdio_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stdlib_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\string_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\strings_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\stropts_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\syslog_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\tar_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\termios_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\tgmath_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\time_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\trace_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\ucontext_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\ulimit_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\unistd_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\utime_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\utmpx_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\wchar_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\wctype_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\wordexp_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\_complex_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\aio_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\assert_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\cpio_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\ctype_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\dirent_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\dlfcn_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\errno_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\fcntl_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\fenv_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\float_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\fmtmsg_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\fnmatch_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\ftw_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\glob_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\grp_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\iconv_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\inttypes_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\iso646_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\langinfo_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\libgen_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\limits_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\locale_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\math_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\monetary_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\mqueue_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\ndbm_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\netdb_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\nl_types_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\NOT_locale_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\poll_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\pthread_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\pwd_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\regex_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\sched_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\search_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\SystemQOR\MSWindows\types\semaphore_types.h">
+      <Filter>Source Files\MSWindows\types</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

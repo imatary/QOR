@@ -166,7 +166,7 @@ namespace nsWin32
 		int Seeki64( Cmp__int64 offset, int whence );
 		int SeekO( off_t Offset , int iWhence );
 		int SetPos( const fpos_t* pos );
-		long int Tell( void );
+		//long int Tell( void );
 		off_t TellO( void );
 		Cmp__int64 Telli64();
 		int TryLock( void );

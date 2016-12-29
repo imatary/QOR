@@ -34,21 +34,7 @@
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __QSYS ) Cassert : public nsBaseCRT::Cassert
-	{
-	public:
-	
-		Cassert();
-		virtual ~Cassert();
-
-	private:
-
-		Cassert( const Cassert& );
-		Cassert& operator = ( const Cassert& );
-
-	};
-
+	typedef nsBaseCRT::Cassert Cassert;
 }//nsWin32
 
 #endif//SYSTEMQOR_MSW_ASSERT_H_1

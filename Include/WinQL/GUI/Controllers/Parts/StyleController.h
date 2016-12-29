@@ -50,7 +50,7 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CStyleController );
 
-        CStyleController( nsMammut::CModel* pModelItem = 0, nsAppocrita::CController* pParent = 0 );
+        CStyleController( nsMammut::CModel* pModelItem = 0, nsQOR::CController::ref_type Parent = 0 );
 		virtual ~CStyleController();
 		virtual bool ProcessMessage( COSWindow& Window, Cmp_long_ptr& lResult, unsigned int uMsg, Cmp_uint_ptr wParam, Cmp_long_ptr lParam );			
 		virtual void OnStyleChanging( STYLESTRUCT* pStyle, bool bExtended );

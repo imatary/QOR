@@ -1,2 +1,1 @@
-Currently just starting up as a GitHub project. 1/4 million lines of code already exist elsewhere but need restructuring into a single coherent project.
-Watch this space.
+The restructure into a coherent project continues.

@@ -1,6 +1,6 @@
 //LibraryHeader.pph
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -26,6 +26,9 @@
 
 //Set up for an MSVC build of a static library
 #include "LibraryHeader.sth"
-#define QOR_PP_CONFIG_INT_DIR ../../Build/%build_project%/%build_architecture%/%build_os%/%build_os_ver%/%build_form%/%build_config%/%buildtype%/
+#define QOR_PP_CONFIG_INT_DIR ../../../Build/%build_project%/%build_architecture%/%build_os%/%build_os_ver%/%build_form%/%build_config%/%buildtype%/
+#define QOR_PP_CONFIG_OBJ_DIR ../../../Build/%build_project%/%build_architecture%/%build_os%/%build_os_ver%/%build_form%/%build_config%/%buildtype%/%buildbinary%/
 #define _LIB
 #include "BuildQOR/Prebuild.pph"
+#include __QCMP_BUILDOPTS		//include the compiler specific build macros
+

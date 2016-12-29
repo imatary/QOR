@@ -1,3 +1,6 @@
+29/12/2016
+Extensions to generic code layer in Appocrita and System. Updates to documents.
+
 10/03/2016
 Added large numbers of files locally from the previous stratified QOR project.
 All headers should now be present

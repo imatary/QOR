@@ -42,7 +42,7 @@
 #define __QCMP_WARNING_PUSH __pragma( warning( push ) )
 #if		( __QOR_PERFORMANCE == __QCS_MAX_SAFETY_ )
 #	undef __QCMP_WARNING_DISABLE
-#	define __QCMP_WARNING_DISABLE(_X, _Reason )	__pragma( warning( disable : _X ) )  __pragma( message( __FILE__"(" __QCMP_STRINGIZE(__LINE__) "):"_Reason ) )
+#	define __QCMP_WARNING_DISABLE(_X, _Reason )	__pragma( warning( disable : _X ) ) // __pragma( message( __FILE__"(" __QCMP_STRINGIZE(__LINE__) "):"_Reason ) )
 #else//!( __QOR_PERFORMANCE == __QCS_MAX_SAFETY_ )
 #	undef __QCMP_WARNING_DISABLE
 #	define __QCMP_WARNING_DISABLE(_X, _Reason )	__pragma( warning( disable : _X ) )
@@ -55,7 +55,7 @@
 #define __QCMP_WARNING_DEFAULT(_X) __pragma( warning( default : _X ) )
 
 #undef	__QCMP_OPTIMIZEINCLUDE
-#define __QCMP_OPTIMIZEINCLUDE //once
+#define __QCMP_OPTIMIZEINCLUDE once
 
 //__QCMP_WARNING_DISABLE( 4251, "Lots of false negatives if we leave this switched on" )	//
 __pragma( warning( disable : 4251 ) )

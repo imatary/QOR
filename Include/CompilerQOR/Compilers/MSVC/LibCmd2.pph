@@ -1,6 +1,6 @@
 //LibCmd2.pph
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -25,5 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 //Preprocessor build script generator, library command line macro for MSVC compilers
-
-QOR_PP_BUILD_LIB_COMMAND_LINE2( QOR_LIB_PATHS, QOR_LIBS, QOR_LIB_NAME )
+//This build .exp and .lib files for a DLL which we're going to link later
+#define QOR_PP_BUILD_LIB_DEF_SELECT 1
+QOR_PP_BUILD_LIB_COMMAND_LINE3( QOR_MODULE_NAME )
+#undef QOR_PP_BUILD_LIB_DEF_SELECT

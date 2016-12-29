@@ -1,6 +1,6 @@
 //BuildType.pph
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -27,9 +27,11 @@
 //Build one type (Debug,Release,etc) of the selected configuration of the selected linkage form of a project
 
 #include "BuildType.sth"
-#define QOR_BUILD_FORM QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_2,QOR_FORMS)
+#define QOR_BUILD_FORM QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_2,QOR_FORM_LIST)
 #define QOR_BUILD_CONFIG QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_3,QOR_CONFIGS)
 #define QOR_BUILD_TYPE QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_4,QOR_TYPES)
+
+#define QOR_PP_BUILD_CONFIG QOR_BUILD_CONFIG
 
 //include the build file for the linkage form out of the project folder
 #include QOR_PP_STRINGIZE(../../Build/QOR_PROJECT/QOR_BUILD_FORM.pp)

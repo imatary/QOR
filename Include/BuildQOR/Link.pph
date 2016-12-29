@@ -1,6 +1,6 @@
 //Link.pph
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -34,7 +34,8 @@
 //Generate the linker stage build commands
 
 #	include __QCMP_BUILDOPTS 			//setup up Linker build options
-#	include __QCMP_BUILDCMD_LINK_PPH	//generate the Linker specific command line 
+//#	include __QCMP_BUILDCMD_LINK_PPH	//generate the Linker specific command line 
+#	include "LinkCmd.pph"				//generate the Linker specific command line 
 
 #endif
 

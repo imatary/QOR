@@ -29,10 +29,10 @@
 set build_architecture=QOR_PP_SEQ_ELEM( 0, QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_1,QOR_TARGETS))
 set build_os=QOR_PP_SEQ_ELEM( 1, QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_1,QOR_TARGETS) )
 set build_os_ver=QOR_PP_SEQ_ELEM( 2, QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_1,QOR_TARGETS) )
-echo Building Target: ..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%
-if NOT EXIST ..\..\Build\%build_project%\%build_architecture% (
-mkdir ..\..\Build\%build_project%\%build_architecture% )
-if NOT EXIST ..\..\Build\%build_project%\%build_architecture%\%build_os% (
-mkdir ..\..\Build\%build_project%\%build_architecture%\%build_os% )
-if NOT EXIST ..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver% (
-mkdir ..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver% )
+echo Building Target: ..\..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%
+if NOT EXIST ..\..\..\Build\%build_project%\%build_architecture% (
+mkdir ..\..\..\Build\%build_project%\%build_architecture% )
+if NOT EXIST ..\..\..\Build\%build_project%\%build_architecture%\%build_os% (
+mkdir ..\..\..\Build\%build_project%\%build_architecture%\%build_os% )
+if NOT EXIST ..\..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver% (
+mkdir ..\..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver% )

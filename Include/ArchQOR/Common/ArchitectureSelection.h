@@ -29,12 +29,63 @@
 #ifndef ARCHQOR_ARCHITECTURESELECTION_H_1
 #define ARCHQOR_ARCHITECTURESELECTION_H_1
 
-#include "ArchQOR/Common/ArchitectureDetection.h"
+#include "Architectures.h"
+
+#ifdef QOR_ARCHITECTURE
+#	define QOR_ARCH QOR_PP_CAT(QOR_ARCH_,QOR_ARCHITECTURE)
+#else
+#	include "ArchQOR/Common/ArchitectureDetection.h"
+#endif
+
+#if (QOR_ARCH == QOR_ARCH_X86_32)
+#	define QOR_ARCH_ROOT_FOLDER	x86
+#elif (QOR_ARCH	== QOR_ARCH_X86_64)
+#	define QOR_ARCH_ROOT_FOLDER	x86
+#elif (QOR_ARCH == QOR_ARCH_Z)
+#	define QOR_ARCH_ROOT_FOLDER	Zarch
+#elif (QOR_ARCH == QOR_ARCH_SYS390)
+#	define QOR_ARCH_ROOT_FOLDER	SYS390
+#elif (QOR_ARCH == QOR_ARCH_SYS370)
+#	define QOR_ARCH_ROOT_FOLDER	SYS370
+#elif (QOR_ARCH == QOR_ARCH_SUPERH)
+#	define QOR_ARCH_ROOT_FOLDER	SuperH
+#elif (QOR_ARCH == QOR_ARCH_SPARC)
+#	define QOR_ARCH_ROOT_FOLDER	Sparc
+#elif (QOR_ARCH == QOR_ARCH_RS6K)
+#	define QOR_ARCH_ROOT_FOLDER	RS6000
+#elif (QOR_ARCH == QOR_ARCH_PYRAMID)
+#	define QOR_ARCH_ROOT_FOLDER	Pyramid
+#elif (QOR_ARCH == QOR_ARCH_PPC)
+#	define QOR_ARCH_ROOT_FOLDER	PPC
+#elif (QOR_ARCH == QOR_ARCH_PARISC)
+#	define QOR_ARCH_ROOT_FOLDER	PARISC
+#elif (QOR_ARCH	== QOR_ARCH_MIPS)
+#	define QOR_ARCH_ROOT_FOLDER	MIPS
+#elif (QOR_ARCH	== QOR_ARCH_M68K)
+#	define QOR_ARCH_ROOT_FOLDER	M68K
+#elif (QOR_ARCH	== QOR_ARCH_IA64)
+#	define QOR_ARCH_ROOT_FOLDER	IA64
+#elif (QOR_ARCH == QOR_ARCH_CONVEX)
+#	define QOR_ARCH_ROOT_FOLDER	Convex
+#elif (QOR_ARCH	== QOR_ARCH_BLACKFIN)
+#	define QOR_ARCH_ROOT_FOLDER	Blackfin
+#elif (QOR_ARCH == QOR_ARCH_ARM)
+#	define QOR_ARCH_ROOT_FOLDER	Arm
+#elif (QOR_ARCH == QOR_ARCH_ALPHA)
+#	define QOR_ARCH_ROOT_FOLDER	Alpha
+#else
+#	error Target architecture could not be determine from host compiler predefinitions or is not supported. define QOR_ARCHITECTURE or modify __FILE__:
+#endif
+
+#	define QOR_ARCH_VERSION_INCLUDE QOR_PP_STRINGIZE( QOR_PP_CAT(ArchQOR/,QOR_PP_CAT(QOR_ARCH_ROOT_FOLDER,QOR_PP_CAT(/,QOR_PP_CAT(QOR_ARCH_ROOT_FOLDER,Version.h)))) )
+#	define QOR_ARCH_CLASS_INCLUDE QOR_PP_STRINGIZE( QOR_PP_CAT(ArchQOR/,QOR_PP_CAT(QOR_ARCH_ROOT_FOLDER,QOR_PP_CAT(/,QOR_PP_CAT(QOR_ARCH_ROOT_FOLDER,.h)))) )
+
 #include QOR_ARCH_VERSION_INCLUDE
 
+/*
 __QCMP_MESSAGE( "Target Architecture " QOR_ARCH_NAME )
 
 #include "ArchQOR/Common/WordSizeSelection.h"
 #include QOR_ARCH_CLASS_INCLUDE
-
+*/
 #endif//ARCHQOR_ARCHITECTURESELECTION_H_1

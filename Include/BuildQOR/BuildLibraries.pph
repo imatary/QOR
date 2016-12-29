@@ -1,6 +1,6 @@
 //BuildLibraries.pph
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,7 +29,6 @@
 #include "BuildQOR/PreBuild.pph"
 
 #ifdef __QCMP_BUILDOPTS
-#	include __QCMP_BUILDOPTS //setup up Compiler build options
 #	define QOR_PP_ITERATION_PARAMS_5 (3,(0,QOR_PP_SEQ_SIZE(QOR_LIBS)-1,"BuildLibrary.sth"))
 #	include QOR_PP_ITERATE_5
 #else

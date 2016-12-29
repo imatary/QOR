@@ -59,6 +59,15 @@
 #endif
 
 //--------------------------------------------------------------------------------
+#ifdef UNICODE
+#	define _QCMP_TXT( _X ) L##_X
+#	pragma __QCMP_VC6_MESSAGE( "MSVC Targetting UNICODE platform." )
+#else
+#	define _QCMP_TXT( _X ) _X
+#	pragma __QCMP_VC6_MESSAGE( "MSVC Targetting ASCII platform." )
+#endif
+
+//--------------------------------------------------------------------------------
 #if		( __QCMP_REPORTDEFECITS == __QCS_YES_ )
 #	if		( __QOR_PERFORMANCE == __QCS_MAX_PERFORMANCE_ )
 #		define TODO(_Message) comment( user, "Incomplete code" )
@@ -87,20 +96,20 @@
 //--------------------------------------------------------------------------------
 //report basic configuration
 #ifdef _M_ALPHA
-#	pragma __QCMP_VC6_MESSAGE( "Targetting Alpha platform." )
+#	pragma __QCMP_VC6_MESSAGE( "MSVC Targetting Alpha platform." )
 #elif defined _M_MPPC
-#	pragma __QCMP_VC6_MESSAGE( "Targetting Power Macintosh platform." )
+#	pragma __QCMP_VC6_MESSAGE( "MSVC Targetting Power Macintosh platform." )
 #elif defined _M_MRX000
-#	pragma __QCMP_VC6_MESSAGE( "Targetting MIPS platform." )
+#	pragma __QCMP_VC6_MESSAGE( "MSVC Targetting MIPS platform." )
 #elif defined _M_MRX000
-#	pragma __QCMP_VC6_MESSAGE( "Targetting Power PC platform." )
+#	pragma __QCMP_VC6_MESSAGE( "MSVC Targetting Power PC platform." )
 #elif ( defined _M_AMD64 || defined _M_X64 )
-#	pragma __QCMP_VC6_MESSAGE( "Targetting x64 platform." )
+#	pragma __QCMP_VC6_MESSAGE( "MSVC Targetting x64 platform." )
 //#	define _WIN64
 #elif defined _M_IA64
-#	pragma __QCMP_VC6_MESSAGE( "Targetting Itanium IA64 platform." )
+#	pragma __QCMP_VC6_MESSAGE( "MSVC Targetting Itanium IA64 platform." )
 #else
-#	pragma __QCMP_VC6_MESSAGE( "Compiler targetting x86 platform." )
+#	pragma __QCMP_VC6_MESSAGE( "MSVC Targetting x86 platform." )
 #endif
 
 //--------------------------------------------------------------------------------
@@ -158,6 +167,7 @@
 #define __QCMP_WARN_CONV_FROM_LONG_DOUBLE_TO_DOUBLE		4244
 #define __QCMP_WARN_CLASS_NEEDS_TO_HAVE_DLL_INTERFACE	4251
 #define __QCMP_WARN_NON_EXPORTED_BASE_FOR_EXPORT		4275
+#define __QCMP_WARN_EXCEPTION_SPEC_IGNORED				4290
 #define __QCMP_WARN_TRUNCATION_FROM_DOUBLE_TO_FLOAT		4305
 #define __QCMP_WARN_STRUCTURE_PADDED_DUE_TO_ALIGN		4324
 #define __QCMP_WARN_THIS_USED_IN_BASE_INIT_LIST			4355

@@ -28,9 +28,9 @@
 set build_project=QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_1,QOR_PROJECTS)
 echo Building project: %build_project%
 //Create a folder in which to build the project
-if NOT EXIST ..\..\Build\%build_project% (
-mkdir ..\..\Build\%build_project% )
+if NOT EXIST ..\..\..\Build\%build_project% (
+mkdir ..\..\..\Build\%build_project% )
 //setup the preprocessor definitions to be passed to the compiler
 set build_env_params=/D"QOR_PROJECT=%build_project%"
 //execute <build_project>.pp as a build script
-call %ppexec% %build_project% ..\..\Build
+call %ppexec% %build_project% ..\..\..\Build

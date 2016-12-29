@@ -38,6 +38,7 @@
 #ifdef _USRDLL													//Only needed for shared library builds
 #	include "CodeQOR/DataTypes/GUID.h"
 #	include "CodeQOR/Modules/LoadableModuleBase.h"
+#	include "SystemQOR/SharedBootStrap.h"
 #endif
 
 //Pull in any intrinsics from the compiler as extern C function prototypes
@@ -114,7 +115,17 @@ __QCMP_ENDLINKAGE_C
 #ifndef QOR_MONOLITHIC
 #ifdef _USRDLL
 
+
 __QCMP_STARTLINKAGE_C
+
+	extern int _cdecl QORStaticInit( void );
+
+	//------------------------------------------------------------------------------
+	__QCMP_EXPORT int _cdecl QORinit( void )
+	{
+		QORStaticInit();
+		return 1;
+	}
 
 	//------------------------------------------------------------------------------
 	//This gives the Compiler QOR library a unique identity

@@ -36,10 +36,6 @@
 #define __QCMP_JOINER( X, Y ) __QCMP_JOINER2( X, Y )
 #define __QCMP_JOINER2( X, Y ) X##Y
 
-//Macros to get strings in the right format from hand coded constants
-#define __QCMP_STRINGIZE(x) __QCMP_STRINGIZER(x)
-#define __QCMP_STRINGIZEA(x) __QCMP_STRINGIZERA(x)
-
 //MSVC supports an L"text" extension macro to embed wide character strings in ANSI source code
 //Turn on the use of this by default if UNICODE is configured
 #if ( __QOR_UNICODE )
@@ -57,6 +53,10 @@
 #	undef UNICODE								//Both these symbols are needed because years ago someone at Microsoft 'screwed up'.
 #	undef _UNICODE
 #endif
+
+//Macros to get strings in the right format from hand coded constants
+#define __QCMP_STRINGIZE(x) __QCMP_STRINGIZER(x)
+#define __QCMP_STRINGIZEA(x) __QCMP_STRINGIZERA(x)
 
 //Make path by joining path to / to filename
 #define __QCMP_PATHIFY(_X,_Y) __QCMP_STRINGIZEA(_X/_Y)

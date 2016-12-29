@@ -1,3 +1,75 @@
 The QOR is a framework of interdependent modules usually built as co-dependent shared libraries.
 
-<modules list>
+Platform independent libraries:-
+
+CompilerQOR:
+	Compiler integration and preprocessor module. Enables the QOR to built with different compilers and provides a preprocessor library based on Boost PP
+	
+ArchQOR:
+	Architecture integration module. Enabled the QOR to target different architectures and provides a JIT assembler based on Asm-JIT
+	
+CodeQOR:
+	Basic containers smart pointers and utility types for the framework. Also classes and Macros for introspection and interception to enable AOP
+	
+SystemQOR:
+	Provides representation of the Operating System and its facilities. All platform specific code also nominally belongs to SystemQOR
+	
+CQOR:
+	A portable Posix 2008 C library layer over platform specific implementations in SystemQOR
+	
+stdQOR:
+	A C++ standard library based on llvm/libc++
+	
+PosumQOR:
+	A Posix Object module. Provides POSIX concepts as convenient object types.
+	
+MonkiQOR:
+	The QOR GUI module. A facade over several alternative GUI implementations
+	
+MammutQOR:
+	The QOR Data Model and Database module
+	
+HippoQOR:
+	The QOR Mocking and Unit Test module
+	
+BluefootQOR
+	A Streaming and pipeline module
+	
+AppocritaQOR
+	Application and workflow control module
+	
+Qurses
+	An ncurses based terminal UI modules
+	
+QORModule
+	A static library linked into each and every QOR Module to make it a QOR Module.
+	
+Platform dependent libraries:-
+
+Each platform xxx will have variations on a set like this
+
+xxxQAPI or xxxQSys
+	A low level kernel/API wrapper. Integration with the OS
+	
+xxxQL
+	A higher level class library module
+	
+xxxQLyyy
+	One or more sub units of the xxxQL module broken up along various lines
+	
+xxxPosum
+	Posix Object integration module for support of PosumQOR
+	
+xxxSharedBootstrap
+	A static library linked into each module as a bootstrap
+	
+xxxUsrExeBoot
+	A static library linked into executables as a bootstrap
+	
+Platform and Compiler dependent libraries:-
+
+xxxCmpSupQORYYYY
+	Static libraries linked into each modules built with compiler YYYY on OS xxx
+	These provide exception handling and other low level ABI related capabilities
+	
+

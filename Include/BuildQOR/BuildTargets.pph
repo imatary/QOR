@@ -1,6 +1,6 @@
 //BuildTargets.pph
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,13 +24,12 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Iterate over QOR TARGETS building the project once for each target
+//Iterate over QOR_TARGETS building the project for each target
 
 #include "BuildQOR/Prebuild.pph"	//include the generic build macros
 
 #ifdef __QCMP_BUILDOPTS				//If the generic macros define which compiler specific macros to use
 
-#	include __QCMP_BUILDOPTS		//include the compiler specific build macros
 #	define QOR_PP_ITERATION_PARAMS_1 (3,(0,QOR_PP_SEQ_SIZE(QOR_TARGETS)-1,"BuildQOR/BuildTarget.pph"))
 #	include QOR_PP_ITERATE_1
 #	undef QOR_TARGETS

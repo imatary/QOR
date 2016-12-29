@@ -1,1 +1,15 @@
-<This file to document the structure of the source tree>
+
+Top level folders
+
+Build:
+	root folder for QOR builds using BuildQOR
+Documents:
+	framework documentaation
+IDEProjects:
+	projects to build QOR libraries with popular IDEs
+Include:
+	All header files that are used by multiple libraries or might be needed by library clients are here
+Source:
+	All source files for QOR modules are here
+Test:
+	Source code projects to test and demonstrate the QOR

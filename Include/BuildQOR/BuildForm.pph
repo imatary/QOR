@@ -1,6 +1,6 @@
 //BuildForm.pph
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -27,6 +27,6 @@
 //Build all the configurations of 1 linkage form of a Target
 
 #include "BuildForm.sth"
-#	define QOR_BUILD_FORM QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_2,QOR_FORMS)
+#	define QOR_BUILD_FORM QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_2,QOR_FORM_LIST)
 #	define QOR_PP_ITERATION_PARAMS_3 (3,(0,QOR_PP_SEQ_SIZE(QOR_CONFIGS)-1,"BuildQOR/BuildConfig.pph"))
 #	include QOR_PP_ITERATE_3

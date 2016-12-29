@@ -1,6 +1,6 @@
 //CompileCmd.pph
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -26,4 +26,5 @@
 
 //Preprocessor build script generator, compile command line macro for MSVC compilers
 
+echo QOR_PP_BUILD_CMP_COMMAND_LINE( QOR_SOURCE_PATH, QOR_SOURCE_EXT, QOR_PP_SEQ_ELEM( QOR_PP_ITERATION(), QOR_SOURCES ) )
 QOR_PP_BUILD_CMP_COMMAND_LINE( QOR_SOURCE_PATH, QOR_SOURCE_EXT, QOR_PP_SEQ_ELEM( QOR_PP_ITERATION(), QOR_SOURCES ) )

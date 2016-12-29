@@ -1,6 +1,6 @@
 //BuildProjects.pph
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,6 +29,6 @@
 //include the necessary preprocessor definitions from whichever compiler processes this
 #include "BuildQOR/PreBuild.pph"
 
-//This expands to repeated includes of BuildProject.sth with incremented values of QOR_PP_ITERATION_1
+//This expands to repeated includes of BuildProject.sth with values of QOR_PP_ITERATE_1 from each element of QOR~PROJECTS
 #	define QOR_PP_ITERATION_PARAMS_1 (3,(0,QOR_PP_SEQ_SIZE(QOR_PROJECTS)-1,"BuildProject.sth"))
 #	include QOR_PP_ITERATE_1

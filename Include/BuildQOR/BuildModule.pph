@@ -1,6 +1,6 @@
 //BuildModule.pph
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -26,4 +26,4 @@
 
 //Generate the linkage command to turn a list of object files into a loadable module(.dll,.so,etc)
 
-#	include __QCMP_BUILDCMD_MODULE_FINAL
+#include "LibCmd2.pph"

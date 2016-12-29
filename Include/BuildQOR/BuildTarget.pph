@@ -1,6 +1,6 @@
 //BuildTarget.pph
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -31,5 +31,17 @@
 #define QOR_SYS_OS QOR_PP_SEQ_ELEM( 1, QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_1,QOR_TARGETS) )
 #define QOR_SYS_OS_VERSION QOR_PP_SEQ_ELEM( 2, QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_1,QOR_TARGETS) )
 
-#	define QOR_PP_ITERATION_PARAMS_2 (3,(0,QOR_PP_SEQ_SIZE(QOR_FORMS)-1,"BuildQOR/BuildForm.pph"))
+#if( QOR_PP_EXPAND(QOR_PP_CAT(QOR_FORMS_,QOR_OS)) != QOR_PP_CAT(QOR_FORMS_,QOR_OS) )
+#	define QOR_FORM_LIST QOR_PP_EXPAND(QOR_PP_CAT(QOR_FORMS_,QOR_OS))
+#	pragma message( Specializing build forms to QOR_FORM_LIST due to OS setting: QOR_OS )
+#else
+#	if( QOR_PP_EXPAND(QOR_PP_CAT(QOR_FORMS_,QOR_ARCH)) != QOR_PP_CAT(QOR_FORMS_,QOR_ARCH) )
+#		define QOR_FORM_LIST QOR_PP_EXPAND(QOR_PP_CAT(QOR_FORMS_,QOR_ARCH))
+#		pragma message( Specializing build forms to QOR_FORM_LIST due to Architecture setting: QOR_ARCH )
+#	else
+#		define QOR_FORM_LIST QOR_FORMS
+#	endif
+#endif
+
+#	define QOR_PP_ITERATION_PARAMS_2 (3,(0,QOR_PP_SEQ_SIZE(QOR_FORM_LIST)-1,"BuildQOR/BuildForm.pph"))
 #	include QOR_PP_ITERATE_2

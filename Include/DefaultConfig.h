@@ -37,7 +37,10 @@
 #define QOR_DEFAULTCONFIG_H_1
 
 
-#define QOR_CONFIG_INCLUDES (../../include)
+#ifndef QOR_CONFIG_INCLUDES
+#	define QOR_CONFIG_INCLUDES (../../../include)
+#endif
+
 #define QOR_CONFIG_DEFINES1 ("QOR")
 
 #ifdef QOR_MONOLITHIC
@@ -47,7 +50,6 @@
 #endif
 
 //QOR build configurations. These are samples at the extremes of safety vs performance for testing purposes
-
 
 #ifndef NDEBUG//	Debug Configuration
 

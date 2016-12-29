@@ -1,6 +1,6 @@
-//WinQLComboBoxFactory.cpp
+//ModuleHeader.pph
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,13 +24,11 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//#include "stdafx.h"
-#include "WinQL/OSGUI/Windows/ComboBoxFactory.h"
-#include "WinQL/OSGUI/Windows/ComboBox.h"
-
-//--------------------------------------------------------------------------------
-namespace nsWin32
-{
-
-}//nsWin32
-
+//Set up for an MSVC build of a DLL or EXE
+#include "LibraryHeader.sth"
+#define QOR_PP_BUILD_DIR %build_shell_path%/
+#define QOR_PP_CONFIG_INT_DIR ../../../Build/%build_project%/%build_architecture%/%build_os%/%build_os_ver%/%build_form%/%build_config%/%buildtype%/
+#define QOR_PP_CONFIG_OBJ_DIR ../../../Build/%build_project%/%build_architecture%/%build_os%/%build_os_ver%/%build_form%/%build_config%/%buildtype%/%buildbinary%/
+#undef	_LIB
+#include "BuildQOR/Prebuild.pph"
+#include __QCMP_BUILDOPTS		//include the compiler specific build macros

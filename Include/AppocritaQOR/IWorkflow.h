@@ -1,6 +1,6 @@
-//WinQLComboBoxExFactory.cpp
+//IWorkflow.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,13 +24,43 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//#include "stdafx.h"
-#include "WinQL/OSGUI/Windows/ComboBoxExFactory.h"
-#include "WinQL/OSGUI/Windows/ComboBoxEx.h"
+//Abstract Workflow Interface
 
-//--------------------------------------------------------------------------------
-namespace nsWin32
+#include "CompilerQOR.h"
+
+#ifdef	__QCMP_OPTIMIZEINCLUDE
+#pragma __QCMP_OPTIMIZEINCLUDE
+#endif//__QCMP_OPTIMIZEINCLUDE
+
+#ifndef _APPOCRITAQOR_IWORKFLOW_H_
+#define _APPOCRITAQOR_IWORKFLOW_H_
+
+#include "AppocritaQOR/IApplication.h"
+#include "AppocritaQOR/IState.h"
+
+//------------------------------------------------------------------------------
+namespace nsQOR
 {
+	//------------------------------------------------------------------------------
+	class __QOR_INTERFACE( __APPOCRITA ) IWorkflow
+	{
+	public:
 
-}//nsWin32
+		__QOR_IMPL_REF( IWorkflow );
 
+		IWorkflow(){};
+		virtual ~IWorkflow(){};
+		IWorkflow( const IWorkflow& src ){};
+		IWorkflow& operator = ( const IWorkflow& src ){ return *this; }
+
+		virtual void SetApplication( IApplication::ref_type Application ) = 0;
+		virtual IState::ref_type CurrentState( void ) const = 0;
+		virtual void SetState( IState::ref_type pNewState, IEvent::ref_type pEvent ) = 0;
+		virtual void PushState( IState::ref_type pNewState, IEvent::ref_type pEvent ) = 0;
+		virtual void PopState( IEvent::ref_type pEvent ) = 0;
+		virtual IState::ref_type InitialState( void ) const = 0;
+		virtual bool DefaultHandleEvent( IEvent::ref_type pEvent ) = 0;
+	};
+}//nsQOR
+
+#endif//_APPOCRITAQOR_IWORKFLOW_H_

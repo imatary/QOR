@@ -5,5 +5,5 @@ rem Collect the folder this script is running from
 set build_script_dir=%~dp0
 set build_env_params=
 set build_project=QOR_PROJECT
-if NOT EXIST ..\..\Build\QOR_PROJECT (
-mkdir ..\..\Build\QOR_PROJECT )
+if NOT EXIST ..\..\..\Build\QOR_PROJECT (
+mkdir ..\..\..\Build\QOR_PROJECT )

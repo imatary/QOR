@@ -1,6 +1,6 @@
 //BuildConfig.pph
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Build all the build types(Debug,Release,etc) of 1 Configuration of a Target
+//Build all the build Configs(Debug,Release,etc) of 1 Form of a Target
 
 #include "BuildConfig.sth"
 #	define QOR_BUILD_CONFIG QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_3,QOR_CONFIGS)

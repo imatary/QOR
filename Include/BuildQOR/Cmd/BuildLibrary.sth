@@ -25,7 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 //Extract the library project to build from the Libraries iteration
-set buildlib=QOR_PP_SEQ_ELEM(QOR_PP_ITERATION(5),QOR_LIBS)
-echo Building Library:
+set buildbinary=QOR_PP_SEQ_ELEM(QOR_PP_ITERATION(5),QOR_LIBS)
+echo Building Library: %buildbinary%
 //Execute the library project as a build script
-call %ppexec% %buildlib% ..\..\Build\%build_project%
+call %ppexec% %buildbinary% ..\..\..\Build\%build_project%

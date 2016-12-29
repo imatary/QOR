@@ -24,14 +24,22 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+if NOT EXIST ..\..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%\%build_form%\%build_config%\%buildtype%\%buildbinary% (
+mkdir ..\..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%\%build_form%\%build_config%\%buildtype%\%buildbinary% )
+
 //Build a single file iff the object file to be built doesn't yet exist or is older than the source
 set build_src_file=QOR_PP_CAT(QOR_PP_CAT(QOR_SOURCE_PATH,QOR_PP_SEQ_ELEM( QOR_PP_ITERATION(), QOR_SOURCES )),QOR_SOURCE_EXT)
-set build_obj_file=QOR_PP_CAT(QOR_PP_CAT(QOR_PP_CONFIG_INT_DIR,QOR_PP_SEQ_ELEM( QOR_PP_ITERATION(), QOR_SOURCES )),QOR_OBJECT_EXT)
+set build_obj_file=QOR_PP_CAT(QOR_PP_CAT(QOR_PP_CONFIG_OBJ_DIR,QOR_PP_SEQ_ELEM( QOR_PP_ITERATION(), QOR_SOURCES )),QOR_OBJECT_EXT)
 set build_include=1
 if NOT EXIST %build_obj_file% GOTO:compile
 xcopy "%build_src_file%" "%build_obj_file%*" /D/Y/L/R | findstr /BC:"0" >nul && set build_include=0
 :compile
 if %build_include%==1 (
-#include "CompileCmd.pph"
+
+#ifndef QOR_PP_BUILD_CMP_ASSEMBLE
+#	include "CompileCmd.pph"
+#else
+#	include "AssembleCmd.pph"
+#endif
 )
 

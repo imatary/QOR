@@ -1,6 +1,6 @@
 //BuildConfig.sth
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -28,5 +28,6 @@
 //Extract the configuration header to be used in the build from the Config iteration
 set build_config=QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_3,QOR_CONFIGS)
 echo Building Config: %build_config%
-if NOT EXIST ..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%\%build_form%\%build_config% (
-mkdir ..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%\%build_form%\%build_config% )
+if NOT EXIST ..\..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%\%build_form%\%build_config% (
+mkdir ..\..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%\%build_form%\%build_config% )
+

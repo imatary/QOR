@@ -10,22 +10,29 @@
 #include "ProjectHeader.sth"
 
 //Define the targets for which to build  this project
-#define QOR_TARGETS ((x86)(MSWindows)(Win95))\
-					((x86)(MSWindows)(WinXP))\
-					((x64)(MSWindows)(Win10))
+//((X86_32)(SANOS)(0))
+//((X86_64)(MSW)(WIN10))
+#define QOR_TARGETS ((X86_32)(MSW)(WIN7))
 
 //Define build forms for each way of linking the project
-#define QOR_FORMS \
-		(Modular)\
-		(Monolithic)
+//The names can be anything but must be matched by a .pp file under a folder named by QOR_PROJECT e.g. QOR\Modular.pp
+//(Monolithic)
+#define QOR_FORMS (Modular)
+//Specialize QOR_FORMS so that on Windows we only build Modular
+#define QOR_FORMS_MSW (Modular)
 
-//Define the project configurations to build. Each must match a .h configuration header
-#define QOR_CONFIGS (Default)
+//Define the project configurations to build. Each must match a Config.h configuration header e.g. DefaultConfig.h
+//(Unicode)
+#define QOR_CONFIGS (ASCII)
+
+//TODO: Make these specializations override QOR CONFIGS
+#define QOR_CONFIGS_SANOS (ASCII)
+#define QOR_CONFIGS_X86_64 (Unicode)
 
 //Define the types of build to preform. Levels of debugging info vs optimization
 #define QOR_TYPES \
-		(Debug)\
-		(Release)
+		(Debug)
+//(Release)
 
 //Include the BuildQOR script to build the targets		
 #include "BuildQOR/BuildTargets.pph"

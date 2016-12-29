@@ -1,6 +1,6 @@
-//WinQLDateTimePickerFactory.cpp
+//SubSystem.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,18 +24,47 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//#include "stdafx.h"
-#include "WinQRT/GUI/Windows/DateTimePickerFactory.h"
-#include "WinQRT/GUI/Windows/DateTimePicker.h"
+//Abstract base for SubSystems
 
-//--------------------------------------------------------------------------------
-namespace nsWin32
+#ifdef	__QCMP_OPTIMIZEINCLUDE
+#pragma	__QCMP_OPTIMIZEINCLUDE
+#endif//__QCMP_OPTIMIZEINCLUDE
+
+#ifndef APPOCRITAQOR_SUBSYSTEM_H_3
+#define APPOCRITAQOR_SUBSYSTEM_H_3
+
+#include "AppocritaQOR/ISubSystem.h"
+#include "AppocritaQOR/Controller.h"
+
+//------------------------------------------------------------------------------
+namespace nsQOR
 {
-	//--------------------------------------------------------------------------------
-	namespace nsGUI
+	class __QOR_INTERFACE( __APPOCRITA ) IApplication;
+
+	//------------------------------------------------------------------------------
+	//A Service component comprising related functionality of the system at a generic level
+	class __QOR_INTERFACE( __APPOCRITA ) CSubSystem : public ISubSystem
 	{
+	public:
 
-	};//namespace nsGUI
+		CSubSystem(){};
+		CSubSystem( nsCodeQOR::mxGUID* classID );
+		virtual ~CSubSystem();
 
-};//namespace nsWin32
+		virtual void Setup( IApplication& Application );
+		virtual void Shutdown( IApplication& Application );
 
+	protected:
+
+		ISubSystem::ref_type m_Impl;
+
+	private:
+
+		CSubSystem( const CSubSystem& );
+		CSubSystem& operator = ( const CSubSystem& );
+		
+	};
+
+}//nsQOR
+
+#endif//APPOCRITAQOR_SUBSYSTEM_H_3

@@ -1,6 +1,6 @@
 //LibraryHeader.sth
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,6 +24,6 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Set up for an MSVC build of a static library under Cmd Shell
+//Set up environment parameters for a build under Cmd Shell
 
-set build_env_params=/D"QOR_PROJECT=%build_project%"/D"QOR_ARCHITECTURE=%build_architecture%"/D"QOR_SYS_OS=%build_os%"/D"QOR_SYS_OS_VER=%build_os_ver%"/D"QOR_BUILD_FORM=%build_form%"/D"QOR_CONFIG_HEADER=%build_config%.h"/D"QOR_BUILD_TYPE=%buildtype%"
+set build_env_params=/D"QOR_PROJECT %build_project%" /D"QOR_ARCHITECTURE=%build_architecture%" /D"QOR_OS=%build_os%" /D"QOR_SYS_OS_VER=%build_os_ver%" /D"QOR_BUILD_FORM=%build_form%" /D"QOR_CONFIG_HEADER=%build_config%" /D"QOR_BUILD_TYPE=%buildtype%"

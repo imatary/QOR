@@ -1,6 +1,6 @@
 //BuildForm.sth
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -26,7 +26,8 @@
 
 //Build one linkage pattern of a target
 //Extract the linkage form to build from the Forms iteration
-set build_form=QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_2,QOR_FORMS)
+
+set build_form=QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_2,QOR_FORM_LIST)
 echo Building Form: %build_form%
-if NOT EXIST ..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%\%build_form% (
-mkdir ..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%\%build_form% )
+if NOT EXIST ..\..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%\%build_form% (
+mkdir ..\..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%\%build_form% )

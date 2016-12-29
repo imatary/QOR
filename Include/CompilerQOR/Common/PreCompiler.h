@@ -36,12 +36,6 @@
 #include "CompilerQOR/Common/CompilerFeatures.h"		//Define feature macros so specific compiler deficiencies can be declared
 #include "CompilerQOR/Common/Compilers.h"				//Determine the available compiler definitions
 
-#ifndef __QOR_CONFIG_HEADER								//If no configuration file is defined
-#	include "DefaultConfig.h"							//use the default
-#else													//otherwise
-#	include __QOR_CONFIG_HEADER							//include it here
-#endif
-
 #include "CompilerQOR/Common/CompilerSelection.h"		//Select by detection the compiler in use
 
 #ifdef __QCMP_COMPILER									//If compiler is determined
@@ -50,5 +44,13 @@
 #else													//Otherwise we guess that the unknown compiler supports #error as that's the best we can do
 #	error The compiler in use could not be identified. Build terminating at PreCompiler.h
 #endif//__QCMP_COMPILER
+
+#ifdef QOR_CONFIG_HEADER								//If a configuration file is defined
+//__QCMP_MESSAGE( QOR_PP_STRINGIZE(QOR_CONFIG_HEADER) )
+#	include QOR_PP_STRINGIZE(QOR_PP_CAT(QOR_CONFIG_HEADER,Config.h))		//include it here
+#else
+#	include "DefaultConfig.h"
+#endif
+
 
 #endif//QOR_PRECOMPILER_H_1

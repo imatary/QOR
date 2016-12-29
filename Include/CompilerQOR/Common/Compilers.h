@@ -53,7 +53,7 @@
 #define __QCMP_IBMXL			0x16	//IBM XL C/C+ for Linux (Little Endian)
 #define __QCMP_IAR_ICC			0x17	//IAR C/C++ Compiler
 #define __QCMP_METAWARE_HIGH	0x18	//Metaware High C/C++ Compiler
-#define __QCMP_COMPAQ_DEC		0x29	//Compaq C/C++
+#define __QCMP_COMPAQ_DEC		0x19	//Compaq C/C++
 #define __QCMP_DIAB				0x20	//Diab C/C++
 #define __QCMP_DIGNUS			0x21	//Dignus Systems/C++
 #define __QCMP_MICROTEC			0x22	//Microtec C/C++

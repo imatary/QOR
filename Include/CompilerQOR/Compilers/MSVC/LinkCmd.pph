@@ -1,6 +1,6 @@
 //LinkCmd.pph
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -26,4 +26,5 @@
 
 //Preprocessor build script generator, link command line macro for MSVC compilers
 
-QOR_PP_BUILD_LINK_COMMAND_LINE( QOR_LIB_PATHS, QOR_LIBS, QOR_SOURCES, QOR_MODULE_NAME )
+echo QOR_PP_BUILD_LINK_COMMAND_LINE3( QOR_LIB_PATHS, QOR_LIBS, QOR_MODULE_NAME )
+QOR_PP_BUILD_LINK_COMMAND_LINE3( QOR_LIB_PATHS, QOR_LIBS, QOR_MODULE_NAME )

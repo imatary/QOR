@@ -1,6 +1,5 @@
 Frequently Asked Questions:
 
-
 Q.	What does QOR stand for?
 A.	Querysoft Open Runtime.
 
@@ -19,7 +18,7 @@ Q.	How do I use the QOR?
 A.	1.	Read a little about the organization of the QOR and decide how you want to use.
 	2.	Configure it.
 	3.	Build it with your chosen Compiler for your chosen OS and hardware.
-	4.	Write your application against the QOR headers e.g. QOR/include/
+	4.	Write your application against the QOR headers in QOR/include/
 	5.	Link your application against the QOR runtime you built in step 3.
 
 Q.	What makes the QOR special?

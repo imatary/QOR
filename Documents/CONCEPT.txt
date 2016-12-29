@@ -12,7 +12,6 @@ Given this once CQOR is interface complete it should neither grow nor change ver
 
 CQOR is built as a shared library in modular builds and as part of the single shared library in monolithic builds.
 
-CQOR is intended to be complete at Strata-3
 
 
 

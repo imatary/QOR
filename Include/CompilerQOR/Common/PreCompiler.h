@@ -26,6 +26,8 @@
 
 //early inclusion header shared between prebuild config stage and CompilerQOR
 
+//Note: THIS FILE AND EVERYTHING INCLUDED FROM IT MUST BE PURE PRE-PROCESSOR CODE
+
 #ifndef QOR_PRECOMPILER_H_1
 #define QOR_PRECOMPILER_H_1
 
@@ -39,7 +41,7 @@
 #include "CompilerQOR/Common/CompilerSelection.h"		//Select by detection the compiler in use
 
 #ifdef __QCMP_COMPILER									//If compiler is determined
-#	include "CompilerQOR/Preprocessor/Preprocessor.h"	//Include preprocessor definitions now we know which preprocessor they will be for													
+#	include "CompilerQOR/Preprocessor/Preprocessor.h"	//Include preprocessor definitions now we know which preprocessor they will be for
 #	include "CompilerQOR/Common/CompilerPath.h"			//Determine the paths for the compiler headers
 #else													//Otherwise we guess that the unknown compiler supports #error as that's the best we can do
 #	error The compiler in use could not be identified. Build terminating at PreCompiler.h
@@ -49,7 +51,7 @@
 //__QCMP_MESSAGE( QOR_PP_STRINGIZE(QOR_CONFIG_HEADER) )
 #	include QOR_PP_STRINGIZE(QOR_PP_CAT(QOR_CONFIG_HEADER,Config.h))		//include it here
 #else
-#	include "DefaultConfig.h"
+#	include "DefaultConfig.h"                           //Otherwise use the Default configuration
 #endif
 
 

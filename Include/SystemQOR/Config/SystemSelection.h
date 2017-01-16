@@ -1,6 +1,6 @@
 //SystemSelection.h
 
-// Copyright Querysoft Limited 2015, 2016
+// Copyright Querysoft Limited 2015, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -25,6 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 //Set the include paths to the ones for the selected operating system
+//Note: THIS FILE AND EVERYTHING IT INCLUDES MUST BE PURE PRE-PROCESSOR CODE
 
 #ifndef SYSTEMQOR_SYSTEMSELECTION_H_1
 #define SYSTEMQOR_SYSTEMSELECTION_H_1

@@ -73,10 +73,10 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CFindBluetoothDeviceSession );
 		
-		CFindBluetoothDeviceSession( CFindBluetoothDeviceSession::SearchParams& SearchParams, CBluetoothRemoteDevice::refType Device );
+		CFindBluetoothDeviceSession( CFindBluetoothDeviceSession::SearchParams& SearchParams, CBluetoothRemoteDevice::ref_type Device );
 		virtual ~CFindBluetoothDeviceSession();
 
-		bool Next( CBluetoothRemoteDevice::refType Device );
+		bool Next( CBluetoothRemoteDevice::ref_type Device );
 
 	private:
 

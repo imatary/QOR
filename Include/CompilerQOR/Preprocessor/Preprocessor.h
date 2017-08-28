@@ -33,5 +33,7 @@
 //Small modifications and additions have been made, mostly cosmetic
 
 #include "CompilerQOR/Preprocessor/preprocessor/library.h"
-
+#if QOR_PP_VARIADICS
+#	include "CompilerQOR/Preprocessor/preprocessor/vmd/vmd.h"
+#endif
 #endif//QCMP_PREPROCESSOR_H_1

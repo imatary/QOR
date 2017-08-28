@@ -1,6 +1,6 @@
 //WinQLTerminalServices.cpp
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -55,9 +55,6 @@ namespace nsWin32
 	CTermServHelper& CTermServHelper::operator = ( const CTermServHelper& src )
 	{
 		_WINQ_FCONTEXT( "CTermServHelper::operator =" );
-		if( &src != this )
-		{
-		}
 		return *this;
 	}
 
@@ -68,7 +65,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTermServHelper::ProcessIdToSessionId( unsigned long dwProcessId, unsigned long* pSessionId )
+	bool CTermServHelper::ProcessIdToSessionId( unsigned long dwProcessId, unsigned long* pSessionId ) const
 	{
 		_WINQ_FCONTEXT( "CTermServHelper::ProcessIdToSessionId" );
 		bool bResult = false;
@@ -80,7 +77,7 @@ namespace nsWin32
 	}	
 
 	//--------------------------------------------------------------------------------
-	bool CTermServHelper::AppInstallMode()
+	bool CTermServHelper::AppInstallMode() const
 	{
 		_WINQ_FCONTEXT( "CTermServHelper::AppInstallMode" );
 		bool bResult = false;
@@ -92,7 +89,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CTermServHelper::GetActiveConsoleSessionId()
+	unsigned long CTermServHelper::GetActiveConsoleSessionId() const
 	{			
 		_WINQ_FCONTEXT( "CTermServHelper::GetActiveConsoleSessionId" );
 		DWORD dwResult = 0;
@@ -128,7 +125,6 @@ namespace nsWin32
 		unsigned long ulCount = 0;
 		__QOR_PROTECT
 		{
-			CTObjectLock< CTerminalServices > Lock( this );
 			bResult = m_pWTSAPI && m_pWTSAPI->WTSEnumerateServers( strDomain.GetNullableBuffer(), 0, 1, ppServerInfo, &ulCount );
 			strDomain.ReleaseBuffer();
 			if( bResult )
@@ -151,7 +147,6 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			CTObjectLock< CTerminalServices > ObjectLock( this );
 			bResult = m_pWTSAPI && m_pWTSAPI->WTSConnectSession( LogonId, TargetLogonId, strPassword.GetBuffer(), bWait ? 1 : 0 ) ? true : false;
 			strPassword.ReleaseBuffer();
 		}__QOR_ENDPROTECT
@@ -165,7 +160,6 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			CTObjectLock< CTerminalServices > ObjectLock( this );
 			bResult = m_pWTSAPI && m_pWTSAPI->WTSEnableChildSessions( bEnable ? 1 : 0 );
 		}__QOR_ENDPROTECT
 		return bResult;
@@ -179,7 +173,6 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			CTObjectLock< CTerminalServices > ObjectLock( this );
 			bResult = m_pWTSAPI && m_pWTSAPI->WTSIsChildSessionsEnabled( &bEnabled );
 		}__QOR_ENDPROTECT
 		bResult &= ( bEnabled ? true : false );
@@ -187,44 +180,44 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CTSLocalServer::refType CTerminalServices::LocalServer( void )
+	nsTerminalServices::nsLocal::CTSLocalServer::ref_type CTerminalServices::LocalServer( void )
 	{
 		_WINQ_FCONTEXT( "CTerminalServices::LocalServer" );
-		return m_LocalServer.Ref();
+		return ref(m_LocalServer);
 	}
 
 	//--------------------------------------------------------------------------------
-	CTerminalServices::CRemoteControlSession::refType CTerminalServices::CreateRemoteControlSession( CTString& strTargetServer, unsigned long ulTargetLogonId, unsigned char HotkeyVk, unsigned short ushotkeyModifiers )
+	nsTerminalServices::CRemoteControlSession::ref_type CTerminalServices::CreateRemoteControlSession( CTString& strTargetServer, unsigned long ulTargetLogonId, unsigned char HotkeyVk, unsigned short ushotkeyModifiers )
 	{
 		_WINQ_FCONTEXT( "CTerminalServices::CreateRemoteControlSession" );
-		return CTerminalServices::CRemoteControlSession::refType( new CTerminalServices::CRemoteControlSession( strTargetServer, ulTargetLogonId, HotkeyVk, ushotkeyModifiers ), true );
+		return new_shared_ref<nsTerminalServices::CRemoteControlSession>( strTargetServer, ulTargetLogonId, HotkeyVk, ushotkeyModifiers );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTSRemoteServer::refType CTerminalServices::RemoteServer( const CTString& strName )
+	nsTerminalServices::CTSRemoteServer::ref_type CTerminalServices::RemoteServer( const CTString& strName )
 	{
 		_WINQ_FCONTEXT( "CTerminalServices::RemoteServer" );
-		return CTSRemoteServer::refType( new CTSRemoteServer( strName ), true );
+		return new_shared_ref<nsTerminalServices::CTSRemoteServer>( strName );
 	}
 
 
 
 	//--------------------------------------------------------------------------------
-	__QOR_IMPLEMENT_OCLASS_LUID( CTerminalServices::CRemoteControlSession );
+	__QOR_IMPLEMENT_OCLASS_LUID(nsTerminalServices::CRemoteControlSession );
 
 	//--------------------------------------------------------------------------------
-	CTerminalServices::CRemoteControlSession::CRemoteControlSession( CTString& strTargetServerName, unsigned long ulTargetLogonId, unsigned char HotkeyVk, unsigned short usHotkeyModifiers ) : m_pWTSAPI( nsWinQAPI::CWTSAPI32::Instance() )
+	nsTerminalServices::CRemoteControlSession::CRemoteControlSession( CTString& strTargetServerName, unsigned long ulTargetLogonId, unsigned char HotkeyVk, unsigned short usHotkeyModifiers ) : m_pWTSAPI( nsWinQAPI::CWTSAPI32::Instance() )
 	{
-		_WINQ_FCONTEXT( "CTerminalServices::CRemoteControlSession::CRemoteControlSession" );
+		_WINQ_FCONTEXT( "nsTerminalServices::CRemoteControlSession::CRemoteControlSession" );
 		m_bStatus = m_pWTSAPI->WTSStartRemoteControlSession( strTargetServerName.GetBuffer(), ulTargetLogonId, HotkeyVk, usHotkeyModifiers ) ? true : false;
 		strTargetServerName.ReleaseBuffer();
 		m_ulLogonId = ulTargetLogonId;
 	}
 
 	//--------------------------------------------------------------------------------
-	CTerminalServices::CRemoteControlSession::~CRemoteControlSession()
+	nsTerminalServices::CRemoteControlSession::~CRemoteControlSession()
 	{
-		_WINQ_FCONTEXT( "CTerminalServices::CRemoteControlSession::~CRemoteControlSession" );
+		_WINQ_FCONTEXT( "nsTerminalServices::CRemoteControlSession::~CRemoteControlSession" );
 		if( m_bStatus )
 		{
 			m_pWTSAPI->WTSStopRemoteControlSession( m_ulLogonId );
@@ -234,39 +227,39 @@ namespace nsWin32
 
 
 	//--------------------------------------------------------------------------------
-	__QOR_IMPLEMENT_OCLASS_LUID( CTerminalServer );
+	__QOR_IMPLEMENT_OCLASS_LUID(nsTerminalServices::CTerminalServer );
 
-	CTerminalServer::CTerminalServer( const CTString& strName ) : m_pWTSAPI( nsWinQAPI::CWTSAPI32::Instance() )
+	nsTerminalServices::CTerminalServer::CTerminalServer( const CTString& strName ) : m_pWTSAPI( nsWinQAPI::CWTSAPI32::Instance() )
 	,	m_strName( strName )
 	{
 		_WINQ_FCONTEXT( "CTerminalServer::CTerminalServer" );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTerminalServer::~CTerminalServer()
+	nsTerminalServices::CTerminalServer::~CTerminalServer()
 	{
 		_WINQ_FCONTEXT( "CTerminalServer::~CTerminalServer" );
 		delete m_pWTSAPI;
 	}
 
 	//--------------------------------------------------------------------------------
-	__QOR_IMPLEMENT_OCLASS_LUID( CTSLocalServer );
+	__QOR_IMPLEMENT_OCLASS_LUID(nsTerminalServices::nsLocal::CTSLocalServer );
 
 	//--------------------------------------------------------------------------------
-	CTSLocalServer::CTSLocalServer() : CTerminalServer( CTString( WTS_CURRENT_SERVER_NAME ) )
+	nsTerminalServices::nsLocal::CTSLocalServer::CTSLocalServer() : nsTerminalServices::CTerminalServer( CTString( WTS_CURRENT_SERVER_NAME ) )
 	{
 		_WINQ_FCONTEXT( "CTSLocalServer::CTSLocalServer" );
 		m_Handle = WTS_CURRENT_SERVER_HANDLE;
 	}
 
 	//--------------------------------------------------------------------------------
-	CTSLocalServer::~CTSLocalServer()
+	nsTerminalServices::nsLocal::CTSLocalServer::~CTSLocalServer()
 	{
 		_WINQ_FCONTEXT( "CTSLocalServer::~CTSLocalServer" );
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::CSession::QueryInformation( CTerminalServer::eINFOCLASS WTSInfoClass, TCHAR** ppBuffer, unsigned long* pBytesReturned )
+	bool nsTerminalServices::CSession::QueryInformation(nsTerminalServices::eINFOCLASS WTSInfoClass, TCHAR** ppBuffer, unsigned long* pBytesReturned )
 	{
 		_WINQ_FCONTEXT( "CTerminalServer::CSession::QueryInformation" );
 		bool bResult = false;
@@ -278,14 +271,14 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CTerminalServer::CSessionNotification::refType CTerminalServer::CreateSessionNotification( COSWindow& Window, bool bAllSessions )
+	nsTerminalServices::CSessionNotification::ref_type nsTerminalServices::CTerminalServer::CreateSessionNotification( COSWindow& Window, bool bAllSessions )
 	{
 		_WINQ_FCONTEXT( "CTerminalServer::CreateSessionNotification" );
-		return CTSLocalServer::CSessionNotification::refType( new CTSLocalServer::CSessionNotification( *this, Window, bAllSessions ), true );
+		return new_shared_ref<nsTerminalServices::CSessionNotification>(*this, Window, bAllSessions);
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::CSession::SendMessageT( CTString strTitle, CTString strMessage, unsigned long Style, unsigned long Timeout, unsigned long* pResponse, bool bWait )
+	bool nsTerminalServices::CSession::SendMessageT( CTString strTitle, CTString strMessage, unsigned long Style, unsigned long Timeout, unsigned long* pResponse, bool bWait )
 	{
 		_WINQ_FCONTEXT( "CTerminalServer::CSession::SendMessageT" );
 		bool bResult = false;
@@ -298,7 +291,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::EnumerateSessions( nsCodeQOR::CTArray< CTSLocalServer::SessionInfo >& Sessions )
+	bool nsTerminalServices::CTerminalServer::EnumerateSessions( nsCodeQOR::CTArray< nsTerminalServices::SessionInfo >& Sessions )
 	{
 		_WINQ_FCONTEXT( "CTerminalServer::EnumerateSessions" );
 		bool bResult = false;
@@ -312,9 +305,9 @@ namespace nsWin32
 			{
 				for( unsigned long ulIndex = 0; ulIndex < ulCount; ulIndex++ )
 				{
-					CTSLocalServer::SessionInfo Info;
+					nsTerminalServices::SessionInfo Info;
 					Info.SessionId = ppSessionInfo[ ulIndex ]->SessionId;
-					Info.State = static_cast< CTSLocalServer::eConnectStateClass >( ppSessionInfo[ ulIndex ]->State );
+					Info.State = static_cast< nsTerminalServices::eConnectStateClass >( ppSessionInfo[ ulIndex ]->State );
 					Info.strWinStationName = CTString( ppSessionInfo[ ulIndex ]->pWinStationName );
 					Sessions.Append( Info );
 				}				
@@ -325,7 +318,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::TerminateProcess( unsigned long ulProcessId, unsigned long ulExitCode )
+	bool nsTerminalServices::CTerminalServer::TerminateProcess( unsigned long ulProcessId, unsigned long ulExitCode )
 	{
 		_WINQ_FCONTEXT( "CTerminalServer::TerminateProcess" );
 		bool bResult = false;
@@ -337,7 +330,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::EnumerateProcesses( nsCodeQOR::CTArray< CTSLocalServer::ProcessInfo >& Processes )
+	bool nsTerminalServices::CTerminalServer::EnumerateProcesses( nsCodeQOR::CTArray< nsTerminalServices::ProcessInfo >& Processes )
 	{
 		_WINQ_FCONTEXT( "CTerminalServer::EnumerateProcesses" );
 		bool bResult = false;
@@ -351,7 +344,7 @@ namespace nsWin32
 			{
 				for( unsigned long ulIndex = 0; ulIndex < ulCount; ulIndex++ )
 				{
-					CTSLocalServer::ProcessInfo Info;
+					nsTerminalServices::ProcessInfo Info;
 					Info.ProcessId = ppProcessInfo[ ulIndex ]->ProcessId;
 					Info.SessionId = ppProcessInfo[ ulIndex ]->SessionId;
 					Info.strProcessName = CTString( ppProcessInfo[ ulIndex ]->pProcessName );
@@ -364,7 +357,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::ShutdownSystem( unsigned long ShutdownFlag )
+	bool nsTerminalServices::CTerminalServer::ShutdownSystem( unsigned long ShutdownFlag )
 	{
 		_WINQ_FCONTEXT( "CTerminalServer::ShutdownSystem" );
 		bool bResult = false;
@@ -376,7 +369,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::SetUserConfig( CTString& strUserName, eCONFIGCLASS ConfigClass, CTString& strBuffer, unsigned long ulDataLength )
+	bool nsTerminalServices::CTerminalServer::SetUserConfig( CTString& strUserName, eCONFIGCLASS ConfigClass, CTString& strBuffer, unsigned long ulDataLength )
 	{
 		_WINQ_FCONTEXT( "CTerminalServer::SetUserConfig" );
 		bool bResult = false;
@@ -391,7 +384,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::QueryUserConfig( CTString& strUserName, eCONFIGCLASS ConfigClass, nsCodeQOR::CTLRef< byte >& refData )
+	bool nsTerminalServices::CTerminalServer::QueryUserConfig( CTString& strUserName, eCONFIGCLASS ConfigClass, nsCodeQOR::CTLRef< byte >& refData )
 	{
 		_WINQ_FCONTEXT( "CTerminalServer::QueryUserConfig" );
 		bool bResult = false;
@@ -411,7 +404,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::WaitSystemEvent( unsigned long EventMask, unsigned long* pEventFlags )
+	bool nsTerminalServices::CTerminalServer::WaitSystemEvent( unsigned long EventMask, unsigned long* pEventFlags )
 	{
 		_WINQ_FCONTEXT( "CTerminalServer::WaitSystemEvent" );
 		bool bResult = false;
@@ -425,40 +418,40 @@ namespace nsWin32
 
 
 	//--------------------------------------------------------------------------------
-	__QOR_IMPLEMENT_OCLASS_LUID( CTerminalServer::CVirtualChannel );
+	__QOR_IMPLEMENT_OCLASS_LUID(nsTerminalServices::CVirtualChannel );
 
 	//--------------------------------------------------------------------------------
-	CTerminalServer::CVirtualChannel::CVirtualChannel( CTerminalServer& Server, CTerminalServer::CSession& Session, CAString& strName ) : m_Server( Server )
+	nsTerminalServices::CVirtualChannel::CVirtualChannel(nsTerminalServices::CTerminalServer& Server, nsTerminalServices::CSession& Session, CAString& strName ) : m_Server( Server )
 	,	m_strName( strName )
 	,	m_hChannelHandle( 0 )
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CVirtualChannel::CVirtualChannel" );
+		_WINQ_FCONTEXT( "CVirtualChannel::CVirtualChannel" );
 		m_hChannelHandle = m_Server.m_pWTSAPI->WTSVirtualChannelOpen( m_Server.m_Handle, Session.ID(), m_strName.GetBuffer() );
 		m_strName.ReleaseBuffer();
 	}
 	
 	//--------------------------------------------------------------------------------
-	CTerminalServer::CVirtualChannel::CVirtualChannel( CTerminalServer& Server, CTerminalServer::CSession& Session, CAString& strName, unsigned long ulFlags ) : m_Server( Server )
+	nsTerminalServices::CVirtualChannel::CVirtualChannel(nsTerminalServices::CTerminalServer& Server, nsTerminalServices::CSession& Session, CAString& strName, unsigned long ulFlags ) : m_Server( Server )
 	,	m_strName( strName )
 	,	m_hChannelHandle( 0 )
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CVirtualChannel::CVirtualChannel" );
+		_WINQ_FCONTEXT( "CVirtualChannel::CVirtualChannel" );
 		m_hChannelHandle = m_Server.m_pWTSAPI->WTSVirtualChannelOpenEx( Session.ID(), m_strName.GetBuffer(), ulFlags );
 		m_strName.ReleaseBuffer();
 	}
 
 	//--------------------------------------------------------------------------------
-	CTerminalServer::CVirtualChannel::~CVirtualChannel()
+	nsTerminalServices::CVirtualChannel::~CVirtualChannel()
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CVirtualChannel::~CVirtualChannel" );
+		_WINQ_FCONTEXT( "CVirtualChannel::~CVirtualChannel" );
 		m_Server.m_pWTSAPI->WTSVirtualChannelClose( m_hChannelHandle );
 	}
 
 	
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::CVirtualChannel::PurgeInput()
+	bool nsTerminalServices::CVirtualChannel::PurgeInput()
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CVirtualChannel::PurgeInput" );
+		_WINQ_FCONTEXT( "CVirtualChannel::PurgeInput" );
 		bool bResult = false;
 		__QOR_PROTECT
 		{
@@ -468,9 +461,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::CVirtualChannel::PurgeOutput()
+	bool nsTerminalServices::CVirtualChannel::PurgeOutput()
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CVirtualChannel::PurgeOutput" );
+		_WINQ_FCONTEXT( "nsTerminalServices::CVirtualChannel::PurgeOutput" );
 		bool bResult = false;
 		__QOR_PROTECT
 		{
@@ -480,9 +473,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::CVirtualChannel::Query( CTerminalServer::CVirtualChannel::eVIRTUALCLASS WtsVirtualClass, void** ppBuffer, unsigned long* pBytesReturned )
+	bool nsTerminalServices::CVirtualChannel::Query(nsTerminalServices::CVirtualChannel::eVIRTUALCLASS WtsVirtualClass, void** ppBuffer, unsigned long* pBytesReturned )
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CVirtualChannel::Query" );
+		_WINQ_FCONTEXT( "CVirtualChannel::Query" );
 		bool bResult = false;
 		__QOR_PROTECT
 		{
@@ -492,9 +485,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::CVirtualChannel::Read( unsigned long TimeOut, char* Buffer, unsigned long BufferSize, unsigned long* pBytesRead )
+	bool nsTerminalServices::CVirtualChannel::Read( unsigned long TimeOut, char* Buffer, unsigned long BufferSize, unsigned long* pBytesRead )
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CVirtualChannel::Read" );
+		_WINQ_FCONTEXT( "CVirtualChannel::Read" );
 		bool bResult = false;
 		__QOR_PROTECT
 		{
@@ -505,9 +498,9 @@ namespace nsWin32
 
 	
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::CVirtualChannel::Write( char* Buffer, unsigned long Length, unsigned long* pBytesWritten )
+	bool nsTerminalServices::CVirtualChannel::Write( char* Buffer, unsigned long Length, unsigned long* pBytesWritten )
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CVirtualChannel::Write" );
+		_WINQ_FCONTEXT( "CVirtualChannel::Write" );
 		bool bResult = false;
 		__QOR_PROTECT
 		{
@@ -518,32 +511,32 @@ namespace nsWin32
 
 
 	//--------------------------------------------------------------------------------
-	__QOR_IMPLEMENT_OCLASS_LUID( CTerminalServer::CSession );
+	__QOR_IMPLEMENT_OCLASS_LUID(nsTerminalServices::CSession );
 
 	//--------------------------------------------------------------------------------
-	CTerminalServer::CSession::CSession( CTerminalServer& Server, unsigned long ulId ) : m_Server( Server )
+	nsTerminalServices::CSession::CSession( CTerminalServer& Server, unsigned long ulId ) : m_Server( Server )
 	,	m_ulID( ulId )
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CSession::CSession" );
+		_WINQ_FCONTEXT( "CSession::CSession" );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTerminalServer::CSession::CSession( const CSession& src ) : m_Server( src.m_Server )
+	nsTerminalServices::CSession::CSession( const CSession& src ) : m_Server( src.m_Server )
 	,	m_ulID( src.m_ulID )
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CSession::CSession" );
+		_WINQ_FCONTEXT( "CSession::CSession" );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTerminalServer::CSession::~CSession()
+	nsTerminalServices::CSession::~CSession()
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CSession::~CSession" );
+		_WINQ_FCONTEXT( "CSession::~CSession" );
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::CSession::Disconnect( bool bWait )
+	bool nsTerminalServices::CSession::Disconnect( bool bWait )
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CSession::Disconnect" );
+		_WINQ_FCONTEXT( "CSession::Disconnect" );
 		bool bResult = false;
 		__QOR_PROTECT
 		{
@@ -553,9 +546,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::CSession::Logoff( bool bWait )
+	bool nsTerminalServices::CSession::Logoff( bool bWait )
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CSession::Logoff" );
+		_WINQ_FCONTEXT( "CSession::Logoff" );
 		bool bResult = false;
 		__QOR_PROTECT
 		{
@@ -565,9 +558,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTerminalServer::CSession::QueryUserToken( CRAIISessionHandle::refType& refHandle )
+	bool nsTerminalServices::CSession::QueryUserToken( CRAIISessionHandle::refType& refHandle )
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CSession::QueryUserToken" );
+		_WINQ_FCONTEXT( "CSession::QueryUserToken" );
 		bool bResult = false;
 		__QOR_PROTECT
 		{
@@ -582,13 +575,12 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTSLocalServer::GetChildSessionId( unsigned long& ulSessionId )
+	bool nsTerminalServices::nsLocal::CTSLocalServer::GetChildSessionId( unsigned long& ulSessionId )
 	{
 		_WINQ_FCONTEXT( "CTSLocalServer::GetChildSessionId" );
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			CTObjectLock< CTSLocalServer > Lock( this );
 			bResult = m_pWTSAPI && m_pWTSAPI->WTSGetChildSessionId( &ulSessionId );
 		}__QOR_ENDPROTECT
 		return bResult;
@@ -596,7 +588,7 @@ namespace nsWin32
 
 
 	//--------------------------------------------------------------------------------
-	bool CTSLocalServer::EnumerateListeners( nsCodeQOR::CTArray< CTSLocalServer::CListener::refType >& Listeners )
+	bool nsTerminalServices::nsLocal::CTSLocalServer::EnumerateListeners( nsCodeQOR::CTArray< nsTerminalServices::nsLocal::CListener::ref_type >& Listeners )
 	{
 		_WINQ_FCONTEXT( "CTSLocalServer::EnumerateListeners" );
 		bool bResult = false;
@@ -605,7 +597,6 @@ namespace nsWin32
 
 		__QOR_PROTECT
 		{
-			CTObjectLock< CTSLocalServer > ObjectLock( this );
 			bResult = m_pWTSAPI && m_pWTSAPI->WTSEnumerateListeners( m_Handle, 0, 0, pListeners, &ulCount );
 
 			if( ulCount > 0 )
@@ -617,7 +608,7 @@ namespace nsWin32
 					for( unsigned long ulIndex = 0; ulIndex < ulCount; ulIndex++ )
 					{
 						CTString strListener( pListeners[ ulIndex ] );
-						CTSLocalServer::CListener::refType refListener( new  CTSLocalServer::CListener( *this, strListener ), true );
+						nsLocal::CListener::ref_type refListener = new_shared_ref<nsLocal::CListener>(*this, strListener);
 						Listeners.Append( refListener );
 					}
 				}
@@ -631,27 +622,27 @@ namespace nsWin32
 
 	
 	//--------------------------------------------------------------------------------
-	__QOR_IMPLEMENT_OCLASS_LUID( CTSLocalServer::CListener );
+	__QOR_IMPLEMENT_OCLASS_LUID(nsTerminalServices::nsLocal::CListener );
 
 	//--------------------------------------------------------------------------------
-	CTSLocalServer::CListener::CListener( CTSLocalServer& Server, CTString& strName ) : m_Server( Server )
+	nsTerminalServices::nsLocal::CListener::CListener(nsTerminalServices::nsLocal::CTSLocalServer& Server, CTString& strName ) : m_Server( Server )
 	,	m_strName( strName )
 	{
 		_WINQ_FCONTEXT( "CTSLocalServer::CListener::CListener" );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTSLocalServer::CListener::CListener( const CTSLocalServer::CListener& src ) : m_Server( src.m_Server )
+	nsTerminalServices::nsLocal::CListener::CListener( const nsTerminalServices::nsLocal::CListener& src ) : m_Server( src.m_Server )
 	{
 		_WINQ_FCONTEXT( "CTSLocalServer::CListener::CListener" );
 		if( &src != this )
 		{
-			*this = dynamic_cast< const CTSLocalServer::CListenerConfig& >( src );
+			*this = dynamic_cast< const nsTerminalServices::nsLocal::CListenerConfig& >( src );
 		}
 	}
 
 	//--------------------------------------------------------------------------------
-	CTSLocalServer::CListener::CListener( CTSLocalServer& Server, const CTSLocalServer::CListenerConfig& src ) : m_Server( Server )
+	nsTerminalServices::nsLocal::CListener::CListener( nsTerminalServices::nsLocal::CTSLocalServer& Server, const nsTerminalServices::nsLocal::CListenerConfig& src ) : m_Server( Server )
 	{
 		_WINQ_FCONTEXT( "CTSLocalServer::CListener::CListener" );
 		if( &src != this )
@@ -661,9 +652,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CTSLocalServer::CListener& CTSLocalServer::CListener::operator = ( const CTSLocalServer::CListenerConfig& src )
+	nsTerminalServices::nsLocal::CListener& nsTerminalServices::nsLocal::CListener::operator = ( const nsTerminalServices::nsLocal::CListenerConfig& src )
 	{
-		_WINQ_FCONTEXT( "CTSLocalServer::CListener::operator =" );
+		_WINQ_FCONTEXT( "CListener::operator =" );
 		if( &src != this )
 		{
 			version = src.version;
@@ -702,15 +693,15 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CTSLocalServer::CListener::~CListener()
+	nsTerminalServices::nsLocal::CListener::~CListener()
 	{
-		_WINQ_FCONTEXT( "CTSLocalServer::CListener::~CListener" );
+		_WINQ_FCONTEXT( "CListener::~CListener" );
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTSLocalServer::CListener::GetSecurity( unsigned long ulSecurityInformation, CSecurityDescriptor** ppDescriptor )
+	bool nsTerminalServices::nsLocal::CListener::GetSecurity( unsigned long ulSecurityInformation, CSecurityDescriptor** ppDescriptor )
 	{
-		_WINQ_FCONTEXT( "CTSLocalServer::CListener::GetSecurity" );
+		_WINQ_FCONTEXT( "CListener::GetSecurity" );
 		bool bResult = false;
 
 		if( ppDescriptor && !*ppDescriptor )
@@ -737,9 +728,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTSLocalServer::CListener::SetSecurity( unsigned long ulSecurityInformation, CSecurityDescriptor& SecurityDescriptor )
+	bool nsTerminalServices::nsLocal::CListener::SetSecurity( unsigned long ulSecurityInformation, CSecurityDescriptor& SecurityDescriptor )
 	{
-		_WINQ_FCONTEXT( "CTSLocalServer::CListener::SetSecurity" );
+		_WINQ_FCONTEXT( "CListener::SetSecurity" );
 		bool bResult = false;
 
 		__QOR_PROTECT
@@ -751,9 +742,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CTSLocalServer::CListener::AssignFromConfig( void* pConfigData )
+	void nsTerminalServices::nsLocal::CListener::AssignFromConfig( void* pConfigData )
 	{
-		_WINQ_FCONTEXT( "CTSLocalServer::CListener::CListeneAssignFromConfig" );
+		_WINQ_FCONTEXT( "CListener::CListeneAssignFromConfig" );
 		::PWTSLISTENERCONFIG pConfig = reinterpret_cast< ::PWTSLISTENERCONFIG >( pConfigData );
 		version = pConfig->version;
 		fEnableListener = pConfig->fEnableListener;
@@ -791,9 +782,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CTSLocalServer::CListener::AssignToConfig( void* pConfigData )
+	void nsTerminalServices::nsLocal::CListener::AssignToConfig( void* pConfigData )
 	{
-		_WINQ_FCONTEXT( "CTSLocalServer::CListener::AssignToConfig" );
+		_WINQ_FCONTEXT( "CListener::AssignToConfig" );
 		::PWTSLISTENERCONFIG pConfig = reinterpret_cast< ::PWTSLISTENERCONFIG >( pConfigData );
 		pConfig->version = version;
 		pConfig->fEnableListener = fEnableListener;
@@ -834,9 +825,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTSLocalServer::CListener::QueryConfig()
+	bool nsTerminalServices::nsLocal::CListener::QueryConfig()
 	{
-		_WINQ_FCONTEXT( "CTSLocalServer::CListener::QueryConfig" );
+		_WINQ_FCONTEXT( "CListener::QueryConfig" );
 		bool bResult = false;
 		::WTSLISTENERCONFIG Config;
 
@@ -854,9 +845,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTSLocalServer::CListener::Create()
+	bool nsTerminalServices::nsLocal::CListener::Create()
 	{
-		_WINQ_FCONTEXT( "CTSLocalServer::CListener::Create" );
+		_WINQ_FCONTEXT( "CListener::Create" );
 		bool bResult = false;
 		::WTSLISTENERCONFIG Config;
 		__QOR_PROTECT
@@ -869,9 +860,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTSLocalServer::CListener::Update()
+	bool nsTerminalServices::nsLocal::CListener::Update()
 	{
-		_WINQ_FCONTEXT( "CTSLocalServer::CListener::Update" );
+		_WINQ_FCONTEXT( "CListener::Update" );
 		bool bResult = false;
 		::WTSLISTENERCONFIG Config;
 		__QOR_PROTECT
@@ -885,20 +876,20 @@ namespace nsWin32
 
 
 	//--------------------------------------------------------------------------------
-	__QOR_IMPLEMENT_OCLASS_LUID( CTerminalServer::CSessionNotification );
+	__QOR_IMPLEMENT_OCLASS_LUID(nsTerminalServices::CSessionNotification );
 
 	//--------------------------------------------------------------------------------
-	CTerminalServer::CSessionNotification::CSessionNotification( CTerminalServer& Server, COSWindow& Window, bool bAllSessions ) : m_Server( Server )
+	nsTerminalServices::CSessionNotification::CSessionNotification( CTerminalServer& Server, COSWindow& Window, bool bAllSessions ) : m_Server( Server )
 	,	m_Window( Window )
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CSessionNotification::CSessionNotification" );
+		_WINQ_FCONTEXT( "CSessionNotification::CSessionNotification" );
 		m_bStatus = m_Server.m_pWTSAPI->WTSRegisterSessionNotification( reinterpret_cast< ::HWND >( m_Window.Handle()->Use() ), bAllSessions ? 1 : 0 ) ? true : false;
 	}
 
 	//--------------------------------------------------------------------------------
-	CTerminalServer::CSessionNotification::~CSessionNotification()
+	nsTerminalServices::CSessionNotification::~CSessionNotification()
 	{
-		_WINQ_FCONTEXT( "CTerminalServer::CSessionNotification::~CSessionNotification" );
+		_WINQ_FCONTEXT( "CSessionNotification::~CSessionNotification" );
 		if( m_bStatus )
 		{
 			m_Server.m_pWTSAPI->WTSUnRegisterSessionNotification( reinterpret_cast< ::HWND >( m_Window.Handle()->Use() ) );
@@ -908,10 +899,10 @@ namespace nsWin32
 
 
 	//--------------------------------------------------------------------------------
-	__QOR_IMPLEMENT_OCLASS_LUID( CTSRemoteServer );
+	__QOR_IMPLEMENT_OCLASS_LUID(nsTerminalServices::CTSRemoteServer );
 
 	//--------------------------------------------------------------------------------
-	CTSRemoteServer::CTSRemoteServer( const CTString& strName ) : CTerminalServer( strName )
+	nsTerminalServices::CTSRemoteServer::CTSRemoteServer( const CTString& strName ) : CTerminalServer( strName )
 	{
 		_WINQ_FCONTEXT( "CTSRemoteServer::CTSRemoteServer" );
 		m_Handle = m_pWTSAPI->WTSOpenServerEx( m_strName.GetBuffer() );
@@ -919,7 +910,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CTSRemoteServer::~CTSRemoteServer()
+	nsTerminalServices::CTSRemoteServer::~CTSRemoteServer()
 	{
 		_WINQ_FCONTEXT( "CTSRemoteServer::~CTSRemoteServer" );
 		m_pWTSAPI->WTSCloseServer( m_Handle );

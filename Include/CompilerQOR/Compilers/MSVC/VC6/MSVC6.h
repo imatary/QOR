@@ -177,6 +177,7 @@
 #define __QCMP_WARN_ASSIGNMENT_WITHIN_COND_EXPR			4706
 
 
+
 #if ! (defined(lint) || defined(RC_INVOKED))
 #	if ( _MSC_VER >= 800 && !defined(_M_I86)) || defined(_PUSHPOP_SUPPORTED)
 #		pragma warning(disable:4103)

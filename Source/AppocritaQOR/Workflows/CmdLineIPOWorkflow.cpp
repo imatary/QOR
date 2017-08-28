@@ -79,7 +79,7 @@ namespace nsQOR
 
 
 	//------------------------------------------------------------------------------
-	bool CApplicationStartupState::HandleEvent( IEvent::ref_type pEvent )
+	bool CApplicationStartupState::operator()( IEvent::ref_type pEvent )
 	{
 		__QCS_FCONTEXT( "CApplicationStartupState::HandleEvent" );
 		if( pEvent && m_pWorkflow )
@@ -125,7 +125,7 @@ namespace nsQOR
 	}
 
 	//------------------------------------------------------------------------------
-	bool CCmdLineInputState::HandleEvent( IEvent::ref_type pEvent )
+	bool CCmdLineInputState::operator()( IEvent::ref_type pEvent )
 	{
 		__QCS_FCONTEXT( "CCmdLineInputState::HandleEvent" );
 		return false;
@@ -139,7 +139,7 @@ namespace nsQOR
 
 
 	//------------------------------------------------------------------------------
-	bool CProcessingState::HandleEvent( IEvent::ref_type pEvent )
+	bool CProcessingState::operator()( IEvent::ref_type pEvent )
 	{
 		__QCS_FCONTEXT( "CProcessingState::HandleEvent" );
 		return false;
@@ -159,7 +159,7 @@ namespace nsQOR
 
 
 	//------------------------------------------------------------------------------
-	bool CCmdLineOutputState::HandleEvent( IEvent::ref_type pEvent )
+	bool CCmdLineOutputState::operator()( IEvent::ref_type pEvent )
 	{
 		__QCS_FCONTEXT( "CCmdLineOutputState::HandleEvent" );
 		return false;

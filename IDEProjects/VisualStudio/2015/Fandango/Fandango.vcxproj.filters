@@ -5,10 +5,177 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{37a2f1d8-e335-4e07-a19a-66d6215a475b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\transport">
+      <UniqueIdentifier>{0d51b8b6-ccf9-4d14-8bb1-5d1ee0c1b4ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\transport">
+      <UniqueIdentifier>{1964475c-3737-46ff-aae8-1bed191160f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Test\Fandango\Fandango.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\api.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\databuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\membuf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_body.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_connect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_hdr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_hdr_membuf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_hdr_ptr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_hdr_stream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_msg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_transport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_transport_sock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\win32compat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\btobex.cpp">
+      <Filter>Source Files\transport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\customtrans.cpp">
+      <Filter>Source Files\transport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\fdobex.cpp">
+      <Filter>Source Files\transport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\inobex.cpp">
+      <Filter>Source Files\transport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\irobex.cpp">
+      <Filter>Source Files\transport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\usb1obex.cpp">
+      <Filter>Source Files\transport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\usbobex.cpp">
+      <Filter>Source Files\transport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\usbutils.cpp">
+      <Filter>Source Files\transport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\ObexProtocolWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Test\Fandango\ObexProtocolSession.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\openobex\obex.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\openobex\obex_const.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\cloexec.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\databuffer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\debug.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\membuf.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\nonblock.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_body.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_hdr.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_incl.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_main.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_object.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_transport.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_transport_sock.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\bluez_compat.h">
+      <Filter>include\transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\btobex.h">
+      <Filter>include\transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\customtrans.h">
+      <Filter>include\transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\fdobex.h">
+      <Filter>include\transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\inobex.h">
+      <Filter>include\transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\irda_wrap.h">
+      <Filter>include\transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\irobex.h">
+      <Filter>include\transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\usbobex.h">
+      <Filter>include\transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\usbutils.h">
+      <Filter>include\transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\openobex\Obex_protocol.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

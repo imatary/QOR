@@ -1,6 +1,6 @@
 //WinQLFileSource.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -40,7 +40,7 @@ namespace nsWin32
 	class __QOR_INTERFACE( __WINQL ) CFileConnector;
 
 	//--------------------------------------------------------------------------------
-	//A general Bluefoot source which reads from a Win32 File
+	//A Bluefoot source which reads from a Win32 File
 	class __QOR_INTERFACE( __WINQL ) CFileSource : public CIOSource
 	{
 	public:
@@ -50,8 +50,11 @@ namespace nsWin32
 		CFileSource( CFileConnector* pFileConnector );
 		virtual ~CFileSource();
 
-		virtual bool Read( unsigned long& ulNumberOfBytesRead, unsigned long ulNumberOfUnitsToRead );
+		virtual bool Read( unsigned long& ulNumberOfBytesRead, unsigned long ulNumberOfUnitsToRead = 1 );
 		virtual bool IsAtEnd( void );
+
+		virtual bool ReadAsync(unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead, byte* pBuffer);
+		virtual bool ReadSync(unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead, byte* pBuffer);
 
 	private:
 

@@ -1,6 +1,6 @@
 //WinQL-COM.cpp
 
-// Copyright Querysoft Limited 2013, 2015
+// Copyright Querysoft Limited 2013, 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -30,10 +30,19 @@
 #include "CodeQOR.h"
 
 //------------------------------------------------------------------------------
-//Only for shared library builds as one of a network of Dlls
+//Only for shared library builds as one of a network of DLLs
 #if (!defined(QOR_MONOLITHIC) && defined _USRDLL)
 
 __QCMP_STARTLINKAGE_C
+
+	extern int _cdecl QORStaticInit(void);
+
+	//------------------------------------------------------------------------------
+	__QCMP_EXPORT int _cdecl QORinit(void)
+	{
+		QORStaticInit();
+		return 1;
+	}
 
 	//------------------------------------------------------------------------------
 	//This provides a unique identifier for the Windows COM QOR Library. 
@@ -53,6 +62,12 @@ nsCodeQOR::CLoadableModuleBase& ThisModule( void )
 {
 	static nsCodeQOR::CLoadableModuleBase WinQLModule( "Querysoft Open Runtime COM class library for Microsoft Windows" );
 	return WinQLModule;
+}
+
+//------------------------------------------------------------------------------
+const char* __QCMP_LOCAL ThisModuleVersion(void)
+{
+	return QOR_PP_STRINGIZE( __DATE__:__TIME__);
 }
 
 #endif//QOR_MONOLITHIC

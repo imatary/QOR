@@ -1,6 +1,6 @@
 //WinQLDeviceInterface.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -31,7 +31,6 @@
 #include "WinQL/System/Devices/Interfaces/WinQLDeviceInterface.h"
 #include "WinQL/System/Devices/Interfaces/WinQLDeviceInterfaceClass.h"
 #include "WinQL/System/Devices/Instances/WinQLDeviceInstance.h"
-#include "WinQL/System/Devices/WinQLIODevice.h"
 #include "WinQL/Definitions/Constants.h"
 #include "WinQL/GUI/Window.h"
 #include "WinQL/System/WinQLSystem.h"
@@ -43,38 +42,22 @@ namespace nsWin32
 {
 	using namespace nsWinQAPI;
 
-	//--------------------------------------------------------------------------------
 	__QOR_IMPLEMENT_OCLASS_LUID( CDeviceInterface );
-	__QOR_IMPLEMENT_OCLASS_LUID( CDeviceInterface::CDeviceSession );
 
 	//--------------------------------------------------------------------------------
-	CDeviceInterface::CDeviceInterface() : m_pInstance( 0 )
-	,	m_pClass( 0 )
-	,	m_ulIndex( (unsigned long)(-1) )
-	,	m_pDeviceFile( 0 )
-	,	m_ulUsageCount( 0 )
+	CDeviceInterface::CDeviceInterface()
 	{
 		_WINQ_FCONTEXT( "CDeviceInterface::CDeviceInterface" );
 	}
 
 	//--------------------------------------------------------------------------------
-	CDeviceInterface::CDeviceInterface( CDeviceHandle& hExisting ) : m_pInstance( 0 )
-	,	m_pClass( 0 )
-	,	m_ulIndex( (unsigned long)(-1) )
-	,	m_pDeviceFile( 0 )
-	,	m_ulUsageCount( 0 )
+	CDeviceInterface::CDeviceInterface( CDeviceHandle& hExisting )
 	{
 		_WINQ_FCONTEXT( "CDeviceInterface::CDeviceInterface" );
-
-		m_pDeviceFile = new CIODeviceFile( hExisting );
 	}
 
 	//--------------------------------------------------------------------------------
-	CDeviceInterface::CDeviceInterface( const CDeviceInterface& src ) : m_pInstance( src.m_pInstance )
-	,	m_pClass( src.m_pClass )
-	,	m_ulIndex( src.m_ulIndex )
-	,	m_pDeviceFile( src.m_pDeviceFile )
-	,	m_ulUsageCount( src.m_ulUsageCount )
+	CDeviceInterface::CDeviceInterface( const CDeviceInterface& src )
 	{
 		_WINQ_FCONTEXT( "CDeviceInterface::CDeviceInterface" );
 		*this = src;
@@ -90,12 +73,7 @@ namespace nsWin32
 			m_bActive = src.m_bActive;
 			m_bDefault = src.m_bDefault;
 			m_bRemoved = src.m_bRemoved;
-			m_pInstance = src.m_pInstance;
-			m_pClass = src.m_pClass;
-			m_ulIndex = src.m_ulIndex;
 			m_strPath = src.m_strPath;
-			m_pDeviceFile = src.m_pDeviceFile;
-			m_ulUsageCount = src.m_ulUsageCount;
 		}
 		return *this;
 	}
@@ -105,37 +83,36 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CDeviceInterface::~CDeviceInterface" );
 	}
-
+	/*
 	//--------------------------------------------------------------------------------
-	void CDeviceInterface::SetClass( CDeviceInterfaceClass* pClass, unsigned long ulClassIndex )
+	void CDeviceInterface::SetClass( CDeviceInterfaceClass::ref_type pClass )
 	{
 		_WINQ_FCONTEXT( "CDeviceInterface::SetClass" );
 		m_pClass = pClass;
-		m_ulIndex = ulClassIndex;
 	}
 
 	//--------------------------------------------------------------------------------
-	nsCodeQOR::CTLRef< CDeviceInterfaceClass > CDeviceInterface::GetClass()
+	CDeviceInterfaceClass::ref_type CDeviceInterface::GetClass()
 	{
 		_WINQ_FCONTEXT( "CDeviceInterface::GetClass" );
-		nsCodeQOR::CTLRef< CDeviceInterfaceClass > Ref( m_pClass, false );
-		return Ref;
+		return m_pClass;
 	}
-
+	*/
+	/*
 	//--------------------------------------------------------------------------------
-	void CDeviceInterface::SetInstance( CDeviceInstance* pInstance )
+	void CDeviceInterface::SetInstance( CDeviceInstance::ref_type pInstance )
 	{
 		_WINQ_FCONTEXT( "CDeviceInterface::SetInstance" );
 		m_pInstance = pInstance;
 	}
 
 	//--------------------------------------------------------------------------------
-	nsCodeQOR::CTLRef< CDeviceInstance > CDeviceInterface::GetInstance()
+	CDeviceInstance::ref_type CDeviceInterface::GetInstance()
 	{
 		_WINQ_FCONTEXT( "CDeviceInterface::GetInstance" );
-		nsCodeQOR::CTLRef< CDeviceInstance > Ref( m_pInstance, false );
-		return Ref;
+		return m_pInstance;
 	}
+	*/
 
 	//--------------------------------------------------------------------------------
 	void CDeviceInterface::SetActive( bool bActive )
@@ -191,102 +168,10 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CIODeviceFile& CDeviceInterface::Open( unsigned long ulAccessRequired, unsigned long ulShareMode, unsigned long ulAttributes )
+	CIODeviceFile::ref_type CDeviceInterface::Open( unsigned long ulAccessRequired, unsigned long ulShareMode, unsigned long ulAttributes )
 	{
 		_WINQ_FCONTEXT( "CDeviceInterface::Open" );
-		if( m_pDeviceFile == 0 )
-		{
-			m_pDeviceFile = new CIODeviceFile( m_strPath.GetBuffer(), ulAccessRequired, ulShareMode, ulAttributes );
-			m_strPath.ReleaseBuffer();
-		}
-
-		++m_ulUsageCount;
-		return *m_pDeviceFile;
+		return new_shared_ref< CIODeviceFile >( m_strPath.GetBuffer(), ulAccessRequired, ulShareMode, ulAttributes );
 	}
-
-	//--------------------------------------------------------------------------------
-	void CDeviceInterface::Close( void )
-	{
-		_WINQ_FCONTEXT( "CDeviceInterface::Close" );
-		--m_ulUsageCount;
-		if( m_ulUsageCount <= 0 && m_pDeviceFile != 0 )
-		{
-			delete m_pDeviceFile;
-			m_pDeviceFile = 0;
-		}
-	}
-
-	//--------------------------------------------------------------------------------
-	CIODeviceFile* CDeviceInterface::GetDeviceFile( void )
-	{
-		_WINQ_FCONTEXT( "CDeviceInterface::GetDeviceFile" );
-		return m_pDeviceFile;
-	}
-
-
-	//--------------------------------------------------------------------------------
-	CDeviceInterface::CDeviceSession::CDeviceSession( CDeviceInterface& Interface, unsigned long ulAccessRequired, unsigned long ulShareMode, unsigned long ulAttributes ) : m_Interface( Interface )
-	{
-		_WINQ_FCONTEXT( "CDeviceInterface::CDeviceSession::CDeviceSession" );
-		m_Interface.Open( ulAccessRequired, ulShareMode, ulAttributes );
-	}
-
-	//--------------------------------------------------------------------------------
-	CDeviceInterface::CDeviceSession::~CDeviceSession()
-	{
-		_WINQ_FCONTEXT( "CDeviceInterface::CDeviceSession::~CDeviceSession" );
-		m_Interface.Close();
-	}
-
-
-
-/*
-	//--------------------------------------------------------------------------------
-	CIODeviceFile& CDeviceInterfaceInstanceController::Open( unsigned long ulAccessRequired, unsigned long ulShareMode, unsigned long ulAttributes )
-	{
-		_WINQ_FCONTEXT( "CDeviceInterfaceInstanceController::Open" );
-
-		nsMammut::CModel::refType RefBaseModel( GetModel(), false );
-
-		nsCodeQOR::CTLRef< CDeviceInterfaceInstanceModel > RefModel( RefBaseModel.As< CDeviceInterfaceInstanceModel >(), false );
-		CIODeviceFile* pDeviceFile = 0;
-
-		if( !RefModel.IsNull() )
-		{	
-			pDeviceFile = RefModel->m_pDeviceFile;
-
-			if( pDeviceFile == 0 )
-			{
-				RefModel->m_pDeviceFile.Set( new CIODeviceFile( RefModel->m_Path.Value(), ulAccessRequired, ulShareMode, ulAttributes ) );
-				RefModel->m_ulUsageCount.Set( RefModel->m_ulUsageCount + 1 );
-			}
-		}
-
-		return *pDeviceFile;
-	}
-
-	//--------------------------------------------------------------------------------
-	void CDeviceInterfaceInstanceController::Close( void )
-	{
-		_WINQ_FCONTEXT( "CDeviceInterfaceInstanceController::Close" );
-
-		nsMammut::CModel::refType RefBaseModel( GetModel(), false );
-
-		nsCodeQOR::CTLRef< CDeviceInterfaceInstanceModel > RefModel( RefBaseModel.As< CDeviceInterfaceInstanceModel >(), false );
-
-		if( !RefModel.IsNull() )
-		{
-			RefModel->m_ulUsageCount.Set( RefModel->m_ulUsageCount - 1 );
-
-			CIODeviceFile* pDeviceFile = RefModel->m_pDeviceFile.Value();
-			if( RefModel->m_ulUsageCount.Value() <= 0 && pDeviceFile != 0 )
-			{
-				RefModel->m_pDeviceFile.Set( 0 );
-				delete pDeviceFile;
-			}
-		}
-	}
-*/
-
 
 }//nsWin32

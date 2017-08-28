@@ -1,6 +1,6 @@
 //WinQLProcessManager.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -27,11 +27,12 @@
 #ifndef WINQL_SYSTEM_PROCESSMANAGER_H_3
 #define WINQL_SYSTEM_PROCESSMANAGER_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-#include "CompilerQOR.h"
 #include "WinQL/WinQL.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/CodeServices/WinQLSharedRef.h"
@@ -42,13 +43,11 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------	
 	class __QOR_INTERFACE( __WINQL ) CProcessManager
 	{
-		QOR_PP_WINQL_SHARED;
 
 	public:
 
-		typedef CSharedRef< CProcessManager > refType;
-
-		__QOR_DECLARE_OCLASS_ID( CProcessManager );
+		__QOR_DECLARE_REF_TYPE(CProcessManager);
+		__QOR_DECLARE_OCLASS_ID(CProcessManager);
 
 		CProcessManager();
 		CProcessManager( const CProcessManager& );

@@ -36,19 +36,19 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFFilter : public CBFElement
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CFilter : public CElement
 	{
 	public:
 
-		CBFFilter();
-		virtual ~CBFFilter();
-		CBFFilter(const CBFFilter& src);
-		CBFFilter& operator = (const CBFFilter& src);
+		CFilter();
+		virtual ~CFilter();
+		CFilter(const CFilter& src);
+		CFilter& operator = (const CFilter& src);
 
-		void SetSink( CBFSink* pSink );
-		CBFSink* GetSink( void );
-		void SetSource( CBFSource* pSource );
-		CBFSource* GetSource( void );
+		void SetSink( CSink* pSink );
+		CSink* GetSink( void );
+		void SetSource( CSource* pSource );
+		CSource* GetSource( void );
 
 		virtual bool Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead = 1 );
 		virtual bool Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite = 1 );//Get the units from the source and output them
@@ -72,18 +72,18 @@ namespace nsBluefoot
 		}
 
 		//------------------------------------------------------------------------------
-		virtual CBFBuffer* GetSourceBuffer( void )
+		virtual CBuffer* GetSourceBuffer( void )
 		{
 			return m_pBuffer;
 		}
 
-		CBFSource* AsSource( void );
-		CBFSink* AsSink( void );
+		CSource* AsSource( void );
+		CSink* AsSink( void );
 
 	protected:
 
-		CTBFSinkProxy< CBFFilter > m_SinkProxy;
-		CTBFSourceProxy< CBFFilter > m_SourceProxy;
+		CSinkProxy< CFilter > m_SinkProxy;
+		CSourceProxy< CFilter > m_SourceProxy;
 	};
 
 }//nsBluefoot

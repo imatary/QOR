@@ -66,6 +66,7 @@ namespace nsQOR
 		virtual int Run( nsCodeQOR::CTLRef< IWorkflow > ) = 0;
 		virtual void EnqueueEvent( nsCodeQOR::CTLRef< IEvent > pEvent ) = 0;
 		virtual void Stop( void ) = 0;
+		virtual void OnIdle(void) = 0;
 	};
 }//nsQOR
 

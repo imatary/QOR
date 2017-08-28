@@ -1,6 +1,6 @@
 //WinQLUser.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -43,11 +43,31 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CUser::CUser()
 	{
+		_WINQ_FCONTEXT("CUser::CUser");
+	}
+
+	//--------------------------------------------------------------------------------
+	CUser::CUser( CUser&& move ) : m_GeoLocationHelper(std::move(move.m_GeoLocationHelper)), m_LocaleHelper(std::move(move.m_LocaleHelper))
+	{
+		_WINQ_FCONTEXT("CUser::CUser");		
+	}
+
+	//--------------------------------------------------------------------------------
+	CUser& CUser::operator = (CUser&& move)
+	{
+		_WINQ_FCONTEXT("CUser::operator =");
+		if (&move != this)
+		{
+			m_GeoLocationHelper = std::move(move.m_GeoLocationHelper);
+			m_LocaleHelper = std::move(move.m_LocaleHelper);
+		}
+		return *this;
 	}
 
 	//--------------------------------------------------------------------------------
 	CUser::~CUser()
 	{
+		_WINQ_FCONTEXT("CUser::~CUser");
 	}
 
 	//--------------------------------------------------------------------------------
@@ -111,7 +131,7 @@ namespace nsWin32
 	bool CUser::CanIWriteAPowerScheme( void )
 	{
 		_WINQ_FCONTEXT( "CUser::CanIWriteAPowerScheme" );
-		return TheSystem().As< nsWin32::CSystem >()->Power(QOR_PP_SHARED_OBJECT_ACCESS).CanUserWriteAPowerScheme();
+		return TheSystem().As< nsWin32::CSystem >()->Power(QOR_PP_SHARED_OBJECT_ACCESS)().CanUserWriteAPowerScheme();
 	}
 
 }//nsWin32

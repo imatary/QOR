@@ -1,6 +1,6 @@
 //BfTextReader.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -33,26 +33,27 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CRecognizerEventSink::CRecognizerEventSink( CBFTextReader* pContainer ) : CEventSink( m_pEvent ), m_pContainer( pContainer )
+	CRecognizerEventSink::CRecognizerEventSink( CTextReader* pContainer ) : CEventSink( m_pEvent ), m_pContainer( pContainer )
 	{
 	}
 
 	//------------------------------------------------------------------------------
-	void CRecognizerEventSink::operator()( void )
+	bool CRecognizerEventSink::operator()( nsQOR::IEvent::ref_type, int iCookie )
 	{
 		if( m_pContainer )
 		{
 			m_pContainer->OnRecognizerEvent( m_pEvent.As< CBOMRecognizedEvent >()->BOMType() );
 		}
+		return true;
 	}
 
-	__QOR_IMPLEMENT_OCLASS_LUID( CBFTextReader );
+	__QOR_IMPLEMENT_OCLASS_LUID(CTextReader);
 
 	//------------------------------------------------------------------------------
-	CBFTextReader::CBFTextReader( CBFSource* pSource ) : CBFPipeline()
+	CTextReader::CTextReader( CSource* pSource ) : CPipeline()
 	, m_RecognizerEventSink( this )
 	{
-		__QCS_MEMBER_FCONTEXT( "CBFTextReader::CBFTextReader" );
+		__QCS_MEMBER_FCONTEXT( "CTextReader::CTextReader" );
 		SetSource( pSource );
 		SetSink( &m_StringSink );
 		InsertFilter( &m_BOMRecognizer );
@@ -60,26 +61,26 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBFTextReader::~CBFTextReader()
+	CTextReader::~CTextReader()
 	{
-		__QCS_MEMBER_FCONTEXT( "CBFTextReader::~CBFTextReader" );
+		__QCS_MEMBER_FCONTEXT( "CTextReader::~CTextReader" );
 	}
 
 	//------------------------------------------------------------------------------
-	CBFTextReader::CBFTextReader( const CBFTextReader& Src ) : CBFPipeline( Src )
+	CTextReader::CTextReader( const CTextReader& Src ) : CPipeline( Src )
 	, m_RecognizerEventSink( this )
 	{
-		__QCS_MEMBER_FCONTEXT( "CBFTextReader::CBFTextReader" );
+		__QCS_MEMBER_FCONTEXT( "CTextReader::CTextReader" );
 		m_BOMRecognizer = Src.m_BOMRecognizer;
 	}
 
 	//------------------------------------------------------------------------------
-	CBFTextReader& CBFTextReader::operator = ( const CBFTextReader& Src )
+	CTextReader& CTextReader::operator = ( const CTextReader& Src )
 	{
-		__QCS_MEMBER_FCONTEXT( "CBFTextReader::operator =" );
+		__QCS_MEMBER_FCONTEXT( "CTextReader::operator =" );
 		if( &Src != this )
 		{
-			CBFPipeline::operator=( Src );
+			CPipeline::operator=( Src );
 			m_BOMRecognizer = Src.m_BOMRecognizer;
 		}
 
@@ -87,23 +88,23 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFTextReader::OnRecognizerEvent( CBOMRecognizedEvent::eBOMType BOMType )
+	void CTextReader::OnRecognizerEvent( CBOMRecognizedEvent::eBOMType BOMType )
 	{
-		__QCS_MEMBER_FCONTEXT( "CBFTextReader::OnRecognizerEvent" );
+		__QCS_MEMBER_FCONTEXT( "CTextReader::OnRecognizerEvent" );
 
 		switch( BOMType )
 		{
 			case CBOMRecognizedEvent::eNone:			//Assume Unicode UTF-8 until content can be analysed			
-				InsertFilter( &( m_UTF8Filter() ) );
+				InsertFilter( m_UTF8Filter.As<CFilter>() );
 				break;
 			case CBOMRecognizedEvent::eUTF8:			//UTF-8 with BOM			
-				InsertFilter( &( m_UTF8Filter() ) );
+				InsertFilter( m_UTF8Filter.As<CFilter>() );
 				break;
 			case CBOMRecognizedEvent::eUTF16BE:			//UTF-16 Big Endian			
-				InsertFilter( &( m_UTF16Filter() ) );
+				InsertFilter( m_UTF16Filter.As<CFilter>() );
 				break;
 			case CBOMRecognizedEvent::eUTF16LE:			//UTF-16 Little Endian			
-				InsertFilter( &( m_UTF16Filter() ) );
+				InsertFilter( m_UTF16Filter.As<CFilter>() );
 				break;
 		}
 	}

@@ -1,4 +1,4 @@
-//String.cpp
+//CQString.cpp
 
 // Copyright Querysoft Limited 2013
 //
@@ -24,7 +24,6 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Empty implementation just to ensure inclusion and export of String template types
 
 #include "SystemQOR.h"
 #include <new>

@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Server">
+      <UniqueIdentifier>{a2cc4476-82b2-4326-b0a5-c72547469a4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Runtime">
+      <UniqueIdentifier>{7dfff551-086d-4964-af1b-2a42bb034dfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Client">
+      <UniqueIdentifier>{01556784-8e2c-4a8e-9c7f-e7345a30f40d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Module">
+      <UniqueIdentifier>{d5702e17-97f1-4c96-8bba-e7a977f24e5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Client\ComPtr">
+      <UniqueIdentifier>{e951801b-3322-4716-9c3d-0dbfd7f7a282}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Runtime\DataStructures">
+      <UniqueIdentifier>{ed168dff-0be4-44fa-96c4-50c35aff47c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Runtime\Registration">
+      <UniqueIdentifier>{22cf7dc1-3afe-4cd0-8b40-99a9ffada029}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Runtime\Sessions">
+      <UniqueIdentifier>{0f703cc0-7fee-4b6a-a65a-c2b23a63e377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Server\OLE">
+      <UniqueIdentifier>{d65ee48c-e8fa-4f93-bee4-5ae2b23f3f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Server\BaseParts">
+      <UniqueIdentifier>{04935a41-fb13-4850-b2de-fcefa02b9bf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Server\Impls">
+      <UniqueIdentifier>{1b162394-ff61-4ed4-989f-9d9ac8fd9316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Server\Module">
+      <UniqueIdentifier>{4079ffe9-ab77-437b-8f63-9e9646d84fa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Server\MMC">
+      <UniqueIdentifier>{5a5864c8-41bd-4e62-bd38-003f58311f08}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\WinQLCOHelper.cpp">
+      <Filter>Source Files\Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\WinQLCOThread.cpp">
+      <Filter>Source Files\Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\WinQLExternalObjectLock.cpp">
+      <Filter>Source Files\Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\WinQLOleRunLock.cpp">
+      <Filter>Source Files\Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Module\WinQL-COM.cpp">
+      <Filter>Source Files\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\WinQLClientBase.cpp">
+      <Filter>Source Files\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\WinQLDataCache.cpp">
+      <Filter>Source Files\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\WinQLComponentDataImpl.cpp">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\WinQLComponentImpl.cpp">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\WinQLDataObjectImpl.cpp">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOleCache2Impl.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOleClientSiteImpl.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOleContainerImpl.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOleInPlaceActiveObjectImpl.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOleInPlaceFrameImpl.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOleInPlaceSiteImpl.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOleInPlaceUIWindowImpl.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOleItemContainerImpl.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOleLinkImpl.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOleObject.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOLEServer.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOleWindowImpl.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOLEContainer.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOLEInProcessObject.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOLEMenuDescriptor.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\OLE\WinQLOLEOutOfProcessObject.cpp">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\Module\WinQLClassFactory.cpp">
+      <Filter>Source Files\Server\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\Module\WinQLInProcServerModule.cpp">
+      <Filter>Source Files\Server\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\Module\WinQLServerModule.cpp">
+      <Filter>Source Files\Server\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\Impls\WinQLAdviseSinkImpl.cpp">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\Impls\WinQLDragDrop.cpp">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\Impls\WinQLExternalConnectionImpl.cpp">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\Impls\WinQLInitializeSpy.cpp">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\Impls\WinQLMallocSpy.cpp">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\Impls\WinQLMessageFilterImpl.cpp">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\Impls\WinQLPersistFileImpl.cpp">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\Impls\WinQLPersistStorageImpl.cpp">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\Impls\WinQLViewObjectImpl.cpp">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\BaseParts\WinQLCOObjectBase.cpp">
+      <Filter>Source Files\Server\BaseParts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\BaseParts\WinQLServerObjectBase.cpp">
+      <Filter>Source Files\Server\BaseParts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\BaseParts\WinQLUnknownImplBase.cpp">
+      <Filter>Source Files\Server\BaseParts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\DataStructures\WinQLPropVariant.cpp">
+      <Filter>Source Files\Runtime\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\DataStructures\WinQLSafeArray.cpp">
+      <Filter>Source Files\Runtime\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\Sessions\WinQLCallContextSession.cpp">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\Sessions\WinQLCancelObjectSession.cpp">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\Sessions\WinQLClientImpersonationSession.cpp">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\Sessions\WinQLCOCancellationSession.cpp">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\Sessions\WinQLCOSecuritySession.cpp">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\Sessions\WinQLCOSession.cpp">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\Sessions\WinQLCOSessionEx.cpp">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\Sessions\WinQLInitializeSpySession.cpp">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\Sessions\WinQLMallocSpySession.cpp">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\Registration\WinQLClassObjectRegistration.cpp">
+      <Filter>Source Files\Runtime\Registration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\Registration\WinQLMessageFilterRegistration.cpp">
+      <Filter>Source Files\Runtime\Registration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\Registration\WinQLProxyStubRegistration.cpp">
+      <Filter>Source Files\Runtime\Registration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\RunTime\Registration\WinQLTreatAsRegistration.cpp">
+      <Filter>Source Files\Runtime\Registration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\ComPtr\WinQLBindContext.cpp">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\ComPtr\WinQLDataAdviseHolder.cpp">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\ComPtr\WinQLDataObjectClient.cpp">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\ComPtr\WinQLErrorInfo.cpp">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\ComPtr\WinQLILockBytesOnHGlobal.cpp">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\ComPtr\WinQLMoniker.cpp">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\ComPtr\WinQLOLEAdviseHolder.cpp">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\ComPtr\WinQLOLEClipboardClient.cpp">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\ComPtr\WinQLRunningObjectTableClient.cpp">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\ComPtr\WinQLStorage.cpp">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\ComPtr\WinQLStream.cpp">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Client\ComPtr\WinQLStreamOnHGlobal.cpp">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\MMC\WinQLSnapinHelpImpl.cpp">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\MMC\WinQLSnapInAboutImpl.cpp">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\MMC\WinQLResultOwnerDataImpl.cpp">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\MMC\WinQLResultDataCompareImpl.cpp">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\MMC\WinQLResultDataCompareExImpl.cpp">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\MMC\WinQLExtendTaskpadImpl.cpp">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\MMC\WinQLExtendPropertySheetImpl.cpp">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\MMC\WinQLExtendControlBarImpl.cpp">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\MMC\WinQLExtendContextMenuImpl.cpp">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\COM\Server\MMC\WinQLEnumTASKImpl.cpp">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOleWindowImpl.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOLEServer.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOLEOutOfProcessObject.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOleObjectImpl.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOLEMenuDescriptor.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOleLinkImpl.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOleItemContainerImpl.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOLEInProcessObject.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOleInPlaceUIWindowImpl.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOleInPlaceSiteImpl.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOleInPlaceFrameImpl.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOLEContainer.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOleInPlaceObjectImpl.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOleClientSiteImpl.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOleInPlaceActiveObjectImpl.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\OLE\WinQLOleCache2Impl.h">
+      <Filter>Source Files\Server\OLE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\Module\WinQLServerModule.h">
+      <Filter>Source Files\Server\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\Module\WinQLInProcServerModule.h">
+      <Filter>Source Files\Server\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\Module\WinQLClassFactory.h">
+      <Filter>Source Files\Server\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\Impls\WinQLViewObject2Impl.h">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\Impls\WinQLPersistStorageImpl.h">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\Impls\WinQLPersistFileImpl.h">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\Impls\WinQLMessageFilterImpl.h">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\Impls\WinQLInitializeSpy.h">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\Impls\WinQLMallocSpy.h">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\Impls\WinQLExternalConnectionImpl.h">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\Impls\WinQLDragDrop.h">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\Impls\WinQLAdviseSinkImpl.h">
+      <Filter>Source Files\Server\Impls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\BaseParts\WinQLUnknownImplBase.h">
+      <Filter>Source Files\Server\BaseParts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\BaseParts\WinQLServerObjectBase.h">
+      <Filter>Source Files\Server\BaseParts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\BaseParts\WinQLCOObjectBase.h">
+      <Filter>Source Files\Server\BaseParts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\WinQLOleRunLock.h">
+      <Filter>Source Files\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\WinQLExternalObjectLock.h">
+      <Filter>Source Files\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\WinQLCOThread.h">
+      <Filter>Source Files\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\WinQLCOHelper.h">
+      <Filter>Source Files\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\DataStructures\WinQLPropVariant.h">
+      <Filter>Source Files\Runtime\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\DataStructures\WinQLSafeArray.h">
+      <Filter>Source Files\Runtime\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\Registration\WinQLTreatAsRegistration.h">
+      <Filter>Source Files\Runtime\Registration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\Registration\WinQLProxyStubRegistration.h">
+      <Filter>Source Files\Runtime\Registration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\Registration\WinQLMessageFilterRegistration.h">
+      <Filter>Source Files\Runtime\Registration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\Registration\WinQLClassObjectRegistration.h">
+      <Filter>Source Files\Runtime\Registration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\Sessions\WinQLCallContextSession.h">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\Sessions\WinQLCancelObjectSession.h">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\Sessions\WinQLClientImpersonationSession.h">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\Sessions\WinQLCOCancellationSession.h">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\Sessions\WinQLCOSecuritySession.h">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\Sessions\WinQLCOSession.h">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\Sessions\WinQLCOSessionEx.h">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\Sessions\WinQLInitializeSpySession.h">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\Sessions\WinQLMallocSpySession.h">
+      <Filter>Source Files\Runtime\Sessions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\BaseParts\WinQLTInterfaceMember.h">
+      <Filter>Source Files\Server\BaseParts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\WinQLClientBase.h">
+      <Filter>Source Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\WinQLDataCache.h">
+      <Filter>Source Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\ComPtr\WinQLBindContext.h">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\ComPtr\WinQLDataAdviseHolder.h">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\ComPtr\WinQLDataObjectClient.h">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\ComPtr\WinQLErrorInfo.h">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\ComPtr\WinQLILockBytesOnHGlobal.h">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\ComPtr\WinQLMoniker.h">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\ComPtr\WinQLOLEAdviseHolder.h">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\ComPtr\WinQLOLEClipboardClient.h">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\ComPtr\WinQLRunningObjectTableClient.h">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\ComPtr\WinQLStorage.h">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\ComPtr\WinQLStream.h">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Client\ComPtr\WinQLStreamOnHGlobal.h">
+      <Filter>Source Files\Client\ComPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\RunTime\DataStructures\WinQLVariant.h">
+      <Filter>Source Files\Runtime\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\MMC\WinQLDataObjectImpl.h">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\MMC\WinQLComponentImpl.h">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\MMC\WinQLComponentDataImpl.h">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\MMC\WinQLSnapinHelpImpl.h">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\MMC\WinQLSnapInAboutImpl.h">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\MMC\WinQLResultOwnerDataImpl.h">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\MMC\WinQLResultDataCompareImpl.h">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\MMC\WinQLResultDataCompareExImpl.h">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\MMC\WinQLExtendTaskpadImpl.h">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\MMC\WinQLExtendPropertySheetImpl.h">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\MMC\WinQLExtendControlBarImpl.h">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\MMC\WinQLEnumTASKImpl.h">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\COM\Server\MMC\WinQLExtendContextMenuImpl.h">
+      <Filter>Source Files\Server\MMC</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

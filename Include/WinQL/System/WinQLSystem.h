@@ -1,6 +1,6 @@
 //WinQLSystem.h
 
-// Copyright Querysoft Limited 2013, 2015
+// Copyright Querysoft Limited 2013, 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -31,6 +31,8 @@
 
 #include "SystemQOR.h"
 #include "CodeQOR/Instancing/STMember.h"
+#include "CodeQOR/DataStructures/TLazy.h"
+#include "CodeQOR/DataStructures/TSyncRef.h"
 #include "CodeQOR/ClassReg/ClassRegEntry.h"
 #include "SystemQOR/System.h"
 #include "WinQL/WinQL.h"
@@ -71,34 +73,33 @@ namespace nsWin32
 		static nsCodeQOR::CTExternalRegEntry< CSystem > RegEntry;
 
 		CSystem();
+		CSystem( const CSystem& ) = delete;
 		virtual ~CSystem();
 
 		virtual void Setup( nsQOR::IApplication& Application );
 		virtual void Shutdown( nsQOR::IApplication& Application );
 
-		CSharedMember< CSharedMemberAdaptor< nsArch::CMachine > > Machine;
-		CSharedMember< CSharedMemberAdaptor< CGlobalAtomTable > > AtomTable;
-		CSharedMember< CSharedMemberAdaptor< CDeviceManager > > Devices;
-		CSharedMember< CSharedMemberAdaptor< CSystemLocale > > Locale;
-		CSharedMember< CSharedMemberAdaptor< CSystemInfo > > Information;		
-		CSharedMember< CSharedMemberAdaptor< CPowerManager > > Power;		
-		CSharedMember< CSharedMemberAdaptor< CPerformanceHelper > > Performance;
-		CSharedMember< CSharedMemberAdaptor< CRegistry > > Registry;
-		CSharedMember< CSharedMemberAdaptor< CClipboard > > Clipboard;
-		CSharedMember< CSharedMemberAdaptor< CSession > > Session;
-		CSharedMember< CSharedMemberAdaptor< CTime > > Time;
-		CSharedMember< CSharedMemberAdaptor< CFileSystem > > FileSystem;
-		CSharedMember< CSharedMemberAdaptor< CProcessManager > > Processes;
-		CSharedMember< CSharedMemberAdaptor< CServiceControlManager > > Services;
-		CSharedMember< CSharedMemberAdaptor< CTerminalServices > > TerminalServices;
-		CSharedMember< CSharedMemberAdaptor< CEventLog > > EventLog;
-		CSharedMember< CSharedMemberAdaptor< CWindowStationManager > > WindowStations;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< nsArch::CMachine >, CWinQLPolicy > Machine;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CGlobalAtomTable >, CWinQLPolicy > AtomTable;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CDeviceManager >, CWinQLPolicy > Devices;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CSystemLocale >, CWinQLPolicy > Locale;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CSystemInfo >, CWinQLPolicy > Information;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CPowerManager >, CWinQLPolicy > Power;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CPerformanceHelper >, CWinQLPolicy > Performance;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CRegistry >, CWinQLPolicy > Registry;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CClipboard >, CWinQLPolicy > Clipboard;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CSession >, CWinQLPolicy > Session;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CTime >, CWinQLPolicy > Time;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CFileSystem >, CWinQLPolicy > FileSystem;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CProcessManager >, CWinQLPolicy > Processes;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CServiceControlManager >, CWinQLPolicy > Services;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CTerminalServices >, CWinQLPolicy > TerminalServices;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CEventLog >, CWinQLPolicy > EventLog;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CWindowStationManager >, CWinQLPolicy >WindowStations;
+		nsCodeQOR::CTSyncAdaptor< nsCodeQOR::CTLazyAdaptor< CDisplay >, CWinQLPolicy > Display;
 
-		CSharedMember< CSharedMemberAdaptor< CDisplay > > Display;
-		CKeyboard::refType Keyboard(unsigned int uiUnit = 0);
-		CMouse::refType Mouse(unsigned int uiUnit);
-
-		//Add User accounts, policies and sessions
+		CKeyboard::ref_type Keyboard(unsigned int uiUnit = 0);
+		CMouse::ref_type Mouse(unsigned int uiUnit);
 
 	};
 

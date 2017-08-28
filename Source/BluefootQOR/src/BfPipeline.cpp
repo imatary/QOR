@@ -1,6 +1,6 @@
 //BfPipeline.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -32,24 +32,24 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CBFPipeline::CBFPipeline() : m_FlowMode( ePull ), m_pSource( 0 ), m_pSink( 0 )
+	CPipeline::CPipeline() : m_FlowMode( ePull ), m_pSource( 0 ), m_pSink( 0 )
 	{
 	}
 
 	//------------------------------------------------------------------------------
-	CBFPipeline::~CBFPipeline()
+	CPipeline::~CPipeline()
 	{
 
 	}
 
 	//------------------------------------------------------------------------------
-	CBFPipeline::CBFPipeline( const CBFPipeline& src )
+	CPipeline::CPipeline( const CPipeline& src )
 	{
 		*this = src;
 	}
 
 	//------------------------------------------------------------------------------
-	CBFPipeline& CBFPipeline::operator = ( const CBFPipeline& src )
+	CPipeline& CPipeline::operator = ( const CPipeline& src )
 	{
 		if (&src != this)
 		{
@@ -61,7 +61,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFPipeline::SetSource( CBFSource* pSource )
+	void CPipeline::SetSource( CSource* pSource )
 	{
 		m_pSource = pSource;
 		m_pSource->SetParent( this );
@@ -78,12 +78,12 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSource* CBFPipeline::GetSource(void)
+	CSource* CPipeline::GetSource(void)
 	{
 		return m_pSource;
 	}
 	//------------------------------------------------------------------------------
-	void CBFPipeline::SetSink( CBFSink* pSink )
+	void CPipeline::SetSink( CSink* pSink )
 	{
 		m_pSink = pSink;
 		m_pSink->SetParent( this );
@@ -100,13 +100,13 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSink* CBFPipeline::GetSink()
+	CSink* CPipeline::GetSink()
 	{
 		return m_pSink;
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFPipeline::Run()
+	void CPipeline::Run()
 	{
 		while( Pump() )
 		{
@@ -114,20 +114,20 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	bool CBFPipeline::Pump()
+	bool CPipeline::Pump()
 	{
 		unsigned long ulUnitsPumped = 0;
 		return Pump( ulUnitsPumped );
 	}
 
 	//------------------------------------------------------------------------------
-	bool CBFPipeline::Pump( unsigned long& ulUnitsPumped, unsigned long ulUnitsToPump )
+	bool CPipeline::Pump( unsigned long& ulUnitsPumped, unsigned long ulUnitsToPump )
 	{
 		return m_FlowMode == ePush ? m_pSource->Read( ulUnitsPumped, ulUnitsToPump ) : m_pSink->Write( ulUnitsPumped, ulUnitsToPump );
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFPipeline::InsertFilter( CBFFilter* pFilter, eFilterPos Pos )
+	void CPipeline::InsertFilter( CFilter* pFilter, eFilterPos Pos )
 	{
 		if( Pos == eBeforeSink )
 		{

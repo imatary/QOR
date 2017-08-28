@@ -162,8 +162,6 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
     class __QOR_INTERFACE( __WINQL ) CRegistry
 	{
-		QOR_PP_WINQL_SHARED;
-
 	public:
 
         class CProfile;

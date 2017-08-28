@@ -1,6 +1,6 @@
 //BfSource.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -31,10 +31,11 @@
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-//Defines an Source for a Bluefoot pipeline
+//Defines a Source for a Bluefoot pipeline
 
 #include "BfElement.h"
 #include "BfBuffer.h"
+#include "AppocritaQOR/Event.h"
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot
@@ -42,24 +43,95 @@ namespace nsBluefoot
 	class CSink;
 
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFSource : public CBFElement
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CSource : public CElement
 	{
 	public:
 
-		CBFSource();
-		virtual ~CBFSource();
-		CBFSource(const CBFSource& src);
-		CBFSource& operator = (const CBFSource& src);
+		__QOR_DECLARE_OCLASS_ID(CSource);
 
-		void SetSink( CBFSink* pSink );
-		CBFSink* GetSink(void);
+		//------------------------------------------------------------------------------
+		class CReadSuccess : public nsQOR::CEvent
+		{
+		public:
 
-		virtual bool Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead = 1 ) = 0;
+			//------------------------------------------------------------------------------
+			CReadSuccess() : CEvent()
+			{
+				m_ulUnitsRead = 0;
+			}
+
+			unsigned long GetUnitsRead(void) { return m_ulUnitsRead; }
+
+			
+		protected:
+
+			//------------------------------------------------------------------------------
+			void SetUnitsRead(unsigned long ulUnitsRead) 
+			{ 
+				m_ulUnitsRead = ulUnitsRead; 
+				Signal();
+			}
+
+			unsigned long m_ulUnitsRead;
+			friend class CSource;
+		}ReadSuccess;
+
+		//------------------------------------------------------------------------------
+		class CReadError : public nsQOR::CEvent
+		{
+		public:
+
+			//------------------------------------------------------------------------------
+			CReadError() : CEvent()
+			{
+				m_ulUnitsRead = 0;
+				m_ulError = 0;
+			}
+
+			unsigned long GetUnitsRead(void) { return m_ulUnitsRead; }
+			unsigned long GetError(void) { return m_ulError; }
+
+		protected:
+
+			void SetData(unsigned long ulUnitsRead, unsigned long ulError)
+			{
+				m_ulUnitsRead = ulUnitsRead;
+				m_ulError = ulError;
+				Signal();
+			}
+
+			unsigned long m_ulUnitsRead;
+			unsigned long m_ulError;
+			friend class CSource;
+		}ReadError;
+
+		nsQOR::CEvent EndOfData;
+
+		CSource();
+		virtual ~CSource();
+		CSource(const CSource& src);
+		CSource& operator = (const CSource& src);
+
+		void SetSink( CSink* pSink );
+		CSink* GetSink(void);
+
+		virtual bool Read( unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead = 1 ) = 0;
 
 		//------------------------------------------------------------------------------
 		virtual void OnReadSuccess( unsigned long ulUnitsRead )
 		{
-			//Overrride for asynchronous sources
+			ReadSuccess.SetUnitsRead(ulUnitsRead);
+		}
+
+		//------------------------------------------------------------------------------
+		virtual void OnReadError(unsigned long ulError, unsigned long ulUnitsRead)
+		{
+			ReadError.SetData(ulUnitsRead, ulError);
+		}
+		//------------------------------------------------------------------------------
+		virtual void OnEndOfData()
+		{
+			EndOfData.Signal();
 		}
 
 		//------------------------------------------------------------------------------
@@ -76,58 +148,58 @@ namespace nsBluefoot
 
 	protected:
 
-		CBFSink* m_pSink;
+		CSink* m_pSink;
 	};
 
 	//--------------------------------------------------------------------------------
 	template< class TSource >
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CTBFSourceProxy : public CBFSource
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CSourceProxy : public CSource
 	{
 	public:
 
 		//--------------------------------------------------------------------------------
-		CTBFSourceProxy( TSource& Source ) : CBFSource()
+		CSourceProxy( TSource& Source ) : CSource()
 		, m_Source( Source )
 		{
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual ~CTBFSourceProxy()
+		virtual ~CSourceProxy()
 		{
 		}
 
 		//--------------------------------------------------------------------------------
-		CTBFSourceProxy( const CTBFSourceProxy& src ) : CBFSource( src )
+		CSourceProxy( const CSourceProxy& src ) : CSource( src )
 		, m_Source( src.m_Source )
 		{
 		}
 
 		//--------------------------------------------------------------------------------
-		CTBFSourceProxy& operator = ( const CTBFSourceProxy& src )
+		CSourceProxy& operator = ( const CSourceProxy& src )
 		{
 			return *this;
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual void SetSink( CBFSink* pSink )
+		virtual void SetSink( CSink* pSink )
 		{
 			m_pSink = pSink;
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual CBFSink* GetSink( void )
+		virtual CSink* GetSink( void )
 		{
 			return m_pSink;
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual bool Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead = 1 )		
+		virtual bool Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead = 1 )
 		{
 			return m_Source.Read( ulUnitsRead, ulUnitsToRead );
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual CBFBuffer* GetBuffer( void )
+		virtual CBuffer* GetBuffer( void )
 		{
 			return m_Source.GetSourceBuffer();
 		}
@@ -138,15 +210,15 @@ namespace nsBluefoot
 
 	};
 
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFPlug;
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CPlug;
 
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CNULLSource : public CBFSource
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CNULLSource : public CSource
 	{
 	public:
 
 		//--------------------------------------------------------------------------------
-		CNULLSource( CBFPlug* pAny = 0 ) : CBFSource()
+		CNULLSource( CPlug* ) : CSource()
 		{
 		}
 

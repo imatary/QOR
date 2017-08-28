@@ -64,13 +64,13 @@ namespace nsQOR
 	}
 
 	//------------------------------------------------------------------------------
-	bool CState::HandleEvent( IEvent::ref_type pEvent )
+	bool CState::operator()(IEvent::ref_type _event, int iCookie)
 	{
-		__QCS_FCONTEXT( "CState::HandleEvent" );
+		__QCS_FCONTEXT( "CState::operator()" );
 		bool bHandled = false;
-		if( pEvent && m_pWorkflow )
+		if( _event && m_pWorkflow )
 		{
-			bHandled = m_pWorkflow->DefaultHandleEvent( pEvent );
+			bHandled = m_pWorkflow->DefaultHandleEvent( _event );
 		}
 		return bHandled;
 	}
@@ -84,13 +84,13 @@ namespace nsQOR
 	}
 
 	//------------------------------------------------------------------------------
-	bool CCompoundState::HandleEvent( IEvent::ref_type pEvent )
+	bool CCompoundState::operator()( IEvent::ref_type pEvent, int iCookie )
 	{
-		__QCS_FCONTEXT( "CCompoundState::HandleEvent" );
+		__QCS_FCONTEXT( "CCompoundState::operator()" );
 		bool bHandled = false;
 		if( pEvent && m_pInternalWorkflow )
 		{
-			bHandled = m_pInternalWorkflow->CurrentState()->HandleEvent( pEvent );
+			bHandled = m_pInternalWorkflow->CurrentState()->operator()( pEvent, iCookie );
 		}
 		return bHandled;
 	}

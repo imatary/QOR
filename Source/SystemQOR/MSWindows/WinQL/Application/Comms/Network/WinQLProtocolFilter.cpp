@@ -24,8 +24,10 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "AppocritaQOR/SubSystems/INetworking.h"
 #include "WinQL/Application/Comms/Network/WinQLProtocolFilter.h"
 #include "WinQL/Application/WinQLApplication.h"
+#include "WinQL/Application/SubSystems/WinQLNetworking.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -59,11 +61,11 @@ namespace nsWin32
 		std::vector< int > VecResult;
 		unsigned long ulProtocolCount = 0;
 		nsQOR::IRole::ref_type Role = CWin32Application::TheWin32Application()->GetRole();
-		CCommsNode* pCommsNode = Role->GetSubSystem( CCommsNode::ClassID() ).As< CCommsNode >();
+		nsWin32::CNetworking::ref_type Networking = Role->GetSubSystem( nsQOR::INetworking::ClassID() ).As< nsWin32::CNetworking >()->Ref();
 
-		if( pCommsNode != 0 )
+		if( !Networking.IsNull() )
 		{
-			WSAProtocolInfo* pProtocol = pCommsNode->NetworkHost().GetProtocols( ulProtocolCount );
+			WSAProtocolInfo* pProtocol = Networking->NetworkHost().GetProtocols( ulProtocolCount );
 
 			bool bIncluded = true;
 			for( unsigned long ulProtocol = 0; ulProtocol < ulProtocolCount; ulProtocol++ )

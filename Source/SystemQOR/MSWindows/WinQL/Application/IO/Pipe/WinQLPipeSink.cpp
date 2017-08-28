@@ -1,6 +1,6 @@
 //WinQLPipeSink.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -46,40 +46,37 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CPipeSink::Write( unsigned long ulNumberOfBytesToWrite, unsigned long& ulNumberOfBytesWritten, byte* pBuffer, unsigned long ulUnitSize )
+	bool CPipeSink::Write( unsigned long& ulNumberOfUnitsWritten, unsigned long ulNumberOfUnitsToWrite)
 	{
 		_WINQ_FCONTEXT( "CPipeSink::Write" );
 		bool bResult = false;
 		CPipeConnector* pPipeConnector = dynamic_cast< CPipeConnector* >( m_pIOSinkConnector );
 		if( pPipeConnector && pPipeConnector->IsConnected() )
 		{			
+			byte* pBuffer = GetSource()->GetBuffer()->ReadRequest(ulNumberOfUnitsToWrite);
+			unsigned long ulUnitSize = GetSource()->GetBuffer()->GetUnitSize();
 			if( pPipeConnector->AsyncConnection() )
 			{
-				bResult = pPipeConnector->Pipe().Write( (const void*)(pBuffer), ulNumberOfBytesToWrite, 
+				bResult = pPipeConnector->Pipe().Write( (const void*)(pBuffer), ulNumberOfUnitsToWrite * ulUnitSize,
 					reinterpret_cast< OVERLAPPED* >( pPipeConnector->GetSyncObject() ), (LPOVERLAPPED_COMPLETION_ROUTINE)(&COverlappedHandler::OnOverlappedWriteCompleted) );
-				ulNumberOfBytesWritten = 0;
+				ulNumberOfUnitsWritten = 0;
 
-				if( !bResult && pPipeConnector->Protocol() )
+				if( !bResult )
 				{
-					pPipeConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteError();
+					WriteError.Signal();
 				}
 
 			}
 			else
 			{
-				bResult = pPipeConnector->Pipe().Write( (const void*)(pBuffer), ulNumberOfBytesToWrite, ulNumberOfBytesWritten, 0 );
-
-				if( pPipeConnector->Protocol() )
+				bResult = pPipeConnector->Pipe().Write( (const void*)(pBuffer), ulNumberOfUnitsToWrite * ulUnitSize, ulNumberOfUnitsWritten, 0 );
+				if (bResult && (ulNumberOfUnitsWritten > 0))
 				{
-					if( bResult )
-					{
-						pPipeConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteSuccess();
-					}
-					else
-					{
-						pPipeConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteError();
-					}
+					ulNumberOfUnitsWritten /= ulUnitSize;
 				}
+				GetSource()->GetBuffer()->ReadAcknowledge(ulNumberOfUnitsWritten);
+
+				bResult ? WriteSuccess.Signal() : WriteError.Signal();
 			}
 		}
 		return bResult;

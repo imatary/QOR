@@ -64,5 +64,11 @@ nsCodeQOR::CLoadableModuleBase& ThisModule( void )
 	return WinQAPIModule;
 }
 
+//------------------------------------------------------------------------------
+const char* __QCMP_LOCAL ThisModuleVersion(void)
+{
+	return QOR_PP_STRINGIZE(__DATE__:__TIME__);
+}
+
 #	endif//_USRDLL
 #endif//QOR_MONOLITHIC

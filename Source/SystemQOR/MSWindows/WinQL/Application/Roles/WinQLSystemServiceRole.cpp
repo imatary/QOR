@@ -89,7 +89,7 @@ namespace nsWin32
 			{ 0, 0 }
 		};
 
-		return TheSystem().As< nsWin32::CSystem >()->Services( QOR_PP_SHARED_OBJECT_ACCESS ).StartCtrlDispatcher( serviceTable );
+		return TheSystem().As< nsWin32::CSystem >()->Services( QOR_PP_SHARED_OBJECT_ACCESS )().StartCtrlDispatcher( serviceTable );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -120,11 +120,11 @@ namespace nsWin32
 		CTString strPath = ( dynamic_cast< CProcess* >( CProcess::ThisProcess() ) )->GetFileName();
 
 		// Open the local default service control manager database 
-		CServiceControlSession::refType ServiceControlSession = TheSystem().As< nsWin32::CSystem >()->Services( QOR_PP_SHARED_OBJECT_ACCESS ).OpenSession(
+		CServiceControlSession::ref_type ServiceControlSession = TheSystem().As< nsWin32::CSystem >()->Services( QOR_PP_SHARED_OBJECT_ACCESS )().OpenSession(
 			CTString::TheEmptyString(), CTString::TheEmptyString(), SCManagerConnect | SCManagerCreate );
 
 		// Install the service into SCM by calling CreateService 
-		CServiceController::refType ServiceController = ServiceControlSession->Create(
+		CServiceController::ref_type ServiceController = ServiceControlSession->Create(
 			m_strName, strDisplayName, Service_Query_Status, Service_Own_Process, ulStartType, eServiceErrorNormal, strPath, CTString::TheEmptyString(), 0, strDependencies, strAccount, strPassword );
 	}
 
@@ -132,7 +132,7 @@ namespace nsWin32
 	void CSystemServiceRole::Uninstall( void )
 	{
 		//Open the local default service control manager database 
-		CServiceControlSession::refType ServiceControlSession = TheSystem().As< nsWin32::CSystem >()->Services( QOR_PP_SHARED_OBJECT_ACCESS ).OpenSession( CTString::TheEmptyString(), CTString::TheEmptyString(), SCManagerConnect );
+		CServiceControlSession::ref_type ServiceControlSession = TheSystem().As< nsWin32::CSystem >()->Services( QOR_PP_SHARED_OBJECT_ACCESS )().OpenSession( CTString::TheEmptyString(), CTString::TheEmptyString(), SCManagerConnect );
 
 		SERVICE_STATUS ssSvcStatus = { };
 
@@ -223,7 +223,7 @@ namespace nsWin32
 		m_Status.dwCheckPoint = ( ( ulCurrentState == eRunning ) || ( ulCurrentState == eStopped ) ) ? 0 : ulCheckPoint++;
 
 		// Report the status of the service to the SCM.
-		TheSystem().As< nsWin32::CSystem >()->Services( QOR_PP_SHARED_OBJECT_ACCESS ).SetStatus( m_StatusHandle, &m_Status );
+		TheSystem().As< nsWin32::CSystem >()->Services( QOR_PP_SHARED_OBJECT_ACCESS )().SetStatus( m_StatusHandle, &m_Status );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -258,7 +258,7 @@ namespace nsWin32
 	{
 		ref_type TheService = CWin32Application::TheWin32Application()->GetRole().As< CSystemServiceRole >();
 
-		TheService->m_StatusHandle = TheSystem().As< nsWin32::CSystem >()->Services( QOR_PP_SHARED_OBJECT_ACCESS ).RegisterCtrlHandler( TheService->m_strName, ServiceCtrlHandler );
+		TheService->m_StatusHandle = TheSystem().As< nsWin32::CSystem >()->Services( QOR_PP_SHARED_OBJECT_ACCESS )().RegisterCtrlHandler( TheService->m_strName, ServiceCtrlHandler );
 
 		if( TheService->m_StatusHandle == 0 )
 		{

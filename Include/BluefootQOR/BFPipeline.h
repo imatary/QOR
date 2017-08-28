@@ -1,6 +1,6 @@
 //BfPipeline.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -36,7 +36,7 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFPipeline : public CBFElement
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CPipeline : public CElement
 	{
 	public:
 
@@ -47,14 +47,14 @@ namespace nsBluefoot
 			eAfterSource,
 		};
 
-		CBFPipeline();
-		virtual ~CBFPipeline();
-		CBFPipeline(const CBFPipeline& src);
-		CBFPipeline& operator = (const CBFPipeline& src);
+		CPipeline();
+		virtual ~CPipeline();
+		CPipeline(const CPipeline& src);
+		CPipeline& operator = (const CPipeline& src);
 
 		//------------------------------------------------------------------------------
 		template< class TSourceConnection, class TSinkConnection  > 
-		CBFPipeline( TSourceConnection& SourceConnection, TSinkConnection& SinkConnection, CBFElement::eFlowMode FlowMode = ePull ) : m_FlowMode( FlowMode ), m_pSource( 0 ), m_pSink( 0 )
+		CPipeline( TSourceConnection& SourceConnection, TSinkConnection& SinkConnection, CElement::eFlowMode FlowMode = ePull ) : m_FlowMode( FlowMode ), m_pSource( 0 ), m_pSink( 0 )
 		{
 			SetSource( SourceConnection.GetSource() );
 			SetSink( SinkConnection.GetSink() );
@@ -72,22 +72,22 @@ namespace nsBluefoot
 			m_FlowMode = FlowMode;
 		}
 
-		void SetSink( CBFSink* pSink );
-		CBFSink* GetSink( void );
-		void SetSource( CBFSource* pSource );
-		CBFSource* GetSource( void );
+		void SetSink( CSink* pSink );
+		CSink* GetSink( void );
+		void SetSource( CSource* pSource );
+		CSource* GetSource( void );
 
 		virtual void Run( void );
 		bool Pump( void );
 
 		virtual bool Pump( unsigned long& ulNumberOfUnitsPumped, unsigned long ulNumberOfUnitsToPump = 1 );
-		virtual void InsertFilter( CBFFilter* pFilter, eFilterPos Pos = eBeforeSink );
+		virtual void InsertFilter( CFilter* pFilter, eFilterPos Pos = eBeforeSink );
 
 	protected:
 
 		eFlowMode m_FlowMode;
-		CBFSource* m_pSource;
-		CBFSink* m_pSink;
+		CSource* m_pSource;
+		CSink* m_pSink;
 
 	};
 

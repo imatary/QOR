@@ -1,6 +1,6 @@
 //WinQLTrustee.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,11 +29,14 @@
 #ifndef WINQL_SECURITY_TRUSTEE_H_3
 #define WINQL_SECURITY_TRUSTEE_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma __QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "CodeQOR/Macros/CodingMacros.h"
+#include "CodeQOR/Text/TString.h"
 #include "WinQL/Definitions/Security.h"
 #include "WinQL/Definitions/Data.h"
 
@@ -134,9 +137,10 @@ namespace nsWin32
 	{
 	public:
 
-		__QOR_DECLARE_OCLASS_ID( CTrustee );
+		__QOR_DECLARE_REF_TYPE(CTrustee);
+		__QOR_DECLARE_OCLASS_ID(CTrustee);
 				
-		CTrustee( TCHAR* pName );
+		CTrustee( nsCodeQOR::CString strName );
 		CTrustee( void* pSid );
 		CTrustee( nsWin32::ObjectsAndName* pObjName, nsWin32::SeObjectType ObjectType, TCHAR* ObjectTypeName, TCHAR* InheritedObjectTypeName, TCHAR* Name );
 		CTrustee( nsWin32::ObjectsAndSID* pObjSid, nsWin32::GUID* pObjectGuid, nsWin32::GUID* pInheritedObjectGuid, void* pSid );
@@ -146,7 +150,7 @@ namespace nsWin32
 		bool GetData( nsWin32::ObjectsAndName** ppObjectsAndName );
 		bool GetSid( void** ppSid );
 		bool GetData( nsWin32::ObjectsAndSID** ppObjectsAndSid );
-		TCHAR* Name( void );
+		nsCodeQOR::CString Name( void );
 		nsWin32::TrusteeType Type( void );
 
 	private:

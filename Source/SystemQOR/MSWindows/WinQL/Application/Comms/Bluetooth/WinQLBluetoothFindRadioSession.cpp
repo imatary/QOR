@@ -38,7 +38,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CFindBluetoothRadioSession );
 
 	//--------------------------------------------------------------------------------
-	CFindBluetoothRadioSession::CFindBluetoothRadioSession( CBluetoothRadio::refType& Radio ): m_Library( CBthProps::Instance() )
+	CFindBluetoothRadioSession::CFindBluetoothRadioSession( CBluetoothRadio::ref_type& Radio ): m_Library( CBthProps::Instance() )
 	{
 		_WINQ_FCONTEXT( "CFindBluetoothRadioSession::CFindBluetoothRadioSession" );
 
@@ -52,12 +52,14 @@ namespace nsWin32
 		if( pRadio != 0 && Radio.IsNull() )
 		{
 			CDeviceHandle hTemp( pRadio );
-			Radio.Attach( new CBluetoothRadio( hTemp ) );
+			Radio = new_ext_ref<CBluetoothRadio>(CBluetoothRadio::ClassID());
+			Radio->SetHandle(hTemp);
+			//Radio.Attach( new CBluetoothRadio( hTemp ) );
 		}
 	}
 
 	//--------------------------------------------------------------------------------
-	CFindBluetoothRadioSession::CFindBluetoothRadioSession( CFindBluetoothRadioSession::SearchParams& SearchParams, CBluetoothRadio::refType& Radio ): m_Library( CBthProps::Instance() )
+	CFindBluetoothRadioSession::CFindBluetoothRadioSession( CFindBluetoothRadioSession::SearchParams& SearchParams, CBluetoothRadio::ref_type& Radio ): m_Library( CBthProps::Instance() )
 	,	m_SearchParams( SearchParams )
 	{
 		_WINQ_FCONTEXT( "CFindBluetoothRadioSession::CFindBluetoothRadioSession" );
@@ -71,7 +73,8 @@ namespace nsWin32
 		if( pRadio != 0 && Radio.IsNull() )
 		{
 			CDeviceHandle hTemp( pRadio );
-			Radio.Attach( new CBluetoothRadio( hTemp ) );
+			Radio = new_ext_ref<CBluetoothRadio>(CBluetoothRadio::ClassID());
+			Radio->SetHandle(hTemp);
 		}
 	}
 
@@ -83,7 +86,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CFindBluetoothRadioSession::Next( CBluetoothRadio::refType& Radio )
+	bool CFindBluetoothRadioSession::Next( CBluetoothRadio::ref_type& Radio )
 	{
 		_WINQ_FCONTEXT( "CFindBluetoothRadioSession::Next" );
 
@@ -93,7 +96,8 @@ namespace nsWin32
 		if( bResult && pRadio != 0 && Radio.IsNull() )
 		{
 			CDeviceHandle hTemp( pRadio );
-			Radio.Attach( new CBluetoothRadio( hTemp ) );
+			Radio = new_ext_ref<CBluetoothRadio>(CBluetoothRadio::ClassID());
+			Radio->SetHandle(hTemp);
 		}
 		return bResult;
 	}

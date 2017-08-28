@@ -36,12 +36,15 @@
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "AppocritaQOR/Application.h"
-#include "AppocritaQOR/SubSystem.h"
+#include "AppocritaQOR/SubSystems/IBluetooth.h"
 #include "WinQL/CodeServices/Handles/WinQLHandle.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "WinQL/Application/Threading/WinQLSynchronization.h"
-#include "WinQL/Application/Comms/Bluetooth/WinQLBluetoothHost.h"
+#include "WinQL/GUI/Controllers/BaseWindowController.h"
 #include "WinQL/GUI/Controllers/Parts/DeviceChangeController.h"
+#include "WinQL/Application/Comms/Bluetooth/WinQLBluetoothAuthenticationSession.h"
+#include "WinQL/Application/Comms/Bluetooth/WinQLBluetoothFindDeviceSession.h"
+#include "WinQL/System/Devices/BluetoothRadio/WinQLBluetoothRadio.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -49,7 +52,7 @@ namespace nsWin32
 	class __QOR_INTERFACE( __WINQL ) CWin32Application;
 
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL ) CBluetooth : public nsQOR::CSubSystem
+	class __QOR_INTERFACE( __WINQL ) CBluetooth : public nsQOR::IBluetooth
 	{
 	public:
 
@@ -87,10 +90,10 @@ namespace nsWin32
 			CBluetooth& m_Host;
 		};
 
-		typedef std::map< const BluetoothAddr, CBluetoothRemoteDevice::refType > AddrDeviceMapType;
-		typedef std::vector< CBluetoothRadio::refType > VecRadiosType;
-		typedef std::map< void*, CBluetoothRadio* > HandleRadioMapType;
-		typedef std::map< nsCodeQOR::mxGUID, CBluetoothClient* > ServiceClientClassMapType;
+		typedef std::map< const BluetoothAddr, CBluetoothRemoteDevice::ref_type > AddrDeviceMapType;
+		typedef std::vector< CBluetoothRadio::ref_type > VecRadiosType;
+		typedef std::map< void*, CBluetoothRadio::ref_type > HandleRadioMapType;
+		typedef std::map< nsCodeQOR::mxGUID, nsQOR::IBluetoothServiceClient::ref_type > ServiceClientClassMapType;
 
 		//--------------------------------------------------------------------------------
 		enum eScanState
@@ -114,16 +117,26 @@ namespace nsWin32
 
 		virtual void Setup( nsQOR::IApplication& Applicaton );
 		virtual void Shutdown( nsQOR::IApplication& Application );
+		virtual void ScanForDevices(void);
+		virtual void RegisterServiceClient(nsCodeQOR::mxGUID& ServiceUUID, nsQOR::IBluetoothServiceClient::ref_type Client);
+		virtual void UnregisterServiceClient(nsCodeQOR::mxGUID& ServiceUUID, nsQOR::IBluetoothServiceClient::ref_type Client);
 
 		long OnHCIEvent( BluetoothHCIEventInfo* pEventInfo, void* pRadioHandle );
 		long OnL2CAPEvent( BluetoothL2CAPEventInfo* pEventInfo, void* pRadioHandle );
 		long OnDeviceInRange( BluetoothRadioInRange* pEventInfo, void* pRadioHandle );
 		long OnDeviceOutOfRange( BluetoothAddress* pEventInfo, void* pRadioHandle );
+		bool OnAuthenticationRequest(CBluetoothRemoteDevice::Authentication_CallbackParams* pAuthCallbackParams);
 
 	private:
 
 		void EnumerateRadios( void );
-		CBluetoothRadio::refType RadioFromHandle( void* pRadioHandle );
+		CBluetoothRadio::ref_type RadioFromHandle( void* pRadioHandle );
+		void ScanForDevicesInitial(void);
+		void ScanForDevicesFirst(void);
+		void ScanForDevicesNext(void);
+		void ScanForDevicesLast(void);
+		void ConnectRegisteredServiceClients(CBluetoothRemoteDevice::ref_type Device);
+		void DisconnectRegisteredServiceClient(CBluetoothRemoteDevice::ref_type Device, nsQOR::IBluetoothServiceClient::ref_type Client);
 
 		nsWinQAPI::CBthProps& m_Library;
 		COSWindow* m_pHostWindow;
@@ -133,7 +146,10 @@ namespace nsWin32
 		AddrDeviceMapType m_MapRemoteDevices;
 		CBaseWindowController m_BaseWindowController;
 		VecRadiosType m_VecRadios;
-		//CAuthenticateSession m_AuthenticationSession;
+		CBluetoothRemoteDevice::ref_type m_Proto;
+		CFindBluetoothDeviceSession::refType m_FindDeviceSession;
+		ServiceClientClassMapType m_MapServiceClients;
+		CAuthenticateBluetoothSession m_AuthenticationSession;
 	};
 
 }//nsWin32

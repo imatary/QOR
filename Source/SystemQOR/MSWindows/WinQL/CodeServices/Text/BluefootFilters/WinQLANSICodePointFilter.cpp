@@ -1,6 +1,6 @@
 //WinQLANSICodePointFilter.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -32,7 +32,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CANSICodePointFilter );
 
 	//------------------------------------------------------------------------------
-	CANSICodePointFilter::CANSICodePointFilter() : CBFFilter()
+	CANSICodePointFilter::CANSICodePointFilter() : CFilter()
 	{
 		_WINQ_FCONTEXT( "CANSICodePointFilter::CANSICodePointFilter" );
 	}
@@ -44,7 +44,7 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	CANSICodePointFilter::CANSICodePointFilter( const CANSICodePointFilter& src ) : CBFFilter( src )
+	CANSICodePointFilter::CANSICodePointFilter( const CANSICodePointFilter& src ) : CFilter( src )
 	{
 		_WINQ_FCONTEXT( "CANSICodePointFilter::CANSICodePointFilter" );
 	}

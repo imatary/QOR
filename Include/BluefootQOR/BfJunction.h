@@ -33,14 +33,14 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	class CBFJunction : public CBFSource
+	class CJunction : public CSource
 	{
 	public:
 
-		CBFJunction();
-		virtual ~CBFJunction();
-		CBFJunction(const CBFJunction& src);
-		CBFJunction& operator = (const CBFJunction& src);
+		CJunction();
+		virtual ~CJunction();
+		CJunction(const CJunction& src);
+		CJunction& operator = (const CJunction& src);
 
 		virtual bool Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead = 1 );
 
@@ -48,7 +48,7 @@ namespace nsBluefoot
 
 	protected:
 
-		std::vector< CBFSource* > m_VecSources;
+		std::vector< CSource* > m_VecSources;
 	};
 
 }//nsBluefoot

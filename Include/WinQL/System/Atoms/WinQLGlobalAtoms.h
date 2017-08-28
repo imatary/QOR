@@ -1,6 +1,6 @@
 //WinQLGlobalAtoms.h
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,6 +29,8 @@
 #ifndef WINQL_GLOBALATOMS_H_3
 #define WINQL_GLOBALATOMS_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -36,12 +38,14 @@
 #include "WinQL/WinQL.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/CodeServices/Text/WinString.h"
-#include "WinQL/CodeServices/WinQLSharedRef.h"
+#include "CodeQOR/DataStructures/TRef.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CGlobalAtom, CTRef);
+__QOR_DECLARE_REF(nsWin32, __WINQL, CGlobalAtomTable, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CGlobalAtom
 	{
@@ -49,26 +53,19 @@ namespace nsWin32
 
 	public:
 
-		typedef nsCodeQOR::CTLRef< CGlobalAtom > refType;
-
+		__QOR_DECLARE_REF_TYPE(CGlobalAtom);
 		__QOR_DECLARE_OCLASS_ID( CGlobalAtom );
 
 		CGlobalAtom( const CTString& strName, bool bUseExisting = false );
 		CGlobalAtom( const CGlobalAtom& src );
+		CGlobalAtom(CGlobalAtom&& move);
+		CGlobalAtom& operator = (const CGlobalAtom&);
+		CGlobalAtom& operator = (CGlobalAtom&&);
 		~CGlobalAtom();
 
 		CTString GetName( void );
-
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this, false );
-		}
-
-		CGlobalAtom& operator = ( const CGlobalAtom& );
-
+		
 	protected:
-
 		
 		CGlobalAtom( unsigned short );
 
@@ -82,31 +79,27 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CGlobalAtomTable
 	{
-
-		QOR_PP_WINQL_SHARED;
-
 	public:
-		
-		typedef CSharedRef< CGlobalAtomTable > refType;
 
+		__QOR_DECLARE_REF_TYPE(CGlobalAtomTable);
 		__QOR_DECLARE_OCLASS_ID( CGlobalAtomTable );
 
 		CGlobalAtomTable();
+		CGlobalAtomTable(CGlobalAtomTable&& move);
+		CGlobalAtomTable& operator = (CGlobalAtomTable&& move);
 		~CGlobalAtomTable();
-		CGlobalAtom Add ( const TCHAR* lpString );
-		void Delete ( CGlobalAtom& Atom );
-		CGlobalAtom Find ( const TCHAR* lpString );
-		CTString GetName( const CGlobalAtom& Atom );		
-
-		refType Ref( void );
+		CGlobalAtom Add ( const TCHAR* lpString ) const;
+		void Delete ( CGlobalAtom& Atom ) const;
+		CGlobalAtom Find ( const TCHAR* lpString ) const;
+		CTString GetName( const CGlobalAtom& Atom ) const;		
 
 	private:
 
-		CGlobalAtomTable( const CGlobalAtomTable& );
-		CGlobalAtomTable& operator = ( const CGlobalAtomTable& );
+		CGlobalAtomTable( const CGlobalAtomTable& ) = delete;
+		CGlobalAtomTable& operator = ( const CGlobalAtomTable& ) = delete;
 	};
 
-	CGlobalAtom::refType CreateGlobalAtom( const CTString& strName );
+	CGlobalAtom::ref_type CreateGlobalAtom( const CTString& strName );
 
 }//nsWin32
 

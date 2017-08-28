@@ -171,16 +171,6 @@ namespace nsWin32
 		byte* WriteIntoBuffer( const byte*, unsigned int );
 		errno_t ReadFromBuffer( char* data, size_t dataSize, unsigned int nbytes );
 
-	private:
-		/*
-		char* _ptr;
-		int   _cnt;
-		char* _base;
-		int   _flag;
-		int   _file;
-		int   _charbuf;
-		int   _bufsiz;
-		char* _tmpfname;*/
 	};
 
 }//nsWin32

@@ -187,7 +187,12 @@ namespace nsWin32
 
 
 	//--------------------------------------------------------------------------------
-	CBluetooth::CBluetooth() : nsQOR::CSubSystem(), m_Library( nsWinQAPI::CBthProps::Instance() ), m_pHostWindow( 0 ), m_DeviceChangeController( *this, 0, 0 ), m_ScanState( eInitial )
+	CBluetooth::CBluetooth() : nsQOR::IBluetooth()
+	,	m_Library( nsWinQAPI::CBthProps::Instance() )
+	,	m_pHostWindow( 0 )
+	,	m_DeviceChangeController( *this, 0, 0 )
+	,	m_ScanState( eInitial )
+	,	m_AuthenticationSession(this)
 	{
 	}
 
@@ -199,8 +204,8 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	void CBluetooth::Setup( nsQOR::IApplication& Application )
 	{
-		//CWin32Application& WindowsApp = dynamic_cast<CWin32Application&>( Application );
-
+		_WINQ_FCONTEXT("CBluetooth::Setup");
+		
 		unsigned long StyleEx = COSWindow::eWSExAppWindow;
 		unsigned long Style = COSWindow::eWSOverlapped;
 		m_pHostWindow = new COSWindow( &s_WindowClass, StyleEx, _TXT( "WinQLBluetoothHostWindow" ), Style, 0, 0, 640, 480, 0, 0, ThisProcess(), 0 );
@@ -220,14 +225,12 @@ namespace nsWin32
 		{
 			( *it )->EnableNotifications( m_pHostWindow->Handle()->AsHandle(), true );
 		}
-
-		//CBluetoothHostMessageHandler MessageHandler( *this );
-		//MessageHandler.MessageLoop();
 	}
 
 	//--------------------------------------------------------------------------------
 	void CBluetooth::Shutdown( nsQOR::IApplication& Application )
 	{
+		_WINQ_FCONTEXT("CBluetooth::Shutdown");
 		//CWin32Application& WindowsApp = dynamic_cast<CWin32Application&>( Application );
 		delete m_pHostWindow;
 		m_pHostWindow = 0;
@@ -237,22 +240,22 @@ namespace nsWin32
 	void CBluetooth::EnumerateRadios( void )
 	{
 		_WINQ_FCONTEXT( "CBluetooth::EnumerateRadios" );
-		CDeviceInterfaceClass::refType BluetoothRadios = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).InterfaceClassFromGUID( CDeviceManager::GUID_BTHPORT_DEVICE_INTERFACE );
+		CDeviceInterfaceClass::ref_type BluetoothRadios = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS )().InterfaceClassFromGUID( CDeviceManager::GUID_BTHPORT_DEVICE_INTERFACE );
 
 		if( !BluetoothRadios.IsNull() )
 		{
 			CDeviceInterfaceClass::interface_iterator it = BluetoothRadios->Interfaces().begin();
 			while( it != BluetoothRadios->Interfaces().end() )
 			{
-				CBluetoothRadio::refType BluetoothRadio = ( *it ).As< CBluetoothRadio >();
+				CBluetoothRadio::ref_type BluetoothRadio = (*it).AsRef<CBluetoothRadio>();
 
 				if( !BluetoothRadio.IsNull() )
 				{
 					m_VecRadios.push_back( BluetoothRadio );
 
-					if( BluetoothRadio->GetDeviceFile() )
+					if( BluetoothRadio->GetSessionHandle() != nullptr )
 					{
-						m_MapRadioHandles.insert( std::make_pair( BluetoothRadio->GetDeviceFile()->Handle()->Use(), BluetoothRadio.operator CBluetoothRadio*( ) ) );
+						m_MapRadioHandles.insert( std::make_pair( BluetoothRadio->GetSessionHandle(), BluetoothRadio ) );
 					}
 				}
 				it++;
@@ -261,16 +264,99 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CBluetoothRadio::refType CBluetooth::RadioFromHandle( void* pRadioHandle )
+	CBluetoothRadio::ref_type CBluetooth::RadioFromHandle( void* pRadioHandle )
 	{
-		CBluetoothRadio::refType Radio;
+		_WINQ_FCONTEXT("CBluetooth::RadioFromHandle");
+
+		CBluetoothRadio::ref_type Radio;
 
 		HandleRadioMapType::const_iterator it = m_MapRadioHandles.find( pRadioHandle );
 		if( it != m_MapRadioHandles.end() )
 		{
-			Radio = ( *it ).second->Ref();
+			return (*it).second;
 		}
 		return Radio;
+	}
+
+	//--------------------------------------------------------------------------------
+	void CBluetooth::ScanForDevicesInitial()
+	{
+		_WINQ_FCONTEXT("CBluetoothHost::ScanForDevicesInitial");
+
+		m_Proto = CBluetoothRemoteDevice::Prototype();
+		m_ScanState = eFirst;
+	}
+
+	//--------------------------------------------------------------------------------
+	void CBluetooth::ScanForDevicesFirst()
+	{
+		_WINQ_FCONTEXT("CBluetoothHost::ScanForDevicesFirst");
+
+		CFindBluetoothDeviceSession::SearchParams SearchParams;
+
+		SearchParams.dwSize = sizeof(CFindBluetoothDeviceSession::SearchParams);
+		SearchParams.cTimeoutMultiplier = 3;
+		SearchParams.fIssueInquiry = 1;
+		SearchParams.fReturnAuthenticated = 1;
+		SearchParams.fReturnRemembered = 1;
+		SearchParams.fReturnUnknown = 1;
+		SearchParams.fReturnConnected = 1;
+		SearchParams.hRadio = 0;
+
+		m_FindDeviceSession = CFindBluetoothDeviceSession::refType(new CFindBluetoothDeviceSession(SearchParams, m_Proto), true);
+		m_ScanState = eNext;
+	}
+
+	//--------------------------------------------------------------------------------
+	void CBluetooth::ScanForDevicesNext()
+	{
+		_WINQ_FCONTEXT("CBluetoothHost::ScanForDevicesNext");
+
+		BluetoothAddr Address = m_Proto.As<CBluetoothRemoteDevice>()->GetInfo()->Address.ullLong;
+
+		if (m_MapRemoteDevices.find(Address) == m_MapRemoteDevices.end())
+		{
+			m_MapRemoteDevices.insert(std::make_pair(Address, m_Proto));
+			m_Proto.As<CBluetoothRemoteDevice>()->EnumerateInstalledServices();
+			ConnectRegisteredServiceClients(m_Proto);
+		}
+
+		m_Proto = CBluetoothRemoteDevice::Prototype();
+
+		if (!m_FindDeviceSession->Next(m_Proto))
+		{
+			m_ScanState = eLast;
+		}
+	}
+
+	//--------------------------------------------------------------------------------
+	void CBluetooth::ScanForDevicesLast()
+	{
+		_WINQ_FCONTEXT("CBluetoothHost::ScanForDevicesLast");
+		m_Proto.Dispose();
+		m_FindDeviceSession.Dispose();
+		m_ScanState = eInitial;
+	}
+
+	//--------------------------------------------------------------------------------
+	void CBluetooth::ScanForDevices()
+	{
+		_WINQ_FCONTEXT("CBluetoothHost::ScanForDevices");
+
+		switch (m_ScanState)
+		{
+		case eInitial:
+			ScanForDevicesInitial();
+		break;
+		case eFirst:
+			ScanForDevicesFirst();
+		break;
+		case eNext:
+			ScanForDevicesNext();
+		break;
+		case eLast:
+			ScanForDevicesLast();
+		}
 	}
 
 	//--------------------------------------------------------------------------------
@@ -281,17 +367,17 @@ namespace nsWin32
 			AddrDeviceMapType::iterator it = m_MapRemoteDevices.find( pEventInfo->bthAddress );
 			if( it != m_MapRemoteDevices.end() )
 			{
-				CBluetoothRemoteDevice::refType RemoteDevice = ( *it ).second->Ref();
+				CBluetoothRemoteDevice::ref_type RemoteDevice = ( *it ).second;
 
 				if( !RemoteDevice.IsNull() )
 				{
 					switch( pEventInfo->connected )
 					{
 					case 0:		//Disconnect
-						RemoteDevice->OnDisconnect();
+						RemoteDevice.As< CBluetoothRemoteDevice >()->OnDisconnect();
 						break;
 					case 1:		//Connect
-						RemoteDevice->OnConnect( static_cast< CBluetoothRemoteDevice::eConnectionType >( pEventInfo->connectionType ) );	//Connection type 1 == ACL, 2 == SCO
+						RemoteDevice.As< CBluetoothRemoteDevice >()->OnConnect( static_cast< CBluetoothRemoteDevice::eConnectionType >( pEventInfo->connectionType ) );	//Connection type 1 == ACL, 2 == SCO
 						break;
 					}
 				}
@@ -308,9 +394,9 @@ namespace nsWin32
 			AddrDeviceMapType::iterator it = m_MapRemoteDevices.find( pEventInfo->bthAddress );
 			if( it != m_MapRemoteDevices.end() )
 			{
-				CBluetoothRemoteDevice::refType RemoteDevice = ( *it ).second->Ref();
+				CBluetoothRemoteDevice::ref_type RemoteDevice = ( *it ).second;
 
-				RemoteDevice->OnL2CAPEvent( pEventInfo, RadioFromHandle( pRadioHandle ) );
+				RemoteDevice.As< CBluetoothRemoteDevice >()->OnL2CAPEvent( pEventInfo, RadioFromHandle( pRadioHandle ) );
 			}
 		}
 		return 1;
@@ -324,16 +410,18 @@ namespace nsWin32
 			AddrDeviceMapType::iterator it = m_MapRemoteDevices.find( pEventInfo->deviceInfo.address );
 			if( it != m_MapRemoteDevices.end() )
 			{
-				CBluetoothRemoteDevice::refType RemoteDevice = ( *it ).second->Ref();
+				CBluetoothRemoteDevice::ref_type RemoteDevice = ( *it ).second;
 
-				RemoteDevice->OnInRange( pEventInfo->deviceInfo, pEventInfo->previousDeviceFlags, RadioFromHandle( pRadioHandle ) );
+				RemoteDevice.As< CBluetoothRemoteDevice >()->OnInRange( pEventInfo->deviceInfo, pEventInfo->previousDeviceFlags, RadioFromHandle( pRadioHandle ) );
 			}
 			else
 			{
-				CBluetoothRemoteDevice::refType RemoteDevice( new CBluetoothRemoteDevice, true );
+				CBluetoothRemoteDevice::ref_type RemoteDevice = new_shared_ref<CBluetoothRemoteDevice>();
 
 				m_MapRemoteDevices.insert( std::make_pair( pEventInfo->deviceInfo.address, RemoteDevice ) );
-				RemoteDevice->OnInRange( pEventInfo->deviceInfo, pEventInfo->previousDeviceFlags, RadioFromHandle( pRadioHandle ) );
+				RemoteDevice.As<CBluetoothRemoteDevice>()->EnumerateInstalledServices();
+				ConnectRegisteredServiceClients(RemoteDevice);
+				RemoteDevice.As< CBluetoothRemoteDevice >()->OnInRange( pEventInfo->deviceInfo, pEventInfo->previousDeviceFlags, RadioFromHandle( pRadioHandle ) );
 			}
 		}
 		return 1;
@@ -347,12 +435,108 @@ namespace nsWin32
 			AddrDeviceMapType::iterator it = m_MapRemoteDevices.find( pEventInfo->ullLong );
 			if( it != m_MapRemoteDevices.end() )
 			{
-				CBluetoothRemoteDevice::refType RemoteDevice = ( *it ).second->Ref();
+				CBluetoothRemoteDevice::ref_type RemoteDevice = ( *it ).second;
 
-				RemoteDevice->OnOutOfRange();
+				RemoteDevice.As< CBluetoothRemoteDevice >()->OnOutOfRange();
 			}
 		}
 		return 1;
 	}
+
+	//--------------------------------------------------------------------------------
+	bool CBluetooth::OnAuthenticationRequest(CBluetoothRemoteDevice::Authentication_CallbackParams* pAuthCallbackParams)
+	{
+		bool bResult = false;
+		if (pAuthCallbackParams)
+		{
+			AddrDeviceMapType::iterator it = m_MapRemoteDevices.find(pAuthCallbackParams->deviceInfo.Address.ullLong);
+			if (it != m_MapRemoteDevices.end())
+			{
+				CBluetoothRemoteDevice::ref_type RemoteDevice = (*it).second;
+
+				bResult = RemoteDevice.As<CBluetoothRemoteDevice>()->OnAuthenticationRequest(pAuthCallbackParams, m_AuthenticationSession);
+			}
+		}
+		return bResult;
+	}
+
+	//--------------------------------------------------------------------------------
+	void CBluetooth::RegisterServiceClient(nsCodeQOR::mxGUID& ServiceUUID, nsQOR::IBluetoothServiceClient::ref_type Client)
+	{
+		m_MapServiceClients.insert(std::make_pair(ServiceUUID, Client));
+
+		AddrDeviceMapType::const_iterator it = m_MapRemoteDevices.begin();
+		while (it != m_MapRemoteDevices.end())
+		{
+			ConnectRegisteredServiceClients((*it).second);
+			it++;
+		}
+	}
+
+	//--------------------------------------------------------------------------------
+	void CBluetooth::UnregisterServiceClient(nsCodeQOR::mxGUID& ServiceUUID, nsQOR::IBluetoothServiceClient::ref_type Client)
+	{
+		ServiceClientClassMapType::iterator it_Clients = m_MapServiceClients.find(ServiceUUID);
+		if (it_Clients != m_MapServiceClients.end())
+		{
+			m_MapServiceClients.erase(it_Clients);
+		}
+		AddrDeviceMapType::const_iterator it_Devices = m_MapRemoteDevices.begin();
+		while (it_Devices != m_MapRemoteDevices.end())
+		{
+			DisconnectRegisteredServiceClient((*it_Devices).second, Client);
+			it_Devices++;
+		}
+	}
+
+	//--------------------------------------------------------------------------------
+	void CBluetooth::ConnectRegisteredServiceClients(CBluetoothRemoteDevice::ref_type Device)
+	{
+		if (!Device.IsNull())
+		{
+			unsigned long ulCountServices = 0;
+			nsCodeQOR::mxGUID* pServiceUUID = Device.As< CBluetoothRemoteDevice >()->GetServices(ulCountServices);
+			nsQOR::IBluetoothServiceClient::ref_type* ppServiceClients = Device.As< CBluetoothRemoteDevice >()->GetServiceClients();
+			CBluetoothRemoteDevice::Info* pInfo = Device.As< CBluetoothRemoteDevice >()->GetInfo();
+			for (unsigned long ulService = 0; ulService < ulCountServices; ulService++)
+			{
+				//Lookup pServiceUUID[ ulService ] in Client Registration
+				if (ppServiceClients[ulService].IsNull() )
+				{
+					ServiceClientClassMapType::const_iterator it = m_MapServiceClients.find(pServiceUUID[ulService]);
+
+					if (it != m_MapServiceClients.end())
+					{
+						nsQOR::IBluetoothServiceClient::ref_type Client = (*it).second;
+						if (!Client.IsNull())
+						{
+							ppServiceClients[ulService] = Client;
+							Client->AttachDevice(Device);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	//--------------------------------------------------------------------------------
+	void CBluetooth::DisconnectRegisteredServiceClient(CBluetoothRemoteDevice::ref_type Device, nsQOR::IBluetoothServiceClient::ref_type Client)
+	{
+		if (!Device.IsNull())
+		{
+			unsigned long ulCountServices = 0;
+			Device.As< CBluetoothRemoteDevice >()->GetServices(ulCountServices);
+			nsQOR::IBluetoothServiceClient::ref_type* ppServiceClients = Device.As< CBluetoothRemoteDevice >()->GetServiceClients();
+			for (unsigned long ulService = 0; ulService < ulCountServices; ulService++)
+			{
+				//Lookup pServiceUUID[ ulService ] in Client Registration
+				if (ppServiceClients[ulService] == Client)
+				{
+					ppServiceClients[ulService].Dispose();
+				}
+			}
+		}
+	}
+
 
 }//nsWin32

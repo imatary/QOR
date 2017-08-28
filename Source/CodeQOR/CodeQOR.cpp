@@ -61,4 +61,10 @@ __QCMP_ENDLINKAGE_C
 		return CodeQORModule;
 	}
 
+	//------------------------------------------------------------------------------
+	const char* __QCMP_LOCAL ThisModuleVersion(void)
+	{
+		return QOR_PP_STRINGIZE(__DATE__:__TIME__);
+	}
+
 #endif//QOR_MONOLITHIC

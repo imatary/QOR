@@ -1,6 +1,6 @@
 //WinQLSession.h
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -27,11 +27,14 @@
 #ifndef WINQL_OSSERV_SESSION_H_3
 #define WINQL_OSSERV_SESSION_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "CodeQOR/Traits/ReferenceTraits.h"
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/Definitions/Handles.h"
 #include "WinQL/Definitions/Data.h"
 #include "WinQL/Definitions/Security.h"
@@ -45,6 +48,16 @@ namespace nsWinQAPI
 	class __QOR_INTERFACE( __WINQAPI ) CUser32;
 	class __QOR_INTERFACE( __WINQAPI ) CAdvAPI32;
 }
+
+//--------------------------------------------------------------------------------
+namespace nsWin32
+{
+	class __QOR_INTERFACE(__WINQL) CSession;
+	class __QOR_INTERFACE(__WINQL) CShutdownBlock;
+}//nsWin32
+
+
+template<> struct nsCodeQOR::reference_type<nsWin32::CShutdownBlock> { typedef nsCodeQOR::CTRef< nsWin32::CShutdownBlock > type; };
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -99,18 +112,18 @@ namespace nsWin32
 
 		CSessionHelper();
 		virtual ~CSessionHelper();
-		bool ExitWindowsEx( unsigned int uFlags, unsigned long dwReason );
-		bool LockWorkStation( void );
-		bool ShutdownBlockReasonCreate( COSWindow::refType Wnd, const wchar_t* pwszReason );
-		bool ShutdownBlockReasonDestroy( COSWindow::refType Wnd );
-		CWString ShutdownBlockReasonQuery( COSWindow::refType Wnd );
-		bool EnumWindowStationsT( WindowStationEnumCallback lpEnumFunc, Cmp_long_ptr lParam );
-		bool AbortSystemShutdownT( const TCHAR* lpMachineName );
-		bool InitiateShutdownT( const TCHAR* lpMachineName, const TCHAR* lpMessage, unsigned long dwGracePeriod, unsigned long dwShutdownFlags, unsigned long dwReason );
-		bool LogonUserT( wchar_t* lpszUsername, wchar_t* lpszDomain, wchar_t* lpszPassword, unsigned long dwLogonType, unsigned long dwLogonProvider, nsWin32::TOKEN_GROUPS* pTokenGroups, void** phToken, void** ppLogonSid, void** ppProfileBuffer, unsigned long* pdwProfileLength, nsWin32::QuotaLimits* pQuotaLimits );
-		unsigned long MSChapSrvChangePassword( wchar_t* ServerName, wchar_t* UserName, unsigned char LmOldPresent, LMOWFPassword* LmOldOwfPassword, LMOWFPassword* LmNewOwfPassword, NTOWFPassword* NtOldOwfPassword, NTOWFPassword* NtNewOwfPassword );
+		bool ExitWindowsEx( unsigned int uFlags, unsigned long dwReason ) const;
+		bool LockWorkStation( void ) const;
+		bool ShutdownBlockReasonCreate( COSWindow::refType Wnd, const wchar_t* pwszReason ) const;
+		bool ShutdownBlockReasonDestroy( COSWindow::refType Wnd ) const;
+		CWString ShutdownBlockReasonQuery( COSWindow::refType Wnd ) const;
+		bool EnumWindowStationsT( WindowStationEnumCallback lpEnumFunc, Cmp_long_ptr lParam ) const;
+		bool AbortSystemShutdownT( const TCHAR* lpMachineName ) const;
+		bool InitiateShutdownT( const TCHAR* lpMachineName, const TCHAR* lpMessage, unsigned long dwGracePeriod, unsigned long dwShutdownFlags, unsigned long dwReason ) const;
+		bool LogonUserT( wchar_t* lpszUsername, wchar_t* lpszDomain, wchar_t* lpszPassword, unsigned long dwLogonType, unsigned long dwLogonProvider, nsWin32::TOKEN_GROUPS* pTokenGroups, void** phToken, void** ppLogonSid, void** ppProfileBuffer, unsigned long* pdwProfileLength, nsWin32::QuotaLimits* pQuotaLimits ) const;
+		unsigned long MSChapSrvChangePassword( wchar_t* ServerName, wchar_t* UserName, unsigned char LmOldPresent, LMOWFPassword* LmOldOwfPassword, LMOWFPassword* LmNewOwfPassword, NTOWFPassword* NtOldOwfPassword, NTOWFPassword* NtNewOwfPassword ) const;
 		unsigned long MSChapSrvChangePassword2( wchar_t* ServerName, wchar_t* UserName, SamprEncryptedUserPassword* NewPasswordEncryptedWithOldNt, 
-			EncryptedNTOWFPassword* OldNtOwfPasswordEncryptedWithNewNt, unsigned char LmPresent, SamprEncryptedUserPassword* NewPasswordEncryptedWithOldLm, EncryptedLMOWFPassword* OldLmOwfPasswordEncryptedWithNewLmOrNt );
+			EncryptedNTOWFPassword* OldNtOwfPasswordEncryptedWithNewNt, unsigned char LmPresent, SamprEncryptedUserPassword* NewPasswordEncryptedWithOldLm, EncryptedLMOWFPassword* OldLmOwfPasswordEncryptedWithNewLmOrNt ) const;
 			
 	private:
 
@@ -121,119 +134,55 @@ namespace nsWin32
 	};
 
 	//--------------------------------------------------------------------------------
+	class __QOR_INTERFACE(__WINQL) CShutdownBlock
+	{
+	public:
+
+		__QOR_DECLARE_OCLASS_ID(CShutdownBlock);
+
+		CShutdownBlock(const CSession& Session, COSWindow::refType Wnd, const wchar_t* pwszReason);
+		~CShutdownBlock();
+
+		CWString QueryReason( void );
+		bool Status(void);
+
+	private:
+
+		CShutdownBlock();
+		CShutdownBlock(const CShutdownBlock&);
+		CShutdownBlock& operator = (const CShutdownBlock&);
+		const CSession& m_Session;
+		bool m_bStatus;
+		COSWindow::refType m_WndShutdownBlock;
+	};
+
+	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CSession : public CSessionHelper
 	{
-		QOR_PP_WINQL_SHARED
 
 	public:
 
-		//--------------------------------------------------------------------------------
-		class __QOR_INTERFACE( __WINQL ) CShutdownBlock
-		{
-		public:
-
-			__QOR_DECLARE_REF_TYPE( CShutdownBlock );			
-
-			//--------------------------------------------------------------------------------
-			CShutdownBlock( CSession& Session, COSWindow::refType Wnd, const wchar_t* pwszReason ) : m_Session( Session ), m_WndShutdownBlock( Wnd )
-			{
-				m_bStatus = m_Session.BlockShutdown( Wnd, pwszReason );
-			}
-
-			//--------------------------------------------------------------------------------
-			~CShutdownBlock()
-			{
-				m_bStatus = m_Session.ReleaseShutdown( m_WndShutdownBlock );
-			}
-
-			//--------------------------------------------------------------------------------
-			CWString QueryReason()
-			{
-				return m_Session.QueryShutdownBlockReason( m_WndShutdownBlock );
-			}
-
-			//--------------------------------------------------------------------------------
-			bool Status( void )
-			{
-				return m_bStatus;
-			}
-
-			//--------------------------------------------------------------------------------
-			ref_type Ref( void )
-			{
-				return ref_type( this );
-			}
-
-		private:
-
-			CShutdownBlock();
-			CShutdownBlock( const CShutdownBlock& );
-			CShutdownBlock& operator = ( const CShutdownBlock& );
-			CSession& m_Session;
-			bool m_bStatus;
-			COSWindow::refType m_WndShutdownBlock;
-		};
+		__QOR_DECLARE_OCLASS_ID(CSession);
 
 		friend class CShutdownBlock;
-
-		//--------------------------------------------------------------------------------
-		CSession() //: m_bWinStationsEnumerated( false )
-		{				
-		}
-
-		//--------------------------------------------------------------------------------
-		virtual ~CSession()
-		{				
-		}
-
-		//--------------------------------------------------------------------------------
-		CShutdownBlock::ref_type ShutdownBlock( COSWindow::refType Wnd, const wchar_t* pwszReason )
-		{
-			return CShutdownBlock::ref_type( new CShutdownBlock( *this, Wnd, pwszReason ), true );
-		}
-
-		//CWindowStation::refType WindowStation( CTString, unsigned long dwFlags = 0, bool fInherit = false, unsigned long dwDesiredAccess = Generic_All, nsWin32::LPSECURITY_ATTRIBUTES lpsa = 0 );
-
-		//--------------------------------------------------------------------------------
+		
+		CSession();
+		CSession(CSession&& move);
+		CSession& operator = (CSession&& move);
+		virtual ~CSession();
+		nsCodeQOR::CTRef<CShutdownBlock> ShutdownBlock(COSWindow::refType Wnd, const wchar_t* pwszReason);
 		CUser& User( void );
 
 	protected:			
 
-		//--------------------------------------------------------------------------------
-		bool BlockShutdown( COSWindow::refType Wnd, const wchar_t* pwszReason )
-		{
-			bool bResult = false;
-			bResult = ShutdownBlockReasonCreate( Wnd, pwszReason );
-			return bResult;
-		}
-
-		//--------------------------------------------------------------------------------
-		bool ReleaseShutdown( COSWindow::refType Wnd )
-		{
-			return ShutdownBlockReasonDestroy( Wnd );
-		}
-
-		//--------------------------------------------------------------------------------
-		CWString QueryShutdownBlockReason( COSWindow::refType Wnd )
-		{
-			return ShutdownBlockReasonQuery( Wnd );
-		}
-
-		//typedef nsCodeQOR::CTMap< CTString, CWindowStation* > WinStationNameMap;
-		//typedef WinStationNameMap::TItem WinStationNameMapItem;
-
-		//WinStationNameMap m_WinStationNameMap;
+		bool BlockShutdown(COSWindow::refType Wnd, const wchar_t* pwszReason) const;
+		bool ReleaseShutdown(COSWindow::refType Wnd) const;
+		CWString QueryShutdownBlockReason(COSWindow::refType Wnd) const;
 
 		CUser m_User;
 
 	private:
 
-		/*
-		static bool __QCMP_STDCALLCONVENTION EnumAllWinStationsProc( TCHAR* StrName, Cmp_long_ptr lParam);
-		bool EnumWinStation( TCHAR* StrName );
-		bool EnumAllWinStations();
-		bool m_bWinStationsEnumerated;
-		*/
 		__QCS_DECLARE_NONCOPYABLE( CSession );
 	};
 

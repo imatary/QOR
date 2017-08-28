@@ -1,6 +1,6 @@
 //WinQLClientBase.cpp
 
-// Copyright Querysoft Limited 2013, 2015
+// Copyright Querysoft Limited 2013, 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -26,7 +26,7 @@
 
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
-#include "WinQL/COM/ClientBase.h"
+#include "WinQL/COM/Client/WinQLClientBase.h"
 #include "WinQAPI/OLE32.h"
 
 //--------------------------------------------------------------------------------

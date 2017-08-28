@@ -1,6 +1,6 @@
 //WinQLDeviceDriverCollection.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,10 +29,13 @@
 #ifndef WINQL_DEVICEDRIVERCOLLECTION_H_3
 #define WINQL_DEVICEDRIVERCOLLECTION_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/Definitions/Data.h"
 #include "WinQL/Definitions/IO.h"
 #include "WinQL/System/Devices/WinQLDevice.h"
@@ -40,10 +43,11 @@
 #include "WinQL/CodeServices/Text/WinString.h"
 #include "MammutQOR/Models/MapModel.h"
 
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceDriverCollection, CTRef);
+
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CDeviceDriverCollection
 	{

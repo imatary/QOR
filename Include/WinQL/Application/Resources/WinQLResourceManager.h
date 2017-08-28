@@ -61,18 +61,18 @@ namespace nsWin32
 
 		//TODO: Local descriptor pool
 
-		CKeyboardLayoutHandleMap& KeyboardLayoutHandleMap( void );
-		CDeviceInfoSetHandleMap& DeviceInfoSetHandleMap( void );
-		CDeviceNotificationHandleMap& DeviceNotificationHandleMap( void );
+		//CKeyboardLayoutHandleMap& KeyboardLayoutHandleMap( void );
+		//CDeviceInfoSetHandleMap& DeviceInfoSetHandleMap( void );
+		//CDeviceNotificationHandleMap& DeviceNotificationHandleMap( void );
 		//CDeviceHandleMap& DeviceHandleMap( void );
 
 	private:
 
 		nsCodeQOR::CTCRef< CThread > m_RefThread;
 		//nsCodeQOR::CSTMember< CWinModuleHandleMap > m_WinModuleMap;
-		nsCodeQOR::CSTMember< CKeyboardLayoutHandleMap > m_KeyboardLayoutMap;
-		nsCodeQOR::CSTMember< CDeviceInfoSetHandleMap > m_DeviceInfoSetHandleMap;
-		nsCodeQOR::CSTMember< CDeviceNotificationHandleMap > m_DeviceNotificationHandleMap;
+		//nsCodeQOR::CSTMember< CKeyboardLayoutHandleMap > m_KeyboardLayoutMap;
+		//nsCodeQOR::CSTMember< CDeviceInfoSetHandleMap > m_DeviceInfoSetHandleMap;
+		//nsCodeQOR::CSTMember< CDeviceNotificationHandleMap > m_DeviceNotificationHandleMap;
 		//nsCodeQOR::CSTMember< CDeviceHandleMap > m_DeviceHandleMap;
 		//DeviceContexts
 		//Bitmaps

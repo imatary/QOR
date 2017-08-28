@@ -46,25 +46,6 @@ namespace nsCodeQOR
 		unsigned short int Data2;
 		unsigned short int Data3;
 		unsigned char Data4[8];
-
-		//--------------------------------------------------------------------------------
-		/*
-		__mxGUID& operator = ( const __mxGUID& guidOther )
-		{
-			Data1 = guidOther.Data1;
-			Data2 = guidOther.Data2;
-			Data3 = guidOther.Data3;
-			Data4[ 0 ] = guidOther.Data4[ 0 ];
-			Data4[ 1 ] = guidOther.Data4[ 1 ];
-			Data4[ 2 ] = guidOther.Data4[ 2 ];
-			Data4[ 3 ] = guidOther.Data4[ 3 ];
-			Data4[ 4 ] = guidOther.Data4[ 4 ];
-			Data4[ 5 ] = guidOther.Data4[ 5 ];
-			Data4[ 6 ] = guidOther.Data4[ 6 ];
-			Data4[ 7 ] = guidOther.Data4[ 7 ];
-			return *this;
-		}*/
-
 	}const mxGUID;
 
 	typedef mxGUID mxIID;

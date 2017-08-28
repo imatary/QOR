@@ -1,6 +1,6 @@
 //WinQLDeviceSetupClass.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -122,20 +122,6 @@ namespace nsWin32
 		return strDescription;
 	}
 			
-	/*
-	//--------------------------------------------------------------------------------
-	CDeviceList& CDeviceSetupClass::DeviceList()
-	{
-		_WINQ_FCONTEXT( "CDeviceSetupClass::DeviceList" );
-		if( m_DeviceList.IsNull() )
-		{
-			m_DeviceList.Configure( new CDeviceList( m_pGUID, 0, m_szMachine ), true );
-		}
-
-		return m_DeviceList();
-	}
-	*/
-
 	//--------------------------------------------------------------------------------
 	CString< byte > CDeviceSetupClass::GetProperty( CDeviceSetupClass::eProperty Property )
 	{
@@ -366,7 +352,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	std::vector< CDeviceInstance::refType >& CDeviceSetupClass::GetInstances()
+	std::vector< CDeviceInstance::ref_type >& CDeviceSetupClass::GetInstances()
 	{
 		if( !m_bInstancesEnumerated )
 		{
@@ -422,19 +408,14 @@ namespace nsWin32
 								ulError = ::GetLastError();
 							}
 
-							CDeviceInstance* pDeviceInstance = TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS).DeviceFromID( strDeviceInstance );
+							CDeviceInstance::ref_type pDeviceInstance = TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS)().DeviceFromID( strDeviceInstance );
 						
-							if( pDeviceInstance == 0 )
+							if( pDeviceInstance.IsNull() )
 							{
-								pDeviceInstance = new CDeviceInstance( strDeviceID, DevInfo );
+								pDeviceInstance = new_shared_ref<CDeviceInstance>( strDeviceID, DevInfo );
 							}
-							/*
-							else
-							{
-								pDeviceInstance->AttachInfoSet( &InfoSet, uiIndex );
-							}
-							*/
-							m_Instances.push_back( pDeviceInstance->Ref() );
+
+							m_Instances.push_back( pDeviceInstance );
 						}
 						
 						uiIndex++;

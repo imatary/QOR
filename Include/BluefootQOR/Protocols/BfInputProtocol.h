@@ -1,6 +1,6 @@
 //BfInputProtocol.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -37,32 +37,21 @@ namespace nsBluefoot
 {
 	
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFInputProtocol : public CBFProtocol
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CInputProtocol : public CProtocol
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CBFInputProtocol > refType;
+		typedef nsCodeQOR::CTLRef< CInputProtocol > refType;
 
-		__QOR_DECLARE_OCLASS_ID( CBFInputProtocol );
+		__QOR_DECLARE_OCLASS_ID( CInputProtocol );
 
-		CBFInputProtocol() = delete;
-		CBFInputProtocol( nsQOR::IApplication::ref_type Application );
-		virtual ~CBFInputProtocol();
-		CBFInputProtocol(const CBFInputProtocol& src);
-		CBFInputProtocol& operator = (const CBFInputProtocol& src);
-
-		//virtual bool OnProtocolStateChange( void );				//single step the state machine
+		CInputProtocol() = delete;
+		CInputProtocol( nsQOR::IApplication::ref_type Application );
+		virtual ~CInputProtocol();
+		CInputProtocol(const CInputProtocol& src);
+		CInputProtocol& operator = (const CInputProtocol& src);
 
 		virtual void GetNextReadCount( void );
-
-		virtual void OnConnectionError( void );
-		virtual void OnConnected( void );
-		virtual void OnDisconnectionError( void );
-		virtual void OnDisconnected( void );
-		virtual void OnReadSuccess( unsigned long ulUnitsRead );
-		virtual void OnReadError( void );
-		virtual bool Read( void );
-		virtual void OnEndOfData( void );
 
 		refType Ref( void )
 		{

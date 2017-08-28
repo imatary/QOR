@@ -614,7 +614,7 @@ namespace nsWinQAPI
 		HWND GetLastActivePopup( HWND hWnd );
 		BOOL GetLayeredWindowAttributes( HWND hwnd, COLORREF* pcrKey, BYTE* pbAlpha, DWORD* pdwFlags );
 		HWND GetParent( HWND hWnd );
-		BOOL GetProcessDefaultLayout( DWORD* pdwDefaultLayout );
+		BOOL GetProcessDefaultLayout( DWORD* pdwDefaultLayout ) const;
 		HWND GetShellWindow(void);
 		BOOL GetTitleBarInfo( HWND hwnd, ::PTITLEBARINFO pti );
 		HWND GetTopWindow( HWND hWnd );
@@ -631,7 +631,7 @@ namespace nsWinQAPI
 		BOOL IsGUIThread( BOOL bConvert );
 		BOOL IsHungAppWindow( HWND hWnd );
 		BOOL IsIconic( HWND hWnd );
-		BOOL IsProcessDPIAware(void);
+		BOOL IsProcessDPIAware(void) const;
 		BOOL IsWindow( HWND hWnd );
 		BOOL IsWindowUnicode( HWND hWnd );
 		BOOL IsWindowVisible( HWND hWnd );
@@ -647,7 +647,7 @@ namespace nsWinQAPI
 		BOOL SetForegroundWindow( HWND hWnd );
 		BOOL SetLayeredWindowAttributes( HWND hwnd, COLORREF crKey, BYTE bAlpha, DWORD dwFlags );
 		HWND SetParent( HWND hWndChild, HWND hWndNewParent );
-		BOOL SetProcessDefaultLayout( DWORD dwDefaultLayout );
+		BOOL SetProcessDefaultLayout( DWORD dwDefaultLayout ) const;
 		BOOL SetProcessDPIAware(void);
 		BOOL SetWindowPlacement( HWND hWnd, ::WINDOWPLACEMENT* lpwndpl );
 		BOOL SetWindowPos( HWND hWnd, HWND hWndInsertAfter, int X, int Y, int cx, int cy, UINT uFlags );
@@ -779,11 +779,11 @@ namespace nsWinQAPI
 		LRESULT DefWindowProc( HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam );
 		//--------------------------------------------------------------------------------
 		//DC functions
-		LONG ChangeDisplaySettings( ::LPDEVMODE lpDevMode, DWORD dwflags );
-		LONG ChangeDisplaySettingsEx( LPCTSTR lpszDeviceName, ::LPDEVMODE lpDevMode, HWND hwnd, DWORD dwflags, LPVOID lParam );
-		BOOL EnumDisplayDevices( LPCTSTR lpDevice, DWORD iDevNum, ::PDISPLAY_DEVICE lpDisplayDevice, DWORD dwFlags );
-		BOOL EnumDisplaySettings( LPCTSTR lpszDeviceName, DWORD iModeNum, ::LPDEVMODE lpDevMode );
-		BOOL EnumDisplaySettingsEx( LPCTSTR lpszDeviceName, DWORD iModeNum, ::LPDEVMODE lpDevMode, DWORD dwFlags );
+		LONG ChangeDisplaySettings( ::LPDEVMODE lpDevMode, DWORD dwflags ) const;
+		LONG ChangeDisplaySettingsEx( LPCTSTR lpszDeviceName, ::LPDEVMODE lpDevMode, HWND hwnd, DWORD dwflags, LPVOID lParam ) const;
+		BOOL EnumDisplayDevices( LPCTSTR lpDevice, DWORD iDevNum, ::PDISPLAY_DEVICE lpDisplayDevice, DWORD dwFlags ) const;
+		BOOL EnumDisplaySettings( LPCTSTR lpszDeviceName, DWORD iModeNum, ::LPDEVMODE lpDevMode ) const;
+		BOOL EnumDisplaySettingsEx( LPCTSTR lpszDeviceName, DWORD iModeNum, ::LPDEVMODE lpDevMode, DWORD dwFlags ) const;
 		HDC GetDC( HWND hWnd );
 		HDC GetDCEx( HWND hWnd, HRGN hrgnClip, DWORD flags );
 		int ReleaseDC( HWND hWnd, HDC hDC );
@@ -1041,8 +1041,8 @@ namespace nsWinQAPI
 		BOOL SetScrollRange( HWND hWnd, int nBar, int nMinPos, int nMaxPos, BOOL bRedraw );
 		BOOL ShowScrollBar( HWND hWnd, int wBar, BOOL bShow );
 		//--------------------------------------------------------------------------------
-		BOOL EnumDisplayMonitors( HDC hdc, LPCRECT lprcClip, ::MONITORENUMPROC lpfnEnum, LPARAM dwData );
-		BOOL GetMonitorInfo( HMONITOR hMonitor, ::LPMONITORINFO lpmi );
+		BOOL EnumDisplayMonitors( HDC hdc, LPCRECT lprcClip, ::MONITORENUMPROC lpfnEnum, LPARAM dwData ) const;
+		BOOL GetMonitorInfo( HMONITOR hMonitor, ::LPMONITORINFO lpmi ) const;
 		HMONITOR MonitorFromPoint( ::POINT pt, DWORD dwFlags );
 		HMONITOR MonitorFromRect( LPCRECT lprc, DWORD dwFlags );
 		HMONITOR MonitorFromWindow( HWND hwnd, DWORD dwFlags );

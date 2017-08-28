@@ -37,11 +37,11 @@
 namespace nsBluefoot
 {
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFConnectionPool
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CConnectionPool
 	{
 	public:
 
-		typedef nsCodeQOR::CTCRef< CBFConnectionPool > refType;
+		typedef nsCodeQOR::CTCRef< CConnectionPool > refType;
 
 		friend class refType;
 
@@ -51,8 +51,8 @@ namespace nsBluefoot
 			m_uiCacheSize = uiSize;
 		}
 
-		virtual CBFPlug::refPlugType Get( void ) = 0;
-		virtual void Release( CBFPlug* pConnection ) = 0;
+		virtual CPlug::refPlugType Get( void ) = 0;
+		virtual void Release( CPlug* pConnection ) = 0;
 
 		//--------------------------------------------------------------------------------
 		refType Ref( void )
@@ -64,14 +64,14 @@ namespace nsBluefoot
 	protected:
 
 		//--------------------------------------------------------------------------------
-		CBFConnectionPool()
+		CConnectionPool()
 		{
 			m_ulPoolRefCount = 0;
 			m_uiCacheSize = 1;
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual ~CBFConnectionPool()
+		virtual ~CConnectionPool()
 		{
 		}
 
@@ -96,7 +96,7 @@ namespace nsBluefoot
 
 	//--------------------------------------------------------------------------------
 	template< class TConnection >
-	class CTBFConnectionPool : public CBFConnectionPool
+	class CTConnectionPool : public CConnectionPool
 	{
 
 	public:
@@ -104,7 +104,7 @@ namespace nsBluefoot
 		//--------------------------------------------------------------------------------
 		static refType CreatePool( unsigned int uiSize = 1 )
 		{
-			CTBFConnectionPool* pPool = new CTBFConnectionPool< TConnection >();
+			CTConnectionPool* pPool = new CTConnectionPool< TConnection >();
 			pPool->SetPoolTargetSize( uiSize );
 			refType ref( pPool );
 			return ref;
@@ -118,7 +118,7 @@ namespace nsBluefoot
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual CBFPlug::refPlugType Get( void )
+		virtual CPlug::refPlugType Get( void )
 		{
 			TConnection* pConnection = 0;
 			if( m_FreeList.GetCount() > 0 )
@@ -132,12 +132,12 @@ namespace nsBluefoot
 
 			m_uiInUse++;
 
-			CBFPlug::refPlugType ref( pConnection );
+			CPlug::refPlugType ref( pConnection );
 			return ref;
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual void Release( CBFPlug* pConnector )
+		virtual void Release( CPlug* pConnector )
 		{
 			TConnection* pConnection = dynamic_cast< TConnection* >( pConnector );
 			if( pConnection )
@@ -169,16 +169,16 @@ namespace nsBluefoot
 
 	private:
 
-		friend class nsCodeQOR::CTCRef< CBFConnectionPool >;
+		friend class nsCodeQOR::CTCRef< CConnectionPool >;
 
 		//--------------------------------------------------------------------------------
-		CTBFConnectionPool() : CBFConnectionPool()
+		CTConnectionPool() : CConnectionPool()
 		{			
 			m_uiInUse = 0;
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual ~CTBFConnectionPool()
+		virtual ~CTConnectionPool()
 		{
 		}
 

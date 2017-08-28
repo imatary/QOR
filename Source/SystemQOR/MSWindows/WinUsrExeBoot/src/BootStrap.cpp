@@ -34,7 +34,7 @@
 #endif
 
 
-//Ensure reserved space for static initializers is allocated at compile time and zeroed so static initialisation can find the end of the list
+//Ensure reserved space for static initializers is allocated at compile time and zeroed so static initialization can find the end of the list
 
 // C initializers
 #pragma __QCMP_DATA_SEGMENT(".CRT$XIA")
@@ -71,8 +71,8 @@ CBootStrap* g_pBootStrap;
 CBootStrap::CBootStrap() : nsWin32::CProcessBootStrap()
 {
 	g_pBootStrap = this;
-	InitTerm( CInit_a, CInit_z );		//Initialise 'C' statics so the process can use 'C' code if desired
-	InitTerm( CppInit_a, CppInit_z );	//Initialise C++ statics belonging to this process module
+	InitTerm( CInit_a, CInit_z );		//Initialize 'C' statics so the process can use 'C' code if desired
+	InitTerm( CppInit_a, CppInit_z );	//Initialize C++ statics belonging to this process module
 	ParseCommandLine();					//Get the command line parameters to pass to the user code entry point
 }
 
@@ -107,6 +107,12 @@ nsCodeQOR::CLoadableModuleBase& ThisModule( void )
 {
 	nsCodeQOR::CLoadableModuleBase& Module( *( nsWin32::CProcess::ThisProcess() ) );
 	return Module;
+}
+
+//------------------------------------------------------------------------------
+const char* __QCMP_LOCAL ThisModuleVersion( void )
+{
+	return QOR_PP_STRINGIZE(__DATE__:__TIME__);
 }
 
 //--------------------------------------------------------------------------------

@@ -51,28 +51,28 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CIOServer::SetConnectionPool( nsBluefoot::CBFConnectionPool::refType refConnectionPool )			//Attach a connection pool to allow the server to request new connections from a pool
+	void CIOServer::SetConnectionPool( nsBluefoot::CConnectionPool::refType refConnectionPool )			//Attach a connection pool to allow the server to request new connections from a pool
 	{
 		m_refConnectionPool = refConnectionPool;
 	}
 
 	//--------------------------------------------------------------------------------
-	nsBluefoot::CBFConnectionPool::refType CIOServer::GetConnectionPool( void )
+	nsBluefoot::CConnectionPool::refType CIOServer::GetConnectionPool( void )
 	{
 		return m_refConnectionPool;
 	}
 
 	//--------------------------------------------------------------------------------
-	void CIOServer::SetupConnection( nsBluefoot::CBFPlug::refPlugType& refConnector )
+	void CIOServer::SetupConnection( nsBluefoot::CPlug::refPlugType& refConnector )
 	{
 		_WINQ_FCONTEXT( "CIOServer::SetupConnection" );
 		//Override to set device specific properties for the Connection
 	}
 
 	//------------------------------------------------------------------------------
-	nsBluefoot::CBFPlug::refPlugType CIOServer::CreateConnection()
+	nsBluefoot::CPlug::refPlugType CIOServer::CreateConnection()
 	{
-		nsBluefoot::CBFPlug::refPlugType refServerConnection( 0 );
+		nsBluefoot::CPlug::refPlugType refServerConnection( 0 );
 		
 		if( !m_refConnectionPool.IsNull() )
 		{

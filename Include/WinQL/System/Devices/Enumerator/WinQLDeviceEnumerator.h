@@ -1,6 +1,6 @@
 //WinQLDeviceEnumerator.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -46,6 +46,9 @@ namespace nsWinQAPI
 	class __QOR_INTERFACE( __WINQAPI ) CSetupAPI;
 }//nsWinQAPI
 
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceEnumerator, CTRef);
+
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
@@ -54,21 +57,14 @@ namespace nsWin32
 	{
 	public:
 
+		__QOR_DECLARE_REF_TYPE(CDeviceEnumerator);
 		__QOR_DECLARE_OCLASS_ID( CDeviceEnumerator );
-
-		typedef nsCodeQOR::CTLRef< CDeviceEnumerator > refType;
 
 		CDeviceEnumerator( CTString& strEnumID );
 		virtual ~CDeviceEnumerator();
 
 		CTString ID( void );
 		unsigned int Enumerate( void );
-
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this );
-		}
 
 		nsCodeQOR::CTArray< CDeviceInstance*, CWinQLPolicy >& Instances( void );
 
@@ -81,9 +77,9 @@ namespace nsWin32
 		nsCodeQOR::CTArray< CDeviceInstance*, CWinQLPolicy > m_ArrayDeviceInstances;
 		bool m_bEnumerated;
 		
-		CDeviceEnumerator();//not to be implemented
-		CDeviceEnumerator( const CDeviceEnumerator& src );
-		CDeviceEnumerator& operator = ( const CDeviceEnumerator& src );
+		CDeviceEnumerator() = delete;//not to be implemented
+		CDeviceEnumerator( const CDeviceEnumerator& src ) = delete;
+		CDeviceEnumerator& operator = ( const CDeviceEnumerator& src ) = delete;
 	};
 
 

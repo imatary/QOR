@@ -80,7 +80,7 @@ namespace nsCodeQOR
 	}
 
 	//------------------------------------------------------------------------------
-	//Get the severity level of the incident and any custom clasification
+	//Get the severity level of the incident and any custom classification
 	CError::Level CWhat::GetLevel( unsigned int* puiCustLevel )
 	{
 		if( puiCustLevel != 0 )

@@ -43,8 +43,6 @@ public:
 
 	CExePageAllocator();
 	virtual ~CExePageAllocator();
-	//CExePageAllocator( const CExePageAllocator& );
-	//CExePageAllocator& operator = ( const CExePageAllocator& );
 };
 
 #endif//SYSTEMQOR_EXEPAGEALLOCATOR_H_1

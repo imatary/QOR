@@ -56,7 +56,7 @@ namespace nsCodeQOR
 
 	};
 
-	//Make sure the compiler genrates code for the base class template and base class static members
+	//Make sure the compiler generates code for the base class template and base class static members
 #if     ( ( __QCMP_COMPILER != __QCMP_CLANG ) && ( __QCMP_COMPILER != __QCMP_INTEL ) )
 	template struct sTOB< CTFlyerRegEntry< CCallInterceptor > >;
 	template class CTFlyer< CCallInterceptor, CFlyStrapBase >;

@@ -31,6 +31,6 @@
 #define QOR_COMPILER_H_1
 
 #	include "CompilerQOR/Common/PreCompiler.h"		//Setup Compiler definitions and preprocessor
-#	include "CompilerQOR/Common/Compiler.h"			//Define a namepsace and a class representing the Compiler definition
+#	include "CompilerQOR/Common/Compiler.h"			//Define a namespace and a class representing the Compiler definition
 
 #endif//QOR_COMPILER_H_1

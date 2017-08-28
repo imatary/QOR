@@ -63,18 +63,11 @@ namespace nsCodeQOR
 
 #include "CodeQOR/Traits/ReferenceTraits.h"
 
+//--------------------------------------------------------------------------------
 template< class T >
-typename nsCodeQOR::reference_type< T >::type new_ref( void )
+__QCMP_INLINE typename nsCodeQOR::reference_type< T >::type ref(T& _t)
 {
-	return typename nsCodeQOR::reference_type< T >::type ( nsCodeQOR::mem_traits< T >::CTAllocator::Allocate(), true );
-}
-
-template< class T, typename A >
-typename nsCodeQOR::reference_type< T >::type new_ref( A a )
-{
-	T* pT = nsCodeQOR::mem_traits< T >::CTAllocator::RawAllocate();
-	new ( pT )T(a);
-	return typename nsCodeQOR::reference_type< T >::type( pT, true );
+	return typename nsCodeQOR::reference_type< T >::type(&_t);
 }
 
 #endif//CODEQOR_TRAITS_MEM_H_1

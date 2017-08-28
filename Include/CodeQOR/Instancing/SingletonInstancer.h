@@ -45,7 +45,7 @@ protected:																		\
 
 //------------------------------------------------------------------------------
 //Macro to singleton enable a class implementation
-//Include __QOR_IMPLEMENT_SINGLETON(classname) in your class implementation
+//Include __QOR_IMPLEMENT_SINGLETON(class-name) in your class implementation
 #define __QOR_IMPLEMENT_SINGLETON( _Class, _Policy  )															\
 																												\
 template<> _Class* nsCodeQOR::CTSingletonInstancer< _Class, _Policy >::m_pInstance = 0;							\
@@ -53,13 +53,13 @@ template<> long nsCodeQOR::CTSingletonInstancer< _Class, _Policy >::m_lInstanceC
 template<> _Policy::TThreadSyncSinglePrimitive nsCodeQOR::CTSingletonInstancer< _Class, _Policy >::m_Section;	\
 template<> mem_traits< _Class >::CSource nsCodeQOR::CTSingletonInstancer< _Class, _Policy >::m_Source;
 
-//Add __QOR_DECLARE_SINGLETON( source, classname ); to your class declaration
-//declaring no other constructors or destructors. 
+//Add __QOR_DECLARE_SINGLETON( source, class-name ); to your class declaration
+//declaring no other constructors or destructor. 
 
-//Add __QOR_IMPLEMENT_SINGLETON( source, classname) to your class implementation
+//Add __QOR_IMPLEMENT_SINGLETON( source, class-name) to your class implementation
 //and your class will only be able to be accessed as a singleton
 
-//Use nsCodeQOR::CTSingletonInstancer< source_type, classname >::Instance() to get an pointer to a singleton
+//Use nsCodeQOR::CTSingletonInstancer< source_type, class-name >::Instance() to get an pointer to a singleton
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR

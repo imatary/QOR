@@ -42,8 +42,6 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------	
 	class __QOR_INTERFACE( __WINQL ) CFileSystem
 	{
-		QOR_PP_WINQL_SHARED;
-
 	public:
 
 		CFileSystem();

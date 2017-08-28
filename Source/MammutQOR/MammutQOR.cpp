@@ -58,8 +58,14 @@ __QCMP_ENDLINKAGE_C
 	//------------------------------------------------------------------------------
 	nsCodeQOR::CLoadableModuleBase& ThisModule( void )
 	{
-		static nsCodeQOR::CLoadableModuleBase PosumQORModule( "Querysoft Open MVC Model Library (Mammut)" );
-		return PosumQORModule;
+		static nsCodeQOR::CLoadableModuleBase MammutQORModule( "Querysoft Open Runtime MVC Model Library (Mammut)" );
+		return MammutQORModule;
+	}
+
+	//------------------------------------------------------------------------------
+	const char* __QCMP_LOCAL ThisModuleVersion(void)
+	{
+		return QOR_PP_STRINGIZE(__DATE__:__TIME__);
 	}
 
 #	endif//_USRDLL

@@ -12,7 +12,7 @@
 # /* Revised by Paul Mensonides (2002-2011) */
 # /* Revised by Edward Diener (2011) */
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -41,36 +41,46 @@
 
 #include "../cat.h"
 #include "../config/config.h"
+#include "../facilities/expand.h"
 #include "../facilities/overload.h"
 #include "rem.h"
 #include "../variadic/elem.h"
+#include "detail/is_single_return.h"
 
 #if QOR_PP_VARIADICS
-#   if QOR_PP_VARIADICS_MSVC
-#       define QOR_PP_TUPLE_ELEM( ... )				QOR_PP_TUPLE_ELEM_I( QOR_PP_OVERLOAD( QOR_PP_TUPLE_ELEM_O_, __VA_ARGS__ ), ( __VA_ARGS__ ) )
-#       define QOR_PP_TUPLE_ELEM_I( m, args )		QOR_PP_TUPLE_ELEM_II( m, args )
-#       define QOR_PP_TUPLE_ELEM_II( m, args )		QOR_PP_CAT( m ## args, )
-#   else
-#       define QOR_PP_TUPLE_ELEM( ... )				QOR_PP_OVERLOAD( QOR_PP_TUPLE_ELEM_O_, __VA_ARGS__ )( __VA_ARGS__ )
-#   endif
-#   define QOR_PP_TUPLE_ELEM_O_2( n, tuple )		QOR_PP_VARIADIC_ELEM( n, QOR_PP_REM tuple )
-#   define QOR_PP_TUPLE_ELEM_O_3( size, n, tuple )	QOR_PP_TUPLE_ELEM_O_2( n, tuple )
-#else
-#   if QOR_PP_CONFIG_FLAGS() & QOR_PP_CONFIG_MSVC()
-#       define QOR_PP_TUPLE_ELEM( size, n, tuple )		QOR_PP_TUPLE_ELEM_I( QOR_PP_CAT( QOR_PP_TUPLE_ELEM_, n ), QOR_PP_CAT( QOR_PP_CAT( QOR_PP_TUPLE_ELEM_E_, size ), tuple ) )
-#       define QOR_PP_TUPLE_ELEM_I( m, args )			QOR_PP_TUPLE_ELEM_II( m, args )
-#       define QOR_PP_TUPLE_ELEM_II( m, args )			QOR_PP_CAT( m ## args, )
-#   elif QOR_PP_CONFIG_FLAGS() & QOR_PP_CONFIG_MWCC()
-#       define QOR_PP_TUPLE_ELEM( size, n, tuple )		QOR_PP_TUPLE_ELEM_I_OO( ( size, n, tuple ) )
-#       define QOR_PP_TUPLE_ELEM_I_OO( par )			QOR_PP_TUPLE_ELEM_I ## par
-#       define QOR_PP_TUPLE_ELEM_I( size, n, tuple )	QOR_PP_TUPLE_ELEM_II( ( n, QOR_PP_TUPLE_ELEM_E_ ## size ## tuple ) )
-#       define QOR_PP_TUPLE_ELEM_II( par )				QOR_PP_TUPLE_ELEM_III_OO( par )
-#       define QOR_PP_TUPLE_ELEM_III_OO( par )			QOR_PP_TUPLE_ELEM_III ## par
-#       define QOR_PP_TUPLE_ELEM_III( n, etuple )		QOR_PP_TUPLE_ELEM_ ## n ## etuple
-#   else
-#       define QOR_PP_TUPLE_ELEM( size, n, tuple )		QOR_PP_TUPLE_ELEM_I( QOR_PP_CAT( QOR_PP_TUPLE_ELEM_, n ) QOR_PP_CAT( QOR_PP_TUPLE_ELEM_E_, size ) tuple )
-#       define QOR_PP_TUPLE_ELEM_I( x )					x
-#   endif
+#    if QOR_PP_VARIADICS_MSVC
+#        define QOR_PP_TUPLE_ELEM(...) QOR_PP_TUPLE_ELEM_I(QOR_PP_OVERLOAD(QOR_PP_TUPLE_ELEM_O_, __VA_ARGS__), (__VA_ARGS__))
+#        define QOR_PP_TUPLE_ELEM_I(m, args) QOR_PP_TUPLE_ELEM_II(m, args)
+#        define QOR_PP_TUPLE_ELEM_II(m, args) QOR_PP_CAT(m ## args,)
+/*
+Use QOR_PP_REM_CAT if it is a single element tuple ( which might be empty )
+else use QOR_PP_REM. This fixes a VC++ problem with an empty tuple and QOR_PP_TUPLE_ELEM
+functionality. See tuple_elem_bug_test.cxx.
+*/
+#    	 define QOR_PP_TUPLE_ELEM_O_2(n, tuple) \
+			QOR_PP_VARIADIC_ELEM(n, QOR_PP_EXPAND(QOR_PP_TUPLE_IS_SINGLE_RETURN(QOR_PP_REM_CAT,QOR_PP_REM,tuple) tuple)) \
+			/**/
+#    else
+#        define QOR_PP_TUPLE_ELEM(...) QOR_PP_OVERLOAD(QOR_PP_TUPLE_ELEM_O_, __VA_ARGS__)(__VA_ARGS__)
+#    	 define QOR_PP_TUPLE_ELEM_O_2(n, tuple) QOR_PP_VARIADIC_ELEM(n, QOR_PP_REM tuple)
+#    endif
+#    define QOR_PP_TUPLE_ELEM_O_3(size, n, tuple) QOR_PP_TUPLE_ELEM_O_2(n, tuple)
+# else
+#    if QOR_PP_CONFIG_FLAGS() & QOR_PP_CONFIG_MSVC()
+#        define QOR_PP_TUPLE_ELEM(size, n, tuple) QOR_PP_TUPLE_ELEM_I(QOR_PP_CAT(QOR_PP_TUPLE_ELEM_, n), QOR_PP_CAT(QOR_PP_CAT(QOR_PP_TUPLE_ELEM_E_, size), tuple))
+#        define QOR_PP_TUPLE_ELEM_I(m, args) QOR_PP_TUPLE_ELEM_II(m, args)
+#        define QOR_PP_TUPLE_ELEM_II(m, args) QOR_PP_CAT(m ## args,)
+#    elif QOR_PP_CONFIG_FLAGS() & QOR_PP_CONFIG_MWCC()
+#        define QOR_PP_TUPLE_ELEM(size, n, tuple) QOR_PP_TUPLE_ELEM_I_OO((size, n, tuple))
+#        define QOR_PP_TUPLE_ELEM_I_OO(par) QOR_PP_TUPLE_ELEM_I ## par
+#        define QOR_PP_TUPLE_ELEM_I(size, n, tuple) QOR_PP_TUPLE_ELEM_II((n, QOR_PP_TUPLE_ELEM_E_ ## size ## tuple))
+#        define QOR_PP_TUPLE_ELEM_II(par) QOR_PP_TUPLE_ELEM_III_OO(par)
+#        define QOR_PP_TUPLE_ELEM_III_OO(par) QOR_PP_TUPLE_ELEM_III ## par
+#        define QOR_PP_TUPLE_ELEM_III(n, etuple) QOR_PP_TUPLE_ELEM_ ## n ## etuple
+#    else
+#        define QOR_PP_TUPLE_ELEM(size, n, tuple) QOR_PP_TUPLE_ELEM_I(QOR_PP_CAT(QOR_PP_TUPLE_ELEM_, n) QOR_PP_CAT(QOR_PP_TUPLE_ELEM_E_, size) tuple)
+#        define QOR_PP_TUPLE_ELEM_I(x) x
+#    endif
 
 #   define QOR_PP_TUPLE_ELEM_E_1(e0) (e0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 #   define QOR_PP_TUPLE_ELEM_E_2(e0, e1) (e0, e1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)

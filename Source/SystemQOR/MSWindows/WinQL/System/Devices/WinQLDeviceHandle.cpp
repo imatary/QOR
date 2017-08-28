@@ -1,6 +1,6 @@
 //WinQLDeviceHandle.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -41,35 +41,32 @@ namespace nsWin32
 
 	//--------------------------------------------------------------------------------
 	CDeviceHandle::CDeviceHandle() : CHandle( 0 )
-	,	m_ulRefCount( 0 )
 	{
 		_WINQ_FCONTEXT( "CDeviceHandle::CDeviceHandle" );
-		Init();
 	}
 
 	//--------------------------------------------------------------------------------
 	CDeviceHandle::CDeviceHandle( void* h ) : CHandle( h )
-	,	m_ulRefCount( 1 )
 	{
 		_WINQ_FCONTEXT( "CDeviceHandle::CDeviceHandle" );
-		Init();
 	}
 
 	//--------------------------------------------------------------------------------
 	CDeviceHandle::CDeviceHandle( int h ) : CHandle( h )
-		, m_ulRefCount( 1 )
 	{
 		_WINQ_FCONTEXT( "CDeviceHandle::CDeviceHandle" );
-		Init();
 	}
 
 	//--------------------------------------------------------------------------------
 	CDeviceHandle::CDeviceHandle( const CDeviceHandle& src ) : CHandle( src.ptr() )
-	,	m_ulRefCount( 1 )
 	{
-		src.AddRef();
 		_WINQ_FCONTEXT( "CDeviceHandle::CDeviceHandle" );
-		Init();
+	}
+
+	//--------------------------------------------------------------------------------
+	CDeviceHandle::CDeviceHandle(CDeviceHandle&& move) : CHandle(std::move(move.ptr()))
+	{
+		_WINQ_FCONTEXT("CDeviceHandle::CDeviceHandle");
 	}
 
 	//--------------------------------------------------------------------------------
@@ -80,8 +77,20 @@ namespace nsWin32
 		if( &src != this )
 		{
 			m_h = src.ptr();
-			m_ulRefCount = 1;
-			src.AddRef();
+		}
+
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
+	CDeviceHandle& CDeviceHandle::operator = ( CDeviceHandle&& move)
+	{
+		_WINQ_FCONTEXT("CDeviceHandle::operator =");
+
+		if (&move != this)
+		{
+			m_h = move.ptr();
+			move.m_h = 0;
 		}
 
 		return *this;
@@ -91,13 +100,7 @@ namespace nsWin32
 	CDeviceHandle::~CDeviceHandle()
 	{
 		_WINQ_FCONTEXT( "CDeviceHandle::~CDeviceHandle" );
-		Uninit();
-		Release();
-
-		if( m_ulRefCount != 0 )
-		{
-			//TODO: Raise warning that device handle is not closed
-		}
+		Close();
 	}
 
 	//--------------------------------------------------------------------------------
@@ -105,51 +108,6 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CDeviceHandle::Use" );
 		return ptr();
-	}
-
-	//--------------------------------------------------------------------------------
-	unsigned long CDeviceHandle::AddRef( void ) const
-	{
-		_WINQ_FCONTEXT( "CDeviceHandle::AddRef" );
-		return ++m_ulRefCount;
-	}
-
-	//--------------------------------------------------------------------------------
-	unsigned long CDeviceHandle::Release( void )
-	{
-		_WINQ_FCONTEXT( "CDeviceHandle::Release" );
-		m_ulRefCount--;
-		if( m_ulRefCount == 0 )
-		{
-			Close();
-		}
-		return m_ulRefCount;
-	}
-
-	//--------------------------------------------------------------------------------
-	void CDeviceHandle::Uninit()
-	{
-		_WINQ_FCONTEXT( "CDeviceHandle::Uninit" );
-
-		/*
-		if( !IsNull() )
-		{
-			_Thread().ResourceManager().DeviceHandleMap().Remove( Ref() );
-		}
-		*/
-	}
-
-	//--------------------------------------------------------------------------------
-	void CDeviceHandle::Init()
-	{
-		_WINQ_SFCONTEXT( "CDeviceHandle::Init" );
-
-		/*
-		if( !IsNull() )
-		{
-			_Thread().ResourceManager().DeviceHandleMap().Add( Ref(), this );
-		}
-		*/
 	}
 
 }//nsWin32

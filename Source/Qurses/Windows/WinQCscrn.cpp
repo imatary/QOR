@@ -4,6 +4,7 @@
 #include "WinQL/WinQL.h"
 #include "WinQL/Definitions/Constants.h"
 #include "WinQL/Definitions/Errors.h"
+#include "WinQL/Application/Console/WinQLConsole.h"
 #include "WinQL/Application/Console/WinQLConsoleScreenBuffer.h"
 #include "WinQL/Application/WinQLApplication.h"
 #include "WinQL/System/Clock/WinQLTime.h"
@@ -26,7 +27,7 @@ unsigned char *pdc_atrtab = (unsigned char *)0;
 
 void* pdc_con_out = (void*)Invalid_Handle_Value;
 void* pdc_con_in = (void*)Invalid_Handle_Value;
-nsWin32::CConsole::refType Console;
+nsWin32::CConsole::ref_type Console;
 
 unsigned long pdc_quick_edit;
 
@@ -91,7 +92,7 @@ static void* _find_console_handle(void)
 {
 	__QCS_FCONTEXT( "_find_console_handle" );
 
-	nsWin32::CThreadHelper ThreadHelper;
+	//nsWin32::CThreadHelper ThreadHelper;
 	nsWin32::CTimeHelper TimeHelper;
     TCHAR orgtitle[ 1024 ], temptitle[ 1024 ];
     void* wnd;
@@ -104,7 +105,7 @@ static void* _find_console_handle(void)
 
 	Console->Title.Set( strTempTitle );
    
-	ThreadHelper.Sleep( 40 );
+	nsWin32::CThread::GetCurrent()->Sleep(40);
 
 	nsWin32::COSWindow::refType RefWindow = nsWin32::COSWindow::Find( 0, strTempTitle );
 	wnd = RefWindow.Detach()->Handle()->AsHandle().Detach();
@@ -133,7 +134,7 @@ static void _set_console_info(void)
     void* hDupSection;
     //void* ptrView;
 	nsWin32::CMessageHandler MessageHandler;
-	nsWin32::CConsole::refType Console = nsWin32::CConsole::TheWin32Console();
+	nsWin32::CConsole::ref_type Console = nsWin32::CConsole::TheWin32Console();
 
     // Each-time initialization for console_info
 
@@ -196,7 +197,7 @@ static void _init_console_info(void)
 	nsWin32::CRegistry::CKeyRef rehnd;
     //HKEY reghnd;
     int i;
-	nsWin32::CConsole::refType Console = nsWin32::CConsole::TheWin32Console();
+	nsWin32::CConsole::ref_type Console = nsWin32::CConsole::TheWin32Console();
 
     console_info.Hwnd = _find_console_handle();
     console_info.Length = sizeof(console_info);
@@ -217,7 +218,7 @@ static void _init_console_info(void)
 	
     console_info.CodePage = nsWin32::CConsole::TheWin32Console()->OutputCodePage.Get().ID();
 
-	rehnd.Attach( new nsWin32::CRegKey( *(nsWin32::CSystem::TheSystem().Registry(QOR_PP_SHARED_OBJECT_ACCESS).CurrentUser()), _TXT( "Console" ), 0, nsWin32::CRegKey::Query_Value ), true );
+	rehnd.Attach( new nsWin32::CRegKey( *( TheSystem().As<nsWin32::CSystem>()->Registry(QOR_PP_SHARED_OBJECT_ACCESS)().CurrentUser()), _TXT( "Console" ), 0, nsWin32::CRegKey::Query_Value ), true );
     //RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Console"), 0, KEY_QUERY_VALUE, &reghnd);
 
     len = sizeof( unsigned long );
@@ -350,7 +351,7 @@ int PDC_scr_open( int argc, char **argv )
 	Console = nsWin32::CConsole::TheWin32Console();
 
 	Console->ScreenBuffer()->GetInfoEx( csbi );
-
+	/*TODO: Find another way to check for redirection
 	nsWin32::CCRTFile* pinFile = Console->ConsoleInputFile();
 	nsWin32::CCRTFile* poutFile = Console->ConsoleOutputFile();
 
@@ -364,8 +365,8 @@ int PDC_scr_open( int argc, char **argv )
         fprintf(stderr, "\nRedirection is not supported.\n");
         exit(1);
     }
-	
-    is_nt = !( nsWin32::CSystem::TheSystem().Information(QOR_PP_SHARED_OBJECT_ACCESS).GetVersion() & 0x80000000 );
+	*/
+	is_nt = !(TheSystem().As <nsWin32::CSystem>()->Information(QOR_PP_SHARED_OBJECT_ACCESS)().GetVersion() & 0x80000000);
 
 	Console->ScreenBuffer()->GetInfoEx( csbi );
 

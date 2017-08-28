@@ -12,7 +12,7 @@
 //Define the targets for which to build  this project
 //((X86_32)(SANOS)(0))
 //((X86_64)(MSW)(WIN10))
-#define QOR_TARGETS ((X86_32)(MSW)(WIN7))
+#define QOR_TARGETS ((X86_32)(MSW)(WIN10))
 
 //Define build forms for each way of linking the project
 //The names can be anything but must be matched by a .pp file under a folder named by QOR_PROJECT e.g. QOR\Modular.pp
@@ -22,8 +22,8 @@
 #define QOR_FORMS_MSW (Modular)
 
 //Define the project configurations to build. Each must match a Config.h configuration header e.g. DefaultConfig.h
-//(Unicode)
-#define QOR_CONFIGS (ASCII)
+//(ASCII)
+#define QOR_CONFIGS (Unicode)
 
 //TODO: Make these specializations override QOR CONFIGS
 #define QOR_CONFIGS_SANOS (ASCII)

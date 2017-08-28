@@ -1,6 +1,6 @@
 //WinQLDefaultKeyboard.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -32,10 +32,10 @@
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-	CDefaultKeyboard::refType CDefaultKeyboard::operator()(unsigned int uiUnit)
+	CDefaultKeyboard::ref_type CDefaultKeyboard::operator()(unsigned int uiUnit)
 	{
 		//TODO: restore this - return System().Devices(QOR_PP_SHARED_OBJECT_ACCESS).RegisteredLocalInterfaceClasses()[CDeviceInterfaceClassCollection::GUID_DEVINTERFACE_KEYBOARD]->Interfaces()[uiUnit];
-		return CDefaultKeyboard::refType( 0, false );
+		return CDefaultKeyboard::ref_type();
 	}
 
 }//nsWin32

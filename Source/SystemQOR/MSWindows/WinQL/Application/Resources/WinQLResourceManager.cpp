@@ -47,13 +47,13 @@ namespace nsWin32
 	CThreadResourceManager::~CThreadResourceManager()
 	{
 	}
-
+	/*
 	//--------------------------------------------------------------------------------
 	CKeyboardLayoutHandleMap& CThreadResourceManager::KeyboardLayoutHandleMap()
 	{
 		return m_KeyboardLayoutMap();
 	}
-
+	
 	//--------------------------------------------------------------------------------
 	CDeviceInfoSetHandleMap& CThreadResourceManager::DeviceInfoSetHandleMap( void )
 	{
@@ -65,7 +65,7 @@ namespace nsWin32
 	{
 		return m_DeviceNotificationHandleMap();
 	}
-	/*
+	
 	//--------------------------------------------------------------------------------
 	CDeviceHandleMap& CThreadResourceManager::DeviceHandleMap( void )
 	{

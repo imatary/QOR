@@ -175,6 +175,7 @@
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\CodeServices\WQPointerChecks.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\CodeServices\WQStringChecks.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\ComCtl32.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\DComp.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\GDI32.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kActCtx.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\Kernel\kAppRecRestart.cpp" />
@@ -270,6 +271,28 @@
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\WinQAPI.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\WS2_32.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQAPI\src\WTSAPI32.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\AdvAPI32.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\BthProps.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\ComCtl32.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\DComp.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\GDI32.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\Kernel32.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\MedFoundAPI.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\MMCAPI.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\OLE32.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\OLEAut32.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\OLEDB.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\OpenGL.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\PowerProf.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\PSAPI.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\SetupAPI.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\User32.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\UxTheme.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\WinQAPI.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\WS2_32.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQAPI\WTSAPI32.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

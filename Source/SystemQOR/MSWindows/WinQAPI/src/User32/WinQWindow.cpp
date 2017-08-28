@@ -1,6 +1,6 @@
 //WinQWindow.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -385,7 +385,7 @@ namespace nsWinQAPI
 	}
 
 	//--------------------------------------------------------------------------------
-	BOOL CUser32::GetProcessDefaultLayout( DWORD* pdwDefaultLayout )
+	BOOL CUser32::GetProcessDefaultLayout( DWORD* pdwDefaultLayout )  const
 	{
 		_WINQ_FCONTEXT( "CUser32::GetProcessDefaultLayout" );
 		CCheckReturn< BOOL, CBoolCheck< > >::TType bResult;
@@ -575,7 +575,7 @@ namespace nsWinQAPI
 	}
 
 	//--------------------------------------------------------------------------------
-	BOOL CUser32::IsProcessDPIAware(void)
+	BOOL CUser32::IsProcessDPIAware(void) const
 	{
 		_WINQ_FCONTEXT( "CUser32::IsProcessDPIAware" );
 		_WINQ_USESAPI( IsProcessDPIAware );
@@ -719,7 +719,7 @@ namespace nsWinQAPI
 	}
 
 	//--------------------------------------------------------------------------------
-	BOOL CUser32::SetProcessDefaultLayout( DWORD dwDefaultLayout )
+	BOOL CUser32::SetProcessDefaultLayout( DWORD dwDefaultLayout ) const
 	{
 		_WINQ_FCONTEXT( "CUser32::SetProcessDefaultLayout" );
 		CCheckReturn< BOOL, CBoolCheck< > >::TType bResult;

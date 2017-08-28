@@ -1,6 +1,6 @@
 //WinQLUSBHubPort.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -89,11 +89,11 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	bool CUSBHub::CPortConnection::GetProperties()
 	{
-		CDeviceSession Session( *m_pHub, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = m_pHub->Open(Generic_Write, File_Share_Write, Open_Existing);
 		unsigned long nBytes = 0;
 		memset( &ConnectorProperties, 0, sizeof( USB_PORT_CONNECTOR_PROPERTIES ) );
 		ConnectorProperties.ConnectionIndex = m_ulConnectionIndex;
-        bool bSuccess = m_pHub->m_pDeviceFile->Control( 
+        bool bSuccess = Session->Control( 
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_PORT_CONNECTOR_PROPERTIES, Method_Buffered, File_Any_Access ), &ConnectorProperties, sizeof(USB_PORT_CONNECTOR_PROPERTIES), &ConnectorProperties, sizeof(USB_PORT_CONNECTOR_PROPERTIES), &nBytes, NULL );
 		return bSuccess;
 	}
@@ -101,7 +101,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CWString CUSBHub::CPortConnection::GetName()
 	{
-		CDeviceSession Session( *m_pHub, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = m_pHub->Open(Generic_Write, File_Share_Write, Open_Existing);
 		bool success = 0;
 		unsigned long nBytes = 0;
 		USB_NODE_CONNECTION_NAME    extHubName;
@@ -111,7 +111,7 @@ namespace nsWin32
 		// Get the length of the name of the external hub attached to the specified port.
 		memset( &extHubName, 0, sizeof( USB_NODE_CONNECTION_NAME ) );
 		extHubName.ConnectionIndex = m_ulConnectionIndex;
-		success = m_pHub->m_pDeviceFile->Control(
+		success = Session->Control(
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_NODE_CONNECTION_NAME, Method_Buffered, File_Any_Access ), &extHubName, sizeof( extHubName ), &extHubName, sizeof( extHubName ), &nBytes, NULL );
 
 		if( success )
@@ -123,7 +123,7 @@ namespace nsWin32
 			// Get the name of the external hub attached to the specified port
     
 			extHubNameW->ConnectionIndex = m_ulConnectionIndex;
-			success = m_pHub->m_pDeviceFile->Control(
+			success = Session->Control(
 				__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_NODE_CONNECTION_NAME, Method_Buffered, File_Any_Access ), extHubNameW, nBytes, extHubNameW, nBytes, &nBytes, NULL);
 
 			memcpy( strNodeConnectionName.GetBufferSetLength( static_cast< unsigned short >( nBytes / sizeof( wchar_t ) ) ), extHubNameW->NodeName, nBytes );
@@ -137,14 +137,14 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	bool CUSBHub::CPortConnection::GetInformation()
 	{
-		CDeviceSession Session( *m_pHub, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = m_pHub->Open(Generic_Write, File_Share_Write, Open_Existing);
 		unsigned long nBytes = sizeof( USB_NODE_CONNECTION_INFORMATION ) + sizeof( USB_PIPE_INFO ) * 30;
 
 		nsCodeQOR::CTLRef< byte > Buffer( new byte[ nBytes ], true );
 		memset( Buffer.operator byte *(), 0, sizeof( USB_NODE_CONNECTION_INFORMATION ) );
 		USB_NODE_CONNECTION_INFORMATION* pConnectionInfo = reinterpret_cast< USB_NODE_CONNECTION_INFORMATION* >( Buffer.operator byte *() );
 		pConnectionInfo->ConnectionIndex = m_ulConnectionIndex;
-		bool bSuccess = m_pHub->m_pDeviceFile->Control( 
+		bool bSuccess = Session->Control( 
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_NODE_CONNECTION_INFORMATION, Method_Buffered, File_Any_Access ), pConnectionInfo, nBytes, pConnectionInfo, nBytes, &nBytes, NULL );
 
 		if( bSuccess )
@@ -175,14 +175,14 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	bool CUSBHub::CPortConnection::GetInformationEx()
 	{
-		CDeviceSession Session( *m_pHub, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = m_pHub->Open(Generic_Write, File_Share_Write, Open_Existing);
 		unsigned long nBytesEx = sizeof( USB_NODE_CONNECTION_INFORMATION_EX ) + ( sizeof( USB_PIPE_INFO ) * 30 );
 
 		nsCodeQOR::CTLRef< byte > Buffer( new byte[ nBytesEx ], true );
 		memset( Buffer.operator byte *(), 0, sizeof( USB_NODE_CONNECTION_INFORMATION_EX ) );
 		USB_NODE_CONNECTION_INFORMATION_EX* pConnectionInfo = reinterpret_cast< USB_NODE_CONNECTION_INFORMATION_EX* >( Buffer.operator byte *() );
 		pConnectionInfo->ConnectionIndex = m_ulConnectionIndex;
-        bool bSuccess = m_pHub->m_pDeviceFile->Control( 
+        bool bSuccess = Session->Control( 
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_NODE_CONNECTION_INFORMATION_EX, Method_Buffered, File_Any_Access ), pConnectionInfo, nBytesEx, pConnectionInfo, nBytesEx, &nBytesEx, NULL );
 
 		if( bSuccess )
@@ -213,12 +213,12 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	bool CUSBHub::CPortConnection::GetInformationExV2()
 	{
-		CDeviceSession Session( *m_pHub, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = m_pHub->Open(Generic_Write, File_Share_Write, Open_Existing);
 		unsigned long nBytes = 0;
 
 		memset( &InfoExV2, 0, sizeof( USB_NODE_CONNECTION_INFORMATION_EX_V2 ) );
 		InfoExV2.ConnectionIndex = m_ulConnectionIndex;
-        bool bSuccess = m_pHub->m_pDeviceFile->Control( 
+        bool bSuccess = Session->Control( 
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_NODE_CONNECTION_INFORMATION_EX_V2, Method_Buffered, File_Any_Access ), 
 			&InfoExV2, sizeof( USB_NODE_CONNECTION_INFORMATION_EX_V2 ), &InfoExV2, sizeof( USB_NODE_CONNECTION_INFORMATION_EX_V2 ), &nBytes, NULL );
 
@@ -238,12 +238,12 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	bool CUSBHub::CPortConnection::GetAttributes()
 	{
-		CDeviceSession Session( *m_pHub, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = m_pHub->Open(Generic_Write, File_Share_Write, Open_Existing);
 		unsigned long nBytes = 0;
 		memset( &Attributes, 0, sizeof( USB_NODE_CONNECTION_ATTRIBUTES ) );
 		Attributes.ConnectionIndex = m_ulConnectionIndex;
 
-		bool bSuccess = m_pHub->m_pDeviceFile->Control(
+		bool bSuccess = Session->Control(
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_NODE_CONNECTION_ATTRIBUTES, Method_Buffered, File_Any_Access ), 
 			&Attributes, sizeof( USB_NODE_CONNECTION_ATTRIBUTES ), 
 			&Attributes, sizeof( USB_NODE_CONNECTION_ATTRIBUTES ), &nBytes, NULL );
@@ -254,7 +254,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CWString CUSBHub::CPortConnection::GetDriverKeyName()
 	{
-		CDeviceSession Session( *m_pHub, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = m_pHub->Open(Generic_Write, File_Share_Write, Open_Existing);
 		bool success = 0;
 		unsigned long nBytes = 0;
 		USB_NODE_CONNECTION_DRIVERKEY_NAME  driverKeyName;
@@ -265,7 +265,7 @@ namespace nsWin32
 		memset( &driverKeyName, 0, sizeof( USB_NODE_CONNECTION_DRIVERKEY_NAME ) );
 		driverKeyName.ConnectionIndex = m_ulConnectionIndex;
 
-		success = m_pHub->m_pDeviceFile->Control(
+		success = Session->Control(
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_NODE_CONNECTION_DRIVERKEY_NAME, Method_Buffered, File_Any_Access ), &driverKeyName, sizeof( driverKeyName ), &driverKeyName, sizeof( driverKeyName ), &nBytes, NULL );
 
 		if( success )
@@ -279,7 +279,7 @@ namespace nsWin32
     
 			driverKeyNameW->ConnectionIndex = m_ulConnectionIndex;
 
-			success = m_pHub->m_pDeviceFile->Control(
+			success = Session->Control(
 				__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_NODE_CONNECTION_DRIVERKEY_NAME, Method_Buffered, File_Any_Access ), driverKeyNameW, nBytes, driverKeyNameW, nBytes, &nBytes, NULL );
 
 			memcpy( strDriverKeyName.GetBufferSetLength( static_cast< unsigned short >( nBytes / sizeof( wchar_t ) ) ), driverKeyNameW->DriverKeyName, nBytes );

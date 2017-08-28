@@ -1,6 +1,6 @@
 //WinQLFileConnector.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -27,6 +27,8 @@
 #ifndef WINQL_IO_FILECONNECTOR_H_3
 #define WINQL_IO_FILECONNECTOR_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -44,24 +46,19 @@
 namespace nsWin32
 {
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL ) CFileConnector : public nsBluefoot::CBFPlug
+	class __QOR_INTERFACE( __WINQL ) CFileConnector : public nsBluefoot::CPlug
 	{
 	public:
 
 		__QOR_DECLARE_OCLASS_ID( CFileConnector );
 
-		CFileConnector( nsBluefoot::CBFConnectionPool* pPool = 0 );
+		CFileConnector( nsBluefoot::CConnectionPool* pPool = 0 );
 		virtual ~CFileConnector();
 
 		//Plug interface
 		virtual bool Connect( void );
 		virtual void Disconnect( void );		
 		virtual bool HandlePendingConnectionResult( bool bConnected );			//Handling device specific pending connection states for async connections
-
-		virtual void OnConnected( void );
-		virtual void OnConnectionError( void );
-		virtual void OnDisconnected( void );		
-		virtual void OnDisconnectionError( void );
 
 		void SetFileName( CTString& strFileName );
 		void SetDesiredAccess( unsigned long ulDesiredAccess );
@@ -90,12 +87,12 @@ namespace nsWin32
 	};
 
 	//--------------------------------------------------------------------------------
-	class CReadOnlyFileConnector : public nsBluefoot::CTBFReadOnlyConnection< CFileConnector, CFileSource >
+	class CReadOnlyFileConnector : public nsBluefoot::CReadOnlyConnection< CFileConnector, CFileSource >
 	{
 	public:
 
 		//--------------------------------------------------------------------------------
-		CReadOnlyFileConnector( CTString& strSourceFileName, unsigned long ulBufferSize = 0 ) : nsBluefoot::CTBFReadOnlyConnection< CFileConnector, CFileSource >(), m_pBuffer( 0 )
+		CReadOnlyFileConnector( CTString& strSourceFileName, unsigned long ulBufferSize = 0 ) : nsBluefoot::CReadOnlyConnection< CFileConnector, CFileSource >(), m_pBuffer( 0 )
 		{
 			SetFileName( strSourceFileName );
 			SetDesiredAccess( Generic_Read );
@@ -109,7 +106,7 @@ namespace nsWin32
 		}
 
 		//--------------------------------------------------------------------------------
-		CReadOnlyFileConnector( mxTCHAR* szFileName, unsigned long ulBufferSize = 0  ) : nsBluefoot::CTBFReadOnlyConnection< CFileConnector, CFileSource >()
+		CReadOnlyFileConnector( mxTCHAR* szFileName, unsigned long ulBufferSize = 0  ) : nsBluefoot::CReadOnlyConnection< CFileConnector, CFileSource >()
 		{
 			CTString strSourceFileName( szFileName );
 			SetFileName( strSourceFileName );
@@ -135,19 +132,19 @@ namespace nsWin32
 	};
 
 	//--------------------------------------------------------------------------------
-	class CWriteOnlyFileConnector : public nsBluefoot::CTBFWriteOnlyConnection< CFileConnector, CFileSink >
+	class CWriteOnlyFileConnector : public nsBluefoot::CWriteOnlyConnection< CFileConnector, CFileSink >
 	{
 	public:
 
 		//--------------------------------------------------------------------------------
-		CWriteOnlyFileConnector( CTString& strSourceFileName ) : nsBluefoot::CTBFWriteOnlyConnection< CFileConnector, CFileSink >()
+		CWriteOnlyFileConnector( CTString& strSourceFileName ) : nsBluefoot::CWriteOnlyConnection< CFileConnector, CFileSink >()
 		{
 			SetFileName( strSourceFileName );
 			SetDesiredAccess( Generic_Write );
 		}
 
 		//--------------------------------------------------------------------------------
-		CWriteOnlyFileConnector( mxTCHAR* szFileName ) : nsBluefoot::CTBFWriteOnlyConnection< CFileConnector, CFileSink >()
+		CWriteOnlyFileConnector( mxTCHAR* szFileName ) : nsBluefoot::CWriteOnlyConnection< CFileConnector, CFileSink >()
 		{
 			CTString strSourceFileName( szFileName );
 			SetFileName( strSourceFileName );

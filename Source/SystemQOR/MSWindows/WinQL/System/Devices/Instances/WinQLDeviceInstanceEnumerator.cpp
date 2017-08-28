@@ -1,6 +1,6 @@
 //WinQLDeviceInstanceEnumerator.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,7 +29,7 @@
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/CodeServices/Text/WinString.h"
 #include "WinQL/System/Devices/SetupClasses/WinQLDeviceClassCollection.h"
-#include "WinQL/System/Devices/SetupClasses/WinQLDeviceList.h"
+//#include "WinQL/System/Devices/SetupClasses/WinQLDeviceList.h"
 #include "WinQL/System/Devices/SetupClasses/WinQLDeviceSetupClass.h"
 #include "WinQL/System/Devices/Instances/WinQLDeviceInstanceEnumerator.h"
 #include "WinQL/Definitions/Constants.h"
@@ -49,7 +49,6 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CDeviceInstanceEnumerator::CDeviceInstanceEnumerator() : nsQOR::CController(), CSetupAPIBase()
 	{		
-		//SetModelType( CDeviceInstanceCM::ClassID() );		//The associated Model is a DeviceInstance Collection Model
 	}
 
 	//--------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 //WinQLPipeConnectionPool.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -27,6 +27,8 @@
 #ifndef WINQL_IO_PIPECONNECTIONPOOL_H_3
 #define WINQL_IO_PIPECONNECTIONPOOL_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -35,13 +37,13 @@
 #include "WinQL/Application/IO/Pipe/WinQLPipeConnector.h"
 #include "WinQL/Application/IO/Pipe/WinQLPipeClientAdaptor.h"
 #include "WinQL/Application/IO/Pipe/WinQLPipeServerAdaptor.h"
-#include "BluefootQOR/ConnectionPool.h"
+#include "BluefootQOR/BfConnectionPool.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-	typedef nsBluefoot::CTBFConnectionPool< nsBluefoot::CBFAsyncConnection< nsBluefoot::CTBFReadWriteConnection< CPipeServerAdaptor, CPipeSource, CPipeSink >, COverlappedHandler > > CServerPipeConnectionPool;
-	typedef nsBluefoot::CTBFConnectionPool< nsBluefoot::CTBFReadWriteConnection< CPipeClientAdaptor, CPipeSource, CPipeSink > > CClientPipeConnectionPool;
+	typedef nsBluefoot::CTConnectionPool< nsBluefoot::CAsyncConnection< nsBluefoot::CReadWriteConnection< CPipeServerAdaptor, CPipeSource, CPipeSink >, COverlappedHandler > > CServerPipeConnectionPool;
+	typedef nsBluefoot::CTConnectionPool< nsBluefoot::CReadWriteConnection< CPipeClientAdaptor, CPipeSource, CPipeSink > > CClientPipeConnectionPool;
 
 }//nsWin32
 

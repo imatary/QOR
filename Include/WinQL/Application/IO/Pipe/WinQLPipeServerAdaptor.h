@@ -1,6 +1,6 @@
 //WinQLPipeServerAdaptor.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -26,6 +26,8 @@
 
 #ifndef WINQL_IO_PIPESERVERADAPTOR_H_3
 #define WINQL_IO_PIPESERVERADAPTOR_H_3
+
+#include "CompilerQOR.h"
 
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
@@ -59,13 +61,12 @@ namespace nsWin32
 		__QCMP_STATIC_CONSTANT( unsigned long, DefaultReadMode = CPipe::ReadMode_Message );
 		__QCMP_STATIC_CONSTANT( unsigned long, DefaultInstanceLimit = CPipe::Unlimited_Instances );
 
-		CPipeServerAdaptor( nsBluefoot::CBFConnectionPool* pPool = 0 );
+		CPipeServerAdaptor( nsBluefoot::CConnectionPool* pPool = 0 );
 		virtual ~CPipeServerAdaptor();
 
-		//Pipe server connection overrides for CBFPlug interface
-		virtual bool Connect();
-		virtual void Disconnect( void );
-		virtual void OnConnected();
+		//Pipe server connection overrides for CPlug interface
+		virtual bool Connect(void);
+		virtual void Disconnect( void );		
 
 		//Pipe server connection properties
 		void SetInstanceLimit( unsigned char ucLimit );

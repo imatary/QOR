@@ -1,6 +1,6 @@
 //WinQLBluetoothRadio.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -59,7 +59,7 @@ namespace nsWin32
 	CBluetoothRadio::CBluetoothRadio( CDeviceHandle& hExisting ) : CDeviceInterface( hExisting ), m_Library( CBthProps::Instance() ), m_bNotificationsEnabled( false ), m_NotificationFilter( CNotificationFilter::eNotifyHandle )
 	{
 		_WINQ_FCONTEXT( "CBluetoothRadio::CBluetoothRadio" );
-		SetupNotificationFilter();
+		Open();
 	}
 
 	//--------------------------------------------------------------------------------
@@ -85,57 +85,77 @@ namespace nsWin32
 	CBluetoothRadio::~CBluetoothRadio()
 	{
 		_WINQ_FCONTEXT( "CBluetoothRadio::~CBluetoothRadio" );
-		if( m_pDeviceFile != 0 )
-		{
-			Close();
-		}
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CBluetoothRadio::OpenDevice()
+	void CBluetoothRadio::SetHandle(CDeviceHandle& hExisting)
 	{
-		_WINQ_FCONTEXT( "CBluetoothRadio::OpenDevice" );
-
-		if( m_pDeviceFile == 0 )
-		{
-			Open( Generic_Read | Generic_Write, File_Share_Read | File_Share_Write, File_Attribute_Normal );
-
-			SetupNotificationFilter();
-		}
-
-		return m_pDeviceFile ? true : false;
+		m_Session = ref(*(reinterpret_cast<CIODeviceFile*>(hExisting.Object())));
+		SetupNotificationFilter();
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBluetoothRadio::AuthenticateDevice( COSWindow::refType ParentWindow, CBluetoothRemoteDevice::refType Device, CWString strPassKey )
+	void* CBluetoothRadio::GetSessionHandle(void)
+	{
+		void* pResult = nullptr;
+		if (!m_Session.IsNull())
+		{
+			pResult = m_Session().Handle()().Use();
+		}
+		return pResult;
+	}
+	//--------------------------------------------------------------------------------
+	void CBluetoothRadio::Open()
+	{
+		_WINQ_FCONTEXT( "CBluetoothRadio::Open" );
+		m_Session = CDeviceInterface::Open( Generic_Read | Generic_Write, File_Share_Read | File_Share_Write, File_Attribute_Normal );
+		SetupNotificationFilter();
+	}
+
+	//--------------------------------------------------------------------------------
+	void CBluetoothRadio::Close()
+	{
+		_WINQ_FCONTEXT("CBluetoothRadio::Close");
+		m_Session.Dispose();
+	}
+	//--------------------------------------------------------------------------------
+	void CBluetoothRadio::AuthenticateDevice( COSWindow::refType ParentWindow, CBluetoothRemoteDevice::ref_type Device, CWString strPassKey )
 	{
 		_WINQ_FCONTEXT( "CBluetoothRemoteDevice::Authenticate" );
 
-		if( OpenDevice() )
+		if( !m_Session.IsNull() )
 		{
 			unsigned long ulErrorCode = m_Library.BluetoothAuthenticateDevice( 
 				ParentWindow.IsNull() ? 0 : reinterpret_cast< ::HWND >( ParentWindow->Handle()->Use() ),
-				m_pDeviceFile->Handle()->Use(),
-				reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Device->GetInfo() ),
+				m_Session->Handle()->Use(),
+				reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Device.As< CBluetoothRemoteDevice >()->GetInfo() ),
 				strPassKey.IsEmpty() ? 0 : strPassKey.GetBuffer(),
 				min( strPassKey.Len(), BLUETOOTH_MAX_PASSKEY_SIZE ) );
 			strPassKey.ReleaseBuffer();
+			if (ulErrorCode != ERROR_SUCCESS)
+			{
+				//TODO: Raise the appropriate Error
+			}
 		}
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBluetoothRadio::AuthenticateDeviceEx( COSWindow::refType ParentWindow, CBluetoothRemoteDevice::refType Device, BluetoothOutOfBandData* pbtOobData, CBluetoothRemoteDevice::Authentication_Requirements AuthentRequirements )
+	void CBluetoothRadio::AuthenticateDeviceEx( COSWindow::refType ParentWindow, CBluetoothRemoteDevice::ref_type Device, BluetoothOutOfBandData* pbtOobData, CBluetoothRemoteDevice::Authentication_Requirements AuthentRequirements )
 	{
 		_WINQ_FCONTEXT( "CBluetoothRemoteDevice::AuthenticateEx" );
 
-		if( OpenDevice() )
+		if (!m_Session.IsNull())
 		{
 			unsigned long ulErrCode = m_Library.BluetoothAuthenticateDeviceEx(
 				ParentWindow.IsNull() ? 0 : reinterpret_cast< ::HWND >( ParentWindow->Handle()->Use() ),
-				m_pDeviceFile->Handle()->Use(),
-				reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Device->GetInfo() ),
+				m_Session->Handle()->Use(),
+				reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Device.As< CBluetoothRemoteDevice >()->GetInfo() ),
 				reinterpret_cast< PBLUETOOTH_OOB_DATA_INFO >( pbtOobData ),
 				static_cast< ::AUTHENTICATION_REQUIREMENTS >( AuthentRequirements ) );
+			if (ulErrCode != ERROR_SUCCESS)
+			{
+				//TODO: Raise the appropriate Error
+			}
 		}
 	}
 
@@ -145,9 +165,9 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CBluetoothRadio::EnableDiscovery" );
 
 		bool bResult = false;
-		if( OpenDevice() )
+		if (!m_Session.IsNull())
 		{
-			bResult = m_Library.BluetoothEnableDiscovery( m_pDeviceFile->Handle()->Use(), bEnabled ? TRUE : FALSE ) ? true : false;
+			bResult = m_Library.BluetoothEnableDiscovery( m_Session->Handle()->Use(), bEnabled ? TRUE : FALSE ) ? true : false;
 		}
 		return bResult;
 	}
@@ -158,43 +178,42 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CBluetoothRadio::EnableIncomingConnections" );
 
 		bool bResult = false;
-		if( OpenDevice() )
+		if (!m_Session.IsNull())
 		{
-			bResult = m_Library.BluetoothEnableIncomingConnections( m_pDeviceFile->Handle()->Use(), bEnabled ? TRUE : FALSE ) ? true : false;
+			bResult = m_Library.BluetoothEnableIncomingConnections( m_Session->Handle()->Use(), bEnabled ? TRUE : FALSE ) ? true : false;
 		}
 		return bResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CBluetoothRadio::EnumerateInstalledServices( CBluetoothRemoteDevice::refType Device, nsCodeQOR::__mxGUID** ppGuidServices )
+	unsigned long CBluetoothRadio::EnumerateInstalledServices( CBluetoothRemoteDevice::ref_type Device, nsCodeQOR::__mxGUID** ppGuidServices )
 	{
 		_WINQ_FCONTEXT( "CBluetoothRadio::EnumerateInstalledServices" );
 
 		unsigned long ulCountServices = 0;
 
-		if( OpenDevice() )
+		if (!m_Session.IsNull())
 		{
-
-			m_Library.BluetoothEnumerateInstalledServices( m_pDeviceFile->Handle()->Use(), 
-				reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Device->GetInfo() ), &ulCountServices, 0 );
+			m_Library.BluetoothEnumerateInstalledServices( m_Session->Handle()->Use(), 
+				reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Device.As< CBluetoothRemoteDevice >()->GetInfo() ), &ulCountServices, 0 );
 
 			if( ulCountServices > 0 && ppGuidServices && !*ppGuidServices )
 			{
 				*ppGuidServices = new nsCodeQOR::__mxGUID[ ulCountServices ];
-				m_Library.BluetoothEnumerateInstalledServices( m_pDeviceFile->Handle()->Use(), reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Device->GetInfo() ), &ulCountServices, reinterpret_cast< ::GUID* >( *ppGuidServices ) );
+				m_Library.BluetoothEnumerateInstalledServices(m_Session->Handle()->Use(), reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Device.As< CBluetoothRemoteDevice >()->GetInfo() ), &ulCountServices, reinterpret_cast< ::GUID* >( *ppGuidServices ) );
 			}
 		}
 		return ulCountServices;		
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBluetoothRadio::GetDeviceInfo( CBluetoothRemoteDevice::refType Device )
+	void CBluetoothRadio::GetDeviceInfo( CBluetoothRemoteDevice::ref_type Device )
 	{
 		_WINQ_FCONTEXT( "CBluetoothRadio::GetDeviceInfo" );
 
-		if( OpenDevice() )
+		if (!m_Session.IsNull())
 		{
-			m_Library.BluetoothGetDeviceInfo( m_pDeviceFile->Handle()->Use(), reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Device->GetInfo() ) );
+			m_Library.BluetoothGetDeviceInfo( m_Session->Handle()->Use(), reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Device.As< CBluetoothRemoteDevice >()->GetInfo() ) );
 		}
 	}
 
@@ -203,9 +222,9 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CBluetoothRadio::GetInfo" );
 
-		if( OpenDevice() )
+		if (!m_Session.IsNull())
 		{
-			m_Library.BluetoothGetRadioInfo( m_pDeviceFile->Handle()->Use(), reinterpret_cast< ::PBLUETOOTH_RADIO_INFO >( &m_Info ) );
+			m_Library.BluetoothGetRadioInfo( m_Session->Handle()->Use(), reinterpret_cast< ::PBLUETOOTH_RADIO_INFO >( &m_Info ) );
 		}
 	}
 
@@ -216,9 +235,9 @@ namespace nsWin32
 
 		bool bResult = false;
 
-		if( OpenDevice() )
+		if (!m_Session.IsNull())
 		{
-			bResult = m_Library.BluetoothIsConnectable( m_pDeviceFile->Handle()->Use() ) ? true : false;
+			bResult = m_Library.BluetoothIsConnectable(m_Session->Handle()->Use() ) ? true : false;
 		}
 
 		return bResult;
@@ -230,9 +249,9 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CBluetoothRadio::IsDiscoverable" );
 
 		bool bResult = false;
-		if( OpenDevice() )
+		if (!m_Session.IsNull())
 		{
-			bResult = m_Library.BluetoothIsDiscoverable( m_pDeviceFile->Handle()->Use() ) ? true : false;
+			bResult = m_Library.BluetoothIsDiscoverable( m_Session->Handle()->Use() ) ? true : false;
 		}
 
 		return bResult;
@@ -243,10 +262,10 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CBluetoothRadio::SendAuthenticationResponse" );
 
-		if( OpenDevice() )
+		if (!m_Session.IsNull())
 		{
 			m_Library.BluetoothSendAuthenticationResponse( 
-				m_pDeviceFile->Handle()->Use(),
+				m_Session->Handle()->Use(),
 				reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( pDeviceInfo ),
 				strPassKey.GetBuffer() );
 			strPassKey.ReleaseBuffer();
@@ -258,10 +277,10 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CBluetoothRadio::SendAuthenticationResponseEx" );
 
-		if( OpenDevice() )
+		if (!m_Session.IsNull())
 		{
 			m_Library.BluetoothSendAuthenticationResponseEx(
-				m_pDeviceFile->Handle()->Use(),
+				m_Session->Handle()->Use(),
 				reinterpret_cast< ::PBLUETOOTH_AUTHENTICATE_RESPONSE >( pResponse ) );
 		}
 	}
@@ -271,10 +290,10 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CBluetoothRadio::SetLocalServiceInfo" );
 
-		if( OpenDevice() )
+		if (!m_Session.IsNull())		
 		{
 			m_Library.BluetoothSetLocalServiceInfo(
-				m_pDeviceFile->Handle()->Use(),
+				m_Session->Handle()->Use(),
 				reinterpret_cast< const ::GUID* >( pClassGuid ),
 				ulInstance,
 				reinterpret_cast< const BLUETOOTH_LOCAL_SERVICE_INFO* >( pServiceInfoIn ) );
@@ -282,15 +301,15 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBluetoothRadio::SetServiceState( CBluetoothRemoteDevice::refType Device, nsCodeQOR::__mxGUID* pGuidService , unsigned long ulServiceFlags )
+	void CBluetoothRadio::SetServiceState( CBluetoothRemoteDevice::ref_type Device, nsCodeQOR::__mxGUID* pGuidService , unsigned long ulServiceFlags )
 	{
 		_WINQ_FCONTEXT( "CBluetoothRadio::SetServiceState" );
 
-		if( OpenDevice() )
+		if (!m_Session.IsNull())
 		{
 			m_Library.BluetoothSetServiceState( 
-				m_pDeviceFile->Handle()->Use(),
-				reinterpret_cast< ::BLUETOOTH_DEVICE_INFO_STRUCT* >( Device->GetInfo() ),
+				m_Session->Handle()->Use(),
+				reinterpret_cast< ::BLUETOOTH_DEVICE_INFO_STRUCT* >( Device.As< CBluetoothRemoteDevice >()->GetInfo() ),
 				reinterpret_cast< ::GUID* >( pGuidService ),
 				ulServiceFlags );
 		}
@@ -300,10 +319,13 @@ namespace nsWin32
 	void CBluetoothRadio::SetupNotificationFilter()
 	{
 		_WINQ_FCONTEXT( "CBluetoothRadio::SetupNotificationFilter" );
-		m_NotificationFilter.AddHandleFilter( m_pDeviceFile->Handle()->Use(), &GUID_BLUETOOTH_HCI_EVENT );
-		m_NotificationFilter.AddHandleFilter( m_pDeviceFile->Handle()->Use(), &GUID_BLUETOOTH_L2CAP_EVENT );
-		m_NotificationFilter.AddHandleFilter( m_pDeviceFile->Handle()->Use(), &GUID_BLUETOOTH_RADIO_IN_RANGE );
-		m_NotificationFilter.AddHandleFilter( m_pDeviceFile->Handle()->Use(), &GUID_BLUETOOTH_RADIO_OUT_OF_RANGE );
+		if (!m_Session.IsNull())
+		{
+			m_NotificationFilter.AddHandleFilter(m_Session->Handle()->Use(), &GUID_BLUETOOTH_HCI_EVENT);
+			m_NotificationFilter.AddHandleFilter(m_Session->Handle()->Use(), &GUID_BLUETOOTH_L2CAP_EVENT);
+			m_NotificationFilter.AddHandleFilter(m_Session->Handle()->Use(), &GUID_BLUETOOTH_RADIO_IN_RANGE);
+			m_NotificationFilter.AddHandleFilter(m_Session->Handle()->Use(), &GUID_BLUETOOTH_RADIO_OUT_OF_RANGE);
+		}
 	}
 
 	//--------------------------------------------------------------------------------
@@ -311,7 +333,7 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CBluetoothRadio::EnableNotifications" );
 
-		if( OpenDevice() )
+		if (!m_Session.IsNull())
 		{
 			if( !m_bNotificationsEnabled )
 			{

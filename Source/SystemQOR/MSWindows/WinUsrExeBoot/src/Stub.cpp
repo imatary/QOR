@@ -34,7 +34,7 @@
 //NOTE: This is the entry point for all QOR Windows processes
 __QCMP_LINKAGE_C int __cdecl _tMainCRTStartup( void )
 {
-	CBootStrap BootStrap;							//Create the Windows Bootstrap object to perfrom Windows process startup operations and model the lifetime of a Windows Process
+	CBootStrap BootStrap;							//Create the Windows Bootstrap object to perform Windows process startup operations and model the lifetime of a Windows Process
 	return BootStrap.Execute();						//Execute the bootstrap and hence the entire whatever
 }
 
@@ -43,7 +43,7 @@ __QCMP_LINKAGE_C int __cdecl _tMainCRTStartup( void )
 //Hack to get Intel and GCC Compilers to insert Error handler Registration into executables
 //This forces the compiler to instantiate the static registration objects for the error handler types
 //MSVC does this without being provoked in this way
-//This must be here rather than in Compiler QOR or elsewhere because it must be in code that is in every excutable and not in any shared library. 
+//This must be here rather than in Compiler QOR or elsewhere because it must be in code that is in every executable and not in any shared library. 
 //This is all there is other than the application itself.
 
 #if     ( ( __QCMP_COMPILER == __QCMP_INTEL ) || ( __QCMP_COMPILER == __QCMP_GCC ) )
@@ -109,7 +109,7 @@ extern "C"
 			__CTOR_LIST__[ i ] ();
 		}
 
-		//Register the destructors for processing on exit.
+		//Register the destructor(s) for processing on exit.
 
 		atexit( __do_global_dtors );
 	}

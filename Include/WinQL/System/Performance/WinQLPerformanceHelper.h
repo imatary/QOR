@@ -44,8 +44,6 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CPerformanceHelper
 	{
-		QOR_PP_WINQL_SHARED
-
 	public:
 
 		__QOR_DECLARE_OCLASS_ID( CPerformanceHelper );

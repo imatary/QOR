@@ -556,7 +556,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CPowerScenario::refType CPowerScenario::Duplicate()
+	CPowerScenario::ref_type CPowerScenario::Duplicate()
 	{
 		_WINQ_FCONTEXT( "CPowerScenario::Duplicate" );
 
@@ -567,7 +567,7 @@ namespace nsWin32
 			nsCodeQOR::__mxGUID guid = *( reinterpret_cast< nsCodeQOR::mxGUID* >( pDestinationSchemeGuid ) );
 			pPowerScenario = new CPowerScenario( guid );
 		}
-		CPowerScenario::refType Result( pPowerScenario, true );
+		CPowerScenario::ref_type Result( pPowerScenario, true );
 		return Result;
 	}
 
@@ -1128,7 +1128,7 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CPowerSchemeCollection::CPowerSchemeCollection" );
 
-		if( TheSystem().As< nsWin32::CSystem >()->Information(QOR_PP_SHARED_OBJECT_ACCESS).GetOSVerNumber() < 6 )
+		if( TheSystem().As< nsWin32::CSystem >()->Information(QOR_PP_SHARED_OBJECT_ACCESS)().GetOSVerNumber() < 6 )
 		{
 			m_Library.EnumPwrSchemes( (::PWRSCHEMESENUMPROC)&StaticEnumProcV1, reinterpret_cast< LPARAM >( this ) );	
 		}
@@ -1395,7 +1395,7 @@ namespace nsWin32
 	bool CMessageWaitingIndicator::Set( unsigned long cmsg )
 	{
 		bool bResult = false;
-		bResult = m_Win32PowerHelper.SetMessageWaitingIndicator( m_MessageWaitingDevice.Handle(), cmsg );
+		bResult = m_Win32PowerHelper.SetMessageWaitingIndicator( m_MessageWaitingDevice.Handle()(), cmsg );
 		return bResult;
 	}
 

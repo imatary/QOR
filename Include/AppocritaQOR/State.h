@@ -45,7 +45,7 @@ namespace nsQOR
 
 		CState( IWorkflow::ref_type pWorkflow );
 
-		virtual bool HandleEvent( IEvent::ref_type pEvent );
+		virtual bool operator()(IEvent::ref_type _event, int iCookie);
 		virtual void OnEnter( IEvent::ref_type pEvent );
 		virtual void OnLeave( IEvent::ref_type pEvent );
 		virtual void OnSuspend( IEvent::ref_type pEvent );
@@ -62,9 +62,11 @@ namespace nsQOR
 	//------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __APPOCRITA ) CCompoundState : public CState
 	{
+	public:
+
 		CCompoundState( IWorkflow::ref_type pWorkflow );
 
-		virtual bool HandleEvent( IEvent::ref_type pEvent );
+		virtual bool operator()(IEvent::ref_type _event, int iCookie);
 
 	protected:
 

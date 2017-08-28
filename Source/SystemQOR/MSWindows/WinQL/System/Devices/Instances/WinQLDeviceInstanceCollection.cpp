@@ -1,6 +1,6 @@
 //WinQLDeviceInstanceCollection.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,7 +29,6 @@
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/CodeServices/Text/WinString.h"
 #include "WinQL/System/Devices/Instances/WinQLDeviceInstanceCollection.h"
-#include "WinQL/System/Devices/Instances/WinQLDeviceInstance.h"
 #include "WinQL/System/Devices/WinQLIODevice.h"
 #include "WinQL/Definitions/Constants.h"
 #include "WinQL/GUI/Window.h"
@@ -76,44 +75,35 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CDeviceInstanceCollection::~CDeviceInstanceCollection" );
 
-		unsigned long ulIndex = 0;
-		m_DeviceInstanceMap.AcquireAccess();
-		while( ulIndex < m_DeviceInstanceMap.Size() )
-		{
-			CDeviceInstance* pInstance = m_DeviceInstanceMap[ ulIndex++ ].Second();
-			delete pInstance;
-		}
-		m_DeviceInstanceMap.ReleaseAccess();
-
+		m_DeviceInstanceMap.erase(m_DeviceInstanceMap.begin(), m_DeviceInstanceMap.end());
 	}
 
 	//--------------------------------------------------------------------------------
 	unsigned long CDeviceInstanceCollection::Size( void )
 	{
 		_WINQ_FCONTEXT( "CDeviceInstanceCollection::Size" );
-		return m_DeviceInstanceMap.Size();
+		return m_DeviceInstanceMap.size();
 	}
 
 	//--------------------------------------------------------------------------------
-	nsCodeQOR::CTLRef< CDeviceInstance > CDeviceInstanceCollection::operator[]( const CTString& strDeviceID )
+	CDeviceInstance::ref_type CDeviceInstanceCollection::operator[]( const CTString& strDeviceID )
 	{
 		_WINQ_FCONTEXT( "CDeviceInstanceCollection::operator[]" );
-		nsCodeQOR::CTLRef< CDeviceInstance > RefDeviceDetails( m_DeviceInstanceMap.Find( strDeviceID ), false );
-		return RefDeviceDetails;
+		return m_DeviceInstanceMap.find(strDeviceID)->second;
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CDeviceInstanceCollection::AddDevice( CTString strDeviceID, CDeviceInstance* pDeviceInstance )
+	void CDeviceInstanceCollection::AddDevice( CTString strDeviceID, CDeviceInstance::ref_type pDeviceInstance )
 	{
 		_WINQ_FCONTEXT( "CDeviceInstanceCollection::AddDevice" );
-		return m_DeviceInstanceMap.Insert( strDeviceID, pDeviceInstance );
+		m_DeviceInstanceMap.insert( std::make_pair( strDeviceID, pDeviceInstance ) );
 	}
 
 	//--------------------------------------------------------------------------------
 	void CDeviceInstanceCollection::RemoveDevice( CTString strDeviceID )
 	{
 		_WINQ_FCONTEXT( "CDeviceInstanceCollection::RemoveDevice" );
-		return m_DeviceInstanceMap.Remove( strDeviceID );
+		m_DeviceInstanceMap.erase( strDeviceID );
 	}
 
 }//nsWin32

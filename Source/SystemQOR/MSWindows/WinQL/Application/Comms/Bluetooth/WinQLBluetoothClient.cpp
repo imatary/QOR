@@ -61,7 +61,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBluetoothClient::AttachDevice( CBluetoothRemoteDevice::refType Device )
+	void CBluetoothClient::AttachDevice( CBluetoothRemoteDevice::ref_type Device )
 	{
 	}
 

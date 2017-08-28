@@ -36,7 +36,6 @@ __QCMP_STARTLINKAGE_C
 	//------------------------------------------------------------------------------
 	//The external initial entry point for this Windows DLL
 
-    //------------------------------------------------------------------------------
 	__QCMP_NOINLINE int __stdcall _DllMainCRTStartup( void* hDllHandle, unsigned long ulReason, void* pReserved )
 	{
 
@@ -74,7 +73,7 @@ __QCMP_STARTLINKAGE_C
 		{
 		case nsWin32::CWinQORSharedBootStrap::eProcessAttach:	//Start-up code. A process has loaded this module
 			{
-				//Create Dll bootstrap object on process global heap and increment process attachment notification
+				//Create DLL bootstrap object on process global heap and increment process attachment notification
 				g_pBootStrap = new nsWin32::CWinQORSharedBootStrap( hDllHandle );
 				break;
 			}
@@ -149,7 +148,7 @@ __QCMP_STARTLINKAGE_C
 			__CTOR_LIST__[ i ] ();
 		}
 
-		//Register the destructors for processing on exit.
+		//Register the destructor(s) for processing on exit.
 
 		atexit( __do_global_dtors );
 	}

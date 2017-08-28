@@ -1,6 +1,6 @@
 //BfXMLReader.cpp
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2015, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -57,8 +57,8 @@
 //------------------------------------------------------------------------------
 namespace nsBluefoot
 {
-	static bool StripTextDecl( CBFXMLReader::CXMLString& str );
-	CBFXMLReader::CXMLString Simplify( const CBFXMLReader::CXMLString& strSource );
+	static bool StripTextDecl( CXMLReader::CXMLString& str );
+	CXMLReader::CXMLString Simplify( const CXMLReader::CXMLString& strSource );
 
 	// the constants for the lookup table
 	static const signed char cltWS      =  0; // white space
@@ -149,9 +149,9 @@ namespace nsBluefoot
 		cltUnknown, cltUnknown, cltUnknown, cltUnknown, cltUnknown, cltUnknown, cltUnknown, cltUnknown  // 0xF8 - 0xFF
 	};
 
-	static const char Begi = (char)CBFXMLReader::NameBeginning;
-	static const char NtBg = (char)CBFXMLReader::NameNotBeginning;
-	static const char NotN = (char)CBFXMLReader::NotName;
+	static const char Begi = (char)CXMLReader::NameBeginning;
+	static const char NtBg = (char)CXMLReader::NameNotBeginning;
+	static const char NotN = (char)CXMLReader::NotName;
 
 	//------------------------------------------------------------------------------
 	static const char nameCharTable[128] =
@@ -183,43 +183,43 @@ namespace nsBluefoot
 	};
 
 	//------------------------------------------------------------------------------
-	static inline CBFXMLReader::NameChar fastDetermineNameChar( nsCodeQOR::CChar16 ch )
+	static inline CXMLReader::NameChar fastDetermineNameChar( nsCodeQOR::CChar16 ch )
 	{
 		unsigned short uc = ch.Unicode();
 
 		if( !( uc & ~0x7f ) ) // uc < 128
 		{
-			return (CBFXMLReader::NameChar)nameCharTable[ uc ];
+			return (CXMLReader::NameChar)nameCharTable[ uc ];
 		}
 
-		CBFXMLReader::CXMLString::char_type::eCategory cat = ch.Category();
+		CXMLReader::CXMLString::char_type::eCategory cat = ch.Category();
 
 		if( ( cat >= nsCodeQOR::CChar16::Letter_Uppercase && cat <= nsCodeQOR::CChar16::Letter_Other ) || cat == nsCodeQOR::CChar16::Number_Letter )
 		{
-			return CBFXMLReader::NameBeginning;
+			return CXMLReader::NameBeginning;
 		}
 
 		if( ( cat >= nsCodeQOR::CChar16::Number_DecimalDigit && cat <= nsCodeQOR::CChar16::Number_Other ) || ( cat >= nsCodeQOR::CChar16::Mark_NonSpacing && cat <= nsCodeQOR::CChar16::Mark_Enclosing ) )
 		{
-			return CBFXMLReader::NameNotBeginning;
+			return CXMLReader::NameNotBeginning;
 		}
 
-		return CBFXMLReader::NotName;
+		return CXMLReader::NotName;
 	}
 
 	//------------------------------------------------------------------------------
-	static CBFXMLReader::NameChar determineNameChar( CBFXMLReader::CXMLString::char_type ch )
+	static CXMLReader::NameChar determineNameChar( CXMLReader::CXMLString::char_type ch )
 	{
 		return fastDetermineNameChar( ch );
 	}
 
 	//------------------------------------------------------------------------------
-	__QOR_IMPLEMENT_OCLASS_LUID( CBFXMLReader );
+	__QOR_IMPLEMENT_OCLASS_LUID( CXMLReader );
 
 	//------------------------------------------------------------------------------
-	CBFXMLReader::CBFXMLReader( CBFSource* pSource ) : CBFTextReader( pSource)
+	CXMLReader::CXMLReader( CSource* pSource ) : CTextReader( pSource)
 	{
-		__QCS_MEMBER_FCONTEXT( "CBFXMLReader::CBFXMLReader" );
+		__QCS_MEMBER_FCONTEXT( "CXMLReader::CXMLReader" );
 
 		m_bUseNamespaces = true;
 		m_bUseNamespacePrefixes = true;
@@ -248,31 +248,31 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBFXMLReader::~CBFXMLReader()
+	CXMLReader::~CXMLReader()
 	{
-		__QCS_MEMBER_FCONTEXT( "CBFXMLReader::~CBFXMLReader" );
+		__QCS_MEMBER_FCONTEXT( "CXMLReader::~CXMLReader" );
 	}
 
 	//------------------------------------------------------------------------------
-	CBFXMLReader::CBFXMLReader( const CBFXMLReader& Src ) : CBFTextReader( Src )
+	CXMLReader::CXMLReader( const CXMLReader& Src ) : CTextReader( Src )
 	{
-		__QCS_MEMBER_FCONTEXT( "CBFXMLReader::CBFXMLReader" );
+		__QCS_MEMBER_FCONTEXT( "CXMLReader::CXMLReader" );
 	}
 
 	//------------------------------------------------------------------------------
-	CBFXMLReader& CBFXMLReader::operator = ( const CBFXMLReader& Src )
+	CXMLReader& CXMLReader::operator = ( const CXMLReader& Src )
 	{
-		__QCS_MEMBER_FCONTEXT( "CBFXMLReader::operator =" );
+		__QCS_MEMBER_FCONTEXT( "CXMLReader::operator =" );
 		if( &Src != this )
 		{
-			CBFTextReader::operator=( Src );
+			CTextReader::operator=( Src );
 		}
 
 		return *this;
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFXMLReader::Run()
+	void CXMLReader::Run()
 	{
 		/*bool bResult = */Parse();		
 	}
@@ -280,9 +280,9 @@ namespace nsBluefoot
 	//Properties
 
 	//------------------------------------------------------------------------------
-	void* CBFXMLReader::Property( const CXMLString&, bool* ok ) const
+	void* CXMLReader::Property( const CXMLString&, bool* ok ) const
 	{
-		__QCS_MEMBER_FCONTEXT( "CBFXMLReader::Property" );
+		__QCS_MEMBER_FCONTEXT( "CXMLReader::Property" );
 		if( ok != 0 )
 		{
 			*ok = false;
@@ -291,20 +291,20 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFXMLReader::SetProperty( const CXMLString&, void* )
+	void CXMLReader::SetProperty( const CXMLString&, void* )
 	{
-		__QCS_MEMBER_FCONTEXT( "CBFXMLReader::SetProperty" );
+		__QCS_MEMBER_FCONTEXT( "CXMLReader::SetProperty" );
 	}
 
 	//------------------------------------------------------------------------------
-	bool CBFXMLReader::HasProperty( const CXMLString& ) const
+	bool CXMLReader::HasProperty( const CXMLString& ) const
 	{
-		__QCS_MEMBER_FCONTEXT( "CBFXMLReader::HasProperty" );
+		__QCS_MEMBER_FCONTEXT( "CXMLReader::HasProperty" );
 		return false;
 	}
 
 	//------------------------------------------------------------------------------
-	bool CBFXMLReader::Feature( const CXMLString& name, bool* ok ) const
+	bool CXMLReader::Feature( const CXMLString& name, bool* ok ) const
 	{
 		//const CXmlSimpleReaderPrivate* d = d_ptr.operator nsBluefoot::CXmlSimpleReaderPrivate *();
 
@@ -372,7 +372,7 @@ namespace nsBluefoot
 		\endtable
 	*/
 	//------------------------------------------------------------------------------
-	void CBFXMLReader::SetFeature( const CXMLString& name, bool enable )
+	void CXMLReader::SetFeature( const CXMLString& name, bool enable )
 	{
 		//CXmlSimpleReaderPrivate* const d = d_ptr.operator nsBluefoot::CXmlSimpleReaderPrivate *();
 
@@ -399,7 +399,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	bool CBFXMLReader::HasFeature( const CXMLString& name ) const
+	bool CXMLReader::HasFeature( const CXMLString& name ) const
 	{
 		if( name == CXMLString( _TXT( "http://xml.org/sax/features/namespaces" ) )
 			|| name == CXMLString( _TXT( "http://xml.org/sax/features/namespace-prefixes" ) )
@@ -417,7 +417,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	bool CBFXMLReader::Parse( bool bIncremental )
+	bool CXMLReader::Parse( bool bIncremental )
 	{
 		if( bIncremental ) 
 		{
@@ -447,7 +447,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFXMLReader::InitIncrementalParsing()
+	void CXMLReader::InitIncrementalParsing()
 	{
 		if( m_pParseStack )
 		{
@@ -464,7 +464,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	// This private function initializes the reader. 
-	void CBFXMLReader::Init()
+	void CXMLReader::Init()
 	{
 		m_iLineNr = 0;
 		m_iColumnNr = -1;
@@ -483,14 +483,14 @@ namespace nsBluefoot
 		m_Doctype.Clear();
 		m_XmlVersion.Clear();
 		m_Encoding.Clear();
-		m_Standalone = CBFXMLReader::Unknown;
+		m_Standalone = CXMLReader::Unknown;
 		m_Error.Clear();
 	}
 
 	//------------------------------------------------------------------------------
 	// This private function initializes the XML data related variables. 
 	// Especially, it reads the data from the input source.
-	void CBFXMLReader::InitData()
+	void CXMLReader::InitData()
 	{
 		m_C = 0xFF;
 		while( !m_XmlRefStack.empty() )
@@ -502,7 +502,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	//This private function moves the cursor to the next character.
-	void CBFXMLReader::Next()
+	void CXMLReader::Next()
 	{
 		int count = m_XmlRefStack.size();
 		while( count != 0 ) 
@@ -547,7 +547,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBFXMLReader::CXMLString::char_type CBFXMLReader::NextChar()
+	CXMLReader::CXMLString::char_type CXMLReader::NextChar()
 	{
 		CXMLString::char_type NextChar = CXMLString::char_type( EndOfDocument );
 		unsigned long ulUnitsRead = 0;
@@ -563,7 +563,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFXMLReader::ReportParseError( const CBFXMLReader::CXMLString& Error )
+	void CXMLReader::ReportParseError( const CXMLReader::CXMLString& Error )
 	{
 		this->m_Error = Error;
 		if( !ErrorHandler.IsNull() ) 
@@ -582,7 +582,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	bool CBFXMLReader::ParseContinue()
+	bool CXMLReader::ParseContinue()
 	{
 		if( m_pParseStack == 0 || m_pParseStack->empty() )
 		{
@@ -596,7 +596,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	//Common part of parse() and parseContinue()
-	bool CBFXMLReader::ParseBeginOrContinue( int state, bool incremental )
+	bool CXMLReader::ParseBeginOrContinue( int state, bool incremental )
 	{
 		bool atEndOrig = atEnd();
 
@@ -694,7 +694,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	//Parses the prolog [22].
-	bool CBFXMLReader::ParseProlog()
+	bool CXMLReader::ParseProlog()
 	{
 		const signed char Init             = 0;
 		const signed char EatWS            = 1; // eat white spaces
@@ -746,13 +746,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseProlog, state );
+					ParseFailed( &CXMLReader::ParseProlog, state );
 					return false;
 				}
 			}
@@ -800,11 +800,11 @@ namespace nsBluefoot
 								value.Append( '\'' );
 							}
 
-							if( m_Standalone == CBFXMLReader::Yes ) 
+							if( m_Standalone == CXMLReader::Yes ) 
 							{
 								value.Append( CXMLString( _TXT( " standalone='yes'" ) ) );
 							} 
-							else if( m_Standalone == CBFXMLReader::No ) 
+							else if( m_Standalone == CXMLReader::No ) 
 							{
 								value.Append( CXMLString( _TXT( " standalone='no'" ) ) );
 							}
@@ -836,7 +836,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseProlog, state );
+				UnexpectedEof( &CXMLReader::ParseProlog, state );
 				return false;
 			}
 
@@ -878,7 +878,7 @@ namespace nsBluefoot
 					m_bXmldecl_possible = false;
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseProlog, state );
+						ParseFailed( &CXMLReader::ParseProlog, state );
 						return false;
 					}
 					break;
@@ -893,7 +893,7 @@ namespace nsBluefoot
 				case DocType:
 					if (!ParseDoctype()) 
 					{
-						ParseFailed( &CBFXMLReader::ParseProlog, state );
+						ParseFailed( &CXMLReader::ParseProlog, state );
 						return false;
 					}
 					break;
@@ -901,7 +901,7 @@ namespace nsBluefoot
 				case CommentR:
 					if( !ParseComment() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseProlog, state );
+						ParseFailed( &CXMLReader::ParseProlog, state );
 						return false;
 					}
 					break;
@@ -910,7 +910,7 @@ namespace nsBluefoot
 					m_bParsePI_xmldecl = m_bXmldecl_possible;
 					if( !ParsePI() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseProlog, state );
+						ParseFailed( &CXMLReader::ParseProlog, state );
 						return false;
 					}
 					break;
@@ -922,7 +922,7 @@ namespace nsBluefoot
 	//------------------------------------------------------------------------------
 	//Parse an element [39].
 	//Precondition: the opening '<' is already read.
-	bool CBFXMLReader::ParseElement()
+	bool CXMLReader::ParseElement()
 	{
 		const int Init             =  0;
 		const int ReadName         =  1;
@@ -976,13 +976,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseElement, state );
+					ParseFailed( &CXMLReader::ParseElement, state );
 					return false;
 				}
 			}
@@ -1024,7 +1024,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseElement, state );
+				UnexpectedEof( &CXMLReader::ParseElement, state );
 				return false;
 			}
 
@@ -1056,7 +1056,7 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseElement, state );
+						ParseFailed( &CXMLReader::ParseElement, state );
 						return false;
 					}
 					break;
@@ -1065,7 +1065,7 @@ namespace nsBluefoot
 				case Ws3:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseElement, state );
+						ParseFailed( &CXMLReader::ParseElement, state );
 						return false;
 					}
 					break;
@@ -1098,7 +1098,7 @@ namespace nsBluefoot
 				case STagEnd2:
 					if( !ParseContent() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseElement, state );
+						ParseFailed( &CXMLReader::ParseElement, state );
 						return false;
 					}
 					break;
@@ -1110,7 +1110,7 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseElement, state );
+						ParseFailed( &CXMLReader::ParseElement, state );
 						return false;
 					}
 					break;
@@ -1131,7 +1131,7 @@ namespace nsBluefoot
 					// get name and value of attribute
 					if( !ParseAttribute() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseElement, state );
+						ParseFailed( &CXMLReader::ParseElement, state );
 						return false;
 					}
 					break;
@@ -1145,7 +1145,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	//Parse Misc [27].
-	bool CBFXMLReader::ParseMisc()
+	bool CXMLReader::ParseMisc()
 	{
 		const signed char Init             = 0;
 		const signed char Lt               = 1; // '<' was read
@@ -1183,13 +1183,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseMisc, state );
+					ParseFailed( &CXMLReader::ParseMisc, state );
 					return false;
 				}
 			}
@@ -1232,7 +1232,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseMisc, state );
+				UnexpectedEof( &CXMLReader::ParseMisc, state );
 				return false;
 			}
 
@@ -1265,7 +1265,7 @@ namespace nsBluefoot
 				case eatWS:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseMisc, state );
+						ParseFailed( &CXMLReader::ParseMisc, state );
 						return false;
 					}
 					break;
@@ -1276,7 +1276,7 @@ namespace nsBluefoot
 					m_bParsePI_xmldecl = false;
 					if( !ParsePI() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseMisc, state );
+						ParseFailed( &CXMLReader::ParseMisc, state );
 						return false;
 					}
 					break;
@@ -1286,7 +1286,7 @@ namespace nsBluefoot
 				case Comment2:
 					if( !ParseComment() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseMisc, state );
+						ParseFailed( &CXMLReader::ParseMisc, state );
 						return false;
 					}
 					break;
@@ -1303,7 +1303,7 @@ namespace nsBluefoot
 
 	  If this function was successful, the head-position is on the first
 	  character after the document type definition.	*/
-	bool CBFXMLReader::ParseDoctype()
+	bool CXMLReader::ParseDoctype()
 	{
 		const signed char Init             =  0;
 		const signed char Doctype          =  1; // read the doctype
@@ -1365,13 +1365,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseDoctype, state );
+					ParseFailed( &CXMLReader::ParseDoctype, state );
 					return false;
 				}
 			}
@@ -1406,7 +1406,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseDoctype, state );
+				UnexpectedEof( &CXMLReader::ParseDoctype, state );
 				return false;
 			}
 
@@ -1454,7 +1454,7 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "DOCTYPE" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseDoctype, state );
+						ParseFailed( &CXMLReader::ParseDoctype, state );
 						return false;
 					}
 					break;
@@ -1464,7 +1464,7 @@ namespace nsBluefoot
 				case Ws4:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseDoctype, state );
+						ParseFailed( &CXMLReader::ParseDoctype, state );
 						return false;
 					}
 					break;
@@ -1472,7 +1472,7 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseDoctype, state );
+						ParseFailed( &CXMLReader::ParseDoctype, state );
 						return false;
 					}
 					break;
@@ -1480,7 +1480,7 @@ namespace nsBluefoot
 					m_bParseExternalID_allowPublicID = false;
 					if( !ParseExternalID() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseDoctype, state );
+						ParseFailed( &CXMLReader::ParseDoctype, state );
 						return false;
 					}
 					thisPublicId = m_PublicId;
@@ -1490,7 +1490,7 @@ namespace nsBluefoot
 				case MPR:
 					if( !next_eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseDoctype, state );
+						ParseFailed( &CXMLReader::ParseDoctype, state );
 						return false;
 					}
 					break;
@@ -1498,21 +1498,21 @@ namespace nsBluefoot
 					m_ParsePEReference_context = InDTD;
 					if( !ParsePEReference() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseDoctype, state );
+						ParseFailed( &CXMLReader::ParseDoctype, state );
 						return false;
 					}
 					break;
 				case Mup:
 					if( !ParseMarkupdecl() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseDoctype, state );
+						ParseFailed( &CXMLReader::ParseDoctype, state );
 						return false;
 					}
 					break;
 				case MPE:
 					if( !next_eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseDoctype, state );
+						ParseFailed( &CXMLReader::ParseDoctype, state );
 						return false;
 					}
 					break;
@@ -1549,7 +1549,7 @@ namespace nsBluefoot
 
 	  If this funktion was successful, the head-position is on the first
 	  character after the comment.*/
-	bool CBFXMLReader::ParseComment()
+	bool CXMLReader::ParseComment()
 	{
 		const signed char Init             = 0;
 		const signed char Dash1            = 1; // the first dash was read
@@ -1589,13 +1589,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed(&CBFXMLReader::ParseComment, state);
+					ParseFailed(&CXMLReader::ParseComment, state);
 					return false;
 				}
 			}
@@ -1625,7 +1625,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof(&CBFXMLReader::ParseComment, state);
+				UnexpectedEof(&CXMLReader::ParseComment, state);
 				return false;
 			}
 
@@ -1680,7 +1680,7 @@ namespace nsBluefoot
 	  If this funktion was successful, the head-position is on the first
 	  character after the PI.
 	*/
-	bool CBFXMLReader::ParsePI()
+	bool CXMLReader::ParsePI()
 	{
 		const signed char Init             =  0;
 		const signed char QmI              =  1; // ? was read
@@ -1742,13 +1742,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParsePI, state );
+					ParseFailed( &CXMLReader::ParsePI, state );
 					return false;
 				}
 			}
@@ -1796,11 +1796,11 @@ namespace nsBluefoot
 					{
 						if( string()== CXMLString( _TXT( "yes" ) ) ) 
 						{
-							m_Standalone = CBFXMLReader::Yes;
+							m_Standalone = CXMLReader::Yes;
 						} 
 						else if( string() == CXMLString( _TXT( "no" ) ) ) 
 						{
-							m_Standalone = CBFXMLReader::No;
+							m_Standalone = CXMLReader::No;
 						} 
 						else 
 						{
@@ -1829,11 +1829,11 @@ namespace nsBluefoot
 
 					if( string() == CXMLString( _TXT( "yes" ) ) )
 					{
-						m_Standalone = CBFXMLReader::Yes;
+						m_Standalone = CXMLReader::Yes;
 					} 
 					else if(string() == CXMLString( _TXT( "no" ) ) ) 
 					{
-						m_Standalone = CBFXMLReader::No;
+						m_Standalone = CXMLReader::No;
 					} 
 					else 
 					{
@@ -1859,7 +1859,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParsePI, state );
+				UnexpectedEof( &CXMLReader::ParsePI, state );
 				return false;
 			}
 
@@ -1894,7 +1894,7 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParsePI, state );
+						ParseFailed( &CXMLReader::ParsePI, state );
 						return false;
 					}
 					break;
@@ -1905,28 +1905,28 @@ namespace nsBluefoot
 				case Ws5:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParsePI, state );
+						ParseFailed( &CXMLReader::ParsePI, state );
 						return false;
 					}
 					break;
 				case Version:
 					if( !ParseAttribute() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParsePI, state );
+						ParseFailed( &CXMLReader::ParsePI, state );
 						return false;
 					}
 					break;
 				case EorSD:
 					if( !ParseAttribute() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParsePI, state );
+						ParseFailed( &CXMLReader::ParsePI, state );
 						return false;
 					}
 					break;
 
 				case SD:
 					// get the SDDecl (syntax like an attribute)
-					if( m_Standalone != CBFXMLReader::Unknown ) 
+					if( m_Standalone != CXMLReader::Unknown ) 
 					{
 						// already parsed the standalone declaration
 						ReportParseError( CXMLString( _TXT( XMLERR_UNEXPECTEDCHARACTER ) ) );
@@ -1935,7 +1935,7 @@ namespace nsBluefoot
 
 					if( !ParseAttribute() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParsePI, state );
+						ParseFailed( &CXMLReader::ParsePI, state );
 						return false;
 					}
 					break;
@@ -1959,7 +1959,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	bool CBFXMLReader::ProcessElementETagBegin2()
+	bool CXMLReader::ProcessElementETagBegin2()
 	{
 		const CXMLString& name = this->name();
 
@@ -2030,7 +2030,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	//Helper to break down the size of the code in the case statement.Return false on error, otherwise true.
-	bool CBFXMLReader::ProcessElementAttribute()
+	bool CXMLReader::ProcessElementAttribute()
 	{
 		CXMLString uri, lname, prefix;
 		const CXMLString& name = this->name();
@@ -2079,7 +2079,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	//Parse a Name [5] and store the name in name or ref (if useRef is true).
-	bool CBFXMLReader::ParseName()
+	bool CXMLReader::ParseName()
 	{
 		const int Init             = 0;
 		const int Name1            = 1; // parse first character of the name
@@ -2107,14 +2107,14 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty()) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseName, state );
+					ParseFailed( &CXMLReader::ParseName, state );
 					return false;
 				}
 			}
@@ -2134,7 +2134,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseName, state );
+				UnexpectedEof( &CXMLReader::ParseName, state );
 				return false;
 			}
 
@@ -2178,7 +2178,7 @@ namespace nsBluefoot
 	  A content is only used between tags. If a end tag is found the < is already
 	  read and the head stand on the '/' of the end tag '</name>'.
 	*/
-	bool CBFXMLReader::ParseContent()
+	bool CXMLReader::ParseContent()
 	{
 		const signed char Init             =  0;
 		const signed char ChD              =  1; // CharData
@@ -2264,13 +2264,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseContent, state );
+					ParseFailed( &CXMLReader::ParseContent, state );
 					return false;
 				}
 			}
@@ -2392,7 +2392,7 @@ namespace nsBluefoot
 			// reasons)
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseContent, state );
+				UnexpectedEof( &CXMLReader::ParseContent, state );
 				return false;
 			}
 
@@ -2460,7 +2460,7 @@ namespace nsBluefoot
 						m_ParseReference_context = InContent;
 						if( !ParseReference() ) 
 						{
-							ParseFailed( &CBFXMLReader::ParseContent, state );
+							ParseFailed( &CXMLReader::ParseContent, state );
 							return false;
 						}
 					} 
@@ -2486,7 +2486,7 @@ namespace nsBluefoot
 						m_ParseReference_context = InContent;
 						if( !ParseReference() ) 
 						{
-							ParseFailed( &CBFXMLReader::ParseContent, state );
+							ParseFailed( &CXMLReader::ParseContent, state );
 							return false;
 						}
 					}
@@ -2516,14 +2516,14 @@ namespace nsBluefoot
 					m_bParsePI_xmldecl = false;
 					if( !ParsePI() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseContent, state );
+						ParseFailed( &CXMLReader::ParseContent, state );
 						return false;
 					}
 					break;
 				case Elem:
 					if( !ParseElement() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseContent, state );
+						ParseFailed( &CXMLReader::ParseContent, state );
 						return false;
 					}
 					break;
@@ -2534,7 +2534,7 @@ namespace nsBluefoot
 				case ComR:
 					if( !ParseComment() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseContent, state );
+						ParseFailed( &CXMLReader::ParseContent, state );
 						return false;
 					}
 					break;
@@ -2542,7 +2542,7 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "[CDATA[" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseContent, state );
+						ParseFailed( &CXMLReader::ParseContent, state );
 						return false;
 					}
 					break;
@@ -2565,7 +2565,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	//Helper to break down the size of the code in the case statement.Return false on error, otherwise true.
-	bool CBFXMLReader::ProcessElementEmptyTag()
+	bool CXMLReader::ProcessElementEmptyTag()
 	{
 		nsCodeQOR::CUCS2String uri, lname;
 		// pop the stack and call the handler
@@ -2654,7 +2654,7 @@ namespace nsBluefoot
 		variable name contains the name of the attribute and the variable
 		string contains the value of the attribute.
 	*/
-	bool CBFXMLReader::ParseAttribute()
+	bool CXMLReader::ParseAttribute()
 	{
 		const int Init             = 0;
 		const int PName            = 1; // parse name
@@ -2692,14 +2692,14 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseAttribute, state );
+					ParseFailed( &CXMLReader::ParseAttribute, state );
 					return false;
 				}
 			}
@@ -2720,7 +2720,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseAttribute, state );
+				UnexpectedEof( &CXMLReader::ParseAttribute, state );
 				return false;
 			}
 			if( determineNameChar( m_C ) == NameBeginning ) 
@@ -2752,28 +2752,28 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttribute, state );
+						ParseFailed( &CXMLReader::ParseAttribute, state );
 						return false;
 					}
 					break;
 				case Ws:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttribute, state );
+						ParseFailed( &CXMLReader::ParseAttribute, state );
 						return false;
 					}
 					break;
 				case Eq:
 					if( !next_eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttribute, state );
+						ParseFailed( &CXMLReader::ParseAttribute, state );
 						return false;
 					}
 					break;
 				case Quotes:
 					if( !ParseAttValue() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttribute, state );
+						ParseFailed( &CXMLReader::ParseAttribute, state );
 						return false;
 					}
 					break;
@@ -2785,7 +2785,7 @@ namespace nsBluefoot
 	//------------------------------------------------------------------------------
 	/*Parses over a simple string.
 	  After the string was successfully parsed, the head is on the first character after the string.*/
-	bool CBFXMLReader::ParseString()
+	bool CXMLReader::ParseString()
 	{
 		const signed char InpCharExpected  = 0; // the character that was expected
 		const signed char InpUnknown       = 1;
@@ -2806,13 +2806,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseString, state );
+					ParseFailed( &CXMLReader::ParseString, state );
 					return false;
 				}
 			}
@@ -2827,7 +2827,7 @@ namespace nsBluefoot
 
 			if (atEnd()) 
 			{
-				UnexpectedEof(&CBFXMLReader::ParseString, state);
+				UnexpectedEof(&CXMLReader::ParseString, state);
 				return false;
 			}
 
@@ -2859,7 +2859,7 @@ namespace nsBluefoot
 	//------------------------------------------------------------------------------
 	/*Parse a ExternalID [75].
 	  If allowPublicID is true parse ExternalID [75] or PublicID [83].*/
-	bool CBFXMLReader::ParseExternalID()
+	bool CXMLReader::ParseExternalID()
 	{
 		const signed char Init             =  0;
 		const signed char Sys              =  1; // parse 'SYSTEM'
@@ -2923,13 +2923,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseExternalID, state );
+					ParseFailed( &CXMLReader::ParseExternalID, state );
 					return false;
 				}
 			}
@@ -2960,7 +2960,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseExternalID, state );
+				UnexpectedEof( &CXMLReader::ParseExternalID, state );
 				return false;
 			}
 
@@ -2996,14 +2996,14 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "SYSTEM" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseExternalID, state );
+						ParseFailed( &CXMLReader::ParseExternalID, state );
 						return false;
 					}
 					break;
 				case SysWS:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseExternalID, state );
+						ParseFailed( &CXMLReader::ParseExternalID, state );
 						return false;
 					}
 					break;
@@ -3021,14 +3021,14 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "PUBLIC" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseExternalID, state );
+						ParseFailed( &CXMLReader::ParseExternalID, state );
 						return false;
 					}
 					break;
 				case PubWS:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseExternalID, state );
+						ParseFailed( &CXMLReader::ParseExternalID, state );
 						return false;
 					}
 					break;
@@ -3049,7 +3049,7 @@ namespace nsBluefoot
 					m_PublicId = this->string();
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseExternalID, state );
+						ParseFailed( &CXMLReader::ParseExternalID, state );
 						return false;
 					}
 					break;
@@ -3064,7 +3064,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	//Parse a PEReference [69]
-	bool CBFXMLReader::ParsePEReference()
+	bool CXMLReader::ParsePEReference()
 	{
 		const signed char Init             = 0;
 		const signed char Next             = 1;
@@ -3100,13 +3100,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParsePEReference, state );
+					ParseFailed( &CXMLReader::ParsePEReference, state );
 					return false;
 				}
 			}
@@ -3198,7 +3198,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParsePEReference, state );
+				UnexpectedEof( &CXMLReader::ParsePEReference, state );
 				return false;
 			}
 
@@ -3226,7 +3226,7 @@ namespace nsBluefoot
 					m_bParseName_useRef = true;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParsePEReference, state );
+						ParseFailed( &CXMLReader::ParsePEReference, state );
 						return false;
 					}
 					break;
@@ -3240,7 +3240,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	//Parse a markupdecl [29].
-	bool CBFXMLReader::ParseMarkupdecl()
+	bool CXMLReader::ParseMarkupdecl()
 	{
 		const signed char Init             = 0;
 		const signed char Lt               = 1; // < was read
@@ -3287,13 +3287,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseMarkupdecl, state );
+					ParseFailed( &CXMLReader::ParseMarkupdecl, state );
 					return false;
 				}
 			}
@@ -3341,7 +3341,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseMarkupdecl, state );
+				UnexpectedEof( &CXMLReader::ParseMarkupdecl, state );
 				return false;
 			}
 
@@ -3398,42 +3398,42 @@ namespace nsBluefoot
 					m_bParsePI_xmldecl = false;
 					if( !ParsePI() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseMarkupdecl, state );
+						ParseFailed( &CXMLReader::ParseMarkupdecl, state );
 						return false;
 					}
 					break;
 				case Dash:
 					if( !ParseComment() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseMarkupdecl, state );
+						ParseFailed( &CXMLReader::ParseMarkupdecl, state );
 						return false;
 					}
 					break;
 				case CA:
 					if( !ParseAttlistDecl() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseMarkupdecl, state );
+						ParseFailed( &CXMLReader::ParseMarkupdecl, state );
 						return false;
 					}
 					break;
 				case CEL:
 					if( !ParseElementDecl() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseMarkupdecl, state );
+						ParseFailed( &CXMLReader::ParseMarkupdecl, state );
 						return false;
 					}
 					break;
 				case CEN:
 					if( !ParseEntityDecl() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseMarkupdecl, state );
+						ParseFailed( &CXMLReader::ParseMarkupdecl, state );
 						return false;
 					}
 					break;
 				case CN:
 					if( !ParseNotationDecl() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseMarkupdecl, state );
+						ParseFailed( &CXMLReader::ParseMarkupdecl, state );
 						return false;
 					}
 					break;
@@ -3443,7 +3443,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	bool CBFXMLReader::ReportEndEntities()
+	bool CXMLReader::ReportEndEntities()
 	{
 		int count = (int)m_XmlRefStack.size();
 		while( count != 0 && m_XmlRefStack.top().isEmpty() ) 
@@ -3485,7 +3485,7 @@ namespace nsBluefoot
 	  parseReference_charDataRead is set to false if the reference must be parsed.
 	  The charachter(s) which the reference mapped to are inserted at the reference
 	  position. The head stands on the first character of the replacement).*/
-	bool CBFXMLReader::ParseReference()
+	bool CXMLReader::ParseReference()
 	{
 		// temporary variables (only used in very local context, so they don't interfere with incremental parsing)
 		unsigned int tmp;
@@ -3537,13 +3537,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !( this->*function )() ) 
 				{
-					ParseFailed(&CBFXMLReader::ParseReference, state );
+					ParseFailed(&CXMLReader::ParseReference, state );
 					return false;
 				}
 			}
@@ -3567,7 +3567,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof(&CBFXMLReader::ParseReference, state);
+				UnexpectedEof(&CXMLReader::ParseReference, state);
 				return false;
 			}
 
@@ -3631,7 +3631,7 @@ namespace nsBluefoot
 					m_bParseName_useRef = true;
 					if (!ParseName()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseReference, state);
+						ParseFailed(&CXMLReader::ParseReference, state);
 						return false;
 					}
 					break;
@@ -3687,7 +3687,7 @@ namespace nsBluefoot
 	  character after the closing " or ' and the value of the attribute
 	  is in string().
 	*/
-	bool CBFXMLReader::ParseAttValue()
+	bool CXMLReader::ParseAttValue()
 	{
 		const signed char Init             = 0;
 		const signed char Dq               = 1; // double quotes were read
@@ -3730,14 +3730,14 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseAttValue, state );
+					ParseFailed( &CXMLReader::ParseAttValue, state );
 					return false;
 				}
 			}
@@ -3757,7 +3757,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseAttValue, state );
+				UnexpectedEof( &CXMLReader::ParseAttValue, state );
 				return false;
 			}
 
@@ -3795,7 +3795,7 @@ namespace nsBluefoot
 					m_ParseReference_context = InAttributeValue;
 					if( !ParseReference() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttValue, state );
+						ParseFailed( &CXMLReader::ParseAttValue, state );
 						return false;
 					}
 					break;
@@ -3818,7 +3818,7 @@ namespace nsBluefoot
 	  Precondition: the beginning '<!' is already read and the head
 	  stands on the 'A' of '<!ATTLIST'
 	*/
-	bool CBFXMLReader::ParseAttlistDecl()
+	bool CXMLReader::ParseAttlistDecl()
 	{
 		const signed char Init             =  0;
 		const signed char Attlist          =  1; // parse the string "ATTLIST"
@@ -3881,13 +3881,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseAttlistDecl, state );
+					ParseFailed( &CXMLReader::ParseAttlistDecl, state );
 					return false;
 				}
 			}
@@ -3913,7 +3913,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseAttlistDecl, state );
+				UnexpectedEof( &CXMLReader::ParseAttlistDecl, state );
 				return false;
 			}
 
@@ -3957,7 +3957,7 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "ATTLIST" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttlistDecl, state );
+						ParseFailed( &CXMLReader::ParseAttlistDecl, state );
 						return false;
 					}
 					break;
@@ -3967,7 +3967,7 @@ namespace nsBluefoot
 				case Ws3:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttlistDecl, state );
+						ParseFailed( &CXMLReader::ParseAttlistDecl, state );
 						return false;
 					}
 					break;
@@ -3975,7 +3975,7 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttlistDecl, state );
+						ParseFailed( &CXMLReader::ParseAttlistDecl, state );
 						return false;
 					}
 					break;
@@ -3983,14 +3983,14 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttlistDecl, state );
+						ParseFailed( &CXMLReader::ParseAttlistDecl, state );
 						return false;
 					}
 					break;
 				case Atttype:
 					if( !ParseAttType() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttlistDecl, state );
+						ParseFailed( &CXMLReader::ParseAttlistDecl, state );
 						return false;
 					}
 					break;
@@ -4001,7 +4001,7 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "REQUIRED" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttlistDecl, state );
+						ParseFailed( &CXMLReader::ParseAttlistDecl, state );
 						return false;
 					}
 					break;
@@ -4009,7 +4009,7 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "IMPLIED" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttlistDecl, state );
+						ParseFailed( &CXMLReader::ParseAttlistDecl, state );
 						return false;
 					}
 					break;
@@ -4017,14 +4017,14 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "FIXED" ) );
 					if (!ParseString()) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttlistDecl, state );
+						ParseFailed( &CXMLReader::ParseAttlistDecl, state );
 						return false;
 					}
 					break;
 				case Attval:
 					if( !ParseAttValue() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttlistDecl, state );
+						ParseFailed( &CXMLReader::ParseAttlistDecl, state );
 						return false;
 					}
 					break;
@@ -4040,7 +4040,7 @@ namespace nsBluefoot
 					}
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttlistDecl, state );
+						ParseFailed( &CXMLReader::ParseAttlistDecl, state );
 						return false;
 					}
 					break;
@@ -4057,7 +4057,7 @@ namespace nsBluefoot
 	/*Parse a elementdecl [45].
 	  Precondition: the beginning '<!E' is already read and the head
 	  stands on the 'L' of '<!ELEMENT'	*/
-	bool CBFXMLReader::ParseElementDecl()
+	bool CXMLReader::ParseElementDecl()
 	{
 		const signed char Init             =  0;
 		const signed char Elem             =  1; // parse the beginning string
@@ -4131,13 +4131,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseElementDecl, state );
+					ParseFailed( &CXMLReader::ParseElementDecl, state );
 					return false;
 				}
 			}
@@ -4156,7 +4156,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof(&CBFXMLReader::ParseElementDecl, state);
+				UnexpectedEof(&CXMLReader::ParseElementDecl, state);
 				return false;
 			}
 
@@ -4220,14 +4220,14 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "LEMENT" ) );
 					if (!ParseString()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
 				case Ws1:
 					if (!eat_ws()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
@@ -4235,14 +4235,14 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if (!ParseName()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
 				case Ws2:
 					if (!eat_ws()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
@@ -4250,7 +4250,7 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "EMPTY" ) );
 					if (!ParseString()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
@@ -4258,14 +4258,14 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT("ANY") );
 					if (!ParseString()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
 				case Cont:
 					if (!next_eat_ws()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
@@ -4273,14 +4273,14 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "#PCDATA" ) );
 					if (!ParseString()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
 				case Mix2:
 					if (!eat_ws()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
@@ -4290,7 +4290,7 @@ namespace nsBluefoot
 				case MixN1:
 					if (!next_eat_ws()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
@@ -4298,14 +4298,14 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if (!ParseName()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
 				case MixN3:
 					if (!eat_ws()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
@@ -4315,7 +4315,7 @@ namespace nsBluefoot
 				case Cp:
 					if (!ParseChoiceSeq()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
@@ -4325,7 +4325,7 @@ namespace nsBluefoot
 				case WsD:
 					if (!next_eat_ws()) 
 					{
-						ParseFailed(&CBFXMLReader::ParseElementDecl, state);
+						ParseFailed(&CXMLReader::ParseElementDecl, state);
 						return false;
 					}
 					break;
@@ -4342,7 +4342,7 @@ namespace nsBluefoot
 	  Precondition: the beginning '<!E' is already read and the head
 	  stand on the 'N' of '<!ENTITY'
 	*/
-	bool CBFXMLReader::ParseEntityDecl()
+	bool CXMLReader::ParseEntityDecl()
 	{
 		const signed char Init             =  0;
 		const signed char Ent              =  1; // parse "ENTITY"
@@ -4417,13 +4417,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+					ParseFailed( &CXMLReader::ParseEntityDecl, state );
 					return false;
 				}
 			}
@@ -4517,7 +4517,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof(&CBFXMLReader::ParseEntityDecl, state);
+				UnexpectedEof(&CXMLReader::ParseEntityDecl, state);
 				return false;
 			}
 
@@ -4553,14 +4553,14 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "NTITY" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
 				case Ws1:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
@@ -4568,14 +4568,14 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
 				case Ws2:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
@@ -4583,7 +4583,7 @@ namespace nsBluefoot
 				case EValueR:
 					if( !ParseEntityValue() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
@@ -4591,14 +4591,14 @@ namespace nsBluefoot
 					m_bParseExternalID_allowPublicID = false;
 					if( !ParseExternalID() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
 				case Ws3:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
@@ -4606,14 +4606,14 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( " NDATA" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
 				case Ws4:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
@@ -4622,7 +4622,7 @@ namespace nsBluefoot
 					m_bParseName_useRef = true;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
@@ -4632,7 +4632,7 @@ namespace nsBluefoot
 				case Ws6:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
@@ -4640,14 +4640,14 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
 				case Ws7:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
@@ -4655,7 +4655,7 @@ namespace nsBluefoot
 				case PEValR:
 					if( !ParseEntityValue() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
@@ -4664,14 +4664,14 @@ namespace nsBluefoot
 					m_bParseExternalID_allowPublicID = false;
 					if( !ParseExternalID() )
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
 				case WsE:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityDecl, state );
+						ParseFailed( &CXMLReader::ParseEntityDecl, state );
 						return false;
 					}
 					break;
@@ -4690,7 +4690,7 @@ namespace nsBluefoot
 	/*Parse a NotationDecl [82].
 	  Precondition: the beginning '<!' is already read and the head
 	  stands on the 'N' of '<!NOTATION'*/
-	bool CBFXMLReader::ParseNotationDecl()
+	bool CXMLReader::ParseNotationDecl()
 	{
 		const signed char Init             = 0;
 		const signed char Not              = 1; // read NOTATION
@@ -4734,13 +4734,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseNotationDecl, state );
+					ParseFailed( &CXMLReader::ParseNotationDecl, state );
 					return false;
 				}
 			}
@@ -4772,7 +4772,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof(&CBFXMLReader::ParseNotationDecl, state);
+				UnexpectedEof(&CXMLReader::ParseNotationDecl, state);
 				return false;
 			}
 
@@ -4800,14 +4800,14 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "NOTATION" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseNotationDecl, state );
+						ParseFailed( &CXMLReader::ParseNotationDecl, state );
 						return false;
 					}
 					break;
 				case Ws1:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseNotationDecl, state );
+						ParseFailed( &CXMLReader::ParseNotationDecl, state );
 						return false;
 					}
 					break;
@@ -4815,14 +4815,14 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseNotationDecl, state );
+						ParseFailed( &CXMLReader::ParseNotationDecl, state );
 						return false;
 					}
 					break;
 				case Ws2:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseNotationDecl, state );
+						ParseFailed( &CXMLReader::ParseNotationDecl, state );
 						return false;
 					}
 					break;
@@ -4831,14 +4831,14 @@ namespace nsBluefoot
 					m_bParseExternalID_allowPublicID = true;
 					if( !ParseExternalID() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseNotationDecl, state );
+						ParseFailed( &CXMLReader::ParseNotationDecl, state );
 						return false;
 					}
 					break;
 				case Ws3:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseNotationDecl, state );
+						ParseFailed( &CXMLReader::ParseNotationDecl, state );
 						return false;
 					}
 					break;
@@ -4852,7 +4852,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	//Helper function for parseReference()
-	bool CBFXMLReader::ProcessReference()
+	bool CXMLReader::ProcessReference()
 	{
 		CXMLString reference = Ref();
 		if( reference == CXMLString( _TXT( "amp" ) ) ) 
@@ -5135,7 +5135,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	//Parse a AttType [54]
-	bool CBFXMLReader::ParseAttType()
+	bool CXMLReader::ParseAttType()
 	{
 		const signed char Init             =  0;
 		const signed char ST               =  1; // StringType
@@ -5212,13 +5212,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed( &CBFXMLReader::ParseAttType, state );
+					ParseFailed( &CXMLReader::ParseAttType, state );
 					return false;
 				}
 			}
@@ -5240,7 +5240,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseAttType, state );
+				UnexpectedEof( &CXMLReader::ParseAttType, state );
 				return false;
 			}
 
@@ -5308,7 +5308,7 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "CDATA" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttType, state );
+						ParseFailed( &CXMLReader::ParseAttType, state );
 						return false;
 					}
 					break;
@@ -5316,7 +5316,7 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "ID" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttType, state );
+						ParseFailed( &CXMLReader::ParseAttType, state );
 						return false;
 					}
 					break;
@@ -5324,7 +5324,7 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "REF" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttType, state );
+						ParseFailed( &CXMLReader::ParseAttType, state );
 						return false;
 					}
 					break;
@@ -5335,7 +5335,7 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "ENTIT" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttType, state );
+						ParseFailed( &CXMLReader::ParseAttType, state );
 						return false;
 					}
 					break;
@@ -5346,7 +5346,7 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "IES" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttType, state );
+						ParseFailed( &CXMLReader::ParseAttType, state );
 						return false;
 					}
 					break;
@@ -5357,7 +5357,7 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "MTOKEN" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttType, state );
+						ParseFailed( &CXMLReader::ParseAttType, state );
 						return false;
 					}
 					break;
@@ -5368,21 +5368,21 @@ namespace nsBluefoot
 					m_ParseString_s = CXMLString( _TXT( "OTATION" ) );
 					if( !ParseString() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttType, state );
+						ParseFailed( &CXMLReader::ParseAttType, state );
 						return false;
 					}
 					break;
 				case NO2:
 					if( !eat_ws() ) 
 					{
-						ParseFailed(&CBFXMLReader::ParseAttType, state);
+						ParseFailed(&CXMLReader::ParseAttType, state);
 						return false;
 					}
 					break;
 				case NO3:
 					if( !next_eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttType, state );
+						ParseFailed( &CXMLReader::ParseAttType, state );
 						return false;
 					}
 					break;
@@ -5390,35 +5390,35 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttType, state );
+						ParseFailed( &CXMLReader::ParseAttType, state );
 						return false;
 					}
 					break;
 				case NO4:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttType, state );
+						ParseFailed( &CXMLReader::ParseAttType, state );
 						return false;
 					}
 					break;
 				case EN:
 					if( !next_eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttType, state );
+						ParseFailed( &CXMLReader::ParseAttType, state );
 						return false;
 					}
 					break;
 				case ENNmt:
 					if( !ParseNmtoken() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttType, state );
+						ParseFailed( &CXMLReader::ParseAttType, state );
 						return false;
 					}
 					break;
 				case EN2:
 					if( !eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseAttType, state );
+						ParseFailed( &CXMLReader::ParseAttType, state );
 						return false;
 					}
 					break;
@@ -5435,7 +5435,7 @@ namespace nsBluefoot
 
 	  Precondition: the beginning '('S? is already read and the head
 	  stands on the first non-whitespace character after it.*/
-	bool CBFXMLReader::ParseChoiceSeq()
+	bool CXMLReader::ParseChoiceSeq()
 	{
 		const signed char Init             = 0;
 		const signed char Ws1              = 1; // eat whitespace
@@ -5480,13 +5480,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed(&CBFXMLReader::ParseChoiceSeq, state);
+					ParseFailed(&CXMLReader::ParseChoiceSeq, state);
 					return false;
 				}
 			}
@@ -5506,7 +5506,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseChoiceSeq, state );
+				UnexpectedEof( &CXMLReader::ParseChoiceSeq, state );
 				return false;
 			}
 			if( m_C.IsSpace() ) 
@@ -5552,28 +5552,28 @@ namespace nsBluefoot
 				case Ws1:
 					if( !next_eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseChoiceSeq, state );
+						ParseFailed( &CXMLReader::ParseChoiceSeq, state );
 						return false;
 					}
 					break;
 				case CoS:
 					if( !ParseChoiceSeq() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseChoiceSeq, state );
+						ParseFailed( &CXMLReader::ParseChoiceSeq, state );
 						return false;
 					}
 					break;
 				case Ws2:
 					if( !next_eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseChoiceSeq, state );
+						ParseFailed( &CXMLReader::ParseChoiceSeq, state );
 						return false;
 					}
 					break;
 				case More:
 					if( !next_eat_ws() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseChoiceSeq, state );
+						ParseFailed( &CXMLReader::ParseChoiceSeq, state );
 						return false;
 					}
 					break;
@@ -5581,7 +5581,7 @@ namespace nsBluefoot
 					m_bParseName_useRef = false;
 					if( !ParseName() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseChoiceSeq, state );
+						ParseFailed( &CXMLReader::ParseChoiceSeq, state );
 						return false;
 					}
 					break;
@@ -5595,7 +5595,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	//Parse a EntityValue [9]
-	bool CBFXMLReader::ParseEntityValue()
+	bool CXMLReader::ParseEntityValue()
 	{
 		const signed char Init             = 0;
 		const signed char Dq               = 1; // EntityValue is double quoted
@@ -5643,14 +5643,14 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				
 				if( !(this->*function)() ) 
 				{
-					ParseFailed(&CBFXMLReader::ParseEntityValue, state);
+					ParseFailed(&CXMLReader::ParseEntityValue, state);
 					return false;
 				}
 			}
@@ -5670,7 +5670,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseEntityValue, state );
+				UnexpectedEof( &CXMLReader::ParseEntityValue, state );
 				return false;
 			}
 
@@ -5713,7 +5713,7 @@ namespace nsBluefoot
 					m_ParsePEReference_context = InEntityValue;
 					if( !ParsePEReference() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityValue, state );
+						ParseFailed( &CXMLReader::ParseEntityValue, state );
 						return false;
 					}
 					break;
@@ -5722,7 +5722,7 @@ namespace nsBluefoot
 					m_ParseReference_context = InEntityValue;
 					if( !ParseReference() ) 
 					{
-						ParseFailed( &CBFXMLReader::ParseEntityValue, state );
+						ParseFailed( &CXMLReader::ParseEntityValue, state );
 						return false;
 					}
 					break;
@@ -5736,7 +5736,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	//Parse a Nmtoken [7] and store the name in name.
-	bool CBFXMLReader::ParseNmtoken()
+	bool CXMLReader::ParseNmtoken()
 	{
 		const signed char Init             = 0;
 		const signed char NameF            = 1;
@@ -5768,13 +5768,13 @@ namespace nsBluefoot
 			if( !m_pParseStack->empty() ) 
 			{
 				ParseFunction function = m_pParseStack->top().m_Function;
-				if( function == &CBFXMLReader::eat_ws ) 
+				if( function == &CXMLReader::eat_ws ) 
 				{
 					m_pParseStack->pop();
 				}
 				if( !(this->*function)() ) 
 				{
-					ParseFailed(&CBFXMLReader::ParseNmtoken, state);
+					ParseFailed(&CXMLReader::ParseNmtoken, state);
 					return false;
 				}
 			}
@@ -5794,7 +5794,7 @@ namespace nsBluefoot
 
 			if( atEnd() ) 
 			{
-				UnexpectedEof( &CBFXMLReader::ParseNmtoken, state );
+				UnexpectedEof( &CXMLReader::ParseNmtoken, state );
 				return false;
 			}
 
@@ -5827,7 +5827,7 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	// Returns true if a entity with the name exists, otherwise returns false.
-	bool CBFXMLReader::EntityExist( const CXMLString& e) const
+	bool CXMLReader::EntityExist( const CXMLString& e) const
 	{
 		if( m_ParameterEntities.find(e) == m_ParameterEntities.end() && 
 			m_ExternParameterEntities.find( e ) == m_ExternParameterEntities.end() && 
@@ -5845,7 +5845,7 @@ namespace nsBluefoot
 	//This private function is called when a parsing function encounters an unexpected EOF. 
 	//It decides what to do (depending on incremental parsing or not).
 	//where is a pointer to the function where the error occurred and state is the parsing state in this function.
-	void CBFXMLReader::UnexpectedEof( CBFXMLReader::ParseFunction where, int state )
+	void CXMLReader::UnexpectedEof( CXMLReader::ParseFunction where, int state )
 	{
 		if( m_pParseStack == 0 ) 
 		{
@@ -5868,7 +5868,7 @@ namespace nsBluefoot
 	//This private function is called when a parse...() function returned false. 
 	//It determines if there was an error or if incremental parsing simply went out of data and does the right thing for the case. 
 	// where is a pointer to the function where the error occurred and state is the parsing state in this function.
-	void CBFXMLReader::ParseFailed( CBFXMLReader::ParseFunction where, int state )
+	void CXMLReader::ParseFailed( CXMLReader::ParseFunction where, int state )
 	{
 		if( m_pParseStack != 0 && m_Error.IsEmpty() ) 
 		{
@@ -5877,23 +5877,23 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	inline static void UpdateValue( CBFXMLReader::CXMLString& value, const CBFXMLReader::CXMLString::char_type* array, int& arrayPos, int& valueLen )
+	inline static void UpdateValue( CXMLReader::CXMLString& value, const CXMLReader::CXMLString::char_type* array, int& arrayPos, int& valueLen )
 	{
-		memcpy( value.GetBufferSetLength( static_cast< unsigned short >( valueLen + arrayPos ) ) + valueLen, array, arrayPos * sizeof( CBFXMLReader::CXMLString::char_type ) );
+		memcpy( value.GetBufferSetLength( static_cast< unsigned short >( valueLen + arrayPos ) ) + valueLen, array, arrayPos * sizeof( CXMLReader::CXMLString::char_type ) );
 		valueLen += arrayPos;
 		value.ValidateBuffer( static_cast< unsigned short >( valueLen ) );
 		arrayPos = 0;
 	}
 
 	//------------------------------------------------------------------------------
-	const CBFXMLReader::CXMLString& CBFXMLReader::string()
+	const CXMLReader::CXMLString& CXMLReader::string()
 	{
 		UpdateValue( m_StringValue, m_StringArray, m_iStringArrayPos, m_iStringValueLen );
 		return m_StringValue;
 	}
 
 	//------------------------------------------------------------------------------
-	const CBFXMLReader::CXMLString& CBFXMLReader::name()
+	const CXMLReader::CXMLString& CXMLReader::name()
 	{
 		UpdateValue( m_NameValue, m_NameArray, m_iNameArrayPos, m_iNameValueLen );
 		return m_NameValue;
@@ -5907,7 +5907,7 @@ namespace nsBluefoot
 
 	  This function returns false on error.
 	*/
-	bool CBFXMLReader::InsertXmlRef( const CXMLString& data, const CXMLString& name, bool inLiteral )
+	bool CXMLReader::InsertXmlRef( const CXMLString& data, const CXMLString& name, bool inLiteral )
 	{
 		if( inLiteral ) 
 		{
@@ -5946,9 +5946,9 @@ namespace nsBluefoot
 
 	  This function is used for external entities since those can include an
 	  TextDecl that must be stripped before inserting the entity.*/
-	static bool StripTextDecl( CBFXMLReader::CXMLString& str )
+	static bool StripTextDecl( CXMLReader::CXMLString& str )
 	{
-		CBFXMLReader::CXMLString textDeclStart( _TXT( "<?xml" ) );
+		CXMLReader::CXMLString textDeclStart( _TXT( "<?xml" ) );
 		/*TODO:
 		if( str.startsWith( textDeclStart ) ) 
 		{
@@ -5971,9 +5971,9 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBFXMLReader::CXMLString Simplify( const CBFXMLReader::CXMLString& strSource )
+	CXMLReader::CXMLString Simplify( const CXMLReader::CXMLString& strSource )
 	{
-		CBFXMLReader::CXMLString strResult;
+		CXMLReader::CXMLString strResult;
 
 		strResult = strSource.TrimLeft();
 		strResult = strResult.TrimRight();

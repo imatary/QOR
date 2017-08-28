@@ -1,6 +1,6 @@
 //StringSource.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -126,15 +126,15 @@ namespace nsBluefoot
 	typedef CBFStringSource< wchar_t > UTF16StringSource;
 */
 
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFUCS2StringSource : public CBFSource
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CUCS2StringSource : public CSource
 	{
 	public:
 
-		CBFUCS2StringSource();
-		CBFUCS2StringSource( nsCodeQOR::CUCS2String& strSource );
-		virtual ~CBFUCS2StringSource();
-		CBFUCS2StringSource( const CBFUCS2StringSource& src );
-		CBFUCS2StringSource& operator = ( const CBFUCS2StringSource& src );
+		CUCS2StringSource();
+		CUCS2StringSource( nsCodeQOR::CUCS2String& strSource );
+		virtual ~CUCS2StringSource();
+		CUCS2StringSource( const CUCS2StringSource& src );
+		CUCS2StringSource& operator = ( const CUCS2StringSource& src );
 		virtual bool Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead );
 		void SetData( nsCodeQOR::CUCS2String& strSource );
 		nsCodeQOR::CUCS2String& GetData( void );

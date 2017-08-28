@@ -32,35 +32,36 @@
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "CodeQOR/DataStructures/TCRef.h"
+#include "AppocritaQOR/Event.h"
 #include "BfProtocol.h"
 
 //--------------------------------------------------------------------------------
 namespace nsBluefoot
 {
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFConnectionPool;
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CConnectionPool;
 
 	//--------------------------------------------------------------------------------
 	//A generic connection point for IO
 	//may be owned by a Connection Pool
 	//handles connection and disconnection, actual reading and writing is dealt with by separate Sources and Sinks
 	//May be driven by a Protocol which responds to connection/disconnection etc
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFPlug
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CPlug
 	{
 	public:
 
-		typedef nsCodeQOR::CTCRef< CBFPlug > refPlugType;
+		typedef nsCodeQOR::CTCRef< CPlug > refPlugType;
 
-		__QOR_DECLARE_OCLASS_ID( CBFPlug );
+		__QOR_DECLARE_OCLASS_ID( CPlug );
 
-		friend class CBFConnectionPool;
+		friend class CConnectionPool;
 		friend class refPlugType;
 		
-		CBFPlug( CBFConnectionPool* pPool = 0 );
-		virtual ~CBFPlug();
+		CPlug( CConnectionPool* pPool = 0 );
+		virtual ~CPlug();
 
 		//Connection interface
-		virtual bool Connect( void ) = 0;
+		virtual bool Connect( void );
 		virtual void Disconnect( void );
 
 		virtual bool HandlePendingConnectionResult( bool bConnected );			//Override for Asynchronous connections with custom pending connection states
@@ -70,23 +71,25 @@ namespace nsBluefoot
 		virtual void OnDisconnectionError( void );
 		bool IsConnected( void );
 		virtual const bool AsyncConnection( void ) const;
-		void SetConnectionProtocol( CBFProtocol::ref_type refProtocol );
-		CBFProtocol::ref_type Protocol( void );
 		virtual void* GetSyncObject( void );
 		virtual void SetSyncObject( void* pSyncObject );
 
 		refPlugType Ref( void );
 
+		nsQOR::CEvent Connected;
+		nsQOR::CEvent ConnectionError;
+		nsQOR::CEvent Disconnected;
+		nsQOR::CEvent DisconnectionError;
+
 	protected:
 		
-		CBFProtocol::ref_type m_refProtocol;
 		bool m_bConnected;
 
 	private:
 
 		void* m_pSyncObject;
 		long m_lRefCount;
-		CBFConnectionPool* m_pPool;
+		CConnectionPool* m_pPool;
 
 		void AddRef( void );
 		void Release( void );

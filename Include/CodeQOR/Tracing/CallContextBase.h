@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Track calls between contexted functions to facilitate AOP interception
+//Track calls between context-ed functions to facilitate AOP interception
 //Currently fixed at 10 parameters to avoid allocation/deallocation in the middle of interception
 //TODO: A custom pool based allocator for CParameterBase would be better.
 
@@ -120,7 +120,7 @@ namespace nsCodeQOR
 	public:
 
 		//--------------------------------------------------------------------------------
-		//Enable clients to register parameters by inlining this code at the point of registration
+		//Enable clients to register parameters by in-lining this code at the point of registration
 		template< typename T > void __QCMP_ALWAYSINLINE Register( T& _t )
 		{
 			CParameterPass< T > paramt( _t );
@@ -128,7 +128,7 @@ namespace nsCodeQOR
 		}
 
 		//--------------------------------------------------------------------------------
-		//Enable clients to register return values of practically any type by inlining
+		//Enable clients to register return values of practically any type by in-lining
 		//this code at the point of registration
 		template< typename T > void __QCMP_ALWAYSINLINE RegisterReturn( T& _t )
 		{
@@ -139,7 +139,7 @@ namespace nsCodeQOR
 		CCallContextBase( nsQOR::IThread::ref_type ThreadContext );
 		virtual ~CCallContextBase();
 
-		virtual void CallMade( CFunctionContextBase* );			//Called when the child function contect is constructed, the call has reached the child function
+		virtual void CallMade( CFunctionContextBase* );			//Called when the child function context is constructed, the call has reached the child function
 		virtual void CallCompleted();							//Called when the child function context is winding up, the call has completed
 		virtual void OnReturnAssignment();
 		CParameterBase* Parameters( void );						//Access to the array of registered parameters

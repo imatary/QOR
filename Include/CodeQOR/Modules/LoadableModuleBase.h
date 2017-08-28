@@ -1,6 +1,6 @@
 //LoadableModuleBase.h
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -71,7 +71,9 @@ namespace nsCodeQOR
 
 }//nsCodeQOR
 
-extern nsCodeQOR::CLoadableModuleBase& ThisModule( void );				//Each and every module that includes this header must provide a ThisModule function returning its module representative object
+//Each and every module that includes this header must provide a ThisModule function returning its module representative object and a ThisModuleVersion function returning the module version
+extern nsCodeQOR::CLoadableModuleBase& ThisModule( void );				
+extern const char* ThisModuleVersion(void);
 
 #endif//CODEQOR_MODULES_LOADABLEMODULEBASE_H_1
 

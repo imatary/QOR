@@ -52,13 +52,15 @@ namespace nsQOR
 	//------------------------------------------------------------------------------
 	CApplication::CApplication( CRole::ref_type Role ) : CApplication()
 	{
+		__QCS_MEMBER_FCONTEXT("CApplication::CApplication");
 		m_Impl->SetRole( Role );
 	}
 
 	//------------------------------------------------------------------------------
 	CApplication::CApplication( const nsCodeQOR::mxGUID* pRoleID ) : CApplication()
 	{
-		m_Impl->SetRole( new_ref< CRole >( pRoleID ).Detach()->Ref() );
+		__QCS_MEMBER_FCONTEXT("CApplication::CApplication");
+		m_Impl->SetRole( new_ref< CRole >( pRoleID )/*.Detach()->Ref()*/ );
 	}
 
 	//------------------------------------------------------------------------------
@@ -138,6 +140,12 @@ namespace nsQOR
 	{
 		__QCS_MEMBER_FCONTEXT( "CApplication::Stop" );
 		m_Impl->Stop();
+	}
+
+	//------------------------------------------------------------------------------
+	void CApplication::OnIdle()
+	{
+		__QCS_MEMBER_FCONTEXT("CApplication::OnIdle");
 	}
 
 }//nsAppocrita

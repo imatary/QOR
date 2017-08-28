@@ -1,6 +1,6 @@
 //DefaultAllocator.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -51,13 +51,43 @@ namespace nsCodeQOR
         public:
 
 			//--------------------------------------------------------------------------------
-			static T* RawAllocate( unsigned int uiCount = 1 )
+			static void* Unbox(const void* pBoxed)
 			{
+				const byte* pMemory = reinterpret_cast<const byte*>(pBoxed);
+				void* pBack = const_cast< byte* >(pMemory - sizeof(void*));
+				return pBack;
+			}
+
+			//--------------------------------------------------------------------------------
+			static T* BoxAllocate(const void* pBack, unsigned int uiCount = 1)
+			{			
+				TInstancer Instancer;
+				T* pResult = 0;
+				if (uiCount == 1)
+				{
+					byte* pMemory = Instancer.Source().Source(sizeof(void*)+sizeof(T));
+					pResult = reinterpret_cast<T*>(pMemory + sizeof(void*));
+					*(reinterpret_cast<void**>(pMemory)) = const_cast< void* >(pBack);
+				}
+				else
+				{
+					byte* pMemory = Instancer.Source().Source( sizeof(unsigned int) + sizeof(void*) + (sizeof(T) * uiCount));
+					*(reinterpret_cast< unsigned int* >(pMemory)) = uiCount;
+					*(reinterpret_cast< void** >(pMemory + sizeof( unsigned int ) ) ) = const_cast< void* >(pBack);
+					pResult = reinterpret_cast< T* >(pMemory + sizeof(void*) + sizeof(unsigned int));
+				}
+				return pResult;
+			}
+
+			//--------------------------------------------------------------------------------
+			static T* RawAllocate( unsigned int uiCount = 1 )
+			{			
 				TInstancer Instancer;
 				T* pResult = 0;
 				if( uiCount == 1 )
 				{
-					pResult = Instancer.Instance();
+					byte* pMemory = Instancer.Source().Source(sizeof(T));
+					pResult = reinterpret_cast<T*>(pMemory);
 				}
 				else
 				{
@@ -69,77 +99,103 @@ namespace nsCodeQOR
 			}
 
 			//--------------------------------------------------------------------------------
-                static T* Allocate( unsigned int uiCount = 1 )
-                {
-						TInstancer Instancer;
-                        T* pResult = 0;
-                        if( uiCount == 1 )
-                        {
-                                pResult = Instancer.Instance();
-                        }
-                        else
-                        {
-                                byte* pMemory = Instancer.Source().Source( sizeof( unsigned int ) + ( sizeof( T ) * uiCount ) );
-                                *( reinterpret_cast< unsigned int* >( pMemory ) ) = uiCount;
-                                pResult = reinterpret_cast< T* >( pMemory + sizeof( unsigned int ) );
-                                T* pInit = pResult;
+            static T* Allocate( unsigned int uiCount = 1 )
+            {
+					TInstancer Instancer;
+                    T* pResult = 0;
+                    if( uiCount == 1 )
+                    {
+                            pResult = Instancer.Instance();
+                    }
+                    else
+                    {
+                            byte* pMemory = Instancer.Source().Source( sizeof( unsigned int ) + ( sizeof( T ) * uiCount ) );
+                            *( reinterpret_cast< unsigned int* >( pMemory ) ) = uiCount;
+                            pResult = reinterpret_cast< T* >( pMemory + sizeof( unsigned int ) );
+                            T* pInit = pResult;
 
-                                for( unsigned int uiLoop = 0; uiLoop < uiCount; uiLoop++ )
-                                {
-                                        new (pInit)T;
-                                        pInit++;
-                                }
-                        }
-                        return pResult;
-                }
+                            for( unsigned int uiLoop = 0; uiLoop < uiCount; uiLoop++ )
+                            {
+                                    new (pInit)T;
+                                    pInit++;
+                            }
+                    }
+                    return pResult;
+            }
 
-                //--------------------------------------------------------------------------------
-                static T* Reallocate( T* pT, unsigned long ulOldCount, unsigned long ulNewCount, bool bPreserve = true )
-                {
-                        if( !bPreserve )
-                        {
-                                Free( pT, ulOldCount );
-                                return Allocate( ulNewCount );
-                        }
+            //--------------------------------------------------------------------------------
+            static T* Reallocate( T* pT, unsigned long ulOldCount, unsigned long ulNewCount, bool bPreserve = true )
+            {
+                    if( !bPreserve )
+                    {
+                            Free( pT, ulOldCount );
+                            return Allocate( ulNewCount );
+                    }
 
-                        T* pNewT = Allocate( ulNewCount );
-                        unsigned long ulCount = 0;
-                        while( ulCount < min( ulOldCount, ulNewCount ) )
-                        {
-                                pNewT[ulCount] = pT[ulCount];
-                                ulCount++;
-                        }
-                        Free( pT, ulOldCount );
-                        return pNewT;
-                }
+                    T* pNewT = Allocate( ulNewCount );
+                    unsigned long ulCount = 0;
+                    while( ulCount < min( ulOldCount, ulNewCount ) )
+                    {
+                            pNewT[ulCount] = pT[ulCount];
+                            ulCount++;
+                    }
+                    Free( pT, ulOldCount );
+                    return pNewT;
+            }
 
 
-                //--------------------------------------------------------------------------------
-                static void Free( T* pT, unsigned int uiCount = 1 )
-                {
-						TInstancer Instancer;
-                        if( pT != 0 )
-                        {
-                                if( uiCount == 1 )
-                                {
-                                        Instancer.Release( pT );
-                                }
-                                else
-                                {
-                                        byte* pMemory = reinterpret_cast< byte* >( pT );
-                                        uiCount = *( reinterpret_cast< unsigned int* >( pMemory - sizeof( unsigned int ) ) );
+            //--------------------------------------------------------------------------------
+            static void Free( T* pT, unsigned int uiCount = 1 )
+            {
+					TInstancer Instancer;
+                    if( pT != 0 )
+                    {
+                            if( uiCount == 1 )
+                            {
+                                    Instancer.Release( pT );
+                            }
+                            else
+                            {
+                                    byte* pMemory = reinterpret_cast< byte* >( pT );
+                                    uiCount = *( reinterpret_cast< unsigned int* >( pMemory - sizeof( unsigned int ) ) );
 
-                                        for( unsigned int uiLoop = 0; uiLoop < uiCount; uiLoop++ )
-                                        {
-                                                pT->~T();
-                                                pT++;
-                                        }
-                                        Instancer.Source().Free( pMemory - sizeof( unsigned int ), sizeof(unsigned int) + ( sizeof( T ) * uiCount ) );
-                                }
-                        }
-                }
+                                    for( unsigned int uiLoop = 0; uiLoop < uiCount; uiLoop++ )
+                                    {
+                                            pT->~T();
+                                            pT++;
+                                    }
+                                    Instancer.Source().Free( pMemory - sizeof( unsigned int ), sizeof(unsigned int) + ( sizeof( T ) * uiCount ) );
+                            }
+                    }
+            }
 
-        private:
+			//--------------------------------------------------------------------------------
+			static void BoxFree(T* pT, unsigned int uiCount = 1)
+			{
+				TInstancer Instancer;
+				if (pT != 0)
+				{
+					if (uiCount == 1)
+					{
+						pT->~T();
+						byte* pMemory = reinterpret_cast<byte*>(pT) - sizeof(void*);
+						Instancer.Source().Free( pMemory, sizeof(void*) + sizeof(T));
+					}
+					else
+					{
+						byte* pMemory = reinterpret_cast< byte* >(pT);
+						uiCount = *(reinterpret_cast< unsigned int* >(pMemory - (sizeof(unsigned int)+sizeof(void*)) ));
+
+						for (unsigned int uiLoop = 0; uiLoop < uiCount; uiLoop++)
+						{
+							pT->~T();
+							pT++;
+						}
+						Instancer.Source().Free(pMemory - ( sizeof(unsigned int) + sizeof(void*) ), sizeof(unsigned int) + sizeof(void*) + (sizeof(T) * uiCount));
+					}
+				}
+			}
+		private:
 
                 CDefaultAllocator(){}
                 ~CDefaultAllocator(){}

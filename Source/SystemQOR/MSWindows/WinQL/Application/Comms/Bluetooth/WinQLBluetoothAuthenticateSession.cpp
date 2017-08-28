@@ -26,7 +26,7 @@
 
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/Application/Comms/Bluetooth/WinQLBluetoothAuthenticationSession.h"
-#include "WinQL/Application/Comms/Bluetooth/WinQLBluetoothHost.h"
+#include "WinQL/Application/SubSystems/WinQLBluetooth.h"
 #include "WinQAPI/Kernel32.h"
 #include "WinQAPI/BthProps.h"
 
@@ -38,20 +38,20 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CAuthenticateBluetoothSession );
 
 	//--------------------------------------------------------------------------------
-	CAuthenticateBluetoothSession::CAuthenticateBluetoothSession( CBluetoothHost* pHost ) : m_Library( CBthProps::Instance() ), m_pHost( pHost )
+	CAuthenticateBluetoothSession::CAuthenticateBluetoothSession( CBluetooth* pHost ) : m_Library( CBthProps::Instance() ), m_pHost( pHost )
 	{
-		CBluetoothRemoteDevice::refType Proto = CBluetoothRemoteDevice::Prototype();
-		Proto->GetInfo()->fConnected = 1;
-		Proto->GetInfo()->fAuthenticated = 1;
-		Proto->GetInfo()->fRemembered = 1;
+		CBluetoothRemoteDevice::ref_type Proto = CBluetoothRemoteDevice::Prototype();
+		Proto.As<CBluetoothRemoteDevice>()->GetInfo()->fConnected = 1;
+		Proto.As<CBluetoothRemoteDevice>()->GetInfo()->fAuthenticated = 1;
+		Proto.As<CBluetoothRemoteDevice>()->GetInfo()->fRemembered = 1;
 		void* pHandle = 0;
-		m_Library.BluetoothRegisterForAuthenticationEx( reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Proto->GetInfo() ), &pHandle, reinterpret_cast< ::PFN_AUTHENTICATION_CALLBACK_EX >( &CallbackEx ), this );
+		m_Library.BluetoothRegisterForAuthenticationEx( reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Proto.As<CBluetoothRemoteDevice>()->GetInfo() ), &pHandle, reinterpret_cast< ::PFN_AUTHENTICATION_CALLBACK_EX >( &CallbackEx ), this );
 		m_Handle = pHandle;
 		m_Handle.Attach( this );
 	}
 
 	//--------------------------------------------------------------------------------
-	CAuthenticateBluetoothSession::CAuthenticateBluetoothSession( CBluetoothRemoteDevice::refType Device ): m_Library( CBthProps::Instance() ), m_pHost( 0 )
+	CAuthenticateBluetoothSession::CAuthenticateBluetoothSession( CBluetoothRemoteDevice::ref_type Device ): m_Library( CBthProps::Instance() ), m_pHost( 0 )
 	{
 		_WINQ_FCONTEXT( "CAuthenticateBluetoothSession::CAuthenticateBluetoothSession" );
 
@@ -60,7 +60,7 @@ namespace nsWin32
 		if( !Device.IsNull() )
 		{
 			m_Library.BluetoothRegisterForAuthentication( 
-				reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Device->GetInfo() ),
+				reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( Device.As<CBluetoothRemoteDevice>()->GetInfo() ),
 				&pHandle,
 				reinterpret_cast< ::PFN_AUTHENTICATION_CALLBACK >( &Callback ),
 				this );
@@ -84,14 +84,14 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CAuthenticateBluetoothSession::SendResponse( CBluetoothRadio::refType Radio, CBluetoothRemoteDevice::Info* pDeviceInfo, CWString strPassKey )
+	void CAuthenticateBluetoothSession::SendResponse( CBluetoothRadio::ref_type Radio, CBluetoothRemoteDevice::Info* pDeviceInfo, CWString strPassKey )
 	{
 		_WINQ_FCONTEXT( "CAuthenticateBluetoothSession::SendResponse" );
 
 		Radio.IsNull() ? m_Library.BluetoothSendAuthenticationResponse( 
 			0,
 			reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( pDeviceInfo ),
-			strPassKey.GetBuffer() ) : Radio->SendAuthenticationResponse( pDeviceInfo, strPassKey );
+			strPassKey.GetBuffer() ) : Radio.As<CBluetoothRadio>()->SendAuthenticationResponse( pDeviceInfo, strPassKey );
 		strPassKey.ReleaseBuffer();
 	}
 
@@ -108,13 +108,13 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CAuthenticateBluetoothSession::SendResponseEx( CBluetoothRadio::refType Radio, CAuthenticateBluetoothSession::Authentication_Response* pResponse )
+	void CAuthenticateBluetoothSession::SendResponseEx( CBluetoothRadio::ref_type Radio, CAuthenticateBluetoothSession::Authentication_Response* pResponse )
 	{
 		_WINQ_FCONTEXT( "CAuthenticateBluetoothSession::SendResponseEx" );
 
 		Radio.IsNull() ? m_Library.BluetoothSendAuthenticationResponseEx(
 			0,
-			reinterpret_cast< ::PBLUETOOTH_AUTHENTICATE_RESPONSE >( pResponse ) ) : Radio->SendAuthenticationResponseEx( pResponse );
+			reinterpret_cast< ::PBLUETOOTH_AUTHENTICATE_RESPONSE >( pResponse ) ) : Radio.As<CBluetoothRadio>()->SendAuthenticationResponseEx( pResponse );
 	}
 
 	//--------------------------------------------------------------------------------

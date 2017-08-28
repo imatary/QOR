@@ -12,7 +12,7 @@
 # /* Revised by Paul Mensonides (2002-2011) */
 # /* Revised by Edward Diener (2011) */
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -62,6 +62,14 @@
 #   endif
 #   define QOR_PP_TUPLE_EAT_I( size )		QOR_PP_TUPLE_EAT_ ## size
 #endif
+
+# if ~QOR_PP_CONFIG_FLAGS() & QOR_PP_CONFIG_MWCC()
+#     define QOR_PP_TUPLE_EAT_N(size) QOR_PP_TUPLE_EAT_N_I(size)
+# else
+#     define QOR_PP_TUPLE_EAT_N(size) QOR_PP_TUPLE_EAT_N_OO((size))
+#     define QOR_PP_TUPLE_EAT_N_OO(par) QOR_PP_TUPLE_EAT_N_I ## par
+# endif
+# define QOR_PP_TUPLE_EAT_N_I(size) QOR_PP_TUPLE_EAT_ ## size
 
 #define QOR_PP_TUPLE_EAT_1(e0)
 #define QOR_PP_TUPLE_EAT_2(e0, e1)

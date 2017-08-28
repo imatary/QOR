@@ -1,6 +1,6 @@
 //WinQLPipeConnector.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -33,7 +33,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CPipeConnector );
 
 	//--------------------------------------------------------------------------------
-	CPipeConnector::CPipeConnector( nsBluefoot::CBFConnectionPool* pPool ) : nsBluefoot::CBFPlug( pPool )
+	CPipeConnector::CPipeConnector( nsBluefoot::CConnectionPool* pPool ) : nsBluefoot::CPlug( pPool )
 	{
 		_WINQ_FCONTEXT( "CPipeConnector::CPipeConnector" );
 		m_pSecurity = 0;

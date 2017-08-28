@@ -62,5 +62,11 @@ __QCMP_ENDLINKAGE_C
 		return MonkiQORModule;
 	}
 
+	//------------------------------------------------------------------------------
+	const char* __QCMP_LOCAL ThisModuleVersion(void)
+	{
+		return QOR_PP_STRINGIZE(__DATE__:__TIME__);
+	}
+
 #	endif//_USRDLL
 #endif//QOR_MONOLITHIC

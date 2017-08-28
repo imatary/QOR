@@ -26,4 +26,19 @@
 
 //Set up environment parameters for a build under Cmd Shell
 
+set build_fullpath=../../../Build/%build_project%/%build_architecture%/%build_os%/%build_os_ver%/%build_form%/%build_config%/%buildtype%
+if NOT EXIST %build_fullpath%/%buildbinary%.bat (
+echo set build_project=%build_project%> %build_fullpath%/%buildbinary%.bat
+echo set build_architecture=%build_architecture%>> %build_fullpath%/%buildbinary%.bat
+echo set build_os=%build_os%>> %build_fullpath%/%buildbinary%.bat
+echo set build_os_ver=%build_os_ver%>> %build_fullpath%/%buildbinary%.bat
+echo set build_form=%build_form%>> %build_fullpath%/%buildbinary%.bat
+echo set build_config=%build_config%>> %build_fullpath%/%buildbinary%.bat
+echo set buildtype=%buildtype%>> %build_fullpath%/%buildbinary%.bat
+echo set build_shell_path=%build_shell_path%>> %build_fullpath%/%buildbinary%.bat
+echo set buildbinary=%buildbinary%>> %build_fullpath%/%buildbinary%.bat
+echo cd %build_shell_path%>> %build_fullpath%/%buildbinary%.bat
+echo call %buildbinary%.bat>> %build_fullpath%/%buildbinary%.bat
+echo cd %build_fullpath%>> %build_fullpath%/%buildbinary%.bat )
+
 set build_env_params=/D"QOR_PROJECT %build_project%" /D"QOR_ARCHITECTURE=%build_architecture%" /D"QOR_OS=%build_os%" /D"QOR_SYS_OS_VER=%build_os_ver%" /D"QOR_BUILD_FORM=%build_form%" /D"QOR_CONFIG_HEADER=%build_config%" /D"QOR_BUILD_TYPE=%buildtype%"

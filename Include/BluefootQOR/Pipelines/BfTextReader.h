@@ -1,6 +1,6 @@
 //BfTextReader.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -39,32 +39,32 @@
 //------------------------------------------------------------------------------
 namespace nsBluefoot
 {
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFTextReader;
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CTextReader;
 
 	//------------------------------------------------------------------------------
 	class CRecognizerEventSink : public nsQOR::CEventSink
 	{
 	public:
 
-		CRecognizerEventSink( CBFTextReader* pContainer );
-		virtual void operator()( void );
+		CRecognizerEventSink( CTextReader* pContainer );
+		virtual bool operator()( nsQOR::IEvent::ref_type, int iCookie );
 
 	protected:
 
-		CBFTextReader* m_pContainer;
+		CTextReader* m_pContainer;
 	};
 
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFTextReader : public CBFPipeline
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CTextReader : public CPipeline
 	{
 	public:
 
-		__QOR_DECLARE_OCLASS_ID( CBFTextReader );
+		__QOR_DECLARE_OCLASS_ID( CTextReader );
 
-		CBFTextReader( CBFSource* pSource );
-		virtual ~CBFTextReader();
-		CBFTextReader(const CBFTextReader& src);
-		CBFTextReader& operator = (const CBFTextReader& src);
+		CTextReader( CSource* pSource );
+		virtual ~CTextReader();
+		CTextReader(const CTextReader& src);
+		CTextReader& operator = (const CTextReader& src);
 
 		virtual void OnRecognizerEvent( CBOMRecognizedEvent::eBOMType BOMType );
 
@@ -76,7 +76,7 @@ namespace nsBluefoot
 		nsCodeQOR::CSTMember< CUTF16CodePointFilter > m_UTF16Filter;
 		nsCodeQOR::CSTMember< CUTF8CodePointFilter > m_UTF8Filter;
 
-		CStringSink m_StringSink;
+		CUCS4StringSink m_StringSink;
 	};
 
 }//nsBluefoot

@@ -64,8 +64,8 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CFindBluetoothRadioSession );
 		
-		CFindBluetoothRadioSession( CBluetoothRadio::refType& Radio );
-		CFindBluetoothRadioSession( CFindBluetoothRadioSession::SearchParams& SearchParams, CBluetoothRadio::refType& Radio );
+		CFindBluetoothRadioSession( CBluetoothRadio::ref_type& Radio );
+		CFindBluetoothRadioSession( CFindBluetoothRadioSession::SearchParams& SearchParams, CBluetoothRadio::ref_type& Radio );
 		virtual ~CFindBluetoothRadioSession();
 
 		//--------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ namespace nsWin32
 			return refType( this, false );
 		}
 
-		bool Next( CBluetoothRadio::refType& Radio );
+		bool Next( CBluetoothRadio::ref_type& Radio );
 
 	private:
 

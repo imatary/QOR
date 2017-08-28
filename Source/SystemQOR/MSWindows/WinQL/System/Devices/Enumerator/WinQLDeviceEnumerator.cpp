@@ -1,6 +1,6 @@
 //WinQLDeviceEnumerator.cpp
 
-// Copyright Querysoft Limited 2013, 2015
+// Copyright Querysoft Limited 2013, 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -52,6 +52,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CTString CDeviceEnumerator::ID(void)
 	{
+		_WINQ_FCONTEXT("CDeviceEnumerator::ID");
 		return m_strID;
 	}
 
@@ -114,7 +115,7 @@ namespace nsWin32
 								ulError = ::GetLastError();
 							}
 
-							CDeviceInstance* pDeviceInstance = TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS).DeviceFromID( strDeviceInstance );
+							CDeviceInstance* pDeviceInstance = TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS)().DeviceFromID( strDeviceInstance );
 						
 							if( pDeviceInstance == 0 )
 							{

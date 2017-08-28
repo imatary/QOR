@@ -35,6 +35,7 @@
 #pragma __QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/CodeServices/Handles/WinQLHandle.h"
 #include "WinQL/CodeServices/Text/WinString.h"
 #include "WinQL/CodeServices/Handles/WinQLRAIISessionHandle.h"
@@ -44,6 +45,8 @@ namespace nsWinQAPI
 {
 	class __QOR_INTERFACE( __WINQAPI ) CSetupAPI;
 }//nsWinQAPI
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CConfigurationManagementSession, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -57,8 +60,7 @@ namespace nsWin32
 
 	public:
 
-		typedef nsCodeQOR::CTLRef< CConfigurationManagementSession > refType;
-
+		__QOR_DECLARE_REF_TYPE(CConfigurationManagementSession);
 		__QOR_DECLARE_OCLASS_ID( CConfigurationManagementSession );
 
 		CConfigurationManagementSession( CTStringRef strMachine = CTString::TheEmptyString().Ref() );
@@ -69,14 +71,7 @@ namespace nsWin32
 		CTStringRef Machine( void );		
 		CDeviceNode& RootDevice( void );
 
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this, false );
-		}
-
 	private:
-
 		
 		unsigned long GetFirstDevNodeChild( unsigned long ulParentDevInst );
 		unsigned long GetDevNodeSibling( unsigned long ulDevNode );

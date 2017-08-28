@@ -50,7 +50,6 @@ namespace nsCodeQOR
 	//Base class representing the running process
     class __QOR_INTERFACE( __CODEQOR ) CProcessBase : public CLoadableModuleBase
     {
-		//friend class CThreadContextBase;
 
     public:
 
@@ -72,7 +71,6 @@ namespace nsCodeQOR
 	protected:
 
 		nsQOR::IThread::ref_type m_MainThread;
-		//CThreadContextBase* m_pMainThreadContext;
 		
 	private:
 

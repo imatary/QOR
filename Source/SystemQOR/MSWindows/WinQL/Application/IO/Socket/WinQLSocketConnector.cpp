@@ -33,7 +33,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CSocketConnector );
 
 	//--------------------------------------------------------------------------------
-	CSocketConnector::CSocketConnector( nsBluefoot::CBFConnectionPool* pPool ) : nsBluefoot::CBFPlug( pPool )
+	CSocketConnector::CSocketConnector( nsBluefoot::CConnectionPool* pPool ) : nsBluefoot::CPlug( pPool )
 	,	m_Type( CSocket::Sock_Stream )
 	,	m_AddressFamily( CSocket::AF_INet )
 	,	m_iProtocol( CSocket::IPProto_TCP )
@@ -60,7 +60,7 @@ namespace nsWin32
 	void CSocketConnector::SetAddress( CSocket::Internet_SocketAddress& Addr )
 	{
 		m_AddressFamily = static_cast< CSocket::eAddressFamily >( Addr.sin_family );
-		memcpy( &m_Address.sa_data, &Addr.sin_port, 6 );
+		memcpy( &m_Address.data.sa_data, &Addr.sin_port, 6 );
 		m_AddressSize = 16;
 	}
 
@@ -73,7 +73,7 @@ namespace nsWin32
 		}
 
 		//m_AddressSize = uiByteCount + 2;
-		memcpy( &m_Address.sa_data, pAddress, uiByteCount );
+		memcpy( &m_Address.data.sa_data, pAddress, uiByteCount );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	void CSocketConnector::SetProtocol( int iProtocol )
 	{
-		m_iProtocol = iProtocol;
+		m_iProtocol = static_cast< nsBluefoot::ISocket::eProtocol >(iProtocol);
 	}
 
 	//--------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ namespace nsWin32
 		if( m_Socket.ID() != 0 && m_Socket.ID() != (Cmp_uint_ptr)(-1) )
 		{
 			m_Address.sa_family = static_cast< unsigned short >( m_AddressFamily );
-			m_bConnected = m_Socket.Connect( &m_Address, 16 ) == 0 ? true : false;
+			m_bConnected = m_Socket.Connect( m_Address ) == 0 ? true : false;
 
 			if( !AsyncConnection() )
 			{
@@ -178,7 +178,7 @@ namespace nsWin32
 		m_bConnected = false;
 		if( !AsyncConnection() )
 		{
-			//bClosed ? OnDisconnected() : OnDisconnectionError();
+			OnDisconnected();// : OnDisconnectionError();
 		}
 	}
 
@@ -193,36 +193,6 @@ namespace nsWin32
 		}
 
 		return false;
-		/*
-		switch( m_ErrorHelper.GetLastError() ) 
-		{ 
-		// The overlapped connection in progress. 
-		case ErrorIOPending: 
-			bPendingIO = true; 
-			break; 
-   
-		// Client is already connected, so signal an event.    
-		case ErrorPipeConnected: 
-			{
-				OVERLAPPED* pOverlapped = reinterpret_cast< OVERLAPPED* >( GetSyncObject() );
-				CSyncHandle tmpHandle( pOverlapped->hEvent, true ); 
-				CEvent tmpEvent( tmpHandle );
-				if( tmpEvent.Set() ) 
-				{
-					tmpHandle.Drop();
-					break; 
-				}
-			}   
-		// If an error occurs during the connect operation... 
-		default: 
-			{
-				//printf("ConnectNamedPipe failed with %d.\n", GetLastError());
-				return false;
-			}
-		} 
-
-		return bPendingIO;		
-		*/
 	}
 
 

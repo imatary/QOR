@@ -1,6 +1,6 @@
 //BfSink.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -34,6 +34,7 @@
 //Defines a Sink for a Bluefoot pipeline
 
 #include "BfElement.h"
+#include "AppocritaQOR/Event.h"
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot
@@ -41,24 +42,89 @@ namespace nsBluefoot
 	class CSource;
 
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFSink : public CBFElement
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CSink : public CElement
 	{
 	public:
 
-		CBFSink();
-		virtual ~CBFSink();
-		CBFSink(const CBFSink& src);
-		CBFSink& operator = (const CBFSink& src);
+		__QOR_DECLARE_OCLASS_ID(CSink);
 
-		virtual void SetSource(CBFSource* pSource);
-		virtual CBFSource* GetSource(void);
+		//------------------------------------------------------------------------------
+		class CWriteSuccess : public nsQOR::CEvent
+		{
+		public:
+
+			//------------------------------------------------------------------------------
+			CWriteSuccess() : CEvent()
+			{
+				m_ulUnitsWritten = 0;
+			}
+
+			unsigned long GetUnitsWritten(void) { return m_ulUnitsWritten; }
+
+
+		protected:
+
+			//------------------------------------------------------------------------------
+			void SetUnitsWritten(unsigned long ulUnitsWritten)
+			{
+				m_ulUnitsWritten = ulUnitsWritten;
+				Signal();
+			}
+
+			unsigned long m_ulUnitsWritten;
+			friend class CSink;
+		}WriteSuccess;
+
+		//------------------------------------------------------------------------------
+		class CWriteError : public nsQOR::CEvent
+		{
+		public:
+
+			//------------------------------------------------------------------------------
+			CWriteError() : CEvent()
+			{
+				m_ulUnitsWritten = 0;
+				m_ulError = 0;
+			}
+
+			unsigned long GetUnitsWritten(void) { return m_ulUnitsWritten; }
+			unsigned long GetError(void) { return m_ulError; }
+
+		protected:
+
+			//------------------------------------------------------------------------------
+			void SetData(unsigned long ulUnitsWritten, unsigned long ulError)
+			{
+				m_ulUnitsWritten = ulUnitsWritten;
+				m_ulError = ulError;
+				Signal();
+			}
+
+			unsigned long m_ulUnitsWritten;
+			unsigned long m_ulError;
+			friend class CSink;
+		}WriteError;
+
+		CSink();
+		virtual ~CSink();
+		CSink(const CSink& src);
+		CSink& operator = (const CSink& src);
+
+		virtual void SetSource(CSource* pSource);
+		virtual CSource* GetSource(void);
 
 		virtual bool Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite = 1 ) = 0; 
 
 		//------------------------------------------------------------------------------
-		virtual void OnWriteSuccess( /*unsigned long ulUnitsRead*/ )
+		virtual void OnWriteSuccess( unsigned long ulUnitsWritten)
 		{
-			//Overrride for asynchronous sinks
+			WriteSuccess.SetUnitsWritten(ulUnitsWritten);
+		}
+
+		//------------------------------------------------------------------------------
+		virtual void OnWriteError(unsigned long ulError, unsigned long ulUnitsWritten)
+		{
+			WriteError.SetData(ulUnitsWritten, ulError);
 		}
 
 		//------------------------------------------------------------------------------
@@ -75,48 +141,48 @@ namespace nsBluefoot
 
 	protected:
 
-		CBFSource* m_pSource;
+		CSource* m_pSource;
 
 		virtual unsigned long GetData( nsCodeQOR::CTLRef< byte >& Data, unsigned long ulUnitsRequired );
 	};
 
 	//------------------------------------------------------------------------------
 	template< class TSink >
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CTBFSinkProxy : public CBFSink
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CSinkProxy : public CSink
 	{
 	public:
 
 		//------------------------------------------------------------------------------
-		CTBFSinkProxy( TSink& Sink ) : CBFSink()
+		CSinkProxy( TSink& Sink ) : CSink()
 		, m_Sink( Sink )
 		{
 		}
 
 		//------------------------------------------------------------------------------
-		virtual ~CTBFSinkProxy()
+		virtual ~CSinkProxy()
 		{
 		}
 
 		//--------------------------------------------------------------------------------
-		CTBFSinkProxy( const CTBFSinkProxy& src ) : CBFSink( src )
+		CSinkProxy( const CSinkProxy& src ) : CSink( src )
 		, m_Sink( src.m_Sink )
 		{
 		}
 
 		//--------------------------------------------------------------------------------
-		CTBFSinkProxy& operator = ( const CTBFSinkProxy& src )
+		CSinkProxy& operator = ( const CSinkProxy& src )
 		{
 			return *this;
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual void SetSource( CBFSource* pSource )
+		virtual void SetSource( CSource* pSource )
 		{
 			m_pSource = pSource;
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual CBFSource* GetSource(void)
+		virtual CSource* GetSource(void)
 		{
 			return m_pSource;
 		}
@@ -132,15 +198,15 @@ namespace nsBluefoot
 		TSink& m_Sink;
 	};
 
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFPlug;
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CPlug;
 
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CNULLSink : public CBFSink
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CNULLSink : public CSink
 	{
 	public:
 
 		//--------------------------------------------------------------------------------
-		CNULLSink( CBFPlug* pAny = 0 ) : CBFSink()
+		CNULLSink( CPlug* ) : CSink()
 		{
 		}
 
@@ -152,11 +218,9 @@ namespace nsBluefoot
 		//--------------------------------------------------------------------------------
 		virtual bool Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite = 1 )
 		{	
-			{	
-				nsCodeQOR::CTLRef< byte > Data;
-				ulUnitsToWrite = GetData( Data, ulUnitsToWrite );
-				ulUnitsWritten = ulUnitsToWrite;
-			}
+			nsCodeQOR::CTLRef< byte > Data;
+			ulUnitsToWrite = GetData( Data, ulUnitsToWrite );
+			ulUnitsWritten = ulUnitsToWrite;
 
 			if( GetBuffer() )
 			{
@@ -173,7 +237,6 @@ namespace nsBluefoot
 		}
 		
 	};
-
 
 }//nsBluefoot
 

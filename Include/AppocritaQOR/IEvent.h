@@ -36,6 +36,11 @@
 #define _APPOCRITAQOR_IEVENT_H_
 
 #include "CodeQOR/Traits/ReferenceTraits.h"
+#include "CodeQOR/DataStructures/TLRef.h"
+
+//------------------------------------------------------------------------------
+//Forward declare the IEvent class and its reference type
+__QOR_DECLARE_REF(nsQOR, __APPOCRITA, IEvent, CTLRef);
 
 //------------------------------------------------------------------------------
 namespace nsQOR
@@ -49,10 +54,27 @@ namespace nsQOR
 
 		IEvent(){};
 		IEvent( const IEvent& src ){ *this = src; }
-		IEvent& operator = ( const IEvent& src ){ return *this; }
+		IEvent& operator = (const IEvent& src) { return *this; }
 		virtual ~IEvent(){}
 		bool operator == ( const IEvent& cmp ) const{ return &cmp == this; }
 		virtual void OnSignaled( void ) = 0;
+	};
+
+	//------------------------------------------------------------------------------
+	class __QOR_INTERFACE(__APPOCRITA) IEventHandler
+	{
+	public:
+
+		IEventHandler() {}
+		virtual ~IEventHandler() {}
+		IEventHandler(const IEventHandler& src) { *this = src; }
+		IEventHandler& operator = (const IEventHandler& src) { return *this; }
+		IEventHandler(IEventHandler&& src) { *this = src; }
+		IEventHandler& operator = (IEventHandler&& src) { return *this; }
+
+		virtual bool operator()(IEvent::ref_type _event, int iCookie) = 0;
+
+		__QOR_IMPL_REF(IEventHandler);
 	};
 
 }//nsQOR

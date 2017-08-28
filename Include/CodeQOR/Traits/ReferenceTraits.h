@@ -33,13 +33,33 @@
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-//#include "CodeQOR/DataStructures/TLRef.h"
 
+//Use __QOR_DECLARE_REF_TYPE inside a class to add a ref_type named type.
 #define __QOR_DECLARE_REF_TYPE( _T ) typedef nsCodeQOR::reference_type< _T >::type ref_type
 
+//Use __QOR_IMPL_REF inside a class to add a ref_type named type and a member function to return actual references.
 #define __QOR_IMPL_REF( _T ) __QOR_DECLARE_REF_TYPE( _T);\
 ref_type Ref( void ) const { return ref_type( this ); }
 
+//Use __QOR_OVERRIDE_REF_TYPE outside a class (after declaration and before definition) to change the reference type for the class
+#define __QOR_OVERRIDE_REF_TYPE( _T, _REF ) template<> struct nsCodeQOR::reference_type<_T>{ typedef _REF< _T > type; };
+
+//Use __QOR_FORWARD_DECLARE outside a class to declare the class so that for examples __QOR_OVERRIDE_REF_TYPE can then be used
+#define __QOR_FORWARD_DECLARE( _NAMESPACE, _INTERFACE, _CLASS ) namespace _NAMESPACE{ class __QOR_INTERFACE(_INTERFACE) _CLASS; }
+
+//Use __QOR_DECLARE_REF outside a class to forward declare it and set the reference type
+#define __QOR_DECLARE_REF( _NAMESPACE, _INTERFACE, _CLASS, _REF ) __QOR_FORWARD_DECLARE( _NAMESPACE, _INTERFACE, _CLASS )\
+template<> struct nsCodeQOR::reference_type<_NAMESPACE::_CLASS>{ typedef nsCodeQOR::_REF< _NAMESPACE::_CLASS > type; }
+
+//Use __QOR_CLASS to directly declare a class, inside a namespace, with a reference type
+#define __QOR_CLASS( _INTERFACE, _CLASS, _REF )\
+class __QOR_INTERFACE(_INTERFACE) _CLASS;\
+template<> struct nsCodeQOR::reference_type<_CLASS>{ typedef nsCodeQOR::_REF< _CLASS > type; }\
+class __QOR_INTERFACE(_INTERFACE) _CLASS
+
+
+//Use _reftype( _T ) to get the type of a reference to T
+#define _reftype( _T ) typename nsCodeQOR::reference_type< _T >::type
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
 {	

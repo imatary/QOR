@@ -85,6 +85,12 @@ namespace nsQOR
 	}
 
 	//------------------------------------------------------------------------------
+	bool CWorkflow::operator()(IEvent::ref_type _event, int iCookie)
+	{
+		return CurrentState()->operator()(_event, iCookie);
+	}
+
+	//------------------------------------------------------------------------------
 	IState::ref_type CWorkflow::CurrentState() const
 	{
 		__QCS_FCONTEXT( "CWorkflow::CurrentState" );
@@ -169,6 +175,7 @@ namespace nsQOR
 	void CWorkflow::OnIdle()
 	{
 		__QCS_FCONTEXT("CWorkflow::OnIdle");
+		m_Application->OnIdle();
 	}
 
 }//nsQOR

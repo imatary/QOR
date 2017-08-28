@@ -39,8 +39,8 @@ __QCMP_MESSAGE( "Target Operating System: Microsoft Windows " )
 #endif
 
 #	ifndef _QSYS_WIN_VERSION	
-__QCMP_MESSAGE( "No minimum Windows version set. Defaulting to Windows 7." )
-#		define _QSYS_WIN_VERSION	_QSYS_MSWVER_WIN7
+__QCMP_MESSAGE( "No minimum Windows version set. Defaulting to Windows 10." )
+#		define _QSYS_WIN_VERSION	_QSYS_MSWVER_WIN10
 #		define _QSYS_MSWVER_SERVPACK 0
 #	endif//!_QSYS_WIN_VERSION	
 

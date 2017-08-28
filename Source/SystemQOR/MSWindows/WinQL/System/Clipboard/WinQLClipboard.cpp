@@ -1,6 +1,6 @@
 //WinQLClipboard.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -25,6 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include "CodeQOR/DataStructures/TLRef.h"
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 __QCMP_WARNING_PUSH
 __QCMP_WARNING_DISABLE( __QCMP_WARN_THIS_USED_IN_BASE_INIT_LIST, "Safe usage: saved in member for later use" );
@@ -223,11 +224,10 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CClipboardFormatHelper::refType CClipboardHelper::Format()
+	CClipboardFormatHelper::ref_type CClipboardHelper::Format()
 	{
 		_WINQ_FCONTEXT( "CClipboardHelper::Format" );
-		CClipboardFormatHelper::refType Result( &m_FormatHelper, false );
-		return Result;
+		return ref(m_FormatHelper);
 	}						
 
 
@@ -350,31 +350,24 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	CClipboard::refType CClipboard::Ref( void )
-	{
-		_WINQ_FCONTEXT( "CClipboard::Ref" );
-		return refType( this );
-	}
-
-	//------------------------------------------------------------------------------
-	nsCodeQOR::CTLRef< CClipboardViewerSession > CClipboard::ViewerSession( COSWindow::refType refWindow )
+	CClipboardViewerSession::ref_type CClipboard::ViewerSession( COSWindow::refType refWindow )
 	{
 		_WINQ_FCONTEXT( "CClipboard::ViewerSession" );
-		return nsCodeQOR::CTLRef< CClipboardViewerSession >( new CClipboardViewerSession( *refWindow ), true );
+		return new_shared_ref<CClipboardViewerSession >( refWindow() );
 	}
 
 	//------------------------------------------------------------------------------
-	nsCodeQOR::CTLRef< CClipboardSession > CClipboard::Session( COSWindow::refType refWindow )
+	CClipboardSession::ref_type CClipboard::Session( COSWindow::refType refWindow )
 	{
 		_WINQ_FCONTEXT( "CClipboard::Session" );
-		return nsCodeQOR::CTLRef< CClipboardSession >( new CClipboardSession( *refWindow ), true );
+		return new_ref<CClipboardSession >( refWindow() );
 	}
 
 	//------------------------------------------------------------------------------
-	nsCodeQOR::CTLRef< CClipboard::CFormatListener > CClipboard::Listener( COSWindow::refType refWindow )
+	CClipboard::CFormatListener::ref_type CClipboard::Listener( COSWindow::refType refWindow )
 	{
 		_WINQ_FCONTEXT( "CCLipboard::Listener" );
-		return nsCodeQOR::CTLRef< CClipboard::CFormatListener >( new CClipboardFormatHelper::CListener( *refWindow ), true );
+		return new_ref< CClipboard::CFormatListener >( refWindow() );
 	}
 
 }//nsWin32

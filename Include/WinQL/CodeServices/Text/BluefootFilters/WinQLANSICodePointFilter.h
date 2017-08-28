@@ -38,7 +38,7 @@
 namespace nsWin32
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CANSICodePointFilter : public nsBluefoot::CBFFilter
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CANSICodePointFilter : public nsBluefoot::CFilter
 	{
 	public:
 

@@ -1,6 +1,6 @@
 //WinQLIOSource.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -42,14 +42,14 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	//A generic Win32 data source, possibly but not necessarily from a device.
 	//Derived classes handle input from specific devices.
-	class __QOR_INTERFACE( __WINQL ) CIOSource : public nsBluefoot::CBFSource
+	class __QOR_INTERFACE( __WINQL ) CIOSource : public nsBluefoot::CSource
 	{
 	public:
 
 		typedef nsCodeQOR::CTLRef< CIOSource > refSourceType;
 
 		//--------------------------------------------------------------------------------
-		CIOSource( nsBluefoot::CBFPlug* pConnector = 0 ) : nsBluefoot::CBFSource()
+		CIOSource( nsBluefoot::CPlug* pConnector = 0 ) : nsBluefoot::CSource()
 		,	m_pIOSourceConnector( pConnector )
 		{
 		}
@@ -68,31 +68,22 @@ namespace nsWin32
 		}
 
 		//--------------------------------------------------------------------------------
-		nsBluefoot::CBFPlug* GetSourceConnector( void )
+		nsBluefoot::CPlug* GetSourceConnector( void )
 		{
 			return m_pIOSourceConnector;
 		}
 
 		//--------------------------------------------------------------------------------
-		void SetSourceConnector( nsBluefoot::CBFPlug* pIOConnector )
+		void SetSourceConnector( nsBluefoot::CPlug* pIOConnector )
 		{
 			m_pIOSourceConnector = pIOConnector;
 		}
 
-		//--------------------------------------------------------------------------------
-		virtual void OnReadSuccess( unsigned long ulUnitsRead )
-		{
-			//m_pBuffer->WriteAcknowledge( ulUnitsRead );
-			//unsigned long ulNumberOfBytesWritten = 0;
-			//dynamic_cast< nsBluefoot::CBFSink* >( m_pSink )->Write( ulUnitsRead, ulNumberOfBytesWritten, m_pBuffer->ReadRequest( ulUnitsRead ) );
-			//m_pBuffer->ReadAcknowledge( ulNumberOfBytesWritten );
-		}
-
-		virtual bool Read( unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead ) = 0;
+		virtual bool Read( unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead = 1) = 0;
 
 	protected:
 
-		nsBluefoot::CBFPlug* m_pIOSourceConnector;
+		nsBluefoot::CPlug* m_pIOSourceConnector;
 	};
 
 }//nsWin32

@@ -1,6 +1,6 @@
 //WinQLBattery.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -45,7 +45,6 @@ namespace nsWin32
 	,	m_bTagAcquired( false )
 	,	m_bAcquiredInfo( false )
 	,	m_ucGranularityCount( 0 )
-	,	m_pIODevice( 0 )
 	,	m_bPresent( true )
 	{
 		_WINQ_FCONTEXT( "CBattery::CBattery" );
@@ -63,7 +62,6 @@ namespace nsWin32
 	,	m_bTagAcquired( false )
 	,	m_bAcquiredInfo( false )
 	,	m_ucGranularityCount( 0 )
-	,	m_pIODevice( 0 )
 	,	m_bPresent( false )
 	{
 		_WINQ_FCONTEXT( "CBattery::CBattery" );
@@ -107,7 +105,7 @@ namespace nsWin32
 			{
 				m_Scales[ ucCount ] = src.m_Scales[ ucCount ];
 			}
-			m_pIODevice = src.m_pIODevice;
+			//m_pIODevice = src.m_pIODevice;
 			m_ulTemperature = src.m_ulTemperature;
 		}
 		return *this;
@@ -117,10 +115,7 @@ namespace nsWin32
 	CBattery::~CBattery()
 	{
 		_WINQ_FCONTEXT( "CBattery::~CBattery" );
-		if( m_pIODevice != 0 )
-		{
-			Close();
-		}
+		m_Session.Dispose();
 	}
 
 	//--------------------------------------------------------------------------------
@@ -282,7 +277,7 @@ namespace nsWin32
 		unsigned long ulOut = 0;
 		unsigned long ulEstimate = 0;
 		
-		if( m_pIODevice->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), &ulEstimate, sizeof( ulEstimate) , &ulOut, 0 ) )
+		if(m_Session->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), &ulEstimate, sizeof( ulEstimate) , &ulOut, 0 ) )
 		{
 			
 		}
@@ -304,7 +299,7 @@ namespace nsWin32
 
 		unsigned long ulOut = 0;
 		
-		if( m_pIODevice->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), strSerialNumber.GetBufferSetLength( MaxPath ), MaxPath, &ulOut, 0 ) )
+		if(m_Session->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), strSerialNumber.GetBufferSetLength( MaxPath ), MaxPath, &ulOut, 0 ) )
 		{
 			strSerialNumber.ValidateBuffer( static_cast< unsigned short >( ulOut ) );	
 		}
@@ -327,7 +322,7 @@ namespace nsWin32
 
 		unsigned long ulOut = 0;
 		
-		if( m_pIODevice->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), strManufacturerName.GetBufferSetLength( MaxPath ), MaxPath, &ulOut, 0 ) )
+		if(m_Session->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), strManufacturerName.GetBufferSetLength( MaxPath ), MaxPath, &ulOut, 0 ) )
 		{
 			strManufacturerName.ValidateBuffer( static_cast< unsigned short >( ulOut ) );	
 		}
@@ -350,7 +345,7 @@ namespace nsWin32
 		Battery_Manufacture_Date Date;
 		unsigned long ulOut = 0;
 		
-		if( m_pIODevice->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), &Date, sizeof(Date), &ulOut, 0 ) )
+		if(m_Session->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), &Date, sizeof(Date), &ulOut, 0 ) )
 		{
 			//TOOD: Use current locale information to turn the date into a string
 			strManufactureDate = CTString( _TXT( "Date of manufacture" ) );
@@ -374,7 +369,7 @@ namespace nsWin32
 
 		unsigned long ulOut = 0;
 		
-		if( m_pIODevice->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), strDeviceName.GetBufferSetLength( MaxPath ), MaxPath, &ulOut, 0 ) )
+		if(m_Session->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), strDeviceName.GetBufferSetLength( MaxPath ), MaxPath, &ulOut, 0 ) )
 		{
 			strDeviceName.ValidateBuffer( static_cast< unsigned short >( ulOut ) );	
 		}
@@ -388,13 +383,12 @@ namespace nsWin32
 		unsigned long ulWait = 0;
 		unsigned long ulOut = 0;		
 
-		if( m_pIODevice == 0 )
+		if (m_Session.IsNull())
 		{
-			CIODeviceFile& IODeviceFile = Open(  Generic_Read | Generic_Write, File_Share_Read | File_Share_Write, File_Attribute_Normal );
-			m_pIODevice = &IODeviceFile;
+			m_Session = Open(Generic_Read | Generic_Write, File_Share_Read | File_Share_Write, File_Attribute_Normal);
 		}
 
-		if( m_pIODevice->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Tag, Method_Buffered, File_Read_Access ), &ulWait, sizeof( ulWait ), &m_BQI.BatteryTag, sizeof( m_BQI.BatteryTag ), &ulOut, 0 ) )
+		if(m_Session->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Tag, Method_Buffered, File_Read_Access ), &ulWait, sizeof( ulWait ), &m_BQI.BatteryTag, sizeof( m_BQI.BatteryTag ), &ulOut, 0 ) )
 		{
 			m_bTagAcquired = true;
 		}
@@ -413,7 +407,7 @@ namespace nsWin32
 
 		unsigned long ulOut = 0;
 		
-		if( m_pIODevice->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), &m_ulTemperature, sizeof( m_ulTemperature ), &ulOut, 0 ) )
+		if(m_Session->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), &m_ulTemperature, sizeof( m_ulTemperature ), &ulOut, 0 ) )
 		{
 			
 		}
@@ -432,7 +426,7 @@ namespace nsWin32
 
 		unsigned long ulOut = 0;
 		
-		if( m_pIODevice->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), m_Scales, sizeof( Battery_Reporting_Scale ) * 4, &ulOut, 0 ) )
+		if(m_Session->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), m_Scales, sizeof( Battery_Reporting_Scale ) * 4, &ulOut, 0 ) )
 		{
 			m_ucGranularityCount = static_cast< unsigned char >( ulOut / sizeof( Battery_Reporting_Scale ) );
 		}
@@ -450,7 +444,7 @@ namespace nsWin32
 		m_BQI.InformationLevel = BatteryInformation;
 
 		unsigned long ulOut = 0;
-		if( m_pIODevice->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), &m_BI, sizeof( m_BI ), &ulOut, 0 ) )
+		if(m_Session->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Information, Method_Buffered, File_Read_Access ), &m_BQI, sizeof( m_BQI ), &m_BI, sizeof( m_BI ), &ulOut, 0 ) )
 		{
 			m_bAcquiredInfo = true;
 		}
@@ -469,7 +463,7 @@ namespace nsWin32
 		WaitStatus.BatteryTag = m_BQI.BatteryTag;
 		unsigned long ulOut = 0;
 
-		m_pIODevice->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Status, Method_Buffered, File_Read_Access ), &WaitStatus, sizeof( WaitStatus ), &m_Status, sizeof( m_Status ), &ulOut, 0 );
+		m_Session->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Battery, Query_Status, Method_Buffered, File_Read_Access ), &WaitStatus, sizeof( WaitStatus ), &m_Status, sizeof( m_Status ), &ulOut, 0 );
 	}
 
 	//--------------------------------------------------------------------------------

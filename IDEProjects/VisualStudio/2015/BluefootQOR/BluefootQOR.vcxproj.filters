@@ -26,6 +26,9 @@
     <Filter Include="Source Files\XML\SAX">
       <UniqueIdentifier>{ea02cfba-c430-4bf8-bb76-d7ba13cac761}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Protocols\OBEX">
+      <UniqueIdentifier>{6c518bab-c040-4d93-ba12-3404be4cde92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\BluefootQOR\BluefootQOR.cpp">
@@ -85,12 +88,6 @@
     <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Pipelines\BfXMLReader.cpp">
       <Filter>Source Files\Pipelines</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Protocols\BfInputProtocol.cpp">
-      <Filter>Source Files\Protocols</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Protocols\BfOutputProtocol.cpp">
-      <Filter>Source Files\Protocols</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Sinks\coutSink.cpp">
       <Filter>Source Files\Sinks</Filter>
     </ClCompile>
@@ -145,6 +142,15 @@
     <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfSAXXmlReader.cpp">
       <Filter>Source Files\XML\SAX</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\BfSocket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Protocols\OBEX\ObexHeader.cpp">
+      <Filter>Source Files\Protocols\OBEX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Protocols\OBEX\ObexObject.cpp">
+      <Filter>Source Files\Protocols\OBEX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Include\BluefootQOR\BfBuffer.h">
@@ -186,8 +192,65 @@
     <ClInclude Include="..\..\..\..\Include\BluefootQOR\BluefootQOR.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Section.h">
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BfSocket.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Sources\cinSource.h">
+      <Filter>Source Files\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Sources\StringSource.h">
+      <Filter>Source Files\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Sinks\coutSink.h">
+      <Filter>Source Files\Sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Sinks\StringSink.h">
+      <Filter>Source Files\Sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Protocols\SMTP.h">
+      <Filter>Source Files\Protocols</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Pipelines\BFTextReader.h">
+      <Filter>Source Files\Pipelines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Pipelines\BfXMLReader.h">
+      <Filter>Source Files\Pipelines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\BOMRecognizerFilter.h">
+      <Filter>Source Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\CodePointSAXParser.h">
+      <Filter>Source Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\CodePointUTF8Filter.h">
+      <Filter>Source Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\CodePointUTF16Filter.h">
+      <Filter>Source Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\MimeRecognizerFilter.h">
+      <Filter>Source Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\ParagraphBreakFilter.h">
+      <Filter>Source Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\UTF8CodePointFilter.h">
+      <Filter>Source Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\UTF16CodePointFilter.h">
+      <Filter>Source Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Protocols\BfObexProtocol.h">
+      <Filter>Source Files\Protocols</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Protocols\OBEX\ObexHeader.h">
+      <Filter>Source Files\Protocols\OBEX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Protocols\OBEX\ObexObject.h">
+      <Filter>Source Files\Protocols\OBEX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Protocols\OBEX\ObexSession.h">
+      <Filter>Source Files\Protocols\OBEX</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

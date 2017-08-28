@@ -1,6 +1,6 @@
 //WinQLMailSlotSource.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -49,13 +49,29 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	bool CMailSlotSource::ReadAsync(unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead, byte* pBuffer)
+	{
+		CMailSlotConnector* pMailSlotConnector = dynamic_cast< CMailSlotConnector* >(m_pIOSourceConnector);
+		return pMailSlotConnector->MailSlot().Read((void*)(pBuffer), ulNumberOfUnitsToRead * GetBuffer()->GetUnitSize(),
+			reinterpret_cast< OVERLAPPED* >(pMailSlotConnector->GetSyncObject()), (LPOVERLAPPED_COMPLETION_ROUTINE)(&COverlappedHandler::OnOverlappedReadCompleted));
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CMailSlotSource::ReadSync(unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead, byte* pBuffer)
+	{
+		CMailSlotConnector* pMailSlotConnector = dynamic_cast< CMailSlotConnector* >(m_pIOSourceConnector);
+		return pMailSlotConnector->MailSlot().Read(pBuffer, ulNumberOfUnitsToRead, ulNumberOfUnitsRead, 0);
+	}
+
+	//--------------------------------------------------------------------------------
 	bool CMailSlotSource::Read( unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead )
 	{
 		_WINQ_FCONTEXT( "CMailSlotSource::Read" );
 		bool bResult = false;
-		CMailSlotConnector* pMailSlotConnector = dynamic_cast< CMailSlotConnector* >( m_pIOSourceConnector );
-		if( pMailSlotConnector )
+		
+		if(m_pIOSourceConnector)
 		{
+			CMailSlotConnector* pMailSlotConnector = dynamic_cast< CMailSlotConnector* >(m_pIOSourceConnector);
 			unsigned long ulNextSize = 0;
 			unsigned long ulMessageCount = 0;
 			pMailSlotConnector->MailSlot().GetInfo( 0, &ulNextSize, &ulMessageCount, 0 );
@@ -64,39 +80,26 @@ namespace nsWin32
 			{
 				byte* pBuffer = GetBuffer()->WriteRequest( ulNumberOfUnitsToRead );
 
-				if( pMailSlotConnector->AsyncConnection() )
+				if(m_pIOSourceConnector->AsyncConnection() )
 				{
-					bResult = pMailSlotConnector->MailSlot().Read( (void*)(pBuffer), ulNumberOfUnitsToRead * GetBuffer()->GetUnitSize(), 
-					reinterpret_cast< OVERLAPPED* >( pMailSlotConnector->GetSyncObject() ), (LPOVERLAPPED_COMPLETION_ROUTINE)(&COverlappedHandler::OnOverlappedReadCompleted) );
+					bResult = ReadAsync(ulNumberOfUnitsRead, ulNumberOfUnitsToRead, pBuffer);
 					ulNumberOfUnitsRead = 0;
 
-					if( !bResult && pMailSlotConnector->Protocol() )
+					if( !bResult )
 					{
-						pMailSlotConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadError();
+						ReadError.Signal();
 					}
 				}
 				else
 				{				
-					if( pMailSlotConnector->MailSlot().Read( pBuffer, ulNumberOfUnitsToRead, ulNumberOfUnitsRead, 0 ) )
+					if( ReadSync( ulNumberOfUnitsRead, ulNumberOfUnitsToRead, pBuffer ) )
 					{
 						ulNumberOfUnitsRead /= GetBuffer()->GetUnitSize();
 						m_pBuffer->WriteAcknowledge( ulNumberOfUnitsRead );
-						//unsigned long ulNumberOfUnitsWritten = 0;
-						//dynamic_cast< nsBluefoot::CBFSink* >( m_pSink )->Write( ulNumberOfUnitsRead, ulNumberOfUnitsWritten, m_pBuffer->ReadRequest( ulNumberOfUnitsRead ) );
 						bResult = ulNumberOfUnitsRead > 0 ? true : false;
 					}
 
-					if( pMailSlotConnector->Protocol() )
-					{
-						if( bResult )
-						{
-							pMailSlotConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadSuccess( ulNumberOfUnitsRead );
-						}
-						else
-						{
-							pMailSlotConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadError();
-						}
-					}
+					bResult ? ReadSuccess.Signal() : ReadError.Signal();
 				}
 			}
 		}

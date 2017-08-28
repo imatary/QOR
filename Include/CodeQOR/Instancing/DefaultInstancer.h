@@ -59,6 +59,15 @@ namespace nsCodeQOR
 		}
 
 		//--------------------------------------------------------------------------------
+		template< typename _P >
+		T* Instance( _P p1 )
+		{
+			byte* pMemory = m_Source.Source(sizeof(T));
+			T* pT = new(pMemory)(T(p1));
+			return pT;
+		}
+
+		//--------------------------------------------------------------------------------
 		void Release( T* pT )
 		{
 			pT->~T();

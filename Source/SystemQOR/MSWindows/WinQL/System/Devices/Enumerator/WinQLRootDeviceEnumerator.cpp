@@ -1,6 +1,6 @@
 //WinQLRootDeviceEnumerator.cpp
 
-// Copyright Querysoft Limited 2013, 2015
+// Copyright Querysoft Limited 2013, 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -54,8 +54,8 @@ namespace nsWin32
 		CTString strEnumerator( _TXT( "ROOT" ) );
 		unsigned long ulInitLength = 256;		
 		unsigned long ulResult = 0;
-		CDeviceEnumerator* pEnumerator = new CDeviceEnumerator( strEnumerator );
-		TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).RegisterEnumerator( strEnumerator, pEnumerator );
+		CDeviceEnumerator::ref_type pEnumerator = new_shared_ref< CDeviceEnumerator >( strEnumerator );
+		TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS )().RegisterEnumerator( strEnumerator, pEnumerator );
 		do
 		{
 			unsigned long ulLength = ulInitLength;
@@ -70,8 +70,8 @@ namespace nsWin32
 				if( ulResult == CR_SUCCESS )
 				{
 					strEnumerator.ValidateBuffer( static_cast< unsigned short >( ulLength ) );
-					pEnumerator = new CDeviceEnumerator( strEnumerator );
-					TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).RegisterEnumerator( strEnumerator, pEnumerator );
+					pEnumerator = new_shared_ref<CDeviceEnumerator>( strEnumerator );
+					TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS )().RegisterEnumerator( strEnumerator, pEnumerator );
 				}
 				else
 				{
@@ -87,7 +87,6 @@ namespace nsWin32
 	CRootDeviceEnumerator::CRootDeviceEnumerator( const CRootDeviceEnumerator& src ) : m_Library( CSetupAPI::Instance() )
 	{
 		_WINQ_FCONTEXT( "CRootDeviceEnumerator::CRootDeviceEnumerator" );
-
 		*this = src;
 	}
 
@@ -95,11 +94,6 @@ namespace nsWin32
 	CRootDeviceEnumerator& CRootDeviceEnumerator::operator = ( const CRootDeviceEnumerator& src )
 	{
 		_WINQ_FCONTEXT( "CRootDeviceEnumerator::operator =" );
-
-		if( &src != this )
-		{
-			//m_EnumeratorMap = src.m_EnumeratorMap;
-		}
 		return *this;
 	}
 
@@ -107,21 +101,6 @@ namespace nsWin32
 	CRootDeviceEnumerator::~CRootDeviceEnumerator()
 	{
 		_WINQ_FCONTEXT( "CRootDeviceEnumerator::~CRootDeviceEnumerator" );
-		//TODO: check that all enumerators are in fact deleted here
-	}
-	/*
-	//--------------------------------------------------------------------------------
-	CRootDeviceEnumerator::CIterator CRootDeviceEnumerator::begin( void )
-	{
-		CRootDeviceEnumerator::CIterator it( *this );
-		return it;
 	}
 
-	//--------------------------------------------------------------------------------
-	CRootDeviceEnumerator::CIterator CRootDeviceEnumerator::end( void )
-	{
-		CRootDeviceEnumerator::CIterator it( *this, m_EnumeratorMap.Size() );
-		return it;
-	}
-	*/
 }//nsWin32

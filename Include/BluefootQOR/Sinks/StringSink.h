@@ -42,28 +42,28 @@ namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
 	template< typename _tChar > 
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFStringSink : public CBFSink
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CStringSink : public CSink
 	{
 	public:
 
 		//------------------------------------------------------------------------------
-		CBFStringSink()
+		CStringSink()
 		{
 		}
 
 		//------------------------------------------------------------------------------
-		virtual ~CBFStringSink()
+		virtual ~CStringSink()
 		{
 		}
 
 		//------------------------------------------------------------------------------
-		CBFStringSink( const CBFStringSink& src )
+		CStringSink( const CStringSink& src )
 		{
 			*this = src;
 		}
 
 		//------------------------------------------------------------------------------
-		CBFStringSink& operator = (const CBFStringSink& src)
+		CStringSink& operator = (const CStringSink& src)
 		{
 			if( &src != this )
 			{
@@ -106,9 +106,9 @@ namespace nsBluefoot
 
 	};
 
-	typedef CBFStringSink< nsCodeQOR::CChar8 > ANSIStringSink;
-	typedef CBFStringSink< nsCodeQOR::CChar16 > UTF16StringSink;
-	typedef CBFStringSink< nsCodeQOR::CChar32 > CStringSink;
+	typedef CStringSink< nsCodeQOR::CChar8 > ANSIStringSink;
+	typedef CStringSink< nsCodeQOR::CChar16 > UTF16StringSink;
+	typedef CStringSink< nsCodeQOR::CChar32 > CUCS4StringSink;
 
 }//nsBluefoot
 

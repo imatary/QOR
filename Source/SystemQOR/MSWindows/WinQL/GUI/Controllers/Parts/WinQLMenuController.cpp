@@ -149,7 +149,7 @@ namespace nsWin32
 				unsigned short wItemID = static_cast< unsigned short >( -1 );
 				int iIndex = 0;
 
-				if( TheSystem().As< nsWin32::CSystem >()->Information(QOR_PP_SHARED_OBJECT_ACCESS).IsWindows98orME() )
+				if( TheSystem().As< nsWin32::CSystem >()->Information(QOR_PP_SHARED_OBJECT_ACCESS)().IsWindows98orME() )
 				{
 					wItemID = LoWord( wParam );
 					iIndex = static_cast< int >( HiWord( wParam ) );

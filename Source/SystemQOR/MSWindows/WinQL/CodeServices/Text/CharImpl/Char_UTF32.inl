@@ -195,7 +195,7 @@ template<> int UTF32Char::toascii() const
 //--------------------------------------------------------------------------------
 template<> int UTF32Char::tolower() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return ascii_tolower();
 	}
@@ -215,7 +215,7 @@ template<> int UTF32Char::ascii_tolower() const
 //--------------------------------------------------------------------------------
 template<> int UTF32Char::toupper() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return ascii_toupper();
 	}
@@ -461,7 +461,7 @@ template<> int UTF32Char::ischartype( int mask, CLocaleThreadData* pLocaleThread
 
 	wint_t d = 0;
 
-	if ( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if ( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{			
 		CLocaleThreadData __initiallocalestructinfo;
 		if ( CSetLoc::__crtGetStringTypeW( &__initiallocalestructinfo, CT_CType1, (const wchar_t*)c_str(), 1, reinterpret_cast< unsigned short* >( &d ), __initiallocalestructinfo.LocaleInfoPtr()->CodePage(), __initiallocalestructinfo.LocaleInfoPtr()->Handles()[ CLocale::LCCTYPE ] ) == 0 )
@@ -503,7 +503,7 @@ template<> int UTF32Char::isctype( int mask, nsWin32::CLocaleThreadData* plocinf
 			}
 			else
 			{
-				if( TheSystem().As< nsWin32::CSystem >()->Locale()->LocaleChanged() == false )
+				if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 				{
 					CLocaleThreadData __initiallocalestructinfo;
 					//TODO:if ( CSetLoc::__crtGetStringTypeW( &__initiallocalestructinfo, CT_CType1, c_str(), 1, reinterpret_cast< unsigned short* >( &d ), __initiallocalestructinfo.LocaleInfoPtr()->CodePage(), __initiallocalestructinfo.LocaleInfoPtr()->Handles()[ CLocale::LCCTYPE ] ) == 0 )

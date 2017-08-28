@@ -404,7 +404,7 @@ namespace nsBluefoot
 		CXmlLexicalHandler*	lexicalHnd;
 		CXmlDeclHandler*	declHnd;
 
-		CBFSource* m_pInputSource;
+		CSource* m_pInputSource;
 		//CXmlInputSource*	inputSource;
 
 		nsCodeQOR::CChar16 c; // the character at reading position
@@ -469,7 +469,7 @@ namespace nsBluefoot
 
 		bool atEnd();
 
-		void init(const CBFSource* i);
+		void init(const CSource* i);
 		void initData();
 
 		bool entityExist(const nsCodeQOR::CUCS2String& ) const;
@@ -953,7 +953,7 @@ namespace nsBluefoot
 		session will be started, and the previous session will be lost.
 	*/
 	//------------------------------------------------------------------------------
-	bool CXmlSimpleReader::Parse( const CBFSource* input, bool incremental )
+	bool CXmlSimpleReader::Parse( const CSource* input, bool incremental )
 	{
 		CXmlSimpleReaderPrivate* const d = d_ptr.operator nsBluefoot::CXmlSimpleReaderPrivate *();
 
@@ -6461,11 +6461,11 @@ namespace nsBluefoot
 	//------------------------------------------------------------------------------
 	// This private function initializes the reader. 
 	// i is the input source to read the data from.
-	void CXmlSimpleReaderPrivate::init( const CBFSource* i )
+	void CXmlSimpleReaderPrivate::init( const CSource* i )
 	{
 		lineNr = 0;
 		columnNr = -1;
-		m_pInputSource = const_cast< CBFSource* >( i );
+		m_pInputSource = const_cast< CSource* >( i );
 		initData();
 
 		externParameterEntities.clear();

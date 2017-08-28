@@ -41,7 +41,7 @@ namespace nsWin32
 	using namespace nsWinQAPI;
 
 	//--------------------------------------------------------------------------------
-	char CStream::sachLookupTrailBytes[ 256 ] =
+	__QOR_INTERFACE(__WINQL) char CStream::sachLookupTrailBytes[ 256 ] =
 	{
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -384,26 +384,19 @@ namespace nsWin32
 	{
 		__try
 		{
-			/* We deliberately don't hard-validate for empty strings here. All other invalid
-			path strings are treated as runtime errors by the inner code in _open and openfile.
-			This is also the appropriate treatment here. Since fopen is the primary access point
-			for file strings it might be subjected to direct user input and thus must be robust to
-			that rather than aborting. The CRT and OS do not provide any other path validator (because
-			WIN32 doesn't allow such things to exist in full generality).
-			*/
-
 			if( *file == '\0' )
 			{
 				errno = EINVAL;
-				return NULL;
+				return nullptr;
 			}
-
-			stream->_openfile( file, mode, shflag, stream );
-
+			else if( stream != nullptr )
+			{
+				stream->_openfile(file, mode, shflag, stream);
+			}
 		}
 		__finally
 		{
-			if( stream )
+			if( stream != nullptr )
 			{
 				stream->funlockfile();
 			}
@@ -436,7 +429,7 @@ namespace nsWin32
 
 		ParseMode( mode, modeflag, streamflag );
 
-		// Try to open the file.  Note that if neither 't' nor 'b' is specified, _sopen will use the default. */
+		// Try to open the file.  Note that if neither 't' nor 'b' is specified, _sopen will use the default.
 
 		if( _sopen_s( &filedes, filename, modeflag, shflag, _S_IREAD | _S_IWRITE ) != 0 )
 		{
@@ -883,7 +876,7 @@ namespace nsWin32
 
 			int count;
 
-			// Set default tmode per oflag. BOM will change the defualt.
+			// Set default tmode per oflag. BOM will change the default.
 			// If oflag does not specify file type get type from _fmode 
 			if( ( oflag & ( OText | OWText | OU16Text | OU8Text ) ) == 0 )
 			{

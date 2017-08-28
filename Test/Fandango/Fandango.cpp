@@ -27,10 +27,358 @@
 #include "SystemQOR.h"
 #include "SystemQOR/MSWindows/MSW_tchar.h"
 #include "AppocritaQOR/Applications/CmdLineApp.h"
+#include "AppocritaQOR/SubSystems/Networking.h"
 #include "AppocritaQOR/SubSystems/Bluetooth.h"
+#include "BluefootQOR/BfConnection.h"
+#include "BluefootQOR/BfProtocol.h"
+#include "BluefootQOR/BfSocket.h"
 #include "CodeQOR/DataStructures/TRef.h"
 
 using namespace nsQOR;
+using namespace nsBluefoot;
+
+//------------------------------------------------------------------------------
+class CObexClientRequestWorkflow : public CWorkflow
+{
+public:
+
+	__QOR_IMPL_REF(CObexClientRequestWorkflow);
+
+	//------------------------------------------------------------------------------
+	class Recieve : public CState
+	{
+	public:
+
+		//------------------------------------------------------------------------------
+		Recieve(IWorkflow::ref_type Workflow) : CState(Workflow)
+		{
+		}
+
+		//------------------------------------------------------------------------------
+		virtual void OnEnter(IEvent::ref_type pEvent)
+		{
+
+		}
+
+	}m_Recieve;
+
+	//------------------------------------------------------------------------------
+	class TransmitPrepare : public CState
+	{
+	public:
+
+		TransmitPrepare(IWorkflow::ref_type Workflow) : CState(Workflow)
+		{
+
+		}
+	}m_TransmitPrepare;
+
+	//------------------------------------------------------------------------------
+	class Transmit : public CState
+	{
+	public:
+
+		Transmit(IWorkflow::ref_type Workflow) : CState(Workflow)
+		{
+
+		}
+	}m_Transmit;
+
+	//------------------------------------------------------------------------------
+	CObexClientRequestWorkflow() : CWorkflow()
+	, m_Recieve(Ref())
+	, m_TransmitPrepare(Ref())
+	, m_Transmit(Ref())
+	{
+	}
+
+	//------------------------------------------------------------------------------
+	CObexClientRequestWorkflow(IApplication::ref_type Application) : CWorkflow(Application)
+	, m_Recieve(Ref())
+	, m_TransmitPrepare(Ref())
+	, m_Transmit(Ref())
+	{
+	}
+
+	//------------------------------------------------------------------------------
+	virtual ~CObexClientRequestWorkflow()
+	{
+	}
+
+	//------------------------------------------------------------------------------
+	IState::ref_type InitialState(void) const
+	{
+		__QCS_FCONTEXT("CObexClientRequestWorkflow::InitialState");
+		return m_TransmitPrepare.Ref();
+	}
+
+	CObexClientRequestWorkflow(const CObexClientRequestWorkflow&) = delete;
+	CObexClientRequestWorkflow& operator = (const CObexClientRequestWorkflow&) = delete;
+};
+
+//------------------------------------------------------------------------------
+class CObexClientResponseWorkflow : public CWorkflow
+{
+public:
+
+	__QOR_IMPL_REF(CObexClientResponseWorkflow);
+
+	//------------------------------------------------------------------------------
+	class Recieve : public CState
+	{
+	public:
+
+		Recieve(IWorkflow::ref_type Workflow) : CState(Workflow)
+		{
+		}
+	}m_Recieve;
+
+	//------------------------------------------------------------------------------
+	class TransmitPrepare : public CState
+	{
+	public:
+
+		TransmitPrepare(IWorkflow::ref_type Workflow) : CState(Workflow)
+		{
+		}
+	}m_TransmitPrepare;
+
+	//------------------------------------------------------------------------------
+	class Transmit : public CState
+	{
+	public:
+
+		Transmit(IWorkflow::ref_type Workflow) : CState(Workflow)
+		{
+		}
+	}m_Transmit;
+
+	//------------------------------------------------------------------------------
+	CObexClientResponseWorkflow() : CWorkflow()
+		, m_Recieve(Ref())
+		, m_TransmitPrepare(Ref())
+		, m_Transmit(Ref())
+	{
+	}
+
+	//------------------------------------------------------------------------------
+	CObexClientResponseWorkflow(IApplication::ref_type Application) : CWorkflow(Application)
+		, m_Recieve(Ref())
+		, m_TransmitPrepare(Ref())
+		, m_Transmit(Ref())
+	{
+	}
+
+	//------------------------------------------------------------------------------
+	virtual ~CObexClientResponseWorkflow()
+	{
+	}
+
+	//------------------------------------------------------------------------------
+	IState::ref_type InitialState(void) const
+	{
+		__QCS_FCONTEXT("CObexClientResponseWorkflow::InitialState");
+		return m_Recieve.Ref();
+	}
+
+	CObexClientResponseWorkflow(const CObexClientResponseWorkflow&) = delete;
+	CObexClientResponseWorkflow& operator = (const CObexClientResponseWorkflow&) = delete;
+};
+
+//------------------------------------------------------------------------------
+class CObexClientAbortWorkflow : public CWorkflow
+{
+public:
+
+	__QOR_IMPL_REF(CObexClientAbortWorkflow);
+
+	//------------------------------------------------------------------------------
+	class Recieve : public CState
+	{
+	public:
+
+		Recieve(IWorkflow::ref_type Workflow) : CState(Workflow)
+		{
+
+		}
+	}m_Recieve;
+
+	//------------------------------------------------------------------------------
+	class TransmitPrepare : public CState
+	{
+	public:
+
+		TransmitPrepare(IWorkflow::ref_type Workflow) : CState(Workflow)
+		{
+
+		}
+	}m_TransmitPrepare;
+
+	//------------------------------------------------------------------------------
+	class Transmit : public CState
+	{
+	public:
+
+		Transmit(IWorkflow::ref_type Workflow) : CState(Workflow)
+		{
+
+		}
+	}m_Transmit;
+
+	//------------------------------------------------------------------------------
+	CObexClientAbortWorkflow() : CWorkflow()
+		, m_Recieve(Ref())
+		, m_TransmitPrepare(Ref())
+		, m_Transmit(Ref())
+	{
+	}
+
+	//------------------------------------------------------------------------------
+	CObexClientAbortWorkflow(IApplication::ref_type Application) : CWorkflow(Application)
+		, m_Recieve(Ref())
+		, m_TransmitPrepare(Ref())
+		, m_Transmit(Ref())
+	{
+	}
+
+	//------------------------------------------------------------------------------
+	virtual ~CObexClientAbortWorkflow()
+	{
+	}
+
+	//------------------------------------------------------------------------------
+	IState::ref_type InitialState(void) const
+	{
+		__QCS_FCONTEXT("CObexClientAbortWorkflow::InitialState");
+		return m_Recieve.Ref();
+	}
+
+	CObexClientAbortWorkflow(const CObexClientAbortWorkflow&) = delete;
+	CObexClientAbortWorkflow& operator = (const CObexClientAbortWorkflow&) = delete;
+};
+
+//------------------------------------------------------------------------------
+class CObexClientWorkflow : public CWorkflow
+{
+public:
+
+	__QOR_IMPL_REF(CObexClientWorkflow);
+
+	//------------------------------------------------------------------------------
+	class Idle : public CState
+	{
+	public:
+
+		Idle(IWorkflow::ref_type Workflow) : CState(Workflow)
+		{
+		}
+	}m_Idle;
+
+	//------------------------------------------------------------------------------
+	class Request : public CState
+	{
+	public:
+
+		Request(IWorkflow::ref_type Workflow) : CState(Workflow)
+		{
+		}
+
+	}m_Request;
+
+	//------------------------------------------------------------------------------
+	class Response : public CState
+	{
+	public:
+
+		Response(IWorkflow::ref_type Workflow) : CState(Workflow)
+		{
+		}
+
+	}m_Response;
+
+	//------------------------------------------------------------------------------
+	class Abort : public CState
+	{
+	public:
+
+		Abort(IWorkflow::ref_type Workflow) : CState(Workflow)
+		{
+		}
+	}m_Abort;
+
+	//------------------------------------------------------------------------------
+	CObexClientWorkflow() : CWorkflow()
+	,	m_Idle(Ref())
+	,	m_Request(Ref())
+	,	m_Response(Ref())
+	,	m_Abort(Ref())
+	{
+	}
+
+	//------------------------------------------------------------------------------
+	CObexClientWorkflow(IApplication::ref_type Application) : CWorkflow(Application)
+	, m_Idle(Ref())
+	, m_Request(Ref())
+	, m_Response(Ref())
+	, m_Abort(Ref())
+	{
+	}
+
+	//------------------------------------------------------------------------------
+	virtual ~CObexClientWorkflow()
+	{
+	}
+
+	//------------------------------------------------------------------------------
+	IState::ref_type InitialState(void) const
+	{
+		__QCS_FCONTEXT("CObexClientWorkflow::InitialState");
+		return m_Idle.Ref();
+	}
+
+	CObexClientWorkflow(const CObexClientWorkflow&) = delete;
+	CObexClientWorkflow& operator = (const CObexClientWorkflow&) = delete;
+};
+
+//------------------------------------------------------------------------------
+class CObexObjectPushClient : public CBluetoothServiceClient
+{
+public:
+
+	__QOR_DECLARE_OCLASS_ID(CObexObjectPushClient);
+
+	//------------------------------------------------------------------------------
+	CObexObjectPushClient() : CBluetoothServiceClient( ClassID() )
+	{
+		Register();
+	}
+
+	//------------------------------------------------------------------------------
+	virtual ~CObexObjectPushClient()
+	{
+		UnRegister();
+	}
+
+	//------------------------------------------------------------------------------
+	virtual void AttachDevice( IBluetoothRemoteDevice::ref_type Device)
+	{
+		m_Device = Device;
+		bool bResult = m_Device().Connect(CObexObjectPushClient::ClassID());
+	}
+
+	//Establish an Object Exchange connection
+	//Push a data object
+	//Pull a data object
+	//Perform an action on a data object
+	//Create and Manage a Reliable Object Exchange Session
+
+private:
+
+	IBluetoothRemoteDevice::ref_type m_Device;
+
+};
+
+__QOR_IMPLEMENT_OCLASS_GUID(CObexObjectPushClient, 0x00001105, 0x0000, 0x1000, 0x80, 0x00, 0x00, 0x80, 0x5F, 0x9B, 0x34, 0xFB);
 
 //------------------------------------------------------------------------------
 class CFandangoApp : public CApplication
@@ -45,34 +393,48 @@ public:
 
 	//------------------------------------------------------------------------------
 	CFandangoApp() : CApplication( CRole::CmdLineTool() )
+	, m_Workflow( ref(*this) )
 	{
-		AddSubSystem( m_Bluetooth );
+		AddSubSystem(m_Networking);
+		AddSubSystem(m_Bluetooth);
 		
-		//_new_shared_ref( Dummy, myDummy );
-		//myDummy().i = 42;
+		m_ObexObjextPushClient = new_ref<CObexObjectPushClient>();
+
+		SetWorkflow(ref(m_Workflow));
 	}
 
 	//------------------------------------------------------------------------------
 	virtual ~CFandangoApp()
 	{
-		m_Bluetooth.Shutdown( *this );
+		m_ObexObjextPushClient.Dispose();
 	}
 
 	//------------------------------------------------------------------------------
 	void Setup( void )
 	{
-		m_Bluetooth.Setup( *this );
+		m_Networking.Setup(*this);
+		m_Bluetooth.Setup(*this);
+	}
+
+	//------------------------------------------------------------------------------
+	void OnIdle(void)
+	{
+		m_Bluetooth.ScanForDevices();
 	}
 
 	//------------------------------------------------------------------------------
 	void Shutdown( void )
 	{
 		m_Bluetooth.Shutdown( *this );
+		m_Networking.Shutdown(*this);
 	}
 
 private:
 
+	CNetworking m_Networking;
 	CBluetooth m_Bluetooth;
+	_reftype(CObexObjectPushClient) m_ObexObjextPushClient;
+	CObexClientWorkflow m_Workflow;
 };
 
 //------------------------------------------------------------------------------

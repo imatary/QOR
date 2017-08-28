@@ -25,7 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 //Implements an error handler for silently resolving a specific error that is
-//expected as part of normal behaviour
+//expected as part of normal behavior
 
 //This is used to provide special cases wherever we call code in circumstances where
 //we expect it to fail but we don't want to prevent it raising errors if it fails

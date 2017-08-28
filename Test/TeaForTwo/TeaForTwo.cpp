@@ -26,8 +26,11 @@
 
 //Minimal test application for Strata-1 qualification
 
+#include "SystemQOR.h"
+#include "SystemQOR/MSWindows/MSW_tchar.h"
+
 //------------------------------------------------------------------------------
-int wmain()
+int _tmain( int /*argc*/, TCHAR** /*argv*/)
 {
     return 42;
 }
@@ -60,13 +63,13 @@ Constructing a CWinQORSharedBootStrap sets up the atexit chain for functions to 
 before the Dll is unloaded. The Module base class of the SharedBootStrap also represents
 the loaded module from now on until it is unloaded.
 
-When all implicitly linked libraries have been initialised like this the OS loader calls
+When all implicitly linked libraries have been initialized like this the OS loader calls
 the entry point on the TeaForTwo executable.
 
 __QCMP_LINKAGE_C int __cdecl _tMainCRTStartup( void )
 
-This is provided by the WinUsrExeBoot.lib static library, which is why WinUsrExeBoot must
-be linked into all QOR Windows executables.
+This is provided by the WinUsrExeBootCon.lib static library, which is why WinUsrExeBootCon must
+be linked into all QOR Windows Console executables.
 This is the end of the first pass which is under the control of Windows.
 
 The _tMainCRTStartup function creates a CBootStrap object on the stack and calls its Execute 

@@ -1,6 +1,6 @@
 //WinQLDeviceInfoSet.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -56,7 +56,6 @@ namespace nsWin32
 			reinterpret_cast< const ::GUID* >( pGuid ), 
 			reinterpret_cast< ::HWND >( pWindow ? pWindow->Handle()->Use() : 0 ), szMachineName, 0 );
 		m_Handle.Attach( this );
-		Init();
 	}
 
 	//--------------------------------------------------------------------------------
@@ -69,7 +68,6 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CDeviceInfoSet::CDeviceInfoSet" );
 		m_Handle = m_Library.SetupDiGetClassDevs( 0, strEnumID, 0, DIGCF_ALLCLASSES | DIGCF_PRESENT );
 		m_Handle.Attach( this );
-		Init();
 	}
 
 	//--------------------------------------------------------------------------------
@@ -82,7 +80,6 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CDeviceInfoSet::CDeviceInfoSet" );
 		m_Handle = m_Library.SetupDiGetClassDevs( reinterpret_cast< const ::GUID* >( &InterfaceGUID ), 0, 0, ulFlags/*( DIGCF_PRESENT | DIGCF_DEVICEINTERFACE )*/ );
 		m_Handle.Attach( this );
-		Init();
 	}
 
 	//--------------------------------------------------------------------------------
@@ -90,7 +87,6 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CDeviceInfoSet::~CDeviceInfoSet" );
 		m_Library.SetupDiDestroyDeviceInfoList( m_Handle.Use() );
-		Uninit();
 	}
 
 	//--------------------------------------------------------------------------------
@@ -98,28 +94,6 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CDeviceInfoSet::Handle" );
 		return m_Handle;
-	}
-
-	//--------------------------------------------------------------------------------
-	void CDeviceInfoSet::Uninit()
-	{
-		_WINQ_FCONTEXT( "CDeviceInfoSet::Uninit" );
-
-		if( !m_Handle.IsNull() )
-		{
-			_Thread().ResourceManager().DeviceInfoSetHandleMap().Remove( nsCodeQOR::CTLRef< CHandle >( &m_Handle ) );
-		}
-	}
-
-	//--------------------------------------------------------------------------------
-	void CDeviceInfoSet::Init()
-	{
-		_WINQ_FCONTEXT( "CDeviceInfoSet::Init" );
-
-		if( !( m_Handle.IsNull() ) )
-		{
-			_Thread().ResourceManager().DeviceInfoSetHandleMap().Add( nsCodeQOR::CTLRef< CHandle >( &m_Handle ), this );
-		}
 	}
 
 }//nsWin32

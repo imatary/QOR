@@ -42,14 +42,14 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	//A generic data sink, possibly but not necessarily representing a device.
 	//Derived classes handle output to specific devices
-	class __QOR_INTERFACE( __WINQL ) CIOSink : public nsBluefoot::CBFSink
+	class __QOR_INTERFACE( __WINQL ) CIOSink : public nsBluefoot::CSink
 	{
 	public:
 
 		typedef nsCodeQOR::CTLRef< CIOSink > refSinkType;
 
 		//--------------------------------------------------------------------------------
-		CIOSink( nsBluefoot::CBFPlug* pConnector = 0 ) : nsBluefoot::CBFSink()
+		CIOSink( nsBluefoot::CPlug* pConnector = 0 ) : nsBluefoot::CSink()
 		,	m_pIOSinkConnector( pConnector )
 		{
 		}
@@ -68,13 +68,13 @@ namespace nsWin32
 		}
 
 		//--------------------------------------------------------------------------------
-		nsBluefoot::CBFPlug* GetSinkConnector( void )
+		nsBluefoot::CPlug* GetSinkConnector( void )
 		{
 			return m_pIOSinkConnector;
 		}
 
 		//--------------------------------------------------------------------------------
-		void SetSinkConnector( nsBluefoot::CBFPlug* pIOConnector )
+		void SetSinkConnector( nsBluefoot::CPlug* pIOConnector )
 		{
 			m_pIOSinkConnector = pIOConnector;
 		}
@@ -89,7 +89,7 @@ namespace nsWin32
 
 	protected:
 
-		nsBluefoot::CBFPlug* m_pIOSinkConnector;
+		nsBluefoot::CPlug* m_pIOSinkConnector;
 	};
 
 }//nsWin32

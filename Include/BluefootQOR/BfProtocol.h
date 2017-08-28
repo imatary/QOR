@@ -1,6 +1,6 @@
 //BfProtocol.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -35,94 +35,197 @@
 #include "BfPipeline.h"
 #include "AppocritaQOR/Workflow.h"
 #include "AppocritaQOR/State.h"
+#include "AppocritaQOR/Subsystems/Thread.h"
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot
 {
 	
+	class __QOR_INTERFACE(__BLUEFOOTQOR) CProtocol;
+	/*
+	
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFProtocol : public nsQOR::CWorkflow
+	class __QOR_INTERFACE(__BLUEFOOTQOR) CProtocolWorkflow : public nsQOR::CWorkflow
 	{
 	public:
 
 		//--------------------------------------------------------------------------------
-		class StoppedState : public nsQOR::CState
+		class State : public nsQOR::CCompoundState
 		{
 		public:
-			StoppedState( IWorkflow::ref_type pWorkflow  ) : nsQOR::CState( pWorkflow )
+
+			//--------------------------------------------------------------------------------
+			State(IWorkflow::ref_type pWorkflow) : nsQOR::CCompoundState(pWorkflow) 
 			{
 			}
+
+			//--------------------------------------------------------------------------------
+			void SetHigherLevelWorkflow(IWorkflow::ref_type Workflow)
+			{
+				m_pHigherLevelWorkflow = Workflow;
+			}
+
+			virtual unsigned long GetNextReadCount(void) = 0;
+			virtual unsigned long GetNextWriteCount(void) = 0;
+		protected:
+
+			IWorkflow::ref_type m_pHigherLevelWorkflow;
+		};
+
+
+		CProtocolWorkflow() = delete;
+		CProtocolWorkflow(nsQOR::IApplication::ref_type Application) : nsQOR::CWorkflow(Application) {}
+		virtual ~CProtocolWorkflow() {}
+		CProtocolWorkflow(const CProtocolWorkflow& src) : nsQOR::CWorkflow(src.GetApplication()) { *this = src; }
+		CProtocolWorkflow& operator = (const CProtocolWorkflow& src) { return *this; }
+
+		//--------------------------------------------------------------------------------
+		void SetHigherLevelWorkflow(IWorkflow::ref_type Workflow)
+		{
+			m_pHigherLevelWorkflow = Workflow;
+			m_pHigherLevelWorkflow.As< CProtocolWorkflow >()->SetProtocol(m_pProtocol);
+		}
+
+		//--------------------------------------------------------------------------------
+		void SetProtocol( CProtocol* pProtocol)
+		{
+			m_pProtocol = pProtocol;
+		}
+
+		//--------------------------------------------------------------------------------
+		CProtocol* GetProtocol(void)
+		{
+			return m_pProtocol;
+		}
+
+		virtual unsigned long GetNextReadCount(void) { return 0; }
+		virtual unsigned long GetNextWriteCount(void) { return 0; }
+
+	protected:
+
+		IWorkflow::ref_type m_pHigherLevelWorkflow;
+		CProtocol* m_pProtocol;
+
+	};
+*/
+	//------------------------------------------------------------------------------
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CProtocol : public nsQOR::CWorkflow
+	{
+	public:
+
+		//--------------------------------------------------------------------------------
+		class CProtocolState : public nsQOR::CCompoundState
+		{
+		public:
+
+			__QOR_DECLARE_OCLASS_ID(CProtocol);
+
+			//--------------------------------------------------------------------------------
+			enum eProtocolEvents
+			{
+				ConnectionError = 1,
+				DisconnectionError,
+				Connected,
+				Disconnected,
+				ReadError,
+				ReadSuccess,
+				EndOfData,
+				WriteError,
+				WriteSuccess
+			};
+
+			CProtocolState(IWorkflow::ref_type pWorkflow);
+			bool operator()(nsQOR::IEvent::ref_type _event, int iCookie);
+			//void SetHigherLevelWorkflow(IWorkflow::ref_type Workflow);
+
+		protected:
+
+			virtual void GetNextReadCount(void);
+			virtual void GetNextWriteCount(void);
+
+			CProtocol* m_pProtocol;
+		};
+
+		//--------------------------------------------------------------------------------
+		class StoppedState : public CProtocolState
+		{
+		public:
+			StoppedState( IWorkflow::ref_type pWorkflow  ) : CProtocolState( pWorkflow ){}
 		}m_StoppedState;
 
 		//--------------------------------------------------------------------------------
-		class ReadingState : public nsQOR::CState
+		class ReadingState : public CProtocolState
 		{
 		public:
-			ReadingState( IWorkflow::ref_type pWorkflow ) : nsQOR::CState( pWorkflow )
+
+			//--------------------------------------------------------------------------------
+			ReadingState( IWorkflow::ref_type pWorkflow ) : CProtocolState( pWorkflow ){}
+
+			//--------------------------------------------------------------------------------
+			void OnEnter(nsQOR::IEvent::ref_type pEvent)
 			{
+				m_pProtocol->Read();
 			}
+
 		}m_ReadingState;
 		
 		//--------------------------------------------------------------------------------
-		class WritingState : public nsQOR::CState
+		class WritingState : public CProtocolState
 		{
 		public:
-			WritingState( IWorkflow::ref_type pWorkflow ) : nsQOR::CState( pWorkflow )
+
+			//--------------------------------------------------------------------------------
+			WritingState( IWorkflow::ref_type pWorkflow ) : CProtocolState( pWorkflow ){}
+
+			//--------------------------------------------------------------------------------
+			void OnEnter(nsQOR::IEvent::ref_type pEvent)
 			{
+				m_pProtocol->Write();
 			}
+
 		}m_WritingState;
 
-		__QOR_DECLARE_OCLASS_ID( CBFProtocol );
+		__QOR_DECLARE_OCLASS_ID(CProtocol);
 
-		CBFProtocol() = delete;
-		CBFProtocol( nsQOR::IApplication::ref_type Application );
-		virtual ~CBFProtocol();
-		CBFProtocol(const CBFProtocol& src);
-		CBFProtocol& operator = (const CBFProtocol& src);
+		CProtocol() = delete;
+		CProtocol( nsQOR::IApplication::ref_type Application );
+		virtual ~CProtocol();
+		CProtocol(const CProtocol& src);
+		CProtocol& operator = (const CProtocol& src);
 
 		virtual nsQOR::IState::ref_type InitialState( void ) const;
 
-		void SetOutPipe( CBFPipeline* pOutPipe );
-		CBFPipeline* GetOutPipe( void );
-		void SetInPipe( CBFPipeline* pInPipe );
-		CBFPipeline* GetInPipe( void );
-
-		virtual bool OnProtocolStateChanged( void );			//single step the state machine
+		void SetOutPipe( CPipeline* pOutPipe );
+		CPipeline* GetOutPipe( void );
+		void SetInPipe( CPipeline* pInPipe );
+		CPipeline* GetInPipe( void );
+		void SetConnection(CPlug* pConnection);
 
 		virtual void GetNextReadCount( void );
 		virtual void GetNextWriteCount( void );
 
-		virtual void OnConnectionError( void );
-		virtual void OnConnected( void );
-		virtual void OnDisconnectionError( void );
-		virtual void OnDisconnected( void );
-		virtual void OnReadSuccess( unsigned long ulUnitsRead );
-		virtual void OnReadError( void );
-		virtual void OnWriteSuccess( void );
-		virtual void OnWriteError( void );
-		virtual void OnEndOfData( void );
 		virtual bool Read( void );
 		virtual bool Write( void );
 
-		//For the use a protocol as a sink/source via CProtocolSink, CProtocolSource below
+		//For the use of a protocol as a sink/source via CProtocolSink, CProtocolSource below
 		virtual bool OnRead( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite = 1 ){ return false; }
 		virtual bool OnWrite( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead = 1 ){ return false; }
 
 	protected:
 
-		nsQOR::CState::ref_type m_NextState;
 		unsigned long m_ulDataSize;		
-		CBFPipeline* m_pInPipe;
-		CBFPipeline* m_pOutPipe;
+		CPipeline* m_pInPipe;
+		CPipeline* m_pOutPipe;
+		CPlug* m_pConnection;
 	};
 
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CProtocolSink : public CBFSink
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CProtocolSink : public CSink
 	{
 	public:
 
 		//--------------------------------------------------------------------------------
-		CProtocolSink( CBFProtocol* pProtocol ) : CBFSink()
+		CProtocolSink( CProtocol* pProtocol ) : CSink()
 		,	m_pProtocol( pProtocol )
 		{
 		}
@@ -146,16 +249,16 @@ namespace nsBluefoot
 
 	protected:
 
-		CBFProtocol* m_pProtocol;
+		CProtocol* m_pProtocol;
 	};
 
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CProtocolSource : public CBFSource
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CProtocolSource : public CSource
 	{
 	public:
 
 		//--------------------------------------------------------------------------------
-		CProtocolSource( CBFProtocol* pProtocol ) : CBFSource()
+		CProtocolSource( CProtocol* pProtocol ) : CSource()
 		,	m_pProtocol( pProtocol )
 		{
 		}
@@ -179,7 +282,7 @@ namespace nsBluefoot
 
 	protected:
 
-		CBFProtocol* m_pProtocol;
+		CProtocol* m_pProtocol;
 	};
 
 }//nsBluefoot

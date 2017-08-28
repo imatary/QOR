@@ -1,6 +1,6 @@
 //UnitTestQOR.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -35,6 +35,15 @@
 
 __QCMP_STARTLINKAGE_C
 
+	extern int _cdecl QORStaticInit(void);
+
+	//------------------------------------------------------------------------------
+	__QCMP_EXPORT int _cdecl QORinit(void)
+	{
+		QORStaticInit();
+		return 1;
+	}
+
 	//------------------------------------------------------------------------------
 	//export a unique identifier for the UnitTestQOR module
 	__QCMP_EXPORT nsCodeQOR::mxGUID* QORidentity( void )
@@ -48,8 +57,14 @@ __QCMP_ENDLINKAGE_C
 		//------------------------------------------------------------------------------
 	nsCodeQOR::CLoadableModuleBase& ThisModule( void )
 	{
-		static nsCodeQOR::CLoadableModuleBase PosumQORModule( "Querysoft Open Unit Test Library (Hippo)" );
-		return PosumQORModule;
+		static nsCodeQOR::CLoadableModuleBase HippoQORModule( "Querysoft Open Runtime Unit Test Library (Hippo)" );
+		return HippoQORModule;
+	}
+
+	//------------------------------------------------------------------------------
+	const char* __QCMP_LOCAL ThisModuleVersion(void)
+	{
+		return QOR_PP_STRINGIZE(__DATE__:__TIME__);
 	}
 
 #endif//_USRDLL

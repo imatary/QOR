@@ -1183,6 +1183,801 @@ namespace nsWin32
 		virtual long __QCMP_STDCALLCONVENTION Authenticate( void** phwnd, wchar_t** pszUsername, wchar_t** pszPassword ) = 0;
 	};
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//IDCompositionAffineTransform2DEffect
+	//The arithmetic composite effect is used to combine 2 images using a weighted sum of pixels from the input images.
+	
+	//IDCompositionAnimation
+	//Represents a function for animating one or more properties of one or more DirectComposition objects.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("CBFD91D9-51B2-45e4-B3DE-D19CCFB863C5")) IDCompositionAnimation : public IUnknown
+	{
+	public:
+
+		virtual long __QCMP_STDCALLCONVENTION Reset(void) = 0;
+		virtual long __QCMP_STDCALLCONVENTION SetAbsoluteBeginTime( LARGE_INTEGER beginTime ) = 0;
+		virtual long __QCMP_STDCALLCONVENTION AddCubic( double beginOffset, float constantCoefficient, float linearCoefficient, float quadraticCoefficient, float cubicCoefficient) = 0;
+		virtual long __QCMP_STDCALLCONVENTION AddSinusoidal( double beginOffset, float bias, float amplitude, float frequency, float phase) = 0;
+		virtual long __QCMP_STDCALLCONVENTION AddRepeat( double beginOffset, double durationToRepeat) = 0;
+		virtual long __QCMP_STDCALLCONVENTION End( double endOffset, float endValue) = 0;
+
+	};
+
+	
+	//IDCompositionArithmeticCompositeEffect
+	//The arithmetic composite effect is used to combine 2 images using a weighted sum of pixels from the input images.
+	
+	//IDCompositionBlendEffect
+	//The Blend Effect is used to combine 2 images.
+	
+	//IDCompositionBrightnessEffect
+	//The brightness effect controls the brightness of the image.
+	
+	//IDCompositionColorMatrixEffect
+	//The color matrix effect alters the RGBA values of a bitmap.
+	
+	//IDCompositionCompositeEffect
+	//The composite effect is used to combine 2 or more images.This effect has 13 different composite modes.The composite effect accepts 2 or more inputs.When you specify 2 images, destination is the first input(index 0) and the source is the second input(index 1).If you specify more than 2 inputs, the images are composited starting with the first input and the second and so on.
+	
+	//IDCompositionClip
+	//Represents a clip object that is used to restrict the rendering of a visual subtree to a rectangular area.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("64AC3703-9D3F-45ec-A109-7CAC0E7A13A7")) IDCompositionClip : public IUnknown
+	{
+	};
+
+	//IDCompositionEffect
+	//Represents a bitmap effect that modifies the rasterization of a visual's subtree.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("EC81B08F-BFCB-4e8d-B193-A915587999E8")) IDCompositionEffect : public IUnknown
+	{
+	};
+
+	//IDCompositionTransform3D
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("71185722-246B-41f2-AAD1-0443F7F4BFC2")) IDCompositionTransform3D : public IDCompositionEffect
+	{
+	};
+
+	//IDCompositionTransform
+	//Represents a 2D transformation that can be used to modify the coordinate space of a visual subtree.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("FD55FAA7-37E0-4c20-95D2-9BE45BC33F55")) IDCompositionTransform : public IDCompositionTransform3D
+	{
+	};
+
+	//IDCompositionVisual
+	//Represents a DirectComposition visual.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("4d93059d-097b-4651-9a60-f0f25116e2f3")) IDCompositionVisual : public  IUnknown
+	{
+		// Changes the value of OffsetX property
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetX(float offsetX) = 0;
+
+		// Animates the value of the OffsetX property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of OffsetY property
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetY(float offsetY) = 0;
+
+		// Animates the value of the OffsetY property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetY(IDCompositionAnimation* animation) = 0;
+
+		// Sets the matrix that modifies the coordinate system of this visual.
+		virtual long __QCMP_STDCALLCONVENTION SetTransform(const D2D_MATRIX_3X2_F& matrix) = 0;
+
+		// Sets the transformation object that modifies the coordinate system of this visual.
+		virtual long __QCMP_STDCALLCONVENTION SetTransform(IDCompositionTransform* transform) = 0;
+
+		// Sets the visual that should act as this visual's parent for the
+		// purpose of establishing a base coordinate system.
+		virtual long __QCMP_STDCALLCONVENTION SetTransformParent(IDCompositionVisual* visual) = 0;
+
+		// Sets the effect object that is applied during the rendering of this visual
+		virtual long __QCMP_STDCALLCONVENTION SetEffect(IDCompositionEffect* effect) = 0;
+
+		// Sets the mode to use when interpolating pixels from bitmaps drawn not
+		// exactly at scale and axis-aligned.
+		virtual long __QCMP_STDCALLCONVENTION SetBitmapInterpolationMode(DCOMPOSITION_BITMAP_INTERPOLATION_MODE interpolationMode) = 0;
+
+		// Sets the mode to use when drawing the edge of bitmaps that are not
+		// exactly axis-aligned and at precise pixel boundaries.
+		virtual long __QCMP_STDCALLCONVENTION SetBorderMode(DCOMPOSITION_BORDER_MODE borderMode) = 0;
+
+		// Sets the clip object that restricts the rendering of this visual to a D2D rectangle.
+		virtual long __QCMP_STDCALLCONVENTION SetClip(const D2D_RECT_F& rect) = 0;
+
+		// Sets the clip object that restricts the rendering of this visual to a rectangle.
+		virtual long __QCMP_STDCALLCONVENTION SetClip(IDCompositionClip* clip) = 0;
+
+		// Associates a bitmap with a visual
+		virtual long __QCMP_STDCALLCONVENTION SetContent(IUnknown* content) = 0;
+
+		// Adds a visual to the children list of another visual.
+		virtual long __QCMP_STDCALLCONVENTION AddVisual(IDCompositionVisual* visual, BOOL insertAbove, IDCompositionVisual* referenceVisual) = 0;
+
+		// Removes a visual from the children list of another visual.
+		virtual long __QCMP_STDCALLCONVENTION RemoveVisual(IDCompositionVisual* visual) = 0;
+
+		// Removes all visuals from the children list of another visual.
+		virtual long __QCMP_STDCALLCONVENTION RemoveAllVisuals() = 0;
+
+		// Sets the mode to use when composing the bitmap against the render target.
+		virtual long __QCMP_STDCALLCONVENTION SetCompositeMode(DCOMPOSITION_COMPOSITE_MODE compositeMode) = 0;
+	};
+
+
+	//IDCompositionVisual2
+	//Represents one DirectComposition visual in a visual tree.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("E8DE1639-4331-4B26-BC5F-6A321D347A85")) IDCompositionVisual2 : public IDCompositionVisual
+	{
+		// Changes the interpretation of the opacity property of an effect group associated with this visual
+		virtual long __QCMP_STDCALLCONVENTION SetOpacityMode(DCOMPOSITION_OPACITY_MODE mode) = 0;
+
+		// Sets back face visibility
+		virtual long __QCMP_STDCALLCONVENTION SetBackFaceVisibility(DCOMPOSITION_BACKFACE_VISIBILITY visibility) = 0;
+	};
+
+	//IDCompositionSurface
+	//Represents a physical bitmap that can be associated with a visual for composition in a visual tree.This interface can also be used to update the bitmap contents.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("BB8A4953-2C99-4F5A-96F5-4819027FA3AC")) IDCompositionSurface : public IUnknown
+	{
+		virtual long __QCMP_STDCALLCONVENTION BeginDraw(const RECT* updateRect, const GUID& iid, void** updateObject, POINT* updateOffset) = 0;
+
+		virtual long __QCMP_STDCALLCONVENTION EndDraw() = 0;
+
+		virtual long __QCMP_STDCALLCONVENTION SuspendDraw() = 0;
+
+		virtual long __QCMP_STDCALLCONVENTION ResumeDraw() = 0;
+
+		virtual long __QCMP_STDCALLCONVENTION Scroll(const RECT* scrollRect, const RECT* clipRect, int offsetX, int offsetY) = 0;
+	};
+
+	//IDCompositionVirtualSurface
+	//Represents a sparsely allocated bitmap that can be associated with a visual for composition in a visual tree.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("AE471C51-5F53-4A24-8D3E-D0C39C30B3F0")) IDCompositionVirtualSurface : public IDCompositionSurface
+	{
+		virtual long __QCMP_STDCALLCONVENTION Resize(unsigned int width, unsigned int height) = 0;
+		virtual long __QCMP_STDCALLCONVENTION Trim(const RECT* rectangles, unsigned int count) = 0;
+	};
+
+	//IDCompositionSurfaceFactory
+	//Creates surface and virtual surface objects associated with an application - provided rendering device.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("E334BC12-3937-4E02-85EB-FCF4EB30D2C8")) IDCompositionSurfaceFactory : public IUnknown
+	{
+		// Creates a DirectComposition surface object
+		virtual long __QCMP_STDCALLCONVENTION CreateSurface(unsigned int width, unsigned int height, DXGI_FORMAT pixelFormat, DXGI_ALPHA_MODE alphaMode, IDCompositionSurface** surface) = 0;
+
+		// Creates a DirectComposition virtual surface object
+		virtual long __QCMP_STDCALLCONVENTION CreateVirtualSurface(unsigned int initialWidth, unsigned int initialHeight, DXGI_FORMAT pixelFormat, DXGI_ALPHA_MODE alphaMode, IDCompositionVirtualSurface** virtualSurface) = 0;
+	};
+
+	//IDCompositionTranslateTransform
+	//Represents a 2D transformation that affects only the offset of a visual along the x - axis and y - axis.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("06791122-C6F0-417d-8323-269E987F5954")) IDCompositionTranslateTransform : public IDCompositionTransform
+	{
+		// Changes the value of the OffsetX property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetX(float offsetX) = 0;
+
+		// Animates the value of the OffsetX property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the OffsetY property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetY(float offsetY) = 0;
+
+		// Animates the value of the OffsetY property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetY(IDCompositionAnimation* animation) = 0;
+	};
+
+	//IDCompositionScaleTransform
+	//Represents a 2D transformation that affects the scale of a visual along the x - axis and y - axis.The coordinate system is scaled from the specified center point.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("71FDE914-40EF-45ef-BD51-68B037C339F9")) IDCompositionScaleTransform : public IDCompositionTransform
+	{
+		// Changes the value of the ScaleX property.
+		virtual long __QCMP_STDCALLCONVENTION SetScaleX(float scaleX) = 0;
+
+		// Animates the value of the ScaleX property.
+		virtual long __QCMP_STDCALLCONVENTION SetScaleX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the ScaleY property.
+		virtual long __QCMP_STDCALLCONVENTION SetScaleY(float scaleY) = 0;
+
+		// Animates the value of the ScaleY property.
+		virtual long __QCMP_STDCALLCONVENTION SetScaleY(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the CenterX property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterX(float centerX) = 0;
+
+		// Animates the value of the CenterX property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the CenterY property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterY(float centerY) = 0;
+
+		// Animates the value of the CenterY property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterY(IDCompositionAnimation* animation) = 0;
+	};
+
+	//IDCompositionRotateTransform
+	//Represents a 2D transformation that affects the rotation of a visual around the z - axis.The coordinate system is rotated around the specified center point.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("641ED83C-AE96-46c5-90DC-32774CC5C6D5")) IDCompositionRotateTransform : public IDCompositionTransform
+	{
+		// Changes the value of the Angle property.
+		virtual long __QCMP_STDCALLCONVENTION SetAngle(float angle) = 0;
+
+		// Animates the value of the Angle property.
+		virtual long __QCMP_STDCALLCONVENTION SetAngle(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the CenterX property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterX(float centerX) = 0;
+
+		// Animates the value of the CenterX property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the CenterY property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterY(float centerY) = 0;
+
+		// Animates the value of the CenterY property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterY(IDCompositionAnimation* animation) = 0;
+	};
+
+	//IDCompositionSkewTransform
+	//Represents a 2D transformation that affects the skew of a visual along the x - axis and y - axis.The coordinate system is skewed around the specified center point.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("E57AA735-DCDB-4c72-9C61-0591F58889EE")) IDCompositionSkewTransform : public IDCompositionTransform
+	{
+		// Changes the value of the AngleX property.
+		virtual long __QCMP_STDCALLCONVENTION SetAngleX(float angleX) = 0;
+
+		// Animates the value of the AngleX property.
+		virtual long __QCMP_STDCALLCONVENTION SetAngleX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the AngleY property.
+		virtual long __QCMP_STDCALLCONVENTION SetAngleY(float angleY) = 0;
+
+		// Animates the value of the AngleY property.
+		virtual long __QCMP_STDCALLCONVENTION SetAngleY(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the CenterX property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterX(float centerX) = 0;
+
+		// Animates the value of the CenterX property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the CenterY property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterY(float centerY) = 0;
+
+		// Animates the value of the CenterY property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterY(IDCompositionAnimation* animation) = 0;
+	};
+
+	//IDCompositionMatrixTransform
+	//Represents an arbitrary affine 2D transformation defined by a 3 - by - 2 matrix.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("16CDFF07-C503-419c-83F2-0965C7AF1FA6")) IDCompositionMatrixTransform : public IDCompositionTransform
+	{
+		// Changes all values of the matrix of this transform.
+		virtual long __QCMP_STDCALLCONVENTION SetMatrix(const D2D_MATRIX_3X2_F& matrix) = 0;
+
+		// Changes a single element of the matrix of this transform.
+		virtual long __QCMP_STDCALLCONVENTION SetMatrixElement(int row, int column, float value) = 0;
+
+		// Animates a single element of the matrix of this transform.
+		virtual long __QCMP_STDCALLCONVENTION SetMatrixElement(int row, int column, IDCompositionAnimation* animation) = 0;
+	};
+
+	//IDCompositionTranslateTransform3D
+	//Represents a 3D transformation that affects the offset of a visual along the x - axis, y - axis, and z - axis.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("91636D4B-9BA1-4532-AAF7-E3344994D788")) IDCompositionTranslateTransform3D : public IDCompositionTransform3D
+	{
+		// Changes the value of the OffsetX property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetX(float offsetX) = 0;
+
+		// Animates the value of the OffsetX property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the OffsetY property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetY(float offsetY) = 0;
+
+		// Animates the value of the OffsetY property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetY(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the OffsetZ property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetZ(float offsetZ) = 0;
+
+		// Animates the value of the OffsetZ property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetZ(IDCompositionAnimation* animation) = 0;
+	};
+
+	//IDCompositionScaleTransform3D
+	//Represents a 3D transformation effect that affects the scale of a visual along the x - axis, y - axis, and z - axis.The coordinate system is scaled from the specified center point.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("2A9E9EAD-364B-4b15-A7C4-A1997F78B389")) IDCompositionScaleTransform3D : public IDCompositionTransform3D
+	{
+		// Changes the value of the ScaleX property.
+		virtual long __QCMP_STDCALLCONVENTION SetScaleX(float scaleX) = 0;
+
+		// Animates the value of the ScaleX property.
+		virtual long __QCMP_STDCALLCONVENTION SetScaleX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the ScaleY property.
+		virtual long __QCMP_STDCALLCONVENTION SetScaleY(float scaleY) = 0;
+
+		// Animates the value of the ScaleY property.
+		virtual long __QCMP_STDCALLCONVENTION SetScaleY(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the ScaleZ property.
+		virtual long __QCMP_STDCALLCONVENTION SetScaleZ(float scaleZ) = 0;
+
+		// Animates the value of the ScaleZ property.
+		virtual long __QCMP_STDCALLCONVENTION SetScaleZ(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the CenterX property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterX(float centerX) = 0;
+
+		// Animates the value of the CenterX property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the CenterY property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterY(float centerY) = 0;
+
+		// Animates the value of the CenterY property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterY(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the CenterZ property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterZ(float centerZ) = 0;
+
+		// Animates the value of the CenterZ property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterZ(IDCompositionAnimation* animation) = 0;
+	};
+
+	//IDCompositionRotateTransform3D
+	//Represents a 3D transformation that affects the rotation of a visual along an arbitrary axis in 3D space.The coordinate system is rotated around the specified center point.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("D8F5B23F-D429-4a91-B55A-D2F45FD75B18")) IDCompositionRotateTransform3D : public IDCompositionTransform3D
+	{
+		// Changes the value of the Angle property.
+		virtual long __QCMP_STDCALLCONVENTION SetAngle(float angle) = 0;
+
+		// Animates the value of the Angle property.
+		virtual long __QCMP_STDCALLCONVENTION SetAngle(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the AxisX property.
+		virtual long __QCMP_STDCALLCONVENTION SetAxisX(float axisX) = 0;
+
+		// Animates the value of the AxisX property.
+		virtual long __QCMP_STDCALLCONVENTION SetAxisX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the AxisY property.
+		virtual long __QCMP_STDCALLCONVENTION SetAxisY(float axisY) = 0;
+
+		// Animates the value of the AxisY property.
+		virtual long __QCMP_STDCALLCONVENTION SetAxisY(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the AxisZ property.
+		virtual long __QCMP_STDCALLCONVENTION SetAxisZ(float axisZ) = 0;
+
+		// Animates the value of the AxisZ property.
+		virtual long __QCMP_STDCALLCONVENTION SetAxisZ(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the CenterX property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterX(float centerX) = 0;
+
+		// Animates the value of the CenterX property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the CenterY property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterY(float centerY) = 0;
+
+		// Animates the value of the CenterY property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterY(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the CenterZ property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterZ(float centerZ) = 0;
+
+		// Animates the value of the CenterZ property.
+		virtual long __QCMP_STDCALLCONVENTION SetCenterZ(IDCompositionAnimation* animation) = 0;
+	};
+
+	//IDCompositionMatrixTransform3D
+	//Represents an arbitrary 3D transformation defined by a 4 - by - 4 matrix.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("4B3363F0-643B-41b7-B6E0-CCF22D34467C")) IDCompositionMatrixTransform3D : public IDCompositionTransform3D
+	{
+		// Changes all values of the matrix of this transform.
+		virtual long __QCMP_STDCALLCONVENTION SetMatrix(const D3DMATRIX& matrix) = 0;
+
+		// Changes a single element of the matrix of this transform.
+		virtual long __QCMP_STDCALLCONVENTION SetMatrixElement(int row, int column, float value) = 0;
+
+		// Animates a single element of the matrix of this transform.
+		virtual long __QCMP_STDCALLCONVENTION SetMatrixElement(int row, int column, IDCompositionAnimation *animation) = 0;
+	};
+
+	//IDCompositionEffectGroup
+	//Represents a group of bitmap effects that are applied together to modify the rasterization of a visual's subtree.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("A7929A74-E6B2-4bd6-8B95-4040119CA34D")) IDCompositionEffectGroup : public IDCompositionEffect
+	{
+		// Changes the opacity property.
+		virtual long __QCMP_STDCALLCONVENTION SetOpacity(float opacity) = 0;
+
+		// Animates the opacity property
+		virtual long __QCMP_STDCALLCONVENTION SetOpacity(IDCompositionAnimation* animation) = 0;
+
+		// Sets the 3D transform
+		virtual long __QCMP_STDCALLCONVENTION SetTransform3D(IDCompositionTransform3D* transform3D) = 0;
+	};
+
+	//IDCompositionRectangleClip
+	//Represents a clip object that restricts the rendering of a visual subtree to the specified rectangular region.Optionally, the clip object may have rounded corners specified.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("9842AD7D-D9CF-4908-AED7-48B51DA5E7C2")) IDCompositionRectangleClip : public IDCompositionClip
+	{
+		// Changes the value of the Left property.
+		virtual long __QCMP_STDCALLCONVENTION SetLeft(float left) = 0;
+
+		// Animates the value of the Left property.
+		virtual long __QCMP_STDCALLCONVENTION SetLeft(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the Top property.
+		virtual long __QCMP_STDCALLCONVENTION SetTop(float top) = 0;
+
+		// Animates the value of the Top property.
+		virtual long __QCMP_STDCALLCONVENTION SetTop(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the Right property.
+		virtual long __QCMP_STDCALLCONVENTION SetRight(float right) = 0;
+
+		// Animates the value of the Right property.
+		virtual long __QCMP_STDCALLCONVENTION SetRight(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the Bottom property.
+		virtual long __QCMP_STDCALLCONVENTION SetBottom(float bottom) = 0;
+
+		// Animates the value of the Bottom property.
+		virtual long __QCMP_STDCALLCONVENTION SetBottom(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the x radius of the ellipse that rounds the
+		// top-left corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetTopLeftRadiusX(float radius) = 0;
+
+		// Animates the value of the x radius of the ellipse that rounds the
+		// top-left corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetTopLeftRadiusX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the y radius of the ellipse that rounds the
+		// top-left corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetTopLeftRadiusY(float radius) = 0;
+
+		// Animates the value of the y radius of the ellipse that rounds the
+		// top-left corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetTopLeftRadiusY(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the x radius of the ellipse that rounds the
+		// top-right corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetTopRightRadiusX(float radius) = 0;
+
+		// Animates the value of the x radius of the ellipse that rounds the
+		// top-right corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetTopRightRadiusX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the y radius of the ellipse that rounds the
+		// top-right corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetTopRightRadiusY(float radius) = 0;
+
+		// Animates the value of the y radius of the ellipse that rounds the
+		// top-right corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetTopRightRadiusY(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the x radius of the ellipse that rounds the
+		// bottom-left corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetBottomLeftRadiusX(float radius) = 0;
+
+		// Animates the value of the x radius of the ellipse that rounds the
+		// bottom-left corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetBottomLeftRadiusX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the y radius of the ellipse that rounds the
+		// bottom-left corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetBottomLeftRadiusY(float radius) = 0;
+
+		// Animates the value of the y radius of the ellipse that rounds the
+		// bottom-left corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetBottomLeftRadiusY(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the x radius of the ellipse that rounds the
+		// bottom-right corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetBottomRightRadiusX(float radius) = 0;
+
+		// Animates the value of the x radius of the ellipse that rounds the
+		// bottom-right corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetBottomRightRadiusX(IDCompositionAnimation* animation) = 0;
+
+		// Changes the value of the y radius of the ellipse that rounds the
+		// bottom-right corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetBottomRightRadiusY(float radius) = 0;
+
+		// Animates the value of the y radius of the ellipse that rounds the
+		// bottom-right corner of the clip.
+		virtual long __QCMP_STDCALLCONVENTION SetBottomRightRadiusY(IDCompositionAnimation* animation) = 0;
+	};
+
+
+	//IDCompositionDevice2
+	//Serves as a factory for all other DirectComposition objects and provides methods to control transactional composition.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("75F6468D-1B8E-447C-9BC6-75FEA80B5B25")) IDCompositionDevice2 : public IUnknown
+	{
+		// Commits all DirectComposition commands pending on this device.
+		virtual long __QCMP_STDCALLCONVENTION Commit() = 0;
+
+		// Waits for the last Commit to be processed by the composition engine
+		virtual long __QCMP_STDCALLCONVENTION WaitForCommitCompletion() = 0;
+
+		// Gets timing information about the composition engine.
+		virtual long __QCMP_STDCALLCONVENTION GetFrameStatistics(DCOMPOSITION_FRAME_STATISTICS* statistics) = 0;
+
+		// Creates a new visual object.
+		virtual long __QCMP_STDCALLCONVENTION CreateVisual(IDCompositionVisual2** visual) = 0;
+
+		// Creates a factory for surface objects
+		virtual long __QCMP_STDCALLCONVENTION CreateSurfaceFactory(IUnknown* renderingDevice, IDCompositionSurfaceFactory** surfaceFactory) = 0;
+
+		// Creates a DirectComposition surface object
+		virtual long __QCMP_STDCALLCONVENTION CreateSurface(unsigned int width, unsigned int height, DXGI_FORMAT pixelFormat, DXGI_ALPHA_MODE alphaMode, IDCompositionSurface** surface) = 0;
+
+		// Creates a DirectComposition virtual surface object
+		virtual long __QCMP_STDCALLCONVENTION CreateVirtualSurface(unsigned int initialWidth, unsigned int initialHeight, DXGI_FORMAT pixelFormat, DXGI_ALPHA_MODE alphaMode, IDCompositionVirtualSurface** virtualSurface) = 0;
+
+		// Creates a 2D translation transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateTranslateTransform(IDCompositionTranslateTransform** translateTransform) = 0;
+
+		// Creates a 2D scale transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateScaleTransform(IDCompositionScaleTransform** scaleTransform) = 0;
+
+		// Creates a 2D rotation transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateRotateTransform(IDCompositionRotateTransform** rotateTransform) = 0;
+
+		// Creates a 2D skew transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateSkewTransform(IDCompositionSkewTransform** skewTransform) = 0;
+
+		// Creates a 2D 3x2 matrix transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateMatrixTransform(IDCompositionMatrixTransform** matrixTransform) = 0;
+
+		// Creates a 2D transform object that holds an array of 2D transform objects.
+		virtual long __QCMP_STDCALLCONVENTION CreateTransformGroup(IDCompositionTransform** transforms, unsigned int elements, IDCompositionTransform** transformGroup) = 0;
+
+		// Creates a 3D translation transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateTranslateTransform3D(IDCompositionTranslateTransform3D** translateTransform3D) = 0;
+
+		// Creates a 3D scale transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateScaleTransform3D(IDCompositionScaleTransform3D** scaleTransform3D) = 0;
+
+		// Creates a 3D rotation transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateRotateTransform3D(IDCompositionRotateTransform3D** rotateTransform3D) = 0;
+
+		// Creates a 3D 4x4 matrix transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateMatrixTransform3D(IDCompositionMatrixTransform3D** matrixTransform3D) = 0;
+
+		// Creates a 3D transform object that holds an array of 3D transform objects.
+		virtual long __QCMP_STDCALLCONVENTION CreateTransform3DGroup(IDCompositionTransform3D** transforms3D, unsigned int elements, IDCompositionTransform3D** transform3DGroup) = 0;
+
+		// Creates an effect group
+		virtual long __QCMP_STDCALLCONVENTION CreateEffectGroup(IDCompositionEffectGroup** effectGroup) = 0;
+
+		// Creates a clip object that can be used to clip the contents of a visual subtree.
+		virtual long __QCMP_STDCALLCONVENTION CreateRectangleClip(IDCompositionRectangleClip** clip) = 0;
+
+		// Creates an animation object
+		virtual long __QCMP_STDCALLCONVENTION CreateAnimation(IDCompositionAnimation** animation) = 0;
+	};
+
+	//IDCompositionTarget
+	//Represents a binding between a DirectComposition visual tree and a destination on top of which the visual tree should be composed.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("eacdd04c-117e-4e17-88f4-d1b12b0e3d89")) IDCompositionTarget : public IUnknown
+	{
+		// Sets the root visual
+		virtual long __QCMP_STDCALLCONVENTION SetRoot(IDCompositionVisual* visual) = 0;
+	};
+
+	//IDCompositionDesktopDevice
+	//An application must use the IDCompositionDesktopDevice interface in order to use DirectComposition in a Win32 desktop application.This interface allows the application to connect a visual tree to a window and to host layered child windows for composition
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("5F4633FE-1E08-4CB8-8C75-CE24333F5602")) IDCompositionDesktopDevice : public IDCompositionDevice2
+	{
+		virtual long __QCMP_STDCALLCONVENTION CreateTargetForHwnd( void* hwnd, BOOL topmost, IDCompositionTarget** target ) = 0;
+
+		// Creates a surface wrapper around a pre-existing surface that can be associated with one or more visuals for composition.
+		virtual long __QCMP_STDCALLCONVENTION CreateSurfaceFromHandle( void* handle, IUnknown** surface ) = 0;
+
+		// Creates a wrapper object that represents the rasterization of a layered window and which can be associated with a visual for composition.
+		virtual long __QCMP_STDCALLCONVENTION CreateSurfaceFromHwnd( void* hwnd, IUnknown** surface ) = 0;
+	};
+
+	
+	//IDCompositionDevice
+	//Serves as a factory for all other DirectComposition objects and provides methods to control transactional composition.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("C37EA93A-E7AA-450D-B16F-9746CB0407F3")) IDCompositionDevice : public IUnknown
+	{
+		// Commits all DirectComposition commands pending on this device.
+		virtual long __QCMP_STDCALLCONVENTION Commit() = 0;
+
+		// Waits for the last Commit to be processed by the composition engine
+		virtual long __QCMP_STDCALLCONVENTION WaitForCommitCompletion() = 0;
+
+		// Gets timing information about the composition engine.
+		virtual long __QCMP_STDCALLCONVENTION GetFrameStatistics( DCOMPOSITION_FRAME_STATISTICS* statistics ) = 0;
+
+		// Creates a composition target bound to a window represented by an HWND.
+		virtual long __QCMP_STDCALLCONVENTION CreateTargetForHwnd( void* hwnd, BOOL topmost, IDCompositionTarget** target ) = 0;
+
+		// Creates a new visual object.
+		virtual long __QCMP_STDCALLCONVENTION CreateVisual( IDCompositionVisual** visual ) = 0;
+
+		// Creates a DirectComposition surface object
+		virtual long __QCMP_STDCALLCONVENTION CreateSurface(unsigned int width, unsigned int height, DXGI_FORMAT pixelFormat, DXGI_ALPHA_MODE alphaMode, IDCompositionSurface** surface ) = 0;
+
+		// Creates a DirectComposition virtual surface object
+		virtual long __QCMP_STDCALLCONVENTION CreateVirtualSurface(unsigned int initialWidth, unsigned int initialHeight, DXGI_FORMAT pixelFormat, DXGI_ALPHA_MODE alphaMode, IDCompositionVirtualSurface** virtualSurface ) = 0;
+
+		// Creates a surface wrapper around a pre-existing surface that can be associated with one or more visuals for composition.
+		virtual long __QCMP_STDCALLCONVENTION CreateSurfaceFromHandle( void* handle, IUnknown** surface ) = 0;
+
+		// Creates a wrapper object that represents the rasterization of a layered window and which can be associated with a visual for composition.
+		virtual long __QCMP_STDCALLCONVENTION CreateSurfaceFromHwnd( void* hwnd, IUnknown** surface ) = 0;
+
+		// Creates a 2D translation transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateTranslateTransform( IDCompositionTranslateTransform** translateTransform ) = 0;
+
+		// Creates a 2D scale transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateScaleTransform( IDCompositionScaleTransform** scaleTransform ) = 0;
+
+		// Creates a 2D rotation transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateRotateTransform( IDCompositionRotateTransform** rotateTransform ) = 0;
+
+		// Creates a 2D skew transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateSkewTransform( IDCompositionSkewTransform** skewTransform ) = 0;
+
+		// Creates a 2D 3x2 matrix transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateMatrixTransform( IDCompositionMatrixTransform** matrixTransform ) = 0;
+
+		// Creates a 2D transform object that holds an array of 2D transform objects.
+		virtual long __QCMP_STDCALLCONVENTION CreateTransformGroup( IDCompositionTransform** transforms, unsigned int elements, IDCompositionTransform** transformGroup ) = 0;
+
+		// Creates a 3D translation transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateTranslateTransform3D( IDCompositionTranslateTransform3D** translateTransform3D ) = 0;
+
+		// Creates a 3D scale transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateScaleTransform3D( IDCompositionScaleTransform3D** scaleTransform3D ) = 0;
+
+		// Creates a 3D rotation transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateRotateTransform3D( IDCompositionRotateTransform3D** rotateTransform3D ) = 0;
+
+		// Creates a 3D 4x4 matrix transform object.
+		virtual long __QCMP_STDCALLCONVENTION CreateMatrixTransform3D( IDCompositionMatrixTransform3D** matrixTransform3D ) = 0;
+
+		// Creates a 3D transform object that holds an array of 3D transform objects.
+		virtual long __QCMP_STDCALLCONVENTION CreateTransform3DGroup( IDCompositionTransform3D** transforms3D, unsigned int elements, IDCompositionTransform3D** transform3DGroup ) = 0;
+
+		// Creates an effect group
+		virtual long __QCMP_STDCALLCONVENTION CreateEffectGroup( IDCompositionEffectGroup** effectGroup ) = 0;
+
+		// Creates a clip object that can be used to clip the contents of a visual subtree.
+		virtual long __QCMP_STDCALLCONVENTION CreateRectangleClip( IDCompositionRectangleClip** clip ) = 0;
+
+		// Creates an animation object
+		virtual long __QCMP_STDCALLCONVENTION CreateAnimation( IDCompositionAnimation** animation ) = 0;
+
+		// Returns the states of the app's DX device and DWM's dx devices
+		virtual long __QCMP_STDCALLCONVENTION CheckDeviceState( BOOL* pfValid ) = 0;
+	};
+
+	
+	
+	//IDCompositionDevice3
+	//Serves as a factory for all other DirectComposition objects and provides methods to control transactional composition.
+	
+	//IDCompositionDeviceDebug
+	//Provides access to rendering features that help with application debugging and performance tuning.This interface can be queried from the DirectComposition device interface.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("A1A3C64A-224F-4A81-9773-4F03A89D3C6C")) IDCompositionDeviceDebug : public IUnknown
+	{
+		// Enables debug counters
+		virtual long __QCMP_STDCALLCONVENTION EnableDebugCounters() = 0;
+
+		// Enables debug counters
+		virtual long __QCMP_STDCALLCONVENTION DisableDebugCounters() = 0;
+	};
+
+	
+	
+	//IDCompositionFilterEffect
+	//Represents a filter effect.
+	
+	//IDCompositionFloodEffect
+	//The flood effect is used to generate a bitmap based on the specified color and alpha value.You can use this effect when you want a specific color as an input for an effect, like a background color.
+	
+	//IDCompositionGaussianBlurEffect
+	
+	//IDCompositionHueRotationEffect
+	//The hue rotate effect alters the hue of an image by applying a color matrix based on the rotation angle.
+	
+	//IDCompositionLinearTransferEffect
+	//The linear transfer effect is used to map the color intensities of an image using a linear function created from a list of values you provide for each channel.
+		
+	
+	//IDCompositionSaturationEffect
+	//This effect is used to alter the saturation of an image.The saturation effect is a specialization of the color matrix effect.
+	
+	//IDCompositionShadowEffect
+	//The shadow effect is used to generate a shadow from the alpha channel of an image.The shadow is more opaque for higher alpha values and more transparent for lower alpha values.You can set the amount of blur and the color of the shadow.
+	
+	//IDCompositionTableTransferEffect
+	//The table transfer effect is used to map the color intensities of an image using a transfer function created from interpolating a list of values you provide.
+	
+	
+	//IDCompositionTransform3D
+	/*
+	//Represents a 3D transformation effect that can be used to modify the rasterization of a visual subtree.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("91636D4B-9BA1-4532-AAF7-E3344994D788")) IDCompositionTranslateTransform3D : public IDCompositionTransform3D
+	{
+		// Changes the value of the OffsetX property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetX( float offsetX ) = 0;
+
+		// Animates the value of the OffsetX property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetX( IDCompositionAnimation* animation ) = 0;
+
+		// Changes the value of the OffsetY property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetY( float offsetY ) = 0;
+
+		// Animates the value of the OffsetY property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetY( IDCompositionAnimation* animation ) = 0;
+
+		// Changes the value of the OffsetZ property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetZ( float offsetZ ) = 0;
+
+		// Animates the value of the OffsetZ property.
+		virtual long __QCMP_STDCALLCONVENTION SetOffsetZ(  IDCompositionAnimation* animation ) = 0;
+	};
+	*/
+
+	
+	//IDCompositionTurbulenceEffect
+	//The turbulence effect is used to generate a bitmap based on the Perlin noise function.The turbulence effect has no input image.
+		
+	//IDCompositionVisual3
+	//Represents one DirectComposition visual in a visual tree.
+	
+	//IDCompositionVisualDebug
+	//Represents a debug visual.
+	struct __QOR_INTERFACE(__WINQL) __declspec(uuid("FED2B808-5EB4-43A0-AEA3-35F65280F91B")) IDCompositionVisualDebug : public IDCompositionVisual2
+	{
+		// Enable heat map
+		virtual long __QCMP_STDCALLCONVENTION EnableHeatMap( const D2D1_COLOR_F& color ) = 0;
+
+		// Disable heat map
+		virtual long __QCMP_STDCALLCONVENTION DisableHeatMap() = 0;
+
+		// Enable redraw regions
+		virtual long __QCMP_STDCALLCONVENTION EnableRedrawRegions() = 0;
+
+		// Disable redraw regions
+		virtual long __QCMP_STDCALLCONVENTION DisableRedrawRegions() = 0;
+	};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 	//--------------------------------------------------------------------------------
     //MIDL_INTERFACE("2cd2d921-c447-44a7-a13c-4adabfc247e3")

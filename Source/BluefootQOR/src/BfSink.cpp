@@ -1,6 +1,6 @@
 //BfSink.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -32,26 +32,31 @@
 //------------------------------------------------------------------------------
 namespace nsBluefoot
 {
+	__QOR_IMPLEMENT_OCLASS_LUID(CSink);
+
 	//------------------------------------------------------------------------------
-	CBFSink::CBFSink() : m_pSource( 0 )
+	CSink::CSink() : m_pSource( 0 )
 	{
+		__QCS_MEMBER_FCONTEXT("CSink::CSink");
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSink::~CBFSink()
+	CSink::~CSink()
 	{
-
+		__QCS_MEMBER_FCONTEXT("CSink::~CSink");
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSink::CBFSink( const CBFSink& src )
+	CSink::CSink( const CSink& src )
 	{
+		__QCS_MEMBER_FCONTEXT("CSink::CSink");
 		*this = src;
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSink& CBFSink::operator = ( const CBFSink& src )
+	CSink& CSink::operator = ( const CSink& src )
 	{
+		__QCS_MEMBER_FCONTEXT("CSink::operator=");
 		if( &src != this )
 		{
 			m_pSource = src.m_pSource;
@@ -60,20 +65,23 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFSink::SetSource( CBFSource* pSource )
+	void CSink::SetSource( CSource* pSource )
 	{
+		__QCS_MEMBER_FCONTEXT("CSink::SetSource");
 		m_pSource = pSource;
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSource* CBFSink::GetSource(void)
+	CSource* CSink::GetSource(void)
 	{
+		__QCS_MEMBER_FCONTEXT("CSink::GetSource");
 		return m_pSource;
 	}
 
 	//------------------------------------------------------------------------------
-	unsigned long CBFSink::GetData( nsCodeQOR::CTLRef< byte >& Data, unsigned long ulUnitsRequired )
+	unsigned long CSink::GetData( nsCodeQOR::CTLRef< byte >& Data, unsigned long ulUnitsRequired )
 	{
+		__QCS_MEMBER_FCONTEXT("CSink::GetData");
 		bool bContinue = true;
 		unsigned long ulUnitsAvailable = GetBuffer() ? GetBuffer()->ReadCapacity() : 0;
 
@@ -97,15 +105,16 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	bool CBFSink::Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite )
+	bool CSink::Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite )
 	{
+		__QCS_MEMBER_FCONTEXT("CSink::Write");
 		unsigned long ulUnitsRead = 0;
 		if( GetMode() == ePull )
 		{			
 			GetSource()->Read( ulUnitsRead, ulUnitsToWrite );
 		}
 
-		/*byte* pBuffer = */m_pBuffer->ReadRequest( ulUnitsToWrite );
+		m_pBuffer->ReadRequest( ulUnitsToWrite );
 
 		m_pBuffer->ReadAcknowledge( ulUnitsWritten );
 

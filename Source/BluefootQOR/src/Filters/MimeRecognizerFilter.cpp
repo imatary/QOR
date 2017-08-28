@@ -1,6 +1,6 @@
 //MimeRecognizerFilter.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -30,7 +30,7 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CMimeRecognizerFilter::CMimeRecognizerFilter() : CBFFilter()
+	CMimeRecognizerFilter::CMimeRecognizerFilter() : CFilter()
 	,	m_bRecognized( false )
 	{
 	}
@@ -41,7 +41,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CMimeRecognizerFilter::CMimeRecognizerFilter( const CMimeRecognizerFilter& src ) : CBFFilter( src )
+	CMimeRecognizerFilter::CMimeRecognizerFilter( const CMimeRecognizerFilter& src ) : CFilter( src )
 	{
 	}
 
@@ -53,9 +53,9 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBFBuffer* CMimeRecognizerFilter::GetSourceBuffer( void )
+	CBuffer* CMimeRecognizerFilter::GetSourceBuffer( void )
 	{
-		CBFBuffer* pBuffer = 0;
+		CBuffer* pBuffer = 0;
 		if( GetSource() )
 		{
 			pBuffer = GetSource()->GetBuffer();
@@ -67,7 +67,7 @@ namespace nsBluefoot
 	byte* CMimeRecognizerFilter::GetSequence( unsigned long& ulSequenceSize )
 	{
 		byte* pSequence = 0;
-		CBFBuffer* pBuffer = GetSourceBuffer();
+		CBuffer* pBuffer = GetSourceBuffer();
 		if( pBuffer )
 		{
 			ulSequenceSize = sculMaxSequenceBytes;

@@ -1,6 +1,6 @@
 //WinQL61883.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,12 +29,16 @@
 #ifndef WINQL_DEVICE_61883_H_3
 #define WINQL_DEVICE_61883_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "WinQL/System/Devices/Interfaces/WinQLDeviceInterface.h"
 #include "WinQL/System/Devices/WinQLIODevice.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, C61883, CTExtRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -44,8 +48,7 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< C61883 > refType;
-
+		__QOR_DECLARE_REF_TYPE(C61883);
 		__QOR_DECLARE_OCLASS_ID( C61883 );
 
 		static nsCodeQOR::CTExternalRegEntry< C61883 > RegEntry;
@@ -53,7 +56,6 @@ namespace nsWin32
 		C61883();
 		virtual ~C61883();
 		
-
 	private:
 
 		C61883( const C61883& src );

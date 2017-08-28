@@ -130,6 +130,9 @@ namespace nsWinQAPI
 
 		{ _T( "%1 Dynamic Library function is missing and was not called: %2" ), //MISSING_LIBRARY_FUNCTION
 		{ _ERR_SEVERITY_, _ERR_SOURCE_, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
+
+		{ _T("%1 Windows Socket Error: %2, %3"), //WSA_ERROR
+		{ _ERR_SEVERITY_, _ERR_SOURCE_, _ERR_PARAM0_, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
 	};
 
 	//--------------------------------------------------------------------------------

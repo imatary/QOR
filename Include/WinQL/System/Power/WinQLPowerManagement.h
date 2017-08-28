@@ -1,6 +1,6 @@
 //WinQLPowerManagement.h
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -26,6 +26,8 @@
 
 #ifndef WINQL_SYSTEM_POWER_H_3
 #define WINQL_SYSTEM_POWER_H_3
+
+#include "CompilerQOR.h"
 
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
@@ -604,7 +606,7 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CPowerScenario > refType;
+		__QOR_DECLARE_REF_TYPE(CPowerScenario);
 
 		//--------------------------------------------------------------------------------
 		enum eSubGroup
@@ -632,7 +634,7 @@ namespace nsWin32
 
 		bool CanRestoreIndividualDefault( void );		
 		bool Delete( void );
-		refType Duplicate();
+		ref_type Duplicate();
 		unsigned long ReadACDefaultIndex( eSubGroup SubGroup, nsCodeQOR::mxGUID* pPowerSettingGuid );
 		nsCodeQOR::CTLRef< byte > ReadACValue( eSubGroup SubGroup, nsCodeQOR::mxGUID* pPowerSettingGuid, unsigned long& ulType, unsigned long& ulBufferSize );
 		unsigned long ReadACValueIndex( eSubGroup SubGroup, nsCodeQOR::mxGUID* PowerSettingGuid );
@@ -697,7 +699,7 @@ namespace nsWin32
 
 		unsigned long CreatePossibleSetting( nsCodeQOR::mxGUID* SubGroupOfPowerSettingsGuid, nsCodeQOR::mxGUID* PowerSettingGuid, unsigned long PossibleSettingIndex );
 		unsigned long CreateSetting( nsCodeQOR::mxGUID* SubGroupOfPowerSettingsGuid, nsCodeQOR::mxGUID* PowerSettingGuid );
-		CPowerScenario::refType GetActiveScenario( void );
+		CPowerScenario::ref_type GetActiveScenario( void );
 		unsigned long ImportScenario( const CWString ImportFileNamePath );
 
 		unsigned long ReadPossibleDescription( const GUID* SubGroupOfPowerSettingsGuid, const GUID* PowerSettingGuid, unsigned long PossibleSettingIndex, unsigned char* Buffer, unsigned long* BufferSize );
@@ -823,8 +825,6 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CPowerManager
 	{
-		QOR_PP_WINQL_SHARED;
-
 	public:
 
 		__QOR_DECLARE_OCLASS_ID( CPowerManager );

@@ -609,7 +609,7 @@ namespace nsWin32
 		if( _ptr == _base )
 		{
 			if( _cnt )
-			{ // my back is against the wall; i've already done ungetc, and there's no room for this one 
+			{ // my back is against the wall; I've already done ungetc, and there's no room for this one 
 				return EOF;
 			}
 

@@ -1,6 +1,6 @@
 //WinQLDeviceNode.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -45,6 +45,9 @@ namespace nsWinQAPI
 	class __QOR_INTERFACE( __WINQAPI ) CSetupAPI;
 }//nsWinQAPI
 
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceNode, CTRef);
+
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
@@ -52,34 +55,28 @@ namespace nsWin32
 	class __QOR_INTERFACE( __WINQL ) CDeviceInstance;
 
 	//--------------------------------------------------------------------------------
+	//A node in the tree of information about devices
 	class __QOR_INTERFACE( __WINQL ) CDeviceNode
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CDeviceNode > refType;
-
+		__QOR_DECLARE_REF_TYPE(CDeviceNode);
 		__QOR_DECLARE_OCLASS_ID( CDeviceNode );
 
 		CDeviceNode( unsigned long ulDevInst, CConfigurationManagementSession& Session );
-		CDeviceNode( const CDeviceNode& src );
+		CDeviceNode( CDeviceNode&& move );
+		CDeviceNode& operator = (CDeviceNode&& move);
 		~CDeviceNode();
 
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this, false );
-		}
-
 		std::vector< CDeviceNode* >& GetChildren( void );
-
-		nsCodeQOR::CTLRef< CDeviceInstance > GetInstance( void );
+		CDeviceInstance& GetInstance( void );
 		CTString GetDescription( void );
 
 	private:
 
 		void EnumerateChildren( void );
 
-		CDeviceNode();
+		CDeviceNode() = delete;
 		CDeviceNode& operator = ( const CDeviceNode& src );
 
 		unsigned long m_DevInst;

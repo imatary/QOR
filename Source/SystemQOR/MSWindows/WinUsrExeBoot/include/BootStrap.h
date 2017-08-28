@@ -38,7 +38,7 @@ ANSI | GUI			-> WinMainCRTStartup	- WinMain
 UNICODE | CONSOLE	-> wmainCRTStartup		- wmain
 UNICODE | GUI		-> wWinMainCRTStartup	- wWinMain
 
-The low level entry point gets mapped to _tMainCRTStartup below so we have exactly one place where where execution begins
+The low level entry point gets mapped to _tMainCRTStartup below so we have exactly one place where execution begins
 The application code entry point gets mapped to _tWinMain or _tmain for GUI or CONSOLE apps which have very different signatures
 
 Three names get defined:
@@ -47,7 +47,7 @@ The framework implements _tMainCRTStartup and the application must implement eit
 */
 
 #if		( __QOR_UNICODE )
-#	ifdef _WINDOWS
+#	ifndef _CONSOLE
 #		define _tMainCRTStartup wWinMainCRTStartup
 #	else
 #		define _tMainCRTStartup wmainCRTStartup
@@ -55,7 +55,7 @@ The framework implements _tMainCRTStartup and the application must implement eit
 #	define _tWinMain		wWinMain
 #	define _tmain			wmain
 #else
-#	ifdef _WINDOWS
+#	ifndef _CONSOLE
 #		define _tMainCRTStartup WinMainCRTStartup
 #	else
 #		define _tMainCRTStartup mainCRTStartup

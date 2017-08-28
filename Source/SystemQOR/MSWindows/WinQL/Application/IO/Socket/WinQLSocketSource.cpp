@@ -1,6 +1,6 @@
 //WinQLSocketSource.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -81,7 +81,7 @@ namespace nsWin32
 				if( !bResult && pSocketConnector->Protocol() )
 				{
 					unsigned long ulLastError = pSocketConnector->Socket().GetLastError();
-					pSocketConnector->Protocol().As<nsBluefoot::CBFProtocol>()->OnReadError();
+					pSocketConnector->Protocol().As<nsBluefoot::CProtocol>()->OnReadError();
 				}
 			}
 			else
@@ -107,11 +107,11 @@ namespace nsWin32
 				{
 					if( bResult )
 					{
-						pSocketConnector->Protocol().As<nsBluefoot::CBFProtocol>()->OnReadSuccess( ulNumberOfUnitsRead );
+						pSocketConnector->Protocol().As<nsBluefoot::CProtocol>()->OnReadSuccess( ulNumberOfUnitsRead );
 					}
 					else
 					{
-						pSocketConnector->Protocol().As<nsBluefoot::CBFProtocol>()->OnReadError();
+						pSocketConnector->Protocol().As<nsBluefoot::CProtocol>()->OnReadError();
 					}
 				}
 			}

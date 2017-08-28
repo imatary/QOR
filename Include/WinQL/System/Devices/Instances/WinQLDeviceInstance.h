@@ -29,10 +29,13 @@
 #ifndef WINQL_DEVICEINSTANCE_H_3
 #define WINQL_DEVICEINSTANCE_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/Definitions/Data.h"
 #include "WinQL/Definitions/IO.h"
@@ -44,6 +47,8 @@
 #include "MammutQOR/Models/VectorModel.h"
 #include "MammutQOR/Models/MapModel.h"
 #include "MammutQOR/Model/MPropertySet.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceInstance, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -58,10 +63,9 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CDeviceInstance > refType;
+		__QOR_DECLARE_REF_TYPE(CDeviceInstance);
 
 		static const DevicePropertyKey DevPKey_Name;
-
 		static const DevicePropertyKey DevPKey_DeviceDesc;             
 		static const DevicePropertyKey DevPKey_HardwareIds;            
 		static const DevicePropertyKey DevPKey_CompatibleIds;          
@@ -111,7 +115,7 @@ namespace nsWin32
 
 		CTString DeviceID( void );
 		SP_DevInfo_Data Info( void );
-		std::vector< CDeviceInterface::refType >& Interfaces( void );
+		std::vector< CDeviceInterface::ref_type >& Interfaces( void );
 		CWString GetDisplayName( void );
 		CWString GetDescription( void );
 		CWString GetParent( void );
@@ -133,11 +137,6 @@ namespace nsWin32
 
 		nsCodeQOR::CSTMember< nsCodeQOR::CTArray< DevicePropertyKey, CWinQLPolicy > > Keys;
 
-		refType Ref( void )
-		{
-			return refType( this, false );
-		}
-
 	protected:
 
 		unsigned long GetUInt32Property( unsigned long ulPropertyIndex );
@@ -152,7 +151,7 @@ namespace nsWin32
 		unsigned long m_ulIndex;
 		CTString m_strID;
 		
-		std::vector< CDeviceInterface::refType > m_VecInterfaces;
+		std::vector< CDeviceInterface::ref_type > m_VecInterfaces;
 		//nsCodeQOR::CTArray< CDeviceInterface*, CWinQLPolicy > m_ArrayInterfaces;
 
 	private:
@@ -162,7 +161,6 @@ namespace nsWin32
 		CDeviceInstance();					//not to be implemented
 		nsWinQAPI::CSetupAPI& m_Library;
 	};
-
 
 }//nsWin32
 

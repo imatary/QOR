@@ -66,7 +66,7 @@ Hardware or a VM with account, password details
 A way to get the latest source.
 Tool chains to build all the QOR variants that can be built on that OS
 Some like SanOS and probably Kolibrios are just targets and can be built from Windows
-iOS is probably best targetted from OSX
-Many of the Linux and other nix can probably be targetted from Linux using clang
+iOS is probably best targeted from OSX
+Many of the Linux and other nix can probably be targeted from Linux using clang
 */
 

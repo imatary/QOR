@@ -206,13 +206,13 @@ namespace nsWin32
 	}
 	
 	//--------------------------------------------------------------------------------
-	CDeviceNode::refType CDeviceManager::RootDevice()
+	CDeviceNode::ref_type CDeviceManager::RootDevice()
 	{
-		return m_ConfigManagementSession.RootDevice().Ref();
+		return ref(m_ConfigManagementSession.RootDevice());
 	}
 
 	//--------------------------------------------------------------------------------
-	std::map< const CTString, CDeviceEnumerator::refType >& CDeviceManager::Enumerators()
+	std::map< const CTString, CDeviceEnumerator::ref_type >& CDeviceManager::Enumerators()
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::Enumerators" );
 		if( !m_bEnumeratorsEnumerated )
@@ -224,7 +224,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	std::map< const CTString, CDeviceInstance::refType >& CDeviceManager::Instances()
+	std::map< const CTString, CDeviceInstance::ref_type >& CDeviceManager::Instances()
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::Instances" );
 		if( !m_bInstancesEnumerated )
@@ -235,7 +235,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	std::map< nsCodeQOR::mxGUID, CDeviceSetupClass::refType >& CDeviceManager::SetupClasses()
+	std::map< nsCodeQOR::mxGUID, CDeviceSetupClass::ref_type >& CDeviceManager::SetupClasses()
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::SetupClasses" );
 		if( !m_bSetupClassesEnumerated )
@@ -246,7 +246,7 @@ namespace nsWin32
 	}
 	
 	//--------------------------------------------------------------------------------
-	std::map< nsCodeQOR::mxGUID, CDeviceInterfaceClass::refType >& CDeviceManager::InterfaceClasses()
+	std::map< nsCodeQOR::mxGUID, CDeviceInterfaceClass::ref_type >& CDeviceManager::InterfaceClasses()
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::InterfaceClasses" );
 		if( !m_bInterfaceClassesEnumerated )
@@ -257,7 +257,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	std::map< const CTString, CDeviceDriver::refType >& CDeviceManager::Drivers()
+	std::map< const CTString, CDeviceDriver::ref_type >& CDeviceManager::Drivers()
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::Drivers" );
 		if( !m_bDriversEnumerated )
@@ -268,24 +268,24 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CDeviceManager::RegisterEnumerator( const CTString strDeivceEnumeratorName, CDeviceEnumerator* pDeviceEnumerator )
+	void CDeviceManager::RegisterEnumerator( const CTString strDeivceEnumeratorName, CDeviceEnumerator::ref_type pDeviceEnumerator )
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::RegisterEnumerator" );
-		m_DeviceEnumeratorCollection.insert( std::make_pair( strDeivceEnumeratorName, CDeviceEnumerator::refType( pDeviceEnumerator, true ) ) );
+		m_DeviceEnumeratorCollection.insert( std::make_pair( strDeivceEnumeratorName, pDeviceEnumerator ) );
 	}
 
 	//--------------------------------------------------------------------------------
-	void CDeviceManager::RegisterInstance( const CTString strDeviceID, CDeviceInstance* pDeviceInstance )
+	void CDeviceManager::RegisterInstance( const CTString strDeviceID, CDeviceInstance::ref_type pDeviceInstance )
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::RegisterInstance" );
-		m_DeviceInstanceCollection.insert( std::make_pair( strDeviceID, CDeviceInstance::refType( pDeviceInstance, true ) ) );
+		m_DeviceInstanceCollection.insert( std::make_pair( strDeviceID, pDeviceInstance ) );
 	}
 
 	//--------------------------------------------------------------------------------
 	void CDeviceManager::RegisterInterfaceClass( const CTString strInterfaceName, nsCodeQOR::mxGUID& InterfaceID )
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::RegisterInterfaceClass" );
-		m_DeviceInterfaceClassCollection.insert( std::make_pair( InterfaceID, CDeviceInterfaceClass::refType( new CDeviceInterfaceClass( InterfaceID, strInterfaceName, m_strMachine.Ref() ), true ) ) );
+		m_DeviceInterfaceClassCollection.insert( std::make_pair( InterfaceID, new_shared_ref<CDeviceInterfaceClass>( InterfaceID, strInterfaceName, m_strMachine.Ref() ) ) );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -310,39 +310,39 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CDeviceInterfaceClass::refType CDeviceManager::InterfaceClassFromGUID( nsCodeQOR::mxGUID const& GUID )
+	CDeviceInterfaceClass::ref_type CDeviceManager::InterfaceClassFromGUID( nsCodeQOR::mxGUID const& GUID )
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::InterfaceClassFromGUID" );
-		std::map< nsCodeQOR::mxGUID, CDeviceInterfaceClass::refType >::iterator it = m_DeviceInterfaceClassCollection.find( GUID );
-		return it == m_DeviceInterfaceClassCollection.end() ? CDeviceInterfaceClass::refType( 0 ) : (*it).second->Ref();
+		std::map< nsCodeQOR::mxGUID, CDeviceInterfaceClass::ref_type >::iterator it = m_DeviceInterfaceClassCollection.find( GUID );
+		return it == m_DeviceInterfaceClassCollection.end() ? CDeviceInterfaceClass::ref_type( (CDeviceInterfaceClass*)(nullptr) ): (*it).second;
 	}
 
 	//--------------------------------------------------------------------------------
-	nsCodeQOR::CTLRef< CDeviceInstance > CDeviceManager::DeviceFromID( const mxTCHAR* szDeviceID )
+	CDeviceInstance::ref_type CDeviceManager::DeviceFromID( CTString& strDeviceID )
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::DeviceFromID" );
-		std::map< const CTString, nsCodeQOR::CTLRef< CDeviceInstance > >::iterator it = m_DeviceInstanceCollection.find( CTString( szDeviceID ) );
-		return it == m_DeviceInstanceCollection.end() ? nsCodeQOR::CTLRef< CDeviceInstance >( 0 ) : (*it).second->Ref();
+		std::map< const CTString, CDeviceInstance::ref_type >::iterator it = m_DeviceInstanceCollection.find( strDeviceID );
+		return it == m_DeviceInstanceCollection.end() ? CDeviceInstance::ref_type((CDeviceInstance*)(nullptr)) : (*it).second;
 	}
 	
 	//--------------------------------------------------------------------------------
-	nsCodeQOR::CTLRef< CDeviceInstance > CDeviceManager::DeviceFromName( const mxTCHAR* szDeviceName )
+	CDeviceInstance::ref_type CDeviceManager::DeviceFromName( const mxTCHAR* szDeviceName )
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::DeviceFromName" );
 
 		CTString strDeviceID = DeviceIDFromName( szDeviceName );
-		std::map< const CTString, nsCodeQOR::CTLRef< CDeviceInstance > >::iterator it = m_DeviceInstanceCollection.find( strDeviceID );
-		return it == m_DeviceInstanceCollection.end() ? nsCodeQOR::CTLRef< CDeviceInstance >( 0 ) : (*it).second->Ref();
+		std::map< const CTString, CDeviceInstance::ref_type >::iterator it = m_DeviceInstanceCollection.find( strDeviceID );
+		return it == m_DeviceInstanceCollection.end() ? CDeviceInstance::ref_type((CDeviceInstance*)(nullptr)) : (*it).second;
 	}
 	
 	//--------------------------------------------------------------------------------
-	CDeviceEnumerator::refType CDeviceManager::EnumeratorFromName( CTStringRef strEnumeratorRef )
+	CDeviceEnumerator::ref_type CDeviceManager::EnumeratorFromName( CTStringRef strEnumeratorRef )
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::EnumeratorFromName" );
 		CTString strEnumerator( *strEnumeratorRef );
 		m_EnumeratorEnumerator();
-		std::map< const CTString, CDeviceEnumerator::refType >::iterator it = m_DeviceEnumeratorCollection.find( strEnumerator );		
-		return it == m_DeviceEnumeratorCollection.end() ? CDeviceEnumerator::refType( 0 ) : (*it).second->Ref();
+		std::map< const CTString, CDeviceEnumerator::ref_type >::iterator it = m_DeviceEnumeratorCollection.find( strEnumerator );		
+		return it == m_DeviceEnumeratorCollection.end() ? CDeviceEnumerator::ref_type( (CDeviceEnumerator*)(nullptr) ) : (*it).second;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -375,7 +375,7 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	void CDeviceManager::WalkInstances( CDeviceNode::refType rootNode, fpDevNodeCallback pNodeCallback )
+	void CDeviceManager::WalkInstances( CDeviceNode::ref_type rootNode, fpDevNodeCallback pNodeCallback )
 	{
 		bool bContinue = true;
 		if( pNodeCallback )
@@ -390,7 +390,7 @@ namespace nsWin32
 			for( std::vector< CDeviceNode* >::iterator it = Nodes.begin(); it != Nodes.end(); ++it )
 			{
 				CDeviceNode* pNode = *it;
-				WalkInstances( pNode->Ref(), pNodeCallback );		
+				WalkInstances( ref(*pNode), pNodeCallback );		
 			}
 		}
 	}
@@ -430,7 +430,7 @@ namespace nsWin32
 
 		for( unsigned int ui = 0; ui < ulSetupClassCount; ui++ )
 		{
-			m_DeviceSetupClassCollection.insert( std::make_pair( SetupClassGUIDs[ ui ], CDeviceSetupClass::refType( new CDeviceSetupClass( SetupClassGUIDs[ ui ], 0/*m_szMachine*/ ), true ) ) );
+			m_DeviceSetupClassCollection.insert( std::make_pair( SetupClassGUIDs[ ui ], new_shared_ref<CDeviceSetupClass>( SetupClassGUIDs[ ui ], CTString::TheEmptyString() ) ) );
 		}
 		m_bSetupClassesEnumerated = true;
 	}
@@ -463,7 +463,7 @@ namespace nsWin32
 			CTString strDriverBaseName;
 			strDriverBaseName.ValidateBuffer( static_cast< unsigned short >( m_pPSAPILibrary->GetDeviceDriverBaseName( DriverAddresses[ ui ], strDriverBaseName.GetBufferSetLength( 1024 ), 1024 ) ) );
 
-			m_DeviceDriverCollection.insert( std::make_pair( strDriverBaseName, CDeviceDriver::refType( new CDeviceDriver(), true ) ) );
+			m_DeviceDriverCollection.insert( std::make_pair( strDriverBaseName, new_shared_ref<CDeviceDriver>() ) );
 		}	
 		m_bDriversEnumerated = true;
 	}

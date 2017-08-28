@@ -51,6 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QOR", "QOR", "{CDD1E4BD-D9D
 		..\..\..\..\Build\QOR\BluefootQORLink.pp = ..\..\..\..\Build\QOR\BluefootQORLink.pp
 		..\..\..\..\Build\QOR\CodeQOR.pp = ..\..\..\..\Build\QOR\CodeQOR.pp
 		..\..\..\..\Build\QOR\CodeQORLink.pp = ..\..\..\..\Build\QOR\CodeQORLink.pp
+		..\..\..\..\Build\QOR\CodeQORTest.pp = ..\..\..\..\Build\QOR\CodeQORTest.pp
 		..\..\..\..\Build\QOR\CompilerQOR.pp = ..\..\..\..\Build\QOR\CompilerQOR.pp
 		..\..\..\..\Build\QOR\CompilerQORLink.pp = ..\..\..\..\Build\QOR\CompilerQORLink.pp
 		..\..\..\..\Build\QOR\CQOR.pp = ..\..\..\..\Build\QOR\CQOR.pp
@@ -72,16 +73,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QOR", "QOR", "{CDD1E4BD-D9D
 		..\..\..\..\Build\QOR\SystemQORLink.pp = ..\..\..\..\Build\QOR\SystemQORLink.pp
 		..\..\..\..\Build\QOR\TeaForTwo.pp = ..\..\..\..\Build\QOR\TeaForTwo.pp
 		..\..\..\..\Build\QOR\WinCmpSupQORVC.pp = ..\..\..\..\Build\QOR\WinCmpSupQORVC.pp
+		..\..\..\..\Build\QOR\Winner.pp = ..\..\..\..\Build\QOR\Winner.pp
 		..\..\..\..\Build\QOR\WinPosumQOR.pp = ..\..\..\..\Build\QOR\WinPosumQOR.pp
 		..\..\..\..\Build\QOR\WinPosumQORLink.pp = ..\..\..\..\Build\QOR\WinPosumQORLink.pp
 		..\..\..\..\Build\QOR\WinQAPI.pp = ..\..\..\..\Build\QOR\WinQAPI.pp
 		..\..\..\..\Build\QOR\WinQAPILink.pp = ..\..\..\..\Build\QOR\WinQAPILink.pp
 		..\..\..\..\Build\QOR\WinQL.pp = ..\..\..\..\Build\QOR\WinQL.pp
+		..\..\..\..\Build\QOR\WinQLCOM.pp = ..\..\..\..\Build\QOR\WinQLCOM.pp
+		..\..\..\..\Build\QOR\WinQLCOMLink.pp = ..\..\..\..\Build\QOR\WinQLCOMLink.pp
 		..\..\..\..\Build\QOR\WinQLGUI.pp = ..\..\..\..\Build\QOR\WinQLGUI.pp
 		..\..\..\..\Build\QOR\WinQLGUILink.pp = ..\..\..\..\Build\QOR\WinQLGUILink.pp
 		..\..\..\..\Build\QOR\WinQLLink.pp = ..\..\..\..\Build\QOR\WinQLLink.pp
 		..\..\..\..\Build\QOR\WinSharedBootstrap.pp = ..\..\..\..\Build\QOR\WinSharedBootstrap.pp
-		..\..\..\..\Build\QOR\WinUsrExeBoot.pp = ..\..\..\..\Build\QOR\WinUsrExeBoot.pp
+		..\..\..\..\Build\QOR\WinUsrExeBootCon.pp = ..\..\..\..\Build\QOR\WinUsrExeBootCon.pp
+		..\..\..\..\Build\QOR\WinUsrExeBootWin.pp = ..\..\..\..\Build\QOR\WinUsrExeBootWin.pp
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildQOR", "BuildQOR", "{9262B8B7-EA47-4D08-BDC5-FD3B9D7363D8}"
@@ -140,7 +145,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cmd", "Cmd", "{D44EC114-388
 		..\..\..\..\Include\BuildQOR\Cmd\ProjectHeader.sth = ..\..\..\..\Include\BuildQOR\Cmd\ProjectHeader.sth
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinQLGUI", "..\WinQLGUI\WinQLGUI.vcxproj", "{F477CD2B-44AA-4CA7-AE12-BC3ED093C45D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinQL-GUI", "..\WinQLGUI\WinQLGUI.vcxproj", "{F477CD2B-44AA-4CA7-AE12-BC3ED093C45D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AppocritaQOR", "..\AppocritaQOR\AppocritaQOR.vcxproj", "{7B4234E6-C3BE-4F5C-8BB7-23C950758D0C}"
 EndProject
@@ -159,6 +164,22 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinPosum", "..\WinPosum\WinPosum.vcxproj", "{C9C96FCE-5497-4AC3-AB59-8521E67AEA6F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fandango", "..\Fandango\Fandango.vcxproj", "{69D6409E-405B-4B1E-9966-40758068A881}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows", "Windows", "{903BCC64-83C3-4686-AC26-BEE41290115A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HippoQOR", "..\HippoQOR\HippoQOR.vcxproj", "{2C45F124-94A3-475F-B0BF-EA2748BAF27F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodeQORTest", "..\CodeQORTest\CodeQORTest.vcxproj", "{A120EF58-A154-4AFB-A4CB-8A85E872B0C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clang", "clang", "{1CF28C70-50CC-492C-9FAF-8BE4CC951531}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Qurses", "..\Qurses\Qurses.vcxproj", "{10323F71-53A9-4986-BF25-7C6AB6896C71}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MonkiQOR", "..\Monki\Monki.vcxproj", "{8F92FEDA-DC82-4D49-B7E5-8C202A418801}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinQL-COM", "..\WinQL-COM\WinQL-COM.vcxproj", "{582BD47A-83DB-4039-ABBC-7BB2B19495B7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Winner", "..\Winner\Winner.vcxproj", "{CF5AA1C4-E6B5-41CB-8851-1E30B67F5785}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -344,6 +365,54 @@ Global
 		{69D6409E-405B-4B1E-9966-40758068A881}.Release|x64.Build.0 = Release|x64
 		{69D6409E-405B-4B1E-9966-40758068A881}.Release|x86.ActiveCfg = Release|Win32
 		{69D6409E-405B-4B1E-9966-40758068A881}.Release|x86.Build.0 = Release|Win32
+		{2C45F124-94A3-475F-B0BF-EA2748BAF27F}.Debug|x64.ActiveCfg = Debug|x64
+		{2C45F124-94A3-475F-B0BF-EA2748BAF27F}.Debug|x64.Build.0 = Debug|x64
+		{2C45F124-94A3-475F-B0BF-EA2748BAF27F}.Debug|x86.ActiveCfg = Debug|Win32
+		{2C45F124-94A3-475F-B0BF-EA2748BAF27F}.Debug|x86.Build.0 = Debug|Win32
+		{2C45F124-94A3-475F-B0BF-EA2748BAF27F}.Release|x64.ActiveCfg = Release|x64
+		{2C45F124-94A3-475F-B0BF-EA2748BAF27F}.Release|x64.Build.0 = Release|x64
+		{2C45F124-94A3-475F-B0BF-EA2748BAF27F}.Release|x86.ActiveCfg = Release|Win32
+		{2C45F124-94A3-475F-B0BF-EA2748BAF27F}.Release|x86.Build.0 = Release|Win32
+		{A120EF58-A154-4AFB-A4CB-8A85E872B0C2}.Debug|x64.ActiveCfg = Debug|x64
+		{A120EF58-A154-4AFB-A4CB-8A85E872B0C2}.Debug|x64.Build.0 = Debug|x64
+		{A120EF58-A154-4AFB-A4CB-8A85E872B0C2}.Debug|x86.ActiveCfg = Debug|Win32
+		{A120EF58-A154-4AFB-A4CB-8A85E872B0C2}.Debug|x86.Build.0 = Debug|Win32
+		{A120EF58-A154-4AFB-A4CB-8A85E872B0C2}.Release|x64.ActiveCfg = Release|x64
+		{A120EF58-A154-4AFB-A4CB-8A85E872B0C2}.Release|x64.Build.0 = Release|x64
+		{A120EF58-A154-4AFB-A4CB-8A85E872B0C2}.Release|x86.ActiveCfg = Release|Win32
+		{A120EF58-A154-4AFB-A4CB-8A85E872B0C2}.Release|x86.Build.0 = Release|Win32
+		{10323F71-53A9-4986-BF25-7C6AB6896C71}.Debug|x64.ActiveCfg = Debug|x64
+		{10323F71-53A9-4986-BF25-7C6AB6896C71}.Debug|x64.Build.0 = Debug|x64
+		{10323F71-53A9-4986-BF25-7C6AB6896C71}.Debug|x86.ActiveCfg = Debug|Win32
+		{10323F71-53A9-4986-BF25-7C6AB6896C71}.Debug|x86.Build.0 = Debug|Win32
+		{10323F71-53A9-4986-BF25-7C6AB6896C71}.Release|x64.ActiveCfg = Release|x64
+		{10323F71-53A9-4986-BF25-7C6AB6896C71}.Release|x64.Build.0 = Release|x64
+		{10323F71-53A9-4986-BF25-7C6AB6896C71}.Release|x86.ActiveCfg = Release|Win32
+		{10323F71-53A9-4986-BF25-7C6AB6896C71}.Release|x86.Build.0 = Release|Win32
+		{8F92FEDA-DC82-4D49-B7E5-8C202A418801}.Debug|x64.ActiveCfg = Debug|x64
+		{8F92FEDA-DC82-4D49-B7E5-8C202A418801}.Debug|x64.Build.0 = Debug|x64
+		{8F92FEDA-DC82-4D49-B7E5-8C202A418801}.Debug|x86.ActiveCfg = Debug|Win32
+		{8F92FEDA-DC82-4D49-B7E5-8C202A418801}.Debug|x86.Build.0 = Debug|Win32
+		{8F92FEDA-DC82-4D49-B7E5-8C202A418801}.Release|x64.ActiveCfg = Release|x64
+		{8F92FEDA-DC82-4D49-B7E5-8C202A418801}.Release|x64.Build.0 = Release|x64
+		{8F92FEDA-DC82-4D49-B7E5-8C202A418801}.Release|x86.ActiveCfg = Release|Win32
+		{8F92FEDA-DC82-4D49-B7E5-8C202A418801}.Release|x86.Build.0 = Release|Win32
+		{582BD47A-83DB-4039-ABBC-7BB2B19495B7}.Debug|x64.ActiveCfg = Debug|x64
+		{582BD47A-83DB-4039-ABBC-7BB2B19495B7}.Debug|x64.Build.0 = Debug|x64
+		{582BD47A-83DB-4039-ABBC-7BB2B19495B7}.Debug|x86.ActiveCfg = Debug|Win32
+		{582BD47A-83DB-4039-ABBC-7BB2B19495B7}.Debug|x86.Build.0 = Debug|Win32
+		{582BD47A-83DB-4039-ABBC-7BB2B19495B7}.Release|x64.ActiveCfg = Release|x64
+		{582BD47A-83DB-4039-ABBC-7BB2B19495B7}.Release|x64.Build.0 = Release|x64
+		{582BD47A-83DB-4039-ABBC-7BB2B19495B7}.Release|x86.ActiveCfg = Release|Win32
+		{582BD47A-83DB-4039-ABBC-7BB2B19495B7}.Release|x86.Build.0 = Release|Win32
+		{CF5AA1C4-E6B5-41CB-8851-1E30B67F5785}.Debug|x64.ActiveCfg = Debug|x64
+		{CF5AA1C4-E6B5-41CB-8851-1E30B67F5785}.Debug|x64.Build.0 = Debug|x64
+		{CF5AA1C4-E6B5-41CB-8851-1E30B67F5785}.Debug|x86.ActiveCfg = Debug|Win32
+		{CF5AA1C4-E6B5-41CB-8851-1E30B67F5785}.Debug|x86.Build.0 = Debug|Win32
+		{CF5AA1C4-E6B5-41CB-8851-1E30B67F5785}.Release|x64.ActiveCfg = Release|x64
+		{CF5AA1C4-E6B5-41CB-8851-1E30B67F5785}.Release|x64.Build.0 = Release|x64
+		{CF5AA1C4-E6B5-41CB-8851-1E30B67F5785}.Release|x86.ActiveCfg = Release|Win32
+		{CF5AA1C4-E6B5-41CB-8851-1E30B67F5785}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -366,5 +435,10 @@ Global
 		{44D13247-CE43-4DDA-9A27-5FBA48B12C3F} = {DD3D5CAC-378C-4220-AF1F-8522B184A47D}
 		{C9C96FCE-5497-4AC3-AB59-8521E67AEA6F} = {ACCD6DB3-E254-432E-90E3-1B1EC7BC97FC}
 		{69D6409E-405B-4B1E-9966-40758068A881} = {DD3D5CAC-378C-4220-AF1F-8522B184A47D}
+		{903BCC64-83C3-4686-AC26-BEE41290115A} = {DD3D5CAC-378C-4220-AF1F-8522B184A47D}
+		{A120EF58-A154-4AFB-A4CB-8A85E872B0C2} = {DD3D5CAC-378C-4220-AF1F-8522B184A47D}
+		{1CF28C70-50CC-492C-9FAF-8BE4CC951531} = {ACCD6DB3-E254-432E-90E3-1B1EC7BC97FC}
+		{582BD47A-83DB-4039-ABBC-7BB2B19495B7} = {ACCD6DB3-E254-432E-90E3-1B1EC7BC97FC}
+		{CF5AA1C4-E6B5-41CB-8851-1E30B67F5785} = {903BCC64-83C3-4686-AC26-BEE41290115A}
 	EndGlobalSection
 EndGlobal

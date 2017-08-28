@@ -1,6 +1,6 @@
 //ArchitectureSelection.h
 
-// Copyright Querysoft Limited 2013, 2015
+// Copyright Querysoft Limited 2013, 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -25,6 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 //Select the basic target architecture
+//Note: THIS FILE AND EVERYTHING IT INCLUDES MUST BE PURE PRE-PROCESSOR CODE
 
 #ifndef ARCHQOR_ARCHITECTURESELECTION_H_1
 #define ARCHQOR_ARCHITECTURESELECTION_H_1
@@ -82,10 +83,4 @@
 
 #include QOR_ARCH_VERSION_INCLUDE
 
-/*
-__QCMP_MESSAGE( "Target Architecture " QOR_ARCH_NAME )
-
-#include "ArchQOR/Common/WordSizeSelection.h"
-#include QOR_ARCH_CLASS_INCLUDE
-*/
 #endif//ARCHQOR_ARCHITECTURESELECTION_H_1

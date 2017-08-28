@@ -1,6 +1,6 @@
 //WinQLFileSink.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -60,30 +60,28 @@ namespace nsWin32
 		CFileConnector* pFileConnector = dynamic_cast< CFileConnector* >( m_pIOSinkConnector );
 		if( pFileConnector && pFileConnector->IsConnected() )
 		{			
+			byte* pBuffer = GetSource()->GetBuffer()->ReadRequest(ulNumberOfUnitsToWrite);
+			unsigned long ulUnitSize = GetSource()->GetBuffer()->GetUnitSize();
 			if( pFileConnector->AsyncConnection() )
 			{
-				byte* pBuffer = GetSource()->GetBuffer()->ReadRequest( ulNumberOfUnitsToWrite );
-
 				if( pBuffer )
 				{
-					unsigned long ulUnitSize = GetSource()->GetBuffer()->GetUnitSize();
+					
 					bResult = pFileConnector->File()->WriteEx( (const void*)(pBuffer), ulNumberOfUnitsToWrite * ulUnitSize, 
 					reinterpret_cast< OVERLAPPED* >( pFileConnector->GetSyncObject() ), (LPOVERLAPPED_COMPLETION_ROUTINE)(&COverlappedHandler::OnOverlappedWriteCompleted) );
 				}
 				ulNumberOfUnitsWritten = 0;
 
-				if( !bResult && pFileConnector->Protocol() )
+				if( !bResult )
 				{
-					pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteError();
+					WriteError.Signal();
 				}
 
 			}
 			else
-			{
-				byte* pBuffer = GetSource()->GetBuffer()->ReadRequest( ulNumberOfUnitsToWrite );
+			{				
 				if( pBuffer && ulNumberOfUnitsToWrite > 0 )
 				{
-					unsigned long ulUnitSize = GetSource()->GetBuffer()->GetUnitSize();
 					ulNumberOfUnitsWritten = 0;
 					bResult = pFileConnector->File()->Write( (const void*)(pBuffer), ulNumberOfUnitsToWrite * ulUnitSize, &ulNumberOfUnitsWritten, 0 );
 					if( bResult && ( ulNumberOfUnitsWritten > 0 ) )
@@ -93,16 +91,13 @@ namespace nsWin32
 					GetSource()->GetBuffer()->ReadAcknowledge( ulNumberOfUnitsWritten );
 				}
 				
-				if( pFileConnector->Protocol() )
+				if( bResult )
 				{
-					if( bResult )
-					{
-						pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteSuccess();
-					}
-					else
-					{
-						pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteError();
-					}
+					WriteSuccess.Signal();
+				}
+				else
+				{
+					WriteError.Signal();
 				}
 			}
 		}

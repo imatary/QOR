@@ -12,7 +12,7 @@
 # /* Revised by Paul Mensonides (2002-2011) */
 # /* Revised by Edward Diener (2011) */
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -42,34 +42,37 @@
 #include "../cat.h"
 #include "../config/config.h"
 #include "../facilities/overload.h"
+#include "size.h"
+#include "../variadic/size.h"
 
 //QOR_PP_TUPLE_REVERSE
 
-#if QOR_PP_VARIADICS
-#   if QOR_PP_VARIADICS_MSVC
-#       define QOR_PP_TUPLE_REVERSE( ... )			QOR_PP_TUPLE_REVERSE_I( QOR_PP_OVERLOAD( QOR_PP_TUPLE_REVERSE_O_, __VA_ARGS__ ), ( __VA_ARGS__ ) )
-#       define QOR_PP_TUPLE_REVERSE_I( m, args )	QOR_PP_TUPLE_REVERSE_II( m, args )
-#       define QOR_PP_TUPLE_REVERSE_II( m, args )	QOR_PP_CAT( m ## args, )
-#   else
-#       define QOR_PP_TUPLE_REVERSE( ... )			QOR_PP_OVERLOAD( QOR_PP_TUPLE_REVERSE_O_, __VA_ARGS__ )( __VA_ARGS__ )
-#   endif
-#   define QOR_PP_TUPLE_REVERSE_O_1( tuple )		QOR_PP_CAT( QOR_PP_TUPLE_REVERSE_, QOR_PP_VARIADIC_SIZE tuple ) tuple
-#   define QOR_PP_TUPLE_REVERSE_O_2( size, tuple )	QOR_PP_TUPLE_REVERSE_O_1( tuple )
-#else
-#   if ~QOR_PP_CONFIG_FLAGS() & QOR_PP_CONFIG_MWCC()
-#       define QOR_PP_TUPLE_REVERSE( size, tuple )	QOR_PP_TUPLE_REVERSE_I( size, tuple )
-#       if ~QOR_PP_CONFIG_FLAGS() & QOR_PP_CONFIG_MSVC()
-#           define QOR_PP_TUPLE_REVERSE_I( s, t )	QOR_PP_TUPLE_REVERSE_ ## s t
-#       else
-#           define QOR_PP_TUPLE_REVERSE_I( s, t )	QOR_PP_TUPLE_REVERSE_II( QOR_PP_TUPLE_REVERSE_ ## s t )
-#           define QOR_PP_TUPLE_REVERSE_II( res )	res
-#       endif
-#   else
-#       define QOR_PP_TUPLE_REVERSE( size, tuple )	QOR_PP_TUPLE_REVERSE_OO( ( size, tuple ) )
-#       define QOR_PP_TUPLE_REVERSE_OO( par )		QOR_PP_TUPLE_REVERSE_I ## par
-#       define QOR_PP_TUPLE_REVERSE_I( s, t )		QOR_PP_TUPLE_REVERSE_ ## s ## t
-#   endif
-#endif
+# if QOR_PP_VARIADICS
+#    if QOR_PP_VARIADICS_MSVC
+#        define QOR_PP_TUPLE_REVERSE(...) QOR_PP_TUPLE_REVERSE_I(QOR_PP_OVERLOAD(QOR_PP_TUPLE_REVERSE_O_, __VA_ARGS__), (__VA_ARGS__))
+#        define QOR_PP_TUPLE_REVERSE_I(m, args) QOR_PP_TUPLE_REVERSE_II(m, args)
+#        define QOR_PP_TUPLE_REVERSE_II(m, args) QOR_PP_CAT(m ## args,)
+#    	 define QOR_PP_TUPLE_REVERSE_O_1(tuple) QOR_PP_CAT(QOR_PP_TUPLE_REVERSE_, QOR_PP_TUPLE_SIZE(tuple)) tuple
+#    else
+#        define QOR_PP_TUPLE_REVERSE(...) QOR_PP_OVERLOAD(QOR_PP_TUPLE_REVERSE_O_, __VA_ARGS__)(__VA_ARGS__)
+#    	 define QOR_PP_TUPLE_REVERSE_O_1(tuple) QOR_PP_CAT(QOR_PP_TUPLE_REVERSE_, QOR_PP_VARIADIC_SIZE tuple) tuple
+#    endif
+#    define QOR_PP_TUPLE_REVERSE_O_2(size, tuple) QOR_PP_TUPLE_REVERSE_O_1(tuple)
+# else
+#    if ~QOR_PP_CONFIG_FLAGS() & QOR_PP_CONFIG_MWCC()
+#        define QOR_PP_TUPLE_REVERSE(size, tuple) QOR_PP_TUPLE_REVERSE_I(size, tuple)
+#        if ~QOR_PP_CONFIG_FLAGS() & QOR_PP_CONFIG_MSVC()
+#            define QOR_PP_TUPLE_REVERSE_I(s, t) QOR_PP_TUPLE_REVERSE_ ## s t
+#        else
+#            define QOR_PP_TUPLE_REVERSE_I(s, t) QOR_PP_TUPLE_REVERSE_II(QOR_PP_TUPLE_REVERSE_ ## s t)
+#            define QOR_PP_TUPLE_REVERSE_II(res) res
+#        endif
+#    else
+#        define QOR_PP_TUPLE_REVERSE(size, tuple) QOR_PP_TUPLE_REVERSE_OO((size, tuple))
+#        define QOR_PP_TUPLE_REVERSE_OO(par) QOR_PP_TUPLE_REVERSE_I ## par
+#        define QOR_PP_TUPLE_REVERSE_I(s, t) QOR_PP_TUPLE_REVERSE_ ## s ## t
+#    endif
+# endif
 
 #define QOR_PP_TUPLE_REVERSE_1(e0) (e0)
 #define QOR_PP_TUPLE_REVERSE_2(e0, e1) (e1, e0)

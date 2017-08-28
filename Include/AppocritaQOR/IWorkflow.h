@@ -42,7 +42,7 @@
 namespace nsQOR
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __APPOCRITA ) IWorkflow
+	class __QOR_INTERFACE( __APPOCRITA ) IWorkflow : public IEventHandler
 	{
 	public:
 
@@ -53,6 +53,7 @@ namespace nsQOR
 		IWorkflow( const IWorkflow& src ){};
 		IWorkflow& operator = ( const IWorkflow& src ){ return *this; }
 
+		virtual bool operator()(IEvent::ref_type _event, int iCookie) = 0;
 		virtual void SetApplication( IApplication::ref_type Application ) = 0;
 		virtual IState::ref_type CurrentState( void ) const = 0;
 		virtual void SetState( IState::ref_type pNewState, IEvent::ref_type pEvent ) = 0;

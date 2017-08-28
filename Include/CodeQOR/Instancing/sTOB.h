@@ -48,7 +48,7 @@ namespace nsCodeQOR
     //The _Kick macro ensures that the real T is 
     //created in the statically allocated memory
     //This is the per call overhead but it only 
-    //inserts a handful of assmebler instructions
+    //inserts a handful of assembler instructions
 
     //_Kick uses the in-place new operator to construct
     //the T in the memory already reserved in the 
@@ -57,7 +57,7 @@ namespace nsCodeQOR
 #	define _Kick				                                                    \
     if( !m_bInitialised )								                            \
     {                                                                               \
-        /*Set initialised to true first to*/										\
+        /*Set initialized to true first to*/										\
         /*allow codependent constructions*/											\
         m_bInitialised = true;														\
         /*T() is called indirectly here*/											\
@@ -72,7 +72,7 @@ namespace nsCodeQOR
 
 	public:
 
-        //We need to overide all these operators
+        //We need to override all these operators
         //The client code may use any of them to 
         //access the sTOB the first time so each must _Kick
 
@@ -119,7 +119,7 @@ namespace nsCodeQOR
         }
 
         //--------------------------------------------------------------------------------
-        //Construct the sTOB at static initialisation time      
+        //Construct the sTOB at static initialization time      
         sTOB() 
         {
             m_bInitialised = false;
@@ -138,7 +138,7 @@ namespace nsCodeQOR
 		}
 
         //--------------------------------------------------------------------------------
-        //Destruct the sTOB at static teardown time
+        //Destruct the sTOB at static tear-down time
         //Be aware that everything including some of the runtime
         //may have disappeared by the time this is called
         ~sTOB()

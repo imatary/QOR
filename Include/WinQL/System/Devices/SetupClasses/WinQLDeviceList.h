@@ -64,7 +64,7 @@ namespace nsWin32
 
 		unsigned long Size( void );
 
-		CDeviceInstance::refType operator[]( unsigned long ulIndex );
+		CDeviceInstance::ref_type operator[]( unsigned long ulIndex );
 
 	private:
 

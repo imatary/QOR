@@ -41,7 +41,7 @@
 namespace nsQOR
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __APPOCRITA ) IState
+	class __QOR_INTERFACE( __APPOCRITA ) IState : public IEventHandler
 	{
 	public:
 
@@ -53,7 +53,7 @@ namespace nsQOR
 		IState& operator = ( const IState& src ){ return *this; }
 		bool operator == ( const IState& cmp ) const { return &cmp == this; }
 
-		virtual bool HandleEvent( IEvent::ref_type pEvent ) = 0;
+		virtual bool operator()(IEvent::ref_type _event, int iCookie) = 0;
 		virtual void OnEnter( IEvent::ref_type pEvent ) = 0;
 		virtual void OnLeave( IEvent::ref_type pEvent ) = 0;
 		virtual void OnSuspend( IEvent::ref_type pEvent ) = 0;

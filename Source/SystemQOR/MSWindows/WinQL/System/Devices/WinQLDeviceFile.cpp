@@ -1,6 +1,6 @@
 //WinQLDeviceFile.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -50,10 +50,10 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CDeviceHandle::refType CDeviceFile::Handle()
+	CDeviceHandle::ref_type CDeviceFile::Handle()
 	{
 		_WINQ_FCONTEXT( "CDeviceFile::Handle" );
-		CDeviceHandle::refType refHandle( &m_Handle );
+		CDeviceHandle::ref_type refHandle( &m_Handle );
 		return refHandle;
 	}
 

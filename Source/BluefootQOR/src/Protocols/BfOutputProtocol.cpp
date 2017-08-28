@@ -1,6 +1,6 @@
 //BfOutputProtocol.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -33,86 +33,34 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CBFOutputProtocol::CBFOutputProtocol( nsQOR::IApplication::ref_type Application ) : CBFProtocol( Application )
+	COutputProtocol::COutputProtocol( nsQOR::IApplication::ref_type Application ) : CProtocol( Application )
 	{
 	}
 
 	//------------------------------------------------------------------------------
-	CBFOutputProtocol::~CBFOutputProtocol()
+	COutputProtocol::~COutputProtocol()
 	{
 	}
 
 	//------------------------------------------------------------------------------
-	CBFOutputProtocol::CBFOutputProtocol( const CBFOutputProtocol& src ) : CBFProtocol( src )
+	COutputProtocol::COutputProtocol( const COutputProtocol& src ) : CProtocol( src )
 	{
 	}
 
 	//------------------------------------------------------------------------------
-	CBFOutputProtocol& CBFOutputProtocol::operator = ( const CBFOutputProtocol& src )
+	COutputProtocol& COutputProtocol::operator = ( const COutputProtocol& src )
 	{
 		if( &src != this )
 		{
-			CBFProtocol::operator = ( src );
+			CProtocol::operator = ( src );
 		}
 		return *this;
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBFOutputProtocol::GetNextWriteCount( void )
+	void COutputProtocol::GetNextWriteCount( void )
 	{
 		m_ulDataSize = 0;
-	}
-
-	//--------------------------------------------------------------------------------
-	bool CBFOutputProtocol::Write()
-	{
-		bool bResult = false;
-		if( m_pOutPipe )
-		{
-			GetNextWriteCount();
-			if( m_ulDataSize > 0 )
-			{
-				unsigned long ulWritten = 0;
-				bResult = m_pOutPipe->Pump( ulWritten, m_ulDataSize );
-			}
-		}
-		return bResult;
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFOutputProtocol::OnConnectionError( void )
-	{
-		SetState( m_StoppedState.Ref(), 0 );
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFOutputProtocol::OnConnected( void )
-	{
-		SetState( m_WritingState.Ref(), 0 );
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFOutputProtocol::OnDisconnectionError( void )
-	{
-		SetState( m_StoppedState.Ref(), 0 );
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFOutputProtocol::OnDisconnected( void )
-	{
-		SetState( m_StoppedState.Ref(), 0 );
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFOutputProtocol::OnWriteSuccess( void )
-	{
-		SetState( m_WritingState.Ref(), 0 );
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFOutputProtocol::OnWriteError( void )
-	{
-		SetState( m_StoppedState.Ref(), 0 );
 	}
 
 }//nsBluefoot

@@ -1,6 +1,6 @@
 //LibraryBase.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -52,7 +52,7 @@ namespace nsCodeQOR
 		const char* LibraryName( void );					//Return the library name
 		void AppendLibrary( CLibraryBase* pNext );			//Append a static library to the chain of QOR libraries in this module
 		CLibraryBase* NextLibrary( void );					//Return the next static library in the chain of static libraries for this module
-		const char* Version( void );						//Return the compilation timestamp
+		const char* Version( void );						//Return the compilation time-stamp
 
 	protected:
 

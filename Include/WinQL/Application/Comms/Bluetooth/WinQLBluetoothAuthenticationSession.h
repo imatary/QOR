@@ -37,6 +37,7 @@
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/CodeServices/Text/WinString.h"
 #include "WinQL/GUI/Window.h"
+#include "WinQL/GUI/Views/WindowView.h"
 #include "WinQL/Application/Comms/Bluetooth/WinQLBluetoothRemoteDevice.h"
 #include "WinQL/System/Devices/BluetoothRadio/WinQLBluetoothRadio.h"
 
@@ -49,7 +50,7 @@ namespace nsWinQAPI
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-	class __QOR_INTERFACE( __WINQL ) CBluetoothHost;
+	class __QOR_INTERFACE( __WINQL ) CBluetooth;
 
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CAuthenticateBluetoothSession
@@ -77,15 +78,15 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CAuthenticateBluetoothSession );
 		
-		CAuthenticateBluetoothSession( CBluetoothHost* pHost );
-		CAuthenticateBluetoothSession( CBluetoothRemoteDevice::refType Device );
+		CAuthenticateBluetoothSession( CBluetooth* pHost );
+		CAuthenticateBluetoothSession( CBluetoothRemoteDevice::ref_type Device );
 		virtual ~CAuthenticateBluetoothSession();
 
 		virtual bool InstanceCallback( CBluetoothRemoteDevice::Info* pDevice );
-		void SendResponse( CBluetoothRadio::refType Radio, CBluetoothRemoteDevice::Info* pDeviceInfo, CWString strPassKey );
+		void SendResponse( CBluetoothRadio::ref_type Radio, CBluetoothRemoteDevice::Info* pDeviceInfo, CWString strPassKey );
 
 		virtual bool InstanceCallbackEx( CBluetoothRemoteDevice::Authentication_CallbackParams* pAuthCallbackParams );
-		void SendResponseEx( CBluetoothRadio::refType Radio, Authentication_Response* pResponse );
+		void SendResponseEx( CBluetoothRadio::ref_type Radio, Authentication_Response* pResponse );
 
 		static int Callback( CAuthenticateBluetoothSession* pSession, CBluetoothRemoteDevice::Info* pDevice );
 		static int CallbackEx( CAuthenticateBluetoothSession* pSession, CBluetoothRemoteDevice::Authentication_CallbackParams* pAuthCallbackParams);
@@ -93,7 +94,7 @@ namespace nsWin32
 	private:
 
 		nsWinQAPI::CBthProps& m_Library;
-		CBluetoothHost* m_pHost;
+		CBluetooth* m_pHost;
 		CHandle m_Handle;
 		
 		CAuthenticateBluetoothSession();

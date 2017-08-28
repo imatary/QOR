@@ -1,6 +1,6 @@
 //WinQLSocketServerAdaptor.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -26,6 +26,8 @@
 
 #ifndef WINQL_IO_SOCKETSERVERADAPTOR_H_3
 #define WINQL_IO_SOCKETSERVERADAPTOR_H_3
+
+#include "CompilerQOR.h"
 
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
@@ -53,10 +55,10 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CSocketServerAdaptor );
 	
-		CSocketServerAdaptor( nsBluefoot::CBFConnectionPool* pPool = 0 );
+		CSocketServerAdaptor( nsBluefoot::CConnectionPool* pPool = 0 );
 		virtual ~CSocketServerAdaptor();
 
-		//Socket server connection overrides for CBFPlug interface
+		//Socket server connection overrides for CPlug interface
 		virtual bool Connect();
 		virtual void Disconnect( void );
 		virtual void OnConnected();
@@ -68,13 +70,13 @@ namespace nsWin32
 		void Create( void );
 		void Bind( void );
 
-		void SetAcceptConnection( nsBluefoot::CBFPlug::refPlugType AcceptConnection );
+		void SetAcceptConnection( nsBluefoot::CPlug::refPlugType AcceptConnection );
 
 	protected:
 
 		int m_iBacklog;
 		byte* m_pAcceptBuffer;
-		nsBluefoot::CBFPlug::refPlugType m_AcceptConnection;
+		nsBluefoot::CPlug::refPlugType m_AcceptConnection;
 	};
 
 }//nsWin32

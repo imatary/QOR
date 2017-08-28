@@ -270,10 +270,10 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	void CWin32Application::OnIdle( void )
 	{
-		//Defer OnIdle processing to Workflow
-		if (m_pWorkflow)
+		//Defer OnIdle processing to Outer
+		if (!m_OuterApplication.IsNull())
 		{
-			m_pWorkflow->OnIdle();
+			m_OuterApplication->OnIdle();
 		}
 	}
 
@@ -326,7 +326,7 @@ namespace nsWin32
 			m_AppEventQueue.pop_front();
 			if( m_pWorkflow && m_pWorkflow->CurrentState() )
 			{
-				m_pWorkflow->CurrentState()->HandleEvent( pEvent );
+				m_pWorkflow->CurrentState()()(ref(*pEvent),-1);
 			}
 		}
 	}

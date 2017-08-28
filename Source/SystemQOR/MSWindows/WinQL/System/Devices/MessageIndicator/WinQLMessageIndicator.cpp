@@ -1,6 +1,6 @@
 //WinQLMessageIndicator.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -52,5 +52,34 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CMessageIndicator::~CMessageIndicator" );
 	}
 
+	//--------------------------------------------------------------------------------
+	void CMessageIndicator::Open()
+	{
+		_WINQ_FCONTEXT("CMessageIndicator::Open");
+		m_Session = CDeviceInterface::Open(Generic_Write, File_Share_Write, File_Attribute_Normal);
+	}
+
+	//--------------------------------------------------------------------------------
+	void CMessageIndicator::Close()
+	{
+		_WINQ_FCONTEXT("CMessageIndicator::Close");
+		m_Session.Dispose();
+	}
+
+	//--------------------------------------------------------------------------------
+	void CMessageIndicator::Set(void)
+	{
+		_WINQ_FCONTEXT("CMessageIndicator::Set");
+
+		if (!m_Session.IsNull())
+		{
+			if (m_Session->Control(__WINQL_DEVICE_CONTROL_CODE(File_Device_MessageIndicator, Set_Func, Method_Buffered, File_Write_Access), 0, 0, 0, 0, 0, 0))
+			{
+			}
+		}
+	}
+
+
+	//	IOCTL_SET_SYS_MESSAGE_INDICATOR
 }//nsWin32
 

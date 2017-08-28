@@ -1,6 +1,6 @@
 //DeviceInterfaceClass.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,6 +29,8 @@
 #ifndef WINQL_DEVICEINTERFACECLASS_H_3
 #define WINQL_DEVICEINTERFACECLASS_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -42,6 +44,8 @@
 #include "WinQL/System/Devices/Interfaces/WinQLDeviceInterface.h"
 #include "WinQL/CodeServices/Text/WinString.h"
 
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceInterfaceClass, CTRef);
+
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
@@ -52,9 +56,8 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CDeviceInterfaceClass > refType;
-		typedef std::vector< CDeviceInterface::refType >::iterator interface_iterator;
-
+		typedef std::vector< CDeviceInterface::ref_type >::iterator interface_iterator;
+		__QOR_DECLARE_REF_TYPE(CDeviceInterfaceClass);
 		__QOR_DECLARE_OCLASS_ID( CDeviceInterfaceClass );
 
 		CDeviceInterfaceClass( nsCodeQOR::__mxGUID GUID, const CTString& strInterfaceName, CTStringRef refstrMachine = CTString::TheEmptyString().Ref() );
@@ -62,24 +65,16 @@ namespace nsWin32
 		CDeviceInterfaceClass& operator = ( const CDeviceInterfaceClass& src );
 		~CDeviceInterfaceClass();
 
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this, false );
-		}
-
 		CTString Name( void );
 		nsCodeQOR::__mxGUID& GUID( void );
 
-		unsigned long RegisterInterface( CDeviceInterface::refType DeviceInterface );
+		unsigned long RegisterInterface( CDeviceInterface::ref_type DeviceInterface );
 		//TODO: UnregisterInterface
 
-		CDeviceInterface* CreateObject( void );
+		CDeviceInterface::ref_type CreateObject( void );
 		bool IsImplemented( void );
-
 		void Enumerate( void );
-
-		std::vector< CDeviceInterface::refType >& Interfaces( void );
+		std::vector< CDeviceInterface::ref_type >& Interfaces( void );
 
 	protected:
 
@@ -91,10 +86,7 @@ namespace nsWin32
 		CTString m_strName;
 		CTString m_strMachine;
 
-		std::vector< CDeviceInterface::refType > m_VecInterfaceInstances;
-		//SP_DevInfo_Data m_DevInfo;
-		//SP_Device_Interface_Data m_DevInterfaceData;
-		//SP_Device_Interface_Detail_Data m_DevInterfaceDetailData;
+		std::vector< CDeviceInterface::ref_type > m_VecInterfaceInstances;
 		nsWinQAPI::CSetupAPI& m_Library;
 		bool m_bEnumerated;
 	};

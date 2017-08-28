@@ -80,6 +80,8 @@
 #define _QSYS_MSWVER_WIN2K8		9
 #define _QSYS_MSWVER_WIN7		10
 #define _QSYS_MSWVER_WIN8		11
+#define _QSYS_MSWVER_WIN8_1		12
+#define _QSYS_MSWVER_WIN10		13
 //!TODO Add new Windows versions here
 
 //Windows Service Packs

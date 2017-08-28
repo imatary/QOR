@@ -53,7 +53,7 @@ namespace nsBluefoot
 		void SetFeature( const nsCodeQOR::CUCS2String& name, bool value );
 		bool HasFeature( const nsCodeQOR::CUCS2String& name ) const;
 
-		virtual bool Parse( const CBFSource* input, bool incremental );
+		virtual bool Parse( const CSource* input, bool incremental );
 		virtual bool ParseContinue();
 
 	private:

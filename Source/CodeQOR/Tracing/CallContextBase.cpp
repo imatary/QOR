@@ -129,7 +129,7 @@ namespace nsCodeQOR
 		/*
 		if( !m_pParameters.IsNull() )
 		{
-			m_pParameters().Clear();	//Delete all the parameter nodes without deferencing or deleting any of the parameters they refered to
+			m_pParameters().Clear();	//Delete all the parameter nodes without dereferencing or deleting any of the parameters they referred to
 		}
 		*/
 

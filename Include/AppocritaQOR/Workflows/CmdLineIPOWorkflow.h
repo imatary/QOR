@@ -46,7 +46,7 @@ namespace nsQOR
 
 		CApplicationStartupState( CWorkflow::ref_type pWorkflow ) : CState( pWorkflow ){}
 
-		virtual bool HandleEvent( IEvent::ref_type pEvent );
+		virtual bool operator()(IEvent::ref_type _event);
 		virtual void OnEnter( IEvent::ref_type pEvent );
 		virtual void OnLeave( IEvent::ref_type pEvent );
 	};
@@ -58,7 +58,7 @@ namespace nsQOR
 
 		CCmdLineInputState( CWorkflow::ref_type pWorkflow ) : CState( pWorkflow ){}
 
-		virtual bool HandleEvent( IEvent::ref_type pEvent );
+		virtual bool operator()(IEvent::ref_type _event);
 		virtual void OnEnter( IEvent::ref_type pEvent );
 		virtual void OnLeave( IEvent::ref_type pEvent );
 	};
@@ -70,7 +70,7 @@ namespace nsQOR
 
 		CProcessingState( CWorkflow::ref_type pWorkflow ) : CState( pWorkflow ){}
 
-		virtual bool HandleEvent( IEvent::ref_type pEvent );
+		virtual bool operator()(IEvent::ref_type _event);
 		virtual void OnEnter( IEvent::ref_type pEvent );
 		virtual void OnLeave( IEvent::ref_type pEvent );
 	};
@@ -82,7 +82,7 @@ namespace nsQOR
 
 		CCmdLineOutputState( CWorkflow::ref_type pWorkflow ) : CState( pWorkflow ){}
 
-		virtual bool HandleEvent( IEvent::ref_type pEvent );
+		virtual bool operator()(IEvent::ref_type _event);
 		virtual void OnEnter( IEvent::ref_type pEvent );
 		virtual void OnLeave( IEvent::ref_type pEvent );
 	};

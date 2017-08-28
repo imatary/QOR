@@ -1,6 +1,6 @@
 //BfInputProtocol.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -33,92 +33,28 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CBFInputProtocol::CBFInputProtocol( nsQOR::IApplication::ref_type Application ) : CBFProtocol( Application )
+	CInputProtocol::CInputProtocol( nsQOR::IApplication::ref_type Application ) : CProtocol( Application )
 	{
 	}
 
 	//------------------------------------------------------------------------------
-	CBFInputProtocol::~CBFInputProtocol()
+	CInputProtocol::~CInputProtocol()
 	{
 	}
 
 	//------------------------------------------------------------------------------
-	CBFInputProtocol::CBFInputProtocol( const CBFInputProtocol& src ) : CBFProtocol( src )
+	CInputProtocol::CInputProtocol( const CInputProtocol& src ) : CProtocol( src )
 	{
 	}
 
 	//------------------------------------------------------------------------------
-	CBFInputProtocol& CBFInputProtocol::operator = ( const CBFInputProtocol& src )
+	CInputProtocol& CInputProtocol::operator = ( const CInputProtocol& src )
 	{
 		if( &src != this )
 		{
-			CBFProtocol::operator = ( src );
+			CProtocol::operator = ( src );
 		}
 		return *this;
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFInputProtocol::GetNextReadCount( void )
-	{
-		m_ulDataSize = 0;
-	}
-
-	//--------------------------------------------------------------------------------
-	bool CBFInputProtocol::Read()
-	{
-		bool bResult = false;
-		if( m_pInPipe )
-		{
-			unsigned long ulNumberOfUnitsPumped = 0;
-			GetNextReadCount();
-			if( m_ulDataSize > 0 )
-			{				
-				bResult = m_pInPipe->Pump( ulNumberOfUnitsPumped, m_ulDataSize );
-			}
-		}
-		return bResult;
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFInputProtocol::OnConnectionError( void )
-	{
-		SetState( m_StoppedState.Ref(), 0 );
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFInputProtocol::OnConnected( void )
-	{
-		SetState( m_ReadingState.Ref(), 0 );
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFInputProtocol::OnDisconnectionError( void )
-	{
-		SetState( m_StoppedState.Ref(), 0 );
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFInputProtocol::OnDisconnected( void )
-	{
-		SetState( m_StoppedState.Ref(), 0 );
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFInputProtocol::OnReadSuccess( unsigned long ulUnitsRead )
-	{
-		SetState( m_ReadingState.Ref(), 0 );
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFInputProtocol::OnReadError( void )
-	{
-		SetState( m_StoppedState.Ref(), 0 );
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFInputProtocol::OnEndOfData( void )
-	{
-		SetState( m_StoppedState.Ref(), 0 );
 	}
 
 }//nsBluefoot

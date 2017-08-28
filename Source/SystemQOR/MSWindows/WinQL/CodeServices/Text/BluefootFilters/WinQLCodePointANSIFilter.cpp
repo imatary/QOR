@@ -1,6 +1,6 @@
 //WinQLCodePointANSIFilter.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -30,7 +30,7 @@
 namespace nsWin32
 {
 	//------------------------------------------------------------------------------
-	CCodePointANSIFilter::CCodePointANSIFilter() : nsBluefoot::CBFFilter()
+	CCodePointANSIFilter::CCodePointANSIFilter() : nsBluefoot::CFilter()
 	{
 	}
 
@@ -40,7 +40,7 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	CCodePointANSIFilter::CCodePointANSIFilter( const CCodePointANSIFilter& src ) : nsBluefoot::CBFFilter( src )
+	CCodePointANSIFilter::CCodePointANSIFilter( const CCodePointANSIFilter& src ) : nsBluefoot::CFilter( src )
 	{
 	}
 

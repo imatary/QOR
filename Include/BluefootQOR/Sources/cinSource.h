@@ -1,6 +1,6 @@
 //cinSource.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013,2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -39,28 +39,28 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFcinSource : public CBFSource
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CcinSource : public CSource
 	{
 	public:
 
 		//------------------------------------------------------------------------------
-		CBFcinSource()
+		CcinSource()
 		{
 		}
 
 		//------------------------------------------------------------------------------
-		virtual ~CBFcinSource()
+		virtual ~CcinSource()
 		{
 		}
 
 		//------------------------------------------------------------------------------
-		CBFcinSource( const CBFcinSource& src )
+		CcinSource( const CcinSource& src )
 		{
 			*this = src;
 		}
 
 		//------------------------------------------------------------------------------
-		CBFcinSource& operator = ( const CBFcinSource& src )
+		CcinSource& operator = ( const CcinSource& src )
 		{
 			if( &src != this )
 			{

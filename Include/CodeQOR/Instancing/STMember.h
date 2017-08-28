@@ -87,6 +87,13 @@ namespace nsCodeQOR
 			return m_pMember;
 		}
 
+		//--------------------------------------------------------------------------------
+		template< class TDerived >
+		TDerived* As(void)
+		{
+			return dynamic_cast<TDerived*>(m_pMember);
+		}
+
         //--------------------------------------------------------------------------------
         bool Configure( Tbase* pConf, bool bConferOwnership = false )
         {

@@ -39,11 +39,11 @@
 namespace nsBluefoot
 {
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL ) CBFConnectionPool;
+	class __QOR_INTERFACE( __WINQL ) CConnectionPool;
 
 	//--------------------------------------------------------------------------------
 	template< class TPlug, class TSource, class TSink >
-	class CTBFConnection : public TPlug
+	class CConnection : public TPlug
 	{
 	public:
 
@@ -52,26 +52,26 @@ namespace nsBluefoot
 		typedef TSink sinkType;
 
 		//--------------------------------------------------------------------------------
-		CTBFConnection( CBFConnectionPool* pPool = 0 ) : TPlug( pPool )
+		CConnection( CConnectionPool* pPool = 0 ) : TPlug( pPool )
 		,	m_Source( this )
 		,	m_Sink( this )
 		{
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual ~CTBFConnection()
+		virtual ~CConnection()
 		{
 		}
 
 		//Connection interface
 		//--------------------------------------------------------------------------------
-		virtual CBFSource* GetSource( void )
+		virtual CSource* GetSource( void )
 		{
 			return &m_Source;
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual CBFSink* GetSink( void )
+		virtual CSink* GetSink( void )
 		{
 			return &m_Sink;
 		}
@@ -104,17 +104,17 @@ namespace nsBluefoot
 	//--------------------------------------------------------------------------------
 	//Adds read capability to a Connection by attaching a Source
 	template< class TPlug, class TSource >
-	class CTBFReadOnlyConnection : public CTBFConnection< TPlug, TSource, CNULLSink >
+	class CReadOnlyConnection : public CConnection< TPlug, TSource, CNULLSink >
 	{
 	public:
 
 		//--------------------------------------------------------------------------------
-		CTBFReadOnlyConnection( CBFConnectionPool* pPool = 0 ) : CTBFConnection< TPlug, TSource, CNULLSink >( pPool )
+		CReadOnlyConnection( CConnectionPool* pPool = 0 ) : CConnection< TPlug, TSource, CNULLSink >( pPool )
 		{			
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual ~CTBFReadOnlyConnection()
+		virtual ~CReadOnlyConnection()
 		{
 		}
 
@@ -127,17 +127,17 @@ namespace nsBluefoot
 
 	//--------------------------------------------------------------------------------
 	template< class TPlug, class TSink >
-	class CTBFWriteOnlyConnection : public CTBFConnection< TPlug, CNULLSource, TSink >
+	class CWriteOnlyConnection : public CConnection< TPlug, CNULLSource, TSink >
 	{
 	public:
 
 		//--------------------------------------------------------------------------------
-		CTBFWriteOnlyConnection( CBFConnectionPool* pPool = 0 ) : CTBFConnection< TPlug, CNULLSource, TSink >( pPool )
+		CWriteOnlyConnection( CConnectionPool* pPool = 0 ) : CConnection< TPlug, CNULLSource, TSink >( pPool )
 		{			
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual ~CTBFWriteOnlyConnection()
+		virtual ~CWriteOnlyConnection()
 		{
 		}
 
@@ -149,19 +149,19 @@ namespace nsBluefoot
 	};
 
 	//--------------------------------------------------------------------------------
-	//A Read|Write connection add Source and Sink to a base CBFPlug
+	//A Read|Write connection adds Source and Sink to a base CPlug
 	template< class TPlug, class TSource, class TSink >
-	class CTBFReadWriteConnection : public CTBFConnection< TPlug, TSource, TSink >
+	class CReadWriteConnection : public CConnection< TPlug, TSource, TSink >
 	{
 	public:
 
 		//--------------------------------------------------------------------------------
-		CTBFReadWriteConnection( CBFConnectionPool* pPool = 0 ) : CTBFConnection< TPlug, TSource, TSink >( pPool )
+		CReadWriteConnection( CConnectionPool* pPool = 0 ) : CConnection< TPlug, TSource, TSink >( pPool )
 		{
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual ~CTBFReadWriteConnection()
+		virtual ~CReadWriteConnection()
 		{
 		}
 
@@ -182,27 +182,27 @@ namespace nsBluefoot
 	//CRTP wrapper which turns a TConnection into an Asynchronous Connection which 
 	//will be called back when Read or Writes complete
 	template< class TConnection, class TAsyncHandler >
-	class CBFAsyncConnection : public TConnection, public TAsyncHandler
+	class CAsyncConnection : public TConnection, public TAsyncHandler
 	{
 		friend TAsyncHandler;
 
 	public:
 
 		//--------------------------------------------------------------------------------
-		CBFAsyncConnection( CBFConnectionPool* pPool = 0 ) : TConnection( pPool )
+		CAsyncConnection( CConnectionPool* pPool = 0 ) : TConnection( pPool )
 		{		
 			SetSyncObject( &m_Overlapped );															//Use the internal SyncObject by default. This may get changed by Server/Connection Manager		
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual ~CBFAsyncConnection()
+		virtual ~CAsyncConnection()
 		{			
 		}
 
 		//--------------------------------------------------------------------------------
 		virtual void OnConnected( void )
 		{
-			_WINQ_FCONTEXT( "CBFAsyncConnection::OnConnected" );
+			//__QCS_MEMBER_FCONTEXT( "CAsyncConnection::OnConnected" );
 			TConnection::SetSyncObject( &m_Overlapped );											//Once connected always use the internal SyncObject for IO
 			TConnection::OnConnected();
 		}
@@ -216,51 +216,36 @@ namespace nsBluefoot
 	protected:
 
 		//--------------------------------------------------------------------------------
-		virtual void OnWriteCompleted( unsigned long ulError, unsigned long ulCountBytesWritten )
+		virtual void OnWriteCompleted( unsigned long ulError, unsigned long ulUnitsWritten )
 		{	
-			if( ulError == 0 )
-			{
-				CBFSink* pSink = GetSink();
-				if( pSink )
-				{
-					pSink->OnWriteSuccess();
-				}
-			}
-
-			if( Protocol() )
+			CSink* pSink = GetSink();
+			if (pSink)
 			{
 				if( ulError == 0 )
 				{
-					Protocol()->OnWriteSuccess();
+					pSink->OnWriteSuccess(ulUnitsWritten);
 				}
 				else
 				{
-					Protocol()->OnWriteError();
+					pSink->OnWriteError(ulUnitsWritten, ulError)
 				}
 			}
 		}
 			
 		//--------------------------------------------------------------------------------
-		virtual void OnReadCompleted( unsigned long ulError, unsigned long ulCountBytesRead )
+		virtual void OnReadCompleted( unsigned long ulError, unsigned long ulCountUnitsRead)
 		{
-			if( ulError == 0 )
-			{
-				CBFSource* pSource = GetSource();
-				if( pSource )
-				{
-					pSource->OnReadSuccess( ulCountBytesRead );
-				}
-			}
+			CSource* pSource = GetSource();
 
-			if( Protocol() )
+			if (pSource)
 			{
-				if( ulError == 0 )
+				if (ulError == 0)
 				{
-					Protocol()->OnReadSuccess( ulCountBytesRead );
+					pSource->OnReadSuccess(ulCountUnitsRead);
 				}
 				else
 				{
-					Protocol()->OnReadError();
+					pSource->OnReadError(ulError, ulCountUnitsRead)
 				}
 			}
 		}

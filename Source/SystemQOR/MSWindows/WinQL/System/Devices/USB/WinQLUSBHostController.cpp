@@ -1,6 +1,6 @@
 //WinQLUSBHostController.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -57,7 +57,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CWString CUSBHostController::GetHCDDriverKeyName()
 	{
-		CDeviceSession Session( *this, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = Open(Generic_Write, File_Share_Write, Open_Existing);
 		CWString strKeyName;
 		bool                    success = false;
 		unsigned long			nBytes = 0;
@@ -67,7 +67,7 @@ namespace nsWin32
 		memset( &driverKeyName, 0, sizeof( USB_HCD_DRIVERKEY_NAME ) );
 
 		// Get the length of the name of the driver key of the HCD
-		success = m_pDeviceFile->Control( 
+		success = Session->Control( 
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, HCD_GET_DRIVERKEY_NAME, Method_Buffered, File_Any_Access ), &driverKeyName, sizeof(driverKeyName), &driverKeyName, sizeof(driverKeyName), &nBytes, NULL );
 
 		// Allocate space to hold the driver key name
@@ -76,7 +76,7 @@ namespace nsWin32
 		driverKeyNameW = reinterpret_cast< PUSB_HCD_DRIVERKEY_NAME >( new byte[ nBytes ] );
 
 		// Get the name of the driver key of the device attached to the specified port.
-		success = m_pDeviceFile->Control( 
+		success = Session->Control( 
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, HCD_GET_DRIVERKEY_NAME, Method_Buffered, File_Any_Access ), driverKeyNameW, nBytes, driverKeyNameW, nBytes, &nBytes, NULL );
 
 		strKeyName.Append( &driverKeyNameW->DriverKeyName[ 0 ] );
@@ -131,7 +131,7 @@ namespace nsWin32
 
 		CTString strRootHub = GetRootHubName().toTString();
 
-		CUSBHub* pHub = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).USBHubFromName( strRootHub );
+		CUSBHub* pHub = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS )().USBHubFromName( strRootHub );
 
 		return pHub;
 	}
@@ -146,11 +146,11 @@ namespace nsWin32
 		PUSB_ROOT_HUB_NAME  rootHubNameW = NULL;
 		CWString strTooHubName;
 
-		CDeviceSession Session( *this, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = Open(Generic_Write, File_Share_Write, Open_Existing);
 
 		// Get the length of the name of the Root Hub attached to the Host Controller
 		
-		success = m_pDeviceFile->Control( 
+		success = Session->Control( 
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, HCD_GET_ROOT_HUB_NAME, Method_Buffered, File_Any_Access ), 0, 0, &rootHubName, sizeof(rootHubName), &nBytes, 0 );
 
 		//Allocate space to hold the Root Hub name
@@ -160,7 +160,7 @@ namespace nsWin32
 		rootHubNameW = reinterpret_cast< PUSB_ROOT_HUB_NAME >( new byte[ nBytes ] );
 
 		// Get the name of the Root Hub attached to the Host Controller
-		success = m_pDeviceFile->Control( 
+		success = Session->Control( 
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, HCD_GET_ROOT_HUB_NAME, Method_Buffered, File_Any_Access ), 0, 0, rootHubNameW, nBytes, &nBytes, 0 );
 
 		strTooHubName.Append( rootHubNameW->RootHubName );
@@ -184,11 +184,11 @@ namespace nsWin32
 		UsbControllerInfo.Header.UsbUserRequest = USBUSER_GET_CONTROLLER_INFO_0;
 		UsbControllerInfo.Header.RequestBufferLength = sizeof(UsbControllerInfo);
 
-		CDeviceSession Session( *this, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = Open(Generic_Write, File_Share_Write, Open_Existing);
 
 		// Query for the USB_CONTROLLER_INFO_0 structure
 		
-		bSuccess = this->m_pDeviceFile->Control( 
+		bSuccess = Session->Control( 
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, HCD_USER_REQUEST, Method_Buffered, File_Any_Access ), &UsbControllerInfo, sizeof(UsbControllerInfo), &UsbControllerInfo, sizeof(UsbControllerInfo), &dwBytes, NULL);
 			
 		memcpy( &hcInfo->ControllerInfo, &UsbControllerInfo.Info0, sizeof(USB_CONTROLLER_INFO_0));// copy the data into our USB Host Controller's info structure
@@ -207,18 +207,19 @@ namespace nsWin32
 		
 		Info.DriverKey = strDriverKeyName.GetBuffer();
 
-		nsCodeQOR::CTLRef< CDeviceInstance > refInstance = GetInstance();
+		/*
+		CDeviceInstance::ref_type refInstance = GetInstance();
 		if( !refInstance.IsNull() )
 		{
 			CTString strDeviceID = refInstance->DeviceID();
 			//strDeviceID.Scan( _TXT( "PCI\\VEN_%x&DEV_%x&SUBSYS_%x&REV_%x", &Info.VendorID, &Info.DeviceID, &Info.SubSysID, &Info.Revision ) );
 		}
-
+		*/
 
 
 		Info.DriverKey = 0;
 		strDriverKeyName.ReleaseBuffer();
-		Close();
+		//Close();
 	}
 }//nsWin32
 

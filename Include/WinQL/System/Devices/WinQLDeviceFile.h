@@ -1,6 +1,6 @@
 //WinQLDeviceFile.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,15 +29,20 @@
 #ifndef WINQL_DEVICEFILE_H_3
 #define WINQL_DEVICEFILE_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/Definitions/Data.h"
 #include "WinQL/Definitions/IO.h"
 #include "WinQL/System/Devices/WinQLDevice.h"
 #include "WinQL/System/Devices/WinQLDeviceHandle.h"
 #include "WinQL/CodeServices/Text/WinString.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceFile, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -48,13 +53,12 @@ namespace nsWin32
 
 	public:
 
-		__QOR_DECLARE_OCLASS_ID( CDeviceFile );
-
-		virtual ~CDeviceFile();
-		nsCodeQOR::CTCRef< CDeviceHandle > Handle();
+		__QOR_DECLARE_REF_TYPE(CDeviceFile);
+		__QOR_DECLARE_OCLASS_ID(CDeviceFile);
 
 		CDeviceFile( const TCHAR* pDeviceName, unsigned long dwDesiredAccess, unsigned long dwShareMode, unsigned long dwFlagsAndAttributes );
 		CDeviceFile( CDeviceHandle& hExisting );
+		virtual ~CDeviceFile();
 
 		virtual bool Read( void* lpBuffer, unsigned long nNumberOfBytesToRead, unsigned long* lpNumberOfBytesRead, nsWin32::LPOVERLAPPED lpOverlapped );
 		virtual bool ReadEx( void* lpBuffer, unsigned long nNumberOfBytesToRead, nsWin32::LPOVERLAPPED lpOverlapped, nsWin32::LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine );
@@ -68,10 +72,11 @@ namespace nsWin32
 		virtual Cmp__int64 Tell( void );
 		virtual bool SupportsPosition( void );
 
+		CDeviceHandle::ref_type Handle();
+
 	protected:
 
 		CDeviceFile();
-
 		CDeviceHandle m_Handle;
 
 	private:

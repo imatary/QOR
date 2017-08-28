@@ -55,7 +55,7 @@ namespace nsWin32
 		m_pArgsList = 0;
 		m_pEnvList = 0;
 		m_StartupInfo = nsWin32::CProcessHelper::StartupInfo();
-		InitStatic();//Initialise the process object and QOR library statics.
+		InitStatic();//Initialize the process object and QOR library statics.
 	}
 
 	//--------------------------------------------------------------------------------
@@ -891,6 +891,12 @@ namespace nsWin32
 			{
 				{ 0xdb51fb8c, 0x4bef, 0x43f2, { 0xa4, 0x61, 0x7e, 0x49, 0x4f, 0xaf, 0xad, 0x75 } },
 					{ 0x2c101426, 0x4e38, 0x49c0, { 0x91, 0xc8, 0x0c, 0xea, 0xf5, 0x14, 0xbc, 0x02 } }, nullGUID, nullGUID, nullGUID
+			},
+
+			{
+				{ 0x559bde19, 0x75ed, 0x4ff9,{ 0x92, 0x45, 0x86, 0x9a, 0xcc, 0xe4, 0xcd, 0xb6 } },//WinQLCOM is dependent on
+				{ 0xdd8152fd, 0xcdd8, 0x4c26,{ 0xb3, 0x55, 0x00, 0xd5, 0x79, 0x55, 0xb8, 0x7a } }, //ArchQOR
+				nullGUID, nullGUID, nullGUID
 			},
 
 			{

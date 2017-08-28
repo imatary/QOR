@@ -1,6 +1,6 @@
 //WinQLUSBHub.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,6 +29,8 @@
 #ifndef WINQL_DEVICE_USBHUB_H_3
 #define WINQL_DEVICE_USBHUB_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -38,6 +40,7 @@
 #include "WinQL/System/Devices/WinQLIODevice.h"
 #include <vector>
 
+__QOR_DECLARE_REF(nsWin32, __WINQL, CUSBHub, CTExtRef);
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
@@ -46,7 +49,7 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CUSBHub > refType;
+		__QOR_DECLARE_REF_TYPE(CUSBHub);
 
 #pragma	__QCMP_PACK( 1 )
 
@@ -416,7 +419,7 @@ namespace nsWin32
 		{
 		public:
 
-			typedef nsCodeQOR::CTLRef< CPortConnection > refType;
+			typedef nsCodeQOR::CTLRef< CPortConnection > ref_type;
 
 			CPortConnection();
 			CPortConnection( CUSBHub* pHub, unsigned long ulConnectionIndex );
@@ -458,9 +461,9 @@ namespace nsWin32
 			CWString GetName( void );
 			CWString GetDriverKeyName( void );
 
-			refType Ref( void )
+			ref_type Ref( void )
 			{
-				return refType( this, false );
+				return ref_type( this, false );
 			}
 
 		private:
@@ -552,7 +555,7 @@ namespace nsWin32
 		bool IsArmedWakeOnConnect( void );
 		bool IsBusPowerCapable( void );
 				
-		CPortConnection::refType GetPort( byte Port );
+		CPortConnection::ref_type GetPort( byte Port );
 				
 		bool GetDescriptorFromNodeConnection( void );
 		

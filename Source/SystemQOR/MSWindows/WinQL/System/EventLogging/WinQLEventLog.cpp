@@ -1,6 +1,6 @@
 //WinQLEventLog.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -220,27 +220,27 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CEventLogServer::refType CEventLog::Server( const CTString& strLogName )
+	CEventLogServer::ref_type CEventLog::Server( const CTString& strLogName )
 	{
 		_WINQ_FCONTEXT( "CEventLog::Server" );
 
-		return CEventLogServer::refType( new CEventLogServer( m_strUNCServerName.IsEmpty() ? 0 : m_strUNCServerName, strLogName ), true );
+		return new_shared_ref<CEventLogServer>( m_strUNCServerName.IsEmpty() ? 0 : m_strUNCServerName, strLogName );
 	}
 
 	//--------------------------------------------------------------------------------
-	CBackupEventLog::refType CEventLog::Backup( const CTString& strFullFilePath )
+	CBackupEventLog::ref_type CEventLog::Backup( const CTString& strFullFilePath )
 	{
 		_WINQ_FCONTEXT( "CEventLog::Backup" );
 
-		return CBackupEventLog::refType( new CBackupEventLog( m_strUNCServerName.IsEmpty() ? 0 : m_strUNCServerName, strFullFilePath ), true );
+		return new_shared_ref<CBackupEventLog>( m_strUNCServerName.IsEmpty() ? 0 : m_strUNCServerName, strFullFilePath );
 	}
 
 	//--------------------------------------------------------------------------------
-	CEventLogClient::refType CEventLog::Client( const CTString& strLogName )
+	CEventLogClient::ref_type CEventLog::Client( const CTString& strLogName )
 	{
 		_WINQ_FCONTEXT( "CEventLog::Client" );
 
-		return CEventLogClient::refType( new CEventLogClient( m_strUNCServerName.IsEmpty() ? 0 : m_strUNCServerName, strLogName ), true );
+		return new_shared_ref<CEventLogClient>( m_strUNCServerName.IsEmpty() ? 0 : m_strUNCServerName, strLogName );
 	}
 
 }//nsWin32

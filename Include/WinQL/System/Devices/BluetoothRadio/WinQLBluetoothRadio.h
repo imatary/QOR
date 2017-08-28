@@ -1,6 +1,6 @@
 //WinQLBluetoothRadio.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,6 +29,8 @@
 #ifndef WINQL_BLUETOOTHRADIO_H_3
 #define WINQL_BLUETOOTHRADIO_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -38,6 +40,8 @@
 #include "WinQL/Application/Comms/Bluetooth/WinQLBluetoothRemoteDevice.h"
 #include "WinQL/System/Devices/WinQLNotification.h"
 
+__QOR_DECLARE_REF(nsWin32, __WINQL, CBluetoothRadio, CTExtRef);
+
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
@@ -46,21 +50,17 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CBluetoothRadio > refType;
+		__QOR_DECLARE_REF_TYPE(CBluetoothRadio);
 
 		//--------------------------------------------------------------------------------
 		struct Info
 		{
-			unsigned long dwSize;                               // Size, in bytes, of this entire data structure
-
-			BluetoothAddress address;                  // Address of the local radio
-
-			wchar_t szName[ BluetoothMaxNameSize ];    // Name of the local radio
-
-			unsigned long ulClassofDevice;                      // Class of device for the local radio
-
-			unsigned short lmpSubversion;                       // lmpSubversion, manufacturer specifc.
-			unsigned short manufacturer;                        // Manufacturer of the radio, BTH_MFG_Xxx value.  For the most up to date
+			unsigned long dwSize;						// Size, in bytes, of this entire data structure
+			BluetoothAddress address;					// Address of the local radio
+			wchar_t szName[ BluetoothMaxNameSize ];		// Name of the local radio
+			unsigned long ulClassofDevice;				// Class of device for the local radio
+			unsigned short lmpSubversion;				// lmpSubversion, manufacturer specifc.
+			unsigned short manufacturer;				// Manufacturer of the radio, BTH_MFG_Xxx value.  For the most up to date
 														// list, goto the Bluetooth specification website and get the Bluetooth
 														// assigned numbers document.
 		};
@@ -68,7 +68,6 @@ namespace nsWin32
 		__QOR_DECLARE_OCLASS_ID( CBluetoothRadio );
 
 		static nsCodeQOR::CTExternalRegEntry< CBluetoothRadio > RegEntry;
-
 		static nsCodeQOR::mxGUID GUID_BLUETOOTH_HCI_EVENT;
 		static nsCodeQOR::mxGUID GUID_BLUETOOTH_L2CAP_EVENT;
 		static nsCodeQOR::mxGUID GUID_BLUETOOTH_RADIO_IN_RANGE;
@@ -80,25 +79,23 @@ namespace nsWin32
 		CBluetoothRadio& operator = ( const CBluetoothRadio& src );
 		virtual ~CBluetoothRadio();
 
-		void AuthenticateDevice( COSWindow::refType ParentWindow, CBluetoothRemoteDevice::refType Device, CWString strPassKey );
-		void AuthenticateDeviceEx( COSWindow::refType ParentWindow, CBluetoothRemoteDevice::refType Device, BluetoothOutOfBandData* pbtOobData, CBluetoothRemoteDevice::Authentication_Requirements AuthentRequirements );
-
+		void SetHandle(CDeviceHandle& hExisting);
+		void AuthenticateDevice( COSWindow::refType ParentWindow, CBluetoothRemoteDevice::ref_type Device, CWString strPassKey );
+		void AuthenticateDeviceEx( COSWindow::refType ParentWindow, CBluetoothRemoteDevice::ref_type Device, BluetoothOutOfBandData* pbtOobData, CBluetoothRemoteDevice::Authentication_Requirements AuthentRequirements );
 		bool EnableDiscovery( bool bEnabled );
 		bool EnableIncomingConnections( bool bEnabled );
-
-		unsigned long EnumerateInstalledServices( CBluetoothRemoteDevice::refType Device, nsCodeQOR::__mxGUID** ppGuidServices );
-
-		void GetDeviceInfo( CBluetoothRemoteDevice::refType Device );
+		unsigned long EnumerateInstalledServices( CBluetoothRemoteDevice::ref_type Device, nsCodeQOR::__mxGUID** ppGuidServices );
+		void GetDeviceInfo( CBluetoothRemoteDevice::ref_type Device );
 		bool IsConnectable( void );
 		bool IsDiscoverable( void );
-
 		void SendAuthenticationResponse( CBluetoothRemoteDevice::Info* pDeviceInfo, CWString strPassKey );
 		void SendAuthenticationResponseEx( void* pResponse );
-
 		void SetLocalServiceInfo( nsCodeQOR::mxGUID* pClassGuid, unsigned long ulInstance, const BluetoothLocalServiceInfo* pServiceInfoIn );
-		void SetServiceState( CBluetoothRemoteDevice::refType Device, nsCodeQOR::__mxGUID* pGuidService , unsigned long ulServiceFlags );
-
+		void SetServiceState( CBluetoothRemoteDevice::ref_type Device, nsCodeQOR::__mxGUID* pGuidService , unsigned long ulServiceFlags );
 		void EnableNotifications( CHandle& hRecipient, bool bEnable );
+		void Open(void);
+		void Close(void);
+		void* GetSessionHandle(void);
 
 	protected:
 
@@ -110,7 +107,8 @@ namespace nsWin32
 
 		CNotificationFilter m_NotificationFilter;
 		bool m_bNotificationsEnabled;
-		CDeviceNotification::refType Notification;
+		CDeviceNotification::ref_type Notification;
+		CIODeviceFile::ref_type m_Session;
 
 	private:
 

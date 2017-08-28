@@ -81,26 +81,26 @@ namespace nsWin32
 		virtual void Setup( nsQOR::IApplication& Applicaton );
 		virtual void Shutdown( nsQOR::IApplication& Application );
 
-		virtual void SetupConnection( nsBluefoot::CBFPlug::refPlugType& refConnector );		//override to set device specific properties for the Connector
-		virtual nsBluefoot::CBFPlug::refPlugType CreateConnection( void );					//override to create new device specific pending client connections
+		virtual void SetupConnection( nsBluefoot::CPlug::refPlugType& refConnector );		//override to set device specific properties for the Connector
+		virtual nsBluefoot::CPlug::refPlugType CreateConnection( void );					//override to create new device specific pending client connections
 		virtual bool OnListenResult( bool );												//override to custom process listen result 
 		virtual bool Listen( void );														//override to customize Servers listen for new client connections		
 		virtual void Stop( void );															//call to break main loop on next event
 
-		void SetConnectionPool( nsBluefoot::CBFConnectionPool::refType refConnectionPool );	//Attach a connection pool to allow the server to request new connections from a pool
-		nsBluefoot::CBFConnectionPool::refType GetConnectionPool( void );
+		void SetConnectionPool( nsBluefoot::CConnectionPool::refType refConnectionPool );	//Attach a connection pool to allow the server to request new connections from a pool
+		nsBluefoot::CConnectionPool::refType GetConnectionPool( void );
 
 		void OnSignaled( void );
 
 	protected:
 
 		bool m_bPendingIO;																	//Is IO pending
-		CServerEvent m_ConnectEvent;														//Event for signalling connections
+		CServerEvent m_ConnectEvent;														//Event for signaling connections
 		OVERLAPPED m_Overlapped;															//Windows sync object for handling async connections
 		CErrorHelper m_ErrorHelper;
 
-		nsBluefoot::CBFPlug::refPlugType m_refPendingIOConnection;							//Precreated connection for the next client
-		nsBluefoot::CBFConnectionPool::refType m_refConnectionPool;							//Connection pool from which to source connections
+		nsBluefoot::CPlug::refPlugType m_refPendingIOConnection;							//Precreated connection for the next client
+		nsBluefoot::CConnectionPool::refType m_refConnectionPool;							//Connection pool from which to source connections
 
 		nsQOR::CApplication::ref_type m_Application;
 

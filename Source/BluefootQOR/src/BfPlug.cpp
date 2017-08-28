@@ -29,23 +29,24 @@
 
 #include "BluefootQOR/BfPlug.h"
 #include "BluefootQOR/BfConnectionPool.h"
+#include "CodeQOR/Tracing/FunctionContextBase.h"
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot
 {
-	__QOR_IMPLEMENT_OCLASS_LUID( CBFPlug ); 
+	__QOR_IMPLEMENT_OCLASS_LUID( CPlug ); 
 
 	//--------------------------------------------------------------------------------
-	CBFPlug::CBFPlug( CBFConnectionPool* pPool ) : m_pSyncObject( 0 ), m_lRefCount( 0 ), m_pPool( pPool )
+	CPlug::CPlug( CConnectionPool* pPool ) : m_pSyncObject( 0 ), m_lRefCount( 0 ), m_pPool( pPool )
 	{
-		//_WINQ_FCONTEXT( "CBFPlug::CBFPlug" );
+		__QCS_MEMBER_FCONTEXT("CPlug::CPlug");
 		m_bConnected = false;
 	}
 
 	//--------------------------------------------------------------------------------
-	CBFPlug::~CBFPlug()
+	CPlug::~CPlug()
 	{
-		//_WINQ_FCONTEXT( "CBFPlug::~CBFPlug" );
+		__QCS_MEMBER_FCONTEXT("CPlug::~CPlug");
 		if( m_bConnected )
 		{
 			Disconnect();
@@ -54,118 +55,114 @@ namespace nsBluefoot
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBFPlug::Disconnect( void )
+	bool CPlug::Connect(void)
 	{
-	}
-
-	//--------------------------------------------------------------------------------
-	//Override for Asynchronous connections with custom pending connection states
-	bool CBFPlug::HandlePendingConnectionResult( bool bConnected )
-	{
-		//_WINQ_FCONTEXT( "CBFPlug::HandlePendingConnectionResult" );
-		return bConnected;
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFPlug::OnConnected( void )
-	{
-		//_WINQ_FCONTEXT( "CBFPlug::OnConnected" );
-		m_bConnected = true;
-		if( !m_refProtocol.IsNull() )
-		{
-			m_refProtocol.As< CBFProtocol >()->OnConnected();
-		}
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFPlug::OnConnectionError( void )
-	{
-		//_WINQ_FCONTEXT( "CBFPlug::OnConnectionError" );
-		m_bConnected = false;
-		if( !m_refProtocol.IsNull() )
-		{
-			m_refProtocol.As< CBFProtocol >()->OnConnectionError();
-		}
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFPlug::OnDisconnected( void )
-	{
-		//_WINQ_FCONTEXT( "CBFPlug::OnDisconnected" );
-		m_bConnected = false;
-		if( !m_refProtocol.IsNull() )
-		{
-			m_refProtocol.As< CBFProtocol >()->OnDisconnected();
-		}
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFPlug::OnDisconnectionError( void )
-	{
-		//_WINQ_FCONTEXT( "CBFPlug::OnDisconnectionError" );
-		m_bConnected = false;
-		if( !m_refProtocol.IsNull() )
-		{
-			m_refProtocol.As<CBFProtocol>()->OnDisconnectionError();
-		}
-	}
-
-	//--------------------------------------------------------------------------------
-	bool CBFPlug::IsConnected( void )
-	{
-		//_WINQ_FCONTEXT( "CBFPlug::IsConnected" );
-		return m_bConnected;
-	}
-
-	//--------------------------------------------------------------------------------
-	const bool CBFPlug::AsyncConnection( void ) const
-	{
-		//_WINQ_FCONTEXT( "CBFPlug::AsyncConnection" );
+		__QCS_MEMBER_FCONTEXT("CPlug::Connect");
 		return false;
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBFPlug::SetConnectionProtocol( CBFProtocol::ref_type refProtocol )
+	void CPlug::Disconnect( void )
 	{
-		//_WINQ_FCONTEXT( "CBFPlug::SetConnectionProtocol" );
+		__QCS_MEMBER_FCONTEXT("CPlug::Disconnect");
+	}
+
+	//--------------------------------------------------------------------------------
+	//Override for Asynchronous connections with custom pending connection states
+	bool CPlug::HandlePendingConnectionResult( bool bConnected )
+	{
+		__QCS_MEMBER_FCONTEXT("CPlug::HandlePendingConnectionResult");
+		return bConnected;
+	}
+
+	//--------------------------------------------------------------------------------
+	void CPlug::OnConnected( void )
+	{
+		__QCS_MEMBER_FCONTEXT("CPlug::OnConnected");
+		m_bConnected = true;
+		Connected.Signal();
+	}
+
+	//--------------------------------------------------------------------------------
+	void CPlug::OnConnectionError( void )
+	{
+		__QCS_MEMBER_FCONTEXT("CPlug::OnConnectionError");
+		m_bConnected = false;
+		ConnectionError.Signal();
+	}
+
+	//--------------------------------------------------------------------------------
+	void CPlug::OnDisconnected( void )
+	{
+		__QCS_MEMBER_FCONTEXT("CPlug::OnDisconnected");
+		m_bConnected = false;
+		Disconnected.Signal();
+	}
+
+	//--------------------------------------------------------------------------------
+	void CPlug::OnDisconnectionError( void )
+	{
+		__QCS_MEMBER_FCONTEXT("CPlug::OnDisconnectionError");
+		m_bConnected = false;
+		DisconnectionError.Signal();
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CPlug::IsConnected( void )
+	{
+		__QCS_MEMBER_FCONTEXT("CPlug::IsConnected");
+		return m_bConnected;
+	}
+
+	//--------------------------------------------------------------------------------
+	const bool CPlug::AsyncConnection( void ) const
+	{
+		__QCS_MEMBER_FCONTEXT("CPlug::AsyncConnection");
+		return false;
+	}
+	/*
+	//--------------------------------------------------------------------------------
+	void CPlug::SetProtocol( CProtocol::ref_type refProtocol )
+	{
+		__QCS_MEMBER_FCONTEXT("CPlug::SetProtocol");
 		m_refProtocol = refProtocol;
 	}
 
 	//--------------------------------------------------------------------------------
-	CBFProtocol::ref_type CBFPlug::Protocol( void )
+	CProtocol::ref_type CPlug::Protocol( void )
 	{
-		//_WINQ_FCONTEXT( "CBFPlug::Protocol" );
+		__QCS_MEMBER_FCONTEXT("CPlug::Protocol");
 		return m_refProtocol->Ref();
 	}
-
+	*/
 	//--------------------------------------------------------------------------------
-	void* CBFPlug::GetSyncObject()
+	void* CPlug::GetSyncObject()
 	{
-		//_WINQ_FCONTEXT( "CBFPlug::GetSyncObject" );
+		__QCS_MEMBER_FCONTEXT("CPlug::GetSyncObject");
 		return m_pSyncObject;
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBFPlug::SetSyncObject( void* pSyncObject )
+	void CPlug::SetSyncObject( void* pSyncObject )
 	{
-		//_WINQ_FCONTEXT( "CBFPlug::SetSyncObject" );
+		__QCS_MEMBER_FCONTEXT("CPlug::SetSyncObject");
 		m_pSyncObject = pSyncObject;
 	}
 
 	//--------------------------------------------------------------------------------
-	CBFPlug::refPlugType CBFPlug::Ref()
+	CPlug::refPlugType CPlug::Ref()
 	{
 		refPlugType ref( this );
 		return ref;
 	}
 	//--------------------------------------------------------------------------------
-	void CBFPlug::AddRef()
+	void CPlug::AddRef()
 	{
 		m_lRefCount++;
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBFPlug::Release()
+	void CPlug::Release()
 	{
 		if( --m_lRefCount <= 0 )
 		{

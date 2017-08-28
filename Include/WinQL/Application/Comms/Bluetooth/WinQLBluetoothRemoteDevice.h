@@ -29,16 +29,24 @@
 #ifndef WINQL_COMMS_BLUETOOTHREMOTEDEVICE_H_3
 #define WINQL_COMMS_BLUETOOTHREMOTEDEVICE_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataTypes/GUID.h"
+#include "CodeQOR/DataStructures/TRef.h"
+#include "AppocritaQOR/SubSystems/IBluetooth.h"
+#include "BluefootQOR/BfConnectionPool.h"
+#include "BluefootQOR/BfSocket.h"
 #include "WinQL/WinQL.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/Definitions/Constants.h"
 #include "WinQL/System/Clock/WinQLTime.h"
 #include "WinQL/GUI/Window.h"
-
+//#include "WinQL/Application/IO/Socket/WinQLSocketConnector.h"
+//#include <ws2bth.h>
 //--------------------------------------------------------------------------------
 namespace nsWinQAPI
 {
@@ -52,6 +60,15 @@ namespace nsWin32
 	class __QOR_INTERFACE( __WINQL ) CBluetoothClient;
 
 	typedef Cmp_unsigned__int64 BluetoothAddr;//BTH_ADDR;
+
+	//--------------------------------------------------------------------------------
+	typedef struct _SOCKADDR_BTH
+	{
+		unsigned short      addressFamily;  // Always AF_BTH
+		BluetoothAddr    btAddr;         // Bluetooth device address
+		GUID        serviceClassId; // [OPTIONAL] system will query SDP for port
+		unsigned long       port;           // RFCOMM channel or L2CAP PSM
+	} SOCKADDR_BTH, *PSOCKADDR_BTH;
 
 	//--------------------------------------------------------------------------------
 	struct BluetoothAddress 
@@ -298,12 +315,10 @@ namespace nsWin32
 
 	//--------------------------------------------------------------------------------
 	//Our representation of somebody else's device on the other end of Bluetooth comms
-	class __QOR_INTERFACE( __WINQL ) CBluetoothRemoteDevice
+	class __QOR_INTERFACE( __WINQL ) CBluetoothRemoteDevice : public nsQOR::IBluetoothRemoteDevice
 	{
 	public:
 		
-		typedef nsCodeQOR::CTLRef< CBluetoothRemoteDevice > refType;
-
 		//--------------------------------------------------------------------------------
 		enum Authentication_Method
 		{
@@ -384,7 +399,7 @@ namespace nsWin32
 		enum eInfoFlags
 		{
 			BDIF_Address		= 0x00000001,
-			BDIF_COD			= 0x00000002,
+			BDIF_CoD			= 0x00000002,
 			BDIF_Name			= 0x00000004,
 			BDIF_Paired			= 0x00000008,
 			BDIF_Personal		= 0x00000010,
@@ -418,16 +433,14 @@ namespace nsWin32
 		CBluetoothRemoteDevice();
 		virtual ~CBluetoothRemoteDevice();
 
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this, false );
-		}
-
-		static refType Prototype( void );
+		static ref_type Prototype( void );
 
 		void Update( void );
 		Info* GetInfo( void );
+
+		//nsQOR::IBluetoothRemoteDevice
+		virtual Cmp_unsigned__int64 GetAddress(void) const;
+		virtual bool Connect(nsCodeQOR::mxGUID* pServiceID);
 
 		void Authenticate( COSWindow::refType ParentWindow, CWString strPassKey );
 		unsigned long AuthenticateEx( COSWindow::refType ParentWindow, BluetoothOutOfBandData* pbtOobData, Authentication_Requirements AuthentRequirements );
@@ -463,7 +476,7 @@ namespace nsWin32
 		bool OnPassKeyAuthenticationRequest( CBluetoothRemoteDevice::Authentication_CallbackParams* pAuthCallbackParams, CAuthenticateBluetoothSession& AuthenticationSession );
 
 		nsCodeQOR::mxGUID* GetServices( unsigned long& ulCountServices );
-		CBluetoothClient** GetServiceClients( void );
+		nsQOR::IBluetoothServiceClient::ref_type* GetServiceClients( void );
 
 	private:
 
@@ -472,8 +485,10 @@ namespace nsWin32
 		nsWinQAPI::CBthProps& m_Library;
 		Info m_Info;		
 		nsCodeQOR::mxGUID* m_pGuidServices;
-		CBluetoothClient** m_pServiceClients;
+		nsQOR::IBluetoothServiceClient::ref_type* m_pServiceClients;
 		unsigned long m_ulCountServices;
+
+		std::vector< nsBluefoot::CReadWriteConnection< nsBluefoot::CSocketConnector, nsBluefoot::CSocketSource, nsBluefoot::CSocketSink >* > m_RFCOMMConnections;
 
 		CBluetoothRemoteDevice( const CBluetoothRemoteDevice& );
 		CBluetoothRemoteDevice& operator = ( const CBluetoothRemoteDevice& );

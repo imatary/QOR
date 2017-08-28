@@ -1,6 +1,6 @@
 //WinQLTermalZone.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -42,7 +42,6 @@ namespace nsWin32
 
 	//--------------------------------------------------------------------------------
 	CThermalZone::CThermalZone() : CDeviceInterface()
-	//,	m_pIODevice( 0 )
 	{
 		_WINQ_FCONTEXT( "CThermalZone::CThermalZone" );
 	}
@@ -51,40 +50,49 @@ namespace nsWin32
 	CThermalZone::~CThermalZone()
 	{
 		_WINQ_FCONTEXT( "CThermalZone::~CThermalZone" );
-		/*
-		if( m_pIODevice != 0 )
-		{
-			Close();
-		}
-		*/
 	}
-	/*
-	//--------------------------------------------------------------------------------
-	void CThermalZone::OpenDevice()
-	{
-		_WINQ_FCONTEXT( "CThermalZone::OpenDevice" );
 
-		if( m_pIODevice == 0 )
+	//--------------------------------------------------------------------------------
+	void CThermalZone::Open()
+	{
+		_WINQ_FCONTEXT("CThermalZone::Open");
+		if (m_Session.IsNull())
 		{
-			CIODeviceFile& IODeviceFile = Open( Generic_Read, File_Share_Read, File_Attribute_Normal );
-			m_pIODevice = &IODeviceFile;
+			m_Session = CDeviceInterface::Open(Generic_Read | Generic_Write, File_Share_Read | File_Share_Write, File_Attribute_Normal);
 		}
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CThermalZone::GetStatus( void )
+	void CThermalZone::Close()
 	{
-		_WINQ_FCONTEXT( "CLid::GetStatus" );
-
-		OpenDevice();
-
-		unsigned long ulOut = 0;
-		unsigned long ulResult = 0;
-		if( m_pIODevice->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Lid, Query_Status, Method_Buffered, File_Read_Access ), 0, 0, &ulResult, sizeof( unsigned long ), &ulOut, 0 ) )
-		{
-		}
-		return ulResult;
+		_WINQ_FCONTEXT("CThermalZone::Open");
+		m_Session.Dispose();
 	}
-	*/
+
+	//--------------------------------------------------------------------------------
+	void CThermalZone::QueryInformation()
+	{
+		_WINQ_FCONTEXT("CThermalZone::QueryInformation");
+		Open();
+		ThermalInfoEx info;
+		unsigned long ulBytesReturned = 0;
+		m_Session->Control(__WINQL_DEVICE_CONTROL_CODE(File_Device_ThermalZone, Query, Method_Buffered, File_Read_Access), 0, 0, &info, sizeof(info), &ulBytesReturned, 0);
+	}
+
+	//--------------------------------------------------------------------------------
+	void CThermalZone::SetCoolingPolicy()
+	{
+		_WINQ_FCONTEXT("CThermalZone::SetCoolingPolicy");
+		m_Session->Control(__WINQL_DEVICE_CONTROL_CODE(File_Device_ThermalZone, Set_Cooling, Method_Buffered, File_Write_Access), 0, 0, 0, 0, 0, 0);
+	}
+
+	//--------------------------------------------------------------------------------
+	void CThermalZone::RunActiveCoolingMethod()
+	{
+		_WINQ_FCONTEXT("CThermalZone::RunActiveCoolingMethod");
+		m_Session->Control(__WINQL_DEVICE_CONTROL_CODE(File_Device_ThermalZone, Run_Active_Cooling, Method_Buffered, File_Write_Access), 0, 0, 0, 0, 0, 0);
+	}
+
 }//nsWin32
+
 

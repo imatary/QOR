@@ -8,17 +8,17 @@
 #include "CodeQOR/DataTypes/GUID.h"
 #include "CodeQOR/Macros/ClassIdentityMacros.h"
 #include "CodeQOR/DataStructures/TLRef.h"
-#include "BluefootQOR/Protocol.h"
+#include "BluefootQOR/BfProtocol.h"
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot
 {	
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFSMTPProtocol : public CBFProtocol
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CSMTPProtocol : public CProtocol
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CBFSMTPProtocol > refType;
+		typedef nsCodeQOR::CTLRef< CSMTPProtocol > refType;
 
 		//--------------------------------------------------------------------------------
 		enum eSMTPPhase
@@ -39,12 +39,12 @@ namespace nsBluefoot
 			Quit,
 		};
 
-		__QOR_DECLARE_OCLASS_ID( CBFSMTPProtocol );
+		__QOR_DECLARE_OCLASS_ID(CSMTPProtocol);
 
-		CBFSMTPProtocol();
-		virtual ~CBFSMTPProtocol();
-		CBFSMTPProtocol(const CBFSMTPProtocol& src);
-		CBFSMTPProtocol& operator = (const CBFSMTPProtocol& src);
+		CSMTPProtocol();
+		virtual ~CSMTPProtocol();
+		CSMTPProtocol(const CSMTPProtocol& src);
+		CSMTPProtocol& operator = (const CSMTPProtocol& src);
 
 		virtual bool OnProtocolStateChange( void );				//single step the state machine
 

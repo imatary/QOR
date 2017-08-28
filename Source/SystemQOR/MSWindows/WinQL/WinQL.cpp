@@ -1,6 +1,6 @@
 //WinQL.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -65,6 +65,12 @@ nsCodeQOR::CLoadableModuleBase& ThisModule( void )
 {
 	static nsCodeQOR::CLoadableModuleBase WinQLModule( "Querysoft Open Runtime class library for Microsoft Windows" );
 	return WinQLModule;
+}
+
+//------------------------------------------------------------------------------
+const char* __QCMP_LOCAL ThisModuleVersion(void)
+{
+	return QOR_PP_STRINGIZE(__DATE__:__TIME__);;
 }
 
 #	endif//_USRDLL

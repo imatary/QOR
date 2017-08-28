@@ -24,6 +24,8 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+//Preprocessable batch script fragment to persist the parameters of a build to a script that can recreate them
+
 //Set up environment parameters for a build under Cmd Shell
 
 set build_fullpath=../../../Build/%build_project%/%build_architecture%/%build_os%/%build_os_ver%/%build_form%/%build_config%/%buildtype%

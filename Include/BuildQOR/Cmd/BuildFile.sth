@@ -24,6 +24,8 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+//Preprocessable batch script fragment to compile or assmemble a single file if the corresponding .obj is out of date
+
 if NOT EXIST ..\..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%\%build_form%\%build_config%\%buildtype%\%buildbinary% (
 mkdir ..\..\..\Build\%build_project%\%build_architecture%\%build_os%\%build_os_ver%\%build_form%\%build_config%\%buildtype%\%buildbinary% )
 

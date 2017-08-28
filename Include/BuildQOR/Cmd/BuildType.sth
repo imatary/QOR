@@ -24,6 +24,8 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+//Preprocessable batch script fragment to build one type of build (Debug/Release) of a target
+
 //Extract the code generation build type: Debug, Release etc from the Types iteration
 set buildtype=QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_4,QOR_TYPES)
 echo Building Type: QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_4,QOR_TYPES)

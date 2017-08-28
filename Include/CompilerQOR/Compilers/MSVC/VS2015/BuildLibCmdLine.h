@@ -143,6 +143,8 @@
 														QOR_PP_BUILD_LIB_EXECUTABLE QOR_PP_BUILD_LIB_NODEPENDS_OPTIONS( _LIB_NAME ) \
 														QOR_PP_CAT(@,QOR_PP_BUILD_LIB_OBJLISTNAME(_LIB_NAME))
 
+//TODO: These are batch dependent and should be redefined in a shell independent way!
+
 #define QOR_PP_BUILD_LIB_EXPORT_OBJNAME( r, _LIB_NAME, _, _X ) \
 														echo QOR_PP_CAT( _X,.obj ) >> QOR_PP_BUILD_LIB_OBJLISTNAME( _LIB_NAME )
 

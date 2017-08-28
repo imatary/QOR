@@ -24,6 +24,8 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+//Preprocessable batch script fragment to build one project
+
 //Extract the project to build from the iteration over the list of projects
 set build_project=QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_1,QOR_PROJECTS)
 echo Building project: %build_project%

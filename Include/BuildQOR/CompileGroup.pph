@@ -35,7 +35,6 @@
 #	define QOR_SOURCE_PATH 	_SOURCE_PATH
 #	define QOR_PP_BUILD_LINK_COMPILER_OUTPUTS	1
 
-//#	include __QCMP_BUILDOPTS //setup up Compiler build options
 #	define QOR_PP_FILENAME_1 __QCMP_BUILDCMD_COMPILE_PPH
 #	define QOR_PP_ITERATION_LIMITS (0, QOR_PP_SEQ_SIZE( QOR_SOURCES ) - 1 )
 #	include QOR_PP_ITERATE()

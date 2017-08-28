@@ -29,11 +29,9 @@
 #include "BuildQOR/Prebuild.pph"	//include the generic build macros
 
 #ifdef __QCMP_BUILDOPTS				//If the generic macros define which compiler specific macros to use
-
 #	define QOR_PP_ITERATION_PARAMS_1 (3,(0,QOR_PP_SEQ_SIZE(QOR_TARGETS)-1,"BuildQOR/BuildTarget.pph"))
 #	include QOR_PP_ITERATE_1
 #	undef QOR_TARGETS
-
 #else
 #	error "Missing __QCMP_BUILDOPTS definition."
 #endif

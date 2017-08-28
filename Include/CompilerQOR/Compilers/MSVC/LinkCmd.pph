@@ -26,5 +26,4 @@
 
 //Preprocessor build script generator, link command line macro for MSVC compilers
 
-echo QOR_PP_BUILD_LINK_COMMAND_LINE3( QOR_LIB_PATHS, QOR_LIBS, QOR_MODULE_NAME )
 QOR_PP_BUILD_LINK_COMMAND_LINE3( QOR_LIB_PATHS, QOR_LIBS, QOR_MODULE_NAME )

@@ -60,7 +60,7 @@ namespace nsQOR
 	CApplication::CApplication( const nsCodeQOR::mxGUID* pRoleID ) : CApplication()
 	{
 		__QCS_MEMBER_FCONTEXT("CApplication::CApplication");
-		m_Impl->SetRole( new_ref< CRole >( pRoleID )/*.Detach()->Ref()*/ );
+		m_Impl->SetRole( new_ref< CRole >( pRoleID ) );
 	}
 
 	//------------------------------------------------------------------------------

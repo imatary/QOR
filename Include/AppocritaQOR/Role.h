@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Abstract base for applications
+//Abstract base for roles
 
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE

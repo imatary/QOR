@@ -80,6 +80,8 @@ namespace nsWin32
 		}
 
 		bool IsInUse( void );
+		bool IsBufferString( void );
+		bool IsUnBuffered( void );
 
 	protected:
 
@@ -122,8 +124,7 @@ namespace nsWin32
 		void LockBuffer( void );
 		void UnlockBuffer( void );
 		bool IsVBuffer( void );
-		bool IsBufferLocked( void );
-		bool IsBufferString( void );
+		bool IsBufferLocked( void );		
 		bool IsBufferError( void );
 		bool IsBufferReadWrite( void );
 		bool IsBufferRead( void );

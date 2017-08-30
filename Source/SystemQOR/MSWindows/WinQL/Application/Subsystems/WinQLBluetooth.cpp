@@ -497,7 +497,7 @@ namespace nsWin32
 			unsigned long ulCountServices = 0;
 			nsCodeQOR::mxGUID* pServiceUUID = Device.As< CBluetoothRemoteDevice >()->GetServices(ulCountServices);
 			nsQOR::IBluetoothServiceClient::ref_type* ppServiceClients = Device.As< CBluetoothRemoteDevice >()->GetServiceClients();
-			CBluetoothRemoteDevice::Info* pInfo = Device.As< CBluetoothRemoteDevice >()->GetInfo();
+			//CBluetoothRemoteDevice::Info* pInfo = Device.As< CBluetoothRemoteDevice >()->GetInfo();
 			for (unsigned long ulService = 0; ulService < ulCountServices; ulService++)
 			{
 				//Lookup pServiceUUID[ ulService ] in Client Registration

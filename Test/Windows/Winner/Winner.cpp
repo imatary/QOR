@@ -28,6 +28,7 @@
 
 #include "SystemQOR.h"
 #include "WinnerApp.h"
+#include "AppocritaQOR/Role.h"
 #include "WinQL/System/FileSystem/WinQLStream.h"
 
 //------------------------------------------------------------------------------
@@ -35,7 +36,7 @@ int __stdcall wWinMain(void* hInstance, void* prevInstance, wchar_t* cmdLine, in
 {
 	CWinnerApp WinnerApp;
 
-	CStream* pStream = CStream::fopen("D:\\Data\\Test.tmp", "w");
+	CStream* pStream = CStream::fopen("C:\\Develop\\Test.tmp", "rw");
 
 	if (pStream)
 	{
@@ -49,6 +50,8 @@ int __stdcall wWinMain(void* hInstance, void* prevInstance, wchar_t* cmdLine, in
 //------------------------------------------------------------------------------
 CWinnerApp::CWinnerApp()
 {
+	SetRole(new_ext_ref< nsQOR::IRole >(nsQOR::CRole::TestingApp() ) );
+
 	m_WindowClassModel.m_ByteAlignClient.Set(true);
 	m_WindowClassModel.m_ByteAlignWindow.Set(true);
 	m_WindowClassModel.m_ClassDC.Set(false);

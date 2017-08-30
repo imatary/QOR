@@ -40,7 +40,8 @@ namespace nsQOR
 		nsCodeQOR::CClassInstanceFactory* pFactory = ThisModule().ExternalClassReg().GetFactory( classID );
 		if( pFactory )
 		{
-			m_Impl.Attach( reinterpret_cast<IRole*>( pFactory->Instance() ), true );
+			void* pInstance = pFactory->Instance();
+			//m_Impl.Attach( reinterpret_cast<IRole*>( pFactory->Instance() ), true );
 		}
 	}
 
@@ -81,11 +82,18 @@ namespace nsQOR
 	//------------------------------------------------------------------------------
 	nsCodeQOR::mxGUID* CRole::CmdLineTool( void )
 	{
-		__QCS_FCONTEXT( "CRole::CmdLineToole" );
+		__QCS_FCONTEXT( "CRole::CmdLineTool" );
 		static nsCodeQOR::mxGUID _CmdLineTool = { 0xd0828572, 0xebd0, 0x47ad,{ 0xba, 0x8b, 0x8c, 0x99, 0x67, 0xec, 0xef, 0xe6 } };// {D0828572-EBD0-47AD-BA8B-8C9967ECEFE6}
 		return &_CmdLineTool;
 	}
 
+	//------------------------------------------------------------------------------
+	nsCodeQOR::mxGUID* CRole::TestingApp(void)
+	{
+		__QCS_FCONTEXT("CRole::TestingApp");
+		static nsCodeQOR::mxGUID _TestingApp = { 0xe0828572, 0xebd0, 0x47ad,{ 0xba, 0x8b, 0x8c, 0x99, 0x67, 0xec, 0xef, 0xe6 } };// {E0828572-EBD0-47AD-BA8B-8C9967ECEFE6}
+		return &_TestingApp;
+	}
 
 	//--------------------------------------------------------------------------------
 	CRoleImplBase::CRoleImplBase()

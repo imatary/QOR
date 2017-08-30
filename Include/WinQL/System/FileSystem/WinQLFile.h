@@ -120,12 +120,12 @@ __QCMP_WARNING_POP
 	public:
 
 		CFile();
-		CFile( CFileHandle& hExisting );
+		CFile( CFileHandle::ref_type hExisting );
 		CFile( const char* lpFileName, unsigned long dwDesiredAccess, unsigned long dwShareMode, nsWin32::LPSECURITY_ATTRIBUTES lpSecurityAttributes, unsigned long dwCreationDisposition, unsigned long dwFlagsAndAttributes, void* hTemplateFile );
 		CFile( const wchar_t* lpFileName, unsigned long dwDesiredAccess, unsigned long dwShareMode, nsWin32::LPSECURITY_ATTRIBUTES lpSecurityAttributes, unsigned long dwCreationDisposition, unsigned long dwFlagsAndAttributes, void* hTemplateFile );
 		CFile( const TCHAR* lpFileName, unsigned long dwDesiredAccess, unsigned long dwShareMode, nsWin32::LPSECURITY_ATTRIBUTES lpSecurityAttributes, unsigned long dwCreationDisposition, unsigned long dwFlagsAndAttributes, void* hTemplateFile, void* hTransaction, unsigned short* pusMiniVersion, void* pExtendedParameter );
 		CFile( const char* lpFileName, nsWin32::LPOFSTRUCT lpReOpenBuff, unsigned int uStyle );
-		CFile( CFileHandle& hFile, nsWin32::LPFILE_ID_DESCRIPTOR lpFileID, unsigned long dwDesiredAccess, unsigned long dwShareMode, nsWin32::LPSECURITY_ATTRIBUTES lpSecurityAttributes, unsigned long dwFlags );
+		CFile( CFileHandle::ref_type hFile, nsWin32::LPFILE_ID_DESCRIPTOR lpFileID, unsigned long dwDesiredAccess, unsigned long dwShareMode, nsWin32::LPSECURITY_ATTRIBUTES lpSecurityAttributes, unsigned long dwFlags );
 		virtual ~CFile();
 
 		bool CancelIo( void );

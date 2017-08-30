@@ -54,7 +54,7 @@ namespace nsQOR
 		virtual ISubSystem::ref_type GetSubSystem( nsCodeQOR::mxGUID* classID );
 		virtual void AddSubSystem( nsCodeQOR::mxGUID classID, ISubSystem::ref_type SubSystem );
 		static nsCodeQOR::mxGUID* CmdLineTool( void );
-
+		static nsCodeQOR::mxGUID* TestingApp(void);
 	private:
 
 		CRole( const CRole& );

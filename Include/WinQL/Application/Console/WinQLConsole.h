@@ -211,10 +211,10 @@ namespace nsWin32
 		static void __initconout(void);
 		static void __termcon(void);
 
-		//static CCRTFile* ConsoleInputFile(void);
+		static CCRTFile* ConsoleInputFile(void);
 		static CCRTFile* ConsoleOutputFile(void);
 
-		//static CCRTFile* s_pConsoleInput;// console input
+		static CCRTFile* s_pConsoleInput;// console input
 		static CCRTFile* s_pConsoleOutput;// console output
 
 	};

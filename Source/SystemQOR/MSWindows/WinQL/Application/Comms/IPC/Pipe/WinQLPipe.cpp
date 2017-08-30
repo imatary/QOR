@@ -52,7 +52,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CPipe::CPipe( CDeviceHandle& hExisting ) : CDeviceFile( hExisting )
+	CPipe::CPipe( CDeviceHandle::ref_type hExisting ) : CDeviceFile( hExisting )
 	{
 	}
 
@@ -82,10 +82,10 @@ namespace nsWin32
 			CTString strName( lpszName );
 			CTString strPipeName = _TXT( "\\\\.\\pipe\\" );
 			strPipeName.Append( strName );
-			m_Handle = CKernel32::CreateNamedPipe( strPipeName.GetBuffer(), OpenMode, PipeMode, nMaxInstances, nOutBufferSize, nInBufferSize, nDefaultTimeout, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( pSecurityAttributes ) );
+			m_Handle() = CKernel32::CreateNamedPipe( strPipeName.GetBuffer(), OpenMode, PipeMode, nMaxInstances, nOutBufferSize, nInBufferSize, nDefaultTimeout, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( pSecurityAttributes ) );
 			strPipeName.ReleaseBuffer();
 
-			bResult = m_Handle.Use() != Invalid_Handle_Value ? true : false;
+			bResult = m_Handle().Use() != Invalid_Handle_Value ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -109,9 +109,9 @@ namespace nsWin32
 			strPipeName.Append( strPipe );
 			strPipeName.Append( strName );
 			
-			m_Handle = CKernel32::CreateFile( strPipeName.GetBuffer(), DesiredAccess, ShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( pSecurityAttributes ), Open_Existing, FlagsAndAttributes, 0 );
+			m_Handle() = CKernel32::CreateFile( strPipeName.GetBuffer(), DesiredAccess, ShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( pSecurityAttributes ), Open_Existing, FlagsAndAttributes, 0 );
 			strPipeName.ReleaseBuffer();
-			bResult = m_Handle.Use() != Invalid_Handle_Value ? true : false;
+			bResult = m_Handle().Use() != Invalid_Handle_Value ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -122,12 +122,12 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CPipe::Attach" );
 		__QOR_PROTECT
 		{
-			if( m_Handle.Use() != hPipe )
+			if( m_Handle().Use() != hPipe )
 			{
 				Close();
 			}
 
-			m_Handle = hPipe;
+			m_Handle() = hPipe;
 		}__QOR_ENDPROTECT
 		return true;
 	}
@@ -139,7 +139,7 @@ namespace nsWin32
 		void* pReturn = const_cast< void* >( Invalid_Handle_Value );
 		__QOR_PROTECT
 		{
-			pReturn = m_Handle.Detach();
+			pReturn = m_Handle().Detach();
 		}__QOR_ENDPROTECT
 		return pReturn;
 	}
@@ -151,9 +151,9 @@ namespace nsWin32
 		bool bSuccess = false;
 		__QOR_PROTECT
 		{
-			if( m_Handle.Use() != 0 )
+			if( m_Handle().Use() != 0 )
 			{
-				m_Handle.Close();
+				m_Handle().Close();
 			}
 			bSuccess = true;
 		}__QOR_ENDPROTECT
@@ -189,12 +189,12 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 			bool bServerPipe;
 			assert( IsServer( bServerPipe ) );
 			assert( bServerPipe );//Must be called from the server side
 
-			bResult = CKernel32::ConnectNamedPipe( m_Handle.Use(), reinterpret_cast< ::LPOVERLAPPED >( pOverlapped ) ) ? true : false;
+			bResult = CKernel32::ConnectNamedPipe( m_Handle().Use(), reinterpret_cast< ::LPOVERLAPPED >( pOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -206,12 +206,12 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 			bool bServerPipe;
 			assert( IsServer( bServerPipe ) );
 			assert( bServerPipe );//Must be called from the server side
 
-			bResult = CKernel32::DisconnectNamedPipe( m_Handle.Use() ) ? true : false;
+			bResult = CKernel32::DisconnectNamedPipe( m_Handle().Use() ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -223,9 +223,9 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 
-			bResult = CKernel32::FlushFileBuffers( m_Handle.Use() ) ? true : false;
+			bResult = CKernel32::FlushFileBuffers( m_Handle().Use() ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -237,9 +237,9 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 			unsigned long State = 0;
-			bResult = CKernel32::GetNamedPipeHandleState( m_Handle.Use(), &State, 0, 0, 0, 0, 0 ) ? true : false;
+			bResult = CKernel32::GetNamedPipeHandleState( m_Handle().Use(), &State, 0, 0, 0, 0, 0 ) ? true : false;
 			if( bResult )
 			{
 				bIsBlocking = ( ( State & Pipe_NoWait ) == 0 );
@@ -255,9 +255,9 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 			unsigned long Flags = 0;
-			bResult = CKernel32::GetNamedPipeInfo( m_Handle.Use(), &Flags, 0, 0, 0 ) ? true : false;
+			bResult = CKernel32::GetNamedPipeInfo( m_Handle().Use(), &Flags, 0, 0, 0 ) ? true : false;
 			if( bResult )
 			{
 				bIsClient = ( ( Flags & Pipe_Client_End ) != 0 );
@@ -273,9 +273,9 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 			unsigned long Flags = 0;
-			bResult = CKernel32::GetNamedPipeInfo( m_Handle.Use(), &Flags, 0, 0, 0 ) ? true : false;
+			bResult = CKernel32::GetNamedPipeInfo( m_Handle().Use(), &Flags, 0, 0, 0 ) ? true : false;
 			if( bResult )
 			{
 				bIsServer = ( ( Flags & Pipe_Server_End ) != 0 );
@@ -291,9 +291,9 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 			unsigned long State = 0;
-			bResult = CKernel32::GetNamedPipeHandleState( m_Handle.Use(), &State, 0, 0, 0, 0, 0 ) ? true : false;
+			bResult = CKernel32::GetNamedPipeHandleState( m_Handle().Use(), &State, 0, 0, 0, 0, 0 ) ? true : false;
 			if( bResult )
 			{
 				bIsMessaging = ( ( ( State & Pipe_ReadMode_Message ) != 0 ) );
@@ -309,8 +309,8 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
-			bResult = CKernel32::GetNamedPipeHandleState( m_Handle.Use(), 0, &CurrentInstances, 0, 0, 0, 0 ) ? true : false;
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
+			bResult = CKernel32::GetNamedPipeHandleState( m_Handle().Use(), 0, &CurrentInstances, 0, 0, 0, 0 ) ? true : false;
 
 		}__QOR_ENDPROTECT
 		return bResult;
@@ -323,11 +323,11 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 			bool bClientPipe = false;
 			assert( IsClient( bClientPipe ) );
 			assert( bClientPipe );//Must be called from the client side
-			bResult = CKernel32::GetNamedPipeHandleState( m_Handle.Use(), 0, 0, &MaxCollectionCount, 0, 0, 0 ) ? true : false;
+			bResult = CKernel32::GetNamedPipeHandleState( m_Handle().Use(), 0, 0, &MaxCollectionCount, 0, 0, 0 ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -339,11 +339,11 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 			bool bClientPipe = false;
 			assert( IsClient( bClientPipe ) );
 			assert( bClientPipe );//Must be called from the client side
-			bResult = CKernel32::GetNamedPipeHandleState( m_Handle.Use(), 0, 0, 0, &CollectDataTimeout, 0, 0 ) ? true : false;
+			bResult = CKernel32::GetNamedPipeHandleState( m_Handle().Use(), 0, 0, 0, &CollectDataTimeout, 0, 0 ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -355,8 +355,8 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
-			bResult = CKernel32::GetNamedPipeInfo( m_Handle.Use(), 0, &OutboundBufferSize, 0, 0 ) ? true : false;
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
+			bResult = CKernel32::GetNamedPipeInfo( m_Handle().Use(), 0, &OutboundBufferSize, 0, 0 ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -368,8 +368,8 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
-			bResult = CKernel32::GetNamedPipeInfo( m_Handle.Use(), 0, 0, &InboundBufferSize, 0 ) ? true : false;
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
+			bResult = CKernel32::GetNamedPipeInfo( m_Handle().Use(), 0, 0, &InboundBufferSize, 0 ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -381,8 +381,8 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
-			bResult = CKernel32::GetNamedPipeClientComputerName( m_Handle.Use(), ClientComputerName, ClientComputerNameLength ) ? true : false;
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
+			bResult = CKernel32::GetNamedPipeClientComputerName( m_Handle().Use(), ClientComputerName, ClientComputerNameLength ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -394,8 +394,8 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
-			bResult = CKernel32::GetNamedPipeClientProcessId( m_Handle.Use(), &ClientProcessId ) ? true : false;
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
+			bResult = CKernel32::GetNamedPipeClientProcessId( m_Handle().Use(), &ClientProcessId ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -407,8 +407,8 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
-			bResult = CKernel32::GetNamedPipeClientSessionId( m_Handle.Use(), &ClientSessionId ) ? true : false;
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
+			bResult = CKernel32::GetNamedPipeClientSessionId( m_Handle().Use(), &ClientSessionId ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -420,12 +420,12 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 			bool bServerPipe = false;
 			assert( IsServer( bServerPipe ) );
 			assert( bServerPipe );//Must be called from the server side
 
-			bResult = CKernel32::GetNamedPipeHandleState( m_Handle.Use(), 0, 0, 0, 0, strUserName.GetBufferSetLength( Max_Path ), Max_Path ) ? true : false;
+			bResult = CKernel32::GetNamedPipeHandleState( m_Handle().Use(), 0, 0, 0, 0, strUserName.GetBufferSetLength( Max_Path ), Max_Path ) ? true : false;
 			if( bResult )
 			{
 				strUserName.ValidateBuffer( Max_Path );
@@ -441,8 +441,8 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
-			bResult = CKernel32::GetNamedPipeInfo( m_Handle.Use(), 0, 0, 0, &MaxInstances ) ? true : false;
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
+			bResult = CKernel32::GetNamedPipeInfo( m_Handle().Use(), 0, 0, 0, &MaxInstances ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -454,12 +454,12 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 
 			unsigned long Mode = bByteMode ? Pipe_ReadMode_Byte : Pipe_ReadMode_Message;
 			Mode |= ( bBlockingMode ? Pipe_Wait : Pipe_NoWait );
 
-			bResult = CKernel32::SetNamedPipeHandleState( m_Handle.Use(), &Mode, 0, 0 ) ? true : false;
+			bResult = CKernel32::SetNamedPipeHandleState( m_Handle().Use(), &Mode, 0, 0 ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -471,12 +471,12 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 			bool bClientPipe = false;
 			assert( IsClient( bClientPipe ) );
 			assert( bClientPipe ); //Must be called from the client side
 
-			bResult = CKernel32::SetNamedPipeHandleState( m_Handle.Use(), 0, &CollectionCount, 0 ) ? true : false;
+			bResult = CKernel32::SetNamedPipeHandleState( m_Handle().Use(), 0, &CollectionCount, 0 ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -488,12 +488,12 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 			bool bClientPipe = false;
 			assert( IsClient( bClientPipe ) );
 			assert( bClientPipe ); //Must be called from the client side
 
-			bResult = CKernel32::SetNamedPipeHandleState( m_Handle.Use(), 0, 0, &DataTimeout ) ? true : false;
+			bResult = CKernel32::SetNamedPipeHandleState( m_Handle().Use(), 0, 0, &DataTimeout ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -528,7 +528,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetNamedPipeHandleState( m_Handle.Use(), pState, pCurInstances, pMaxCollectionCount, pCollectDataTimeout, UserName, nMaxUserNameSize ) ? true : false;
+			bResult = CKernel32::GetNamedPipeHandleState( m_Handle().Use(), pState, pCurInstances, pMaxCollectionCount, pCollectDataTimeout, UserName, nMaxUserNameSize ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -540,7 +540,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetNamedPipeInfo( m_Handle.Use(), pFlags, pOutBufferSize, pInBufferSize, pMaxInstances ) ? true : false;
+			bResult = CKernel32::GetNamedPipeInfo( m_Handle().Use(), pFlags, pOutBufferSize, pInBufferSize, pMaxInstances ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -552,7 +552,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetNamedPipeServerProcessId( m_Handle.Use(), &ServerProcessId ) ? true : false;
+			bResult = CKernel32::GetNamedPipeServerProcessId( m_Handle().Use(), &ServerProcessId ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -564,7 +564,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetNamedPipeServerSessionId( m_Handle.Use(), &ServerSessionId ) ? true : false;
+			bResult = CKernel32::GetNamedPipeServerSessionId( m_Handle().Use(), &ServerSessionId ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -576,8 +576,8 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
-			bResult = CKernel32::PeekNamedPipe( m_Handle.Use(), pBuffer, nBufferSize, &BytesRead, &TotalBytesAvail, &BytesLeftThisMessage ) ? true : false;
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
+			bResult = CKernel32::PeekNamedPipe( m_Handle().Use(), pBuffer, nBufferSize, &BytesRead, &TotalBytesAvail, &BytesLeftThisMessage ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -589,8 +589,8 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
-			bResult = CKernel32::SetNamedPipeHandleState( m_Handle.Use(), pMode, pMaxCollectionCount, pCollectDataTimeout ) ? true : false;
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
+			bResult = CKernel32::SetNamedPipeHandleState( m_Handle().Use(), pMode, pMaxCollectionCount, pCollectDataTimeout ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -602,8 +602,8 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
-			bResult = CKernel32::TransactNamedPipe( m_Handle.Use(), pBuffer, nInBufferSize, pOutBuffer, nOutBufferSize, &BytesRead, reinterpret_cast< ::LPOVERLAPPED >( pOverlapped ) ) ? true : false;
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
+			bResult = CKernel32::TransactNamedPipe( m_Handle().Use(), pBuffer, nInBufferSize, pOutBuffer, nOutBufferSize, &BytesRead, reinterpret_cast< ::LPOVERLAPPED >( pOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -615,8 +615,8 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
-			bResult = CKernel32::WriteFile( m_Handle.Use(), pBuffer, NumberOfBytesToWrite, &NumberOfBytesWritten, reinterpret_cast< ::LPOVERLAPPED >( pOverlapped ) ) ? true : false;
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
+			bResult = CKernel32::WriteFile( m_Handle().Use(), pBuffer, NumberOfBytesToWrite, &NumberOfBytesWritten, reinterpret_cast< ::LPOVERLAPPED >( pOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -628,8 +628,8 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
-			bResult = CKernel32::WriteFileEx( m_Handle.Use(), pBuffer, NumberOfBytesToWrite, reinterpret_cast< ::LPOVERLAPPED >( pOverlapped ), reinterpret_cast< ::LPOVERLAPPED_COMPLETION_ROUTINE >( pCompletionRoutine ) ) ? true : false;
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
+			bResult = CKernel32::WriteFileEx( m_Handle().Use(), pBuffer, NumberOfBytesToWrite, reinterpret_cast< ::LPOVERLAPPED >( pOverlapped ), reinterpret_cast< ::LPOVERLAPPED_COMPLETION_ROUTINE >( pCompletionRoutine ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -641,8 +641,8 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
-			bResult = CKernel32::ReadFile( m_Handle.Use(), pBuffer, NumberOfBytesToRead, &NumberOfBytesRead, reinterpret_cast< ::LPOVERLAPPED >( pOverlapped ) ) ? true : false;
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
+			bResult = CKernel32::ReadFile( m_Handle().Use(), pBuffer, NumberOfBytesToRead, &NumberOfBytesRead, reinterpret_cast< ::LPOVERLAPPED >( pOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -654,7 +654,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			assert( !m_Handle.IsNull() && !m_Handle.IsInvalid() );
+			assert( !m_Handle().IsNull() && !m_Handle().IsInvalid() );
 			bResult = CKernel32::ReadFileEx( Handle()->Use(), pBuffer, NumberOfBytesToRead, reinterpret_cast< ::LPOVERLAPPED >( pOverlapped ), reinterpret_cast< ::LPOVERLAPPED_COMPLETION_ROUTINE >( pCompletionRoutine ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;

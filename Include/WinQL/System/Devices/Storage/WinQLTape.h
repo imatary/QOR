@@ -121,7 +121,7 @@ namespace nsWin32
 		static nsCodeQOR::CTExternalRegEntry< CTape > RegEntry;
 
 		CTape();
-		CTape( CDeviceHandle& Handle );
+		CTape( CDeviceHandle::ref_type Handle );
 		virtual ~CTape();
 		unsigned long CreatePartition( E_PartitionMethod PartitionMethod, unsigned long dwCount, unsigned long dwSize );
 		unsigned long Erase( E_EraseType EraseType, bool bImmediate );
@@ -135,7 +135,7 @@ namespace nsWin32
 
 	protected:
 
-		CDeviceHandle& m_Handle;
+		CDeviceHandle::ref_type m_Handle;
 
 	private:
 

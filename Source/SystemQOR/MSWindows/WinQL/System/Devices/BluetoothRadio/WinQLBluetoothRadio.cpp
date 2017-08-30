@@ -56,7 +56,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CBluetoothRadio::CBluetoothRadio( CDeviceHandle& hExisting ) : CDeviceInterface( hExisting ), m_Library( CBthProps::Instance() ), m_bNotificationsEnabled( false ), m_NotificationFilter( CNotificationFilter::eNotifyHandle )
+	CBluetoothRadio::CBluetoothRadio( CDeviceHandle::ref_type hExisting ) : CDeviceInterface( hExisting ), m_Library( CBthProps::Instance() ), m_bNotificationsEnabled( false ), m_NotificationFilter( CNotificationFilter::eNotifyHandle )
 	{
 		_WINQ_FCONTEXT( "CBluetoothRadio::CBluetoothRadio" );
 		Open();
@@ -88,9 +88,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBluetoothRadio::SetHandle(CDeviceHandle& hExisting)
+	void CBluetoothRadio::SetHandle(CDeviceHandle::ref_type hExisting)
 	{
-		m_Session = ref(*(reinterpret_cast<CIODeviceFile*>(hExisting.Object())));
+		m_Session->Handle() = hExisting;
 		SetupNotificationFilter();
 	}
 

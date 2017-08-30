@@ -53,8 +53,8 @@ template<> struct nsCodeQOR::reference_type<_NAMESPACE::_CLASS>{ typedef nsCodeQ
 
 //Use __QOR_CLASS to directly declare a class, inside a namespace, with a reference type
 #define __QOR_CLASS( _INTERFACE, _CLASS, _REF )\
-class __QOR_INTERFACE(_INTERFACE) _CLASS;\
-template<> struct nsCodeQOR::reference_type<_CLASS>{ typedef nsCodeQOR::_REF< _CLASS > type; }\
+__QOR_INTERFACE(_INTERFACE) _CLASS;\
+template<> struct nsCodeQOR::reference_type<_CLASS>{ typedef nsCodeQOR::_REF< _CLASS > type; };\
 class __QOR_INTERFACE(_INTERFACE) _CLASS
 
 

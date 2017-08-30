@@ -43,13 +43,13 @@ namespace nsWin32
 	nsCodeQOR::CTExternalRegEntry< CTape > CTape::RegEntry;
 
 	//--------------------------------------------------------------------------------
-	CTape::CTape() : CDeviceInterface(), m_Handle( *( new CDeviceHandle() ) )
+	CTape::CTape() : CDeviceInterface()
 	{
 		_WINQ_FCONTEXT( "CTape::CTape" );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTape::CTape( CDeviceHandle& DeviceHandle ) : CDeviceInterface(), m_Handle( DeviceHandle )
+	CTape::CTape( CDeviceHandle::ref_type DeviceHandle ) : CDeviceInterface(), m_Handle( DeviceHandle )
 	{
 		_WINQ_FCONTEXT( "CTape::CTape" );
 	}
@@ -67,7 +67,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::CreateTapePartition( m_Handle.Use(), static_cast< DWORD >( PartitionMethod ), dwCount, dwSize );
+			dwResult = CKernel32::CreateTapePartition( m_Handle().Use(), static_cast< DWORD >( PartitionMethod ), dwCount, dwSize );
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
@@ -79,7 +79,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::EraseTape( m_Handle.Use(), static_cast< DWORD >( EraseType ), bImmediate ? TRUE : FALSE );
+			dwResult = CKernel32::EraseTape( m_Handle().Use(), static_cast< DWORD >( EraseType ), bImmediate ? TRUE : FALSE );
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
@@ -91,7 +91,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::GetTapeParameters( m_Handle.Use(), static_cast< DWORD >( Operation ), lpdwSize, lpTapeInformation );
+			dwResult = CKernel32::GetTapeParameters( m_Handle().Use(), static_cast< DWORD >( Operation ), lpdwSize, lpTapeInformation );
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
@@ -103,7 +103,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::GetTapePosition( m_Handle.Use(), static_cast< DWORD >( PositionType ), lpdwPartition, lpdwOffsetLow, lpdwOffsetHigh );
+			dwResult = CKernel32::GetTapePosition( m_Handle().Use(), static_cast< DWORD >( PositionType ), lpdwPartition, lpdwOffsetLow, lpdwOffsetHigh );
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
@@ -115,7 +115,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::GetTapeStatus( m_Handle.Use() );
+			dwResult = CKernel32::GetTapeStatus( m_Handle().Use() );
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
@@ -127,7 +127,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::PrepareTape( m_Handle.Use(), static_cast< DWORD >( Operation ), bImmediate ? TRUE : FALSE );
+			dwResult = CKernel32::PrepareTape( m_Handle().Use(), static_cast< DWORD >( Operation ), bImmediate ? TRUE : FALSE );
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
@@ -139,7 +139,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::SetTapeParameters( m_Handle.Use(), static_cast< DWORD >( Operation ), lpTapeInformation );
+			dwResult = CKernel32::SetTapeParameters( m_Handle().Use(), static_cast< DWORD >( Operation ), lpTapeInformation );
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
@@ -151,7 +151,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::SetTapePosition( m_Handle.Use(), static_cast< DWORD >( PositionMethod ), dwPartition, dwOffsetLow, dwOffsetHigh, bImmediate ? TRUE : FALSE );
+			dwResult = CKernel32::SetTapePosition( m_Handle().Use(), static_cast< DWORD >( PositionMethod ), dwPartition, dwOffsetLow, dwOffsetHigh, bImmediate ? TRUE : FALSE );
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
@@ -163,7 +163,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::WriteTapemark( m_Handle.Use(), static_cast< DWORD >( TapemarkType ), dwTapemarkCount, bImmediate ? TRUE : FALSE );
+			dwResult = CKernel32::WriteTapemark( m_Handle().Use(), static_cast< DWORD >( TapemarkType ), dwTapemarkCount, bImmediate ? TRUE : FALSE );
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}

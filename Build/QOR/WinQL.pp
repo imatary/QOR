@@ -69,7 +69,8 @@
 
 #	define SOURCE_PATH ../../../Source/SystemQOR/MSWindows/WinQL/Application/Roles/
 #	define SOURCES	(WinQLCmdLineToolRole)\
-					(WinQLSystemServiceRole)
+					(WinQLSystemServiceRole)\
+					(WinQLTestingRole)
 #	include "BuildQOR/BuildGroup.pph"
 
 #	define SOURCE_PATH ../../../Source/SystemQOR/MSWindows/WinQL/Application/Subsystems/
@@ -582,6 +583,7 @@
 					(WinQLIOCompletionPort)\
 					(WinQLIOStream)\
 					(WinQLStream)\
+					(WinQLStreamFormatter)\
 					(WinQLVolumeManagement)
 #	include "BuildQOR/BuildGroup.pph"
 

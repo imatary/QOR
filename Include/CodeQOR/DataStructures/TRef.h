@@ -215,7 +215,7 @@ namespace nsCodeQOR
 		}
 
 		//--------------------------------------------------------------------------------
-		CTRef( T& _t ) : m_p( reinterpret_cast< CTCSharedRef<T>* >(nsCodeQOR::mem_traits< T >::CTAllocator::Unbox(&t)) )
+		CTRef( T& _t ) : m_p( reinterpret_cast< CTCSharedRef<T>* >(nsCodeQOR::mem_traits< T >::CTAllocator::Unbox(&_t)) )
 		{
 			m_p->AddRef();
 		}

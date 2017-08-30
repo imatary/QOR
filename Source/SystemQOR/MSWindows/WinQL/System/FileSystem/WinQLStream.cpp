@@ -58,6 +58,12 @@ namespace nsWin32
 		3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0
 	};
 
+	//----------------------------------------------------------------------------------------
+	int CStream::utf8_no_of_trailbytes(char c)
+	{
+		return CStream::sachLookupTrailBytes[(unsigned char)c];
+	}
+
 	//------------------------------------------------------------------------------
 	void* CStream::_stdbuf[ 2 ] = { NULL, NULL };
 
@@ -1167,9 +1173,9 @@ namespace nsWin32
 		CDeviceFile* pDeviceFile = 0;
 		CErrorHelper ErrorHelper;
 
-		CDeviceHandle Handle = CKernel32::CreateFileW( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile );
+		CDeviceHandle::ref_type Handle = new_shared_ref<CDeviceHandle>( CKernel32::CreateFileW( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile ) );
 
-		if( Handle.IsInvalid() )
+		if( Handle().IsInvalid() )
 		{
 			if( ( dwDesiredAccess & ( Generic_Read | Generic_Write ) ) == ( Generic_Read | Generic_Write ) && ( oflag & OWriteOnly ) )
 			{
@@ -1177,8 +1183,8 @@ namespace nsWin32
 				//So try again with GENERIC_WRITE and we will have to use the default encoding.  We won't be able to determine the encoding from reading the BOM.
 
 				dwDesiredAccess &= ~Generic_Read;
-				Handle = CKernel32::CreateFileW( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast<::LPSECURITY_ATTRIBUTES>( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile );
-				if( Handle.IsInvalid() )
+				Handle = new_shared_ref<CDeviceHandle>( CKernel32::CreateFileW( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast<::LPSECURITY_ATTRIBUTES>( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile ) );
+				if( Handle().IsInvalid() )
 				{
 					return pDeviceFile;
 				}
@@ -1189,7 +1195,7 @@ namespace nsWin32
 			}
 		}
 
-		switch( CKernel32::GetFileType( Handle.Use() ) )
+		switch( CKernel32::GetFileType( Handle().Use() ) )
 		{
 		case File_Type_Unknown:
 		{

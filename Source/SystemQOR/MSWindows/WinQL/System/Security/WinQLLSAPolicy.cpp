@@ -95,7 +95,7 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CLSAUnicodeStringArray::operator LSAUnicodeString*" );
 		if( m_pStrArray != 0 && m_pLSAArray == 0 )
 		{
-			LSAUnicodeString* m_pLSAArray = new LSAUnicodeString[ m_ulCount ];
+			m_pLSAArray = new LSAUnicodeString[ m_ulCount ];
 			for( ULONG ulIndex = 0; ulIndex < m_ulCount; ulIndex++ )
 			{
 				m_pLSAArray[ ulIndex ].Length = static_cast< USHORT >( wcslen( m_pStrArray[ ulIndex ] ) * sizeof(WCHAR) );

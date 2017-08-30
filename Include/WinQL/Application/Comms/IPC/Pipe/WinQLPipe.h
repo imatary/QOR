@@ -82,7 +82,7 @@ namespace nsWin32
 		__QOR_DECLARE_OCLASS_ID( CPipe );
 
 		CPipe();
-		CPipe( CDeviceHandle& hExisting );
+		CPipe( CDeviceHandle::ref_type hExisting );
 		virtual ~CPipe();
 
 		static bool Instance( void** hReadPipe, void** hWritePipe, nsWin32::LPSECURITY_ATTRIBUTES lpPipeAttributes, unsigned long nSize );

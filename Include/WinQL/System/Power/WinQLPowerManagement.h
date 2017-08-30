@@ -463,14 +463,14 @@ namespace nsWin32
 		CPowerHelper( const CPowerHelper& );
 		CPowerHelper& operator = ( const CPowerHelper& );
 		virtual ~CPowerHelper();
-		bool GetDevicePowerState( CDeviceHandle& hDevice, int& fOn );
-		bool CancelDeviceWakeupRequest( CDeviceHandle& hDevice );
+		bool GetDevicePowerState( CDeviceHandle::ref_type hDevice, int& fOn );
+		bool CancelDeviceWakeupRequest( CDeviceHandle::ref_type hDevice );
 		bool GetSystemPowerStatus( SystemPowerStatus& SystemPowerStatus );
 		bool IsSystemResumeAutomatic( void );
 		bool RequestWakeupLatency( eLatency_Time latency );
 		unsigned long SetThreadExecutionState( unsigned long esFlags );
 		bool SetSystemPowerState( bool fSuspend, bool fForce );
-		bool SetMessageWaitingIndicator( CDeviceHandle& hIndicator, unsigned long cmsg );
+		bool SetMessageWaitingIndicator( CDeviceHandle::ref_type hIndicator, unsigned long cmsg );
 	};
 
 	//--------------------------------------------------------------------------------

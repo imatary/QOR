@@ -333,11 +333,7 @@ namespace nsWin32
 		//bool IsAnyBuffer( void );
 		bool ParseMode( const char* szMode, int& iModeFlags, int& iStreamFlags );
 
-		//----------------------------------------------------------------------------------------
-		int utf8_no_of_trailbytes( char c )
-		{
-			return sachLookupTrailBytes[ (unsigned char)c ];
-		}
+		int utf8_no_of_trailbytes(char c);
 
 		shared_long m_lRefCount;	//Count of external references
 

@@ -57,7 +57,7 @@ namespace nsWin32
 		__QOR_DECLARE_OCLASS_ID(CDeviceFile);
 
 		CDeviceFile( const TCHAR* pDeviceName, unsigned long dwDesiredAccess, unsigned long dwShareMode, unsigned long dwFlagsAndAttributes );
-		CDeviceFile( CDeviceHandle& hExisting );
+		CDeviceFile( CDeviceHandle::ref_type hExisting );
 		virtual ~CDeviceFile();
 
 		virtual bool Read( void* lpBuffer, unsigned long nNumberOfBytesToRead, unsigned long* lpNumberOfBytesRead, nsWin32::LPOVERLAPPED lpOverlapped );
@@ -77,7 +77,7 @@ namespace nsWin32
 	protected:
 
 		CDeviceFile();
-		CDeviceHandle m_Handle;
+		CDeviceHandle::ref_type m_Handle;
 
 	private:
 

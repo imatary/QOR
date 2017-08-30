@@ -56,7 +56,7 @@ namespace nsWin32
 		__QOR_DECLARE_REF_TYPE(CIODeviceFile);
 
 		CIODeviceFile( const TCHAR* pDeviceName, unsigned long dwDesiredAccess, unsigned long dwShareMode, unsigned long dwFlagsAndAttributes );
-		CIODeviceFile( CDeviceHandle& hExisting );
+		CIODeviceFile( CDeviceHandle::ref_type hExisting );
 		virtual ~CIODeviceFile();
 		bool Control( unsigned long dwIoControlCode, void* lpInBuffer, unsigned long nInBufferSize, void* lpOutBuffer, unsigned long nOutBufferSize, unsigned long* lpBytesReturned, nsWin32::LPOVERLAPPED lpOverlapped );
 		bool GetPowerState( int& fOn );

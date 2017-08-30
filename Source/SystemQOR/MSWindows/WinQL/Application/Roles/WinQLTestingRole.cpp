@@ -1,6 +1,6 @@
-//WinQLConsoleAliases.cpp
+//WinQLTestingRole.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,68 +24,75 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-#include "WinQL/Application/ErrorSystem/WinQLError.h"
-#include "WinQL/Application/ErrorSystem/WinQLErrDomain.h"
-__QCMP_WARNING_PUSH
-__QCMP_WARNING_DISABLE( __QCMP_WARN_THIS_USED_IN_BASE_INIT_LIST, "Safe usage: saved in member for later use" );
-#include "WinQL/Application/Console/WinQLConsole.h"
-__QCMP_WARNING_POP
-#include "WinQAPI/Kernel32.h"
+//WinQL Application Role for all-in test applications
+
+#include "WinQL/WinQL.h"
+
+#ifdef	__QCMP_OPTIMIZEINCLUDE
+#pragma	__QCMP_OPTIMIZEINCLUDE
+#endif//__QCMP_OPTIMIZEINCLUDE
+
+#include "CodeQOR/Traits/MemoryTraits.h"
+#include "WinQL/System/WinQLSystem.h"
+#include "WinQL/Application/Roles/WinQLTestingRole.h"
+#include "WinQL/Application/Process/WinQLProcess.h"
+#include "WinQL/Application/WinQLApplication.h"
+#include "WinQL/System/EventLogging/WinQLEventLog.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
-{
+{	
+	__QOR_IMPLEMENT_OCLASS_GUID( CTestingRole, 0xe0828572, 0xebd0, 0x47ad, 0xba, 0x8b, 0x8c, 0x99, 0x67, 0xec, 0xef, 0xe6 );
+
+	nsCodeQOR::CTExternalRegEntry< CTestingRole > CTestingRole::RegEntry;
+
 	//--------------------------------------------------------------------------------
-	CConsole::CAliases::CAliases( CConsole& Console ) : m_Console( Console )
+	CTestingRole::CTestingRole() : nsQOR::CRoleImplBase()
 	{
+		_WINQ_FCONTEXT( "CTestingRole::CTestingRole" );
+		AddSubSystem( *CThreading::ClassID(), m_Threading.Ref() );
+		AddSubSystem( *CSystem::ClassID(), m_System.Ref() );
+		AddSubSystem( *CStandardIO::ClassID(), m_StandardIO.Ref() );
 	}
 
 	//--------------------------------------------------------------------------------
-	CConsole::CAliases::~CAliases()
+	CTestingRole::~CTestingRole()
 	{
+		_WINQ_FCONTEXT( "CTestingRole::~CTestingRole" );
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CConsole::CAliases::Add( const TCHAR* szSource, const TCHAR* szTarget, const TCHAR* szExeName )
+	CTestingRole::CTestingRole( const CTestingRole& src ) : nsQOR::CRoleImplBase( src )
 	{
-		return m_Console.m_Helper.AddAlias( szSource, szTarget, szExeName );
+		_WINQ_FCONTEXT( "CTestingRole::CTestingRole" );
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CConsole::CAliases::Get( const TCHAR* szSource, CTStringRef strTargetBuffer, const TCHAR* szExeName )
+	CTestingRole& CTestingRole::operator = ( const CTestingRole& src )
 	{
-		return m_Console.m_Helper.GetAlias( szSource, strTargetBuffer, szExeName );
-	}
-
-	//--------------------------------------------------------------------------------
-	unsigned long CConsole::CAliases::GetAll( CTStringRef strAliases, const TCHAR* szExeName )
-	{
-		return m_Console.m_Helper.GetAliases( strAliases, szExeName );
-	}
-
-	//--------------------------------------------------------------------------------
-	unsigned long CConsole::CAliases::GetLength( const TCHAR* szExeName )
-	{
-		return m_Console.m_Helper.GetAliasesLength( szExeName );
-	}			
-
-	//--------------------------------------------------------------------------------
-	unsigned long CConsole::CAliases::GetExes( CTString& ExeNameBuffer )
-	{
-		unsigned long ulExesLen = GetExesLength();
-		if (ulExesLen > USHRT_MAX)
+		_WINQ_FCONTEXT( "CTestingRole::operator =" );
+		if( &src != this )
 		{
-			//TODO: Raise a data loss error!
 		}
-		ExeNameBuffer.GetBufferSetLength( static_cast< unsigned short >( ulExesLen ) );
-		unsigned long ulResult = m_Console.m_Helper.GetAliasExes( ExeNameBuffer() );
-		ExeNameBuffer.ValidateBuffer( static_cast< unsigned short >( ulResult ) );
-		return ulResult;
+		return *this;
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CConsole::CAliases::GetExesLength()
+	void CTestingRole::Setup( nsQOR::IApplication& Application )
+	{		
+		_WINQ_FCONTEXT( "CTestingRole::Setup" );
+		m_Threading.Setup( Application );
+		m_System.Setup( Application );
+		m_StandardIO.Setup( Application );
+	}
+
+	//--------------------------------------------------------------------------------
+	void CTestingRole::Shutdown( nsQOR::IApplication& Application )
 	{
-		return m_Console.m_Helper.GetAliasExesLength();
-	}					
+		_WINQ_FCONTEXT( "CTestingRole::Shutdown" );
+		m_StandardIO.Shutdown( Application );
+		m_System.Shutdown( Application );
+		m_Threading.Shutdown( Application );
+	}
+
 }//nsWin32

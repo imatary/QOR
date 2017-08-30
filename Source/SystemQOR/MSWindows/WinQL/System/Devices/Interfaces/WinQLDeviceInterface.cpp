@@ -51,7 +51,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CDeviceInterface::CDeviceInterface( CDeviceHandle& hExisting )
+	CDeviceInterface::CDeviceInterface( CDeviceHandle::ref_type hExisting )
 	{
 		_WINQ_FCONTEXT( "CDeviceInterface::CDeviceInterface" );
 	}

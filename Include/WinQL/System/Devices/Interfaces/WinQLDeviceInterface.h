@@ -85,7 +85,7 @@ namespace nsWin32
 		__QOR_DECLARE_OCLASS_ID( CDeviceInterface );
 
 		CDeviceInterface();
-		CDeviceInterface( CDeviceHandle& hExisting );
+		CDeviceInterface( CDeviceHandle::ref_type hExisting );
 		CDeviceInterface( const CDeviceInterface& );
 		CDeviceInterface& operator = ( const CDeviceInterface& );
 		virtual ~CDeviceInterface();

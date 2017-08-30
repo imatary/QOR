@@ -1,6 +1,6 @@
-//IRole.h
+//WinQLTestingRole.h
 
-// Copyright Querysoft Limited 2016
+// Copyright Querysoft Limited 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,7 +24,10 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Abstract Role interface
+//WinQL Application Role for all-in test applications
+
+#ifndef WINQL_APPROLETESTING_H_1
+#define WINQL_APPROLETESTING_H_1
 
 #include "CompilerQOR.h"
 
@@ -32,44 +35,42 @@
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-#ifndef APPOCRITAQOR_IROLE_H_3
-#define APPOCRITAQOR_IROLE_H_3
+#include "CodeQOR/ClassReg/ExternalClassReg.h"
+#include "AppocritaQOR/Role.h"
+#include "SystemQOR/System.h"
+#include "WinQL/Application/Subsystems/WinQLStandardIO.h"
+#include "WinQL/Application/Subsystems/WinQLTerminal.h"
+#include "WinQL/Application/Subsystems/WinQLThreading.h"
 
-#include "CodeQOR/Traits/ReferenceTraits.h"
-#include "CodeQOR/Tracing/ObjectContext.h"
-#include "CodeQOR/DataStructures/TRef.h"
-#include "AppocritaQOR/ISubSystem.h"
-
-__QOR_DECLARE_REF(nsQOR, __APPOCRITA, IRole, CTExtRef);
-
-//------------------------------------------------------------------------------
-namespace nsQOR
+//--------------------------------------------------------------------------------
+namespace nsWin32
 {
-	class __QOR_INTERFACE( __APPOCRITA ) IApplication;
-
-	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __APPOCRITA ) IRole
+	//--------------------------------------------------------------------------------
+	class __QOR_INTERFACE( __WINQL ) CTestingRole : public nsQOR::CRoleImplBase
 	{
 	public:
 
-		__QOR_DECLARE_REF_TYPE(IRole);
+		__QOR_DECLARE_OCLASS_ID(CTestingRole);
 
-		IRole(){}
-		virtual ~IRole(){};
+		__QOR_IMPL_REF(CTestingRole);
 
-		virtual void Setup( IApplication& Application ) = 0;
-		virtual void Shutdown( IApplication& Application ) = 0;
-		virtual ISubSystem::ref_type GetSubSystem( nsCodeQOR::mxGUID* classID ) = 0;
-		virtual void AddSubSystem( nsCodeQOR::mxGUID classID, ISubSystem::ref_type SubSystem ) = 0;
+		static nsCodeQOR::CTExternalRegEntry< CTestingRole > RegEntry;
 
-	protected:
+		CTestingRole();
+		virtual ~CTestingRole();
+		CTestingRole( const CTestingRole& src );
+		CTestingRole& operator = ( const CTestingRole& src );
+
+		virtual void Setup( nsQOR::IApplication& );
+		virtual void Shutdown( nsQOR::IApplication& );
 
 	private:
 
-		IRole( const IRole& );
-		IRole& operator = ( const IRole& );
-
+		CStandardIO m_StandardIO;
+		nsQOR::CThreading m_Threading;
+		nsQOR::CSystem m_System;
 	};
-}//nsQOR
 
-#endif//APPOCRITAQOR_IROLE_H_3
+}//nsWin32
+
+#endif//WINQL_APPROLETESTING_H_1

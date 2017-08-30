@@ -102,6 +102,12 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	bool CIOBuffer::IsUnBuffered( void )
+	{
+		return _base == 0 ? true : false;
+	}
+
+	//--------------------------------------------------------------------------------
 	byte* CIOBuffer::GetFallbackBuffer( void )
 	{
 		return reinterpret_cast<byte*>( &_charbuf );

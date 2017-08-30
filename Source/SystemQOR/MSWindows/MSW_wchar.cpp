@@ -3352,7 +3352,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	int Cwchar::_vsnwprintf( wchar_t* buffer, size_t count, const wchar_t* format, va_list argptr )
 	{
-		_WINQ_FCONTEXT( "Cwchar::" );
+		_WINQ_FCONTEXT( "Cwchar::_vsnwprintf" );
 		int iResult = 0;
 		__QOR_PROTECT
 		{

@@ -74,12 +74,12 @@ namespace nsWin32
 		static nsCodeQOR::mxGUID GUID_BLUETOOTH_RADIO_OUT_OF_RANGE;
 
 		CBluetoothRadio();
-		CBluetoothRadio( CDeviceHandle& hExisting );
+		CBluetoothRadio( CDeviceHandle::ref_type hExisting );
 		CBluetoothRadio( const CBluetoothRadio& src );
 		CBluetoothRadio& operator = ( const CBluetoothRadio& src );
 		virtual ~CBluetoothRadio();
 
-		void SetHandle(CDeviceHandle& hExisting);
+		void SetHandle(CDeviceHandle::ref_type hExisting);
 		void AuthenticateDevice( COSWindow::refType ParentWindow, CBluetoothRemoteDevice::ref_type Device, CWString strPassKey );
 		void AuthenticateDeviceEx( COSWindow::refType ParentWindow, CBluetoothRemoteDevice::ref_type Device, BluetoothOutOfBandData* pbtOobData, CBluetoothRemoteDevice::Authentication_Requirements AuthentRequirements );
 		bool EnableDiscovery( bool bEnabled );

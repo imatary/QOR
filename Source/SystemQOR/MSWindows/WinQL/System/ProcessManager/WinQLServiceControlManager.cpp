@@ -94,10 +94,10 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CServiceControlSession::refType CServiceControlManager::OpenSession( CTString& strMachine, CTString& strDatabaseName, unsigned long ulDesiredAccess )
+	CServiceControlSession::ref_type CServiceControlManager::OpenSession( CTString& strMachine, CTString& strDatabaseName, unsigned long ulDesiredAccess )
 	{
 		_WINQ_FCONTEXT( "CServiceControlManager::OpenSession" );
-		CServiceControlSession::refType result( new CServiceControlSession( *this, strMachine.GetNullableBuffer(), strDatabaseName.GetNullableBuffer(), ulDesiredAccess ), true );
+		CServiceControlSession::ref_type result( new CServiceControlSession( *this, strMachine.GetNullableBuffer(), strDatabaseName.GetNullableBuffer(), ulDesiredAccess ), true );
 		
 		strMachine.ReleaseBuffer();
 		strDatabaseName.ReleaseBuffer();

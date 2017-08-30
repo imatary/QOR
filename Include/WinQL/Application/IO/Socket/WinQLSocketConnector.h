@@ -39,13 +39,13 @@
 namespace nsWin32
 {
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL ) CSocketConnector : public nsBluefoot::CBFPlug
+	class __QOR_INTERFACE( __WINQL ) CSocketConnector : public nsBluefoot::CPlug
 	{
 	public:
 
 		__QOR_DECLARE_OCLASS_ID( CSocketConnector );
 
-		CSocketConnector( nsBluefoot::CBFConnectionPool* pPool = 0 );
+		CSocketConnector( nsBluefoot::CConnectionPool* pPool = 0 );
 		virtual ~CSocketConnector();
 
 		//Plug interface
@@ -83,7 +83,7 @@ namespace nsWin32
 		CSocket m_Socket;
 		CSocket::eType m_Type;
 		CSocket::eAddressFamily m_AddressFamily;
-		int m_iProtocol;
+		CSocket::eProtocol m_iProtocol;
 		CSocket::Address m_Address;
 		unsigned int m_AddressSize;
 		WSAProtocolInfo* m_pProtocolInfo;

@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Abstract base for applications
+//Abstract base for roles
 
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
@@ -54,7 +54,7 @@ namespace nsQOR
 		virtual ISubSystem::ref_type GetSubSystem( nsCodeQOR::mxGUID* classID );
 		virtual void AddSubSystem( nsCodeQOR::mxGUID classID, ISubSystem::ref_type SubSystem );
 		static nsCodeQOR::mxGUID* CmdLineTool( void );
-
+		static nsCodeQOR::mxGUID* TestingApp(void);
 	private:
 
 		CRole( const CRole& );

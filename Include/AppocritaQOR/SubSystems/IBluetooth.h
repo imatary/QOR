@@ -26,6 +26,8 @@
 
 //Bluetooth SubSystem interface
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -34,6 +36,10 @@
 #define APPOCRITAQOR_SUBSYSTEMS_IBLUETOOTH_H_3
 
 #include "AppocritaQOR/ISubSystem.h"
+#include "CodeQOR/DataStructures/TRef.h"
+
+__QOR_DECLARE_REF(nsQOR, __APPOCRITA, IBluetoothServiceClient, CTRef);
+__QOR_DECLARE_REF(nsQOR, __APPOCRITA, IBluetoothRemoteDevice, CTRef);
 
 //------------------------------------------------------------------------------
 namespace nsQOR
@@ -41,12 +47,47 @@ namespace nsQOR
 	class __QOR_INTERFACE( __APPOCRITA ) IApplication;
 
 	//------------------------------------------------------------------------------
+	class __QOR_INTERFACE(__APPOCRITA) IBluetoothRemoteDevice
+	{
+	public:
+
+		__QOR_DECLARE_OCLASS_ID(IBluetoothRemoteDevice);
+		__QOR_DECLARE_REF_TYPE(IBluetoothRemoteDevice);
+
+		IBluetoothRemoteDevice() {}
+		virtual ~IBluetoothRemoteDevice() {}
+		IBluetoothRemoteDevice(const IBluetoothRemoteDevice& src) { *this = src; }
+		IBluetoothRemoteDevice& operator = (const IBluetoothRemoteDevice& src) { return *this; }
+
+		virtual Cmp_unsigned__int64 GetAddress(void) const = 0;
+		virtual bool Connect(nsCodeQOR::mxGUID* pServiceID) = 0;
+	};
+
+	//------------------------------------------------------------------------------
+	class __QOR_INTERFACE(__APPOCRITA) IBluetoothServiceClient
+	{
+	public:
+
+		__QOR_DECLARE_OCLASS_ID(IBluetoothServiceClient);
+		__QOR_DECLARE_REF_TYPE(IBluetoothServiceClient);
+
+		IBluetoothServiceClient() {}
+		virtual ~IBluetoothServiceClient() {}
+		IBluetoothServiceClient(const IBluetoothServiceClient& src) { *this = src; }
+		IBluetoothServiceClient& operator = (const IBluetoothServiceClient& src) { return *this; }
+		bool operator == (const IBluetoothServiceClient& cmp) { return &cmp == this; }
+
+		virtual void Register() = 0;
+		virtual void UnRegister() = 0;
+		virtual void AttachDevice(IBluetoothRemoteDevice::ref_type Device) = 0;
+	};
+
+	//------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __APPOCRITA ) IBluetooth : public ISubSystem
 	{
 	public:
 
 		__QOR_DECLARE_OCLASS_ID( IBluetooth );
-
 		__QOR_IMPL_REF( IBluetooth );
 
 		IBluetooth(){}
@@ -54,6 +95,9 @@ namespace nsQOR
 
 		virtual void Setup( IApplication& Application ) = 0;
 		virtual void Shutdown( IApplication& Application ) = 0;
+		virtual void ScanForDevices(void) = 0;
+		virtual void RegisterServiceClient(nsCodeQOR::mxGUID& ServiceUUID, IBluetoothServiceClient::ref_type Client) = 0;
+		virtual void UnregisterServiceClient(nsCodeQOR::mxGUID& ServiceUUID, IBluetoothServiceClient::ref_type Client) = 0;
 
 	private:
 

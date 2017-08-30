@@ -1,4 +1,4 @@
-//Threading.cpp
+//Thread.cpp
 
 // Copyright Querysoft Limited 2016
 //
@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Threading SubSystem
+//Thread implementation
 
 #include "CodeQOR/Instancing/TInstancePtr.h"
 #include "CodeQOR/Tracing/TraceFlyer.h"
@@ -32,6 +32,7 @@
 #include "AppocritaQOR/AppocritaQOR.h"
 #include "AppocritaQOR/SubSystems/Thread.h"
 #include "AppocritaQOR/SubSystems/IThreading.h"
+#include "AppocritaQOR/SubSystems/Threading.h"
 #include "AppocritaQOR/SubSystem.h"
 #include "AppocritaQOR/Application.h"
 
@@ -75,7 +76,7 @@ namespace nsQOR
 	{
 		if( !TheApplication().IsNull() && !TheApplication()->GetRole().IsNull() )
 		{
-			nsQOR::IThreading* pThreading = TheApplication()->GetRole()->GetSubSystem( IThreading::ClassID() ).As< nsQOR::IThreading >();
+			nsQOR::CThreading* pThreading = TheApplication()->GetRole()->GetSubSystem( IThreading::ClassID() ).As< nsQOR::CThreading >();
 			if( pThreading )
 			{
 				return pThreading->GetCurrent();

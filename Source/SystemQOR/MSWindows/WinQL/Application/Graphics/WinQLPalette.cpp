@@ -103,14 +103,14 @@ namespace nsWin32
 	nsWin32::LOGCOLORSPACE CColourSpace::GetData( void )
 	{
 		_WINQ_FCONTEXT( "CColourSpace::CColourSpace" );
-		nsWin32::LOGCOLORSPACE Space;
+		nsWin32::LOGCOLORSPACE aSpace;
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			memset( &Space, 0, sizeof( nsWin32::LOGCOLORSPACE ) );
-			bResult = m_GDI32Library.GetLogColorSpace( reinterpret_cast< ::HCOLORSPACE >( Handle()->Use() ), reinterpret_cast< ::LPLOGCOLORSPACE >( &Space ), sizeof( nsWin32::LOGCOLORSPACE ) ) ? true : false;
+			memset( &aSpace, 0, sizeof( nsWin32::LOGCOLORSPACE ) );
+			bResult = m_GDI32Library.GetLogColorSpace( reinterpret_cast< ::HCOLORSPACE >( Handle()->Use() ), reinterpret_cast< ::LPLOGCOLORSPACE >( &aSpace ), sizeof( nsWin32::LOGCOLORSPACE ) ) ? true : false;
 		}__QOR_ENDPROTECT
-		return Space;
+		return aSpace;
 	}
 
 	//-- Palette

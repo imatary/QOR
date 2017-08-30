@@ -1,6 +1,6 @@
 //BfOutputProtocol.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -34,32 +34,23 @@
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot
-{
-	
+{	
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFOutputProtocol : public CBFProtocol
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) COutputProtocol : public CProtocol
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CBFOutputProtocol > refType;
+		typedef nsCodeQOR::CTLRef< COutputProtocol > refType;
 
-		__QOR_DECLARE_OCLASS_ID( CBFOutputProtocol );
+		__QOR_DECLARE_OCLASS_ID(COutputProtocol);
 
-		CBFOutputProtocol() = delete;
-		CBFOutputProtocol( nsQOR::IApplication::ref_type Application );
-		virtual ~CBFOutputProtocol();
-		CBFOutputProtocol( const CBFOutputProtocol& src );
-		CBFOutputProtocol& operator = ( const CBFOutputProtocol& src);
+		COutputProtocol() = delete;
+		COutputProtocol( nsQOR::IApplication::ref_type Application );
+		virtual ~COutputProtocol();
+		COutputProtocol( const COutputProtocol& src );
+		COutputProtocol& operator = ( const COutputProtocol& src);
 
 		virtual void GetNextWriteCount( void );
-
-		virtual void OnConnectionError( void );
-		virtual void OnConnected( void );
-		virtual void OnDisconnectionError( void );
-		virtual void OnDisconnected( void );
-		virtual void OnWriteSuccess( void );
-		virtual void OnWriteError( void );
-		virtual bool Write( void );
 
 		refType Ref( void )
 		{

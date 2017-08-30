@@ -207,7 +207,7 @@ namespace nsCodeQOR
 	{
 		if( !nsCodeQOR::CFunctionContextBase::Booted( false ) )
 		{
-			return;//Don't allow errors to be raised before static init completes
+			return;//Don't allow errors to be raised before static initialization completes
 		}
 
 		CFunctionContextBase* pFunctionContext = CFunctionContextBase::GetCurrent();

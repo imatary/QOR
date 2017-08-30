@@ -1,6 +1,6 @@
 //WinQLFileSink.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -27,6 +27,8 @@
 #ifndef WINQL_IO_FILESINK_H_3
 #define WINQL_IO_FILESINK_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -40,7 +42,7 @@ namespace nsWin32
 	class __QOR_INTERFACE( __WINQL ) CFileConnector;
 
 	//--------------------------------------------------------------------------------
-	//A general Bluefoot sink which writes to a Win32 File
+	//A Bluefoot sink which writes to a Win32 File
 	class __QOR_INTERFACE( __WINQL ) CFileSink : public CIOSink
 	{
 	public:

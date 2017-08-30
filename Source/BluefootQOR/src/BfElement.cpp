@@ -32,25 +32,25 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CBFElement::CBFElement() : m_pParent(0), m_pBuffer( 0 )
+	CElement::CElement() : m_pParent(0), m_pBuffer( 0 )
 	{
 
 	}
 
 	//------------------------------------------------------------------------------
-	CBFElement::~CBFElement()
+	CElement::~CElement()
 	{
 
 	}
 
 	//------------------------------------------------------------------------------
-	CBFElement::CBFElement( const CBFElement& src )
+	CElement::CElement( const CElement& src )
 	{
 		*this = src;
 	}
 
 	//------------------------------------------------------------------------------
-	CBFElement& CBFElement::operator = ( const CBFElement& src )
+	CElement& CElement::operator = ( const CElement& src )
 	{
 		if (&src != this)
 		{
@@ -61,13 +61,13 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBFElement* CBFElement::GetParent( void )
+	CElement* CElement::GetParent( void )
 	{
 		return m_pParent;
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFElement::SetParent( CBFElement* pParent )
+	void CElement::SetParent( CElement* pParent )
 	{
 		m_pParent = pParent;
 	}

@@ -1,6 +1,6 @@
 //BfInputHeaderBodyProtocol.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -36,11 +36,11 @@ namespace nsBluefoot
 {	
 	//------------------------------------------------------------------------------
 	template< class THeaderSizeType >
-	class CBFInputHeaderBodyProtocol : public CBFInputProtocol
+	class CInputHeaderBodyProtocol : public CProtocol
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CBFInputHeaderBodyProtocol > refType;
+		typedef nsCodeQOR::CTLRef< CInputHeaderBodyProtocol > refType;
 
 		//------------------------------------------------------------------------------
 		enum eInputHeaderBodySates
@@ -49,28 +49,28 @@ namespace nsBluefoot
 			Body,
 		};
 
-		__QOR_DECLARE_OCLASS_ID( CBFInputHeaderBodyProtocol );
+		__QOR_DECLARE_OCLASS_ID(CInputHeaderBodyProtocol);
 
 		//------------------------------------------------------------------------------
-		CBFInputHeaderBodyProtocol() : CBFInputProtocol() 
+		CInputHeaderBodyProtocol() : CInputProtocol()
 		,	m_HeaderBuffer( 1 )
 		,	m_BodyBuffer( 1 )
 		{
 		}
 		
 		//------------------------------------------------------------------------------
-		virtual ~CBFInputHeaderBodyProtocol()
+		virtual ~CInputHeaderBodyProtocol()
 		{
 		}
 
 		//------------------------------------------------------------------------------
-		CBFInputHeaderBodyProtocol( const CBFInputHeaderBodyProtocol& src ) : CBFInputProtocol( src )
+		CInputHeaderBodyProtocol( const CInputHeaderBodyProtocol& src ) : CInputProtocol( src )
 		{
 
 		}
 
 		//------------------------------------------------------------------------------
-		CBFInputHeaderBodyProtocol& operator = ( const CBFInputHeaderBodyProtocol& src )
+		CInputHeaderBodyProtocol& operator = ( const CInputHeaderBodyProtocol& src )
 		{
 			return *this;
 		}

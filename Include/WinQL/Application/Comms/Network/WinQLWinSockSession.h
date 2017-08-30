@@ -34,6 +34,7 @@
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "WinQL/WinQL.h"
+#include "CodeQOR/DataStructures/TRef.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWinQAPI
@@ -64,18 +65,12 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CWinSockSession > refType;
+		typedef nsCodeQOR::CTRef< CWinSockSession > ref_type;
 
 		__QOR_DECLARE_OCLASS_ID( CWinSockSession );
 
 		CWinSockSession( unsigned short usVersionRequested );
 		~CWinSockSession();
-
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this, false );
-		}
 
 		bool IsValid( void );
 		WinSockSessionData GetData( void );

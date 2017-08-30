@@ -46,11 +46,15 @@
 
 #define QOR_PP_BUILD_LINK_OBJLISTNAME( _MODULE_NAME )	QOR_PP_CAT( QOR_PP_CAT( QOR_PP_CONFIG_INT_DIR, _MODULE_NAME ), objlist.txt )
 
+
+//TODO: These are batch dependent and should be redefined in a shell independent way!
+
 #define QOR_PP_BUILD_LINK_PREPARE_OBJLIST( _MODULE_NAME ) \
 														echo ??/n > QOR_PP_BUILD_LINK_OBJLISTNAME( _MODULE_NAME )
 
 #define QOR_PP_BUILD_LINK_EXPORT_OBJNAME( r, _MODULE_NAME, _, _X ) \
 														echo QOR_PP_CAT( QOR_PP_CAT( QOR_PP_CONFIG_INT_DIR,_MODULE_NAME/ ), QOR_PP_CAT( _X,.obj )) >> QOR_PP_BUILD_LINK_OBJLISTNAME( _MODULE_NAME )
+//
 
 #include "BuildLibCmdLine.h"
 #include "BuildAsmCmdLine.h"

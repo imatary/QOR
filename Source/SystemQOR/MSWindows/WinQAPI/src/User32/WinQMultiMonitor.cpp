@@ -1,6 +1,6 @@
 //WinQMultiMonitor.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -33,7 +33,7 @@
 namespace nsWinQAPI
 {
 	//--------------------------------------------------------------------------------
-	BOOL CUser32::EnumDisplayMonitors( HDC hdc, LPCRECT lprcClip, ::MONITORENUMPROC lpfnEnum, LPARAM dwData )
+	BOOL CUser32::EnumDisplayMonitors( HDC hdc, LPCRECT lprcClip, ::MONITORENUMPROC lpfnEnum, LPARAM dwData ) const
 	{
 		_WINQ_FCONTEXT( "CUser32::EnumDisplayMonitors" );
 		CCheckReturn< BOOL, CBoolCheck< > >::TType bResult;
@@ -43,7 +43,7 @@ namespace nsWinQAPI
 	}
 
 	//--------------------------------------------------------------------------------
-	BOOL CUser32::GetMonitorInfo( HMONITOR hMonitor, ::LPMONITORINFO lpmi )
+	BOOL CUser32::GetMonitorInfo( HMONITOR hMonitor, ::LPMONITORINFO lpmi ) const
 	{
 		_WINQ_FCONTEXT( "CUser32::GetMonitorInfo" );
 		CCheckReturn< BOOL, CBoolCheck< > >::TType bResult;

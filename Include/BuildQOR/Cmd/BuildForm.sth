@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Build one linkage pattern of a target
+//Preprocessable batch script fragment to build one linkage pattern of a target
 //Extract the linkage form to build from the Forms iteration
 
 set build_form=QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_2,QOR_FORM_LIST)

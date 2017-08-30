@@ -72,7 +72,12 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	unsigned long CConsole::CAliases::GetExes( CTString& ExeNameBuffer )
 	{
-		ExeNameBuffer.GetBufferSetLength( GetExesLength() );
+		unsigned long ulExesLen = GetExesLength();
+		if (ulExesLen > USHRT_MAX)
+		{
+			//TODO: Raise a data loss error!
+		}
+		ExeNameBuffer.GetBufferSetLength( static_cast< unsigned short >( ulExesLen ) );
 		unsigned long ulResult = m_Console.m_Helper.GetAliasExes( ExeNameBuffer() );
 		ExeNameBuffer.ValidateBuffer( static_cast< unsigned short >( ulResult ) );
 		return ulResult;

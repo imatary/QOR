@@ -1,6 +1,6 @@
 //WinQLMouse.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,6 +29,8 @@
 #ifndef WINQL_SYSTEM_DEVICE_MOUSE_H_3
 #define WINQL_SYSTEM_DEVICE_MOUSE_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -43,6 +45,8 @@ namespace nsWinQAPI
 {
 	class __QOR_INTERFACE( __WINQAPI ) CUser32;
 }
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CMouse, CTExtRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -68,12 +72,10 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE(__WINQL) CMouse : public CDeviceInterface
 	{
-		QOR_PP_WINQL_SHARED;
 
 	public:
 
-		typedef CSharedRef< CMouse > refType;
-
+		__QOR_DECLARE_REF_TYPE(CMouse);
 		__QOR_DECLARE_OCLASS_ID( CMouse );
 
 		static nsCodeQOR::CTExternalRegEntry< CMouse > RegEntry;
@@ -90,8 +92,6 @@ namespace nsWin32
 		bool SetDoubleClickTime( unsigned int uInterval );
 		bool SwapButton( bool fSwap );
 		bool TrackEvent( nsWin32::LPTRACKMOUSEEVENT lpEventTrack );
-
-		refType Ref(void);
 
 	private:
 

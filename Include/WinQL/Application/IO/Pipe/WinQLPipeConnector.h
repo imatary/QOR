@@ -1,6 +1,6 @@
 //WinQLPipeConnector.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -39,7 +39,7 @@
 namespace nsWin32
 {
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL ) CPipeConnector : public nsBluefoot::CBFPlug
+	class __QOR_INTERFACE( __WINQL ) CPipeConnector : public nsBluefoot::CPlug
 	{
 	public:
 
@@ -47,7 +47,7 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CPipeConnector );
 
-		CPipeConnector( nsBluefoot::CBFConnectionPool* pPool = 0 );
+		CPipeConnector( nsBluefoot::CConnectionPool* pPool = 0 );
 		virtual ~CPipeConnector();
 
 		//Plug interface

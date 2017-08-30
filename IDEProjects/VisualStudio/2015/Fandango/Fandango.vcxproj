@@ -87,8 +87,8 @@
       </PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../../include;../../../../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH;$(FrameworkSdkDir)include\um;$(FrameworkSdkDir)include\shared</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;HAVE_BLUETOOTH;HAVE_IRDA_WINDOWS;HAVE_BLUETOOTH_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../include;../../../../Source/SystemQOR/MSWindows/WinCmpSupQORVC/include/Exceptions/SEH;../../../../Test/Fandango/include;$(FrameworkSdkDir)include\um;$(FrameworkSdkDir)include\shared</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -100,7 +100,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies />
+      <AdditionalDependencies>deliberately_prevent_linking.lib</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -153,6 +153,60 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Test\Fandango\Fandango.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\api.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\databuffer.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\membuf.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_body.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_client.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_connect.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_hdr.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_hdr_membuf.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_hdr_ptr.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_hdr_stream.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_main.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_msg.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_object.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_server.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_transport.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\obex_transport_sock.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\btobex.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\customtrans.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\fdobex.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\inobex.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\irobex.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\usb1obex.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\usbobex.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\transport\usbutils.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\lib\win32compat.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\ObexProtocolSession.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Fandango\ObexProtocolWrapper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\cloexec.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\databuffer.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\debug.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\defines.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\membuf.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\nonblock.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_body.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_hdr.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_incl.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_main.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_object.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_transport.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\obex_transport_sock.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\openobex\obex.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\openobex\obex_const.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\openobex\Obex_protocol.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\bluez_compat.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\btobex.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\customtrans.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\fdobex.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\inobex.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\irda_wrap.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\irobex.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\usbobex.h" />
+    <ClInclude Include="..\..\..\..\Test\Fandango\include\transport\usbutils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

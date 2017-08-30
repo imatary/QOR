@@ -1,4 +1,4 @@
-//WinQLFile.h
+//WinQLStream.h
 
 // Copyright Querysoft Limited 2013, 2016
 //
@@ -64,7 +64,7 @@ namespace nsWin32
 		typedef int( *INPUTFN )( CStream* _File, const unsigned char *, _locale_t, va_list );
 		typedef int( *WINPUTFN )( CStream* _File, const wchar_t *, _locale_t, va_list );
 
-		__QCMP_STATIC_CONSTANT( unsigned short, _S_IFMT = 0xF000 );				// file type mask
+		__QCMP_STATIC_CONSTANT( unsigned short, _S_IFMT = 0xF000 );					// file type mask
 		__QCMP_STATIC_CONSTANT( unsigned short, _S_IFDIR = 0x4000 );				//directory
 		__QCMP_STATIC_CONSTANT( unsigned short, _S_IFCHR = 0x2000 );				//character special
 		__QCMP_STATIC_CONSTANT( unsigned short, _S_IFIFO = 0x1000 );				//pipe
@@ -76,12 +76,12 @@ namespace nsWin32
 		__QCMP_STATIC_CONSTANT( int, FILE_BEGIN = 0 );
 		__QCMP_STATIC_CONSTANT( int, FILE_CURRENT = 1 );
 		__QCMP_STATIC_CONSTANT( int, FILE_END = 2 );
-		__QCMP_STATIC_CONSTANT( int, BUF_SIZE = 1025 );				// size of LF translation buffer
+		__QCMP_STATIC_CONSTANT( int, BUF_SIZE = 1025 );								// size of LF translation buffer
 		__QCMP_STATIC_CONSTANT( intptr_t, _NO_CONSOLE_FILENO = (intptr_t)-2 );
 		__QCMP_STATIC_CONSTANT( unsigned int, _SMALL_BUFSIZ = 512 );
 		__QCMP_STATIC_CONSTANT( unsigned int, _INTERNAL_BUFSIZ = 4096 );
 
-		__QCMP_STATIC_CONSTANT( unsigned short, m_scusIONoBuffering = 0x0004 );				//_IONBF
+		__QCMP_STATIC_CONSTANT( unsigned short, m_scusIONoBuffering = 0x0004 );		//_IONBF
 		__QCMP_STATIC_CONSTANT( unsigned short, _IOYOURBUF = 0x0100 );
 		__QCMP_STATIC_CONSTANT( unsigned short, _IOSETVBUF = 0x0400 );
 		__QCMP_STATIC_CONSTANT( unsigned short, _IOFEOF = 0x0800 );
@@ -90,60 +90,60 @@ namespace nsWin32
 		__QCMP_STATIC_CONSTANT( unsigned short, _IOCOMMIT = 0x4000 );
 		__QCMP_STATIC_CONSTANT( unsigned short, _IOLOCKED = 0x8000 );
 
-		__QCMP_STATIC_CONSTANT( unsigned char, FOPEN = 0x01 );				// file open
+		__QCMP_STATIC_CONSTANT( unsigned char, FOPEN = 0x01 );					// file open
 		__QCMP_STATIC_CONSTANT( unsigned char, FEOFLAG = 0x02 );				// end of file has been encountered
-		__QCMP_STATIC_CONSTANT( unsigned char, FCRLF = 0x04 );				// CR-LF across read buffer (in text mode)
-		__QCMP_STATIC_CONSTANT( unsigned char, FPIPE = 0x08 );				// file refers to a pipe
+		__QCMP_STATIC_CONSTANT( unsigned char, FCRLF = 0x04 );					// CR-LF across read buffer (in text mode)
+		__QCMP_STATIC_CONSTANT( unsigned char, FPIPE = 0x08 );					// file refers to a pipe
 		__QCMP_STATIC_CONSTANT( unsigned char, FNOINHERIT = 0x10 );				// file opened _O_NOINHERIT
 		__QCMP_STATIC_CONSTANT( unsigned char, FAPPEND = 0x20 );				// file opened O_APPEND
-		__QCMP_STATIC_CONSTANT( unsigned char, FDEV = 0x40 );				// file refers to device
-		__QCMP_STATIC_CONSTANT( unsigned char, FTEXT = 0x80 );				// file is in text mode
+		__QCMP_STATIC_CONSTANT( unsigned char, FDEV = 0x40 );					// file refers to device
+		__QCMP_STATIC_CONSTANT( unsigned char, FTEXT = 0x80 );					// file is in text mode
 
-		__QCMP_STATIC_CONSTANT( int, _SH_DENYRW = 0x10 );				// deny read/write mode
-		__QCMP_STATIC_CONSTANT( int, _SH_DENYWR = 0x20 );				// deny write mode
-		__QCMP_STATIC_CONSTANT( int, _SH_DENYRD = 0x30 );				// deny read mode
-		__QCMP_STATIC_CONSTANT( int, _SH_DENYNO = 0x40 );				// deny none mode
-		__QCMP_STATIC_CONSTANT( int, _SH_SECURE = 0x80 );				// secure mode
+		__QCMP_STATIC_CONSTANT( int, _SH_DENYRW = 0x10 );						// deny read/write mode
+		__QCMP_STATIC_CONSTANT( int, _SH_DENYWR = 0x20 );						// deny write mode
+		__QCMP_STATIC_CONSTANT( int, _SH_DENYRD = 0x30 );						// deny read mode
+		__QCMP_STATIC_CONSTANT( int, _SH_DENYNO = 0x40 );						// deny none mode
+		__QCMP_STATIC_CONSTANT( int, _SH_SECURE = 0x80 );						// secure mode
 
-		__QCMP_STATIC_CONSTANT( int, OReadOnly = 0x00000 );			//open for reading only
-		__QCMP_STATIC_CONSTANT( int, OWriteOnly = 0x00001 );			//open for writing only
-		__QCMP_STATIC_CONSTANT( int, OReadWrite = 0x00002 );			//open for reading and writing
-		__QCMP_STATIC_CONSTANT( int, OAppend = 0x00008 );			//writes done at eof
-		__QCMP_STATIC_CONSTANT( int, OCreate = 0x00100 );			//create and open file
-		__QCMP_STATIC_CONSTANT( int, OTruncate = 0x00200 );			//open and truncate
-		__QCMP_STATIC_CONSTANT( int, OExclusive = 0x00400 );			//open only if file doesn't already exist
+		__QCMP_STATIC_CONSTANT( int, OReadOnly = 0x00000 );						//open for reading only
+		__QCMP_STATIC_CONSTANT( int, OWriteOnly = 0x00001 );					//open for writing only
+		__QCMP_STATIC_CONSTANT( int, OReadWrite = 0x00002 );					//open for reading and writing
+		__QCMP_STATIC_CONSTANT( int, OAppend = 0x00008 );						//writes done at eof
+		__QCMP_STATIC_CONSTANT( int, OCreate = 0x00100 );						//create and open file
+		__QCMP_STATIC_CONSTANT( int, OTruncate = 0x00200 );						//open and truncate
+		__QCMP_STATIC_CONSTANT( int, OExclusive = 0x00400 );					//open only if file doesn't already exist
 
-		__QCMP_STATIC_CONSTANT( int, OText = 0x04000 );			//file mode is text (translated). OText files have <cr><lf> sequences translated to <lf> on read()'s, and <lf> sequences translated to <cr><lf> on write()'s
-		__QCMP_STATIC_CONSTANT( int, OBinary = 0x08000 );			//file mode is binary (untranslated)
-		__QCMP_STATIC_CONSTANT( int, OWText = 0x10000 );			//file mode is UTF16 (translated)
-		__QCMP_STATIC_CONSTANT( int, OU16Text = 0x20000 );			//file mode is UTF16 no BOM (translated)
-		__QCMP_STATIC_CONSTANT( int, OU8Text = 0x40000 );			//file mode is UTF8  no BOM (translated)
+		__QCMP_STATIC_CONSTANT( int, OText = 0x04000 );							//file mode is text (translated). OText files have <cr><lf> sequences translated to <lf> on read()'s, and <lf> sequences translated to <cr><lf> on write()'s
+		__QCMP_STATIC_CONSTANT( int, OBinary = 0x08000 );						//file mode is binary (untranslated)
+		__QCMP_STATIC_CONSTANT( int, OWText = 0x10000 );						//file mode is UTF16 (translated)
+		__QCMP_STATIC_CONSTANT( int, OU16Text = 0x20000 );						//file mode is UTF16 no BOM (translated)
+		__QCMP_STATIC_CONSTANT( int, OU8Text = 0x40000 );						//file mode is UTF8  no BOM (translated)
 
 		__QCMP_STATIC_CONSTANT( int, __IOINFO_TM_ANSI = 0 );					// Regular Text
 		__QCMP_STATIC_CONSTANT( int, __IOINFO_TM_UTF8 = 1 );					// UTF8 Encoded
 		__QCMP_STATIC_CONSTANT( int, __IOINFO_TM_UTF16LE = 2 );					// UTF16 Little Endian Encoded
-		__QCMP_STATIC_CONSTANT( unsigned char, LF = 10 );					// line feed
-		__QCMP_STATIC_CONSTANT( unsigned char, CR = 13 );					// carriage return
+		__QCMP_STATIC_CONSTANT( unsigned char, LF = 10 );						// line feed
+		__QCMP_STATIC_CONSTANT( unsigned char, CR = 13 );						// carriage return
 		__QCMP_STATIC_CONSTANT( unsigned char, CTRLZ = 26 );					// ctrl-z means eof for text
 
-		__QCMP_STATIC_CONSTANT( int, ORaw = OBinary );			//file mode is binary (untranslated)
-		__QCMP_STATIC_CONSTANT( int, ONoInherit = 0x00080 );			//child process doesn't inherit file // Open handle inherit bit
-		__QCMP_STATIC_CONSTANT( int, OTemporary = 0x00040 );			//temporary file bit// Temporary file bit - file is deleted when last handle is closed
-		__QCMP_STATIC_CONSTANT( int, OShortLived = 0x01000 );			//temporary storage file, try not to flush// temporary access hint
-		__QCMP_STATIC_CONSTANT( int, OObtainDir = 0x02000 );			//get information about a directory
-		__QCMP_STATIC_CONSTANT( int, OSequential = 0x00020 );			//file access is primarily sequential sequential/random access hints
-		__QCMP_STATIC_CONSTANT( int, ORandom = 0x00010 );			//file access is primarily random
+		__QCMP_STATIC_CONSTANT( int, ORaw = OBinary );							//file mode is binary (untranslated)
+		__QCMP_STATIC_CONSTANT( int, ONoInherit = 0x00080 );					//child process doesn't inherit file // Open handle inherit bit
+		__QCMP_STATIC_CONSTANT( int, OTemporary = 0x00040 );					//temporary file bit// Temporary file bit - file is deleted when last handle is closed
+		__QCMP_STATIC_CONSTANT( int, OShortLived = 0x01000 );					//temporary storage file, try not to flush// temporary access hint
+		__QCMP_STATIC_CONSTANT( int, OObtainDir = 0x02000 );					//get information about a directory
+		__QCMP_STATIC_CONSTANT( int, OSequential = 0x00020 );					//file access is primarily sequential sequential/random access hints
+		__QCMP_STATIC_CONSTANT( int, ORandom = 0x00010 );						//file access is primarily random
 
-		__QCMP_STATIC_CONSTANT( unsigned short, UTF16LE_BOM = 0xFEFF );				// UTF16 Little Endian Byte Order Mark
-		__QCMP_STATIC_CONSTANT( unsigned short, UTF16BE_BOM = 0xFFFE );				// UTF16 Big Endian Byte Order Mark
-		__QCMP_STATIC_CONSTANT( unsigned short, BOM_MASK = 0xFFFF );				// Mask for testing Byte Order Mark
+		__QCMP_STATIC_CONSTANT( unsigned short, UTF16LE_BOM = 0xFEFF );			// UTF16 Little Endian Byte Order Mark
+		__QCMP_STATIC_CONSTANT( unsigned short, UTF16BE_BOM = 0xFFFE );			// UTF16 Big Endian Byte Order Mark
+		__QCMP_STATIC_CONSTANT( unsigned short, BOM_MASK = 0xFFFF );			// Mask for testing Byte Order Mark
 		__QCMP_STATIC_CONSTANT( unsigned int, UTF8_BOM = 0xBFBBEF );			// UTF8 Byte Order Mark
-		__QCMP_STATIC_CONSTANT( int, UTF16_BOMLEN = 2 );					// No of Bytes in a UTF16 BOM
-		__QCMP_STATIC_CONSTANT( int, UTF8_BOMLEN = 3 );					// No of Bytes in a UTF8 BOM
+		__QCMP_STATIC_CONSTANT( int, UTF16_BOMLEN = 2 );						// No of Bytes in a UTF16 BOM
+		__QCMP_STATIC_CONSTANT( int, UTF8_BOMLEN = 3 );							// No of Bytes in a UTF8 BOM
 
 		CStream();
 		CStream( const CStream& src );
-		CStream( const char* filename, const char* mode );					//fopen constructor
+		CStream( const char* filename, const char* mode );						//fopen constructor
 
 		CStream& operator = ( const CStream& src );
 		~CStream();
@@ -333,11 +333,7 @@ namespace nsWin32
 		//bool IsAnyBuffer( void );
 		bool ParseMode( const char* szMode, int& iModeFlags, int& iStreamFlags );
 
-		//----------------------------------------------------------------------------------------
-		int utf8_no_of_trailbytes( char c )
-		{
-			return sachLookupTrailBytes[ (unsigned char)c ];
-		}
+		int utf8_no_of_trailbytes(char c);
 
 		shared_long m_lRefCount;	//Count of external references
 

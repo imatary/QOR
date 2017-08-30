@@ -1,6 +1,6 @@
 //ParagraphBreakFilter.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -30,7 +30,7 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CParagraphBreakFilter::CParagraphBreakFilter() : CBFFilter()
+	CParagraphBreakFilter::CParagraphBreakFilter() : CFilter()
 	,	m_bHighBreak( false )
 	,	m_Break( eCRLF )
 	{
@@ -42,7 +42,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CParagraphBreakFilter::CParagraphBreakFilter( const CParagraphBreakFilter& src ) : CBFFilter( src )
+	CParagraphBreakFilter::CParagraphBreakFilter( const CParagraphBreakFilter& src ) : CFilter( src )
 	{
 	}
 

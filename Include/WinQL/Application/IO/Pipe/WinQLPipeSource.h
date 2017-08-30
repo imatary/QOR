@@ -1,6 +1,6 @@
 //WinQLPipeSource.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -41,7 +41,7 @@ namespace nsWin32
 	class __QOR_INTERFACE( __WINQL ) CPipeConnector;
 
 	//--------------------------------------------------------------------------------
-	//A general Bluefoot source which reads from a Win32 Pipe connection
+	//A Bluefoot source which reads from a Win32 Pipe connection
 	class __QOR_INTERFACE( __WINQL ) CPipeSource : public CIOSource
 	{
 	public:
@@ -51,10 +51,12 @@ namespace nsWin32
 		CPipeSource( CPipeConnector* pPipeConnector );
 		virtual ~CPipeSource();
 
-		virtual bool Read( unsigned long ulUnitSize = 1 );
-		virtual bool Read( unsigned long ulNumberOfBytesToRead, unsigned long& ulNumberOfBytesRead, unsigned long ulUnitSize = 1  );
-
+		virtual bool Read(unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead = 1);
 		virtual bool IsAtEnd( void );
+
+		virtual bool ReadAsync(unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead, byte* pBuffer);
+		virtual bool ReadSync(unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead, byte* pBuffer);
+
 	};
 
 }//nsWin32

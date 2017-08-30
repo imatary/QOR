@@ -1,6 +1,6 @@
 //WinQLDeviceNode.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -47,9 +47,24 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CDeviceNode::CDeviceNode( const CDeviceNode& src ) : m_DevInst( src.m_DevInst ), m_Session( src.m_Session ), m_bChildrenEnumerated( src.m_bChildrenEnumerated ), m_pInstance( src.m_pInstance )
+	CDeviceNode::CDeviceNode( CDeviceNode&& move ) : m_DevInst( move.m_DevInst ), m_Session( move.m_Session ), m_bChildrenEnumerated( move.m_bChildrenEnumerated ), m_pInstance( move.m_pInstance )
 	{
 		_WINQ_FCONTEXT( "CDeviceNode::CDeviceNode" );
+	}
+
+	//--------------------------------------------------------------------------------
+	CDeviceNode& CDeviceNode::operator= (CDeviceNode&& move)
+	{
+		_WINQ_FCONTEXT("CDeviceNode::operator =");
+		if (&move != this)
+		{
+			m_DevInst = move.m_DevInst;
+			m_VecChildren = std::move(move.m_VecChildren);
+			m_bChildrenEnumerated = move.m_bChildrenEnumerated;
+			m_pInstance = move.m_pInstance;
+
+		}
+		return *this;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -89,26 +104,26 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	nsCodeQOR::CTLRef< CDeviceInstance > CDeviceNode::GetInstance()
+	CDeviceInstance& CDeviceNode::GetInstance()
 	{
 		_WINQ_FCONTEXT( "CDeviceNode::GetInstance" );
 		CTString strDeviceInstance = m_Session.GetDeviceInstanceID( m_DevInst );
-		m_pInstance = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).DeviceFromID( strDeviceInstance );
+		m_pInstance = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS )().DeviceFromID( strDeviceInstance );
 
 		if( m_pInstance == 0 )
 		{
 			CTString strEnumerator = m_Session.GetDevNodeEnumerator( m_DevInst );
 
-			CDeviceEnumerator::refType Enumerator = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).EnumeratorFromName( strEnumerator.Ref() );
+			CDeviceEnumerator::ref_type Enumerator = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS )().EnumeratorFromName( strEnumerator.Ref() );
 
 			if( !Enumerator.IsNull() )
 			{
 				Enumerator->Enumerate();
-				m_pInstance = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).DeviceFromID( strDeviceInstance );
+				m_pInstance = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS )().DeviceFromID( strDeviceInstance );
 			}
 		}
 
-		return nsCodeQOR::CTLRef< CDeviceInstance >( m_pInstance, false );		
+		return *m_pInstance;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -116,9 +131,9 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CDeviceNode::GetDescription" );
 		CTString strDescription = m_Session.GetDevNodeDescription( m_DevInst );
-		if( strDescription.IsEmpty() && GetInstance() != 0 )
+		if( strDescription.IsEmpty() )
 		{
-			strDescription = GetInstance()->GetDisplayName().toTString();
+			strDescription = GetInstance().GetDisplayName().toTString();
 		}
 		else if( strDescription.IsEmpty() )
 		{

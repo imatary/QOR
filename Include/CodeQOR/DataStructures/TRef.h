@@ -34,13 +34,13 @@
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "CodeQOR/Traits/MemoryTraits.h"
-
-#define _new_shared_ref( _T, _NAME ) nsCodeQOR::CTRef< _T > _NAME( (new nsCodeQOR::CTCSharedRef< _T >())->Ref() );
+#include "CodeQOR/DataTypes/GUID.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
 {
 	template< class T > class CTRef;
+	template< class T > class CTExtRef;
 
 	//--------------------------------------------------------------------------------	
 	template< class T > class CTCSharedRef
@@ -48,6 +48,14 @@ namespace nsCodeQOR
 		friend class CTRef< T >;
 
 	public:
+
+		//--------------------------------------------------------------------------------
+		template< typename... _p >
+		CTCSharedRef( _p&&... p1 ) : m_p(nullptr), m_ulRefCount(0)
+		{
+			T* pT = nsCodeQOR::mem_traits< T >::CTAllocator::BoxAllocate(this);
+			m_p = new (pT)T(std::forward<_p>(p1)...);
+		}
 
 		//--------------------------------------------------------------------------------
 		CTCSharedRef() : m_p( _new( T ) ), m_ulRefCount( 0 )
@@ -91,8 +99,9 @@ namespace nsCodeQOR
 			unsigned long ulResult = --m_ulRefCount;
 			if( ulResult <= 0 )
 			{
-				delete m_p;
+				nsCodeQOR::mem_traits< T >::CTAllocator::BoxFree(m_p);
 				m_p = 0;
+				delete this;
 			}
 			return ulResult;
 		}
@@ -110,6 +119,85 @@ namespace nsCodeQOR
 		mutable unsigned long m_ulRefCount;
 	};
 
+	//--------------------------------------------------------------------------------	
+	template< class T > class CTCSharedExtRef
+	{
+		friend class CTExtRef< T >;
+
+	public:
+
+		//--------------------------------------------------------------------------------
+		CTCSharedExtRef( mxGUID* pID ) : m_p(nullptr), m_ulRefCount(0), m_pID(pID)
+		{
+			CClassInstanceFactory* pFactory = ThisModule().ExternalClassReg().GetFactory(pID);
+			if (pFactory)
+			{
+				m_p = reinterpret_cast< T* >(pFactory->Instance());
+			}
+		}
+
+		CTCSharedExtRef(const CTCSharedExtRef< T >& Src) = delete;
+		CTCSharedExtRef& operator = (const CTCSharedExtRef< T >& Src) = delete;
+
+		//--------------------------------------------------------------------------------
+		CTExtRef< T > Ref(void) const
+		{
+			return CTExtRef< T >(this);
+		}
+
+		//--------------------------------------------------------------------------------
+		~CTCSharedExtRef()
+		{
+			if (m_p)
+			{
+				//Throw because the contained item still exists
+			}
+			m_p = 0;
+		}
+
+		//--------------------------------------------------------------------------------
+		bool IsNull(void) const
+		{
+			return m_p == 0;
+		}
+
+		//--------------------------------------------------------------------------------
+		unsigned long AddRef(void) const
+		{
+			return ++m_ulRefCount;
+		}
+
+		//--------------------------------------------------------------------------------
+		unsigned long Release(void) const
+		{
+			unsigned long ulResult = --m_ulRefCount;
+			if (ulResult <= 0)
+			{
+				CClassInstanceFactory* pFactory = ThisModule().ExternalClassReg().GetFactory(m_pID);
+				if (pFactory)
+				{
+					pFactory->Release(m_p);
+				}
+				m_p = 0;
+				delete this;
+			}
+			return ulResult;
+		}
+
+	private:
+
+		T* ptr(void) const
+		{
+			return m_p;
+		}
+
+	protected:
+
+		mutable T* m_p;
+		mutable unsigned long m_ulRefCount;
+		mutable mxGUID* m_pID;
+	};
+
 	//--------------------------------------------------------------------------------
 	template< class T > class CTRef
 	{
@@ -118,6 +206,18 @@ namespace nsCodeQOR
 		//--------------------------------------------------------------------------------
 		CTRef() : m_p( 0 )
 		{
+		}
+
+		//--------------------------------------------------------------------------------
+		CTRef(T* pt) : m_p(reinterpret_cast<CTCSharedRef<T>*>(nsCodeQOR::mem_traits<T>::CTAllocator::Unbox(pt)))
+		{
+			m_p->AddRef();
+		}
+
+		//--------------------------------------------------------------------------------
+		CTRef( T& _t ) : m_p( reinterpret_cast< CTCSharedRef<T>* >(nsCodeQOR::mem_traits< T >::CTAllocator::Unbox(&_t)) )
+		{
+			m_p->AddRef();
 		}
 
 		//--------------------------------------------------------------------------------
@@ -134,11 +234,33 @@ namespace nsCodeQOR
 		}
 
 		//--------------------------------------------------------------------------------
-		CTRef& operator = ( const CTLRef< T >& Src )
+		CTRef( CTRef< T >&& Src)
 		{
-			Dispose();
 			m_p = Src.m_p;
-			m_p->AddRef();
+			Src.m_p = nullptr;
+		}
+
+		//--------------------------------------------------------------------------------
+		CTRef& operator = ( const CTRef< T >& Src )
+		{
+			if (this != &Src)
+			{
+				Dispose();
+				m_p = Src.m_p;
+				m_p->AddRef();
+			}
+			return *this;
+		}
+
+		//--------------------------------------------------------------------------------
+		CTRef& operator = ( CTRef< T >&& Src )
+		{
+			if (this != &Src)
+			{
+				Dispose();
+				m_p = Src.m_p;
+				Src.m_p = nullptr;
+			}
 			return *this;
 		}
 
@@ -160,7 +282,7 @@ namespace nsCodeQOR
 		{
 			if( m_p == nullptr )
 			{
-				//TODO Raise NULL reference excpetion
+				//TODO Raise NULL reference exception
 			}
 			return *( m_p->ptr());
 		}
@@ -194,8 +316,12 @@ namespace nsCodeQOR
 		//--------------------------------------------------------------------------------
 		void Attach( CTCSharedRef<T>* p, bool bTemp = true )
 		{
+			if (p)
+			{
+				p->AddRef();
+			}
 			Dispose();
-			m_p = p;
+			m_p = p;			
 		}
 
 		//--------------------------------------------------------------------------------
@@ -203,6 +329,17 @@ namespace nsCodeQOR
 		TDerived* As( void )
 		{
 			return dynamic_cast< TDerived* >( m_p->ptr() );
+		}
+
+		//--------------------------------------------------------------------------------
+		template< class TDerived >
+		CTRef< TDerived > AsRef(void)
+		{
+			if (dynamic_cast<TDerived*>(m_p->ptr()) != nullptr)
+			{
+				return CTRef< TDerived >(reinterpret_cast<const CTCSharedRef< TDerived >*>(m_p));
+			}
+			return CTRef< TDerived >(reinterpret_cast< T* >(nullptr));
 		}
 
 		//--------------------------------------------------------------------------------
@@ -222,6 +359,177 @@ namespace nsCodeQOR
 		const CTCSharedRef<T>* m_p;
 	};
 
+
+	//--------------------------------------------------------------------------------
+	template< class T > class CTExtRef
+	{
+	public:
+
+		//--------------------------------------------------------------------------------
+		CTExtRef() : m_p(nullptr)
+		{
+		}
+
+		//--------------------------------------------------------------------------------
+		CTExtRef(const CTCSharedExtRef<T>* pt) : m_p(pt)
+		{
+			m_p->AddRef();
+		}
+
+		//--------------------------------------------------------------------------------
+		CTExtRef(const CTExtRef< T >& Src)
+		{
+			m_p = Src.m_p;
+			m_p->AddRef();
+		}
+
+		//--------------------------------------------------------------------------------
+		CTExtRef(CTExtRef< T >&& Src)
+		{
+			m_p = Src.m_p;
+			Src.m_p = nullptr;
+		}
+
+		//--------------------------------------------------------------------------------
+		CTExtRef& operator = (const CTExtRef< T >& Src)
+		{
+			if (this != &Src)
+			{
+				Dispose();
+				m_p = Src.m_p;
+				m_p->AddRef();
+			}
+			return *this;
+		}
+
+		//--------------------------------------------------------------------------------
+		CTExtRef& operator = (CTExtRef< T >&& Src)
+		{
+			if (this != &Src)
+			{
+				Dispose();
+				m_p = Src.m_p;
+				Src.m_p = nullptr;
+			}
+			return *this;
+		}
+
+		//--------------------------------------------------------------------------------
+		//Two references are equal if they refer to the same object
+		bool operator == (const CTExtRef< T >& Cmp) const
+		{
+			return (m_p == Cmp.m_p);
+		}
+
+		//--------------------------------------------------------------------------------
+		operator T* (void) const
+		{
+			return m_p->ptr();
+		}
+
+		//--------------------------------------------------------------------------------
+		T& operator() (void) const
+		{
+			if (m_p == nullptr)
+			{
+				//TODO Raise NULL reference exception
+			}
+			return *(m_p->ptr());
+		}
+
+		//--------------------------------------------------------------------------------
+		T* operator -> () const
+		{
+			if (m_p == 0)
+			{
+				//TODO: Raise a null reference exception here
+			}
+			return m_p->ptr();
+		}
+
+		//--------------------------------------------------------------------------------
+		~CTExtRef()
+		{
+			Dispose();
+		}
+
+		//--------------------------------------------------------------------------------
+		void Dispose(void)
+		{
+			if (m_p)
+			{
+				m_p->Release();
+			}
+			m_p = 0;
+		}
+
+		//--------------------------------------------------------------------------------
+		void Attach(CTCSharedExtRef<T>* p, bool bTemp = true)
+		{
+			if (p)
+			{
+				p->AddRef();
+			}
+			Dispose();
+			m_p = p;
+		}
+
+		//--------------------------------------------------------------------------------
+		template< class TDerived >
+		TDerived* As(void)
+		{
+			return dynamic_cast< TDerived* >(m_p->ptr());
+		}
+
+		//--------------------------------------------------------------------------------
+		template< class TDerived >
+		CTExtRef< TDerived > AsRef(void)
+		{
+			if (dynamic_cast<TDerived*>(m_p->ptr()) != nullptr)
+			{
+				return CTExtRef< TDerived >(reinterpret_cast<const CTCSharedExtRef< TDerived >*>(m_p));
+			}
+			return CTExtRef< TDerived >(nullptr);
+		}
+
+		//--------------------------------------------------------------------------------
+		bool IsNull(void) const
+		{
+			return m_p == nullptr || (m_p->IsNull());
+		}
+
+		//--------------------------------------------------------------------------------
+		bool IsOwner(void) const
+		{
+			return (m_p && m_p->m_ulRefCount == 1) ? true : false;
+		}
+
+	protected:
+
+		const CTCSharedExtRef<T>* m_p;
+	};
+
 }//nsCodeQOR
+
+//--------------------------------------------------------------------------------
+template< typename T >
+nsCodeQOR::CTRef<T> new_shared_ref()
+{
+	return (new nsCodeQOR::CTCSharedRef<T>())->Ref();
+}
+
+//--------------------------------------------------------------------------------
+template< typename T, typename... _p >
+nsCodeQOR::CTRef<T> new_shared_ref(_p&&... p1)
+{
+	return (new nsCodeQOR::CTCSharedRef<T>(std::forward<_p>(p1)...))->Ref();
+}
+
+//--------------------------------------------------------------------------------
+template< typename T >
+nsCodeQOR::CTExtRef<T> new_ext_ref(nsCodeQOR::mxGUID* pID)
+{
+	return (new nsCodeQOR::CTCSharedExtRef<T>(pID))->Ref();
+}
 
 #endif//CODEQOR_DATASTRUCTS_TCREF_H_1

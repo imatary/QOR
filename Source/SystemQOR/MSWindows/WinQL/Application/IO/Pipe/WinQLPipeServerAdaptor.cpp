@@ -33,7 +33,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CPipeServerAdaptor );
 
 	//--------------------------------------------------------------------------------
-	CPipeServerAdaptor::CPipeServerAdaptor( nsBluefoot::CBFConnectionPool* pPool ) : CPipeConnector( pPool )
+	CPipeServerAdaptor::CPipeServerAdaptor( nsBluefoot::CConnectionPool* pPool ) : CPipeConnector( pPool )
 	{
 		_WINQ_FCONTEXT( "CPipeServerAdaptor::CPipeServerAdaptor" );
 		
@@ -75,17 +75,6 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CPipeServerAdaptor::OnConnected()
-	{
-		_WINQ_FCONTEXT( "CPipeServerAdaptor::OnConnected" );
-		m_bConnected = true;
-		if( Protocol() )
-		{
-			Protocol().As< nsBluefoot::CBFProtocol >()->OnConnected();
-		}
-	}
-
-	//--------------------------------------------------------------------------------
 	void CPipeServerAdaptor::Disconnect() 
 	{ 
 		_WINQ_FCONTEXT( "CPipeServerAdaptor::Disconnect" );
@@ -97,9 +86,9 @@ namespace nsWin32
 			m_Pipe.Close();									// Close the handle to the pipe instance. 
 		}
 
-		if( !AsyncConnection() && Protocol() )
+		if( !AsyncConnection() )
 		{
-			bDisconnected ? Protocol().As< nsBluefoot::CBFProtocol >()->OnDisconnected() : Protocol().As< nsBluefoot::CBFProtocol >()->OnDisconnectionError();
+			bDisconnected ? OnDisconnected() : OnDisconnectionError();
 		}		
 	}
 

@@ -1,6 +1,6 @@
 //MimeRecognizerFilter.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -70,7 +70,7 @@ namespace nsBluefoot
 	};
 
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CMimeRecognizerFilter : public nsBluefoot::CBFFilter
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CMimeRecognizerFilter : public CFilter
 	{
 	public:
 
@@ -83,7 +83,7 @@ namespace nsBluefoot
 		
 		virtual bool Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead = 1 );
 		virtual bool Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite = 1 );
-		virtual CBFBuffer* GetSourceBuffer( void );
+		virtual CBuffer* GetSourceBuffer( void );
 
 		__QCMP_STATIC_CONSTANT( unsigned long, sculMaxSequenceBytes = 512 );
 

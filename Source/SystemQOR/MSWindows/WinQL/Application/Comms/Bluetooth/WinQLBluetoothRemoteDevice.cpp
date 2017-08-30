@@ -1,6 +1,6 @@
 //WinQLBluetoothRemoteDevice.cpp
 
-// Copyright Querysoft Limited 2013, 2016
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,11 +24,10 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-#include "WinQL/Application/ErrorSystem/WinQLError.h"
-#include "WinQL/Application/Comms/Bluetooth/WinQLBluetoothClient.h"
 #include "WinQL/Application/Comms/Bluetooth/WinQLBluetoothRemoteDevice.h"
 #include "WinQL/Application/Comms/Bluetooth/WinQLBluetoothAuthenticationSession.h"
 #include "WinQL/System/Devices/BluetoothRadio/WinQLBluetoothRadio.h"
+#include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQAPI/Kernel32.h"
 #include "WinQAPI/BthProps.h"
 
@@ -57,6 +56,37 @@ namespace nsWin32
 	CBluetoothRemoteDevice::Info* CBluetoothRemoteDevice::GetInfo( void )
 	{
 		return &m_Info;
+	}
+
+	//--------------------------------------------------------------------------------
+	Cmp_unsigned__int64 CBluetoothRemoteDevice::GetAddress() const
+	{
+		return m_Info.Address.ullLong;
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CBluetoothRemoteDevice::Connect(nsCodeQOR::mxGUID* pServiceID)
+	{
+		nsBluefoot::ISocket::Address Address(nsBluefoot::ISocket::AF_Bth);
+		Address.data.BluetoothAddress = { GetAddress(), *pServiceID, 0 };
+
+		nsBluefoot::CReadWriteConnection< nsBluefoot::CSocketConnector, nsBluefoot::CSocketSource, nsBluefoot::CSocketSink >* pRFCOMMConnection = 
+			new nsBluefoot::CReadWriteConnection< nsBluefoot::CSocketConnector, nsBluefoot::CSocketSource, nsBluefoot::CSocketSink >();
+
+		pRFCOMMConnection->SetAddress(Address);
+		pRFCOMMConnection->SetProtocol(nsBluefoot::ISocket::BTHProto_RFCOMM);
+
+		bool bResult = pRFCOMMConnection->Connect();
+
+		if (bResult)
+		{
+			m_RFCOMMConnections.push_back(pRFCOMMConnection);
+		}
+		else
+		{
+			delete pRFCOMMConnection;
+		}
+		return bResult;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -132,11 +162,8 @@ namespace nsWin32
 		if( m_ulCountServices > 0 )
 		{
 			m_pGuidServices = new nsCodeQOR::mxGUID[ m_ulCountServices ];
-			m_pServiceClients = new CBluetoothClient*[ m_ulCountServices ];
-			for( unsigned int uiService = 0; uiService < m_ulCountServices; uiService++ )
-			{
-				m_pServiceClients[ uiService ] = 0;
-			}
+			m_pServiceClients = new typename nsQOR::IBluetoothServiceClient::ref_type[ m_ulCountServices ];
+
 			m_Library.BluetoothEnumerateInstalledServices( 0, reinterpret_cast< ::BLUETOOTH_DEVICE_INFO* >( &m_Info ), &m_ulCountServices, 
 				reinterpret_cast< ::GUID* >( const_cast< nsCodeQOR::__mxGUID* >( m_pGuidServices ) ) );
 		}
@@ -151,7 +178,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CBluetoothClient** CBluetoothRemoteDevice::GetServiceClients()
+	nsQOR::IBluetoothServiceClient::ref_type* CBluetoothRemoteDevice::GetServiceClients()
 	{
 		_WINQ_FCONTEXT( "CBluetoothRemoteDevice::GetServices" );
 		return m_pServiceClients;
@@ -174,9 +201,9 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CBluetoothRemoteDevice::refType CBluetoothRemoteDevice::Prototype( void )
+	CBluetoothRemoteDevice::ref_type CBluetoothRemoteDevice::Prototype( void )
 	{
-		return refType( new CBluetoothRemoteDevice, true );
+		return new_shared_ref<CBluetoothRemoteDevice>().AsRef<IBluetoothRemoteDevice>();
 	}
 
 	//--------------------------------------------------------------------------------
@@ -259,6 +286,8 @@ namespace nsWin32
 		case PSM_AVDTP:
 			break;
 		case PSM_UDI_C_PLANE:
+			break;
+		default:
 			break;
 		}
 	}
@@ -463,7 +492,7 @@ namespace nsWin32
 
 		if( sInfo.flags & BDIF_Address )
 		{
-			if( ( sInfo.flags & BDIF_COD ) )
+			if( ( sInfo.flags & BDIF_CoD ) )
 			{
 				if( m_Info.ulClassofDevice.ulClassofDevice != sInfo.classOfDevice.ulClassofDevice )
 				{
@@ -478,15 +507,55 @@ namespace nsWin32
 				//TODO: We need to convert to UTF16 here
 			}
 
+			if (sInfo.flags & BDIF_Personal)
+			{
+				bool bPersonal = true;
+			}
+
+			if (sInfo.flags & BDIF_Connected)
+			{
+				bool bConnected = true;
+			}
+
+			if (sInfo.flags & BDIF_ShortName)
+			{
+				bool bShortName = true;
+			}
+
+			if (sInfo.flags & BDIF_Visible)
+			{
+				bool bVisible = true;
+			}
+
+			if (sInfo.flags & BDIF_SSPSupported)
+			{
+				bool bSSPSupported = true;
+			}
+
+			if (sInfo.flags & BDIF_Paired)
+			{
+				bool bPaired = true;
+			}
+
+			if (sInfo.flags & BDIF_SSPPaired)
+			{
+				bool bSSPPaired = true;
+			}
+
+			if (sInfo.flags & BDIF_SSP_MITMProtected)
+			{
+				bool bSSP_MITMProtected = true;
+			}
+
+			if (sInfo.flags & BDIF_RSSI)
+			{
+				bool bRSSI = true;
+			}
+
 			if( sInfo.flags & BDIF_EIR )
 			{
 				bool bEIR = true;
 				//TODO: Do we get this? Were would the extra 240 bytes be?
-			}
-
-			if( sInfo.flags & BDIF_CONNECTED )
-			{
-				
 			}
 		}
 		else
@@ -557,7 +626,7 @@ namespace nsWin32
 			Response.numericCompInfo.NumericValue = pAuthCallbackParams->Numeric_Value;
 			Response.negativeResponse = 0;
 
-			AuthenticationSession.SendResponseEx( CBluetoothRadio::refType( 0 ), &Response );
+			AuthenticationSession.SendResponseEx( CBluetoothRadio::ref_type( 0 ), &Response );
 		}
 		else 
 		{
@@ -577,7 +646,7 @@ namespace nsWin32
 				Response.numericCompInfo.NumericValue = pAuthCallbackParams->Numeric_Value;
 				Response.negativeResponse = 0;
 
-				AuthenticationSession.SendResponseEx( CBluetoothRadio::refType( 0 ), &Response );
+				AuthenticationSession.SendResponseEx( CBluetoothRadio::ref_type( 0 ), &Response );
 			}
 			break;
 			case BLUETOOTH_IO_CAPABILITY_KEYBOARDONLY:

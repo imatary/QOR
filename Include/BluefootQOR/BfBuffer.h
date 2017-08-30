@@ -32,19 +32,20 @@
 #include "CompilerQOR.h"
 #include "CodeQOR/MemoryManagement/DefaultAllocator.h"
 #include "CodeQOR/DataStructures/TLRef.h"
+#include <string.h>
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFBuffer
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBuffer
 	{
 	public:
 
-		CBFBuffer( unsigned long ulUnitSize = 1, unsigned long ulItemCount = 0 );
-		CBFBuffer( const CBFBuffer& src );
-		virtual ~CBFBuffer();
-		CBFBuffer& operator = ( const CBFBuffer& src );
+		CBuffer( unsigned long ulUnitSize = 1, unsigned long ulItemCount = 0 );
+		CBuffer( const CBuffer& src );
+		virtual ~CBuffer();
+		CBuffer& operator = ( const CBuffer& src );
 
 		virtual unsigned long WriteCapacity( void ) = 0;
 		virtual unsigned long ReadCapacity( void ) = 0;
@@ -77,14 +78,14 @@ namespace nsBluefoot
 
 	//------------------------------------------------------------------------------
 	template< class pod_t >
-	class CPODStreamBuffer : public CBFBuffer
+	class CPODStreamBuffer : public CBuffer
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CPODStreamBuffer< pod_t > > refType;
+		typedef nsCodeQOR::CTLRef< CPODStreamBuffer< pod_t > > ref_type;
 
 		//------------------------------------------------------------------------------
-		CPODStreamBuffer( unsigned long ulItemCount = 0 ) : CBFBuffer( sizeof( pod_t ), ulItemCount )
+		CPODStreamBuffer( unsigned long ulItemCount = 0 ) : CBuffer( sizeof( pod_t ), ulItemCount )
 		,	m_pAllocation( 0 )
 		{
 			SetCapacity( ulItemCount );
@@ -106,7 +107,7 @@ namespace nsBluefoot
 		{
 			if( &src != this )
 			{
-				CBFBuffer::operator = ( src );				
+				CBuffer::operator = ( src );				
 				memcpy( m_pAllocation, src.m_pAllocation, sizeof( pod_t ) * m_ulAllocationCount );
 			}
 			return *this;
@@ -195,13 +196,13 @@ namespace nsBluefoot
 			delete [] m_pAllocation;
 			m_pAllocation = ( ulItemCount > 0 ) ? new pod_t[ ulItemCount ] : 0;
 
-			CBFBuffer::SetCapacity( ulItemCount );
+			CBuffer::SetCapacity( ulItemCount );
 		}
 
 		//------------------------------------------------------------------------------
-		refType Ref(void)
+		ref_type Ref(void)
 		{
-			return refType( this );
+			return ref_type( this );
 		}
 
 	private:

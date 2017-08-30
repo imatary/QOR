@@ -34,7 +34,6 @@
 #include "WinQL/Application/ErrorSystem/WinQLErrorSystem.h"
 #include "WinQL/CodeServices/Text/WinString.h"
 #include "WinQL/System/Info/WinQLSystemInfo.h"
-#include "WinQL/CodeServices/WinQLSharedRef.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -42,8 +41,6 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CSystemInfo
 	{
-
-		QOR_PP_WINQL_SHARED;
 
 	public:
 		

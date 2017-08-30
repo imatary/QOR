@@ -1,6 +1,6 @@
 //UTF16CodePointFilter.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -30,7 +30,7 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CUTF16CodePointFilter::CUTF16CodePointFilter() : CBFFilter()
+	CUTF16CodePointFilter::CUTF16CodePointFilter() : CFilter()
 	,	wcHigh( 0 )
 	,	wcLow( 0 )
 	,	m_bHigh( false )
@@ -44,7 +44,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CUTF16CodePointFilter::CUTF16CodePointFilter( const CUTF16CodePointFilter& src ) : CBFFilter( src )
+	CUTF16CodePointFilter::CUTF16CodePointFilter( const CUTF16CodePointFilter& src ) : CFilter( src )
 	{
 		*this = src;
 	}
@@ -54,7 +54,7 @@ namespace nsBluefoot
 	{
 		if( &src != this )
 		{
-			CBFFilter::operator = ( src );
+			CFilter::operator = ( src );
 			wcHigh = src.wcHigh;
 			wcLow = src.wcLow;
 			//m_uiUnicodePoint = src.m_uiUnicodePoint;
@@ -65,7 +65,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBFBuffer* CUTF16CodePointFilter::GetSourceBuffer( void )
+	CBuffer* CUTF16CodePointFilter::GetSourceBuffer( void )
 	{
 		return &m_SinkBuffer;
 	}

@@ -28,16 +28,14 @@
 #include "WinQAPI/Kernel32.h"
 #include <new>
 
-//The module global pointer to the module bootstrap object
-CSharedBootStrap* g_pBootStrap;
+CSharedBootStrap* g_pBootStrap;									//The module global pointer to the module bootstrap object
 
 __QCMP_STARTLINKAGE_C
-//The module global security cookie from the Compiler C++ support library
-extern Cmp_uint_ptr __security_cookie;
-extern Cmp_uint_ptr __security_cookie_complement;
+	extern Cmp_uint_ptr __security_cookie;						//The module global security cookie from the Compiler C++ support library
+	extern Cmp_uint_ptr __security_cookie_complement;
 __QCMP_ENDLINKAGE_C
 
-//The following reserves space within special sections of the module image for static initialisers
+//The following reserves space within special sections of the module image for static initializers
 
 // C initializers
 #pragma __QCMP_DATA_SEGMENT(".CRT$XIA")
@@ -57,7 +55,7 @@ nsWin32::CWinQORSharedBootStrap::InitFunc nsWin32::CWinQORSharedBootStrap::CppIn
 
 //Tell the linker to merge the .CRT section into the regular data or read only data section
 //Needs to be a writable data section for 32 bit Windows so we can tweak the loader to make
-//per thread initialisation work later on
+//per thread initialization work later on
 
 #ifdef _M_IA64
 	#pragma comment(linker, "/merge:.CRT=.rdata")
@@ -75,17 +73,13 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	void* CWinQORSharedBootStrap::operator new( size_t )
 	{
-		HANDLE hHeap = ::GetProcessHeap();
-		Cmp_unsigned__int32 uiFlags = 0x00000008;//Zero memory
-		return ::HeapAlloc( hHeap, uiFlags, sizeof( CWinQORSharedBootStrap ) );
+		return ::HeapAlloc(::GetProcessHeap(), 0x00000008/*Zero memory*/, sizeof( CWinQORSharedBootStrap ) );
 	}
 
 	//--------------------------------------------------------------------------------
 	void CWinQORSharedBootStrap::operator delete( void* pInstance )
 	{
-		HANDLE hHeap = ::GetProcessHeap();
-		Cmp_unsigned__int32 uiFlags = 0x00000000;
-		::HeapFree( hHeap, uiFlags, pInstance );
+		::HeapFree(::GetProcessHeap(), 0x00000000, pInstance );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -104,7 +98,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	//Walk an initialisation/termination list of C or C++ objects
+	//Walk an initialization/termination list of C or C++ objects
 	void CWinQORSharedBootStrap::InitTerm( InitFunc* pfbegin, InitFunc* pfend )
 	{
 		while( pfbegin < pfend )
@@ -118,7 +112,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	//Initialise all the C and C++ static objects. 
+	//Initialize all the C and C++ static objects. 
 	//This is called by the Process after all implicitly linked libraries are loaded
 	// which allows static objects to depend on other libraries.
 	void CWinQORSharedBootStrap::InitStatic()

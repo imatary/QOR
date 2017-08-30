@@ -43,7 +43,7 @@
 //QOR_PP_CAT
 
 #if		~QOR_PP_CONFIG_FLAGS() & QOR_PP_CONFIG_MWCC()
-#		define QOR_PP_CAT( a, b )		QOR_PP_CAT_I( a, b )
+#		define QOR_PP_CAT( a, b )		QOR_PP_CAT_I(a,b)
 #else//MWCC
 #		define QOR_PP_CAT( a, b )		QOR_PP_CAT_OO( (a, b) )
 #		define QOR_PP_CAT_OO( par )		QOR_PP_CAT_I ## par
@@ -52,7 +52,7 @@
 #if		~QOR_PP_CONFIG_FLAGS() & QOR_PP_CONFIG_MSVC()
 #		define QOR_PP_CAT_I( a, b )		a##b
 #else//MSVC
-#		define QOR_PP_CAT_I( a, b )		QOR_PP_CAT_II( ~, a ## b )
+#		define QOR_PP_CAT_I( a, b )		QOR_PP_CAT_II(~,a##b)
 #		define QOR_PP_CAT_II( p, res )	res
 #endif
 

@@ -47,7 +47,6 @@ __QCMP_ENDLINKAGE_C
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-
 	//--------------------------------------------------------------------------------
 	//Construct the object which represents the shared QOR library
 	CModuleBootStrap::CModuleBootStrap()
@@ -110,7 +109,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	//Walk an initialisation/termination list of C or C++ objects
+	//Walk an initialization/termination list of C or C++ objects
 	void CModuleBootStrap::InitTerm( InitFunc* pfbegin, InitFunc* pfend )
 	{
 		while ( pfbegin < pfend )

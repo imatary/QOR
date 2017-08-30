@@ -1,6 +1,6 @@
 //WinQLFileConnector.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -33,7 +33,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CFileConnector );
 
 	//--------------------------------------------------------------------------------
-	CFileConnector::CFileConnector( nsBluefoot::CBFConnectionPool* pPool ) : nsBluefoot::CBFPlug( pPool )
+	CFileConnector::CFileConnector( nsBluefoot::CConnectionPool* pPool ) : nsBluefoot::CPlug( pPool )
 	{
 		_WINQ_FCONTEXT( "CFileConnector::CFileConnector" );
 		m_pSecurity = 0;
@@ -112,26 +112,6 @@ namespace nsWin32
 		} 
 
 		return bPendingIO;		
-	}
-
-	//--------------------------------------------------------------------------------
-	void CFileConnector::OnConnected( void )
-	{
-	}
-
-	//--------------------------------------------------------------------------------
-	void CFileConnector::OnConnectionError( void )
-	{
-	}
-
-	//--------------------------------------------------------------------------------
-	void CFileConnector::OnDisconnected( void )
-	{
-	}
-
-	//--------------------------------------------------------------------------------
-	void CFileConnector::OnDisconnectionError( void )
-	{
 	}
 
 	//--------------------------------------------------------------------------------

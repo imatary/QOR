@@ -52,6 +52,7 @@ namespace nsQOR
 		CWorkflow( const CWorkflow& src );
 		CWorkflow& operator = ( const CWorkflow& src );
 
+		bool operator()(IEvent::ref_type _event, int iCookie);
 		void SetApplication( IApplication::ref_type Application );
 		IApplication::ref_type GetApplication( void ) const;
 		IState::ref_type CurrentState( void ) const;

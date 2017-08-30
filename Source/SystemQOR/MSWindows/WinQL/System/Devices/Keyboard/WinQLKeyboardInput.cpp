@@ -1,6 +1,6 @@
 //WinQLKeyboardInput.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -44,114 +44,11 @@ namespace nsWin32
 {
 	using namespace nsWinQAPI;
 
-	__QOR_IMPLEMENT_OCLASS_LUID( CKeyboardLayout );
+	
 
+/*
 	//--------------------------------------------------------------------------------
-	void CKeyboardLayout::Uninit()
-	{
-		_WINQ_FCONTEXT( "CKeyboardLayout::Uninit" );
-
-		if( !m_Handle.IsNull() )
-		{
-			_Thread().ResourceManager().KeyboardLayoutHandleMap().Remove( m_Handle.Ref() );
-		}
-	}
-
-	//--------------------------------------------------------------------------------
-	void CKeyboardLayout::Init()
-	{
-		_WINQ_FCONTEXT( "CKeyboardLayout::Init" );
-
-		if( !( m_Handle.IsNull() ) )
-		{
-			_Thread().ResourceManager().KeyboardLayoutHandleMap().Add( m_Handle.Ref(), this );
-		}
-	}
-
-	__QCMP_WARNING_PUSH
-	__QCMP_WARNING_DISABLE( __QCMP_WARN_THIS_USED_IN_BASE_INIT_LIST, "Safe usage: stored in member for later use" )
-
-	//--------------------------------------------------------------------------------
-	CKeyboardLayout::CKeyboardLayout( CKeyboardLayoutHandle::refType hKL ) : m_Library( CUser32::Instance() )
-	,	m_Handle( this, hKL->AsHandle().ptr() )
-	{
-		_WINQ_FCONTEXT( "CKeyboardLayout::CKeyboardLayout" );
-		m_pbResult = 0;
-		__QOR_PROTECT
-		{
-			Init();
-		}__QOR_ENDPROTECT		
-	}
-
-	//--------------------------------------------------------------------------------
-	CKeyboardLayout::CKeyboardLayout( const TCHAR* pwszKLID, unsigned int Flags, int* pbResult ) : m_Library( CUser32::Instance() )
-	,	m_Handle( this, 0 )
-	{
-		_WINQ_FCONTEXT( "CKeyboardLayout::CKeyboardLayout" );
-		__QOR_PROTECT
-		{
-			m_pbResult = 0;
-			if( pbResult != 0 )
-			{
-				m_pbResult = pbResult;
-			}
-			m_Handle = ( m_Library.LoadKeyboardLayout( pwszKLID, Flags ) );
-			Init();
-		}__QOR_ENDPROTECT
-	}
-
-	//--------------------------------------------------------------------------------
-	CKeyboardLayout::~CKeyboardLayout()
-	{
-		_WINQ_FCONTEXT( "CKeyboardLayout::~CKeyboardLayout" );
-		BOOL bResult = FALSE;
-		__QOR_PROTECT
-		{
-			bResult = m_Library.UnloadKeyboardLayout( reinterpret_cast< ::HKL >( m_Handle.Use() ) );
-			if( m_pbResult != 0 )
-			{
-				*m_pbResult = bResult;
-			}				
-			Uninit();
-		}__QOR_ENDPROTECT
-	}
-
-	//--------------------------------------------------------------------------------
-	void CKeyboardLayout::Activate( unsigned int uiFlags )
-	{
-		_WINQ_FCONTEXT( "CKeyboardLayout::Activate" );
-		__QOR_PROTECT
-		{
-			CKeyboardLayout::refType refDeactivate = CKeyboardLayout::FromHandle( CKeyboardLayoutHandle( 0, (void*)(m_Library.ActivateKeyboardLayout( reinterpret_cast< ::HKL >( m_Handle.Use() ), uiFlags ) ) ).Ref() );
-
-			if( !refDeactivate.IsNull() )
-			{
-				refDeactivate->OnDeactivate( Ref() );
-			}
-
-		}__QOR_ENDPROTECT
-	}
-
-	//--------------------------------------------------------------------------------
-	void CKeyboardLayout::OnDeactivate( CKeyboardLayout::refType New )
-	{
-		_WINQ_FCONTEXT( "CKeyboardLayout::OnDeactivate" );
-	}
-
-	//--------------------------------------------------------------------------------
-	CKeyboardLayout::refType CKeyboardLayout::Ref( void )
-	{
-		return refType( this, false );
-	}
-
-	//--------------------------------------------------------------------------------
-	CKeyboardLayoutHandle::refType CKeyboardLayout::Handle( void )
-	{
-		return m_Handle.Ref();
-	}
-
-	//--------------------------------------------------------------------------------
-	CKeyboardLayout::refType CKeyboardLayout::FromHandle( CKeyboardLayoutHandle::refType hKL )
+	CKeyboardLayout::ref_type CKeyboardLayout::FromHandle( CKeyboardLayoutHandle::refType hKL )
 	{
 		_WINQ_SFCONTEXT( "CKeyboardLayout::FromHandle" );
 		CKeyboardLayout* pKL = 0;
@@ -173,9 +70,9 @@ namespace nsWin32
 
 		}__QOR_ENDPROTECT
 
-		return refType( pKL, bOwningRef );
+		return ref(*pKL);
 	}
-
+*/
 	//--Keyboard-Layouts--------------------------------------------------------------
 
 	CKeyboardLayouts::CKeyboardLayouts()
@@ -186,7 +83,7 @@ namespace nsWin32
 	CKeyboardLayouts::~CKeyboardLayouts()
 	{
 	}
-
+	/*
 	//------------------------------------------------------------------------------
 	unsigned int CKeyboardLayouts::count( void )
 	{
@@ -229,9 +126,9 @@ namespace nsWin32
 		CKeyboardLayoutIterator it( pLayout->Handle() );
 		return it;
 	}
-
+	*/
 	//--Keyboard-Layout-Iterator------------------------------------------------------
-
+	/*
 	unsigned int CKeyboardLayouts::CKeyboardLayoutIterator::count()
 	{
 		return _Thread().ResourceManager().KeyboardLayoutHandleMap().Size();
@@ -318,46 +215,13 @@ namespace nsWin32
 			//TODO: Raise error
 		}
 	}
-
+	*/
 	//--HotKeys-----------------------------------------------------------------------
 
-	__QOR_IMPLEMENT_OCLASS_LUID( CHotKeys );
-
-	//--------------------------------------------------------------------------------
-	CHotKeys::CHotKeys() : nsCodeQOR::CTArray< CHotKey*, CPolicy >()
-	{
-	}
-
-	//--------------------------------------------------------------------------------
-	CHotKeys::~CHotKeys()
-	{
-	}	
-
-	//--------------------------------------------------------------------------------
-	CHotKey::refType CHotKeys::CreateHotKey( COSWindow::refType Wnd, int id, unsigned int fsModifiers, unsigned int vk, int* pbResult )
-	{
-		CHotKey* pNewHotKey = new CHotKey( Wnd, id, fsModifiers, vk, pbResult );
-		Append( pNewHotKey );
-		return CHotKey::refType( pNewHotKey, true );
-	}
 	/*
 	//--Keyboard----------------------------------------------------------------------
 
-	__QOR_IMPLEMENT_OCLASS_LUID( CPrivateKeyboard );
 	__QOR_IMPLEMENT_OCLASS_LUID( CKeyboard );
-
-	//--------------------------------------------------------------------------------
-	CPrivateKeyboard::CPrivateKeyboard() : m_Library( CUser32::Instance() )
-	{
-		CTString strLayoutName;
-		m_Library.GetKeyboardLayoutName( strLayoutName.GetBufferSetLength( KL_NAMELENGTH ) );
-		Layouts.CreateKeyboardLayout( CKeyboardLayout::KLF_Activate | CKeyboardLayout::KLF_NoTellShell | CKeyboardLayout::KLF_Substitute | CKeyboardLayout::KLF_SetForProcess, strLayoutName );
-	}
-
-	//--------------------------------------------------------------------------------
-	CPrivateKeyboard::~CPrivateKeyboard()
-	{
-	}
 
 	//--------------------------------------------------------------------------------
 	//Set up the process wide keyboard object
@@ -379,176 +243,7 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CKeyboard::~CKeyboard" );
 	}
-
-	//--------------------------------------------------------------------------------
-	void CPrivateKeyboard::ActivateLayout( CKeyboardLayout& KeyboardLayout, unsigned int Flags )
-	{
-		_WINQ_FCONTEXT( "CKeyboard::ActivateLayout" );
-		__QOR_PROTECT
-		{
-			KeyboardLayout.Activate( Flags );
-		}__QOR_ENDPROTECT
-	}
-
-	//--------------------------------------------------------------------------------
-	bool CPrivateKeyboard::BlockInput( bool fBlockIt )
-	{
-		_WINQ_FCONTEXT( "CKeyboard::BlockInput" );
-		bool bResult = false;
-		__QOR_PROTECT
-		{
-			bResult = m_Library.BlockInput( fBlockIt ? TRUE : FALSE ) ? true : false;
-		}__QOR_ENDPROTECT
-		return bResult;
-	}
-
-	//--------------------------------------------------------------------------------
-	bool CPrivateKeyboard::EnableWindow( COSWindow::refType Wnd, bool bEnable )
-	{
-		_WINQ_FCONTEXT( "CKeyboard::EnableWindow" );
-		bool bResult = false;
-		__QOR_PROTECT
-		{
-			bResult = m_Library.EnableWindow( reinterpret_cast< ::HWND >( Wnd->Handle()->Use() ), bEnable ? TRUE : FALSE ) ? true : false;
-		}__QOR_ENDPROTECT
-		return bResult;
-	}
-
-	//--------------------------------------------------------------------------------
-	COSWindow::refType CPrivateKeyboard::GetActiveWindow()
-	{
-		_WINQ_FCONTEXT( "CKeyboard::GetActiveWindow" );
-		__QOR_PROTECT
-		{
-			return COSWindow::FromHandle( CWindowHandle( 0, (void*)( m_Library.GetActiveWindow() ) ).Ref() );
-		}__QOR_ENDPROTECT
-	}
-
-	//--------------------------------------------------------------------------------
-	short CPrivateKeyboard::GetAsyncKeyState( int vKey )
-	{
-		_WINQ_FCONTEXT( "CKeyboard::GetAsyncKeyState" );
-		short sResult = 0;
-		__QOR_PROTECT
-		{
-			sResult = m_Library.GetAsyncKeyState( vKey );
-		}__QOR_ENDPROTECT
-		return sResult;
-	}
-
-	//--------------------------------------------------------------------------------
-	short CPrivateKeyboard::GetKeyState( int nVirtKey )
-	{
-		_WINQ_FCONTEXT( "CKeyboard::GetKeyState" );
-		short sResult = 0;
-		__QOR_PROTECT
-		{
-			sResult = m_Library.GetKeyState( nVirtKey );
-		}__QOR_ENDPROTECT
-		return sResult;
-	}
-
-	//--------------------------------------------------------------------------------
-	unsigned int CPrivateKeyboard::MapVKey( unsigned int uCode, unsigned uMapType )
-	{
-		_WINQ_FCONTEXT( "CKeyboard::MapVirtualKey" );
-		unsigned int uiResult = 0;
-		__QOR_PROTECT
-		{
-			uiResult = m_Library.MapVirtualKey( uCode, uMapType );
-		}__QOR_ENDPROTECT
-		return uiResult;
-	}
-
-	//--------------------------------------------------------------------------------
-	COSWindow::refType CPrivateKeyboard::GetFocus()
-	{
-		_WINQ_FCONTEXT( "CKeyboard::GetFocus" );
-		__QOR_PROTECT
-		{
-			return COSWindow::FromHandle( CWindowHandle( 0, (void*)( m_Library.GetFocus() ) ).Ref() );
-		}__QOR_ENDPROTECT
-	}
-
-	//--------------------------------------------------------------------------------
-	unsigned int CPrivateKeyboard::GetCodePage()
-	{
-		_WINQ_FCONTEXT( "CKeyboard::GetCodePage" );
-		UINT uiResult = 0;
-		__QOR_PROTECT
-		{
-			uiResult = m_Library.GetKBCodePage();
-		}__QOR_ENDPROTECT
-		return uiResult;
-	}
 */
 
-	//--HotKey------------------------------------------------------------------------
-
-	__QOR_IMPLEMENT_OCLASS_LUID( CHotKey );
-
-	//--------------------------------------------------------------------------------
-	CHotKey::CHotKey() : m_Library( CUser32::Instance() )
-	{
-		_WINQ_FCONTEXT( "CHotKey::CHotKey" );
-		m_id = 0;
-		m_pbResult = 0;
-	}
-
-	//--------------------------------------------------------------------------------
-	CHotKey::CHotKey( COSWindow::refType Wnd, int id, unsigned int fsModifiers, unsigned int vk, int* pbResult ) : m_Library( CUser32::Instance() )
-	{
-		_WINQ_FCONTEXT( "CHotKey::CHotKey" );
-		m_id = id;
-		m_Wnd = Wnd;
-		m_pbResult = pbResult;
-		BOOL bResult = FALSE;
-		__QOR_PROTECT
-		{
-			bResult = m_Library.RegisterHotKey( reinterpret_cast< ::HWND >( m_Wnd->Handle()->Use() ), m_id, fsModifiers, vk );
-			if( m_pbResult != NULL )
-			{
-				*m_pbResult = bResult;
-			}
-		}__QOR_ENDPROTECT
-	}
-
-	//--------------------------------------------------------------------------------
-	CHotKey::CHotKey( const CHotKey& src ) : m_Library( CUser32::Instance() )
-	{
-		_WINQ_FCONTEXT( "CHotKey::CHotKey" );
-		*this = src;
-	}
-
-	//--------------------------------------------------------------------------------
-	CHotKey& CHotKey::operator = ( const CHotKey& src )
-	{
-		_WINQ_FCONTEXT( "CHotKey::operator =" );
-		if( &src != this )
-		{
-			m_id = src.m_id;
-			m_Wnd = src.m_Wnd;
-			m_pbResult = src.m_pbResult;
-		}
-		return *this;
-	}
-
-	//--------------------------------------------------------------------------------
-	CHotKey::~CHotKey()
-	{
-		_WINQ_FCONTEXT( "CHotKey::~CHotKey" );
-		BOOL bResult = FALSE;
-		__QOR_PROTECT
-		{
-			if( !m_Wnd.IsNull() )
-			{
-				bResult = m_Library.UnregisterHotKey( reinterpret_cast< ::HWND >( m_Wnd->Handle()->Use() ), m_id );
-			}
-			if( m_pbResult != NULL )
-			{
-				*m_pbResult = bResult;
-			}
-		}__QOR_ENDPROTECT
-	}
 
 }//nsWin32

@@ -62,7 +62,7 @@ namespace nsBluefoot
 		virtual void SetProperty( const nsCodeQOR::CUCS2String& name, void* value );
 		virtual bool HasProperty( const nsCodeQOR::CUCS2String& name ) const;
 
-		virtual bool Parse( const CBFSource* input, bool incremental = false ) = 0;
+		virtual bool Parse( const CSource* input, bool incremental = false ) = 0;
 
 		nsCodeQOR::CSTMember< CXmlEntityResolver > EntityResolver;
 		nsCodeQOR::CSTMember< CXmlDTDHandler > DTDHandler;

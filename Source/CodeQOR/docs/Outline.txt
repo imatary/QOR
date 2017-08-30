@@ -6,7 +6,4 @@ CodeQOR provides basic facilities to rest of the QOR libraries and to QOR applic
 
 You will need to link your QOR Application or QOR extension shared library with CodeQOR.
 
-CodeQOR is available in reduced but safe form at Strata-1. It is intended to be complete at Strata-2.
-Use the Strata-2 build where available to get all the features of CodeQOR.
-
-CodeQOR provides the framework Aspect Oriented Programming within the QOR and QOR applications.
+CodeQOR provides the framework Aspect Oriented Programming facilities within the QOR and QOR applications.

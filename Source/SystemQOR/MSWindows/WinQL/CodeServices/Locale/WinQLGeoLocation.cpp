@@ -1,6 +1,6 @@
 //WinQLGeoLocation.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -46,12 +46,23 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CGeoLocationHelper::CGeoLocationHelper( CGeoLocationHelper&& move )
+	{
+		_WINQ_FCONTEXT("CGeoLocationHelper::CGeoLocationHelper");
+		*this = std::move(move);
+	}
+
+	//--------------------------------------------------------------------------------
 	CGeoLocationHelper& CGeoLocationHelper::operator = ( const CGeoLocationHelper& src )
 	{
 		_WINQ_FCONTEXT( "CGeoLocationHelper::operator =" );
-		if( &src != this )
-		{
-		}
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
+	CGeoLocationHelper& CGeoLocationHelper::operator = ( CGeoLocationHelper&& move)
+	{
+		_WINQ_FCONTEXT("CGeoLocationHelper::operator =");
 		return *this;
 	}
 
@@ -62,7 +73,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	BOOL CGeoLocationHelper::EnumSystemGeoID( GEOCLASS GeoClass, GEOID ParentGeoId, GeoEnumCallback lpGeoEnumProc )
+	BOOL CGeoLocationHelper::EnumSystemGeoID( GEOCLASS GeoClass, GEOID ParentGeoId, GeoEnumCallback lpGeoEnumProc ) const
 	{
 		_WINQ_FCONTEXT( "CGeoLocationHelper::EnumSystemGeoID" );
 		BOOL bResult = m_Win32LocaleHelper.EnumSystemGeoID( GeoClass, ParentGeoId, lpGeoEnumProc );
@@ -70,28 +81,28 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CGeoLocationHelper::GetGeoInfo( GEOID GeoId, GEOTYPE GeoType, unsigned short usLanguage )
+	CTString CGeoLocationHelper::GetGeoInfo( GEOID GeoId, GEOTYPE GeoType, unsigned short usLanguage ) const
 	{
 		_WINQ_FCONTEXT( "CGeoLocationHelper::GetGeoInfo" );
 		return m_Win32LocaleHelper.GetGeoInfoT( GeoId, GeoType, usLanguage );
 	}
 
 	//--------------------------------------------------------------------------------
-	GEOID CGeoLocationHelper::GetUserNation()
+	GEOID CGeoLocationHelper::GetUserNation() const
 	{
 		_WINQ_FCONTEXT( "CGeoLocationHelper::GetUserNation" );
 		return GetUserGeoID( GeoClass_Nation );
 	}
 
 	//--------------------------------------------------------------------------------
-	GEOID CGeoLocationHelper::GetUserRegion()
+	GEOID CGeoLocationHelper::GetUserRegion() const
 	{
 		_WINQ_FCONTEXT( "CGeoLocationHelper::GetUserRegion" );
 		return GetUserGeoID( GeoClass_Region );
 	}
 
 	//--------------------------------------------------------------------------------
-	GEOID CGeoLocationHelper::GetUserGeoID( GEOCLASS GeoClass )
+	GEOID CGeoLocationHelper::GetUserGeoID( GEOCLASS GeoClass ) const
 	{
 		_WINQ_FCONTEXT( "CGeoLocationHelper::GetUSerGeoID" );
 		GEOID Result = m_Win32LocaleHelper.GetUserGeoID( GeoClass );
@@ -99,7 +110,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	BOOL CGeoLocationHelper::SetUserGeoID( GEOID GeoID )
+	BOOL CGeoLocationHelper::SetUserGeoID( GEOID GeoID ) const
 	{
 		_WINQ_FCONTEXT( "CGeoLocationHelper::SetUserGeoID" );
 		BOOL bResult = m_Win32LocaleHelper.SetUserGeoID( GeoID );
@@ -122,6 +133,13 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CGeoLocation::CGeoLocation( CGeoLocation&& move )
+	{
+		_WINQ_FCONTEXT("CGeoLocation::CGeoLocation");
+		*this = std::move(move);
+	}
+
+	//--------------------------------------------------------------------------------
 	CGeoLocation& CGeoLocation::operator = ( const CGeoLocation& src )
 	{
 		_WINQ_FCONTEXT( "CGeoLocation::operator =" );
@@ -133,93 +151,90 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CGeoLocation& CGeoLocation::operator = ( CGeoLocation&& move)
+	{
+		_WINQ_FCONTEXT("CGeoLocation::operator =");
+		if (&move != this)
+		{
+			m_ID = move.m_ID;
+		}
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
 	CGeoLocation::~CGeoLocation()
 	{
 		_WINQ_FCONTEXT( "CGeoLocation::~CGeoLocation" );
 	}
 
 	//--------------------------------------------------------------------------------
-	GEOID CGeoLocation::ID()
+	GEOID CGeoLocation::ID() const
 	{
 		_WINQ_FCONTEXT( "CGeoLocation::ID" );
 		return m_ID;
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CGeoLocation::GetNation( unsigned short usLanguage )
+	CTString CGeoLocation::GetNation( unsigned short usLanguage ) const
 	{
 		_WINQ_FCONTEXT( "CGeoLocation::GetNation" );
 		return m_Helper.GetGeoInfo( m_ID, GeoType_Nation, usLanguage );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CGeoLocation::GetLatitude( unsigned short usLanguage )
+	CTString CGeoLocation::GetLatitude( unsigned short usLanguage ) const
 	{
 		_WINQ_FCONTEXT( "CGeoLocation::GetLatitude" );
 		return m_Helper.GetGeoInfo( m_ID, GeoType_Latitude, usLanguage );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CGeoLocation::GetLongitude( unsigned short usLanguage )
+	CTString CGeoLocation::GetLongitude( unsigned short usLanguage ) const
 	{
 		_WINQ_FCONTEXT( "CGeoLocation::GetLongitude" );
 		return m_Helper.GetGeoInfo( m_ID, GeoType_Longitude, usLanguage );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CGeoLocation::GetISO2( unsigned short usLanguage )
+	CTString CGeoLocation::GetISO2( unsigned short usLanguage ) const
 	{
 		_WINQ_FCONTEXT( "CGeoLocation::GetISO2" );
 		return m_Helper.GetGeoInfo( m_ID, GeoType_ISO2, usLanguage );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CGeoLocation::GetISO3( unsigned short usLanguage )
+	CTString CGeoLocation::GetISO3( unsigned short usLanguage ) const
 	{
 		_WINQ_FCONTEXT( "CGeoLocation::GetISO3" );
 		return m_Helper.GetGeoInfo( m_ID, GeoType_ISO3, usLanguage );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CGeoLocation::GetRFC1766( unsigned short usLanguage )
+	CTString CGeoLocation::GetRFC1766( unsigned short usLanguage ) const
 	{
 		_WINQ_FCONTEXT( "CGeoLocation::GetRFC1766" );
 		return m_Helper.GetGeoInfo( m_ID, GeoType_RFC1766, usLanguage );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CGeoLocation::GetLCID( unsigned short usLanguage )
+	CTString CGeoLocation::GetLCID( unsigned short usLanguage ) const
 	{
 		_WINQ_FCONTEXT( "CGeoLocation::GetLCID" );
 		return m_Helper.GetGeoInfo( m_ID, GeoType_LCID, usLanguage );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CGeoLocation::GetFriendlyName( unsigned short usLanguage )
+	CTString CGeoLocation::GetFriendlyName( unsigned short usLanguage ) const
 	{
 		_WINQ_FCONTEXT( "CGeoLocation::GetFriendlyName" );
 		return m_Helper.GetGeoInfo( m_ID, GeoType_FriendlyName, usLanguage );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CGeoLocation::GetOfficialName( unsigned short usLanguage )
+	CTString CGeoLocation::GetOfficialName( unsigned short usLanguage ) const
 	{
 		_WINQ_FCONTEXT( "CGeoLocation::GetOfficialName" );
 		return m_Helper.GetGeoInfo( m_ID, GeoType_OfficialName, usLanguage );
 	}
-	/*
-	//--------------------------------------------------------------------------------
-	CTString CGeoLocation::GetTimeZones( unsigned short usLanguage )
-	{
-		_WINQ_FCONTEXT( "CGeoLocation::GetTimeZones" );
-		return m_Helper.GetGeoInfo( m_ID, GeoType_TimeZones, usLanguage );
-	}
 
-	//--------------------------------------------------------------------------------
-	CTString CGeoLocation::GetOfficialLanguages( unsigned short usLanguage )
-	{
-		_WINQ_FCONTEXT( "CGeoLocation::GetOfficialLanguages" );
-		return m_Helper.GetGeoInfo( m_ID, GeoType_OfficialLanguages, usLanguage );
-	}
-	*/
 }//nsWin32

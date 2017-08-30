@@ -50,6 +50,15 @@
     <Filter Include="Source Files\Traits">
       <UniqueIdentifier>{3ede7556-8e52-4611-a8d9-29d7dd3f8107}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\DataStructures\Collections">
+      <UniqueIdentifier>{b77a960e-fc32-4120-8de4-b90600cb2c00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Instancing">
+      <UniqueIdentifier>{3fee7888-a78b-43d6-9be9-0e8c728b0adc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\docs">
+      <UniqueIdentifier>{4155ce61-cd06-48f1-928c-7497a0877f8f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\CodeQOR\CodeQOR.cpp">
@@ -220,12 +229,6 @@
     <ClCompile Include="..\..\..\..\Source\CodeQOR\DataTypes\OTypes.cpp">
       <Filter>Source Files\DataTypes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\DataStructures\PODVector.cpp">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\CodeQOR\DataStructures\THash.cpp">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Source\CodeQOR\CodePages\CodePage.cpp">
       <Filter>Source Files\CodePages</Filter>
     </ClCompile>
@@ -234,6 +237,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullSemaphore.cpp">
       <Filter>Source Files\SyncObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\DataStructures\PODVector.cpp">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\DataStructures\THash.cpp">
+      <Filter>Source Files\DataStructures\Collections</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -264,49 +273,16 @@
     <ClInclude Include="..\..\..\..\Include\CodeQOR\CodePages\CodePage.h">
       <Filter>Source Files\CodePages</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\PODVector.h">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TArray.h">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TBitArray.h">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TBox.h">
       <Filter>Source Files\DataStructures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TCRef.h">
       <Filter>Source Files\DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TFLink.h">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\THash.h">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TIndexedArray.h">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TLinkedList.h">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TLRef.h">
       <Filter>Source Files\DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TMap.h">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TMapPair.h">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TPair.h">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TPointer.h">
-      <Filter>Source Files\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TRangePair.h">
       <Filter>Source Files\DataStructures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataTypes\GUID.h">
@@ -534,5 +510,87 @@
     <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TRef.h">
       <Filter>Source Files\DataStructures</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TArray.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TBitArray.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TIndexedArray.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TLinkedList.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TMap.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TMapPair.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TPair.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TRangePair.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\PODVector.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\THash.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TFLink.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TSyncRef.h">
+      <Filter>Source Files\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TLazy.h">
+      <Filter>Source Files\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\DefaultInstancer.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\PoolInstancer.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\SingletonInstancer.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\STMember.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\sTOB.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\TInstancePtr.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\TMemberPtr.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\TWeakPtr.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\Source\CodeQOR\docs\CONCEPT.txt">
+      <Filter>Source Files\docs</Filter>
+    </Text>
+    <Text Include="..\..\..\..\Source\CodeQOR\docs\Memory.txt">
+      <Filter>Source Files\docs</Filter>
+    </Text>
+    <Text Include="..\..\..\..\Source\CodeQOR\docs\Notes.txt">
+      <Filter>Source Files\docs</Filter>
+    </Text>
+    <Text Include="..\..\..\..\Source\CodeQOR\docs\Outline.txt">
+      <Filter>Source Files\docs</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Source\CodeQOR\docs\Design.odp">
+      <Filter>Source Files\docs</Filter>
+    </None>
   </ItemGroup>
 </Project>

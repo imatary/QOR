@@ -46,7 +46,7 @@ namespace
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-	//CCRTFile* CConsole::s_pConsoleInput = (CCRTFile*)(-2);	// console input
+	CCRTFile* CConsole::s_pConsoleInput = (CCRTFile*)(-2);	// console input
 	CCRTFile* CConsole::s_pConsoleOutput = (CCRTFile*)(-2);	// console output
 
 	using namespace nsWinQAPI;
@@ -342,12 +342,11 @@ namespace nsWin32
 		return Ref;
 	}
 	
-	/*
 	//--------------------------------------------------------------------------------
 	nsWin32::CCRTFile* CConsole::ConsoleInputFile()
 	{
 		return CConsole::s_pConsoleInput;
-	}*/
+	}
 
 	//--------------------------------------------------------------------------------
 	nsWin32::CCRTFile* CConsole::ConsoleOutputFile()
@@ -488,7 +487,7 @@ namespace nsWin32
 	void CConsole::__initconin()
 	{
 		_WINQ_SFCONTEXT( "CConsole::__initconin" );
-		//if( s_pConsoleInput == (nsWin32::CFile*)(-2) )
+		if( s_pConsoleInput == (nsWin32::CFile*)(-2) )
 		{
 			CConsStartContHandler ErrHandler;
 			nsWin32::CConsoleHelper ConsoleHelper;
@@ -496,11 +495,11 @@ namespace nsWin32
 			if( hstdin.IsNull() || hstdin.IsInvalid() )
 			{
 				ConsoleHelper.Alloc();
-				//s_pConsoleInput = new nsWin32::CCRTFile( "CONIN$", Generic_Read | Generic_Write, File_Share_Read| File_Share_Write, 0, Open_Existing, 0, 0 );
+				s_pConsoleInput = new nsWin32::CCRTFile( "CONIN$", Generic_Read | Generic_Write, File_Share_Read| File_Share_Write, 0, Open_Existing, 0, 0 );
 			}
 			else
 			{
-				//s_pConsoleInput = new nsWin32::CCRTFile( hstdin );
+				s_pConsoleInput = new nsWin32::CCRTFile( hstdin );
 			}
 		}
 	}
@@ -536,13 +535,12 @@ namespace nsWin32
 			s_pConsoleOutput = 0;
 		}
 
-		/*
 		if( s_pConsoleInput > 0 )
 		{
 			delete s_pConsoleInput;
 			s_pConsoleInput = 0;
 		}
-		*/
+		
 	}
 
 }//nsWin32

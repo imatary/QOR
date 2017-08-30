@@ -1,6 +1,6 @@
 //WinQLThread.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -28,6 +28,8 @@
 
 #ifndef WINQL_CS_THREAD_H_3
 #define WINQL_CS_THREAD_H_3
+
+#include "CompilerQOR.h"
 
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE

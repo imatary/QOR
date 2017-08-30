@@ -42,22 +42,6 @@ namespace nsWin32
 {
 	typedef CDeviceHandle CFileHandle;
 	/*
-	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL ) CFileHandle : public CDeviceHandle
-	{
-	public:
-
-		__QOR_DECLARE_OCLASS_ID( CFileHandle );
-
-		CFileHandle();
-		CFileHandle( void* h );
-		CFileHandle( int iFile );
-		CFileHandle( const CFileHandle& src );
-		CFileHandle& operator = ( const CFileHandle& src );
-		CFileHandle& operator = ( void* h );
-		CFileHandle& operator = ( int iFile );
-		virtual ~CFileHandle();
-	};
 	*/
 }//nsWin32
 

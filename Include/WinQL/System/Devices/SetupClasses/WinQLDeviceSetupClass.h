@@ -1,6 +1,6 @@
 //DeviceSetupClass.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,6 +29,8 @@
 #ifndef WINQL_DEVICESETUPCLASS_H_3
 #define WINQL_DEVICESETUPCLASS_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -36,11 +38,12 @@
 #include "WinQL/Definitions/Data.h"
 #include "WinQL/Definitions/IO.h"
 #include "WinQL/System/Devices/WinQLDevice.h"
-//#include "WinQL/Devices/SetupClasses/DeviceList.h"
 #include "WinQL/System/Devices/WinQLDeviceHandle.h"
 #include "WinQL/System/Devices/Instances/WinQLDeviceInstance.h"
 #include "WinQL/CodeServices/Text/WinString.h"
 #include "AppocritaQOR/Controller.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceSetupClass, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -50,7 +53,7 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CDeviceSetupClass > refType;
+		__QOR_DECLARE_REF_TYPE(CDeviceSetupClass);
 
 		//--------------------------------------------------------------------------------
 		enum eProperty
@@ -78,7 +81,6 @@ namespace nsWin32
 		bool IsRemote( void );
 
 		CTString Description( void );
-		//CDeviceList& DeviceList( void );		
 
 		CString< byte > GetProperty( eProperty );
 		unsigned long GetCharacteristics( void );
@@ -90,7 +92,7 @@ namespace nsWin32
 		nsCodeQOR::CTLRef< nsCodeQOR::CTArray< CTString, CWinQLPolicy > > GetUpperFilters( void );
 		nsCodeQOR::CTLRef< nsCodeQOR::CTArray< nsCodeQOR::__mxGUID, CWinQLPolicy > > GetGUIDsFromName( void );
 
-		std::vector< CDeviceInstance::refType >& CDeviceSetupClass::GetInstances( void );
+		std::vector< CDeviceInstance::ref_type >& CDeviceSetupClass::GetInstances( void );
 
 	protected:
 
@@ -100,7 +102,7 @@ namespace nsWin32
 	private:
 
 		nsWinQAPI::CSetupAPI& m_Library;
-		std::vector< CDeviceInstance::refType > m_Instances;
+		std::vector< CDeviceInstance::ref_type > m_Instances;
 		bool m_bInstancesEnumerated;
 
 		unsigned int EnumerateInstances( void );

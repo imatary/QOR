@@ -1,6 +1,6 @@
 //WinQLDefaultKeyboard.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,15 +29,20 @@
 #ifndef WINQL_DEVICE_DEFAULT_KEYBD_H_3
 #define WINQL_DEVICE_DEFAULT_KEYBD_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/WinQL.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "CodeQOR/DataStructures/TLRef.h"
 #include "WinQL/CodeServices/WinQLSharedRef.h"
 #include "WinQL/System/Devices/Keyboard/WinQLKeyboardInput.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDefaultKeyboard, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -48,14 +53,14 @@ namespace nsWin32
 
 	public:
 
-		typedef nsCodeQOR::CTLRef< CKeyboard > refType;
+		__QOR_DECLARE_REF_TYPE(CDefaultKeyboard);
 
 		//--------------------------------------------------------------------------------
 		CDefaultKeyboard(){}
 		//--------------------------------------------------------------------------------
 		~CDefaultKeyboard(){}
 
-		refType operator()(unsigned int uiUnit = 0);
+		ref_type operator()(unsigned int uiUnit = 0);
 
 	private:
 

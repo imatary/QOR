@@ -1,6 +1,6 @@
 //WinQLDisplay.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -50,13 +50,39 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CDisplayHelper::CDisplayHelper( const CDisplayHelper& src) : m_User32Library(CUser32::Instance())
+	{
+		_WINQ_FCONTEXT("CDisplayHelper::CDisplayHelper");
+	}
+
+	//--------------------------------------------------------------------------------
+	CDisplayHelper::CDisplayHelper( CDisplayHelper&& move ) : m_User32Library(CUser32::Instance())
+	{
+		_WINQ_FCONTEXT("CDisplayHelper::CDisplayHelper");
+	}
+
+	//--------------------------------------------------------------------------------
+	CDisplayHelper& CDisplayHelper::operator = (const CDisplayHelper& src)
+	{
+		_WINQ_FCONTEXT("CDisplayHelper::operator =");
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
+	CDisplayHelper& CDisplayHelper::operator = ( CDisplayHelper&& move)
+	{
+		_WINQ_FCONTEXT("CDisplayHelper::operator =");
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
 	CDisplayHelper::~CDisplayHelper()
 	{
 		_WINQ_FCONTEXT( "CDisplayHelper::~CDisplayHelper" );
 	}
 
 	//--------------------------------------------------------------------------------
-	long CDisplayHelper::ChangeSettings( nsWin32::LPDEVMODE lpDevMode, unsigned long dwflags )
+	long CDisplayHelper::ChangeSettings( nsWin32::LPDEVMODE lpDevMode, unsigned long dwflags ) const
 	{
 		_WINQ_FCONTEXT( "CDisplayHelper::ChangeSettings" );
 		LONG lResult = 0;
@@ -68,7 +94,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	long CDisplayHelper::ChangeSettings( const TCHAR* lpszDeviceName, nsWin32::LPDEVMODE lpDevMode, COSWindow::refType Window, unsigned long dwflags, void* lParam )
+	long CDisplayHelper::ChangeSettings( const TCHAR* lpszDeviceName, nsWin32::LPDEVMODE lpDevMode, COSWindow::refType Window, unsigned long dwflags, void* lParam ) const
 	{
 		_WINQ_FCONTEXT( "CDisplayHelper::ChangeSettings" );
 		LONG lResult = 0;
@@ -80,7 +106,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CDisplayHelper::EnumDevices( const TCHAR* lpDevice, unsigned long iDevNum, nsWin32::PDISPLAY_DEVICE lpDisplayDevice, unsigned long dwFlags )
+	bool CDisplayHelper::EnumDevices( const TCHAR* lpDevice, unsigned long iDevNum, nsWin32::PDISPLAY_DEVICE lpDisplayDevice, unsigned long dwFlags ) const
 	{
 		_WINQ_FCONTEXT( "CDisplayHelper::EnumDevices" );
 		bool bResult = false;
@@ -92,7 +118,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CDisplayHelper::EnumSettings( const TCHAR* lpszDeviceName, unsigned long iModeNum, nsWin32::LPDEVMODE lpDevMode, unsigned long dwFlags )
+	bool CDisplayHelper::EnumSettings( const TCHAR* lpszDeviceName, unsigned long iModeNum, nsWin32::LPDEVMODE lpDevMode, unsigned long dwFlags ) const
 	{				
 		_WINQ_FCONTEXT( "CDisplayHelper::EnumSettings" );
 		bool bResult = false;
@@ -111,7 +137,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CDisplayHelper::EnumDisplayMonitors( CDeviceContext::refType dc, const nsWin32::RECT* lprcClip, nsWin32::MONITORENUMPROC lpfnEnum, Cmp_long_ptr dwData )
+	bool CDisplayHelper::EnumDisplayMonitors( CDeviceContext::refType dc, const nsWin32::RECT* lprcClip, nsWin32::MONITORENUMPROC lpfnEnum, Cmp_long_ptr dwData ) const
 	{
 		_WINQ_FCONTEXT( "CDisplayHelper::EnumDisplayMonitors" );
 		bool bResult = false;
@@ -123,7 +149,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CDisplayHelper::SetProcessDPIAware()
+	bool CDisplayHelper::SetProcessDPIAware() const
 	{
 		_WINQ_FCONTEXT( "CDisplayHelper::SetProcessDPIAware" );
 		bool bResult = false;
@@ -135,7 +161,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CDisplayHelper::GetProcessDefaultLayout( unsigned long* pdwDefaultLayout )
+	bool CDisplayHelper::GetProcessDefaultLayout( unsigned long* pdwDefaultLayout ) const
 	{
 		_WINQ_FCONTEXT( "CDisplayHelper::GetProcessDefaultLayout" );
 		bool bResult = false;
@@ -147,7 +173,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CDisplayHelper::SetProcessDefaultLayout( unsigned long dwDefaultLayout )
+	bool CDisplayHelper::SetProcessDefaultLayout( unsigned long dwDefaultLayout ) const
 	{
 		_WINQ_FCONTEXT( "CDisplayHelper::SetProcessDefaultLayout" );
 		bool bResult = false;
@@ -159,7 +185,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CDisplayHelper::IsProcessDPIAware()
+	bool CDisplayHelper::IsProcessDPIAware() const
 	{
 		_WINQ_FCONTEXT( "CDisplayHelper::IsProcessDPIAware" );
 		bool bResult = false;
@@ -238,7 +264,7 @@ __QCMP_WARNING_POP
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CMonitorHelper::GetInfo( nsWin32::LPMONITORINFO lpmi )
+	bool CMonitorHelper::GetInfo( nsWin32::LPMONITORINFO lpmi ) const
 	{
 		_WINQ_FCONTEXT( "CMonitorHelper::GetInfo" );
 		bool bResult = false;
@@ -267,8 +293,9 @@ __QCMP_WARNING_POP
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CDevice CDisplay::DefaultDevice()
+	CDisplayDevice::ref_type CDisplay::DefaultDevice()
 	{
+		_WINQ_FCONTEXT("CDisplay::DefaultDevice");
 		if( !m_bDevicesEnumerated )
 		{
 			EnumDevices();
@@ -277,49 +304,74 @@ __QCMP_WARNING_POP
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CDevice CDisplay::Device( unsigned int uiDevice )
+	std::vector< CDisplayDevice::ref_type >::iterator CDisplay::Devices_begin()
 	{
-		if( !m_bDevicesEnumerated )
+		_WINQ_FCONTEXT("CDisplay::Devices_begin");
+		if (!m_bDevicesEnumerated)
 		{
 			EnumDevices();
 		}
-		return m_Devices[ uiDevice ];		
+		return m_Devices.begin();
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CMonitor& CDisplay::Monitor( unsigned int uiMonitor )
+	std::vector< CDisplayDevice::ref_type >::iterator CDisplay::Devices_end()
 	{
-		if( !m_bMonitorsEnumerated )
+		_WINQ_FCONTEXT("CDisplay::Devices_end");
+		if (!m_bDevicesEnumerated)
+		{
+			EnumDevices();
+		}
+		return m_Devices.end();
+	}
+
+	//--------------------------------------------------------------------------------
+	std::vector< CDisplayMonitor::ref_type >::iterator CDisplay::Monitors_begin(void)
+	{
+		_WINQ_FCONTEXT("CDisplay::Monitors_begin");
+		if (!m_bMonitorsEnumerated)
 		{
 			EnumAllMonitors();
 		}
-		return (*m_apMonitors[ uiMonitor ]);
+		return m_Monitors.begin();
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CMonitor CDisplay::MonitorFromPoint( nsWin32::POINT pt, unsigned long dwFlags )
+	std::vector< CDisplayMonitor::ref_type >::iterator CDisplay::Monitors_end(void)
 	{
-		CMonitor aMonitor( pt, dwFlags );
-		return aMonitor;
+		_WINQ_FCONTEXT("CDisplay::Monitors_end");
+		if (!m_bMonitorsEnumerated)
+		{
+			EnumAllMonitors();
+		}
+		return m_Monitors.end();
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CMonitor CDisplay::MonitorFromRect( const CRectangle* lprc, unsigned long dwFlags )
+	CDisplayMonitor::ref_type CDisplay::MonitorFromPoint( nsWin32::POINT pt, unsigned long dwFlags )
 	{
-		CMonitor aMonitor( lprc, dwFlags );
-		return aMonitor;
+		_WINQ_FCONTEXT("CDisplay::MonitorFromPoint");
+		return new_shared_ref<CDisplayMonitor>(pt, dwFlags);
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CMonitor CDisplay::MonitorFromWindow( COSWindow::refType Window, unsigned long dwFlags )
+	CDisplayMonitor::ref_type CDisplay::MonitorFromRect( const CRectangle* lprc, unsigned long dwFlags )
 	{
-		CMonitor aMonitor( Window, dwFlags );
-		return aMonitor;
+		_WINQ_FCONTEXT("CDisplay::MonitorFromRect");
+		return new_shared_ref<CDisplayMonitor>(lprc, dwFlags);
+	}
+
+	//--------------------------------------------------------------------------------
+	CDisplayMonitor::ref_type CDisplay::MonitorFromWindow( COSWindow::refType Window, unsigned long dwFlags )
+	{
+		_WINQ_FCONTEXT("CDisplay::MonitorFromWindow");
+		return new_shared_ref<CDisplayMonitor>( Window, dwFlags );
 	}
 
 	//--------------------------------------------------------------------------------
 	long CDisplay::ChangeSettingsForDefaultDevice( nsWin32::LPDEVMODE lpDevMode, unsigned long dwflags )
 	{
+		_WINQ_FCONTEXT("CDisplay::ChangeSettingsForDefaultDevice");
 		long lResult = 0;
 		lResult = m_Win32DisplayHelper.ChangeSettings( lpDevMode, dwflags );
 		return lResult;
@@ -328,6 +380,7 @@ __QCMP_WARNING_POP
 	//--------------------------------------------------------------------------------
 	bool CDisplay::EnumMonitors( CDeviceContext::refType dc, const CRectangle* lprcClip, nsWin32::MONITORENUMPROC lpfnEnum, Cmp_long_ptr dwData )
 	{
+		_WINQ_FCONTEXT("CDisplay::EnumMonitors");
 		bool bResult = false;
 		bResult = m_Win32DisplayHelper.EnumDisplayMonitors( dc, lprcClip, lpfnEnum, dwData );
 		return bResult;
@@ -359,8 +412,8 @@ __QCMP_WARNING_POP
 	{
 		_WINQ_FCONTEXT( "CDisplay::AddMonitor" );
 		bool bResult = false;
-		CMonitor* pMonitor = new CMonitor( CMonitorHandle( 0, hMonitor ).Ref() );
-		m_apMonitors.Append( pMonitor );
+		CDisplayMonitor::ref_type Monitor = new_shared_ref<CDisplayMonitor>( CMonitorHandle( 0, hMonitor ).Ref() );
+		m_Monitors.push_back( Monitor );
 		bResult = true;
 		return bResult;
 	}
@@ -381,12 +434,12 @@ __QCMP_WARNING_POP
 				
 			do
 			{
-				CDevice DisplayDevice;
-				bResult = m_Win32DisplayHelper.EnumDevices( 0, iDevNum, &DisplayDevice, CDisplayHelper::_EDD_GET_DEVICE_INTERFACE_NAME );
+				CDisplayDevice::ref_type DisplayDevice = new_shared_ref<CDisplayDevice>();
+				bResult = m_Win32DisplayHelper.EnumDevices( 0, iDevNum, &(DisplayDevice()), CDisplayHelper::_EDD_GET_DEVICE_INTERFACE_NAME );
 				if( bResult == true )
 				{
-					DisplayDevice.m_bInitialised = true;
-					m_Devices.Append( DisplayDevice );
+					DisplayDevice().m_bInitialised = true;
+					m_Devices.push_back( DisplayDevice );
 				}
 				iDevNum++;
 			}while( bResult == true );
@@ -395,8 +448,8 @@ __QCMP_WARNING_POP
 		else
 		{
 #		else
-			CDevice DisplayDevice;
-			m_Devices.Append( DisplayDevice );
+			CDisplayDevice::ref_type DisplayDevice = new_shared_ref<CDisplayDevice>();
+			m_Devices.push_back( DisplayDevice );
 #		endif
 #		if( WINVER >= 0x0500 )
 		}
@@ -409,33 +462,39 @@ __QCMP_WARNING_POP
 
 
 
-	__QOR_IMPLEMENT_OCLASS_LUID( CDisplay::CDevice )
+	__QOR_IMPLEMENT_OCLASS_LUID( CDisplayDevice )
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CDevice::CDevice() : m_bInitialised( false )
+	CDisplayDevice::CDisplayDevice() : m_bInitialised( false )
 	{				
-		_WINQ_FCONTEXT( "CDisplay::CDevice::CDevice" );
+		_WINQ_FCONTEXT( "CDisplayDevice::CDisplayDevice" );
 		cb = sizeof( nsWin32::DISPLAY_DEVICE );
 		StateFlags = 0;
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CDevice::CDevice( const CDisplay::CDevice& src )
+	CDisplayDevice::CDisplayDevice( const CDisplayDevice& src )
 	{
-		_WINQ_FCONTEXT( "CDisplay::CDevice::CDevice" );
+		_WINQ_FCONTEXT( "CDisplayDevice::CDisplayDevice" );
 		*this = src;
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CDevice::~CDevice()
+	CDisplayDevice::CDisplayDevice(CDisplayDevice&& move)
 	{
-		_WINQ_FCONTEXT( "CDisplay::CDevice::~CDevice" );
+		_WINQ_FCONTEXT("CDisplayDevice::CDisplayDevice");
+		*this = std::move(move);
+	}
+	//--------------------------------------------------------------------------------
+	CDisplayDevice::~CDisplayDevice()
+	{
+		_WINQ_FCONTEXT( "CDisplayDevice::~CDisplayDevice" );
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CDevice& CDisplay::CDevice::operator=( const CDevice& Src )
+	CDisplayDevice& CDisplayDevice::operator=( const CDisplayDevice& Src )
 	{
-		_WINQ_FCONTEXT( "CDisplay::CDevice::operator =" );
+		_WINQ_FCONTEXT( "CDisplayDevice::operator =" );
 		cb = Src.cb;
 		memcpy( DeviceName, Src.DeviceName, 32 * sizeof( TCHAR ) );
 		memcpy( DeviceString, Src.DeviceString, 128 * sizeof( TCHAR ) );
@@ -446,9 +505,22 @@ __QCMP_WARNING_POP
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CDisplay::CDevice::EnumSettings( unsigned long iModeNum, nsWin32::LPDEVMODE lpDevMode, unsigned long dwFlags )
+	CDisplayDevice& CDisplayDevice::operator=( CDisplayDevice&& move)
 	{
-		_WINQ_FCONTEXT( "CDisplay::CDevice::EnumSettings" );
+		_WINQ_FCONTEXT("CDisplayDevice::operator =");
+		cb = move.cb;
+		memcpy(DeviceName, move.DeviceName, 32 * sizeof(TCHAR));
+		memcpy(DeviceString, move.DeviceString, 128 * sizeof(TCHAR));
+		StateFlags = move.StateFlags;
+		memcpy(DeviceID, move.DeviceID, 128 * sizeof(TCHAR));
+		memcpy(DeviceKey, move.DeviceKey, 128 * sizeof(TCHAR));
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CDisplayDevice::EnumSettings( unsigned long iModeNum, nsWin32::LPDEVMODE lpDevMode, unsigned long dwFlags ) const
+	{
+		_WINQ_FCONTEXT( "CDisplayDevice::EnumSettings" );
 		bool bResult = false;
 		if( m_bInitialised )
 		{
@@ -462,84 +534,116 @@ __QCMP_WARNING_POP
 	}
 
 	//--------------------------------------------------------------------------------
-	long CDisplay::CDevice::ChangeSettings( nsWin32::LPDEVMODE lpDevMode, COSWindow::refType Window, unsigned long dwflags, void* lParam )
+	long CDisplayDevice::ChangeSettings( nsWin32::LPDEVMODE lpDevMode, COSWindow::refType Window, unsigned long dwflags, void* lParam ) const
 	{
-		_WINQ_FCONTEXT( "CDisplay::CDevice::ChangeSettings" );
-		long lResult = 0;
-		lResult = m_Win32DisplayHelper.ChangeSettings( DeviceName, lpDevMode, Window, dwflags, lParam );
-		return lResult;
+		_WINQ_FCONTEXT( "CDisplayDevice::ChangeSettings" );
+		return m_Win32DisplayHelper.ChangeSettings( DeviceName, lpDevMode, Window, dwflags, lParam );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CDisplay::CDevice::GetDeviceID()
+	CTString CDisplayDevice::GetDeviceID() const
 	{
-		_WINQ_FCONTEXT( "CDisplay::CDevice::GetDeviceID" );
+		_WINQ_FCONTEXT( "CDisplayDevice::GetDeviceID" );
 		CTString strDeviceID( DeviceID, 128 );
 		return strDeviceID;
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CDisplay::CDevice::GetDeviceString()
+	CTString CDisplayDevice::GetDeviceString() const
 	{
-		_WINQ_FCONTEXT( "CDisplay::CDevice::GetDeviceString" );
+		_WINQ_FCONTEXT( "CDisplayDevice::GetDeviceString" );
 		CTString strDeviceString( DeviceString, 128 );
 		return strDeviceString;
 	}
 
 
 
-	__QOR_IMPLEMENT_OCLASS_LUID( CDisplay::CMonitor )
+	__QOR_IMPLEMENT_OCLASS_LUID( CDisplayMonitor )
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CMonitor::CMonitor( const CDisplay::CMonitor& Monitor ) : m_Win32Monitor( Monitor.m_Win32Monitor )
+	CDisplayMonitor::CDisplayMonitor( const CDisplayMonitor& Monitor ) : m_Win32Monitor( Monitor.m_Win32Monitor )
 	{
-		_WINQ_FCONTEXT( "CDisplay::CMonitor::CMonitor" );
+		_WINQ_FCONTEXT( "CDisplayMonitor::CDisplayMonitor" );
 		*( dynamic_cast< nsWin32::MONITORINFO* >( this ) ) = Monitor;
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CMonitor::CMonitor( CMonitorHandle::refType hMonitor ) : m_Win32Monitor( hMonitor )
+	CDisplayMonitor::CDisplayMonitor( CDisplayMonitor&& Monitor) : m_Win32Monitor(std::move(Monitor.m_Win32Monitor))
 	{
-		_WINQ_FCONTEXT( "CDisplay::CMonitor::CMonitor" );
+		_WINQ_FCONTEXT("CDisplayMonitor::CDisplayMonitor");
+		*(dynamic_cast< nsWin32::MONITORINFO* >(this)) = std::move(Monitor);
+	}
+
+	//--------------------------------------------------------------------------------
+	CDisplayMonitor::CDisplayMonitor( CMonitorHandle::refType hMonitor ) : m_Win32Monitor( hMonitor )
+	{
+		_WINQ_FCONTEXT( "CDisplayMonitor::CDisplayMonitor" );
 		cbSize = sizeof( nsWin32::MONITORINFO );
 		m_Win32Monitor.GetInfo( this );
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CMonitor::CMonitor( nsWin32::POINT pt, unsigned long dwFlags ) : m_Win32Monitor( pt, dwFlags )
+	CDisplayMonitor::CDisplayMonitor( nsWin32::POINT pt, unsigned long dwFlags ) : m_Win32Monitor( pt, dwFlags )
 	{
-		_WINQ_FCONTEXT( "CDisplay::CMonitor::CMonitor" );
+		_WINQ_FCONTEXT( "CDisplayMonitor::CDisplayMonitor" );
 		cbSize = sizeof( nsWin32::MONITORINFO );
 		m_Win32Monitor.GetInfo( this );
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CMonitor::CMonitor( const CRectangle* lprc, unsigned long dwFlags ) : m_Win32Monitor( lprc, dwFlags )
+	CDisplayMonitor::CDisplayMonitor( const CRectangle* lprc, unsigned long dwFlags ) : m_Win32Monitor( lprc, dwFlags )
 	{
-		_WINQ_FCONTEXT( "CDisplay::CMonitor::CMonitor" );
+		_WINQ_FCONTEXT( "CDisplayMonitor::CDisplayMonitor" );
 		cbSize = sizeof( nsWin32::MONITORINFO );
 		m_Win32Monitor.GetInfo( this );
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CMonitor::CMonitor( COSWindow::refType Window, unsigned long dwFlags ) : m_Win32Monitor( Window, dwFlags )
+	CDisplayMonitor::CDisplayMonitor( COSWindow::refType Window, unsigned long dwFlags ) : m_Win32Monitor( Window, dwFlags )
 	{
-		_WINQ_FCONTEXT( "CDisplay::CMonitor::CMonitor" );
+		_WINQ_FCONTEXT( "CDisplayMonitor::CMonitor" );
 		cbSize = sizeof( nsWin32::MONITORINFO );
 		m_Win32Monitor.GetInfo( this );
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CDisplay::CMonitor::IsPrimary()
+	CDisplayMonitor& CDisplayMonitor::operator = (const CDisplayMonitor& src)
+	{
+		_WINQ_FCONTEXT("CDisplayMonitor::operator =");
+		if (&src != this)
+		{
+			cbSize = src.cbSize;
+			rcMonitor = src.rcMonitor;
+			rcWork = src.rcWork;
+			dwFlags = src.dwFlags;
+		}
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
+	CDisplayMonitor& CDisplayMonitor::operator = (CDisplayMonitor&& move)
+	{
+		_WINQ_FCONTEXT("CDisplayMonitor::operator =");
+		if (&move != this)
+		{
+			cbSize = std::move(move.cbSize);
+			rcMonitor = std::move(move.rcMonitor);
+			rcWork = std::move(move.rcWork);
+			dwFlags = std::move(move.dwFlags);
+		}
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CDisplayMonitor::IsPrimary() const
 	{
 		return ( dwFlags & MONITORINFOF_PRIMARY ) ? true : false;
 	}
 
 	//--------------------------------------------------------------------------------
-	CDisplay::CMonitor::~CMonitor()
+	CDisplayMonitor::~CDisplayMonitor()
 	{
-		_WINQ_FCONTEXT( "CDisplay::CMonitor::~CMonitor" );
+		_WINQ_FCONTEXT( "CDisplayMonitor::~CMonitor" );
 	}
-
 
 }//nsWin32

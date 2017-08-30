@@ -1,6 +1,6 @@
 //WinQLInProcServerModule.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,7 +29,7 @@
 
 #include "WinQL/Definitions/Constants.h"
 #include "WinQL/Definitions/Security.h"
-#include "WinQL/COM/COObjectBase.h"
+#include "WinQL/COM/Server/BaseParts/WinQLCOObjectBase.h"
 #include "WinQL/Application/Threading/WinQLSynchronization.h"
 #include "CodeQOR/Modules/LoadableModuleBase.h"
 

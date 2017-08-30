@@ -1,6 +1,6 @@
 //WinQLDeviceInstance.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -49,7 +49,7 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CDeviceInstance::CDeviceInstance" );
 		memset( &m_Info, sizeof( SP_DevInfo_Data ), 0 );
-		TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS).RegisterInstance( m_strID, this );
+		TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS)().RegisterInstance( m_strID, ref(*this) );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ namespace nsWin32
 	,	m_strID( strID )
 	{
 		_WINQ_FCONTEXT( "CDeviceInstance::CDeviceInstance" );
-		TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS).RegisterInstance( m_strID, this );
+		TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS)().RegisterInstance( m_strID, ref(*this) );
 
 	}
 
@@ -73,7 +73,7 @@ namespace nsWin32
 	,	m_strID( strID )
 	{
 		_WINQ_FCONTEXT( "CDeviceInstance::CDeviceInstance" );
-		TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS).RegisterInstance( m_strID, this );
+		TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS)().RegisterInstance( m_strID, ref(*this) );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -126,14 +126,16 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	std::vector< CDeviceInterface::refType >& CDeviceInstance::Interfaces()
+	std::vector< CDeviceInterface::ref_type >& CDeviceInstance::Interfaces()
 	{
+		_WINQ_FCONTEXT("CDeviceInstance::Interfaces");
 		return m_VecInterfaces;
 	}
 
 	//--------------------------------------------------------------------------------
 	void CDeviceInstance::SetupPropertyKeys()
 	{
+		_WINQ_FCONTEXT("CDeviceInstance::SetupPropertyKeys");
 		if( !m_pContainer )
 		{
 		}
@@ -510,78 +512,4 @@ namespace nsWin32
 		return RefResult;
 	}
 
-
-	/*
-	//--------------------------------------------------------------------------------
-	__QOR_IMPLEMENT_OCLASS_LUID( CDeviceInstanceModel );
-
-	//--------------------------------------------------------------------------------
-	CDeviceInstanceModel::CDeviceInstanceModel( nsMammut::CModel* pContainer ) : BaseName( pContainer )
-	,	m_Properties( this )
-	,	m_ID					(	&m_Properties, CTString( "ID"				) )
-	,	m_ulIndex				(	&m_Properties, CTString( "Index"				) )
-	,	m_Info					(	&m_Properties, CTString( "Info"				) )	
-	,	m_PDOName				(	this, CTString( "PDOName"			) )
-	,	m_Location				(	this, CTString( "Location"			) )
-	,	m_FriendlyName			(	this, CTString( "Friendly Name"		) )
-	,	m_Manufacturer			(	this, CTString( "Manufacturer"		) )
-	,	m_DisplayName			(	this, CTString( "DisplayName"		) )
-	,	m_Description			(	this, CTString( "Description"		) )
-	,	m_Parent				(	this, CTString( "Parent"			) )
-	,	m_Service				(	this, CTString( "Service"			) )
-	,	m_SetupClassName		(	this, CTString( "SetupClassName"	) )
-	,	m_Driver				(	this, CTString( "Driver"			) )
-	{
-		Initialize();
-	}
-
-	//--------------------------------------------------------------------------------
-	CDeviceInstanceModel::CDeviceInstanceModel( const CDeviceInstanceModel& src) : BaseName( src.m_pContainer )
-	,	m_Properties( this )
-	,	m_ID					(	&m_Properties, CTString( "ID"				) )
-	,	m_ulIndex				(	&m_Properties, CTString( "Index"				) )
-	,	m_Info					(	&m_Properties, CTString( "Info"				) )	
-	,	m_PDOName				(	this, CTString( "PDOName"			) )
-	,	m_Location				(	this, CTString( "Location"			) )
-	,	m_FriendlyName			(	this, CTString( "Friendly Name"		) )
-	,	m_Manufacturer			(	this, CTString( "Manufacturer"		) )
-	,	m_DisplayName			(	this, CTString( "DisplayName"		) )
-	,	m_Description			(	this, CTString( "Description"		) )
-	,	m_Parent				(	this, CTString( "Parent"			) )
-	,	m_Service				(	this, CTString( "Service"			) )
-	,	m_SetupClassName		(	this, CTString( "SetupClassName"	) )
-	,	m_Driver				(	this, CTString( "Driver"			) )
-	{		
-		Initialize();
-		*this = src;
-	}
-
-	//--------------------------------------------------------------------------------
-	void CDeviceInstanceModel::Initialize()
-	{		
-		insert( CTString( _TXT( "Properties" ) ), m_Properties.Ref() );
-		insert( CTString( _TXT( "Interfaces" ) ), m_Interfaces.Ref() );
-	}
-
-	//--------------------------------------------------------------------------------
-	CDeviceInstanceModel& CDeviceInstanceModel::operator = ( const CDeviceInstanceModel& src )
-	{
-		if( &src != this )
-		{
-			nsMammut::CModel::operator=( src );
-		}
-		return *this;
-	}
-
-	//--------------------------------------------------------------------------------
-	CDeviceInstanceModel::~CDeviceInstanceModel()
-	{
-	}
-
-	//--------------------------------------------------------------------------------
-	CDeviceStringProperty::CDeviceStringProperty( CDeviceInstanceModel* pModel, const nsCodeQOR::CTString& strName, unsigned long ulPropertyIndex ) :
-		BaseName(dynamic_cast< nsMammut::CModel* >(pModel), strName, this), m_pModel(pModel), m_ulPropertyIndex(ulPropertyIndex)
-	{
-	}
-	*/
 }//nsWin32

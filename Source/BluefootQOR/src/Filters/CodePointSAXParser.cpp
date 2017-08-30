@@ -1,6 +1,6 @@
 //CodePointSAXParser.cpp
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2015, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -30,7 +30,7 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CCodePointSAXParser::CCodePointSAXParser() : CBFFilter()
+	CCodePointSAXParser::CCodePointSAXParser() : CFilter()
 	{
 
 	}
@@ -41,7 +41,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CCodePointSAXParser::CCodePointSAXParser( const CCodePointSAXParser& src ) : CBFFilter( src )
+	CCodePointSAXParser::CCodePointSAXParser( const CCodePointSAXParser& src ) : CFilter( src )
 	{
 	}
 
@@ -53,7 +53,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBFBuffer* CCodePointSAXParser::GetSourceBuffer( void )
+	CBuffer* CCodePointSAXParser::GetSourceBuffer( void )
 	{
 		return m_pBuffer;
 	}

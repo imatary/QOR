@@ -1,6 +1,6 @@
 //WinQLMailSlotSink.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -27,6 +27,8 @@
 #ifndef WINQL_IO_MAILSLOTSINK_H_3
 #define WINQL_IO_MAILSLOTSINK_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -42,7 +44,7 @@ namespace nsWin32
 	class __QOR_INTERFACE( __WINQL ) CMailSlotConnector;
 
 	//--------------------------------------------------------------------------------
-	//A general Bluefoot Sink which writes to a Win32 MailSlot Connection
+	//A Bluefoot Sink which writes to a Win32 MailSlot Connection
 	class __QOR_INTERFACE( __WINQL ) CMailSlotSink : public CIOSink
 	{
 	public:

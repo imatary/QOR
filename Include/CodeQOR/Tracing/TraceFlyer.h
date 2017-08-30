@@ -29,12 +29,12 @@
 #ifndef CODEQOR_TRACING_TRACEFLYER_H_3
 #define CODEQOR_TRACING_TRACEFLYER_H_3
 
-#include "CodeQOR/ErrorSystem/Error.h"
-#include "CodeQOR/ClassReg/TFlyer.h"
-
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
+
+#include "CodeQOR/ErrorSystem/Error.h"
+#include "CodeQOR/ClassReg/TFlyer.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR

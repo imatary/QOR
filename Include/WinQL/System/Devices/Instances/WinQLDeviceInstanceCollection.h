@@ -1,6 +1,6 @@
 //WinQLDeviceInstanceCollection.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,6 +29,8 @@
 #ifndef WINQL_DEVICEINSTANCECOLLECTION_H_3
 #define WINQL_DEVICEINSTANCECOLLECTION_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -38,6 +40,8 @@
 #include "WinQL/System/Devices/WinQLDevice.h"
 #include "WinQL/System/Devices/WinQLDeviceHandle.h"
 #include "WinQL/CodeServices/Text/WinString.h"
+#include "WinQL/System/Devices/Instances/WinQLDeviceInstance.h"
+#include <map>
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -57,13 +61,13 @@ namespace nsWin32
 		~CDeviceInstanceCollection();
 
 		unsigned long Size( void );
-		unsigned long AddDevice( CTString strDeviceID, CDeviceInstance* pDeviceInstance );
+		void AddDevice( CTString strDeviceID, CDeviceInstance::ref_type pDeviceInstance );
 		void RemoveDevice( CTString strDeviceID );
-		nsCodeQOR::CTLRef< CDeviceInstance > operator[]( const CTString& strDeviceID );
+		CDeviceInstance::ref_type operator[]( const CTString& strDeviceID );
 
 	protected:
 
-		nsCodeQOR::CTMap< CTString, CDeviceInstance* > m_DeviceInstanceMap;
+		std::map< const CTString, CDeviceInstance::ref_type > m_DeviceInstanceMap;
 
 	private:
 

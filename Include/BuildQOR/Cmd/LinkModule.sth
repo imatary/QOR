@@ -24,6 +24,8 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+//Preprocessable batch script fragment to link one binary
+
 //Extract the module to link from the Modules iteration
 set buildlib=QOR_PP_SEQ_ELEM(QOR_PP_ITERATION(5),QOR_MODULES)
 echo Linking Module: %buildlib%

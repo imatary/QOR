@@ -1,6 +1,6 @@
 //WinQLSystem.cpp
 
-// Copyright Querysoft Limited 2013, 2015
+// Copyright Querysoft Limited 2013, 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -37,8 +37,6 @@
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-	//CSystem OperatingSystem;				//Represents the Windows instance
-
 	__QOR_IMPLEMENT_EXTERNAL_FACTORY( CSystem, 0xa6eb5841, 0x95ca, 0x4008, 0xb8, 0x4f, 0xb8, 0xd0, 0x6b, 0xbf, 0xb6, 0x14 );
 
 	//--------------------------------------------------------------------------------
@@ -56,7 +54,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	void CSystem::Setup( nsQOR::IApplication& Application )
 	{
-		Machine.Configure( TheMachine() );
+		Machine(QOR_PP_SYNCHRONIZE).Configure( ref(*TheMachine()) );
 	}
 	
 	//--------------------------------------------------------------------------------
@@ -65,16 +63,16 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CKeyboard::refType CSystem::Keyboard(unsigned int uiUnit)
+	CKeyboard::ref_type CSystem::Keyboard(unsigned int uiUnit)
 	{
-		return CKeyboard::refType( 0 );
+		return CKeyboard::ref_type();
 		//return Devices(QOR_PP_SHARED_OBJECT_ACCESS).RegisteredLocalInterfaceClasses()[CDeviceInterfaceClassCollection::GUID_DEVINTERFACE_KEYBOARD]->Interfaces()[uiUnit].As< CKeyboard >()->Ref();
 	}
 
 	//--------------------------------------------------------------------------------
-	CMouse::refType CSystem::Mouse(unsigned int uiUnit)
+	CMouse::ref_type CSystem::Mouse(unsigned int uiUnit)
 	{
-		return CMouse::refType( 0 );
+		return CMouse::ref_type();
 		//return Devices(QOR_PP_SHARED_OBJECT_ACCESS).RegisteredLocalInterfaceClasses()[CDeviceInterfaceClassCollection::GUID_DEVINTERFACE_MOUSE]->Interfaces()[uiUnit].As< CMouse >()->Ref();
 	}
 

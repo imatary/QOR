@@ -80,6 +80,8 @@ namespace nsWin32
 		}
 
 		bool IsInUse( void );
+		bool IsBufferString( void );
+		bool IsUnBuffered( void );
 
 	protected:
 
@@ -122,8 +124,7 @@ namespace nsWin32
 		void LockBuffer( void );
 		void UnlockBuffer( void );
 		bool IsVBuffer( void );
-		bool IsBufferLocked( void );
-		bool IsBufferString( void );
+		bool IsBufferLocked( void );		
 		bool IsBufferError( void );
 		bool IsBufferReadWrite( void );
 		bool IsBufferRead( void );
@@ -171,16 +172,6 @@ namespace nsWin32
 		byte* WriteIntoBuffer( const byte*, unsigned int );
 		errno_t ReadFromBuffer( char* data, size_t dataSize, unsigned int nbytes );
 
-	private:
-		/*
-		char* _ptr;
-		int   _cnt;
-		char* _base;
-		int   _flag;
-		int   _file;
-		int   _charbuf;
-		int   _bufsiz;
-		char* _tmpfname;*/
 	};
 
 }//nsWin32

@@ -35,7 +35,7 @@
 #include "WinQL/WinQL.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/CodeServices/Text/WinQLStringServices.h"
-//#include "PosumQOR/Stream.h"
+#include "PosumQOR/PosumStream.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -283,8 +283,8 @@ namespace nsWin32
 		FILE* pResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( filename, mode );
-			pResult = 0;// Stream.GetFILE();
+			auto ref = nsPosum::CStream::fopen(filename, mode);
+			pResult = ref->GetFILE();
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
@@ -700,8 +700,7 @@ namespace nsWin32
 		}
 		else
 		{
-			//::nsPosum::CStream Stream( 1 );
-			//iResult = Stream.PrintF( format, vargs );
+			iResult = ::nsPosum::CStream::_stdout()->_vfprintf_l( format, nullptr, vargs );
 		}
 		return iResult;
 	}

@@ -1,6 +1,6 @@
 //BfSource.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -32,26 +32,31 @@
 //------------------------------------------------------------------------------
 namespace nsBluefoot
 {
+	__QOR_IMPLEMENT_OCLASS_LUID(CSource);
+
 	//------------------------------------------------------------------------------
-	CBFSource::CBFSource() : m_pSink( 0 )
+	CSource::CSource() : m_pSink( 0 )
 	{
+		__QCS_MEMBER_FCONTEXT("CSource::CSource");
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSource::~CBFSource()
+	CSource::~CSource()
 	{
-
+		__QCS_MEMBER_FCONTEXT("CSource::~CSource");
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSource::CBFSource( const CBFSource& src )
+	CSource::CSource( const CSource& src )
 	{
+		__QCS_MEMBER_FCONTEXT("CSource::CSource");
 		*this = src;
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSource& CBFSource::operator = ( const CBFSource& src )
+	CSource& CSource::operator = ( const CSource& src )
 	{
+		__QCS_MEMBER_FCONTEXT("CSource::operator=");
 		if (&src != this)
 		{
 			m_pSink = src.m_pSink;
@@ -60,14 +65,16 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFSource::SetSink( CBFSink* pSink )
+	void CSource::SetSink( CSink* pSink )
 	{
+		__QCS_MEMBER_FCONTEXT("CSource::SetSink");
 		m_pSink = pSink;
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSink* CBFSource::GetSink( void )
+	CSink* CSource::GetSink( void )
 	{
+		__QCS_MEMBER_FCONTEXT("CSource::GetSink");
 		return m_pSink;
 	}
 

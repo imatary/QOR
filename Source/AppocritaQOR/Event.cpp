@@ -49,6 +49,17 @@ namespace nsQOR
 	}
 
 	//------------------------------------------------------------------------------
+	CEvent::CEvent() : CEvent(TheApplication()())//chaining constructor
+	{
+	}
+
+	//------------------------------------------------------------------------------
+	void CEvent::Signal()
+	{
+		OnSignaled();
+	}
+
+	//------------------------------------------------------------------------------
 	void CEvent::OnSignaled()
 	{
 		__QCS_FCONTEXT( "CEvent::OnSignaled" );
@@ -65,7 +76,7 @@ namespace nsQOR
 
 
 	//--------------------------------------------------------------------------------
-	CEventSink::CEventSink( CEvent::ref_type pEvent ) : m_pEvent( nullptr )
+	CEventSink::CEventSink( CEvent::ref_type pEvent ) : IEventHandler(), m_pEvent( nullptr )
 	{
 		if( pEvent )
 		{
@@ -138,7 +149,7 @@ namespace nsQOR
 		
 		if( it == m_EventSubscriberMap.end() )
 		{
-			m_EventSubscriberMap.insert( std::make_pair( pEvent, new std::vector< CEventSink* >() ) );
+			m_EventSubscriberMap.insert( std::make_pair( pEvent, new std::vector< std::pair< IEventHandler*, int > >() ) );
 		}
 	}
 
@@ -158,29 +169,29 @@ namespace nsQOR
 		auto pSubscriberList = m_EventSubscriberMap.at( pEvent.operator->() );
 		if( pSubscriberList )
 		{
-			for( CEventSink* pSink : *pSubscriberList )
+			for( std::pair<IEventHandler*, int> pHandlerPair: *pSubscriberList )
 			{
-				(*pSink)();
+				(*pHandlerPair.first)(pEvent, pHandlerPair.second);
 			}
 		}
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CEventManager::Subscribe( CEventSink::ref_type pSink, CEvent::ref_type pEvent )
+	bool CEventManager::Subscribe( IEventHandler::ref_type pSink, CEvent::ref_type pEvent, int iCookie )
 	{
 		bool bResult = false;
 
 		auto pSubscriberList = m_EventSubscriberMap.at( pEvent.operator->() );
 		if( pSubscriberList )
 		{
-			pSubscriberList->push_back( pSink.operator->() );
+			pSubscriberList->push_back( std::make_pair( pSink.operator->(), iCookie ) );
 			bResult = true;
 		}
 		return bResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CEventManager::Unsubscribe( CEventSink::ref_type pSink, CEvent::ref_type pEvent )
+	bool CEventManager::Unsubscribe(IEventHandler::ref_type pSink, CEvent::ref_type pEvent )
 	{
 		bool bResult = false;
 
@@ -190,7 +201,7 @@ namespace nsQOR
 		{
 			for( auto it = pSubscriberList->begin(); it != pSubscriberList->end(); it++ )
 			{
-				if( *it == pSink.operator->() )
+				if( (*it).first == pSink.operator->() )
 				{
 					pSubscriberList->erase( it );
 					bResult = true;

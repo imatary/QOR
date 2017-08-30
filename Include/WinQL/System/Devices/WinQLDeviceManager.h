@@ -1,6 +1,6 @@
 //WinQLDeviceManager.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,10 +29,13 @@
 #ifndef WINQL_DEVICEMANAGER_H_3
 #define WINQL_DEVICEMANAGER_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/Definitions/Data.h"
 #include "WinQL/Definitions/IO.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
@@ -45,7 +48,7 @@
 #include "WinQL/System/Devices/WinQLConfigManSession.h"
 #include "WinQL/System/Devices/WinQLDeviceNode.h"
 #include "WinQL/CodeServices/Text/WinString.h"
-#include "WinQL/CodeServices/WinQLSharedRef.h"
+//#include "WinQL/CodeServices/WinQLSharedRef.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWinQAPI
@@ -62,10 +65,9 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CDeviceManager
 	{
-		QOR_PP_WINQL_SHARED;
-
 	public:
 
+		__QOR_DECLARE_REF_TYPE(CDeviceManager);
 		__QOR_DECLARE_OCLASS_ID( CDeviceManager );
 
 		typedef bool( CDeviceManager::*fpDevNodeCallback )( CDeviceNode* pNode );
@@ -144,32 +146,32 @@ namespace nsWin32
 
 		nsCodeQOR::CSTMember< CRootDeviceEnumerator > m_EnumeratorEnumerator;
 		
-		CDeviceNode::refType RootDevice( void );
+		CDeviceNode::ref_type RootDevice( void );
 
-		std::map< const CTString, CDeviceEnumerator::refType >& Enumerators( void );
-		std::map< const CTString, CDeviceInstance::refType >& Instances( void );
-		std::map< nsCodeQOR::mxGUID, CDeviceSetupClass::refType >& SetupClasses( void );
-		std::map< nsCodeQOR::mxGUID, CDeviceInterfaceClass::refType >& InterfaceClasses( void );		
-		std::map< const CTString, CDeviceDriver::refType >& Drivers( void );
+		std::map< const CTString, CDeviceEnumerator::ref_type >& Enumerators( void );
+		std::map< const CTString, CDeviceInstance::ref_type >& Instances( void );
+		std::map< nsCodeQOR::mxGUID, CDeviceSetupClass::ref_type >& SetupClasses( void );
+		std::map< nsCodeQOR::mxGUID, CDeviceInterfaceClass::ref_type >& InterfaceClasses( void );
+		std::map< const CTString, CDeviceDriver::ref_type >& Drivers( void );
 		
-		void RegisterEnumerator( const CTString strDeivceEnumeratorName, CDeviceEnumerator* pDeviceEnumerator );
-		void RegisterInstance( const CTString strDeviceInstance, CDeviceInstance* pDeviceInstance );
+		void RegisterEnumerator( const CTString strDeivceEnumeratorName, CDeviceEnumerator::ref_type pDeviceEnumerator );
+		void RegisterInstance( const CTString strDeviceInstance, CDeviceInstance::ref_type pDeviceInstance );
 		void RegisterInterfaceClass( const CTString strInterfaceName, nsCodeQOR::mxGUID& GUID );
 		void RegisterUSBHub( const CTString& strHubName, CUSBHub* pUSBHub ); 
 	
 		CUSBHub* USBHubFromName( const CTString& strHubName );
-		nsCodeQOR::CTLRef< CDeviceInstance > DeviceFromID( const mxTCHAR* szDeviceID );
-		nsCodeQOR::CTLRef< CDeviceInstance > DeviceFromName( const mxTCHAR* szDeviceName );
-		CDeviceEnumerator::refType EnumeratorFromName( CTStringRef strEnumerator );
-		CDeviceInterfaceClass::refType InterfaceClassFromGUID( nsCodeQOR::mxGUID& GUID );
+		CDeviceInstance::ref_type DeviceFromID( CTString& strDeviceID );
+		CDeviceInstance::ref_type DeviceFromName( const mxTCHAR* szDeviceName );
+		CDeviceEnumerator::ref_type EnumeratorFromName( CTStringRef strEnumerator );
+		CDeviceInterfaceClass::ref_type InterfaceClassFromGUID( nsCodeQOR::mxGUID& GUID );
 
 	protected:
 
-		std::map< const CTString, CDeviceEnumerator::refType > m_DeviceEnumeratorCollection;
-		std::map< const CTString, CDeviceInstance::refType > m_DeviceInstanceCollection;
-		std::map< nsCodeQOR::mxGUID, CDeviceInterfaceClass::refType > m_DeviceInterfaceClassCollection;
-		std::map< nsCodeQOR::mxGUID, CDeviceSetupClass::refType > m_DeviceSetupClassCollection;
-		std::map< const CTString, CDeviceDriver::refType > m_DeviceDriverCollection;
+		std::map< const CTString, CDeviceEnumerator::ref_type > m_DeviceEnumeratorCollection;
+		std::map< const CTString, CDeviceInstance::ref_type > m_DeviceInstanceCollection;
+		std::map< nsCodeQOR::mxGUID, CDeviceInterfaceClass::ref_type > m_DeviceInterfaceClassCollection;
+		std::map< nsCodeQOR::mxGUID, CDeviceSetupClass::ref_type > m_DeviceSetupClassCollection;
+		std::map< const CTString, CDeviceDriver::ref_type > m_DeviceDriverCollection;
 		std::map< const CTString, CUSBHub* > m_USBHubByNameMap;
 
 		CConfigurationManagementSession m_ConfigManagementSession;
@@ -183,7 +185,7 @@ namespace nsWin32
 		void EnumerateInterfaceClasses( void );
 		void EnumerateDrivers( void );
 		
-		void WalkInstances( CDeviceNode::refType rootNode, fpDevNodeCallback pNodeCallback = 0 );
+		void WalkInstances( CDeviceNode::ref_type rootNode, fpDevNodeCallback pNodeCallback = 0 );
 		bool InstanceFromNodeCallback( CDeviceNode* pDevNode );
 
 		CTString DeviceIDFromName( const mxTCHAR* szDeviceName );		
@@ -203,16 +205,7 @@ namespace nsWin32
 		CDeviceManager& CDeviceManager::operator = ( const CDeviceManager& src );
 
 	};
-/*
-#ifndef __WINQL
 
-	__QOR_INTERFACE( __WINQL ) nsCodeQOR::mxGUID __QCMP_DECLARE_MERGE_INITIALIZERS CDeviceManager::GUID_DEVICE_BATTERY		 = { 0x72631E54, 0x78A4, 0x11D0, { 0xBC, 0xF7, 0x00, 0xAA, 0x00, 0xB7, 0xB3, 0x2A } };
-	__QOR_INTERFACE( __WINQL ) nsCodeQOR::mxGUID __QCMP_DECLARE_MERGE_INITIALIZERS CDeviceManager::GUID_DEVICE_LID			 = { 0x4AFA3D52, 0x74A7, 0x11d0, { 0xbe, 0x5e, 0x00, 0xA0, 0xC9, 0x06, 0x28, 0x57 } };
-	__QOR_INTERFACE( __WINQL ) nsCodeQOR::mxGUID __QCMP_DECLARE_MERGE_INITIALIZERS CDeviceManager::GUID_DEVICE_PROCESSOR	 = { 0x97FADB10, 0x4E33, 0x40AE, { 0x35, 0x9C, 0x8B, 0xEF, 0x02, 0x9D, 0xBD, 0xD0 } };
-
-	__QOR_INTERFACE( __WINQL ) nsCodeQOR::mxGUID __QCMP_DECLARE_MERGE_INITIALIZERS CDeviceManager::GUID_BTHPORT_DEVICE_INTERFACE		 =	{ 0x0850302A, 0xB344, 0x4fda, { 0x9B, 0xE9, 0x90, 0x57, 0x6B, 0x8D, 0x46, 0xF0 } };
-#endif
-*/
 }//nsWin32
 
 #endif//WINQL_DEVICEMANAGER_H_3

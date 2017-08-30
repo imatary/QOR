@@ -47,8 +47,8 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CFile::CFile" );
 		__QOR_PROTECT
 		{
-			m_Handle = CKernel32::CreateFileA( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile );
-			m_Handle.Attach( this );
+			m_Handle = new_shared_ref<CDeviceHandle>( CKernel32::CreateFileA( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile ) );
+			m_Handle().Attach( this );
 		}__QOR_ENDPROTECT
 	}
 
@@ -58,8 +58,8 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CFile::CFile" );
 		__QOR_PROTECT
 		{
-			m_Handle = CKernel32::CreateFileW( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile );
-			m_Handle.Attach( this );
+			m_Handle = new_shared_ref<CDeviceHandle>( CKernel32::CreateFileW( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile ) );
+			m_Handle().Attach( this );
 		}__QOR_ENDPROTECT
 	}
 
@@ -69,7 +69,7 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CFile::CFile" );
 		__QOR_PROTECT
 		{
-			m_Handle = CKernel32::Instance().CreateFileTransacted( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile, hTransaction, pusMiniVersion, pExtendedParameter );
+			m_Handle = new_shared_ref<CDeviceHandle>( CKernel32::Instance().CreateFileTransacted( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile, hTransaction, pusMiniVersion, pExtendedParameter ) );
 		}__QOR_ENDPROTECT
 	}
 
@@ -79,18 +79,18 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CFile::CFile" );
 		__QOR_PROTECT
 		{
-			m_Handle = CKernel32::OpenFile( lpFileName, reinterpret_cast< ::LPOFSTRUCT >( lpReOpenBuff ), uStyle );
+			m_Handle = new_shared_ref<CDeviceHandle>( CKernel32::OpenFile( lpFileName, reinterpret_cast< ::LPOFSTRUCT >( lpReOpenBuff ), uStyle ) );
 		}__QOR_ENDPROTECT
 	}
 
 	//--------------------------------------------------------------------------------
-	CFile::CFile( CFileHandle& hFile, nsWin32::FILE_ID_DESCRIPTOR* lpFileID, unsigned long dwDesiredAccess, unsigned long dwShareMode, nsWin32::LPSECURITY_ATTRIBUTES lpSecurityAttributes, unsigned long dwFlags ) : CDeviceFile()
+	CFile::CFile( CFileHandle::ref_type hFile, nsWin32::FILE_ID_DESCRIPTOR* lpFileID, unsigned long dwDesiredAccess, unsigned long dwShareMode, nsWin32::LPSECURITY_ATTRIBUTES lpSecurityAttributes, unsigned long dwFlags ) : CDeviceFile()
 	{
 		_WINQ_FCONTEXT( "CFile::CFile" );
 		__QOR_PROTECT
 		{
 #			if ( _WIN32_WINNT >= 0x0600 )
-			m_Handle = CKernel32::Instance().OpenFileById( hFile.Use(), reinterpret_cast< ::FILE_ID_DESCRIPTOR* >( lpFileID ), dwDesiredAccess, dwShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpSecurityAttributes ), dwFlags );
+			m_Handle = new_shared_ref<CDeviceHandle>( CKernel32::Instance().OpenFileById( hFile().Use(), reinterpret_cast< ::FILE_ID_DESCRIPTOR* >( lpFileID ), dwDesiredAccess, dwShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpSecurityAttributes ), dwFlags ) );
 #			else
 				QOR_PP_UNREF6( hFile, lpFileID, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwFlags );
 				_QSYS_MSW_WWL_CONT_ERROR(( API_REQUIRES_VERSION, _CTXT( "OpenFileById" ), _CTXT( "Windows Vista" ), 0 ));
@@ -112,7 +112,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::CancelIo( m_Handle.Use() ) ? true : false;
+			bResult = CKernel32::CancelIo( m_Handle().Use() ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -124,7 +124,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::Instance().CancelIoEx( m_Handle.Use(), reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
+			bResult = CKernel32::Instance().CancelIoEx( m_Handle().Use(), reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -148,7 +148,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::Instance().GetFileBandwidthReservation( m_Handle.Use(), lpPeriodMilliseconds, lpBytesPerPeriod, pDiscardable, lpTransferSize, lpNumOutstandingRequests ) ? true : false;
+			bResult = CKernel32::Instance().GetFileBandwidthReservation( m_Handle().Use(), lpPeriodMilliseconds, lpBytesPerPeriod, pDiscardable, lpTransferSize, lpNumOutstandingRequests ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -160,7 +160,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetFileInformationByHandle( m_Handle.Use(), reinterpret_cast< ::LPBY_HANDLE_FILE_INFORMATION >( lpFileInformation ) ) ? true : false;
+			bResult = CKernel32::GetFileInformationByHandle( m_Handle().Use(), reinterpret_cast< ::LPBY_HANDLE_FILE_INFORMATION >( lpFileInformation ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -172,7 +172,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetFileInformationByHandleEx( m_Handle.Use(), static_cast< ::FILE_INFO_BY_HANDLE_CLASS >( FileInformationClass ), lpFileInformation, dwBufferSize ) ? true : false;
+			bResult = CKernel32::GetFileInformationByHandleEx( m_Handle().Use(), static_cast< ::FILE_INFO_BY_HANDLE_CLASS >( FileInformationClass ), lpFileInformation, dwBufferSize ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -184,7 +184,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::GetFileSize( m_Handle.Use(), lpFileSizeHigh );
+			dwResult = CKernel32::GetFileSize( m_Handle().Use(), lpFileSizeHigh );
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
@@ -196,7 +196,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetFileSizeEx( m_Handle.Use(), reinterpret_cast< ::PLARGE_INTEGER >( lpFileSize ) ) ? true : false;
+			bResult = CKernel32::GetFileSizeEx( m_Handle().Use(), reinterpret_cast< ::PLARGE_INTEGER >( lpFileSize ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -208,7 +208,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::GetFileType( m_Handle.Use() );
+			dwResult = CKernel32::GetFileType( m_Handle().Use() );
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
@@ -220,7 +220,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::GetFinalPathNameByHandle( m_Handle.Use(), lpszFilePath, cchFilePath, dwFlags );
+			dwResult = CKernel32::GetFinalPathNameByHandle( m_Handle().Use(), lpszFilePath, cchFilePath, dwFlags );
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
@@ -232,7 +232,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::LockFile( m_Handle.Use(), dwFileOffsetLow, dwFileOffsetHigh, nNumberOfBytesToLockLow, nNumberOfBytesToLockHigh ) ? true : false;
+			bResult = CKernel32::LockFile( m_Handle().Use(), dwFileOffsetLow, dwFileOffsetHigh, nNumberOfBytesToLockLow, nNumberOfBytesToLockHigh ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -244,7 +244,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::LockFileEx( m_Handle.Use(), dwFlags, dwReserved, nNumberOfBytesToLockLow, nNumberOfBytesToLockHigh, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
+			bResult = CKernel32::LockFileEx( m_Handle().Use(), dwFlags, dwReserved, nNumberOfBytesToLockLow, nNumberOfBytesToLockHigh, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -280,7 +280,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::ReadFileScatter( m_Handle.Use(), reinterpret_cast< ::FILE_SEGMENT_ELEMENT* >( aSegmentArray ), nNumberOfBytesToRead, lpReserved, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
+			bResult = CKernel32::ReadFileScatter( m_Handle().Use(), reinterpret_cast< ::FILE_SEGMENT_ELEMENT* >( aSegmentArray ), nNumberOfBytesToRead, lpReserved, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -291,7 +291,7 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CFile::ReOpen" );
 		__QOR_PROTECT
 		{
-			m_Handle = CKernel32::ReOpenFile( m_Handle.Use(), dwDesiredAccess, dwShareMode, dwFlags );
+			m_Handle() = CKernel32::ReOpenFile( m_Handle().Use(), dwDesiredAccess, dwShareMode, dwFlags );
 		}__QOR_ENDPROTECT
 		return *this;
 	}
@@ -303,7 +303,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::SetEndOfFile( m_Handle.Use() ) ? true : false;
+			bResult = CKernel32::SetEndOfFile( m_Handle().Use() ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -315,7 +315,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::Instance().SetFileBandwidthReservation( m_Handle.Use(), nPeriodMilliseconds, nBytesPerPeriod, bDiscardable ? TRUE : FALSE, lpTransferSize, lpNumOutstandingRequests ) ? true : false;
+			bResult = CKernel32::Instance().SetFileBandwidthReservation( m_Handle().Use(), nPeriodMilliseconds, nBytesPerPeriod, bDiscardable ? TRUE : FALSE, lpTransferSize, lpNumOutstandingRequests ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -327,7 +327,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::Instance().SetFileCompletionNotificationModes( m_Handle.Use(), Flags ) ? true : false;
+			bResult = CKernel32::Instance().SetFileCompletionNotificationModes( m_Handle().Use(), Flags ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -339,7 +339,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::Instance().SetFileInformationByHandle( m_Handle.Use(), static_cast< ::FILE_INFO_BY_HANDLE_CLASS >( FileInformationClass ), lpFileInformation, dwBufferSize ) ? true : false;
+			bResult = CKernel32::Instance().SetFileInformationByHandle( m_Handle().Use(), static_cast< ::FILE_INFO_BY_HANDLE_CLASS >( FileInformationClass ), lpFileInformation, dwBufferSize ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -351,7 +351,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::Instance().SetFileIoOverlappedRange( m_Handle.Use(), OverlappedRangeStart, Length ) ? true : false;
+			bResult = CKernel32::Instance().SetFileIoOverlappedRange( m_Handle().Use(), OverlappedRangeStart, Length ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -363,7 +363,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::SetFilePointer( m_Handle.Use(), lDistanceToMove, lpDistanceToMoveHigh, dwMoveMethod );
+			dwResult = CKernel32::SetFilePointer( m_Handle().Use(), lDistanceToMove, lpDistanceToMoveHigh, dwMoveMethod );
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
@@ -375,7 +375,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::SetFilePointerEx( m_Handle.Use(), *( reinterpret_cast< ::LARGE_INTEGER* >( &liDistanceToMove ) ), reinterpret_cast< ::PLARGE_INTEGER >( lpNewFilePointer ), dwMoveMethod ) ? true : false;
+			bResult = CKernel32::SetFilePointerEx( m_Handle().Use(), *( reinterpret_cast< ::LARGE_INTEGER* >( &liDistanceToMove ) ), reinterpret_cast< ::PLARGE_INTEGER >( lpNewFilePointer ), dwMoveMethod ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -387,7 +387,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::SetFileShortName( m_Handle.Use(), lpShortName ) ? true : false;
+			bResult = CKernel32::SetFileShortName( m_Handle().Use(), lpShortName ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -399,7 +399,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::SetFileValidData( m_Handle.Use(), ValidDataLength ) ? true : false;
+			bResult = CKernel32::SetFileValidData( m_Handle().Use(), ValidDataLength ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -411,7 +411,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::UnlockFile( m_Handle.Use(), dwFileOffsetLow, dwFileOffsetHigh, nNumberOfBytesToUnlockLow, nNumberOfBytesToUnlockHigh ) ? true : false;
+			bResult = CKernel32::UnlockFile( m_Handle().Use(), dwFileOffsetLow, dwFileOffsetHigh, nNumberOfBytesToUnlockLow, nNumberOfBytesToUnlockHigh ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -423,7 +423,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::UnlockFileEx( m_Handle.Use(), dwReserved, nNumberOfBytesToUnlockLow, nNumberOfBytesToUnlockHigh, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
+			bResult = CKernel32::UnlockFileEx( m_Handle().Use(), dwReserved, nNumberOfBytesToUnlockLow, nNumberOfBytesToUnlockHigh, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -459,13 +459,13 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::WriteFileGather( m_Handle.Use(), reinterpret_cast< ::FILE_SEGMENT_ELEMENT* >( aSegmentArray ), nNumberOfBytesToWrite, lpReserved, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
+			bResult = CKernel32::WriteFileGather( m_Handle().Use(), reinterpret_cast< ::FILE_SEGMENT_ELEMENT* >( aSegmentArray ), nNumberOfBytesToWrite, lpReserved, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	CFile::CFile( CFileHandle& hExisting ) : CDeviceFile( hExisting )
+	CFile::CFile( CFileHandle::ref_type hExisting ) : CDeviceFile( hExisting )
 	{
 		_WINQ_FCONTEXT( "CFile::CFile" );
 	}

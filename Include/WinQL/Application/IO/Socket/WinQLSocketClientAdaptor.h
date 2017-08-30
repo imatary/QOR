@@ -35,7 +35,7 @@
 #include "WinQL/Application/IO/Socket/WinQLSocketConnector.h"
 #include "WinQL/Application/IO/Socket/WinQLSocketSource.h"
 #include "WinQL/Application/IO/Socket/WinQLSocketSink.h"
-#include "BluefootQOR/ConnectionPool.h"
+#include "BluefootQOR/BfConnectionPool.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -48,7 +48,7 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CSocketClientAdaptor );
 
-		CSocketClientAdaptor( nsBluefoot::CBFConnectionPool* pPool = 0 );
+		CSocketClientAdaptor( nsBluefoot::CConnectionPool* pPool = 0 );
 		virtual ~CSocketClientAdaptor();
 
 		//Socket client connection overrides for CBFPlug interface

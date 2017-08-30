@@ -39,18 +39,23 @@
 #include "CodeQOR/DataStructures/PODVector.h"
 #include "CodeQOR/DataStructures/TBitArray.h"
 #include "CodeQOR/DataStructures/TBox.h"
-#include "CodeQOR/DataStructures/TBuffer.h"
 #include "CodeQOR/DataStructures/TCRef.h"
 #include "CodeQOR/DataStructures/TFLink.h"
-//#include "CodeQOR/DataStructures/THash.h"
 #include "CodeQOR/DataStructures/TLinkedList.h"
 #include "CodeQOR/DataStructures/TPointer.h"
 #include "CodeQOR/DataStructures/TMap.h"
+#include "CodeQOR/DataStructures/TLRef.h"
+#include "CodeQOR/DataStructures/TRef.h"
+#include "CodeQOR/DataStructures/TSyncRef.h"
+#include "CodeQOR/DataStructures/TLazy.h"
 #include "CodeQOR/Modules/ProcessBase.h"
 #include "CodeQOR/ErrorSystem/BaseErrorDomain.h"
 #include "CodeQOR/ErrorSystem/ParamErrorDomain.h"
 #include "CodeQOR/ErrorSystem/Error.h"
 #include "CodeQOR/ErrorSystem/ExpectedHandler.h"
+#include "CodeQOR/Tracing/FunctionContextBase.h"
+#include "CodeQOR/Tracing/CallContextBase.h"
+
 using namespace nsCodeQOR;
 
 #endif//USINGCODEQOR_H_3

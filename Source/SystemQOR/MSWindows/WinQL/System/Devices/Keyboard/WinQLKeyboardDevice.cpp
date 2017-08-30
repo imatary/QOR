@@ -1,6 +1,6 @@
 //WinQLKeyboardDevice.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -49,7 +49,7 @@ namespace nsWin32
 		_WINQ_FCONTEXT("CKeyboard::CKeyboard");		
 		CTString strLayoutName;
 		m_Library.GetKeyboardLayoutName(strLayoutName.GetBufferSetLength(KL_NAMELENGTH));
-		Layouts.CreateKeyboardLayout(CKeyboardLayout::KLF_Activate | CKeyboardLayout::KLF_NoTellShell | CKeyboardLayout::KLF_Substitute | CKeyboardLayout::KLF_SetForProcess, strLayoutName);
+		//Layouts.CreateKeyboardLayout(CKeyboardLayout::KLF_Activate | CKeyboardLayout::KLF_NoTellShell | CKeyboardLayout::KLF_Substitute | CKeyboardLayout::KLF_SetForProcess, strLayoutName);
 	}
 
 	//--------------------------------------------------------------------------------
@@ -74,14 +74,7 @@ namespace nsWin32
 	CKeyboard::~CKeyboard()
 	{
 		_WINQ_FCONTEXT("CKeyboard::~CKeyboard");
-		Close();
-	}
-
-
-	//--------------------------------------------------------------------------------
-	CKeyboard::refType CKeyboard::Ref()
-	{
-		return refType(this);
+		//Close();
 	}
 
 	//--------------------------------------------------------------------------------
@@ -189,7 +182,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	void CKeyboard::Open()
 	{
-		CDeviceInterface::Open(Generic_Read | Generic_Write, File_Share_Read | File_Share_Write, File_Attribute_Normal);
+		m_Session = CDeviceInterface::Open(Generic_Read | Generic_Write, File_Share_Read | File_Share_Write, File_Attribute_Normal);
 		m_bOpen = true;
 	}
 
@@ -201,7 +194,7 @@ namespace nsWin32
 		{
 			Open();
 		}
-		m_pDeviceFile->Control(__WINQL_DEVICE_CONTROL_CODE(File_Device_Keyboard, Query_Attributes, Method_Buffered, File_Any_Access), &ulWait, sizeof(ulWait), &m_Attributes, sizeof(Keyboard_Attributes), 0, 0);
+		m_Session->Control(__WINQL_DEVICE_CONTROL_CODE(File_Device_Keyboard, Query_Attributes, Method_Buffered, File_Any_Access), &ulWait, sizeof(ulWait), &m_Attributes, sizeof(Keyboard_Attributes), 0, 0);
 	}
 
 	//--------------------------------------------------------------------------------
@@ -212,6 +205,6 @@ namespace nsWin32
 		{
 			Open();
 		}
-		m_pDeviceFile->Control(__WINQL_DEVICE_CONTROL_CODE(File_Device_Keyboard, Query_Indicators, Method_Buffered, File_Any_Access), &ulWait, sizeof(ulWait), &m_Indicators, sizeof(Keyboard_Indicators), 0, 0);
+		m_Session->Control(__WINQL_DEVICE_CONTROL_CODE(File_Device_Keyboard, Query_Indicators, Method_Buffered, File_Any_Access), &ulWait, sizeof(ulWait), &m_Indicators, sizeof(Keyboard_Indicators), 0, 0);
 	}
 }//nsWin32

@@ -1,6 +1,6 @@
 //BfProtocol.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -28,33 +28,39 @@
 
 #include "CompilerQOR.h"
 #include "BluefootQOR/BfProtocol.h"
+#include "BluefootQOR/BfPlug.h"
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot
 {
+	__QOR_IMPLEMENT_OCLASS_LUID(CProtocol);
+
 	//------------------------------------------------------------------------------
-	CBFProtocol::CBFProtocol( nsQOR::IApplication::ref_type Application) : nsQOR::CWorkflow( Application ), m_StoppedState( Ref() ), m_ReadingState( Ref() ), m_WritingState( Ref() )
-	,	m_NextState( &m_StoppedState )
+	CProtocol::CProtocol( nsQOR::IApplication::ref_type Application) : nsQOR::CWorkflow( Application ), m_StoppedState( ref(*this) ), m_ReadingState(ref(*this)), m_WritingState(ref(*this))
 	,	m_ulDataSize( 0 )
 	,	m_pInPipe( 0 )
 	,	m_pOutPipe( 0 )
 	{
+		__QCS_MEMBER_FCONTEXT("CProtocol::CProtocol");
 	}
 
 	//------------------------------------------------------------------------------
-	CBFProtocol::~CBFProtocol()
+	CProtocol::~CProtocol()
 	{
+		__QCS_MEMBER_FCONTEXT("CProtocol::~CProtocol");
 	}
 
 	//------------------------------------------------------------------------------
-	CBFProtocol::CBFProtocol(const CBFProtocol& src) : CBFProtocol( src.GetApplication() )
+	CProtocol::CProtocol(const CProtocol& src) : CProtocol( src.GetApplication() )
 	{
+		__QCS_MEMBER_FCONTEXT("CProtocol::CProtocol");
 		*this = src;
 	}
 
 	//------------------------------------------------------------------------------
-	CBFProtocol& CBFProtocol::operator = ( const CBFProtocol& src )
+	CProtocol& CProtocol::operator = ( const CProtocol& src )
 	{
+		__QCS_MEMBER_FCONTEXT("CProtocol::operator=");
 		if( &src != this )
 		{
 		}
@@ -62,137 +68,191 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	nsQOR::IState::ref_type CBFProtocol::InitialState() const
+	nsQOR::IState::ref_type CProtocol::InitialState() const
 	{
+		__QCS_MEMBER_FCONTEXT("CProtocol::InitialState");
 		return m_StoppedState.Ref();
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFProtocol::SetOutPipe( CBFPipeline* pOutPipe )
+	void CProtocol::SetConnection(CPlug* pConnection)
 	{
-		m_pOutPipe = pOutPipe;
+		__QCS_MEMBER_FCONTEXT("CProtocol::SetConnection");
+		m_pConnection = pConnection;
+		nsQOR::IThread::ref_type pThread = nsQOR::CThread::GetCurrent();
+		if (pThread)
+		{
+			pThread->LocalEventManager().Subscribe(IEventHandler::Ref(), pConnection->Connected.Ref(), CProtocolState::Connected);
+			pThread->LocalEventManager().Subscribe(IEventHandler::Ref(), pConnection->ConnectionError.Ref(), CProtocolState::ConnectionError);
+			pThread->LocalEventManager().Subscribe(IEventHandler::Ref(), pConnection->Disconnected.Ref(), CProtocolState::Disconnected);
+			pThread->LocalEventManager().Subscribe(IEventHandler::Ref(), pConnection->DisconnectionError.Ref(), CProtocolState::DisconnectionError);
+		}
 	}
 
 	//------------------------------------------------------------------------------
-	CBFPipeline* CBFProtocol::GetOutPipe( void )
+	void CProtocol::SetOutPipe( CPipeline* pOutPipe )
 	{
+		__QCS_MEMBER_FCONTEXT("CProtocol::SetOutPipe");
+		m_pOutPipe = pOutPipe;
+		nsQOR::IThread::ref_type pThread = nsQOR::CThread::GetCurrent();
+		if (pThread)
+		{
+			pThread->LocalEventManager().Subscribe(IEventHandler::Ref(), m_pOutPipe->GetSink()->WriteError.Ref(), CProtocolState::WriteError);
+			pThread->LocalEventManager().Subscribe(IEventHandler::Ref(), m_pOutPipe->GetSink()->WriteSuccess.Ref(), CProtocolState::WriteSuccess);
+		}
+	}
+
+	//------------------------------------------------------------------------------
+	CPipeline* CProtocol::GetOutPipe( void )
+	{
+		__QCS_MEMBER_FCONTEXT("CProtocol::GetOutPipt");
 		return m_pOutPipe;
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFProtocol::SetInPipe( CBFPipeline* pInPipe )
+	void CProtocol::SetInPipe( CPipeline* pInPipe )
 	{
+		__QCS_MEMBER_FCONTEXT("CProtocol::SetInPipe");
 		m_pInPipe = pInPipe;
+
+		nsQOR::IThread::ref_type pThread = nsQOR::CThread::GetCurrent();
+		if (pThread)
+		{
+			pThread->LocalEventManager().Subscribe(IEventHandler::Ref(), m_pInPipe->GetSource()->ReadError.Ref(), CProtocolState::ReadError);
+			pThread->LocalEventManager().Subscribe(IEventHandler::Ref(), m_pInPipe->GetSource()->ReadSuccess.Ref(), CProtocolState::ReadSuccess);
+			pThread->LocalEventManager().Subscribe(IEventHandler::Ref(), m_pInPipe->GetSource()->EndOfData.Ref(), CProtocolState::EndOfData);
+		}
 	}
 
 	//------------------------------------------------------------------------------
-	CBFPipeline* CBFProtocol::GetInPipe( void )
+	CPipeline* CProtocol::GetInPipe( void )
 	{
+		__QCS_MEMBER_FCONTEXT("CProtocol::GetInPipe");
 		return m_pInPipe;
 	}
 
-	//------------------------------------------------------------------------------
-	bool CBFProtocol::OnProtocolStateChanged( void )
-	{
-		bool bResult = false;
-		nsQOR::IState::ref_type Current = CurrentState();
-
-		if( Current == m_WritingState.Ref() )
-		{
-			bResult = Write();
-		}
-		else if( Current == m_ReadingState.Ref() )
-		{
-			bResult = Read();
-		}
-
-		return bResult;
-	}
-
 	//--------------------------------------------------------------------------------
-	void CBFProtocol::GetNextReadCount( void )
+	void CProtocol::GetNextReadCount( void )
 	{
-		//__QCS_MEMBER_FCONTEXT( "CBFProtocol::GetNextReadCount" );
+		__QCS_MEMBER_FCONTEXT("CProtocol::GetNextReadCount");
 		m_ulDataSize = 0;
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBFProtocol::GetNextWriteCount( void )
+	void CProtocol::GetNextWriteCount( void )
 	{
-		//_WINQ_FCONTEXT( "CIOProtocol::GetNextWriteCount" );
+		__QCS_MEMBER_FCONTEXT("CProtocol::GetNextWriteCount");
 		m_ulDataSize = 0;
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CBFProtocol::Read()
+	bool CProtocol::Read()
 	{
-		//_WINQ_FCONTEXT( "CIOProtocol::Read" );
+		__QCS_MEMBER_FCONTEXT("CProtocol::Read");
 		bool bResult = false;
 		GetNextReadCount();
-		if( m_ulDataSize > 0 )
+		if( m_ulDataSize > 0 && m_pInPipe )
 		{
 			unsigned long ulNumberOfUnitsPumped = 0;
-			bResult = m_pInPipe->Pump( m_ulDataSize, ulNumberOfUnitsPumped );
+			bResult = m_pInPipe->Pump( ulNumberOfUnitsPumped, m_ulDataSize );
 		}
 		return bResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CBFProtocol::Write()
+	bool CProtocol::Write()
 	{
+		__QCS_MEMBER_FCONTEXT("CProtocol::Write");
 		bool bResult = false;
 		GetNextWriteCount();
-		if( m_ulDataSize > 0 )
+		if( m_ulDataSize > 0 && m_pOutPipe)
 		{
 			unsigned long ulWritten = 0;
-			bResult = m_pOutPipe->Pump( m_ulDataSize, ulWritten );
+			bResult = m_pOutPipe->Pump( ulWritten, m_ulDataSize );
 		}
 		return bResult;
 	}
 
+
+	__QOR_IMPLEMENT_OCLASS_LUID(CProtocol::CProtocolState);
+
 	//--------------------------------------------------------------------------------
-	void CBFProtocol::OnConnectionError( void )
+	CProtocol::CProtocolState::CProtocolState(IWorkflow::ref_type pWorkflow) : nsQOR::CCompoundState(pWorkflow)
 	{
+		__QCS_MEMBER_FCONTEXT("CProtocol::CProtocolState::CProtocolState");
+		m_pProtocol = pWorkflow.As< CProtocol >();
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBFProtocol::OnConnected( void )
+	void CProtocol::CProtocolState::GetNextReadCount(void)
 	{
+		__QCS_MEMBER_FCONTEXT("CProtocol::CProtocolState::GetNextReadCount");
+		m_pProtocol->m_ulDataSize = 0;
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBFProtocol::OnDisconnectionError( void )
+	void CProtocol::CProtocolState::GetNextWriteCount(void)
 	{
+		__QCS_MEMBER_FCONTEXT("CProtocol::CProtocolState::GetNextWriteCount");
+		m_pProtocol->m_ulDataSize = 0;
 	}
 
 	//--------------------------------------------------------------------------------
-	void CBFProtocol::OnDisconnected( void )
+	bool CProtocol::CProtocolState::operator()(nsQOR::IEvent::ref_type _event, int iCookie)
 	{
-	}
+		__QCS_MEMBER_FCONTEXT("CProtocol::CProtocolState::operator()");
+		bool bHandled = false;
+		if (_event )
+		{
+			if ( m_pInternalWorkflow)
+			{
+				bHandled = m_pInternalWorkflow->CurrentState()->operator()(_event, iCookie);
+			}
 
-	//--------------------------------------------------------------------------------
-	void CBFProtocol::OnReadSuccess( unsigned long ulUnitsRead )
-	{
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFProtocol::OnReadError( void )
-	{
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFProtocol::OnWriteSuccess( void )
-	{
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFProtocol::OnWriteError( void )
-	{
-	}
-
-	//--------------------------------------------------------------------------------
-	void CBFProtocol::OnEndOfData( void )
-	{
+			if (!bHandled && m_pProtocol)
+			{
+				switch (static_cast<eProtocolEvents>(iCookie))
+				{
+				case ConnectionError:
+					m_pProtocol->SetState(m_pProtocol->m_StoppedState.Ref(), _event);
+					bHandled = true;
+					break;
+				case DisconnectionError:
+					m_pProtocol->SetState(m_pProtocol->m_StoppedState.Ref(), _event);
+					bHandled = true;
+					break;
+				case Connected:
+					m_pProtocol->SetState(m_pProtocol->m_ReadingState.Ref(), _event);
+					bHandled = true;
+					break;
+				case Disconnected:
+					m_pProtocol->SetState(m_pProtocol->m_StoppedState.Ref(), _event);
+					bHandled = true;
+					break;
+				case ReadError:
+					m_pProtocol->SetState(m_pProtocol->m_StoppedState.Ref(), _event);
+					bHandled = true;
+					break;
+				case ReadSuccess:
+					m_pProtocol->SetState(m_pProtocol->m_ReadingState.Ref(), _event);
+					bHandled = true;
+					break;
+				case EndOfData:
+					m_pProtocol->SetState(m_pProtocol->m_WritingState.Ref(), _event);
+					bHandled = true;
+					break;
+				case WriteError:
+					m_pProtocol->SetState(m_pProtocol->m_StoppedState.Ref(), _event);
+					bHandled = true;
+					break;
+				case WriteSuccess:
+					m_pProtocol->SetState(m_pProtocol->m_WritingState.Ref(), _event);
+					bHandled = true;
+					break;
+				}
+			}
+		}
+		return bHandled;
 	}
 
 }//nsBluefoot

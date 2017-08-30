@@ -36,7 +36,7 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CUTF8CodePointFilter : public nsBluefoot::CBFFilter
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CUTF8CodePointFilter : public CFilter
 	{
 	public:
 
@@ -55,7 +55,7 @@ namespace nsBluefoot
 		CUTF8CodePointFilter& operator = ( const CUTF8CodePointFilter& src );
 		virtual bool Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead );
 		bool Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite );
-		virtual CBFBuffer* GetSourceBuffer( void );
+		virtual CBuffer* GetSourceBuffer( void );
 
 	protected:
 

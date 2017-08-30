@@ -1,6 +1,6 @@
 //WinQLKeyboardDevice.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,15 +29,22 @@
 #ifndef WINQL_DEVICE_KEYBOARD_H_3
 #define WINQL_DEVICE_KEYBOARD_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/System/Devices/Interfaces/WinQLDeviceInterface.h"
 #include "WinQL/System/Devices/WinQLIODevice.h"
 #include "WinQL/System/Devices/Instances/WinQLDeviceInstance.h"
+#include "WinQL/System/Devices/Keyboard/WinQLKeyboardLayout.h"
+#include "WinQL/System/Devices/Keyboard/WinQLHotKey.h"
 #include "WinQL/System/Devices/Keyboard/WinQLKeyboardInput.h"
 #include "WinQL/CodeServices/WinQLSharedRef.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CKeyboard, CTExtRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -46,12 +53,9 @@ namespace nsWin32
 	class __QOR_INTERFACE(__WINQL) CKeyboard : public CDeviceInterface
 	{
 
-		QOR_PP_WINQL_SHARED;
-
 	public:
 		
-		typedef CSharedRef< CKeyboard > refType;
-
+		__QOR_DECLARE_REF_TYPE(CKeyboard);
 		__QOR_DECLARE_OCLASS_ID( CKeyboard );
 
 		static nsCodeQOR::CTExternalRegEntry< CKeyboard > RegEntry;
@@ -341,8 +345,6 @@ namespace nsWin32
 		CKeyboard();
 		virtual ~CKeyboard();
 		
-		refType Ref(void);
-
 		void ActivateLayout( CKeyboardLayout& KeyboardLayout, unsigned int Flags );
 		bool BlockInput( bool fBlockIt );
 		bool EnableWindow( COSWindow::refType Wnd, bool bEnable );
@@ -371,6 +373,7 @@ namespace nsWin32
 		Keyboard_Attributes m_Attributes;
 		Keyboard_Indicators m_Indicators;
 		bool m_bOpen;
+		CIODeviceFile::ref_type m_Session;
 	};
 
 }//nsWin32

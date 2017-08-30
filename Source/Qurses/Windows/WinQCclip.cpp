@@ -60,7 +60,7 @@ int PDC_getclipboard( char** contents, long* length )
     long len;
 	nsWin32::CGlobalHelper GlobalHelper;
 
-	nsWin32::CClipboardSession::refType RefSession = nsWin32::CSystem::TheSystem().Clipboard(QOR_PP_SHARED_OBJECT_ACCESS).Session( nsWin32::COSWindow::refType() );
+	nsWin32::CClipboardSession::ref_type RefSession = TheSystem().As<nsWin32::CSystem>()->Clipboard(QOR_PP_SHARED_OBJECT_ACCESS)().Session( nsWin32::COSWindow::refType() );
 
 	if( RefSession.IsNull() )
 	{
@@ -103,7 +103,7 @@ int PDC_setclipboard(const char *contents, long length)
 	nsWin32::mxChar* ptr2;
 	nsWin32::CGlobalHelper GlobalHelper;
 
-	nsWin32::CClipboardSession::refType RefSession = nsWin32::CSystem::TheSystem().Clipboard(QOR_PP_SHARED_OBJECT_ACCESS).Session( nsWin32::COSWindow::refType() );
+	nsWin32::CClipboardSession::ref_type RefSession = TheSystem().As<nsWin32::CSystem>()->Clipboard(QOR_PP_SHARED_OBJECT_ACCESS)().Session( nsWin32::COSWindow::refType() );
 
 	if( RefSession.IsNull() )
 	{
@@ -156,7 +156,7 @@ int PDC_clearclipboard( void )
 {
     __QCS_FCONTEXT( "PDC_clearclipboard" );
 
-	nsWin32::CClipboardSession::refType RefSession = nsWin32::CSystem::TheSystem().Clipboard(QOR_PP_SHARED_OBJECT_ACCESS).Session( nsWin32::COSWindow::refType() );
+	nsWin32::CClipboardSession::ref_type RefSession = TheSystem().As<nsWin32::CSystem>()->Clipboard(QOR_PP_SHARED_OBJECT_ACCESS)().Session( nsWin32::COSWindow::refType() );
 	RefSession->Empty();
 
     return PDC_CLIP_SUCCESS;

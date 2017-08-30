@@ -556,7 +556,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CPowerScenario::refType CPowerScenario::Duplicate()
+	CPowerScenario::ref_type CPowerScenario::Duplicate()
 	{
 		_WINQ_FCONTEXT( "CPowerScenario::Duplicate" );
 
@@ -567,7 +567,7 @@ namespace nsWin32
 			nsCodeQOR::__mxGUID guid = *( reinterpret_cast< nsCodeQOR::mxGUID* >( pDestinationSchemeGuid ) );
 			pPowerScenario = new CPowerScenario( guid );
 		}
-		CPowerScenario::refType Result( pPowerScenario, true );
+		CPowerScenario::ref_type Result( pPowerScenario, true );
 		return Result;
 	}
 
@@ -1128,7 +1128,7 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CPowerSchemeCollection::CPowerSchemeCollection" );
 
-		if( TheSystem().As< nsWin32::CSystem >()->Information(QOR_PP_SHARED_OBJECT_ACCESS).GetOSVerNumber() < 6 )
+		if( TheSystem().As< nsWin32::CSystem >()->Information(QOR_PP_SHARED_OBJECT_ACCESS)().GetOSVerNumber() < 6 )
 		{
 			m_Library.EnumPwrSchemes( (::PWRSCHEMESENUMPROC)&StaticEnumProcV1, reinterpret_cast< LPARAM >( this ) );	
 		}
@@ -1285,25 +1285,25 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CPowerHelper::GetDevicePowerState( CDeviceHandle& hDevice, int& fOn )
+	bool CPowerHelper::GetDevicePowerState( CDeviceHandle::ref_type hDevice, int& fOn )
 	{
 		_WINQ_FCONTEXT( "CPowerHelper::GetDevicePowerState" );
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetDevicePowerState( hDevice.Use(), &fOn ) ? true : false;
+			bResult = CKernel32::GetDevicePowerState( hDevice().Use(), &fOn ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CPowerHelper::CancelDeviceWakeupRequest( CDeviceHandle& hDevice )
+	bool CPowerHelper::CancelDeviceWakeupRequest( CDeviceHandle::ref_type hDevice )
 	{
 		_WINQ_FCONTEXT( "CPowerHelper::CancelDeviceWakeupRequest" );
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::CancelDeviceWakeupRequest( hDevice.Use() ) ? true : false;
+			bResult = CKernel32::CancelDeviceWakeupRequest( hDevice().Use() ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -1369,13 +1369,13 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CPowerHelper::SetMessageWaitingIndicator( CDeviceHandle& hIndicator, unsigned long cmsg )
+	bool CPowerHelper::SetMessageWaitingIndicator( CDeviceHandle::ref_type hIndicator, unsigned long cmsg )
 	{
 		_WINQ_FCONTEXT( "CPowerHelper::SetMessageWaitingIndicator" );
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::SetMessageWaitingIndicator( hIndicator.Use(), cmsg ) ? true : false;
+			bResult = CKernel32::SetMessageWaitingIndicator( hIndicator().Use(), cmsg ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -1395,7 +1395,7 @@ namespace nsWin32
 	bool CMessageWaitingIndicator::Set( unsigned long cmsg )
 	{
 		bool bResult = false;
-		bResult = m_Win32PowerHelper.SetMessageWaitingIndicator( m_MessageWaitingDevice.Handle(), cmsg );
+		bResult = m_Win32PowerHelper.SetMessageWaitingIndicator( m_MessageWaitingDevice.Handle()(), cmsg );
 		return bResult;
 	}
 

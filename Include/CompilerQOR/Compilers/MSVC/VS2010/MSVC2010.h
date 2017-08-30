@@ -55,7 +55,7 @@
 #define __QCMP_WARNING_DEFAULT(_X) __pragma( warning( default : _X ) )
 
 #undef	__QCMP_OPTIMIZEINCLUDE
-#define __QCMP_OPTIMIZEINCLUDE once
+#define __QCMP_OPTIMIZEINCLUDE once//message #__FILE__ #__LINE__//once
 
 //__QCMP_WARNING_DISABLE( 4251, "Lots of false negatives if we leave this switched on" )	//
 __pragma( warning( disable : 4251 ) )

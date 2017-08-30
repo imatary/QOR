@@ -1,6 +1,6 @@
 //WinQLClipboard.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,6 +29,8 @@
 #ifndef WINQL_OSSERV_CLIPBOARD_H_3
 #define WINQL_OSSERV_CLIPBOARD_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -37,13 +39,15 @@
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "WinQL/GUI/Window.h"
 #include "WinQL/Definitions/Handles.h"
-#include "WinQL/CodeServices/WinQLSharedRef.h"
+#include "CodeQOR/DataStructures/TRef.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWinQAPI
 {
 	class __QOR_INTERFACE( __WINQAPI ) CUser32;
 }
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CClipboardViewerSession, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -55,8 +59,7 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CClipboardFormatHelper > refType;
-
+		__QOR_DECLARE_REF_TYPE(CClipboardFormatHelper);
 		__QOR_DECLARE_OCLASS_ID( CClipboardFormatHelper );
 
 		CClipboardFormatHelper();
@@ -67,7 +70,7 @@ namespace nsWin32
 		int GetPriority( unsigned int* paFormatPriorityList, int cFormats );
 		int GetName( unsigned int format, TCHAR* lpszFormatName, int cchMaxCount );
 		unsigned int Enum( unsigned int format );
-		int Count();
+		int Count( void );
 
 		//--------------------------------------------------------------------------------
 		//Clipboard format session class over a Window
@@ -75,8 +78,7 @@ namespace nsWin32
 		{
 		public:
 
-			typedef nsCodeQOR::CTLRef< CListener > refType;
-
+			__QOR_DECLARE_REF_TYPE(CListener);
 			__QOR_DECLARE_OCLASS_ID( CListener );
 
 			CListener( COSWindow& Wnd, int* pbResult = 0 );
@@ -116,11 +118,15 @@ namespace nsWin32
 		typedef CClipboardFormatHelper::CListener CFormatListener;
 
 		CClipboardHelper();
+		CClipboardHelper(const CClipboardHelper&);
+		CClipboardHelper(CClipboardHelper&&);
+		CClipboardHelper& operator = (const CClipboardHelper& src);
+		CClipboardHelper& operator = (CClipboardHelper&& move);
 		virtual ~CClipboardHelper();
 		unsigned long GetSequenceNumber( void );									//Get a arbitrary value which increments when the clipboard contents changes
 		COSWindow::refType GetViewer( void );
 		COSWindow::refType GetOpenClipboardWindow( void );
-		CClipboardFormatHelper::refType Format( void );
+		CClipboardFormatHelper::ref_type Format( void );
 
 	protected:
 
@@ -130,7 +136,6 @@ namespace nsWin32
 
 		nsWinQAPI::CUser32& m_User32Library;
 
-		__QCS_DECLARE_NONCOPYABLE( CClipboardHelper );
 	};
 
 	//--------------------------------------------------------------------------------
@@ -139,8 +144,7 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CClipboardSession > refType;
-
+		__QOR_DECLARE_REF_TYPE(CClipboardSession);
 		__QOR_DECLARE_OCLASS_ID( CClipboardSession );
 
 		CClipboardSession();
@@ -170,8 +174,7 @@ namespace nsWin32
 	{
 	public:
 			
-		typedef nsCodeQOR::CTLRef< CClipboardViewerSession > refType;
-
+		__QOR_DECLARE_REF_TYPE(CClipboardViewerSession);
 		__QOR_DECLARE_OCLASS_ID( CClipboardViewerSession );
 		
 		CClipboardViewerSession( COSWindow& Wnd, int* pbResult = 0 );
@@ -195,11 +198,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CClipboard : public CClipboardHelper
 	{
-		QOR_PP_WINQL_SHARED
-
 	public:
-
-		typedef CSharedRef< CClipboard > refType;
 
 		__QCMP_STATIC_CONSTANT( unsigned int, CF_Text				= 1		 );
 		__QCMP_STATIC_CONSTANT( unsigned int, CF_Bitmap          	= 2		 );
@@ -217,8 +216,7 @@ namespace nsWin32
 		__QCMP_STATIC_CONSTANT( unsigned int, CF_ENHMetaFile     	= 14	 );
 		__QCMP_STATIC_CONSTANT( unsigned int, CF_HDrop           	= 15	 );
 		__QCMP_STATIC_CONSTANT( unsigned int, CF_Locale          	= 16	 );
-		__QCMP_STATIC_CONSTANT( unsigned int, CF_DibV5           	= 17	 );
-																 	
+		__QCMP_STATIC_CONSTANT( unsigned int, CF_DibV5           	= 17	 );																 	
 		__QCMP_STATIC_CONSTANT( unsigned int, CF_Max             	= 18	 );
 																 	
 		__QCMP_STATIC_CONSTANT( unsigned int, CF_OwnerDisplay    	= 0x0080 );
@@ -238,11 +236,9 @@ namespace nsWin32
 		CClipboard();
 		~CClipboard();
 
-		refType Ref( void );
-
-		nsCodeQOR::CTLRef< CClipboardViewerSession > ViewerSession( COSWindow::refType refWindow );
-		nsCodeQOR::CTLRef< CClipboardSession > Session( COSWindow::refType refWindow );
-		nsCodeQOR::CTLRef< CClipboard::CFormatListener > Listener( COSWindow::refType refWindow );
+		CClipboardViewerSession::ref_type ViewerSession( COSWindow::refType refWindow );
+		CClipboardSession::ref_type Session( COSWindow::refType refWindow );
+		CClipboard::CFormatListener::ref_type Listener( COSWindow::refType refWindow );
 
 	private:
 

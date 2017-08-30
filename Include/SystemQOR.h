@@ -34,7 +34,7 @@
 #include "SystemQOR/Config/SystemSelection.h"	//Select the Operating System support to include
 
 #ifdef QOR_SYS_SYSTEMHEADER
-#	include QOR_SYS_SYSTEMHEADER					//include everything needed to support and use the selected OS
+#	include QOR_SYS_SYSTEMHEADER				//include everything needed to support and use the selected OS
 #endif
 
 #ifdef QOR_MONOLITHIC
@@ -44,4 +44,4 @@ extern "C"
 }
 #endif
 
-#endif//QOR_SYSTEM_H_1
+#endif//QOR_SYSTEM_H_3

@@ -1,6 +1,6 @@
 //CodePointUTF8Filter.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -30,7 +30,7 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CCodePointUTF8Filter::CCodePointUTF8Filter() : CBFFilter()
+	CCodePointUTF8Filter::CCodePointUTF8Filter() : CFilter()
 	{
 		m_SourceBuffer.SetCapacity( 4 );
 	}
@@ -41,7 +41,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CCodePointUTF8Filter::CCodePointUTF8Filter( const CCodePointUTF8Filter& src ) : CBFFilter( src )
+	CCodePointUTF8Filter::CCodePointUTF8Filter( const CCodePointUTF8Filter& src ) : CFilter( src )
 	{
 	}
 
@@ -53,7 +53,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBFBuffer* CCodePointUTF8Filter::GetSourceBuffer( void )
+	CBuffer* CCodePointUTF8Filter::GetSourceBuffer( void )
 	{
 		return &m_SourceBuffer;
 	}

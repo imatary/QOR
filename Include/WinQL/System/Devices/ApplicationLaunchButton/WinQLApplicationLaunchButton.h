@@ -1,6 +1,6 @@
 //WinQLApplicationLaunchButton.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,12 +29,16 @@
 #ifndef WINQL_DEVICE_APPLAUNCHBUTTON_H_3
 #define WINQL_DEVICE_APPLAUNCHBUTTON_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "WinQL/System/Devices/Interfaces/WinQLDeviceInterface.h"
 #include "WinQL/System/Devices/WinQLIODevice.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CAppLaunchButton, CTExtRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -44,8 +48,7 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CAppLaunchButton > refType;
-
+		__QOR_DECLARE_REF_TYPE(CAppLaunchButton);
 		__QOR_DECLARE_OCLASS_ID( CAppLaunchButton );
 
 		static nsCodeQOR::CTExternalRegEntry< CAppLaunchButton > RegEntry;
@@ -53,7 +56,6 @@ namespace nsWin32
 		CAppLaunchButton();
 		virtual ~CAppLaunchButton();
 		
-
 	private:
 
 		CAppLaunchButton( const CAppLaunchButton& src );

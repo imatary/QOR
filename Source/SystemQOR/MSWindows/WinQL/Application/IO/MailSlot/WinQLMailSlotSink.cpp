@@ -1,6 +1,6 @@
 //WinQLMailSlotSink.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -65,9 +65,9 @@ namespace nsWin32
 				}
 				ulNumberOfBytesWritten = 0;
 
-				if( !bResult && pMailSlotConnector->Protocol() )
+				if( !bResult )
 				{
-					pMailSlotConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteError();
+					WriteError.Signal();
 				}
 
 			}
@@ -86,17 +86,7 @@ namespace nsWin32
 					GetSource()->GetBuffer()->ReadAcknowledge( ulNumberOfBytesWritten );
 				}
 
-				if( pMailSlotConnector->Protocol() )
-				{
-					if( bResult )
-					{
-						pMailSlotConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteSuccess();
-					}
-					else
-					{
-						pMailSlotConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnWriteError();
-					}
-				}
+				bResult ? WriteSuccess.Signal() : WriteError.Signal();				
 			}
 		}
 		return bResult;

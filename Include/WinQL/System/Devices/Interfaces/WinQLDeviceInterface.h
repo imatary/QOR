@@ -1,6 +1,6 @@
-//DeviceInterface.h
+//WinQLDeviceInterface.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,19 +29,26 @@
 #ifndef WINQL_DEVICEINTERFACE_H_3
 #define WINQL_DEVICEINTERFACE_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/Definitions/Data.h"
 #include "WinQL/Definitions/IO.h"
 #include "WinQL/System/Devices/WinQLDevice.h"
 #include "WinQL/System/Devices/WinQLDeviceHandle.h"
+#include "WinQL/System/Devices/WinQLIODevice.h"
 #include "WinQL/CodeServices/Text/WinString.h"
 #include "AppocritaQOR/Controller.h"
 
 #define __WINQL_DEVICE_CONTROL_CODE( DeviceType, Function, Method, Access ) (	\
     ((DeviceType) << 16) | ((Access) << 14) | ((Function) << 2) | (Method) )
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceInterface, CTExtRef);
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceSession, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -55,7 +62,7 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CDeviceInterface > refType;
+		__QOR_DECLARE_REF_TYPE(CDeviceInterface);
 
 		//--------------------------------------------------------------------------------
 		enum eMethod
@@ -78,22 +85,10 @@ namespace nsWin32
 		__QOR_DECLARE_OCLASS_ID( CDeviceInterface );
 
 		CDeviceInterface();
-		CDeviceInterface( CDeviceHandle& hExisting );
+		CDeviceInterface( CDeviceHandle::ref_type hExisting );
 		CDeviceInterface( const CDeviceInterface& );
 		CDeviceInterface& operator = ( const CDeviceInterface& );
 		virtual ~CDeviceInterface();
-
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this, false );
-		}
-
-		void SetClass( CDeviceInterfaceClass* pClass, unsigned long ulIndex );
-		nsCodeQOR::CTLRef< CDeviceInterfaceClass > GetClass( void );
-
-		void SetInstance( CDeviceInstance* pInstance );
-		nsCodeQOR::CTLRef< CDeviceInstance > GetInstance( void );
 
 		void SetActive( bool bActive );
 		bool GetActive( void );
@@ -107,42 +102,14 @@ namespace nsWin32
 		virtual void SetPath( const mxTCHAR* szPath );
 		CTString& GetPath( void );
 
-		CIODeviceFile& Open( unsigned long ulAccessRequired, unsigned long ulShareMode, unsigned long ulAttributes );
-		void Close( void );
-
-		CIODeviceFile* GetDeviceFile( void );
-
-		//--------------------------------------------------------------------------------
-		class CDeviceSession
-		{
-		public:
-
-			CDeviceSession( CDeviceInterface& Interface, unsigned long ulAccessRequired, unsigned long ulShareMode, unsigned long ulAttributes );
-			~CDeviceSession();
-
-			__QOR_DECLARE_OCLASS_ID( CDeviceInterface::CDeviceSession );
-
-		private:
-
-			CDeviceInterface& m_Interface;
-
-			CDeviceSession();
-			CDeviceSession( const CDeviceSession& src );
-			CDeviceSession& operator = ( const CDeviceSession& src );
-		};
+		CIODeviceFile::ref_type Open( unsigned long ulAccessRequired, unsigned long ulShareMode, unsigned long ulAttributes );
 
 	protected:
 				
 		bool m_bActive;
 		bool m_bDefault;
 		bool m_bRemoved;
-		CDeviceInstance* m_pInstance;
-		CDeviceInterfaceClass* m_pClass;
-		unsigned long m_ulIndex;
 		CTString m_strPath;		
-		unsigned long m_ulUsageCount;
-		
-		CIODeviceFile* m_pDeviceFile;
 	};
 
 }//nsWin32

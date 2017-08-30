@@ -30,6 +30,8 @@
 #include "CodeQOR/Instancing/TInstancePtr.h"
 #include "AppocritaQOR/SubSystems/Thread.h"
 
+const char* CCodeQORPolicy::Name = "Default CodeQOR Policy";
+
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
 {

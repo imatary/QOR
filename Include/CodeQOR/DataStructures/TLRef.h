@@ -1,6 +1,6 @@
 //TLRef.h
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2015, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -30,6 +30,7 @@
 #define CODEQOR_DATASTRUCTS_TLREF_H_1
 
 #include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
@@ -68,11 +69,30 @@ namespace nsCodeQOR
 		}
 
 		//--------------------------------------------------------------------------------
+		CTLRef( CTLRef< T >&& Src)
+		{
+			m_p = Src.m_p;			//We take on ownership from the source object
+			m_bTemp = Src.m_bTemp;
+			Src.m_p = nullptr;
+			Src.m_bTemp = false;
+		}
+
+		//--------------------------------------------------------------------------------
 		CTLRef& operator = ( const CTLRef< T >& Src )
 		{
 			m_p = Src.m_p;
 			m_bTemp = Src.m_bTemp;
 			Src.m_bTemp = false;
+			return *this;
+		}
+
+		//--------------------------------------------------------------------------------
+		CTLRef& operator = (CTLRef< T >&& Src)
+		{
+			m_p = Src.m_p;
+			m_bTemp = Src.m_bTemp;
+			Src.m_bTemp = false;
+			Src.m_p = nullptr;
 			return *this;
 		}
 
@@ -106,7 +126,7 @@ namespace nsCodeQOR
 		{
 			if( m_p == nullptr )
 			{
-				//TODO Raise NULL reference excpetion
+				//TODO Raise NULL reference exception
 			}
 			return *m_p;
 		}
@@ -162,9 +182,20 @@ namespace nsCodeQOR
 	
 		//--------------------------------------------------------------------------------
 		template< class TDerived >
-		TDerived* As( void )
+		TDerived* As( void ) const
 		{
 			return dynamic_cast< TDerived* >( m_p );
+		}
+
+		//--------------------------------------------------------------------------------
+		template< class TDerived >
+		CTLRef< TDerived > AsRef(void)
+		{
+			if (dynamic_cast<TDerived*>(m_p) != nullptr)
+			{
+				return CTLRef< TDerived >(m_p);
+			}
+			return CTLRef< TDerived >(nullptr);
 		}
 
 		//--------------------------------------------------------------------------------
@@ -186,5 +217,19 @@ namespace nsCodeQOR
 	};
 
 }//nsCodeQOR
+
+//--------------------------------------------------------------------------------
+template< typename T >
+nsCodeQOR::CTLRef<T> new_ref()
+{
+	return nsCodeQOR::CTLRef<T>(new (nsCodeQOR::mem_traits< T >::CTAllocator::RawAllocate())T(), true);
+}
+
+//--------------------------------------------------------------------------------
+template< typename T, typename..._p >
+nsCodeQOR::CTLRef<T> new_ref(_p&&... p1)
+{
+	return nsCodeQOR::CTLRef<T>(new (nsCodeQOR::mem_traits< T >::CTAllocator::RawAllocate())T(std::forward<_p>(p1)...), true);
+}
 
 #endif//CODEQOR_DATASTRUCTS_TLREF_H_1

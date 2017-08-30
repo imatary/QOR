@@ -1,6 +1,6 @@
 //WinQLSerialBusEnumerator.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,12 +29,16 @@
 #ifndef WINQL_DEVICE_SERBUSENUM_H_3
 #define WINQL_DEVICE_SERBUSENUM_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "WinQL/System/Devices/Interfaces/WinQLDeviceInterface.h"
 #include "WinQL/System/Devices/WinQLIODevice.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CSerialBusEnumerator, CTExtRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -44,21 +48,35 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CSerialBusEnumerator > refType;
-
+		__QOR_DECLARE_REF_TYPE(CSerialBusEnumerator);
 		__QOR_DECLARE_OCLASS_ID( CSerialBusEnumerator );
 
 		static nsCodeQOR::CTExternalRegEntry< CSerialBusEnumerator > RegEntry;
 
+		__QCMP_STATIC_CONSTANT(unsigned long, File_Device_SerialEnumerator = 0x00000037);
+
 		CSerialBusEnumerator();
 		virtual ~CSerialBusEnumerator();
 		
+		void Open(void);
+		void Close(void);
 
 	private:
 
 		CSerialBusEnumerator( const CSerialBusEnumerator& src );
 		CSerialBusEnumerator& operator = ( const CSerialBusEnumerator& src );
 		
+		CIODeviceFile::ref_type m_Session;
+
+		/*
+		#define IOCTL_SERENUM_EXPOSE_HARDWARE   CTL_CODE(File_Device_SerialEnumerator,128,METHOD_BUFFERED,FILE_ANY_ACCESS)
+		#define IOCTL_SERENUM_REMOVE_HARDWARE   CTL_CODE(File_Device_SerialEnumerator,129,METHOD_BUFFERED,FILE_ANY_ACCESS)
+		#define IOCTL_SERENUM_PORT_DESC         CTL_CODE(File_Device_SerialEnumerator,130,METHOD_BUFFERED,FILE_ANY_ACCESS)
+		#define IOCTL_SERENUM_GET_PORT_NAME     CTL_CODE(File_Device_SerialEnumerator,131,METHOD_BUFFERED,FILE_ANY_ACCESS)
+		#define IOCTL_INTERNAL_SERENUM_REMOVE_SELF \
+		CTL_CODE(FILE_DEVICE_SERENUM, 129, METHOD_NEITHER, FILE_ANY_ACCESS)
+
+		*/
 	};
 
 }//nsWin32

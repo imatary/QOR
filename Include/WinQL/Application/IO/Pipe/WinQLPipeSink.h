@@ -1,6 +1,6 @@
 //WinQLPipeSink.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -42,7 +42,7 @@ namespace nsWin32
 	class __QOR_INTERFACE( __WINQL ) CPipeConnector;
 
 	//--------------------------------------------------------------------------------
-	//A general Bluefoot Sink which writes to a Win32 Pipe Connection
+	//A Bluefoot Sink which writes to a Win32 Pipe Connection
 	class __QOR_INTERFACE( __WINQL ) CPipeSink : public CIOSink
 	{
 	public:
@@ -52,7 +52,7 @@ namespace nsWin32
 		CPipeSink( CPipeConnector* pPipeConnector );
 		virtual ~CPipeSink();
 
-		virtual bool Write( unsigned long ulNumberOfBytesToWrite, unsigned long& ulNumberOfBytesWritten, byte* pBuffer, unsigned long ulUnitSize = 1 );
+		virtual bool Write(unsigned long& ulNumberOfBytesWritten, unsigned long ulNumberOfUnitsToWrite);
 		virtual bool Flush( void );
 
 	};

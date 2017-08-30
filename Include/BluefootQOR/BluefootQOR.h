@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Policy class for BluefootQOR library 
+//Policy class for BluefootQOR Pipeline library 
 
 #ifndef BLUEFOOT_POLICY_H_3
 #define BLUEFOOT_POLICY_H_3

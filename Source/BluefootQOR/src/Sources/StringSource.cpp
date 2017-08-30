@@ -1,6 +1,6 @@
 //StringSource.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Implementation of std::string based Bluefoot Source
+//Implementation of String based Bluefoot Source
 
 #include "BluefootQOR/Sources/StringSource.h"
 #include "CodeQOR/Text/Char.h"
@@ -34,28 +34,28 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CBFUCS2StringSource::CBFUCS2StringSource() : m_usPos( 0 )
+	CUCS2StringSource::CUCS2StringSource() : m_usPos( 0 )
 	{
 	}
 
 	//------------------------------------------------------------------------------
-	CBFUCS2StringSource::CBFUCS2StringSource( nsCodeQOR::CUCS2String& strSource ) : m_strSource( strSource ), m_usPos( 0 )
+	CUCS2StringSource::CUCS2StringSource( nsCodeQOR::CUCS2String& strSource ) : m_strSource( strSource ), m_usPos( 0 )
 	{
 	}
 
 	//------------------------------------------------------------------------------
-	CBFUCS2StringSource::~CBFUCS2StringSource()
+	CUCS2StringSource::~CUCS2StringSource()
 	{
 	}
 
 	//------------------------------------------------------------------------------
-	CBFUCS2StringSource::CBFUCS2StringSource( const CBFUCS2StringSource& src )
+	CUCS2StringSource::CUCS2StringSource( const CUCS2StringSource& src )
 	{
 		*this = src;
 	}
 
 	//------------------------------------------------------------------------------
-	CBFUCS2StringSource& CBFUCS2StringSource::operator = ( const CBFUCS2StringSource& src )
+	CUCS2StringSource& CUCS2StringSource::operator = ( const CUCS2StringSource& src )
 	{
 		if( &src != this )
 		{
@@ -66,7 +66,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	bool CBFUCS2StringSource::Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead )
+	bool CUCS2StringSource::Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead )
 	{
 		bool bResult = false;
 		byte* pBuffer = GetBuffer()->WriteRequest( ulUnitsToRead );
@@ -92,14 +92,14 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFUCS2StringSource::SetData( nsCodeQOR::CUCS2String& strSource )
+	void CUCS2StringSource::SetData( nsCodeQOR::CUCS2String& strSource )
 	{
 		m_strSource = strSource;
 		m_usPos = 0;
 	}
 
 	//------------------------------------------------------------------------------
-	nsCodeQOR::CUCS2String& CBFUCS2StringSource::GetData( void )
+	nsCodeQOR::CUCS2String& CUCS2StringSource::GetData( void )
 	{
 		return m_strSource;
 	}

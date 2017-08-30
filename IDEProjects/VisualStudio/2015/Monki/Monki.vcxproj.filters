@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\View">
+      <UniqueIdentifier>{9ea241c3-96dc-43fd-bb1c-45309c8d9279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Views">
+      <UniqueIdentifier>{0f17daa2-6eed-4bbd-bb20-4f3e539066c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UIG">
+      <UniqueIdentifier>{6411db07-ec81-435c-b098-69142ba00ec6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Layouts">
+      <UniqueIdentifier>{31b1fdd1-468e-47bd-9b0b-3b8ef32b5be0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Views\Impl">
+      <UniqueIdentifier>{53b521c4-c431-4028-a8a3-958bf15fac48}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\MonkiQOR\GUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MonkiQOR\MonkiQOR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MonkiQOR\TerminalGUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\MonkiQOR\View.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\AbstractTerminalGUI.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\EventSource.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\GUI.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\TerminalGUI.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\View.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\View\ItemExtent.h">
+      <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\View\Layout.h">
+      <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\View\LayoutItem.h">
+      <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\View\Size.h">
+      <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\View\State.h">
+      <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\View\Layouts\ColumnLayout.h">
+      <Filter>Source Files\View\Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\View\Layouts\FlowLayout.h">
+      <Filter>Source Files\View\Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\View\Layouts\GridLayout.h">
+      <Filter>Source Files\View\Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\View\Layouts\RowLayout.h">
+      <Filter>Source Files\View\Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\Views\AbstractWindowView.h">
+      <Filter>Source Files\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\Views\BrowserView.h">
+      <Filter>Source Files\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\Views\DesktopView.h">
+      <Filter>Source Files\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\Views\KioskView.h">
+      <Filter>Source Files\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\Views\SmartPhoneView.h">
+      <Filter>Source Files\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\Views\TabletView.h">
+      <Filter>Source Files\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\Views\TVView.h">
+      <Filter>Source Files\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\Views\Impl\DesktopViewImpl.h">
+      <Filter>Source Files\Views\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\UIG\Interaction.h">
+      <Filter>Source Files\UIG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\UIG\Script.h">
+      <Filter>Source Files\UIG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\UIG\Selection.h">
+      <Filter>Source Files\UIG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\UIG\Sequence.h">
+      <Filter>Source Files\UIG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\UIG\Show.h">
+      <Filter>Source Files\UIG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\UIG\SideBySide.h">
+      <Filter>Source Files\UIG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\MonkiQOR\UIG\Stack.h">
+      <Filter>Source Files\UIG</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

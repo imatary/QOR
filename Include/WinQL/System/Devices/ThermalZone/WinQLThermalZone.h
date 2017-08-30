@@ -1,6 +1,6 @@
 //WinQLThermalZone.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,12 +29,16 @@
 #ifndef WINQL_DEVICE_THERMALZONE_H_3
 #define WINQL_DEVICE_THERMALZONE_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "WinQL/System/Devices/Interfaces/WinQLDeviceInterface.h"
 #include "WinQL/System/Devices/WinQLIODevice.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CThermalZone, CTExtRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -44,20 +48,82 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CThermalZone > refType;
-
+		__QOR_DECLARE_REF_TYPE(CThermalZone);
 		__QOR_DECLARE_OCLASS_ID( CThermalZone );
 
 		static nsCodeQOR::CTExternalRegEntry< CThermalZone > RegEntry;
+		__QCMP_STATIC_CONSTANT(unsigned long, File_Device_ThermalZone = 0x00000029);
+
+		//--------------------------------------------------------------------------------
+		struct ThermalInfoEx
+		{
+			unsigned long ThermalStamp;
+			unsigned long ThermalConstant1;
+			unsigned long ThermalConstant2;
+			unsigned long Processors;
+			unsigned long SamplingPeriod;
+			unsigned long CurrentTemperature;
+			unsigned long PassiveTripPoint;
+			unsigned long CriticalTripPoint;
+			unsigned char ActiveTripPointCount;
+			unsigned long ActiveTripPoint[10];
+			unsigned long S4TransitionTripPoint;
+		};
+
+		//--------------------------------------------------------------------------------
+		struct Policy
+		{
+			unsigned long Version; 
+			byte WaitForUpdate;
+			byte Hibernate;
+			byte Critical;
+			byte ThermalStandby;
+			unsigned long ActivationReasons;
+			unsigned long PassiveLimit;
+			unsigned long ActiveLevel;
+		};
+
+		//--------------------------------------------------------------------------------
+		struct WaitRead
+		{
+			unsigned long Timeout;
+			unsigned long LowTemperature;
+			unsigned long HighTemperature;
+
+		};
+
+		//--------------------------------------------------------------------------------
+		enum eThermalFunctions
+		{
+			Query = 0x20,
+			Set_Cooling,
+			Run_Active_Cooling,
+		};
+
+		//--------------------------------------------------------------------------------
+		enum eActivationReasons
+		{
+			NotThrottled = 0x00000000,
+			Thermal,
+			Current_Limit,
+		};
 
 		CThermalZone();
 		virtual ~CThermalZone();
 		
+		void Open(void);
+		void Close(void);
 
 	private:
 
+		void QueryInformation(void);
+		void SetCoolingPolicy(void);
+		void RunActiveCoolingMethod(void);
+
 		CThermalZone( const CThermalZone& src );
 		CThermalZone& operator = ( const CThermalZone& src );
+
+		CIODeviceFile::ref_type m_Session;
 		
 /*
 //

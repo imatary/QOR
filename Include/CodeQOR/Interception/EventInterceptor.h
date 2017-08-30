@@ -2,7 +2,7 @@
 
 // Copyright Querysoft Limited 2015
 //
-// Permission is hereby granted, free of charge, to any person or organisation
+// Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
 // this license (the "Software") to use, reproduce, display, distribute,
 // execute, and transmit the Software, and to prepare derivative works of the

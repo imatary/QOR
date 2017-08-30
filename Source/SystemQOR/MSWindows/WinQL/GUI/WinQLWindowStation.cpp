@@ -1,6 +1,6 @@
 //WinQLWindowStation.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,6 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/GUI/WindowStation.h"
 #include "WinQAPI/User32.h"
@@ -52,28 +53,26 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CWindowStation::refType CWindowStationManager::Current()
+	CWindowStation::ref_type CWindowStationManager::Current()
 	{
 		_WINQ_FCONTEXT( "CWindowStationManager::Current" );
-		CWindowStation::refType Ref( new CWindowStation(), true );
-		return Ref;
+		return new_shared_ref<CWindowStation>();
 	}
 
 	//--------------------------------------------------------------------------------
-	CWindowStation::refType CWindowStationManager::Open( CTString& strWindowStation, bool bInherit, unsigned long ulDesiredAccess )
+	CWindowStation::ref_type CWindowStationManager::Open( CTString& strWindowStation, bool bInherit, unsigned long ulDesiredAccess )
 	{
 		_WINQ_FCONTEXT( "CWindowStationManager::Open" );
-		CWindowStation::refType Ref( new CWindowStation( strWindowStation.GetBuffer(), bInherit ? 1 : 0, ulDesiredAccess ), true );
+		CWindowStation::ref_type Ref = new_shared_ref< CWindowStation>(strWindowStation.GetBuffer(), bInherit ? 1 : 0, ulDesiredAccess);
 		strWindowStation.ReleaseBuffer();
 		return Ref;
 	}
 
 	//--------------------------------------------------------------------------------
-	CWindowStation::refType CWindowStationManager::Create( CTString& strWindowStation, unsigned long ulFlags, unsigned long ulDesiredAccess, SECURITY_ATTRIBUTES* pSA )
+	CWindowStation::ref_type CWindowStationManager::Create( CTString& strWindowStation, unsigned long ulFlags, unsigned long ulDesiredAccess, SECURITY_ATTRIBUTES* pSA )
 	{
 		_WINQ_FCONTEXT( "CWindowStationManager::Create" );
-		CWindowStation::refType Ref( new CWindowStation( strWindowStation.GetBuffer(), ulFlags, ulDesiredAccess, pSA ), true );
-		return Ref;
+		return new_shared_ref<CWindowStation>(strWindowStation.GetBuffer(), ulFlags, ulDesiredAccess, pSA);
 	}
 
 	//--------------------------------------------------------------------------------
@@ -161,7 +160,6 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			CTObjectLock< CWindowStation > Lock( this );
 			bResult = m_User32Library.SetProcessWindowStation( reinterpret_cast< ::HWINSTA >( m_Handle.Use() ) ) ? true : false;
 		}__QOR_ENDPROTECT;
 		return bResult;
@@ -174,7 +172,6 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			CTObjectLock< CWindowStation > Lock( this );
 			bResult = m_User32Library.EnumDesktops(reinterpret_cast< ::HWINSTA >( m_Handle.Use() ), lpEnumFunc, lParam ) ? true : false;
 		}__QOR_ENDPROTECT;
 		return bResult;
@@ -187,7 +184,6 @@ namespace nsWin32
 		
 		__QOR_PROTECT
 		{			
-			CTObjectLock< CWindowStation > Lock( this );
 			CDesktopHandle Handle( 0, (void*)( m_User32Library.GetThreadDesktop( dwThreadId ) ) );
 			CDesktopHandle::refType refHandle( &Handle, false );			
 			return CDesktop::FromHandle( refHandle );
@@ -202,7 +198,6 @@ namespace nsWin32
 		byte* pvInfo;
 		__QOR_PROTECT
 		{			
-			CTObjectLock< CWindowStation > Lock( this );
 			unsigned long ulLen = 0;
 			bResult = m_User32Library.GetUserObjectInformation( m_Handle.Use(), nIndex, 0, 0, &ulLen ) ? true : false;
 
@@ -224,7 +219,6 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			CTObjectLock< CWindowStation > Lock( this );
 			bResult = m_User32Library.SetUserObjectInformation( m_Handle.Use(), nIndex, const_cast< ::PVOID >( pvInfo ), nLength ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
@@ -269,7 +263,6 @@ namespace nsWin32
 		CTString strName;
 		__QOR_PROTECT
 		{
-			CTObjectLock< CWindowStation > Lock( this );
 			nsCodeQOR::CTLRef< byte > RefData( 0, true );
 			bool bResult = GetInformation( nsWin32::CUserObject::UOI_Name, RefData );
 			if( bResult )
@@ -288,7 +281,6 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			CTObjectLock< CWindowStation > Lock( this );
 			nsCodeQOR::CTLRef< byte > RefData( 0, true );
 			bResult = GetInformation( nsWin32::CUserObject::UOI_Flags, RefData );
 			if( bResult )
@@ -306,7 +298,6 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			CTObjectLock< CWindowStation > Lock( this );
 			void* pvInfo = reinterpret_cast< void* >( &Flags );
 			bResult = SetInformation( CUserObject::UOI_Flags, pvInfo, sizeof( USEROBJECTFLAGS ) );
 		}__QOR_ENDPROTECT
@@ -321,7 +312,6 @@ namespace nsWin32
 		__QOR_PROTECT
 		{
 			nsCodeQOR::CTLRef< byte > RefData( 0, true );
-			CTObjectLock< CWindowStation > Lock( this );
 			bool bResult = GetInformation( nsWin32::CUserObject::UOI_Type, RefData );
 			if( bResult )
 			{
@@ -341,7 +331,6 @@ namespace nsWin32
 		__QOR_PROTECT
 		{
 			nsCodeQOR::CTLRef< byte > RefData( 0, true );
-			CTObjectLock< CWindowStation > Lock( this );
 			bool bResult = GetInformation( nsWin32::CUserObject::UOI_User_SID, RefData );
 			if( bResult )
 			{
@@ -368,7 +357,6 @@ namespace nsWin32
 			}
 			else
 			{
-				CTObjectLock< CWindowStation > Lock( this );
 				if( !m_bDesktopsEnumerated )
 				{
 					EnumAllDesktops();
@@ -388,12 +376,6 @@ namespace nsWin32
 			}
 		}__QOR_ENDPROTECT
 		return Result;
-	}
-
-	//--------------------------------------------------------------------------------
-	CWindowStation::refType CWindowStation::Ref( void )
-	{
-		return refType( this, false );
 	}
 
 }//nsWin32

@@ -1,6 +1,6 @@
 //WinQLSystemLocale.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -46,7 +46,7 @@ namespace nsWin32
 		{
 			TCHAR* pEnd = 0;
 			unsigned long ulCodePage = _tcstoul( strCodePage, &pEnd, 0 );
-			bResult = TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SHARED_OBJECT_ACCESS).AddCodePage( static_cast< unsigned int >( ulCodePage ) );
+			bResult = TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SHARED_OBJECT_ACCESS)().AddCodePage( static_cast< unsigned int >( ulCodePage ) );
 		}__QOR_ENDPROTECT
 		return bResult;
 	}

@@ -24,6 +24,8 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+//Preprocessable batch script fragment to build one static library
+
 //Extract the library project to build from the Libraries iteration
 set buildbinary=QOR_PP_SEQ_ELEM(QOR_PP_ITERATION(5),QOR_LIBS)
 echo Building Library: %buildbinary%

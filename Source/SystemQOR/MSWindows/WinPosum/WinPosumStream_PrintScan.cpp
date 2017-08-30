@@ -87,7 +87,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	int __cdecl _output_s ( CPosumStream* pStream, const char* format, va_list argptr )
 	{
-		return 0;//OutputA( format, 0, true, false, argptr );
+		return 0;// OutputA(format, 0, true, false, argptr);
 	}
 
 	//--------------------------------------------------------------------------------
@@ -354,6 +354,9 @@ namespace nsWin32
 			if( retval == 0 )
 			{
 				buffing = _stbuf();
+				/*		CFormatter Formatter( this );
+				iResult = Formatter.OutputA_l( format, ap );
+				*/
 				retval = outfn( this, format, plocinfo, ap );
 				_ftbuf( buffing );
 			}

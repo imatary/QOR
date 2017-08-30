@@ -53,7 +53,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetCommConfig( m_Handle.Use(), reinterpret_cast< ::LPCOMMCONFIG >( lpCC ), lpdwSize ) ? true : false;
+			bResult = CKernel32::GetCommConfig( m_Handle().Use(), reinterpret_cast< ::LPCOMMCONFIG >( lpCC ), lpdwSize ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -65,7 +65,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::SetCommConfig( m_Handle.Use(), reinterpret_cast< ::LPCOMMCONFIG >( lpCC ), dwSize ) ? true : false;
+			bResult = CKernel32::SetCommConfig( m_Handle().Use(), reinterpret_cast< ::LPCOMMCONFIG >( lpCC ), dwSize ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -77,7 +77,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::ClearCommBreak( m_Handle.Use() ) ? true : false;
+			bResult = CKernel32::ClearCommBreak( m_Handle().Use() ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -89,7 +89,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::ClearCommError( m_Handle.Use(), lpErrors, reinterpret_cast< ::LPCOMSTAT >( lpStat ) ) ? true : false;
+			bResult = CKernel32::ClearCommError( m_Handle().Use(), lpErrors, reinterpret_cast< ::LPCOMSTAT >( lpStat ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -101,7 +101,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::EscapeCommFunction( m_Handle.Use(), dwFunc ) ? true : false;
+			bResult = CKernel32::EscapeCommFunction( m_Handle().Use(), dwFunc ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -113,7 +113,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetCommMask( m_Handle.Use(), lpEvtMask ) ? true : false;
+			bResult = CKernel32::GetCommMask( m_Handle().Use(), lpEvtMask ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -125,7 +125,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetCommModemStatus( m_Handle.Use(), lpModemStat ) ? true : false;
+			bResult = CKernel32::GetCommModemStatus( m_Handle().Use(), lpModemStat ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -137,7 +137,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetCommProperties( m_Handle.Use(), reinterpret_cast< ::LPCOMMPROP >( lpCommProp ) ) ? true : false;
+			bResult = CKernel32::GetCommProperties( m_Handle().Use(), reinterpret_cast< ::LPCOMMPROP >( lpCommProp ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -149,7 +149,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetCommState( m_Handle.Use(), reinterpret_cast< ::LPDCB >( lpDCB ) ) ? true : false;
+			bResult = CKernel32::GetCommState( m_Handle().Use(), reinterpret_cast< ::LPDCB >( lpDCB ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -161,7 +161,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::PurgeComm( m_Handle.Use(), dwFlags ) ? true : false;
+			bResult = CKernel32::PurgeComm( m_Handle().Use(), dwFlags ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -173,7 +173,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::SetCommBreak( m_Handle.Use() ) ? true : false;
+			bResult = CKernel32::SetCommBreak( m_Handle().Use() ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -185,7 +185,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::SetCommMask( m_Handle.Use(), dwEvtMask ) ? true : false;
+			bResult = CKernel32::SetCommMask( m_Handle().Use(), dwEvtMask ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -197,7 +197,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::SetCommState( m_Handle.Use(), reinterpret_cast< ::LPDCB >( lpDCB ) ) ? true : false;
+			bResult = CKernel32::SetCommState( m_Handle().Use(), reinterpret_cast< ::LPDCB >( lpDCB ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -209,7 +209,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetCommTimeouts( m_Handle.Use(), reinterpret_cast< ::LPCOMMTIMEOUTS >( lpCommTimeouts ) ) ? true : false;
+			bResult = CKernel32::GetCommTimeouts( m_Handle().Use(), reinterpret_cast< ::LPCOMMTIMEOUTS >( lpCommTimeouts ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -221,7 +221,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::SetCommTimeouts( m_Handle.Use(), reinterpret_cast< ::LPCOMMTIMEOUTS >( lpCommTimeouts ) ) ? true : false;
+			bResult = CKernel32::SetCommTimeouts( m_Handle().Use(), reinterpret_cast< ::LPCOMMTIMEOUTS >( lpCommTimeouts ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -233,7 +233,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::SetupComm( m_Handle.Use(), dwInQueue, dwOutQueue ) ? true : false;
+			bResult = CKernel32::SetupComm( m_Handle().Use(), dwInQueue, dwOutQueue ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -245,7 +245,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::TransmitCommChar( m_Handle.Use(), cChar ) ? true : false;
+			bResult = CKernel32::TransmitCommChar( m_Handle().Use(), cChar ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -257,7 +257,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::WaitCommEvent( m_Handle.Use(), lpEvtMask, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
+			bResult = CKernel32::WaitCommEvent( m_Handle().Use(), lpEvtMask, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}

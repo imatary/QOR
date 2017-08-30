@@ -1,6 +1,6 @@
 //UnitTestBase.cpp
 
-// Copyright Querysoft Limited 2012 - . All rights reserved.
+// Copyright Querysoft Limited 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by

@@ -31,6 +31,7 @@
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TSyncRef.h"
 #include "WinQL/WinQL.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "WinQL/Definitions/Handles.h"
@@ -46,6 +47,8 @@ namespace nsWinQAPI
 	class __QOR_INTERFACE( __WINQAPI ) CUser32;
 }
 
+__QOR_DECLARE_REF(nsWin32, __WINQL_GUI, CWindowStation, CTRef);
+
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
@@ -58,20 +61,20 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL_GUI ) CWindowStation
 	{
-		QOR_PP_WINQL_SHARED;
 
 	public:
-			
-		typedef nsCodeQOR::CTLRef< CWindowStation > refType;
 
 		__QOR_DECLARE_OCLASS_ID( CWindowStation );
+		__QOR_DECLARE_REF_TYPE(CWindowStation);
 
 		CWindowStation();
+		CWindowStation(const CWindowStation& src) = delete;
+		CWindowStation& operator = (const CWindowStation& src) = delete;
 		CWindowStation( TCHAR* lpszWinSta, int fInherit, unsigned long dwDesiredAccess );
 		CWindowStation( const TCHAR* lpwinsta, unsigned long dwFlags, unsigned long dwDesiredAccess, nsWin32::LPSECURITY_ATTRIBUTES lpsa );		
 		virtual ~CWindowStation();
 		
-		bool SetAsProcessWindowStation();
+		bool SetAsProcessWindowStation( void );
 		bool EnumDesktopsT( nsWin32::DesktopEnumProc lpEnumFunc, Cmp_long_ptr lParam );
 		CDesktop::refType GetThreadDesktop( unsigned long dwThreadId );
 		bool GetInformation( int nIndex, nsCodeQOR::CTLRef< byte >& RefData );
@@ -83,7 +86,6 @@ namespace nsWin32
 		CTString GetType( void );
 		CSID GetSID();
 		CDesktop::refType Desktop( CTString StrDesktop = CTString(), const TCHAR* lpszDevice = 0, nsWin32::LPDEVMODE pDevmode = 0, unsigned long dwFlags = 0, bool fInherit = false, unsigned long dwDesiredAccess = 0, nsWin32::LPSECURITY_ATTRIBUTES lpsa = 0 );
-		refType Ref( void );
 
 		/*
 		WTSRegisterSessionNotificationEx
@@ -272,34 +274,25 @@ namespace nsWin32
 		bool m_bDesktopsEnumerated;
 			
 		nsWinQAPI::CUser32& m_User32Library;
-		__QCS_DECLARE_NONCOPYABLE( CWindowStation );
+		
 	};
 
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL_GUI ) CWindowStationManager
 	{
-		QOR_PP_WINQL_SHARED;
 
 	public:
-
-		typedef CSharedRef< CWindowStationManager > refType;
 
 		__QOR_DECLARE_OCLASS_ID( CWindowStationManager );
 
 		CWindowStationManager();
 		~CWindowStationManager();
 
-		CWindowStation::refType Current( void );
-		CWindowStation::refType Open( CTString& strWindowStation, bool bInherit, unsigned long ulDesiredAccess );
-		CWindowStation::refType Create( CTString& strWindowStation, unsigned long ulFlags, unsigned long ulDesiredAccess, SECURITY_ATTRIBUTES* pSA );
+		CWindowStation::ref_type Current( void );
+		CWindowStation::ref_type Open( CTString& strWindowStation, bool bInherit, unsigned long ulDesiredAccess );
+		CWindowStation::ref_type Create( CTString& strWindowStation, unsigned long ulFlags, unsigned long ulDesiredAccess, SECURITY_ATTRIBUTES* pSA );
 
 		bool Enumerate( nsWin32::WinStaEnumProc lpEnumFunc, Cmp_long_ptr lParam );
-
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this );
-		}
 
 	private:
 			

@@ -675,7 +675,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	int CSetLoc::_stricmp ( const char* dst, const char* src )
 	{
-		if ( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+		if ( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 		{				
 			//_VALIDATE_RETURN(dst != NULL, EINVAL, _NLSCMPERROR);
 			//_VALIDATE_RETURN(src != NULL, EINVAL, _NLSCMPERROR);
@@ -718,7 +718,7 @@ namespace nsWin32
 	int CSetLoc::_strnicmp ( const char* dst, const char* src, size_t count )
 	{
 
-		if ( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+		if ( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 		{
 			// validation section
 			//_VALIDATE_RETURN(dst != NULL, EINVAL, _NLSCMPERROR);

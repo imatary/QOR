@@ -1,6 +1,6 @@
 //WinQLSocket.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -27,6 +27,7 @@
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/Application/Comms/Network/WinQLSocket.h"
 #include "WinQL/Application/Comms/Network/WinQLSocketEvent.h"
+#include "WinQL/Application/IO/WinQLOverlappedHandler.h"
 #include "WinQAPI/WS2_32.h"
 
 //--------------------------------------------------------------------------------
@@ -37,6 +38,57 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CSocket );
 
 	nsCodeQOR::mxGUID CSocket::WSAID_AcceptEx	= { 0xb5367df1, 0xcbac, 0x11cf, { 0x95, 0xca, 0x00, 0x80, 0x5f, 0x48, 0xa1, 0x92 } };
+
+	//--------------------------------------------------------------------------------
+	const int sizeofAddressByFamily(const unsigned short usFamily) 
+	{
+		int iResult = 16;
+		switch (usFamily)
+		{
+			case nsBluefoot::ISocket::AF_Unspecified:
+			case nsBluefoot::ISocket::AF_Unix:
+			case nsBluefoot::ISocket::AF_INet:
+			case nsBluefoot::ISocket::AF_ImpLink:
+			case nsBluefoot::ISocket::AF_Pup:
+			case nsBluefoot::ISocket::AF_Chaos:
+			case nsBluefoot::ISocket::AF_Ns:
+			//case nsBluefoot::ISocket::AF_Ipx:
+			case nsBluefoot::ISocket::AF_Iso:
+			//case nsBluefoot::ISocket::AF_Osi:
+			case nsBluefoot::ISocket::AF_Ecma:
+			case nsBluefoot::ISocket::AF_DataKit:
+			case nsBluefoot::ISocket::AF_Ccitt:
+			case nsBluefoot::ISocket::AF_Sna:
+			case nsBluefoot::ISocket::AF_DecNet:
+			case nsBluefoot::ISocket::AF_Dli:
+			case nsBluefoot::ISocket::AF_Lat:
+			case nsBluefoot::ISocket::AF_HYLink:
+			case nsBluefoot::ISocket::AF_AppleTalk:
+			case nsBluefoot::ISocket::AF_NetBIOS:
+			case nsBluefoot::ISocket::AF_VoiceView:
+			case nsBluefoot::ISocket::AF_FireFox:
+			case nsBluefoot::ISocket::AF_Unknown1:
+			case nsBluefoot::ISocket::AF_Ban:
+			case nsBluefoot::ISocket::AF_Atm:
+			case nsBluefoot::ISocket::AF_INet6:
+			case nsBluefoot::ISocket::AF_Cluster:
+			case nsBluefoot::ISocket::AF_1284_4:
+			case nsBluefoot::ISocket::AF_Irda:
+			case nsBluefoot::ISocket::AF_NetDes:
+			case nsBluefoot::ISocket::AF_TcnProcess:
+			case nsBluefoot::ISocket::AF_TcnMessage:
+			case nsBluefoot::ISocket::AF_IclFxbm:
+				break;
+			case nsBluefoot::ISocket::AF_Bth:					// Bluetooth RFCOMM/L2CAP protocols
+				return 30;
+
+			case nsBluefoot::ISocket::AF_Link:
+			case nsBluefoot::ISocket::AF_Max:
+			default:
+				break;
+		}
+		return iResult;
+	}
 
 	//--------------------------------------------------------------------------------
 	CSocket::Internet_SocketAddress::Internet_SocketAddress( unsigned char ucA, unsigned char ucB, unsigned char ucC, unsigned char ucD, unsigned short usPort )
@@ -76,7 +128,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CSocket::Create( int iAF, int iType, int iProtocol )
+	void CSocket::Create( eAddressFamily iAF, eType iType, eProtocol iProtocol )
 	{
 		_WINQ_FCONTEXT( "CSocket::Create" );
 		__QOR_PROTECT
@@ -86,7 +138,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CSocket::Create( int iAF, int iType, int iProtocol, WSAProtocolInfo* pProtocolInfo, unsigned int Group, unsigned long ulFlags )
+	void CSocket::Create(eAddressFamily iAF, eType iType, eProtocol iProtocol, WSAProtocolInfo* pProtocolInfo, unsigned int Group, unsigned long ulFlags )
 	{
 		_WINQ_FCONTEXT( "CSocket::Create" );
 		__QOR_PROTECT
@@ -96,13 +148,13 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CSocket::Bind( const CSocket::Address* szName, int iNamelen )
+	int CSocket::Bind( const Address& Address )
 	{
 		_WINQ_FCONTEXT( "CSocket::Bind" );
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			iResult = m_Library.bind( m_Socket, reinterpret_cast< const ::sockaddr* >( szName ), 16 );
+			iResult = m_Library.bind( m_Socket, reinterpret_cast< const ::sockaddr* >( &Address ), sizeof( ::sockaddr ) );
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -120,41 +172,44 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CSocket CSocket::Accept( CSocket::Address* pAddr, int* pAddrlen )
+	nsBluefoot::ISocket::ref_type CSocket::Accept( Address& Addr )
 	{
 		_WINQ_FCONTEXT( "CSocket::Accept" );
-		CSocket Result( m_Library.accept( m_Socket, reinterpret_cast< ::sockaddr* >( pAddr ), pAddrlen ) );
+
+		int addrlen = 0;
+		SOCKET s = m_Library.accept(m_Socket, reinterpret_cast< ::sockaddr*>(&Addr), &addrlen );
+		return new_shared_ref<CSocket>(s).AsRef<nsBluefoot::ISocket>();
+	}
+
+	//--------------------------------------------------------------------------------
+	CSocket CSocket::Accept( Address& Addr, fpConditionProc pfnCondition, Cmp_ulong_ptr CallbackData )
+	{
+		_WINQ_FCONTEXT( "CSocket::Accept" );
+		int addrlen = 0;
+		CSocket Result( m_Library.WSAAccept( m_Socket, reinterpret_cast< ::sockaddr* >( &Addr ), &addrlen, reinterpret_cast< ::LPCONDITIONPROC >( pfnCondition ), CallbackData ) );
 		return Result;
 	}
 
 	//--------------------------------------------------------------------------------
-	CSocket CSocket::Accept( CSocket::Address* pAddr, int* pAddrlen, fpConditionProc pfnCondition, Cmp_ulong_ptr CallbackData )
-	{
-		_WINQ_FCONTEXT( "CSocket::Accept" );
-		CSocket Result( m_Library.WSAAccept( m_Socket, reinterpret_cast< ::sockaddr* >( pAddr ), pAddrlen, reinterpret_cast< ::LPCONDITIONPROC >( pfnCondition ), CallbackData ) );
-		return Result;
-	}
-
-	//--------------------------------------------------------------------------------
-	int CSocket::Connect( const CSocket::Address* pName, int iNamelen )
+	int CSocket::Connect( const Address& Addr )
 	{
 		_WINQ_FCONTEXT( "CSocket::Connect" );
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			iResult = m_Library.connect( m_Socket, reinterpret_cast< const ::sockaddr* >( pName ), iNamelen );
+			iResult = m_Library.connect( m_Socket, reinterpret_cast< const ::sockaddr* >( &Addr), sizeofAddressByFamily(Addr.sa_family) );
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	int CSocket::Connect( const CSocket::Address* pName, int iNamelen, WSABuf* pCallerData, WSABuf* pCalleeData, QualityOfService* pSQOS, QualityOfService* pGQOS )
+	int CSocket::Connect( const Address& Addr, WSABuf* pCallerData, WSABuf* pCalleeData, QualityOfService* pSQOS, QualityOfService* pGQOS )
 	{
 		_WINQ_FCONTEXT( "CSocket::Connect" );
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			iResult = m_Library.WSAConnect( m_Socket, reinterpret_cast< const ::sockaddr* >( pName ), iNamelen, reinterpret_cast< ::LPWSABUF >( pCallerData ), reinterpret_cast< ::LPWSABUF >( pCalleeData ), reinterpret_cast< ::LPQOS >( pSQOS ), reinterpret_cast< ::LPQOS >( pGQOS ) );
+			iResult = m_Library.WSAConnect( m_Socket, reinterpret_cast< const ::sockaddr* >( &Addr), sizeofAddressByFamily(Addr.sa_family), reinterpret_cast< ::LPWSABUF >( pCallerData ), reinterpret_cast< ::LPWSABUF >( pCalleeData ), reinterpret_cast< ::LPQOS >( pSQOS ), reinterpret_cast< ::LPQOS >( pGQOS ) );
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -196,25 +251,27 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CSocket::GetPeerName( CSocket::Address* pName, int* piNameLen )
+	int CSocket::GetPeerName( Address& Addr )
 	{
 		_WINQ_FCONTEXT( "CSocket::GetPeerName" );
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			iResult = m_Library.getpeername( m_Socket, reinterpret_cast< ::sockaddr* >( pName ), piNameLen );
+			int addrlen = 0;
+			iResult = m_Library.getpeername( m_Socket, reinterpret_cast< ::sockaddr* >( &Addr), &addrlen );
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	int CSocket::GetSockName( CSocket::Address* pName, int* piNameLen )
+	int CSocket::GetSockName( Address& Address )
 	{
 		_WINQ_FCONTEXT( "CSocket::GetSockName" );
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			iResult = m_Library.getsockname( m_Socket, reinterpret_cast< ::sockaddr* >( pName ), piNameLen );
+			int addrlen = 0;
+			iResult = m_Library.getsockname( m_Socket, reinterpret_cast< ::sockaddr* >( &Address ), &addrlen );
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -280,10 +337,10 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CSocket CSocket::JoinLeaf( const CSocket::Address* pName, int iNamelen, WSABuf* pCallerData, WSABuf* pCalleeData, QualityOfService* pSQOS, QualityOfService* pGQOS, unsigned long ulFlags )
+	CSocket CSocket::JoinLeaf( const Address& Address, WSABuf* pCallerData, WSABuf* pCalleeData, QualityOfService* pSQOS, QualityOfService* pGQOS, unsigned long ulFlags )
 	{			
 		_WINQ_FCONTEXT( "CSocket::JoinLeaf" );
-		CSocket Result( m_Library.WSAJoinLeaf( m_Socket, reinterpret_cast< const ::sockaddr* >( pName ), iNamelen, reinterpret_cast< LPWSABUF >( pCallerData ), reinterpret_cast< LPWSABUF >( pCalleeData ), reinterpret_cast< ::LPQOS >( pSQOS ), reinterpret_cast< ::LPQOS >( pGQOS ), ulFlags ) );
+		CSocket Result( m_Library.WSAJoinLeaf( m_Socket, reinterpret_cast< const ::sockaddr* >( &Address ), sizeof(::sockaddr), reinterpret_cast< LPWSABUF >( pCallerData ), reinterpret_cast< LPWSABUF >( pCalleeData ), reinterpret_cast< ::LPQOS >( pSQOS ), reinterpret_cast< ::LPQOS >( pGQOS ), ulFlags ) );
 		return Result;
 	}
 
@@ -307,6 +364,23 @@ namespace nsWin32
 		__QOR_PROTECT
 		{
 			iResult = m_Library.WSANtohs( m_Socket, usNet, pusHost );
+		}__QOR_ENDPROTECT
+		return iResult;
+	}
+
+	//--------------------------------------------------------------------------------
+	int CSocket::AsyncReceive(char* pBuffer, int iLen, void* pSyncObject)
+	{
+		_WINQ_FCONTEXT("CSocket::AsyncReceive");
+		int iResult = 0;
+		__QOR_PROTECT
+		{
+			WSABUF tmpBuffer;
+			tmpBuffer.buf = pBuffer;
+			tmpBuffer.len = iLen;
+			unsigned long ulNumberOfBytesRecvd = 0;
+			unsigned long ulFlags = 0;
+			iResult = m_Library.WSARecv(m_Socket, reinterpret_cast< ::LPWSABUF >(&tmpBuffer), 1, &ulNumberOfBytesRecvd, &ulFlags, reinterpret_cast< ::LPWSAOVERLAPPED >(pSyncObject), reinterpret_cast< ::LPWSAOVERLAPPED_COMPLETION_ROUTINE >(&COverlappedHandler::OnOverlappedSocketReadCompleted));
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -348,37 +422,55 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CSocket::ReceiveFrom( char* Buffer, int iLen, int iFlags, Address* pFrom, int* pFromLen )
+	int CSocket::ReceiveFrom( char* Buffer, int iLen, int iFlags, Address& From )
 	{
 		_WINQ_FCONTEXT( "CSocket::ReceiveFrom" );
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			iResult = m_Library.recvfrom( m_Socket, Buffer, iLen, iFlags, reinterpret_cast< ::sockaddr* >( pFrom ), pFromLen );
+			int fromLen = 0;
+			iResult = m_Library.recvfrom( m_Socket, Buffer, iLen, iFlags, reinterpret_cast< ::sockaddr* >( &From ), &fromLen );
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	int CSocket::ReceiveFrom( WSABuf* pBuffers, unsigned long ulBufferCount, unsigned long* pulNumberOfBytesRecvd, unsigned long* pulFlags, Address* pFrom, int* pFromLen, OVERLAPPED* pOverlapped, fpWSAOverlappedCompletionRoutine pCompletionRoutine )
+	int CSocket::ReceiveFrom( WSABuf* pBuffers, unsigned long ulBufferCount, unsigned long* pulNumberOfBytesRecvd, unsigned long* pulFlags, Address& From, OVERLAPPED* pOverlapped, fpWSAOverlappedCompletionRoutine pCompletionRoutine )
 	{
 		_WINQ_FCONTEXT( "CSocket::ReceiveFrom" );
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			iResult = m_Library.WSARecvFrom( m_Socket, reinterpret_cast< ::LPWSABUF >( pBuffers ), ulBufferCount, pulNumberOfBytesRecvd, pulFlags, reinterpret_cast< ::sockaddr* >( pFrom ), pFromLen, reinterpret_cast< ::LPWSAOVERLAPPED >( pOverlapped ), reinterpret_cast< ::LPWSAOVERLAPPED_COMPLETION_ROUTINE >( pCompletionRoutine ) );
+			int fromLen = 0;
+			iResult = m_Library.WSARecvFrom( m_Socket, reinterpret_cast< ::LPWSABUF >( pBuffers ), ulBufferCount, pulNumberOfBytesRecvd, pulFlags, reinterpret_cast< ::sockaddr* >( &From ), &fromLen, reinterpret_cast< ::LPWSAOVERLAPPED >( pOverlapped ), reinterpret_cast< ::LPWSAOVERLAPPED_COMPLETION_ROUTINE >( pCompletionRoutine ) );
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	int CSocket::Send( const char* Buffer, int iLen, int iFlags )
+	int CSocket::AsyncSend(char* Buffer, int iLen, void* pSyncObject)
+	{
+		_WINQ_FCONTEXT("CSocket::Send");
+		int iResult = 0;
+		__QOR_PROTECT
+		{
+			WSABUF tmpBuffer;
+			tmpBuffer.buf = Buffer;
+			tmpBuffer.len = iLen;
+			unsigned long ulNumberOfBytesSent = 0;
+			iResult = m_Library.WSASend(m_Socket, reinterpret_cast< ::LPWSABUF >(&tmpBuffer), 1, &ulNumberOfBytesSent, 0, reinterpret_cast< ::LPWSAOVERLAPPED >(pSyncObject), (LPWSAOVERLAPPED_COMPLETION_ROUTINE)(&COverlappedHandler::OnOverlappedSocketWriteCompleted) );
+		}__QOR_ENDPROTECT
+		return iResult;
+	}
+
+	//--------------------------------------------------------------------------------
+	int CSocket::Send( const char* Buffer, int iLen )
 	{
 		_WINQ_FCONTEXT( "CSocket::Send" );
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			iResult = m_Library.send( m_Socket, Buffer, iLen, iFlags );
+			iResult = m_Library.send( m_Socket, Buffer, iLen, 0 );
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -420,13 +512,13 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CSocket::SendTo( const char* Buffer, int iLen, int iFlags, const Address* pTo, int iToLen )
+	int CSocket::SendTo( const char* Buffer, int iLen, int iFlags, const Address& To)
 	{
 		_WINQ_FCONTEXT( "CSocket::SendTo" );
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			iResult = m_Library.sendto( m_Socket, Buffer, iLen, iFlags, reinterpret_cast< const ::sockaddr* >( pTo ), iToLen );
+			iResult = m_Library.sendto( m_Socket, Buffer, iLen, iFlags, reinterpret_cast< const ::sockaddr* >( &To ), sizeofAddressByFamily(To.sa_family));
 		}__QOR_ENDPROTECT
 		return iResult;
 	}

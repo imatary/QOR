@@ -1,6 +1,6 @@
 //WinQLSession.cpp
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -62,7 +62,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CSessionHelper::ExitWindowsEx( unsigned int uFlags, unsigned long dwReason )
+	bool CSessionHelper::ExitWindowsEx( unsigned int uFlags, unsigned long dwReason ) const
 	{
 		_WINQ_FCONTEXT( "CSessionHelper::ExitWindowsEx" );
 		bool bResult = false;
@@ -74,7 +74,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CSessionHelper::LockWorkStation()
+	bool CSessionHelper::LockWorkStation() const
 	{
 		_WINQ_FCONTEXT( "CSessionHelper::LockWorkStation" );
 		bool bResult = false;
@@ -86,7 +86,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CSessionHelper::ShutdownBlockReasonCreate( COSWindow::refType Wnd, const wchar_t* pwszReason )
+	bool CSessionHelper::ShutdownBlockReasonCreate( COSWindow::refType Wnd, const wchar_t* pwszReason ) const
 	{
 		_WINQ_FCONTEXT( "CSessionHelper::ShutdownBlockReasonCreate" );
 		bool bResult = false;
@@ -98,7 +98,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CSessionHelper::ShutdownBlockReasonDestroy( COSWindow::refType Wnd )
+	bool CSessionHelper::ShutdownBlockReasonDestroy( COSWindow::refType Wnd ) const
 	{
 		_WINQ_FCONTEXT( "CSessionHelper::ShutdownBlockReasonDestroy" );
 		bool bResult = false;
@@ -110,7 +110,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CWString CSessionHelper::ShutdownBlockReasonQuery( COSWindow::refType Wnd )
+	CWString CSessionHelper::ShutdownBlockReasonQuery( COSWindow::refType Wnd ) const
 	{
 		_WINQ_FCONTEXT( "CSessionHelper::ShutdownBlockReasonQuery" );
 		CWString strReason;
@@ -127,7 +127,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CSessionHelper::EnumWindowStationsT( WindowStationEnumCallback lpEnumFunc, Cmp_long_ptr lParam )
+	bool CSessionHelper::EnumWindowStationsT( WindowStationEnumCallback lpEnumFunc, Cmp_long_ptr lParam ) const
 	{
 		_WINQ_FCONTEXT( "CSession::EnumWindowStations" );
 		bool bResult = false;
@@ -139,7 +139,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CSessionHelper::AbortSystemShutdownT( const TCHAR* lpMachineName )
+	bool CSessionHelper::AbortSystemShutdownT( const TCHAR* lpMachineName ) const
 	{
 		_WINQ_FCONTEXT( "CSession::AbortSystemShutdown" );
 		bool bResult = false;
@@ -153,7 +153,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	//If its Vista just call down
 	//else rearrange the params and call InitiateSystemShutdownEx or InitiateSystemShutdown if no reason is given
-	bool CSessionHelper::InitiateShutdownT( const TCHAR* lpMachineName, const TCHAR* lpMessage, unsigned long dwGracePeriod, unsigned long dwShutdownFlags, unsigned long dwReason )
+	bool CSessionHelper::InitiateShutdownT( const TCHAR* lpMachineName, const TCHAR* lpMessage, unsigned long dwGracePeriod, unsigned long dwShutdownFlags, unsigned long dwReason ) const
 	{
 		_WINQ_FCONTEXT( "CSessionHelper::InitiateShutdown" );
 		bool bResult = false;
@@ -191,7 +191,7 @@ namespace nsWin32
 			
 	//--------------------------------------------------------------------------------
 	bool CSessionHelper::LogonUserT( wchar_t* lpszUsername, wchar_t* lpszDomain, wchar_t* lpszPassword, unsigned long dwLogonType, unsigned long dwLogonProvider,
-		nsWin32::PTOKEN_GROUPS pTokenGroups, void** phToken, void** ppLogonSid, void** ppProfileBuffer, unsigned long* pdwProfileLength, nsWin32::QuotaLimits* pQuotaLimits )
+		nsWin32::PTOKEN_GROUPS pTokenGroups, void** phToken, void** ppLogonSid, void** ppProfileBuffer, unsigned long* pdwProfileLength, nsWin32::QuotaLimits* pQuotaLimits ) const
 	{
 		_WINQ_FCONTEXT( "CSessionHelper::LogonUser" );
 		bool bResult = false;
@@ -231,7 +231,7 @@ namespace nsWin32
 
 	//--------------------------------------------------------------------------------
 	unsigned long CSessionHelper::MSChapSrvChangePassword( wchar_t* ServerName, wchar_t* UserName, unsigned char LmOldPresent, 
-		LMOWFPassword* LmOldOwfPassword, LMOWFPassword* LmNewOwfPassword, NTOWFPassword* NtOldOwfPassword, NTOWFPassword* NtNewOwfPassword )
+		LMOWFPassword* LmOldOwfPassword, LMOWFPassword* LmNewOwfPassword, NTOWFPassword* NtOldOwfPassword, NTOWFPassword* NtNewOwfPassword ) const
 	{
 		_WINQ_FCONTEXT( "CSessionHelper::MSChapSrvChangePassword" );
 		unsigned long dwResult = 0;
@@ -243,7 +243,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CSessionHelper::MSChapSrvChangePassword2( wchar_t* ServerName, wchar_t* UserName, SamprEncryptedUserPassword* NewPasswordEncryptedWithOldNt, EncryptedNTOWFPassword* OldNtOwfPasswordEncryptedWithNewNt, unsigned char LmPresent, SamprEncryptedUserPassword* NewPasswordEncryptedWithOldLm, EncryptedLMOWFPassword* OldLmOwfPasswordEncryptedWithNewLmOrNt )
+	unsigned long CSessionHelper::MSChapSrvChangePassword2( wchar_t* ServerName, wchar_t* UserName, SamprEncryptedUserPassword* NewPasswordEncryptedWithOldNt, EncryptedNTOWFPassword* OldNtOwfPasswordEncryptedWithNewNt, unsigned char LmPresent, SamprEncryptedUserPassword* NewPasswordEncryptedWithOldLm, EncryptedLMOWFPassword* OldLmOwfPasswordEncryptedWithNewLmOrNt ) const
 	{
 		_WINQ_FCONTEXT( "CSessionHelper::MSChapSrvChangePassword2" );
 		unsigned long dwResult = 0;
@@ -253,34 +253,40 @@ namespace nsWin32
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
-	/*
+
 	//--------------------------------------------------------------------------------
-	CWindowStation::refType CSession::WindowStation( CTString StrWinStation, unsigned long dwFlags, bool fInherit, unsigned long dwDesiredAccess, LPSECURITY_ATTRIBUTES lpsa )
+	__QOR_IMPLEMENT_OCLASS_LUID(CShutdownBlock);
+
+	//--------------------------------------------------------------------------------
+	CShutdownBlock::CShutdownBlock(const CSession& Session, COSWindow::refType Wnd, const wchar_t* pwszReason) : m_Session(Session), m_WndShutdownBlock(Wnd)
 	{
-		if( !m_bWinStationsEnumerated )
-		{
-			EnumAllWinStations();
-		}
-
-		if( StrWinStation.IsEmpty() )
-		{	
-			//Get the current process Window Station
-			CWindowStation::refType refWinSta( new CWindowStation, true );
-			return refWinSta;			
-		}
-		else
-		{
-			CWindowStation* pResult = m_WinStationNameMap.Find( StrWinStation );
-			if( pResult == 0 )
-			{	
-				pResult = new CWindowStation( StrWinStation, dwFlags, dwDesiredAccess, lpsa );
-				m_WinStationNameMap.Insert( StrWinStation, pResult );
-			}
-
-			return CWindowStation::refType( pResult, false );
-		}
+		_WINQ_FCONTEXT("CShutdownBlock::CShutdownBlock");
+		m_bStatus = m_Session.BlockShutdown(Wnd, pwszReason);
 	}
-	*/
+
+	//--------------------------------------------------------------------------------
+	CShutdownBlock::~CShutdownBlock()
+	{
+		_WINQ_FCONTEXT("CShutdownBlock::~CShutdownBlock");
+		m_bStatus = m_Session.ReleaseShutdown(m_WndShutdownBlock);
+	}
+
+	//--------------------------------------------------------------------------------
+	CWString CShutdownBlock::QueryReason()
+	{
+		_WINQ_FCONTEXT("CShutdownBlock::QueryReason");
+		return m_Session.QueryShutdownBlockReason(m_WndShutdownBlock);
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CShutdownBlock::Status(void)
+	{
+		_WINQ_FCONTEXT("CShutdownBlock::Status");
+		return m_bStatus;
+	}
+
+	__QOR_IMPLEMENT_OCLASS_LUID(CSession);
+
 	//--------------------------------------------------------------------------------
 	CUser& CSession::User()
 	{
@@ -288,41 +294,61 @@ namespace nsWin32
 		return m_User;
 	}
 
-//private:
-	/*
 	//--------------------------------------------------------------------------------
-	bool CSession::EnumAllWinStations()
+	CSession::CSession()
 	{
+		_WINQ_FCONTEXT("CSession::CSession");
+	}
+
+	//--------------------------------------------------------------------------------
+	CSession::CSession(CSession&& move) : m_User(std::move(move.m_User))
+	{
+		_WINQ_FCONTEXT("CSession::CSession");
+	}
+
+	//--------------------------------------------------------------------------------
+	CSession& CSession::operator = (CSession&& move)
+	{
+		m_User = std::move(move.m_User);
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
+	CSession::~CSession()
+	{
+		_WINQ_FCONTEXT("CSession::~CSession");
+	}
+
+	//--------------------------------------------------------------------------------
+	nsCodeQOR::CTRef<CShutdownBlock> CSession::ShutdownBlock(COSWindow::refType Wnd, const wchar_t* pwszReason)
+	{
+		_WINQ_FCONTEXT("CSession::ShutdownBlock");
+		return new_shared_ref<CShutdownBlock>(*this, Wnd, pwszReason);
+	}
+
+//protected:
+
+	//--------------------------------------------------------------------------------
+	bool CSession::BlockShutdown(COSWindow::refType Wnd, const wchar_t* pwszReason) const
+	{
+		_WINQ_FCONTEXT("CSession::BlockShutdown");
 		bool bResult = false;
-
-		m_WinStationNameMap.Clear();
-		bResult = EnumWindowStationsT( &CSession::EnumAllWinStationsProc, reinterpret_cast< Cmp_long_ptr >( this ) );
-		m_bWinStationsEnumerated = true;
-
+		bResult = ShutdownBlockReasonCreate(Wnd, pwszReason);
 		return bResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CSession::EnumWinStation( TCHAR* StrName )
+	bool CSession::ReleaseShutdown(COSWindow::refType Wnd) const
 	{
-		bool bResult = false;
-		CTString Name( StrName );
-		WinStationNameMapItem Item( Name, 0 );
-		m_WinStationNameMap.Append( Item );
-		bResult = true;
-		return bResult;
+		_WINQ_FCONTEXT("CSession::ReleaseShutdown");
+		return ShutdownBlockReasonDestroy(Wnd);
 	}
 
 	//--------------------------------------------------------------------------------
-	bool __QCMP_STDCALLCONVENTION CSession::EnumAllWinStationsProc( TCHAR* StrName, Cmp_long_ptr lParam )
+	CWString CSession::QueryShutdownBlockReason(COSWindow::refType Wnd) const
 	{
-		bool bResult = false;
-		if( lParam != 0 )
-		{
-			CSession* pThis = reinterpret_cast< CSession* >( lParam );
-			bResult = pThis->EnumWinStation( StrName );
-		}
-		return bResult;
-	}		
-	*/
+		_WINQ_FCONTEXT("CSession::QueryShutdownBlockReason");
+		return ShutdownBlockReasonQuery(Wnd);
+	}
+
 }//nsWin32

@@ -1,6 +1,6 @@
 //WinQLProcessor.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -42,7 +42,6 @@ namespace nsWin32
 
 	//--------------------------------------------------------------------------------
 	CProcessor::CProcessor() : CDeviceInterface()
-	,	m_pIODevice( 0 )
 	{
 		_WINQ_FCONTEXT( "CProcessor::CProcessor" );
 	}
@@ -71,7 +70,7 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CProcessor::~CProcessor" );
 		if( m_pIODevice != 0 )
 		{
-			Close();
+			//Close();
 		}
 	}
 
@@ -82,8 +81,7 @@ namespace nsWin32
 
 		if( m_pIODevice == 0 )
 		{
-			CIODeviceFile& IODeviceFile = Open( Generic_Read, File_Share_Read, File_Attribute_Normal );
-			m_pIODevice = &IODeviceFile;
+			m_pIODevice = Open( Generic_Read, File_Share_Read, File_Attribute_Normal );
 		}
 	}
 
@@ -95,7 +93,7 @@ namespace nsWin32
 		//NOTE: :-( This doesn't work. Win 7 Home Premuim at least seems to provide no access. The call to CreateFile fails
 		//OpenDevice();
 
-		unsigned long ulOut = 0;
+		//unsigned long ulOut = 0;
 		Processor_Info_Ex Result = { 0, 0, 0, 0 };
 		/*
 		if( m_pIODevice->Control( __WINQL_DEVICE_CONTROL_CODE( File_Device_Processor, Get_Info, Method_Buffered, File_Read_Access ), 0, 0, &Result, sizeof( Processor_Info_Ex ), &ulOut, 0 ) )

@@ -917,7 +917,7 @@ namespace nsPosum
 	{
 		__QCS_FCONTEXT( "CStream::_vfprintf_l" );
 		nsPlatform::CPosumStreamAccessor PSA( m_pFILE );
-		return PSA,_vfprintf_l( format, locale, argptr );
+		return PSA._vfprintf_l( format, locale, argptr );
 	}
 	
 	//--------------------------------------------------------------------------------

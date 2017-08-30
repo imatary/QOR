@@ -47,9 +47,11 @@ namespace nsQOR
 	{
 	public:
 
+		CEvent();
 		CEvent( IApplication& Application );
 		virtual ~CEvent();
 
+		virtual void Signal(void);
 		virtual void OnSignaled( void );
 
 	protected:
@@ -60,20 +62,17 @@ namespace nsQOR
 	private:
 
 		CEvent( const CEvent& src );
-		CEvent& operator = ( const CEvent& src );
-		CEvent();
+		CEvent& operator = ( const CEvent& src );		
 	};
 
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __APPOCRITA ) CEventSink
+	class __QOR_INTERFACE( __APPOCRITA ) CEventSink : public IEventHandler
 	{
 	public:
 
-		__QOR_IMPL_REF( CEventSink );
-
 		CEventSink( CEvent::ref_type pEvent = 0 );
 		virtual ~CEventSink();
-		virtual void operator()( void ) = 0;
+		virtual bool operator()(IEvent::ref_type _event, int iCookie) = 0;
 		bool Connect( CEvent::ref_type pEvent );
 		void Disconnect();
 
@@ -95,12 +94,12 @@ namespace nsQOR
 		void Publish( CEvent::ref_type pEvent );
 		void Revoke( CEvent::ref_type pEvent );
 		void Raise( CEvent::ref_type pEvent );
-		bool Subscribe( CEventSink::ref_type pSink, CEvent::ref_type pEvent );
-		bool Unsubscribe( CEventSink::ref_type pSink, CEvent::ref_type pEvent );
+		bool Subscribe( IEventHandler::ref_type pSink, CEvent::ref_type pEvent, int iCookie = 0 );
+		bool Unsubscribe(IEventHandler::ref_type pSink, CEvent::ref_type pEvent );
 
 	private:
 
-		std::map< IEvent*, std::vector< CEventSink* >* > m_EventSubscriberMap;
+		std::map< IEvent*, std::vector< std::pair< IEventHandler*, int > >* > m_EventSubscriberMap;
 	};
 
 }//nsQOR

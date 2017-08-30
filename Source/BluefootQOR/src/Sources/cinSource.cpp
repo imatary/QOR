@@ -34,7 +34,7 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	bool CBFcinSource::Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead )
+	bool CcinSource::Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead )
 	{
 		bool bResult = false;
 		byte* pBuffer = GetBuffer()->WriteRequest( ulUnitsToRead );

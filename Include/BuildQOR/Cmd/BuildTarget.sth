@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Build all the forms, configrations and type combinations of 1 target
+//Preprocessable batch script fragment to build all the forms, configrations and type combinations of 1 target
 
 set build_architecture=QOR_PP_SEQ_ELEM( 0, QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_1,QOR_TARGETS))
 set build_os=QOR_PP_SEQ_ELEM( 1, QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_1,QOR_TARGETS) )

@@ -34,6 +34,7 @@
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "CodeQOR/Macros/codingmacros.h"
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/WinQL.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/CodeServices/Handles/WinQLRAIISessionHandle.h"
@@ -46,6 +47,10 @@ namespace nsWinQAPI
 	class __QOR_INTERFACE( __WINQAPI ) CAdvAPI32;
 }
 
+__QOR_DECLARE_REF(nsWin32, __WINQL, CEventLogClient, CTRef);
+__QOR_DECLARE_REF(nsWin32, __WINQL, CBackupEventLog, CTRef);
+__QOR_DECLARE_REF(nsWin32, __WINQL, CEventLogServer, CTRef);
+
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
@@ -56,7 +61,7 @@ namespace nsWin32
 	{
 	public:
 
-		__QOR_DECLARE_OCLASS_ID( CEventLogAccess );
+		__QOR_DECLARE_OCLASS_ID(CEventLogAccess);
 
 	protected:
 
@@ -82,18 +87,11 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CEventLogClient > refType;
-
 		__QOR_DECLARE_OCLASS_ID( CEventLogClient );
+		__QOR_DECLARE_REF_TYPE(CEventLogClient);
 
 		CEventLogClient( const TCHAR* UNCServerName, const TCHAR* SourceName );
 		virtual ~CEventLogClient();
-
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this, false );
-		}
 
 	private:
 
@@ -106,18 +104,11 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CBackupEventLog > refType;
-
 		__QOR_DECLARE_OCLASS_ID( CBackupEventLog );
+		__QOR_DECLARE_REF_TYPE(CBackupEventLog);
 
 		CBackupEventLog( const TCHAR* UNCServerName, const TCHAR* FileName );
 		virtual ~CBackupEventLog();
-
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this, false );
-		}
 
 	private:
 
@@ -130,20 +121,13 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CEventLogServer > refType;
-
 		__QOR_DECLARE_OCLASS_ID( CEventLogServer );
+		__QOR_DECLARE_REF_TYPE(CEventLogServer);
 
 		CEventLogServer( const TCHAR* UNCServerName, const TCHAR* lpSourceName );
 		virtual ~CEventLogServer();
 
 		bool Report( unsigned short wType, unsigned short wCategory, unsigned long dwEventID, void* lpUserSid, unsigned short wNumStrings, unsigned long dwDataSize, const TCHAR** lpStrings, void* lpRawData );
-
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this, false );
-		}
 
 	private:
 
@@ -155,7 +139,6 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CEventLog
 	{
-		QOR_PP_WINQL_SHARED;
 
 	public:
 
@@ -164,9 +147,9 @@ namespace nsWin32
 		CEventLog( const CTString& = CTString() );
 		~CEventLog();
 
-		CEventLogServer::refType Server( const CTString& strLogName );
-		CBackupEventLog::refType Backup( const CTString& strFullFilePath );
-		CEventLogClient::refType Client( const CTString& strLogName );
+		CEventLogServer::ref_type Server( const CTString& strLogName );
+		CBackupEventLog::ref_type Backup( const CTString& strFullFilePath );
+		CEventLogClient::ref_type Client( const CTString& strLogName );
 
 	private:
 

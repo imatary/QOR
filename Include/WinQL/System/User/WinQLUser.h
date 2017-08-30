@@ -1,6 +1,6 @@
 //WinQLUser.h
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,9 +29,18 @@
 #ifndef WINQL_SYSTEM_USER_H_3
 #define WINQL_SYSTEM_USER_H_3
 
+#include "CompilerQOR.h"
+
+#ifdef	__QCMP_OPTIMIZEINCLUDE
+#pragma	__QCMP_OPTIMIZEINCLUDE
+#endif//__QCMP_OPTIMIZEINCLUDE
+
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/Application/ErrorSystem/WinQLErrorSystem.h"
 #include "WinQL/CodeServices/Locale/WinQLGeoLocation.h"
 #include "WinQL/Application/I18n/WinQLI18n.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CUser, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -41,12 +50,15 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CUser > refType;
-
-		__QOR_DECLARE_OCLASS_ID( CUser );
+		__QOR_DECLARE_REF_TYPE(CUser);
+		__QOR_DECLARE_OCLASS_ID(CUser);
 
 		CUser();
-		virtual ~CUser();
+		CUser(const CUser&) = delete;
+		CUser(CUser&& move);
+		CUser& operator = (const CUser&) = delete;
+		CUser& operator = (CUser&& move);
+		~CUser();
 
 		bool EnableTheming( bool bEnable );
 		GEOID GetNation();
@@ -55,7 +67,6 @@ namespace nsWin32
 		unsigned short GetDefaultLangID( void );
 		unsigned long GetDefaultLCID( void );
 		CWString GetDefaultLocaleName( void );
-
 		bool CanIWriteAPowerScheme( void );
 
 	private:

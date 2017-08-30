@@ -1,6 +1,6 @@
 //WinQLRootDeviceEnumerator.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -35,6 +35,7 @@
 #pragma __QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/CodeServices/Handles/WinQLHandle.h"
 #include "WinQL/System/Devices/Instances/WinQLDeviceInstanceCollection.h"
 #include "WinQL/System/Devices/Enumerator/WinQLDeviceEnumerator.h"
@@ -45,6 +46,8 @@ namespace nsWinQAPI
 	class __QOR_INTERFACE( __WINQAPI ) CSetupAPI;
 }//nsWinQAPI
 
+__QOR_DECLARE_REF(nsWin32, __WINQL, CRootDeviceEnumerator, CTRef);
+
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
@@ -54,6 +57,7 @@ namespace nsWin32
 	{
 	public:
 
+		__QOR_DECLARE_REF_TYPE(CRootDeviceEnumerator);
 		__QOR_DECLARE_OCLASS_ID( CRootDeviceEnumerator );
 
 		typedef nsCodeQOR::CTLRef< CRootDeviceEnumerator > refType;
@@ -65,101 +69,9 @@ namespace nsWin32
 
 		unsigned int Enumerate( void );
 
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this );
-		}
-		/*
-		//--------------------------------------------------------------------------------
-		class CIterator
-		{
-		public:
-
-			//--------------------------------------------------------------------------------
-			CIterator( CRootDeviceEnumerator& RDE, unsigned int uiIndex = 0 ) : m_RDE( RDE )
-			{
-				m_uiIndex = uiIndex;
-			}
-
-			//--------------------------------------------------------------------------------
-			CIterator( const CIterator& src ) : m_RDE( src.m_RDE )
-			{
-				*this = src;
-			}
-
-			//--------------------------------------------------------------------------------
-			CIterator& operator = ( const CIterator& src )
-			{
-				m_uiIndex = src.m_uiIndex;
-				return *this;
-			}
-
-			//--------------------------------------------------------------------------------
-			~CIterator()
-			{
-			}
-
-			//--------------------------------------------------------------------------------
-			bool operator == ( const CIterator& cmp )
-			{
-				return m_uiIndex == cmp.m_uiIndex;
-			}
-
-			//--------------------------------------------------------------------------------
-			bool operator != ( const CIterator& cmp )
-			{
-				return m_uiIndex != cmp.m_uiIndex;
-			}
-
-			//--------------------------------------------------------------------------------
-			CDeviceEnumerator::refType operator *()
-			{
-				CDeviceEnumerator::refType Ref( m_RDE.m_EnumeratorMap[ m_uiIndex ].Second(), false );
-				return Ref;
-			}
-
-			//--------------------------------------------------------------------------------
-			CDeviceEnumerator::refType operator->()
-			{
-				return m_RDE.m_EnumeratorMap[ m_uiIndex ].Second();
-			}
-
-			//--------------------------------------------------------------------------------
-			CIterator& operator++( void )
-			{
-				if( m_uiIndex < m_RDE.m_EnumeratorMap.Size() )
-				{
-					++m_uiIndex;
-				}
-				return *this;
-			}
-
-			//--------------------------------------------------------------------------------
-			CIterator& operator--( void )
-			{
-				if( m_uiIndex > 0 )
-				{
-					--m_uiIndex;
-				}
-				return *this;
-			}
-
-		private:
-
-			unsigned int m_uiIndex;
-			CRootDeviceEnumerator& m_RDE;
-		};
-
-		friend class CIterator;
-
-		CIterator begin( void );
-		CIterator end( void );
-		*/
 	private:
 
-		nsWinQAPI::CSetupAPI& m_Library;
-		//nsCodeQOR::CTMap< CTString, CDeviceEnumerator* > m_EnumeratorMap;
+		nsWinQAPI::CSetupAPI& m_Library;		
 	};
 
 }//nsWin32

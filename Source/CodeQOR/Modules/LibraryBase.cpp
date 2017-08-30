@@ -31,6 +31,7 @@
 #include "CodeQOR/Modules/LoadableModuleBase.h"
 
 extern nsCodeQOR::CLoadableModuleBase& ThisModule();
+extern const char* ThisModuleVersion();
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
@@ -111,7 +112,7 @@ namespace nsCodeQOR
 	//--------------------------------------------------------------------------------
 	const char* CLibraryBase::Version()
 	{
-		return __TIMESTAMP__;
+		return ThisModuleVersion();
 	}
 
 }//nsCodeQOR

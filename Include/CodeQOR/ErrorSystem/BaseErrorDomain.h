@@ -53,7 +53,7 @@
 //--------------------------------------------------------------------------------
 //Declares a Base Error domain for generic errors.
 // An error domain is generally a category sub division of the error handling 
-// aspect covering a specific area of the codebase.
+// aspect covering a specific area of the code-base.
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
@@ -105,12 +105,12 @@ namespace nsCodeQOR
 			return reinterpret_cast< mxTCHAR* >( pError->What().Parameter( static_cast< unsigned char >( i ) ) ); 
         }               
 
-    //protected: Should be protected by VC6 doesn't make s_BaseError available to derived classes, Doh!
+    //protected: Should be protected but VC6 doesn't make s_BaseError available to derived classes, Doh!
         
         typedef mxTCHAR* ( CBaseErrorDomain::*fpBaseErrorDescriptor )( CError* pError );
 
         //--------------------------------------------------------------------------------
-		//An error definition consists of a format string, and a list of function pointers to functions for filling in the parameterised parts of the string from the error
+		//An error definition consists of a format string, and a list of function pointers to functions for filling in the parameterized parts of the string from the error
         struct s_BaseError
         {
             const mxTCHAR* pText;

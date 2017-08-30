@@ -44,14 +44,14 @@ namespace nsCodeQOR
 
 		CUTF8Char();										//Construct a null reference
 		CUTF8Char( CChar8* pChar );							//Construct a reference to 1 to 4 CChar8
-		CUTF8Char( const CUTF8Char& Src );					//Copy an exisiting reference
+		CUTF8Char( const CUTF8Char& Src );					//Copy an existing reference
 		CUTF8Char& operator = ( const CUTF8Char& Src );		//Assign from an existing reference
 		bool operator == ( const CUTF8Char& Cmp ) const;	//Compare referenced UTF-8 characters
 		bool operator >= ( const CUTF8Char& Cmp ) const;	//Compare referenced UTF-8 characters
 		bool operator <= ( const CUTF8Char& Cmp ) const;	//Compare referenced UTF-8 characters
 		bool operator < ( const CUTF8Char& Cmp ) const;	//Compare referenced UTF-8 characters
-		CUTF8Char& operator++( void );						//Move the reference to the next UTF-8 character - not gaurenteed to be valid
-		CUTF8Char& operator--( void );						//Move the reference to the previous UTF-8 character - not gaurenteed to be valid
+		CUTF8Char& operator++( void );						//Move the reference to the next UTF-8 character - not guaranteed to be valid
+		CUTF8Char& operator--( void );						//Move the reference to the previous UTF-8 character - not guaranteed to be valid
 		CUTF8Char& operator += ( unsigned short usOffset );	//Move the reference forward in the string by N UTF-8 characters
 		CUTF8Char& operator -= ( unsigned short usOffset ); //Move the reference backward in the string by B UTF-8 characters
 		operator CChar8*() const;							//Automatic conversion to a CChar8 pointer
@@ -61,7 +61,7 @@ namespace nsCodeQOR
 			return m_pChar;
 		}
 		~CUTF8Char();										//Destructor
-		void Dispose( void );								//Throw away refence returning this to a NULL reference
+		void Dispose( void );								//Throw away reference returning this to a NULL reference
 		void Attach( CChar8* p );							//Set the CChar8 reference 
         CChar8* Detach();									//Return and clear the CChar8 reference
 		bool IsNull( void ) const;							//Is this a NULL reference or a reference to NULL. Either will return true.

@@ -25,6 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 //Build all the linkage forms, configrations and build type combinations of 1 target
+//A target is an architecture/OS/OSVersion triple
 
 #include "BuildTarget.sth"
 #define QOR_ARCH QOR_PP_SEQ_ELEM( 0, QOR_PP_SEQ_ELEM(QOR_PP_ITERATION_1,QOR_TARGETS) )

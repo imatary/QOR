@@ -58,4 +58,58 @@ namespace nsQOR
 		}
 	}
 
+	//------------------------------------------------------------------------------
+	void CBluetooth::ScanForDevices(void)
+	{
+		m_Impl.As< IBluetooth >()->ScanForDevices();
+	}
+
+	//------------------------------------------------------------------------------
+	void CBluetooth::RegisterServiceClient(nsCodeQOR::mxGUID& ServiceUUID, IBluetoothServiceClient::ref_type Client)
+	{
+		m_Impl.As< IBluetooth >()->RegisterServiceClient(ServiceUUID, Client);
+	}
+
+	//------------------------------------------------------------------------------
+	void CBluetooth::UnregisterServiceClient(nsCodeQOR::mxGUID& ServiceUUID, IBluetoothServiceClient::ref_type Client)
+	{
+		m_Impl.As< IBluetooth >()->UnregisterServiceClient(ServiceUUID, Client);
+	}
+
+
+
+	//------------------------------------------------------------------------------
+	__QOR_IMPLEMENT_OCLASS_LUID(CBluetoothServiceClient);
+
+	//------------------------------------------------------------------------------
+	CBluetoothServiceClient::CBluetoothServiceClient(nsCodeQOR::mxGUID* pServiceID) : IBluetoothServiceClient()
+	,	m_pServiceID( pServiceID )
+	{
+
+	}
+
+	//------------------------------------------------------------------------------
+	CBluetoothServiceClient::~CBluetoothServiceClient()
+	{
+
+	}
+
+	//------------------------------------------------------------------------------
+	void CBluetoothServiceClient::Register()
+	{
+		TheApplication()->GetRole()->GetSubSystem(IBluetooth::ClassID()).As<CBluetooth>()->RegisterServiceClient(*m_pServiceID, ref(*this).AsRef<IBluetoothServiceClient>());
+	}
+
+	//------------------------------------------------------------------------------
+	void CBluetoothServiceClient::UnRegister()
+	{
+		TheApplication()->GetRole()->GetSubSystem(IBluetooth::ClassID()).As<CBluetooth>()->UnregisterServiceClient(*m_pServiceID, ref(*this).AsRef<IBluetoothServiceClient>());
+	}
+
+	//------------------------------------------------------------------------------
+	void CBluetoothServiceClient::AttachDevice(IBluetoothRemoteDevice::ref_type Device)
+	{
+
+	}
+
 }//nsQOR

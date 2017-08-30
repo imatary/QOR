@@ -1,6 +1,6 @@
 //WinQLTime.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -28,6 +28,8 @@
 
 #ifndef WINQL_SYSTEM_TIME_H_3
 #define WINQL_SYSTEM_TIME_H_3
+
+#include "CompilerQOR.h"
 
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
@@ -89,48 +91,48 @@ namespace nsWin32
 		__QOR_DECLARE_OCLASS_ID( CTimeHelper );
 
 		CTimeHelper();
+		CTimeHelper(const CTimeHelper&);
+		CTimeHelper(CTimeHelper&&);
+		CTimeHelper& operator = (const CTimeHelper&);
+		CTimeHelper& operator = (CTimeHelper&&);
 		virtual ~CTimeHelper();
-		long CompareFileTime( const nsWin32::FILETIME* lpFileTime1, const nsWin32::FILETIME* lpFileTime2 );
-		bool DosDateTimeToFileTime( unsigned short wFatDate, unsigned short wFatTime, nsWin32::LPFILETIME lpFileTime );
-		bool FileTimeToDosDateTime( const nsWin32::FILETIME* lpFileTime, unsigned short* lpFatDate, unsigned short* lpFatTime );
-		bool FileTimeToLocalFileTime( const nsWin32::FILETIME* lpFileTime, nsWin32::LPFILETIME lpLocalFileTime );
-		bool FileTimeToSystemTime( const nsWin32::FILETIME* lpFileTime, nsWin32::SystemTime* lpSystemTime );
-		unsigned long GetDynamicTimeZoneInformation( nsWin32::DynamicTimeZoneInformation* pTimeZoneInformation );
-		bool GetFileTime( void* hFile, nsWin32::LPFILETIME lpCreationTime, nsWin32::LPFILETIME lpLastAccessTime, nsWin32::LPFILETIME lpLastWriteTime );
-		void GetLocalTime( nsWin32::SystemTime* lpSystemTime );
-		void GetSystemTime( nsWin32::SystemTime* lpSystemTime );
-		bool GetSystemTimeAdjustment( unsigned long* lpTimeAdjustment, unsigned long* lpTimeIncrement, int* lpTimeAdjustmentDisabled );
-		void GetSystemTimeAsFileTime( nsWin32::LPFILETIME lpSystemTimeAsFileTime );
-		bool GetSystemTimes( nsWin32::LPFILETIME lpIdleTime, nsWin32::LPFILETIME lpKernelTime, nsWin32::LPFILETIME lpUserTime );
-		unsigned long GetTickCount( void );
-		Cmp_unsigned_long_long GetTickCount64( void );
-		unsigned long GetTimeZoneInformation( nsWin32::TimeZoneInformation* lpTimeZoneInformation );
-		bool GetTimeZoneInformationForYear( unsigned short wYear, nsWin32::DynamicTimeZoneInformation* pdtzi, nsWin32::TimeZoneInformation* ptzi );
-		bool LocalFileTimeToFileTime( const nsWin32::FILETIME* lpLocalFileTime, nsWin32::LPFILETIME lpFileTime );
-		bool SetDynamicTimeZoneInformation( const nsWin32::DynamicTimeZoneInformation* lpTimeZoneInformation );
-		bool SetFileTime( void* hFile, const nsWin32::FILETIME* lpCreationTime, const nsWin32::FILETIME* lpLastAccessTime, const nsWin32::FILETIME* lpLastWriteTime );
-		bool SetLocalTime( const nsWin32::SystemTime* lpSystemTime );
-		bool SetSystemTime( const nsWin32::SystemTime* lpSystemTime );
-		bool SetSystemTimeAdjustment( unsigned long dwTimeAdjustment, bool bTimeAdjustmentDisabled );
-		bool SetTimeZoneInformation( const nsWin32::TimeZoneInformation* lpTimeZoneInformation );
-		bool SystemTimeToFileTime( const nsWin32::SystemTime* lpSystemTime, nsWin32::LPFILETIME lpFileTime );
-		bool SystemTimeToTzSpecificLocalTime( nsWin32::TimeZoneInformation* lpTimeZone, nsWin32::SystemTime* lpUniversalTime, nsWin32::SystemTime* lpLocalTime );
-		bool TzSpecificLocalTimeToSystemTime( nsWin32::TimeZoneInformation* lpTimeZoneInformation, nsWin32::SystemTime* lpLocalTime, nsWin32::SystemTime* lpUniversalTime );
-
+		long CompareFileTime( const nsWin32::FILETIME* lpFileTime1, const nsWin32::FILETIME* lpFileTime2 ) const;
+		bool DosDateTimeToFileTime( unsigned short wFatDate, unsigned short wFatTime, nsWin32::LPFILETIME lpFileTime ) const;
+		bool FileTimeToDosDateTime( const nsWin32::FILETIME* lpFileTime, unsigned short* lpFatDate, unsigned short* lpFatTime ) const;
+		bool FileTimeToLocalFileTime( const nsWin32::FILETIME* lpFileTime, nsWin32::LPFILETIME lpLocalFileTime ) const;
+		bool FileTimeToSystemTime( const nsWin32::FILETIME* lpFileTime, nsWin32::SystemTime* lpSystemTime ) const;
+		unsigned long GetDynamicTimeZoneInformation( nsWin32::DynamicTimeZoneInformation* pTimeZoneInformation ) const;
+		bool GetFileTime( void* hFile, nsWin32::LPFILETIME lpCreationTime, nsWin32::LPFILETIME lpLastAccessTime, nsWin32::LPFILETIME lpLastWriteTime ) const;
+		void GetLocalTime( nsWin32::SystemTime* lpSystemTime ) const;
+		void GetSystemTime( nsWin32::SystemTime* lpSystemTime ) const;
+		bool GetSystemTimeAdjustment( unsigned long* lpTimeAdjustment, unsigned long* lpTimeIncrement, int* lpTimeAdjustmentDisabled ) const;
+		void GetSystemTimeAsFileTime( nsWin32::LPFILETIME lpSystemTimeAsFileTime ) const;
+		bool GetSystemTimes( nsWin32::LPFILETIME lpIdleTime, nsWin32::LPFILETIME lpKernelTime, nsWin32::LPFILETIME lpUserTime ) const;
+		unsigned long GetTickCount( void ) const;
+		Cmp_unsigned_long_long GetTickCount64( void ) const;
+		unsigned long GetTimeZoneInformation( nsWin32::TimeZoneInformation* lpTimeZoneInformation ) const;
+		bool GetTimeZoneInformationForYear( unsigned short wYear, nsWin32::DynamicTimeZoneInformation* pdtzi, nsWin32::TimeZoneInformation* ptzi ) const;
+		bool LocalFileTimeToFileTime( const nsWin32::FILETIME* lpLocalFileTime, nsWin32::LPFILETIME lpFileTime ) const;
+		bool SetDynamicTimeZoneInformation( const nsWin32::DynamicTimeZoneInformation* lpTimeZoneInformation ) const;
+		bool SetFileTime( void* hFile, const nsWin32::FILETIME* lpCreationTime, const nsWin32::FILETIME* lpLastAccessTime, const nsWin32::FILETIME* lpLastWriteTime ) const;
+		bool SetLocalTime( const nsWin32::SystemTime* lpSystemTime ) const;
+		bool SetSystemTime( const nsWin32::SystemTime* lpSystemTime ) const;
+		bool SetSystemTimeAdjustment( unsigned long dwTimeAdjustment, bool bTimeAdjustmentDisabled ) const;
+		bool SetTimeZoneInformation( const nsWin32::TimeZoneInformation* lpTimeZoneInformation ) const;
+		bool SystemTimeToFileTime( const nsWin32::SystemTime* lpSystemTime, nsWin32::LPFILETIME lpFileTime ) const;
+		bool SystemTimeToTzSpecificLocalTime( nsWin32::TimeZoneInformation* lpTimeZone, nsWin32::SystemTime* lpUniversalTime, nsWin32::SystemTime* lpLocalTime ) const;
+		bool TzSpecificLocalTimeToSystemTime( nsWin32::TimeZoneInformation* lpTimeZoneInformation, nsWin32::SystemTime* lpLocalTime, nsWin32::SystemTime* lpUniversalTime ) const;
 	};
 
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CTime
 	{
 
-		QOR_PP_WINQL_SHARED
-
 	public:
 
 		typedef nsWin32::FILETIME CFileTime;
 
-		typedef CSharedRef< CTime > refType;
-
+		__QOR_DECLARE_REF_TYPE(CTime);
 		__QOR_DECLARE_OCLASS_ID( CTime );
 
 		//--------------------------------------------------------------------------------
@@ -140,31 +142,33 @@ namespace nsWin32
 
 			__QOR_DECLARE_OCLASS_ID( CClockTime );
 
+			CClockTime(const CClockTime&);
+			CClockTime(CClockTime&&);
 			CClockTime( const SystemTime& Src );
 			CClockTime( const CFileTime* pFileTime );
 			CClockTime( unsigned short aYear = 0, unsigned short aMonth = 0, unsigned short aDayOfWeek = 0, unsigned short aDay = 0, unsigned short aHour = 0, unsigned short aMinute = 0, unsigned short aSecond = 0, unsigned short aMilliseconds = 0 );
+			CClockTime& operator = (const CClockTime&);
+			CClockTime& operator = (CClockTime&&);
 			~CClockTime();
 
-			unsigned short Year( void );
-			unsigned short Month( void );
-			unsigned short DayOfWeek( void );
-			unsigned short Day( void );
-			unsigned short Hour( void );
-			unsigned short Minute( void );
-			unsigned short Second( void );
-			unsigned short MilliSeconds( void );
+			unsigned short Year( void ) const;
+			unsigned short Month( void ) const;
+			unsigned short DayOfWeek( void ) const;
+			unsigned short Day( void ) const;
+			unsigned short Hour( void ) const;
+			unsigned short Minute( void ) const;
+			unsigned short Second( void ) const;
+			unsigned short MilliSeconds( void ) const;
 
 		protected:
 
 			CTimeHelper m_Win32TimeHelper;
-		};
+		} SystemTime;
 
 		//--------------------------------------------------------------------------------
 		class __QOR_INTERFACE( __WINQL ) CUTCClock
 		{
 		public:
-
-			typedef nsCodeQOR::CTLRef< CUTCClock > refType;
 
 			__QOR_DECLARE_OCLASS_ID( CUTCClock );
 
@@ -176,6 +180,10 @@ namespace nsWin32
 				__QOR_DECLARE_OCLASS_ID( CAdjustment );
 
 				CAdjustment();
+				CAdjustment(const CAdjustment&);
+				CAdjustment(CAdjustment&&);
+				CAdjustment& operator = (const CAdjustment&);
+				CAdjustment& operator = (CAdjustment&&);
 				~CAdjustment();
 
 				bool Enabled( void );
@@ -194,17 +202,20 @@ namespace nsWin32
 				unsigned long m_dwTimeIncrement;
 				int m_bTimeAdjustDisabled;
 				CTimeHelper m_Win32TimeHelper;
-			};
+			}Adjustment;
 
 			//--------------------------------------------------------------------------------
 
 			CUTCClock();
+			CUTCClock(const CUTCClock&);
+			CUTCClock(CUTCClock&&);
+			CUTCClock& operator = (const CUTCClock&);
+			CUTCClock& operator = (CUTCClock&&);
 			~CUTCClock();
 
 			virtual CClockTime Time();
 			virtual bool SetTime( CClockTime& NewTime );
 			virtual CFileTime FileTime();
-			CAdjustment& Adjustment();
 
 		protected:
 
@@ -215,17 +226,14 @@ namespace nsWin32
 			void GetSystemTimeAsFileTime( CFileTime* pSystemTimeAsFileTime );
 
 			CClockTime m_ClockTime;
-			CAdjustment m_Adjustment;
 			CTimeHelper m_Win32TimeHelper;
 
-		};
+		} UTCClock;
 
 		//--------------------------------------------------------------------------------
 		class __QOR_INTERFACE( __WINQL ) CLocalClock : public CUTCClock
 		{
 		public:
-
-			typedef nsCodeQOR::CTLRef< CLocalClock > refType;
 
 			__QOR_DECLARE_OCLASS_ID( CLocalClock );
 
@@ -271,35 +279,35 @@ namespace nsWin32
 				TimeZoneInformation m_TimeZoneInfo;
 				CTimeHelper m_Win32TimeHelper;
 
-			};
+			} TimeZone;
 
 			//--------------------------------------------------------------------------------
 			virtual CClockTime Time();
 			virtual bool SetTime( CClockTime& NewTime );
 			virtual CFileTime FileTime();
-			CTimeZone& TimeZone();
 
 		protected:
 
-			CTimeZone m_TimeZone;
-		};
+		} LocalClock;
 
 		//--------------------------------------------------------------------------------
 
 		CTime();
+		CTime(const CTime&);
+		CTime(CTime&&);
+		CTime& operator = (const CTime&);
+		CTime& operator = (CTime&&);
 		virtual ~CTime();
-		bool GetSystemTimes( CFileTime* pIdleTime, CFileTime* pKernelTime, CFileTime* pUserTime );
-		unsigned long GetTickCount(void);
-		Cmp_unsigned_long_long GetTickCount64(void);
-		bool GetTimeZoneInformationForYear( unsigned short wYear, DynamicTimeZoneInformation* pdtzi, TimeZoneInformation* ptzi );
-		bool LocalFileTimeToFileTime( const CFileTime* pLocalFileTime, CFileTime* pFileTime );
-		bool SystemTimeToFileTime( const CClockTime* pSystemTime, CFileTime* pFileTime );
-		bool SystemTimeToTzSpecificLocalTime( TimeZoneInformation* pTimeZone, CClockTime* pUniversalTime, CClockTime* pLocalTime );
-		bool TzSpecificLocalTimeToSystemTime( TimeZoneInformation* pTimeZoneInformation, CClockTime* pLocalTime, CClockTime* pUniversalTime );
+		bool GetSystemTimes( CFileTime* pIdleTime, CFileTime* pKernelTime, CFileTime* pUserTime ) const;
+		unsigned long GetTickCount(void) const;
+		Cmp_unsigned_long_long GetTickCount64(void) const;
+		bool GetTimeZoneInformationForYear( unsigned short wYear, DynamicTimeZoneInformation* pdtzi, TimeZoneInformation* ptzi ) const;
+		bool LocalFileTimeToFileTime( const CFileTime* pLocalFileTime, CFileTime* pFileTime ) const;
+		bool SystemTimeToFileTime( const CClockTime* pSystemTime, CFileTime* pFileTime ) const;
+		bool SystemTimeToTzSpecificLocalTime( TimeZoneInformation* pTimeZone, CClockTime* pUniversalTime, CClockTime* pLocalTime ) const;
+		bool TzSpecificLocalTimeToSystemTime( TimeZoneInformation* pTimeZoneInformation, CClockTime* pLocalTime, CClockTime* pUniversalTime ) const;
 
-		CUTCClock::refType UTCClock( void  );
-		CLocalClock::refType LocalClock( void );
-		CTimeHelper& Helper( void );
+		const CTimeHelper& Helper( void ) const;
 
 	protected:
 

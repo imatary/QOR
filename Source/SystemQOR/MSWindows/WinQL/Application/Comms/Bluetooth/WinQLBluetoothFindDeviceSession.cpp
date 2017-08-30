@@ -37,13 +37,13 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CFindBluetoothDeviceSession );
 
 	//--------------------------------------------------------------------------------
-	CFindBluetoothDeviceSession::CFindBluetoothDeviceSession( CFindBluetoothDeviceSession::SearchParams& SearchParams, CBluetoothRemoteDevice::refType Device ): m_Library( CBthProps::Instance() )
+	CFindBluetoothDeviceSession::CFindBluetoothDeviceSession( CFindBluetoothDeviceSession::SearchParams& SearchParams, CBluetoothRemoteDevice::ref_type Device ): m_Library( CBthProps::Instance() )
 	,	m_SearchParams( SearchParams )
 	{
 		_WINQ_FCONTEXT( "CFindBluetoothDeviceSession::CFindBluetoothDeviceSession" );
 		m_Handle = m_Library.BluetoothFindFirstDevice( 
 			reinterpret_cast< ::BLUETOOTH_DEVICE_SEARCH_PARAMS* >( &m_SearchParams ),
-			reinterpret_cast< ::BLUETOOTH_DEVICE_INFO_STRUCT* >( Device->GetInfo() ) );
+			reinterpret_cast< ::BLUETOOTH_DEVICE_INFO_STRUCT* >( Device.As<CBluetoothRemoteDevice>()->GetInfo() ) );
 		m_Handle.Attach( this );
 	}
 
@@ -55,12 +55,12 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CFindBluetoothDeviceSession::Next( CBluetoothRemoteDevice::refType Device )
+	bool CFindBluetoothDeviceSession::Next( CBluetoothRemoteDevice::ref_type Device )
 	{
 		_WINQ_FCONTEXT( "CFindBluetoothDeviceSession::Next" );
 
 		return m_Library.BluetoothFindNextDevice( m_Handle.Use(), 
-			reinterpret_cast< ::BLUETOOTH_DEVICE_INFO_STRUCT* >( Device->GetInfo() ) ) ? true : false;
+			reinterpret_cast< ::BLUETOOTH_DEVICE_INFO_STRUCT* >( Device.As<CBluetoothRemoteDevice>()->GetInfo() ) ) ? true : false;
 	}
 
 

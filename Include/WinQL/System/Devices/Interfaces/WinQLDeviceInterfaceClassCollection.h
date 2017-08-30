@@ -1,6 +1,6 @@
 //WinQLDeviceInterfaceClassCollection.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,10 +29,13 @@
 #ifndef WINQL_DEVICEINTERFACECLASSCOLLECTION_H_3
 #define WINQL_DEVICEINTERFACECLASSCOLLECTION_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/Definitions/Data.h"
 #include "WinQL/Definitions/IO.h"
 #include "WinQL/System/Devices/WinQLDevice.h"
@@ -40,6 +43,8 @@
 #include "WinQL/System/Devices/Interfaces/WinQLDeviceInterfaceClass.h"
 #include "WinQL/CodeServices/Text/WinString.h"
 #include <map>
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceInterfaceClassCollection, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -53,18 +58,10 @@ namespace nsWin32
 
 	public:
 
+		__QOR_DECLARE_REF_TYPE(CDeviceInterfaceClassCollection);
+
 		typedef std::map< nsCodeQOR::__mxGUID*, CDeviceInterfaceClass* > BaseType;
-		/*
-		//--------------------------------------------------------------------------------
-		enum eSystemDefinedInterfaceClasses
-		{
-			Bus1394 = 0,
-			Class61883,
-			ApplicationLaunchButton,
-			Battery,
-			Lid,
-		};
-		*/
+
 		static nsCodeQOR::__mxGUID BUS1394_CLASS_GUID;
 		static nsCodeQOR::__mxGUID GUID_61883_CLASS;
 

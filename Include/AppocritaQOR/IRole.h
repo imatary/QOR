@@ -37,7 +37,10 @@
 
 #include "CodeQOR/Traits/ReferenceTraits.h"
 #include "CodeQOR/Tracing/ObjectContext.h"
+#include "CodeQOR/DataStructures/TRef.h"
 #include "AppocritaQOR/ISubSystem.h"
+
+__QOR_DECLARE_REF(nsQOR, __APPOCRITA, IRole, CTExtRef);
 
 //------------------------------------------------------------------------------
 namespace nsQOR
@@ -49,7 +52,7 @@ namespace nsQOR
 	{
 	public:
 
-		__QOR_IMPL_REF( IRole );
+		__QOR_DECLARE_REF_TYPE(IRole);
 
 		IRole(){}
 		virtual ~IRole(){};

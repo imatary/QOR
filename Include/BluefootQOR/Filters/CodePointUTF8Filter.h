@@ -1,6 +1,6 @@
 //CodePointUTF8Filter.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -36,7 +36,7 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CCodePointUTF8Filter : public nsBluefoot::CBFFilter
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CCodePointUTF8Filter : public CFilter
 	{
 	public:
 
@@ -46,7 +46,7 @@ namespace nsBluefoot
 		CCodePointUTF8Filter& operator = ( const CCodePointUTF8Filter& src );
 		virtual bool Read( unsigned long& ulUnitsRead , unsigned long ulUnitsToRead = 1 );
 		virtual bool Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite = 1 );
-		virtual CBFBuffer* GetSourceBuffer( void );
+		virtual CBuffer* GetSourceBuffer( void );
 
 	private:
 

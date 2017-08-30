@@ -33,7 +33,7 @@
 #include "SystemQOR/Config/SupportedOSList.h"
 
 #ifdef QOR_OS
-#	undef QOR_SYS_OS		//TODO: Make this unnecessary by removing the preprocessor definition of QOR_SYS_OS in favour of QOR_OS
+#	undef QOR_SYS_OS		//TODO: Make this unnecessary by removing the preprocessor definition of QOR_SYS_OS in favor of QOR_OS
 #	define QOR_SYS_OS QOR_PP_CAT(QOR_SYS_,QOR_OS)
 #else
 #	include "SystemQOR/Config/OSDetection.h"
@@ -50,11 +50,11 @@
 
 #		define QOR_CONFIG_DEFINES_OS1 QOR_PP_LIST_APPEND( QOR_CONFIG_DEFINES, ("QOR_SYS_OS=QOR_SYS_MSW") )
 #		define QOR_CONFIG_DEFINES_OS2 QOR_PP_LIST_APPEND( QOR_CONFIG_DEFINES_OS1, ("WIN32") )
-#		ifndef _CONSOLE
+/*#		ifndef _CONSOLE
 #			define QOR_CONFIG_DEFINES_OS3 QOR_PP_LIST_APPEND( QOR_CONFIG_DEFINES_OS2, ("_WINDOWS") )
 #		else
 #			define QOR_CONFIG_DEFINES_OS3 QOR_CONFIG_DEFINES_OS2
-#		endif
+#		endif*/
 #		ifndef _LIB
 #			define QOR_CONFIG_DEFINES_OS4 QOR_PP_LIST_APPEND( QOR_CONFIG_DEFINES_OS3, ("_USRDLL") )
 #			define QOR_CONFIG_DEFINES_OS QOR_PP_LIST_APPEND( QOR_CONFIG_DEFINES_OS4, ("_WINDLL") )

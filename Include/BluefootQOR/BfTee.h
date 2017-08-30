@@ -33,23 +33,23 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	class CBFTee : public CBFSink
+	class CTee : public CSink
 	{
 	public:
 
-		CBFTee();
-		virtual ~CBFTee();
-		CBFTee(const CBFTee& src);
-		CBFTee& operator = (const CBFTee& src);
+		CTee();
+		virtual ~CTee();
+		CTee(const CTee& src);
+		CTee& operator = (const CTee& src);
 
-		void AddSink(CBFSink* pSink);
-		CBFSink* GetSink( unsigned int );
+		void AddSink(CSink* pSink);
+		CSink* GetSink( unsigned int );
 
 		bool Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite = 1 );//Get the units from the source or buffer and process them
 
 	protected:
 
-		std::vector< CBFSink* > m_VecSinks;
+		std::vector< CSink* > m_VecSinks;
 	};
 
 }//nsBluefoot

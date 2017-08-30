@@ -1,6 +1,6 @@
 //CodePointSAXParser.h
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2015, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -35,7 +35,7 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CCodePointSAXParser : public nsBluefoot::CBFFilter
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CCodePointSAXParser : public CFilter
 	{
 	public:
 
@@ -45,7 +45,7 @@ namespace nsBluefoot
 		CCodePointSAXParser& operator = ( const CCodePointSAXParser& src );
 		virtual bool Read( unsigned long& ulUnitsRead , unsigned long ulUnitsToRead = 1 );
 		virtual bool Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite = 1 );
-		virtual CBFBuffer* GetSourceBuffer( void );
+		virtual CBuffer* GetSourceBuffer( void );
 	};
 
 }//nsBluefoot

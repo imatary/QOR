@@ -1,6 +1,6 @@
 //WinQLTrustee.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -38,21 +38,22 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CTrustee );
 
 	//--------------------------------------------------------------------------------
-	//TODO: this properly
 	bool operator == ( const Trustee& T1, const Trustee& T2 )
 	{
 		return ( 
 			( T1.MultipleTrusteeOperation == T2.MultipleTrusteeOperation ) &&
 			( T1.Form == T2.Form ) &&
 			( T1.Type == T2.Type) && 
-			( _tcscmp( T1.ptstrName, T2.ptstrName ) == 0 ) );
+			( _tcscmp( T1.ptstrName, T2.ptstrName ) == 0 ) &&
+			( T1.pMultipleTrustee == T2.pMultipleTrustee ) );
 	}
 
 	//--------------------------------------------------------------------------------
-	CTrustee::CTrustee( TCHAR* pName ) : m_AdvAPI32Library( CAdvAPI32::Instance() )
+	CTrustee::CTrustee( nsCodeQOR::CString strName ) : m_AdvAPI32Library( CAdvAPI32::Instance() )
 	{
 		_WINQ_FCONTEXT( "CTrustee::CTrustee" );
-		m_AdvAPI32Library.BuildTrusteeWithName( reinterpret_cast< ::PTRUSTEE >( this ), pName );
+		m_AdvAPI32Library.BuildTrusteeWithName( reinterpret_cast< ::PTRUSTEE >( this ), reinterpret_cast< LPWSTR >( strName.GetBuffer() ) );
+		strName.ReleaseBuffer();
 	}
 
 	//--------------------------------------------------------------------------------
@@ -166,13 +167,13 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	TCHAR* CTrustee::Name()
+	nsCodeQOR::CString CTrustee::Name()
 	{
 		_WINQ_FCONTEXT( "CTrustee::Name" );
-		LPTSTR strResult = 0;
+		nsCodeQOR::CString strResult;
         __QOR_PROTECT
         {
-			strResult = m_AdvAPI32Library.GetTrusteeName( reinterpret_cast< ::PTRUSTEE >( this ) );
+			strResult = nsCodeQOR::CString(m_AdvAPI32Library.GetTrusteeName( reinterpret_cast< ::PTRUSTEE >( this ) ) );
         }__QOR_ENDPROTECT
 		return strResult;
 	}

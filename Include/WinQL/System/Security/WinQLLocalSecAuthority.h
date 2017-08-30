@@ -1,6 +1,6 @@
 //WinQLLocalSecAuthority.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,12 +24,14 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#ifndef WINQL_SECURITY_LOCALSECAUTH_H_3
+#define WINQL_SECURITY_LOCALSECAUTH_H_3
+
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
-
-#ifndef WINQL_SECURITY_LOCALSECAUTH_H_3
-#define WINQL_SECURITY_LOCALSECAUTH_H_3
 
 #include "WinQL/WinQL.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"

@@ -30,17 +30,17 @@
 #define BLUEFOOT_ELEMENT_H_3
 
 #include "CompilerQOR.h"
-#include <vector>
+//#include <vector>
 #include "BfBuffer.h"
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot
 {
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFSource;
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFSink;
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CSource;
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CSink;
 
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFElement
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CElement
 	{
 	public:
 
@@ -51,13 +51,13 @@ namespace nsBluefoot
 			ePush
 		};
 
-		CBFElement();
-		virtual ~CBFElement();
-		CBFElement(const CBFElement& src);
-		CBFElement& operator = (const CBFElement& src);
+		CElement();
+		virtual ~CElement();
+		CElement(const CElement& src);
+		CElement& operator = (const CElement& src);
 
-		CBFElement* GetParent(void);
-		void SetParent(CBFElement* pParent);
+		CElement* GetParent(void);
+		void SetParent(CElement* pParent);
 
 		//------------------------------------------------------------------------------
 		virtual bool IsBuffered(void)
@@ -78,37 +78,37 @@ namespace nsBluefoot
 		}
 
 		//--------------------------------------------------------------------------------
-		void SetBuffer( CBFBuffer* pIOBuffer )
+		void SetBuffer( CBuffer* pIOBuffer )
 		{
 			m_pBuffer = pIOBuffer;
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual CBFBuffer* GetBuffer( void )
+		virtual CBuffer* GetBuffer( void )
 		{
 			return m_pBuffer;
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual void SetSource( CBFSource* pSource )
+		virtual void SetSource( CSource* pSource )
 		{
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual CBFSource* GetSource( void )
+		virtual CSource* GetSource( void )
 		{
-			return 0;
+			return nullptr;
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual void SetSink( CBFSink* pSink )
+		virtual void SetSink( CSink* pSink )
 		{
 		}
 
 		//--------------------------------------------------------------------------------
-		virtual CBFSink* GetSink( void )
+		virtual CSink* GetSink( void )
 		{
-			return 0;
+			return nullptr;
 		}
 
 		//------------------------------------------------------------------------------
@@ -119,8 +119,8 @@ namespace nsBluefoot
 
 	protected:
 
-		CBFElement* m_pParent;//The owning element or pipeline
-		CBFBuffer* m_pBuffer;
+		CElement* m_pParent;//The owning element or pipeline
+		CBuffer* m_pBuffer;
 
 	};
 

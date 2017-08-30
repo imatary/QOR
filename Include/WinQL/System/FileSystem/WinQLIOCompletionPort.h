@@ -44,17 +44,17 @@ namespace nsWin32
 		__QOR_DECLARE_OCLASS_ID( CIOCompletionPort );
 
 		CIOCompletionPort();
-		CIOCompletionPort( CFileHandle& FileHandle, Cmp_ulong_ptr CompletionKey, unsigned long NumberOfConcurrentThreads );
+		CIOCompletionPort( CFileHandle::ref_type FileHandle, Cmp_ulong_ptr CompletionKey, unsigned long NumberOfConcurrentThreads );
 		virtual ~CIOCompletionPort();
 
-		bool Attach( CFileHandle& FileHandle, Cmp_ulong_ptr CompletionKey, unsigned long NumberOfConcurrentThreads );
+		bool Attach( CFileHandle::ref_type FileHandle, Cmp_ulong_ptr CompletionKey, unsigned long NumberOfConcurrentThreads );
 		bool GetQueuedCompletionStatus( unsigned long* lpNumberOfBytes, Cmp_ulong_ptr* lpCompletionKey, nsWin32::LPOVERLAPPED* lpOverlapped, unsigned long dwMilliseconds );
 		bool GetQueuedCompletionStatusEx( nsWin32::LPOVERLAPPED_ENTRY lpCompletionPortEntries, unsigned long ulCount, unsigned long* ulNumEntriesRemoved, unsigned long dwMilliseconds, bool fAlertable );
 		bool PostQueuedCompletionStatus( unsigned long dwNumberOfBytesTransferred, Cmp_ulong_ptr dwCompletionKey, nsWin32::LPOVERLAPPED lpOverlapped );
 
 	protected:
 
-		CFileHandle m_Handle;
+		CFileHandle::ref_type m_Handle;
 
 	private:
 

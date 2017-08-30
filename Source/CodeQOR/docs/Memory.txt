@@ -6,7 +6,7 @@ Allocator - handles allocation count and object initialization/destruction
 Instancer - handles singletons, limited instances, counted instances, flyers and other instancing patterns
 Source - handles raw memory blocks, OS interaction, pre-allocation and pooling
 
-An Allocator for type T is formed by template instantiation of an Allocator type with an Instancer type itself parameterised with a Source type.
+An Allocator for type T is formed by template instantiation of an Allocator type with an Instancer type itself parameterized with a Source type.
 
 e.g. CDefaultAllocator< CDefaultInstancer< CDefaultSource, T >, T >
 

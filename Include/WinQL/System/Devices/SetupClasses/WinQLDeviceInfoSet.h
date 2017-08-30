@@ -1,6 +1,6 @@
 //WinQLDeviceInfoSet.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,27 +29,31 @@
 #ifndef WINQL_DEVICEINFOSET_H_3
 #define WINQL_DEVICEINFOSET_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/Definitions/Data.h"
 #include "WinQL/Definitions/IO.h"
 #include "WinQL/System/Devices/WinQLDevice.h"
-//#include "WinQL/Devices/Instances/DeviceInstance.h"
 #include "WinQL/System/Devices/WinQLDeviceHandle.h"
 #include "WinQL/CodeServices/Text/WinString.h"
 #include "WinQL/Application/Threading/WinQLThreadAffinity.h"
 #include "WinQL/CodeServices/WinQLSharedRef.h"
 #include "WinQL/CodeServices/Handles/WinQLHandleMap.h"
 
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceInfoSet, CTRef);
+
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
 	class __QOR_INTERFACE( __WINQL ) COSWindow;
-	class __QOR_INTERFACE( __WINQL ) CDeviceInfoSet;
+	//class __QOR_INTERFACE( __WINQL ) CDeviceInfoSet;
 
-	typedef nsWin32::CTHandleMap< nsCodeQOR::CTLRef< CHandle >, CDeviceInfoSet > CDeviceInfoSetHandleMap;
+	//typedef nsWin32::CTHandleMap< nsCodeQOR::CTLRef< CHandle >, CDeviceInfoSet > CDeviceInfoSetHandleMap;
 
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CDeviceInfoSet
@@ -60,7 +64,8 @@ namespace nsWin32
 
 		typedef nsCodeQOR::CTLRef< CDeviceInfoSet > refType;
 
-		__QOR_DECLARE_OCLASS_ID( CDeviceInfoSet );
+		__QOR_DECLARE_REF_TYPE(CDeviceInfoSet);
+		__QOR_DECLARE_OCLASS_ID(CDeviceInfoSet);
 		
 		CDeviceInfoSet( nsCodeQOR::mxGUID* pGuid = 0, COSWindow* pWindow = 0, const mxTCHAR* szMachineName = 0 );
 		CDeviceInfoSet( CTString& strEnumeratorID );
@@ -70,16 +75,7 @@ namespace nsWin32
 
 		CHandle& Handle( void );
 
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this );
-		}
-
 	protected:
-
-		void Init( void );																		//Initialise a Device InfoSet - Add it to the per thread collection																				
-		void Uninit( void );																	//Uninitialise a Device InfoSet - Remove it from the per thread collection
 
 		nsWinQAPI::CSetupAPI& m_Library;
 		nsCodeQOR::mxGUID* m_pGUID;																//device setup class guid

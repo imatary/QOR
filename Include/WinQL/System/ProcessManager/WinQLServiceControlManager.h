@@ -55,6 +55,7 @@ namespace nsWin32
 	{
 	public:
 
+		__QOR_DECLARE_REF_TYPE(CServiceController);
 		__QOR_DECLARE_OCLASS_ID( CServiceController );
 
 		typedef nsCodeQOR::CTLRef< CServiceController > refType;
@@ -94,9 +95,8 @@ namespace nsWin32
 	{
 	public:
 
-		__QOR_DECLARE_OCLASS_ID( CServiceControlSession );
-
-		typedef nsCodeQOR::CTLRef< CServiceControlSession > refType;
+		__QOR_DECLARE_REF_TYPE(CServiceControlSession);
+		__QOR_DECLARE_OCLASS_ID(CServiceControlSession);
 
 		CServiceControlSession( CServiceControlManager& Manager, const TCHAR* szMachineName, const TCHAR* szDatabaseName, unsigned long ulDesiredAccess );
 		~CServiceControlSession();
@@ -110,12 +110,6 @@ namespace nsWin32
 		bool GetDisplayName( CTString& strServiceName, CTString& DisplayName, unsigned long* lpcchBuffer );		
 		bool GetKeyName( CTString& strDisplayName, CTString& strServiceName );
 		bool QueryLockStatus( QUERY_SERVICE_LOCK_STATUS** ppLockStatus, unsigned long& ulBytesReturned );
-
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this, false );
-		}
 
 	private:
 
@@ -149,7 +143,7 @@ namespace nsWin32
 		ServiceStatusHandle RegisterCtrlHandler( CTString& strServiceName, LPHANDLER_FUNCTION_EX lpHandlerProc, void* lpContext = 0 );		
 		bool SetBits( ServiceStatusHandle hServiceStatus, unsigned long ulServiceBits, bool bSetBitsOn, bool bUpdateImmediately );		
 		bool SetStatus( ServiceStatusHandle hServiceStatus, LPSERVICE_STATUS lpServiceStatus );
-		CServiceControlSession::refType OpenSession( CTString& strMachine, CTString& strDatabaseName, unsigned long ulDesiredAccess );
+		CServiceControlSession::ref_type OpenSession( CTString& strMachine, CTString& strDatabaseName, unsigned long ulDesiredAccess );
 
 	private:
 

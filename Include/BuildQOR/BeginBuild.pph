@@ -1,6 +1,6 @@
 //BeginBuild.pph
 
-// Copyright Querysoft Limited 2016
+// Copyright Querysoft Limited 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -28,5 +28,4 @@
 //Include this preprocessor header once after defining your config and build parameters
 //This header does the once per build initializations for the compile stage
 
-//#	include __QCMP_BUILDOPTS 					//Compiler specific build macros
 #	include "Initialize.pph"					//Include compiler specific initialization

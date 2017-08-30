@@ -1,6 +1,6 @@
 //WinQLDeviceHandle.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -35,17 +35,18 @@
 #pragma __QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/CodeServices/Handles/WinQLHandle.h"
 #include "WinQL/Application/Threading/WinQLThreadAffinity.h"
 #include "WinQL/CodeServices/Handles/WinQLHandleMap.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceHandle, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
 
 	class __QOR_INTERFACE( __WINQL ) CDeviceHandle;
-
-	//typedef nsWin32::CTHandleMap< nsCodeQOR::CTCRef< CDeviceHandle >, CDeviceHandle > CDeviceHandleMap;
 
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CDeviceHandle : public CHandle
@@ -54,36 +55,20 @@ namespace nsWin32
 
 	public:
 
-		typedef nsCodeQOR::CTCRef< CDeviceHandle > refType;
-
+		__QOR_DECLARE_REF_TYPE(CDeviceHandle);
 		__QOR_DECLARE_OCLASS_ID( CDeviceHandle );
 
 		CDeviceHandle();
 		CDeviceHandle( void* h );
 		CDeviceHandle( int h );
 		CDeviceHandle( const CDeviceHandle& src );
+		CDeviceHandle( CDeviceHandle&& move);
 		CDeviceHandle& operator = ( const CDeviceHandle& src );
+		CDeviceHandle& operator = ( CDeviceHandle&& move);
 		virtual ~CDeviceHandle();
 
 		void* Use( void ) const;
 
-		unsigned long AddRef( void ) const ;
-		unsigned long Release( void );
-
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this );
-		}
-
-	protected:
-
-		void Init( void );																		//
-		void Uninit( void );																	//
-
-	private:
-
-		mutable unsigned long m_ulRefCount;//TODO: Should be an atmoic value		
 	};
 
 }//nsWin32

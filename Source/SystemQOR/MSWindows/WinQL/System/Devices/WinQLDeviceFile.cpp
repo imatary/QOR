@@ -1,6 +1,6 @@
 //WinQLDeviceFile.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -50,11 +50,10 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CDeviceHandle::refType CDeviceFile::Handle()
+	CDeviceHandle::ref_type CDeviceFile::Handle()
 	{
 		_WINQ_FCONTEXT( "CDeviceFile::Handle" );
-		CDeviceHandle::refType refHandle( &m_Handle );
-		return refHandle;
+		return m_Handle;
 	}
 
 	//protected:
@@ -70,12 +69,12 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CDeviceFile::CDeviceFile" );
 		__QOR_PROTECT
 		{				
-			m_Handle = CKernel32::CreateFile( pDeviceName, dwDesiredAccess, dwShareMode, 0, OPEN_EXISTING, dwFlagsAndAttributes, 0 );
+			m_Handle() = CKernel32::CreateFile( pDeviceName, dwDesiredAccess, dwShareMode, 0, OPEN_EXISTING, dwFlagsAndAttributes, 0 );
 		}__QOR_ENDPROTECT
 	}
 
 	//--------------------------------------------------------------------------------
-	CDeviceFile::CDeviceFile( CDeviceHandle& hExisting )
+	CDeviceFile::CDeviceFile( CDeviceHandle::ref_type hExisting )
 	{
 		_WINQ_FCONTEXT( "CDeviceFile::CDeviceFile" );
 
@@ -89,7 +88,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::ReadFile( m_Handle.Use(), lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
+			bResult = CKernel32::ReadFile( m_Handle().Use(), lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -101,7 +100,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::ReadFileEx( m_Handle.Use(), lpBuffer, nNumberOfBytesToRead, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ), reinterpret_cast< ::LPOVERLAPPED_COMPLETION_ROUTINE >( lpCompletionRoutine ) ) ? true : false;
+			bResult = CKernel32::ReadFileEx( m_Handle().Use(), lpBuffer, nNumberOfBytesToRead, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ), reinterpret_cast< ::LPOVERLAPPED_COMPLETION_ROUTINE >( lpCompletionRoutine ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -113,7 +112,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::WriteFile( m_Handle.Use(), lpBuffer, nNumberOfBytesToWrite, lpNumberOfBytesWritten, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
+			bResult = CKernel32::WriteFile( m_Handle().Use(), lpBuffer, nNumberOfBytesToWrite, lpNumberOfBytesWritten, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -125,7 +124,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::WriteFileEx( m_Handle.Use(), lpBuffer, nNumberOfBytesToWrite, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ), reinterpret_cast< ::LPOVERLAPPED_COMPLETION_ROUTINE >( lpCompletionRoutine ) ) ? true : false;
+			bResult = CKernel32::WriteFileEx( m_Handle().Use(), lpBuffer, nNumberOfBytesToWrite, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ), reinterpret_cast< ::LPOVERLAPPED_COMPLETION_ROUTINE >( lpCompletionRoutine ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -144,7 +143,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::FlushFileBuffers( m_Handle.Use() ) ? true : false;
+			bResult = CKernel32::FlushFileBuffers( m_Handle().Use() ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -156,7 +155,7 @@ namespace nsWin32
 		unsigned long ulResult = File_Type_Unknown;
 		__QOR_PROTECT
 		{
-			ulResult = CKernel32::GetFileType( m_Handle.Use() );
+			ulResult = CKernel32::GetFileType( m_Handle().Use() );
 		}__QOR_ENDPROTECT
 		return ulResult;			
 	}

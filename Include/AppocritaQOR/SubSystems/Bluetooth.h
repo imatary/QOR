@@ -37,6 +37,8 @@
 #include "AppocritaQOR/Event.h"
 #include "AppocritaQOR/SubSystems/IBluetooth.h"
 
+__QOR_DECLARE_REF(nsQOR, __APPOCRITA, CBluetoothServiceClient, CTRef);
+
  //------------------------------------------------------------------------------
 namespace nsQOR
 {
@@ -51,11 +53,39 @@ namespace nsQOR
 
 		CBluetooth();
 		virtual ~CBluetooth(){};
+		virtual void ScanForDevices(void);
+		virtual void RegisterServiceClient(nsCodeQOR::mxGUID& ServiceUUID, _reftype(IBluetoothServiceClient) Client);
+		virtual void UnregisterServiceClient(nsCodeQOR::mxGUID& ServiceUUID, _reftype(IBluetoothServiceClient) Client);
 
 	private:
 
 		CBluetooth( const CBluetooth& );
 		CBluetooth& operator = ( const CBluetooth& );
+	};
+	
+	//------------------------------------------------------------------------------
+	class __QOR_INTERFACE(__APPOCRITA) CBluetoothServiceClient : public IBluetoothServiceClient
+	{
+	public:
+
+		__QOR_DECLARE_OCLASS_ID( CBluetoothServiceClient );
+
+		CBluetoothServiceClient(nsCodeQOR::mxGUID* serviceID);
+		virtual ~CBluetoothServiceClient();
+
+		virtual void Register();
+		virtual void UnRegister();
+		virtual void AttachDevice(IBluetoothRemoteDevice::ref_type Device);
+
+	protected:
+
+		nsCodeQOR::mxGUID* m_pServiceID;
+
+	private:
+
+		CBluetoothServiceClient() = delete;
+		CBluetoothServiceClient( const CBluetoothServiceClient& src) = delete;
+		CBluetoothServiceClient& operator = (const CBluetoothServiceClient& src) = delete;
 	};
 
 }//nsQOR

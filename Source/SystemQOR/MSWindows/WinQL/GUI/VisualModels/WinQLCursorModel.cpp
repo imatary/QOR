@@ -41,14 +41,14 @@ namespace nsWin32
 	//default construct
 	CCursorModel::CCursorModel( CModel* pContainer ) : nsMammut::CPropertySet( pContainer )
 	,	m_Type			( this, _TXT( "Type" ).str()		, eByNameCursor		)
-	,	m_pModule		( this, _TXT( "Module" ).str()	, 0					)
+	,	m_pModule		( this, _TXT( "Module" ).str()		, 0					)
 	,	m_szName		( this, _TXT( "Name" ).str()		, 0					)
 	,	m_iXHotSpot		( this, _TXT( "XHotSpot" ).str()	, 0					)
 	,	m_iYHotSpot		( this, _TXT( "YHotSpot" ).str()	, 0					)
-	,	m_iHeight		( this, _TXT( "Height" ).str()	, 32				)
+	,	m_iHeight		( this, _TXT( "Height" ).str()		, 32				)
 	,	m_iWidth		( this, _TXT( "Width" ).str()		, 32				)
-	,	m_pANDPlane		( this, _TXT( "ANDBits" ).str()	, 0					)
-	,	m_pORPlane		( this, _TXT( "ORBits" ).str()	, 0					)
+	,	m_pANDPlane		( this, _TXT( "ANDBits" ).str()		, 0					)
+	,	m_pORPlane		( this, _TXT( "ORBits" ).str()		, 0					)
 	{
 	}
 
@@ -71,14 +71,14 @@ namespace nsWin32
 	//Construct from a generic PropertySet
 	CCursorModel::CCursorModel( nsMammut::CPropertySet& src ) : CPropertySet( src )
 	,	m_Type		( this, _TXT( "Type" ).str()		,	src[ _TXT( "Type" ).str()		] )
-	,	m_pModule	( this, _TXT( "Module" ).str()	,	src[ _TXT( "Module" ).str()	] )
+	,	m_pModule	( this, _TXT( "Module" ).str()		,	src[ _TXT( "Module" ).str()		] )
 	,	m_szName	( this, _TXT( "Name" ).str()		,	src[ _TXT( "Name" ).str()		] )	
 	,	m_iXHotSpot	( this, _TXT( "XHotSpot" ).str()	,	src[ _TXT( "XHotSpot" ).str()	] )
 	,	m_iYHotSpot	( this, _TXT( "YHotSpot" ).str()	,	src[ _TXT( "YHotSpot" ).str()	] )
-	,	m_iHeight	( this, _TXT( "Height" ).str()	,	src[ _TXT( "Height" ).str()	] )
-	,	m_iWidth	( this, _TXT( "Width" ).str()		,	src[ _TXT( "Width" ).str()	] )	
-	,	m_pANDPlane	( this, _TXT( "ANDBits" ).str()	,	src[ _TXT( "ANDBits" ).str()	] )
-	,	m_pORPlane	( this, _TXT( "ORBits" ).str()	,	src[ _TXT( "ORBits" ).str()	] )
+	,	m_iHeight	( this, _TXT( "Height" ).str()		,	src[ _TXT( "Height" ).str()		] )
+	,	m_iWidth	( this, _TXT( "Width" ).str()		,	src[ _TXT( "Width" ).str()		] )	
+	,	m_pANDPlane	( this, _TXT( "ANDBits" ).str()		,	src[ _TXT( "ANDBits" ).str()	] )
+	,	m_pORPlane	( this, _TXT( "ORBits" ).str()		,	src[ _TXT( "ORBits" ).str()		] )
 	{
 	}
 
@@ -111,14 +111,14 @@ __QCMP_WARNING_POP
 		if( &src != this )
 		{
 			m_Type			=	src[ _TXT( "Type" ).str()		];
-			m_pModule		=	src[ _TXT( "Module" ).str()	];
+			m_pModule		=	src[ _TXT( "Module" ).str()		];
 			m_szName		=	src[ _TXT( "Name" ).str()		];
 			m_iXHotSpot		=	src[ _TXT( "XHotSpot" ).str()	];
 			m_iYHotSpot		=	src[ _TXT( "YHotSpot" ).str()	];
-			m_iHeight		=	src[ _TXT( "Height" ).str()	];
-			m_iWidth		=	src[ _TXT( "Width" ).str()	];
+			m_iHeight		=	src[ _TXT( "Height" ).str()		];
+			m_iWidth		=	src[ _TXT( "Width" ).str()		];
 			m_pANDPlane		=	src[ _TXT( "ANDBits" ).str()	];
-			m_pORPlane		=	src[ _TXT( "ORBits" ).str()	];
+			m_pORPlane		=	src[ _TXT( "ORBits" ).str()		];
 		}
 		return *this;
 	}

@@ -1,6 +1,6 @@
 //coutSink.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -39,28 +39,28 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFcoutSink : public CBFSink
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CcoutSink : public CSink
 	{
 	public:
 
 		//------------------------------------------------------------------------------
-		CBFcoutSink()
+		CcoutSink()
 		{
 		}
 
 		//------------------------------------------------------------------------------
-		virtual ~CBFcoutSink()
+		virtual ~CcoutSink()
 		{
 		}
 
 		//------------------------------------------------------------------------------
-		CBFcoutSink( const CBFcoutSink& src )
+		CcoutSink( const CcoutSink& src )
 		{
 			*this = src;
 		}
 
 		//------------------------------------------------------------------------------
-		CBFcoutSink& operator = (const CBFcoutSink& src)
+		CcoutSink& operator = (const CcoutSink& src)
 		{
 			if( &src != this )
 			{
@@ -69,10 +69,6 @@ namespace nsBluefoot
 		}
 
 		virtual bool Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite = 1 );
-
-	protected:
-
-		
 
 	};
 

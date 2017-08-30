@@ -93,7 +93,7 @@ template<> wchar_t SBSChar::To_wchar() const
 //--------------------------------------------------------------------------------
 template<> bool SBSChar::isalnum() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Alpha | Digit ) ? true : false;
 	}
@@ -106,7 +106,7 @@ template<> bool SBSChar::isalnum() const
 //--------------------------------------------------------------------------------
 template<> bool SBSChar::isalpha() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Alpha ) ? true : false;
 	}
@@ -126,7 +126,7 @@ template<> bool SBSChar::ascii_isalpha() const
 //--------------------------------------------------------------------------------
 template<> bool SBSChar::isblank() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Blank ) ? true : false;
 	}
@@ -139,7 +139,7 @@ template<> bool SBSChar::isblank() const
 //--------------------------------------------------------------------------------
 template<> bool SBSChar::iscntrl() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Control ) ? true : false;
 	}
@@ -152,7 +152,7 @@ template<> bool SBSChar::iscntrl() const
 //--------------------------------------------------------------------------------
 template<> bool SBSChar::isdigit() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Digit ) ? true : false;
 	}
@@ -165,7 +165,7 @@ template<> bool SBSChar::isdigit() const
 //--------------------------------------------------------------------------------
 template<> bool SBSChar::isgraph() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Punct|Alpha|Digit ) ? true : false;
 	}
@@ -178,7 +178,7 @@ template<> bool SBSChar::isgraph() const
 //--------------------------------------------------------------------------------
 template<> bool SBSChar::islower() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Lower ) ? true : false;
 	}
@@ -191,7 +191,7 @@ template<> bool SBSChar::islower() const
 //--------------------------------------------------------------------------------
 template<> bool SBSChar::isprint() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Blank|Punct|Alpha|Digit ) ? true : false;
 	}
@@ -204,7 +204,7 @@ template<> bool SBSChar::isprint() const
 //--------------------------------------------------------------------------------
 template<> bool SBSChar::ispunct() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Punct ) ? true : false;
 	}
@@ -217,7 +217,7 @@ template<> bool SBSChar::ispunct() const
 //--------------------------------------------------------------------------------
 template<> bool SBSChar::isspace() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Space ) ? true : false;
 	}
@@ -230,7 +230,7 @@ template<> bool SBSChar::isspace() const
 //--------------------------------------------------------------------------------
 template<> bool SBSChar::isupper() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Upper ) ? true : false;
 	}
@@ -243,7 +243,7 @@ template<> bool SBSChar::isupper() const
 //--------------------------------------------------------------------------------
 template<> bool SBSChar::isxdigit() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return __fast_ch_check( Hex ) ? true : false;
 	}
@@ -262,7 +262,7 @@ template<> int SBSChar::toascii() const
 //--------------------------------------------------------------------------------
 template<> int SBSChar::tolower() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return ascii_tolower();
 	}
@@ -283,7 +283,7 @@ template<> int SBSChar::ascii_tolower() const
 //--------------------------------------------------------------------------------
 template<> int SBSChar::toupper() const
 {
-	if( TheSystem().As< nsWin32::CSystem >()->Locale()().LocaleChanged() == false )
+	if( TheSystem().As< nsWin32::CSystem >()->Locale(QOR_PP_SYNCHRONIZE)().LocaleChanged() == false )
 	{
 		return ascii_toupper();
 	}

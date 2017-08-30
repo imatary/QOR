@@ -44,12 +44,11 @@ namespace nsWin32
 	,	m_Class	( this, _TXT( "Class" ).str()	, 0 )
 	,	m_Style	( this, _TXT( "Style" ).str()	, 0	)
 	,	m_Menu	( this, _TXT( "Menu" ).str()	, 0 )
-	,	m_Layout( this, _TXT( "Layout" ).str(), CWindowLayoutModel( this )	)
-	,	m_Name	( this, _TXT( "Name" ).str(),	_TXT( "WinQLWindow" ).c_str() )
-	,	m_Parent( this, _TXT( "Parent" ).str(), 0 )
-	,	m_Module( this, _TXT( "Module" ).str(), 0 )
-	{
-		
+	,	m_Layout( this, _TXT( "Layout" ).str()	, CWindowLayoutModel( this )	)
+	,	m_Name	( this, _TXT( "Name" ).str()	, _TXT( "WinQLWindow" ).c_str() )
+	,	m_Parent( this, _TXT( "Parent" ).str()	, 0 )
+	,	m_Module( this, _TXT( "Module" ).str()	, 0 )
+	{		
 	}
 
 	//--------------------------------------------------------------------------------
@@ -73,13 +72,13 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	//Construct from a generic PropertySet
 	CWindowModel::CWindowModel( nsMammut::CPropertySet& src ) : CPropertySet( src )
-	,	m_Class	( this, _TXT( "Class" ).str()	 , src[ _TXT( "Class" ).str()	 	] )
-	,	m_Style	( this, _TXT( "Style" ).str()	 , src[ _TXT( "Style" ).str()	 	] )
-	,	m_Menu	( this, _TXT( "Menu" ).str()	 , src[ _TXT( "Menu" ).str()		] )
-	,	m_Layout( this, _TXT( "Layout" ).str() , src[ _TXT( "Layout" ).str() 	] )
-	,	m_Name	( this, _TXT( "Name" ).str()	 , src[ _TXT( "Name" ).str()		] )
-	,	m_Parent( this, _TXT( "Parent" ).str() , src[ _TXT( "Parent" ).str()	] )
-	,	m_Module( this, _TXT( "Module" ).str() , src[ _TXT( "Module" ).str()	] )
+	,	m_Class	( this, _TXT( "Class" ).str()	, src[ _TXT( "Class" ).str()	] )
+	,	m_Style	( this, _TXT( "Style" ).str()	, src[ _TXT( "Style" ).str()	] )
+	,	m_Menu	( this, _TXT( "Menu" ).str()	, src[ _TXT( "Menu" ).str()		] )
+	,	m_Layout( this, _TXT( "Layout" ).str()	, src[ _TXT( "Layout" ).str() 	] )
+	,	m_Name	( this, _TXT( "Name" ).str()	, src[ _TXT( "Name" ).str()		] )
+	,	m_Parent( this, _TXT( "Parent" ).str()	, src[ _TXT( "Parent" ).str()	] )
+	,	m_Module( this, _TXT( "Module" ).str()	, src[ _TXT( "Module" ).str()	] )
 	{
 	}
 
@@ -106,11 +105,11 @@ namespace nsWin32
 	{
 		if( &src != this )
 		{
-			m_Class	 = src[ _TXT( "Class" ).str()	 	];
-			m_Style	 = src[ _TXT( "Style" ).str()	 	];
-			m_Menu	 = src[ _TXT( "Menu" ).str()		];
+			m_Class	 = src[ _TXT( "Class" ).str()	];
+			m_Style	 = src[ _TXT( "Style" ).str()	];
+			m_Menu	 = src[ _TXT( "Menu" ).str()	];
 			m_Layout = src[ _TXT( "Layout" ).str() 	];
-			m_Name	 = src[ _TXT( "Name" ).str()		];
+			m_Name	 = src[ _TXT( "Name" ).str()	];
 			m_Parent = src[ _TXT( "Parent" ).str()	];
 			m_Module = src[ _TXT( "Module" ).str()	];
 		}

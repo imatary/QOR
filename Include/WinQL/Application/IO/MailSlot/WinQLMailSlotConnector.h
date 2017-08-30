@@ -1,6 +1,6 @@
 //WinQLMailSlotConnector.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -39,13 +39,13 @@
 namespace nsWin32
 {
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL ) CMailSlotConnector : public nsBluefoot::CBFPlug
+	class __QOR_INTERFACE( __WINQL ) CMailSlotConnector : public nsBluefoot::CPlug
 	{
 	public:
 
 		__QOR_DECLARE_OCLASS_ID( CMailSlotConnector );
 
-		CMailSlotConnector( nsBluefoot::CBFConnectionPool* pPool = 0 );
+		CMailSlotConnector( nsBluefoot::CConnectionPool* pPool = 0 );
 		virtual ~CMailSlotConnector();
 
 		//Plug interface

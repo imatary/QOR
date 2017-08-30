@@ -30,6 +30,9 @@
 #define WINQL_CS_LC_GEO_H_3
 
 #include "WinQL/Application/I18n/WinQLI18n.h"
+#include "CodeQOR/DataStructures/TRef.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQLL, CGeoLocation, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -69,15 +72,17 @@ namespace nsWin32
 		__QOR_DECLARE_OCLASS_ID( CGeoLocationHelper );
 
 		CGeoLocationHelper();
-		CGeoLocationHelper( const CGeoLocationHelper& );
-		CGeoLocationHelper& operator = ( const CGeoLocationHelper& );
+		CGeoLocationHelper( const CGeoLocationHelper& src );
+		CGeoLocationHelper( CGeoLocationHelper&& move );
+		CGeoLocationHelper& operator = ( const CGeoLocationHelper& src);
+		CGeoLocationHelper& operator = ( CGeoLocationHelper&& move);
 		~CGeoLocationHelper();
-		BOOL EnumSystemGeoID( GEOCLASS GeoClass, GEOID ParentGeoId, GeoEnumCallback lpGeoEnumProc );
-		CTString GetGeoInfo( GEOID GeoId, GEOTYPE GeoType, unsigned short usLanguage );
-		GEOID GetUserNation();
-		GEOID GetUserRegion();
-		GEOID GetUserGeoID( GEOCLASS GeoClass );
-		BOOL SetUserGeoID( GEOID GeoID );
+		BOOL EnumSystemGeoID( GEOCLASS GeoClass, GEOID ParentGeoId, GeoEnumCallback lpGeoEnumProc ) const;
+		CTString GetGeoInfo( GEOID GeoId, GEOTYPE GeoType, unsigned short usLanguage ) const;
+		GEOID GetUserNation() const;
+		GEOID GetUserRegion() const;
+		GEOID GetUserGeoID( GEOCLASS GeoClass ) const;
+		BOOL SetUserGeoID( GEOID GeoID ) const;
 
 	private:
 
@@ -92,25 +97,25 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CGeoLocation );
 
+		CGeoLocation() = delete;
 		CGeoLocation( GEOID ID );
 		CGeoLocation( const CGeoLocation& src );
+		CGeoLocation( CGeoLocation&& move );
 		CGeoLocation& operator = ( const CGeoLocation& src );
+		CGeoLocation& operator = ( CGeoLocation&& move);
 		~CGeoLocation();
 
-		GEOID ID();
-		CTString GetNation( unsigned short usLanguage );
-		CTString GetLatitude( unsigned short usLanguage );
-		CTString GetLongitude( unsigned short usLanguage );
-		CTString GetISO2( unsigned short usLanguage );
-		CTString GetISO3( unsigned short usLanguage );
-		CTString GetRFC1766( unsigned short usLanguage );
-		CTString GetLCID( unsigned short usLanguage );
-		CTString GetFriendlyName( unsigned short usLanguage );
-		CTString GetOfficialName( unsigned short usLanguage );
-		/*
-		CTString GetTimeZones( unsigned short usLanguage );
-		CTString GetOfficialLanguages( unsigned short usLanguage );
-		*/
+		GEOID ID() const;
+		CTString GetNation( unsigned short usLanguage ) const;
+		CTString GetLatitude( unsigned short usLanguage ) const;
+		CTString GetLongitude( unsigned short usLanguage ) const;
+		CTString GetISO2( unsigned short usLanguage ) const;
+		CTString GetISO3( unsigned short usLanguage ) const;
+		CTString GetRFC1766( unsigned short usLanguage ) const;
+		CTString GetLCID( unsigned short usLanguage ) const;
+		CTString GetFriendlyName( unsigned short usLanguage ) const;
+		CTString GetOfficialName( unsigned short usLanguage ) const;
+
 	private:
 
 		GEOID m_ID;

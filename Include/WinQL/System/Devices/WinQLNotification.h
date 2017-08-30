@@ -1,6 +1,6 @@
 //WinQLNotification.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,10 +29,13 @@
 #ifndef WINQL_DEVICEIO_NOTIFICATION_H_3
 #define WINQL_DEVICEIO_NOTIFICATION_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/Application/Threading/WinQLThreadAffinity.h"
 #include "WinQL/CodeServices/Handles/WinQLHandleMap.h"
 #include "WinQL/CodeServices/Handles/WinQLHandle.h"
@@ -44,59 +47,41 @@ namespace nsWinQAPI
 	class __QOR_INTERFACE( __WINQAPI ) CUser32;
 }
 
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceNotification, CTRef);
+
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-	class __QOR_INTERFACE( __WINQL ) CDeviceNotification;
-
-	typedef nsWin32::CTHandleMap< nsCodeQOR::CTLRef< CHandle >, CDeviceNotification > CDeviceNotificationHandleMap;
-
 	//--------------------------------------------------------------------------------
 	class __QOR_INTERFACE( __WINQL ) CDeviceNotification
 	{
-		friend class nsCodeQOR::CDefaultInstancer< nsCodeQOR::CDefaultSource, CDeviceNotification >;
-		friend class nsCodeQOR::CDefaultAllocator< nsCodeQOR::CDefaultInstancer< nsCodeQOR::CDefaultSource, CDeviceNotification >, CDeviceNotification >;
 
 		QOR_PP_WINQL_THREAD_ATTACHED;
 
 	public:
 
-		typedef nsCodeQOR::CTLRef< CDeviceNotification > refType;
-
-		__QOR_DECLARE_OCLASS_ID( CDeviceNotification );
-
-		//--------------------------------------------------------------------------------
-		refType Ref( void )
-		{
-			return refType( this );
-		}
-
-		std::vector< CHandle >& Handles( void );
-
-	protected:
+		__QOR_DECLARE_REF_TYPE(CDeviceNotification);
+		__QOR_DECLARE_OCLASS_ID(CDeviceNotification);
 
 		CDeviceNotification( CHandle& Handle, CNotificationFilter& Filter, unsigned long Flags );
 		virtual ~CDeviceNotification();
 
-		void Init( void );																		//
-		void Uninit( void );																	//
+		std::vector< CHandle >& Handles(void);
 
 	private:
 
-		std::vector< CHandle > m_VecNotifyHandles;
-		
+		std::vector< CHandle > m_VecNotifyHandles;		
 		nsWinQAPI::CUser32& m_Library;
 
-		CDeviceNotification();
+		CDeviceNotification() = delete;
 		__QCS_DECLARE_NONCOPYABLE( CDeviceNotification );
 
-		friend class refType;
-		friend __QOR_INTERFACE( __WINQL ) CDeviceNotification::refType CreateWindowDeviceNotification( CHandle& Handle, CNotificationFilter& Filter );
-		friend __QOR_INTERFACE( __WINQL ) CDeviceNotification::refType CreateServiceDeviceNotification( CHandle& Handle, CNotificationFilter& Filter );
+		friend __QOR_INTERFACE( __WINQL ) CDeviceNotification::ref_type CreateWindowDeviceNotification( CHandle& Handle, CNotificationFilter& Filter );
+		friend __QOR_INTERFACE( __WINQL ) CDeviceNotification::ref_type CreateServiceDeviceNotification( CHandle& Handle, CNotificationFilter& Filter );
 	};
 
-	__QOR_INTERFACE( __WINQL ) CDeviceNotification::refType CreateWindowDeviceNotification( CHandle& Handle, CNotificationFilter& Filter );
-	__QOR_INTERFACE( __WINQL ) CDeviceNotification::refType CreateServiceDeviceNotification( CHandle& Handle, CNotificationFilter& Filter );
+	__QOR_INTERFACE( __WINQL ) CDeviceNotification::ref_type CreateWindowDeviceNotification( CHandle& Handle, CNotificationFilter& Filter );
+	__QOR_INTERFACE( __WINQL ) CDeviceNotification::ref_type CreateServiceDeviceNotification( CHandle& Handle, CNotificationFilter& Filter );
 
 }//nsWin32
 

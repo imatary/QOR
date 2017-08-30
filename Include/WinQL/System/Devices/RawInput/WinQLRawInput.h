@@ -1,6 +1,6 @@
 //WinQLRawInput.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,10 +29,13 @@
 #ifndef WINQL_DEVICEIO_RAWINPUT_H_3
 #define WINQL_DEVICEIO_RAWINPUT_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include "CodeQOR/DataStructures/TRef.h"
 #include "WinQL/Definitions/Handles.h"
 
 //--------------------------------------------------------------------------------
@@ -40,6 +43,8 @@ namespace nsWinQAPI
 {
 	class __QOR_INTERFACE( __WINQAPI ) CUser32;
 }
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CRawInput, CTExtRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -138,6 +143,7 @@ __QCMP_WARNING_POP
 	{
 	public:
 
+		__QOR_DECLARE_REF_TYPE(CRawInput);
 		__QOR_DECLARE_OCLASS_ID( CRawInput );
 
 		CRawInput();

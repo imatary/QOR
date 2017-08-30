@@ -23,13 +23,14 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>WinQLGUI</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>WinQL-GUI</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -196,6 +197,7 @@
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLNCButtonController.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLRenderedWindowController.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Controllers\WinQLRowContainer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Rendering\WinQLDirectComposition.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Theme\WinQLBufferedAnimation.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Theme\WinQLBufferPaintSession.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\Theme\WinQLPanningFeedback.cpp" />
@@ -285,6 +287,30 @@
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLWindowClass.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLWindowFactory.cpp" />
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\GUI\WinQLWindowStation.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\AcceleratorTable.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\Caret.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\CommonCtrl.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\Cursor.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\DeferWindowPos.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\Desktop.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\Dialog.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\DragDropReg.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\GUI.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\GUIFactory.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\Icon.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\ImageList.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\Menu.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\MessageBox.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\MessageHandler.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\Multilingual.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\PaintSession.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\Rendering\DirectComposition.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\Window.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\WindowClass.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\WindowFactory.h" />
+    <ClInclude Include="..\..\..\..\Include\WinQL\GUI\WindowStation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,6 @@
 //WinQLMouse.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -168,13 +168,6 @@ namespace nsWin32
 			bResult = m_Library.TrackMouseEvent( reinterpret_cast< ::LPTRACKMOUSEEVENT >( lpEventTrack ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
-	}
-
-	//--------------------------------------------------------------------------------
-	CMouse::refType CMouse::Ref(void)
-	{
-		_WINQ_FCONTEXT("CMouse::Ref");
-		return refType(this);
 	}
 
 }//nsWin32

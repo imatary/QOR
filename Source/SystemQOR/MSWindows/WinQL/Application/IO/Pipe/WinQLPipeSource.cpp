@@ -1,6 +1,6 @@
 //WinQLPipeSource.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -47,57 +47,50 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CPipeSource::Read( unsigned long ulUnitSize )
+	bool CPipeSource::ReadAsync(unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead, byte* pBuffer)
 	{
-		_WINQ_FCONTEXT( "CPipeSource::Read" );
-
-		unsigned long ulNumberOfUnitsToRead = m_pBuffer->WriteCapacity();
-		unsigned long ulNumberOfUnitsRead = 0;
-		return Read( ulNumberOfUnitsToRead, ulNumberOfUnitsRead, ulUnitSize );
+		CPipeConnector* pPipeConnector = dynamic_cast< CPipeConnector* >(m_pIOSourceConnector);
+		return pPipeConnector->Pipe().Read((void*)(pBuffer), ulNumberOfUnitsToRead,
+			reinterpret_cast<OVERLAPPED*>(pPipeConnector->GetSyncObject()), (LPOVERLAPPED_COMPLETION_ROUTINE)(&COverlappedHandler::OnOverlappedReadCompleted));
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CPipeSource::Read( unsigned long ulNumberOfUnitsToRead, unsigned long& ulNumberOfUnitsRead, unsigned long ulUnitSize )
+	bool CPipeSource::ReadSync(unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead, byte* pBuffer)
+	{
+		CPipeConnector* pPipeConnector = dynamic_cast< CPipeConnector* >(m_pIOSourceConnector);
+		return pPipeConnector->Pipe().Read(pBuffer, ulNumberOfUnitsToRead, ulNumberOfUnitsRead, 0);
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CPipeSource::Read(unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead )
 	{
 		_WINQ_FCONTEXT( "CPipeSource::Read" );
 		bool bResult = false;
-		CPipeConnector* pPipeConnector = dynamic_cast< CPipeConnector* >( m_pIOSourceConnector );
-		if( pPipeConnector && pPipeConnector->IsConnected() )
+		
+		if(m_pIOSourceConnector && m_pIOSourceConnector->IsConnected() )
 		{
 			byte* pBuffer = m_pBuffer->WriteRequest( ulNumberOfUnitsToRead );
 
-			if( pPipeConnector->AsyncConnection() )
+			if(m_pIOSourceConnector->AsyncConnection() )
 			{
-				bResult = pPipeConnector->Pipe().Read( (void*)(pBuffer), ulNumberOfUnitsToRead, 
-					reinterpret_cast< OVERLAPPED* >( pPipeConnector->GetSyncObject() ), (LPOVERLAPPED_COMPLETION_ROUTINE)(&COverlappedHandler::OnOverlappedReadCompleted) );
+				bResult = ReadAsync(ulNumberOfUnitsRead, ulNumberOfUnitsToRead, pBuffer);
 				ulNumberOfUnitsRead = 0;
 
-				if( !bResult && pPipeConnector->Protocol() )
+				if( !bResult )
 				{
-					pPipeConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadError();
+					ReadError.Signal();
 				}
 			}
 			else
 			{				
-				if( pPipeConnector->Pipe().Read( pBuffer, ulNumberOfUnitsToRead, ulNumberOfUnitsRead, 0 ) )
+				if( ReadSync(ulNumberOfUnitsRead, ulNumberOfUnitsToRead, pBuffer ))
 				{
+					ulNumberOfUnitsRead /= GetBuffer()->GetUnitSize();
 					m_pBuffer->WriteAcknowledge( ulNumberOfUnitsRead );
-					//unsigned long ulNumberOfUnitsWritten = 0;
-					//dynamic_cast< nsBluefoot::CBFSink* >( m_pSink )->Write( ulNumberOfUnitsRead, ulNumberOfUnitsWritten, m_pBuffer->ReadRequest( ulNumberOfUnitsRead ) );
 					bResult = true;
 				}
 
-				if( pPipeConnector->Protocol() )
-				{
-					if( bResult )
-					{
-						pPipeConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadSuccess( ulNumberOfUnitsRead );
-					}
-					else
-					{
-						pPipeConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadError();
-					}
-				}
+				bResult ? ReadSuccess.Signal() : ReadError.Signal();
 			}
 		}
 		return bResult;

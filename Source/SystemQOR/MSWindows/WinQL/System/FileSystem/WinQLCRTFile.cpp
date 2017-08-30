@@ -233,7 +233,7 @@ namespace nsWin32
 
 				if( fh == 0 )
 				{
-					//pnewFile = CConsole::ConsoleInputFile();
+					pnewFile = CConsole::ConsoleInputFile();
 				}
 				else
 				{
@@ -551,13 +551,13 @@ namespace nsWin32
 						( _file == 2 && ( s_pStdOut->m_chFlags & FOPEN ) ) ) && ( s_pStdOut->Handle() == s_pStdErr->Handle() ) ) )
 				{
 					//m_pFile = 0;
-					m_Handle.Drop();
+					m_Handle().Drop();
 					dwDOSResult = 0L;
 				}
 				else
 				{
 					Close();
-					m_Handle.Drop();
+					m_Handle().Drop();
 					//delete m_pFile ;
 				}
 
@@ -1748,7 +1748,8 @@ done:
 	void CCRTFile::GetBuffer()
 	{
         // Try to get a big buffer
-        if( _base = (char*)malloc( _INTERNAL_BUFSIZ ) )
+		_base = (char*)malloc(_INTERNAL_BUFSIZ);
+        if( _base != nullptr )
         {
 			// Got a big buffer
 			_flag |= _IOMYBUF;
@@ -4400,7 +4401,7 @@ exit:
 		//delete m_pFile;
 		//m_pFile = 0;
 		Close();
-		m_Handle.Drop();
+		m_Handle().Drop();
         m_chFlags = 0;		// clear file flags
         return 0;
 	}

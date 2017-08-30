@@ -29,7 +29,6 @@
 #include "BuildQOR/PreBuild.pph"
 
 #ifdef __QCMP_BUILDOPTS
-//#	include __QCMP_BUILDOPTS //setup up Compiler build options
 #	define QOR_PP_ITERATION_PARAMS_5 (3,(0,QOR_PP_SEQ_SIZE(QOR_APPLICATIONS)-1,"BuildApplication.sth"))
 #	include QOR_PP_ITERATE()
 #	undef QOR_APPLICATIONS

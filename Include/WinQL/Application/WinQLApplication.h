@@ -1,6 +1,6 @@
 //WinQLApplication.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -34,6 +34,7 @@
 #include "CodeQOR/ClassReg/ClassRegEntry.h"
 #include "AppocritaQOR/Application.h"
 #include "AppocritaQOR/Workflow.h"
+#include "WinQL/Application/Process/WinQLProcess.h"
 #include "WinQL/Application/Threading/WinQLEvent.h"
 #include "WinQL/Application/ErrorSystem/WinQLErrorSystem.h"
 #include "AppocritaQOR/Role.h"
@@ -48,7 +49,6 @@
 #include "WinQL/Application/RecoveryAndRestart/WinQLAppRecovery.h"
 #include "WinQL/Application/RecoveryAndRestart/WinQLAppRestart.h"
 #include "WinQL/Application/Comms/IPC/Atoms/WinQLAtoms.h"
-#include "WinQL/Application/Comms/Node/WinQLCommsNode.h"
 #include "WinQL/GUI/MessageHandler.h"
 #include "algorithm"
 #include "vector"
@@ -107,7 +107,6 @@ namespace nsWin32
 
 		//Comms/IPC
 		nsCodeQOR::CSTMember< CLocalAtomTable > LocalAtomTable;
-		nsCodeQOR::CSTMember< CCommsNode > CommsNode;
 		
 
 		//CLocale::refType Locale( void );		
@@ -118,7 +117,7 @@ namespace nsWin32
 		//CTimerManager::refType Timers( void );
 		//CModuleManager::refType Modules( void );
 		//CSecurityManager::refType Security( void );
-		CUser::refType User( void );
+		CUser::ref_type User( void );
 		//CGUI::refType GUI( void );		
 
 		static ref_type TheWin32Application( void );
@@ -137,8 +136,7 @@ namespace nsWin32
 		virtual int Run( nsQOR::IWorkflow::ref_type pWorkflow );
 		virtual void EnqueueEvent( nsQOR::IEvent::ref_type pEvent );
 		virtual void Stop( void );															//call to break main loop on next event
-
-		void OnIdle( void );
+		virtual void OnIdle( void );
 		void AddWaitableObject( CWaitableObject::ref_type );
 		void RemoveWaitableObject( CWaitableObject::ref_type );
 

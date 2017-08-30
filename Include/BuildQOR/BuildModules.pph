@@ -29,7 +29,6 @@
 #include "BuildQOR/PreBuild.pph"
 
 #ifdef __QCMP_BUILDOPTS
-//#	include __QCMP_BUILDOPTS //setup up Compiler build options
 //First we compile all the modules and generate linker inputs and dependencies for them
 #	define QOR_PP_ITERATION_PARAMS_5 (3,(0,QOR_PP_SEQ_SIZE(QOR_MODULES)-1,"BuildModule.sth"))
 #	include QOR_PP_ITERATE_5

@@ -1,6 +1,6 @@
 //WinQLCOHelper.cpp
 
-// Copyright Querysoft Limited 2013, 2015
+// Copyright Querysoft Limited 2013, 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -27,7 +27,7 @@
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"
 #include "WinQL/System/Registry/WinQLRegistry.h"
-#include "WinQL/COM/COHelper.h"
+#include "WinQL/COM/Runtime/WinQLCOHelper.h"
 #include "WinQL/Definitions/Interfaces.h"
 #include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/CodeServices/Text/WinString.h"

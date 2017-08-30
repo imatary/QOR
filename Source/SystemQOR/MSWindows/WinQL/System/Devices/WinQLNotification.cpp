@@ -1,6 +1,6 @@
 //WinQLNotification.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -41,15 +41,15 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CDeviceNotification );
 
 	//--------------------------------------------------------------------------------
-	__QOR_INTERFACE( __WINQL ) CDeviceNotification::refType CreateWindowDeviceNotification( CHandle& Handle, CNotificationFilter& Filter )
+	__QOR_INTERFACE( __WINQL ) CDeviceNotification::ref_type CreateWindowDeviceNotification( CHandle& Handle, CNotificationFilter& Filter )
 	{
-		return CDeviceNotification::refType( new CDeviceNotification( Handle, Filter, DEVICE_NOTIFY_WINDOW_HANDLE ), true );
+		return new_shared_ref<CDeviceNotification>( Handle, Filter, DEVICE_NOTIFY_WINDOW_HANDLE );
 	}
 
 	//--------------------------------------------------------------------------------
-	__QOR_INTERFACE( __WINQL ) CDeviceNotification::refType CreateServiceDeviceNotification( CHandle& Handle, CNotificationFilter& Filter )
+	__QOR_INTERFACE( __WINQL ) CDeviceNotification::ref_type CreateServiceDeviceNotification( CHandle& Handle, CNotificationFilter& Filter )
 	{
-		return CDeviceNotification::refType( new CDeviceNotification( Handle, Filter, DEVICE_NOTIFY_SERVICE_HANDLE ), true );
+		return new_shared_ref<CDeviceNotification>( Handle, Filter, DEVICE_NOTIFY_SERVICE_HANDLE );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -83,7 +83,6 @@ namespace nsWin32
 			}
 			break;
 			}
-			Init();
 		}__QOR_ENDPROTECT
 	}
 
@@ -93,8 +92,6 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CDeviceNotification::~CDeviceNotification" );
 		__QOR_PROTECT
 		{
-			Uninit();
-
 			std::vector< CHandle >::iterator it = m_VecNotifyHandles.begin();
 			while( it != m_VecNotifyHandles.end() )
 			{
@@ -109,32 +106,6 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CDeviceNotification::Handles" );
 		return m_VecNotifyHandles;
-	}
-
-	//--------------------------------------------------------------------------------
-	void CDeviceNotification::Uninit()
-	{
-		_WINQ_FCONTEXT( "CDeviceNotification::Uninit" );
-
-		std::vector< CHandle >::iterator it = m_VecNotifyHandles.begin();
-		while( it != m_VecNotifyHandles.end() )
-		{
-			_Thread().ResourceManager().DeviceNotificationHandleMap().Remove( nsCodeQOR::CTLRef< CHandle >( &(*it) ) );		
-			it++;
-		}
-	}
-
-	//--------------------------------------------------------------------------------
-	void CDeviceNotification::Init()
-	{
-		_WINQ_FCONTEXT( "CDeviceNotification::Init" );
-
-		std::vector< CHandle >::iterator it = m_VecNotifyHandles.begin();
-		while( it != m_VecNotifyHandles.end() )
-		{
-			_Thread().ResourceManager().DeviceNotificationHandleMap().Add( nsCodeQOR::CTLRef< CHandle >( &(*it) ), this );		
-			it++;
-		}
 	}
 
 }//nsWin32

@@ -1,6 +1,6 @@
 //coutSink.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -34,9 +34,10 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	bool CBFcoutSink::Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite )
+	bool CcoutSink::Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite )
 	{
-		{	nsCodeQOR::CTLRef< byte > Data;
+		{	
+			nsCodeQOR::CTLRef< byte > Data;
 			ulUnitsToWrite = GetData( Data, ulUnitsToWrite );
 			unsigned long ulUnitSize = GetBuffer()->GetUnitSize();
 			for( ulUnitsWritten = 0; ulUnitsWritten < ulUnitsToWrite; ulUnitsWritten++ )

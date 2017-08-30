@@ -1,6 +1,6 @@
 //WinQLGlobalAtoms.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -44,13 +44,27 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CGlobalAtomTable::CGlobalAtomTable(CGlobalAtomTable&& move)
+	{
+		_WINQ_FCONTEXT("CGlobalAtomTable::CGlobalAtomTable");
+		*this = std::move(move);
+	}
+
+	//--------------------------------------------------------------------------------
+	CGlobalAtomTable& CGlobalAtomTable::operator = (CGlobalAtomTable&& move)
+	{
+		_WINQ_FCONTEXT("CGlobalAtomTable::operator =");
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
 	CGlobalAtomTable::~CGlobalAtomTable()
 	{
 		_WINQ_FCONTEXT( "CGlobalAtomTable::~CGlobalAtomTable" );
 	}
 
 	//--------------------------------------------------------------------------------
-	CGlobalAtom CGlobalAtomTable::Add ( const TCHAR* lpString )
+	CGlobalAtom CGlobalAtomTable::Add ( const TCHAR* lpString ) const
 	{
 		_WINQ_FCONTEXT( "CGlobalAtomTable::Add" );
 		CGlobalAtom atom( 0 );
@@ -62,7 +76,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CGlobalAtomTable::Delete( CGlobalAtom& Atom )
+	void CGlobalAtomTable::Delete( CGlobalAtom& Atom ) const
 	{
 		_WINQ_FCONTEXT( "CGlobalAtomTable::Delete" );
 		__QOR_PROTECT
@@ -72,7 +86,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CGlobalAtom CGlobalAtomTable::Find( const TCHAR* lpString )
+	CGlobalAtom CGlobalAtomTable::Find( const TCHAR* lpString ) const
 	{
 		_WINQ_FCONTEXT( "CGlobalAtomTable::Find" );
 		CGlobalAtom atom( 0 );
@@ -84,7 +98,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CGlobalAtomTable::GetName( const CGlobalAtom& Atom )
+	CTString CGlobalAtomTable::GetName( const CGlobalAtom& Atom ) const
 	{
 		_WINQ_FCONTEXT( "CGlobalAtomTable::GetName" );
 		CTString strName;
@@ -97,20 +111,13 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CGlobalAtomTable::refType CGlobalAtomTable::Ref()
-	{
-		return refType( this );
-	}
-
-
-	//--------------------------------------------------------------------------------
 	__QOR_IMPLEMENT_OCLASS_LUID( CGlobalAtom );
 
 	//--------------------------------------------------------------------------------
-	CGlobalAtom::refType CreateGlobalAtom( const CTString& strName )
+	CGlobalAtom::ref_type CreateGlobalAtom( const CTString& strName )
 	{
 		_WINQ_SFCONTEXT( "CreateGlobalAtom" );
-		return CGlobalAtom::refType( new CGlobalAtom( strName ), true );
+		return ::new_shared_ref<CGlobalAtom>( strName );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -131,16 +138,27 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CGlobalAtom::CGlobalAtom( CGlobalAtom&& move )
+	{
+		_WINQ_FCONTEXT("CGlobalAtom::CGlobalAtom");
+		if (&move != this)
+		{
+			m_usAtom = std::move(move.m_usAtom);
+			move.m_usAtom = 0;
+		}
+	}
+
+	//--------------------------------------------------------------------------------
 	CGlobalAtom::CGlobalAtom( const CTString& strName, bool bUseExisting ) : m_usAtom( 0 )
 	{
 		_WINQ_FCONTEXT( "CGlobalAtom::CGlobalAtom" );
 		if( bUseExisting )
 		{
-			*this = TheSystem().As< nsWin32::CSystem >()->AtomTable( QOR_PP_SHARED_OBJECT_ACCESS ).Find( strName );
+			*this = TheSystem().As< nsWin32::CSystem >()->AtomTable(QOR_PP_SYNCHRONIZE)().Find( strName );
 		}
 		if( m_usAtom == 0 )
 		{
-			*this = TheSystem().As< nsWin32::CSystem >()->AtomTable( QOR_PP_SHARED_OBJECT_ACCESS ).Add( strName );
+			*this = TheSystem().As< nsWin32::CSystem >()->AtomTable(QOR_PP_SYNCHRONIZE)().Add( strName );
 		}		
 	}
 
@@ -150,7 +168,7 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CGlobalAtom::~CGlobalAtom" );
 		if( m_usAtom != 0 )
 		{
-			TheSystem().As< nsWin32::CSystem >()->AtomTable( QOR_PP_SHARED_OBJECT_ACCESS ).Delete( *this );
+			TheSystem().As< nsWin32::CSystem >()->AtomTable( QOR_PP_SYNCHRONIZE )().Delete( *this );
 		}
 	}
 
@@ -164,10 +182,19 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CGlobalAtom& CGlobalAtom::operator = ( CGlobalAtom&& move )
+	{
+		_WINQ_FCONTEXT("CGlobalAtom::operator = ");
+		m_usAtom = move.m_usAtom;
+		move.m_usAtom = 0;
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
 	CTString CGlobalAtom::GetName( void )
 	{
 		_WINQ_FCONTEXT( "CGlobalAtom::GetName" );
-		CTString strName = TheSystem().As< nsWin32::CSystem >()->AtomTable( QOR_PP_SHARED_OBJECT_ACCESS ).GetName( *this );
+		CTString strName = TheSystem().As< nsWin32::CSystem >()->AtomTable(QOR_PP_SYNCHRONIZE)().GetName( *this );
 		return strName;
 	}
 

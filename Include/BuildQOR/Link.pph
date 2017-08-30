@@ -34,7 +34,6 @@
 //Generate the linker stage build commands
 
 #	include __QCMP_BUILDOPTS 			//setup up Linker build options
-//#	include __QCMP_BUILDCMD_LINK_PPH	//generate the Linker specific command line 
 #	include "LinkCmd.pph"				//generate the Linker specific command line 
 
 #endif

@@ -33,25 +33,25 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CBFBuffer::CBFBuffer( unsigned long ulUnitSize, unsigned long ulItemCount ) : m_ulUnitSize( ulUnitSize )
+	CBuffer::CBuffer( unsigned long ulUnitSize, unsigned long ulItemCount ) : m_ulUnitSize( ulUnitSize )
 	{
 		SetCapacity( ulItemCount );
 	}
 
 	//------------------------------------------------------------------------------
-	CBFBuffer::CBFBuffer( const CBFBuffer& src )
+	CBuffer::CBuffer( const CBuffer& src )
 	{
 		*this = src;
 	}
 
 	//------------------------------------------------------------------------------
-	CBFBuffer::~CBFBuffer()
+	CBuffer::~CBuffer()
 	{
 		SetCapacity( 0 );
 	}
 
 	//------------------------------------------------------------------------------
-	CBFBuffer& CBFBuffer::operator = ( const CBFBuffer& src )
+	CBuffer& CBuffer::operator = ( const CBuffer& src )
 	{
 		if( &src != this )
 		{
@@ -61,7 +61,7 @@ namespace nsBluefoot
 	}
 		
 	//------------------------------------------------------------------------------
-	void CBFBuffer::SetCapacity( unsigned long ulItemCount )
+	void CBuffer::SetCapacity( unsigned long ulItemCount )
 	{
 		m_ulAllocationCount = ulItemCount;
 		m_uiReadBegin = 0;
@@ -71,13 +71,13 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	unsigned long CBFBuffer::Capacity( void ) const
+	unsigned long CBuffer::Capacity( void ) const
 	{
 		return m_ulAllocationCount;
 	}
 
 	//------------------------------------------------------------------------------
-	unsigned long CBFBuffer::ReadAcknowledge( unsigned long& ulItemCount )
+	unsigned long CBuffer::ReadAcknowledge( unsigned long& ulItemCount )
 	{
 		if( ulItemCount > ( m_uiReadEnd - m_uiReadBegin ) )
 		{
@@ -89,7 +89,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	unsigned long CBFBuffer::ReadReject( unsigned long& ulItemCount )
+	unsigned long CBuffer::ReadReject( unsigned long& ulItemCount )
 	{
 		if( ulItemCount > ( m_uiReadEnd - m_uiReadBegin ) )
 		{
@@ -101,7 +101,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	unsigned long CBFBuffer::WriteAcknowledge( unsigned long& ulItemCount )
+	unsigned long CBuffer::WriteAcknowledge( unsigned long& ulItemCount )
 	{
 		if( ulItemCount >( m_uiWriteEnd - m_uiWriteBegin ) )
 		{
@@ -113,7 +113,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	unsigned long CBFBuffer::GetUnitSize( void )
+	unsigned long CBuffer::GetUnitSize( void )
 	{
 		return m_ulUnitSize;
 	}

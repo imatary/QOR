@@ -32,79 +32,79 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	CBFFilter::CBFFilter() : m_SinkProxy( *this ), m_SourceProxy( *this )
+	CFilter::CFilter() : m_SinkProxy( *this ), m_SourceProxy( *this )
 	{
 		m_SinkProxy.SetParent( this );
 		m_SourceProxy.SetParent( this );
 	}
 
 	//------------------------------------------------------------------------------
-	CBFFilter::~CBFFilter()
+	CFilter::~CFilter()
 	{
 
 	}
 
 	//------------------------------------------------------------------------------
-	CBFFilter::CBFFilter( const CBFFilter& src ) : m_SinkProxy( *this ), m_SourceProxy( *this )
+	CFilter::CFilter( const CFilter& src ) : m_SinkProxy( *this ), m_SourceProxy( *this )
 	{
 		*this = src;
 	}
 
 	//------------------------------------------------------------------------------
-	CBFFilter& CBFFilter::operator = ( const CBFFilter& src )
+	CFilter& CFilter::operator = ( const CFilter& src )
 	{
 		if (&src != this)
 		{
-			m_SinkProxy.SetSource( const_cast< CBFFilter& >( src ).m_SinkProxy.GetSource() );
-			m_SourceProxy.SetSink( const_cast< CBFFilter& >( src ).m_SourceProxy.GetSink() );
+			m_SinkProxy.SetSource( const_cast< CFilter& >( src ).m_SinkProxy.GetSource() );
+			m_SourceProxy.SetSink( const_cast< CFilter& >( src ).m_SourceProxy.GetSink() );
 		}
 		return *this;
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFFilter::SetSource( CBFSource* pSource )
+	void CFilter::SetSource( CSource* pSource )
 	{
 		m_SinkProxy.SetSource( pSource );
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSource* CBFFilter::GetSource(void)
+	CSource* CFilter::GetSource(void)
 	{
 		return m_SinkProxy.GetSource();
 	}
 
 	//------------------------------------------------------------------------------
-	bool CBFFilter::Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite )
+	bool CFilter::Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite )
 	{
 		return false;
 	}
 
 	//------------------------------------------------------------------------------
-	void CBFFilter::SetSink( CBFSink* pSink )
+	void CFilter::SetSink( CSink* pSink )
 	{
 		m_SourceProxy.SetSink( pSink );
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSink* CBFFilter::GetSink( void )
+	CSink* CFilter::GetSink( void )
 	{
 		return m_SourceProxy.GetSink();
 	}
 
 	//------------------------------------------------------------------------------
-	bool CBFFilter::Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead )
+	bool CFilter::Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead )
 	{
 		return false;
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSource* CBFFilter::AsSource()
+	CSource* CFilter::AsSource()
 	{
 		return &m_SourceProxy;
 	}
 
 	//------------------------------------------------------------------------------
-	CBFSink* CBFFilter::AsSink()
+	CSink* CFilter::AsSink()
 	{
 		return &m_SinkProxy;
 	}

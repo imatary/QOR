@@ -48,18 +48,18 @@
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBFXMLReader : public CBFTextReader
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CXMLReader : public CTextReader
 	{
 	public:
 
 		typedef nsCodeQOR::CUCS2String CXMLString;
 
-		__QOR_DECLARE_OCLASS_ID( CBFXMLReader );
+		__QOR_DECLARE_OCLASS_ID( CXMLReader );
 
-		CBFXMLReader( CBFSource* pSource );
-		virtual ~CBFXMLReader();
-		CBFXMLReader(const CBFXMLReader& src);
-		CBFXMLReader& operator = (const CBFXMLReader& src);
+		CXMLReader( CSource* pSource );
+		virtual ~CXMLReader();
+		CXMLReader(const CXMLReader& src);
+		CXMLReader& operator = (const CXMLReader& src);
 
 		virtual void Run( void );
 
@@ -129,7 +129,7 @@ namespace nsBluefoot
 		//------------------------------------------------------------------------------
 		struct ParseState // for incremental parsing
 		{
-			typedef bool (CBFXMLReader::*ParseFunction)();
+			typedef bool (CXMLReader::*ParseFunction)();
 			ParseFunction m_Function;
 			int m_iState;
 		};
@@ -146,7 +146,7 @@ namespace nsBluefoot
 			InDTD 
 		};
 
-		typedef bool( CBFXMLReader::*ParseFunction ) ();
+		typedef bool( CXMLReader::*ParseFunction ) ();
 
 		//------------------------------------------------------------------------------
 		// used for entity declarations
@@ -357,7 +357,7 @@ namespace nsBluefoot
 
 			if ( m_pParseStack != 0) 
 			{
-				UnexpectedEof(&CBFXMLReader::eat_ws, 0);
+				UnexpectedEof(&CXMLReader::eat_ws, 0);
 				return false;
 			}
 			return true;
@@ -371,7 +371,7 @@ namespace nsBluefoot
 		}
 
 		//------------------------------------------------------------------------------
-		__QCMP_INLINE void StringAddC( CBFXMLReader::CXMLString::char_type ch )
+		__QCMP_INLINE void StringAddC( CXMLReader::CXMLString::char_type ch )
 		{
 			if( m_iStringArrayPos == 256 )
 			{
@@ -456,7 +456,7 @@ namespace nsBluefoot
 
 		__QOR_DECLARE_OCLASS_ID( CBFXMLReaderLocator );
 
-		CBFXMLReaderLocator( CBFXMLReader* pParent );
+		CBFXMLReaderLocator( CXMLReader* pParent );
 		virtual ~CBFXMLReaderLocator();
 
 		int ColumnNumber() const;
@@ -464,7 +464,7 @@ namespace nsBluefoot
 
 	private:
 
-		CBFXMLReader* m_pReader;
+		CXMLReader* m_pReader;
 
 		CBFXMLReaderLocator();
 	};

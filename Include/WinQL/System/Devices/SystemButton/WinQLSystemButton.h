@@ -1,6 +1,6 @@
 //WinQLSystemButton.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -29,12 +29,16 @@
 #ifndef WINQL_DEVICE_SYSBUTTON_H_3
 #define WINQL_DEVICE_SYSBUTTON_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "WinQL/System/Devices/Interfaces/WinQLDeviceInterface.h"
 #include "WinQL/System/Devices/WinQLIODevice.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CSystemButton, CTExtRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -44,17 +48,27 @@ namespace nsWin32
 	{
 	public:
 
-		typedef nsCodeQOR::CTLRef< CSystemButton > refType;
-
+		__QOR_DECLARE_REF_TYPE(CSystemButton);
 		__QOR_DECLARE_OCLASS_ID( CSystemButton );
 
 		static nsCodeQOR::CTExternalRegEntry< CSystemButton > RegEntry;
+		__QCMP_STATIC_CONSTANT(unsigned long, File_Device_SystemButton = 0x00000029);
 
 		CSystemButton();
 		virtual ~CSystemButton();
 		
+		//--------------------------------------------------------------------------------
+		enum eSystemButtonFuncs
+		{
+			eGetCaps = 0x50,
+			eGetEvent,
+		};
+
 
 	private:
+
+		void GetCaps(void);
+		void GetEvent(void);
 
 		CSystemButton( const CSystemButton& src );
 		CSystemButton& operator = ( const CSystemButton& src );

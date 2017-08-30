@@ -100,7 +100,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../QOR/Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>QORModule.lib;WinCmpSupQORVC.lib;WinSharedBootstrap.lib;kernel32.lib</AdditionalDependencies>
+      <AdditionalDependencies>deliberately_prevent_linking.lib</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -161,6 +161,7 @@
     <ClCompile Include="..\..\..\..\Source\AppocritaQOR\State.cpp" />
     <ClCompile Include="..\..\..\..\Source\AppocritaQOR\SubSystem.cpp" />
     <ClCompile Include="..\..\..\..\Source\AppocritaQOR\SubSystems\Bluetooth.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\SubSystems\Networking.cpp" />
     <ClCompile Include="..\..\..\..\Source\AppocritaQOR\SubSystems\Thread.cpp" />
     <ClCompile Include="..\..\..\..\Source\AppocritaQOR\SubSystems\Threading.cpp" />
     <ClCompile Include="..\..\..\..\Source\AppocritaQOR\Workflow.cpp" />
@@ -184,8 +185,10 @@
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystem.h" />
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\Bluetooth.h" />
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\IBluetooth.h" />
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\INetworking.h" />
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\IThread.h" />
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\IThreading.h" />
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\Networking.h" />
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\Thread.h" />
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\Threading.h" />
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Workflow.h" />

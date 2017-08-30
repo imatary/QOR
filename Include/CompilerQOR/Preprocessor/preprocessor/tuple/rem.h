@@ -10,7 +10,7 @@
 #  *                                                                          *
 #  ************************************************************************** */
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -39,29 +39,42 @@
 
 #include "../cat.h"
 #include "../config/config.h"
+#include "../facilities/expand.h"
 #include "../facilities/overload.h"
+#include "detail/is_single_return.h"
 
 //QOR_PP_REM
 
-#if QOR_PP_VARIADICS
-#   define QOR_PP_REM( ... )			__VA_ARGS__
-#else
-#   define QOR_PP_REM( x )				x
-#endif
-
-//QOR_PP_TUPLE_REM
-
-#if QOR_PP_VARIADICS
-#   define QOR_PP_TUPLE_REM( size )			QOR_PP_REM
-#else
-#   if ~QOR_PP_CONFIG_FLAGS() & QOR_PP_CONFIG_MWCC()
-#       define QOR_PP_TUPLE_REM( size )		QOR_PP_TUPLE_REM_I( size )
-#   else
-#       define QOR_PP_TUPLE_REM( size )		QOR_PP_TUPLE_REM_OO( ( size ) )
-#       define QOR_PP_TUPLE_REM_OO( par )	QOR_PP_TUPLE_REM_I ## par
-#   endif
-#   define QOR_PP_TUPLE_REM_I( size )		QOR_PP_TUPLE_REM_ ## size
-#endif
+# if QOR_PP_VARIADICS
+# 	 if QOR_PP_VARIADICS_MSVC
+/* To be used internally when __VA_ARGS__ could be empty ( or is a single element ) */
+#    	define QOR_PP_REM_CAT(...) QOR_PP_CAT(__VA_ARGS__,)
+# 	 endif
+#    define QOR_PP_REM(...) __VA_ARGS__
+# else
+#    define QOR_PP_REM(x) x
+# endif
+#
+# /* QOR_PP_TUPLE_REM */
+#
+/*
+VC++8.0 cannot handle the variadic version of QOR_PP_TUPLE_REM(size)
+*/
+# if QOR_PP_VARIADICS && !(QOR_PP_VARIADICS_MSVC && _MSC_VER <= 1400)
+# 	 if QOR_PP_VARIADICS_MSVC
+/* To be used internally when the size could be 0 ( or 1 ) */
+#    	define QOR_PP_TUPLE_REM_CAT(size) QOR_PP_REM_CAT
+# 	 endif
+#    define QOR_PP_TUPLE_REM(size) QOR_PP_REM
+# else
+#    if ~QOR_PP_CONFIG_FLAGS() & QOR_PP_CONFIG_MWCC()
+#        define QOR_PP_TUPLE_REM(size) QOR_PP_TUPLE_REM_I(size)
+#    else
+#        define QOR_PP_TUPLE_REM(size) QOR_PP_TUPLE_REM_OO((size))
+#        define QOR_PP_TUPLE_REM_OO(par) QOR_PP_TUPLE_REM_I ## par
+#    endif
+#    define QOR_PP_TUPLE_REM_I(size) QOR_PP_TUPLE_REM_ ## size
+# endif
 
 #define QOR_PP_TUPLE_REM_1(e0) e0
 #define QOR_PP_TUPLE_REM_2(e0, e1) e0, e1

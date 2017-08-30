@@ -1,6 +1,6 @@
 //WinQLI18n.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -355,7 +355,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::CompareStringOrdinal ( const wchar_t* lpString1, int cchCount1, const wchar_t* lpString2, int cchCount2, bool bIgnoreCase )
+	int CLocaleHelper::CompareStringOrdinal ( const wchar_t* lpString1, int cchCount1, const wchar_t* lpString2, int cchCount2, bool bIgnoreCase ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::CompareStringOrdinal" );
 		int iResult = 0;
@@ -367,7 +367,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CLocaleHelper::ConvertDefaultLocale( unsigned long Locale )
+	unsigned long CLocaleHelper::ConvertDefaultLocale( unsigned long Locale ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::ConvertDefaultLocale" );
 		unsigned long Result = 0;
@@ -379,7 +379,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::EnumLanguageGroupLocalesT( LangGroupLocaleEnumCallback pLangGroupLocaleEnumProc, CLocaleHelper::eLanguageGroup LanguageGroup, Cmp_long_ptr lParam )
+	bool CLocaleHelper::EnumLanguageGroupLocalesT( LangGroupLocaleEnumCallback pLangGroupLocaleEnumProc, CLocaleHelper::eLanguageGroup LanguageGroup, Cmp_long_ptr lParam ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::EnumLanguageGroupLocalesT" );
 		bool bResult = false;
@@ -391,7 +391,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::EnumSystemCodePagesT( CodePageEnumCallback lpCodePageEnumProc, unsigned long dwFlags )
+	bool CLocaleHelper::EnumSystemCodePagesT( CodePageEnumCallback lpCodePageEnumProc, unsigned long dwFlags ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::EnumSystemCodePages" );
 		bool bResult = false;
@@ -403,7 +403,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::EnumSystemGeoID( unsigned long GeoClass, long ParentGeoId, GeoEnumCallback lpGeoEnumProc )
+	bool CLocaleHelper::EnumSystemGeoID( unsigned long GeoClass, long ParentGeoId, GeoEnumCallback lpGeoEnumProc ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::EnumSystemGeoID" );
 		bool bResult = false;
@@ -415,7 +415,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::EnumSystemLanguageGroupsT( LanguageGroupEnumCallback pLangGroupEnumProc, unsigned long dwFlags, Cmp_long_ptr lParam )
+	bool CLocaleHelper::EnumSystemLanguageGroupsT( LanguageGroupEnumCallback pLangGroupEnumProc, unsigned long dwFlags, Cmp_long_ptr lParam ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::EnumSystemLanguageGroups" );
 		bool bResult = false;
@@ -427,7 +427,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::EnumSystemLocalesA( LocaleEnumCallbackA lpLocaleEnumProc, unsigned long dwFlags )
+	bool CLocaleHelper::EnumSystemLocalesA( LocaleEnumCallbackA lpLocaleEnumProc, unsigned long dwFlags ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::EnumSystemLocalesA" );
 		bool bResult = false;
@@ -439,7 +439,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::EnumSystemLocalesT( LocaleEnumCallback lpLocaleEnumProc, unsigned long dwFlags )
+	bool CLocaleHelper::EnumSystemLocalesT( LocaleEnumCallback lpLocaleEnumProc, unsigned long dwFlags ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::EnumSystemLocalesT" );
 		bool bResult = false;
@@ -451,7 +451,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::EnumSystemLocalesW( LocaleEnumCallbackW lpLocaleEnumProc, unsigned long dwFlags )
+	bool CLocaleHelper::EnumSystemLocalesW( LocaleEnumCallbackW lpLocaleEnumProc, unsigned long dwFlags ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::EnumSystemLocalesW" );
 		bool bResult = false;
@@ -463,7 +463,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::EnumSystemLocalesEx( LocaleEnumCallbackEx lpLocaleEnumProcEx, unsigned long dwFlags, Cmp_long_ptr lParam )
+	bool CLocaleHelper::EnumSystemLocalesEx( LocaleEnumCallbackEx lpLocaleEnumProcEx, unsigned long dwFlags, Cmp_long_ptr lParam ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::EnumSystemLocalesEx" );
 		bool bResult = false;
@@ -475,7 +475,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::FindNLSString( unsigned long Locale, unsigned long dwFindNLSStringFlags, const wchar_t* lpStringSource, int cchSource, const wchar_t* lpStringValue, int cchValue, int* pcchFound )
+	int CLocaleHelper::FindNLSString( unsigned long Locale, unsigned long dwFindNLSStringFlags, const wchar_t* lpStringSource, int cchSource, const wchar_t* lpStringValue, int cchValue, int* pcchFound ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::FindNLSString" );
 		int iResult = 0;
@@ -487,7 +487,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::FindNLSStringEx( const wchar_t* lpLocaleName, unsigned long dwFindNLSStringFlags, const wchar_t* lpStringSource, int cchSource, const wchar_t* lpStringValue, int cchValue, int* pcchFound, NLSVersionInfo* lpVersionInformation, void* lpReserved, Cmp_long_ptr lParam )
+	int CLocaleHelper::FindNLSStringEx( const wchar_t* lpLocaleName, unsigned long dwFindNLSStringFlags, const wchar_t* lpStringSource, int cchSource, const wchar_t* lpStringValue, int cchValue, int* pcchFound, NLSVersionInfo* lpVersionInformation, void* lpReserved, Cmp_long_ptr lParam ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::FindNLSStringEx" );
 		int iResult = 0;
@@ -499,7 +499,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned int CLocaleHelper::GetACP()
+	unsigned int CLocaleHelper::GetACP() const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetACP" );
 		unsigned int uiResult = 0;
@@ -511,7 +511,7 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	nsCodeQOR::CTLRef< CPInfo > CLocaleHelper::GetCPInfo( CCodePage& CodePage )
+	nsCodeQOR::CTLRef< CPInfo > CLocaleHelper::GetCPInfo( CCodePage& CodePage ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::GetCPInfo" );
 		nsCodeQOR::CTLRef< CPInfo > Result;
@@ -526,7 +526,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	nsCodeQOR::CTLRef< CPInfoEx > CLocaleHelper::GetCPInfoExT( CCodePage& CodePage )
+	nsCodeQOR::CTLRef< CPInfoEx > CLocaleHelper::GetCPInfoExT( CCodePage& CodePage ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetCPInfoEx" );
 		nsCodeQOR::CTLRef< CPInfoEx > Result;	
@@ -541,7 +541,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::GetCurrencyFormatT( unsigned long Locale, unsigned long dwFlags, const TCHAR* lpValue, const CURRENCYFMT& Format, CTStringRef strCurrency )
+	int CLocaleHelper::GetCurrencyFormatT( unsigned long Locale, unsigned long dwFlags, const TCHAR* lpValue, const CURRENCYFMT& Format, CTStringRef strCurrency ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetCurrencyFormat" );
 		int iResult = 0;
@@ -553,7 +553,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::GetCurrencyFormatEx( const wchar_t* lpLocaleName, unsigned long dwFlags, const wchar_t* lpValue, const CURRENCYFMTW& Format, CWStringRef strCurrency )
+	int CLocaleHelper::GetCurrencyFormatEx( const wchar_t* lpLocaleName, unsigned long dwFlags, const wchar_t* lpValue, const CURRENCYFMTW& Format, CWStringRef strCurrency ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::GetCurrencyFormatEx" );
 		int iResult = 0;
@@ -565,7 +565,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CTString CLocaleHelper::GetGeoInfoT( long GeoId, unsigned long GeoType, unsigned short language )
+	CTString CLocaleHelper::GetGeoInfoT( long GeoId, unsigned long GeoType, unsigned short language ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetGeoInfo" );
 		CTString strGeoInfo;
@@ -583,7 +583,7 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	int CLocaleHelper::GetLocaleInfoT( unsigned long Locale, unsigned long LCType, CTStringRef strLCData )
+	int CLocaleHelper::GetLocaleInfoT( unsigned long Locale, unsigned long LCType, CTStringRef strLCData ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::GetLocaleInfo" );
 		int iResult = 0;
@@ -595,7 +595,7 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	int CLocaleHelper::GetLocaleInfoA( unsigned long Locale, unsigned long LCType, CAStringRef strLCData )
+	int CLocaleHelper::GetLocaleInfoA( unsigned long Locale, unsigned long LCType, CAStringRef strLCData ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::GetLocaleInfo" );
 		int iResult = 0;
@@ -607,7 +607,7 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	int CLocaleHelper::GetLocaleInfoW( unsigned long Locale, unsigned long LCType, CWStringRef strLCData )
+	int CLocaleHelper::GetLocaleInfoW( unsigned long Locale, unsigned long LCType, CWStringRef strLCData ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::GetLocaleInfo" );
 		int iResult = 0;
@@ -619,7 +619,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::GetLocaleInfoEx( const wchar_t* lpLocaleName, unsigned long LCType, CWStringRef strLCData )
+	int CLocaleHelper::GetLocaleInfoEx( const wchar_t* lpLocaleName, unsigned long LCType, CWStringRef strLCData ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::GetLocaleInfoEx" );
 		int iResult = 0;
@@ -631,7 +631,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::GetNLSVersion( unsigned long Function, unsigned long Locale, NLSVersionInfo& VersionInformation )
+	bool CLocaleHelper::GetNLSVersion( unsigned long Function, unsigned long Locale, NLSVersionInfo& VersionInformation ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetNLSVersion" );
 		bool bResult = false;
@@ -643,7 +643,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::GetNLSVersionEx( unsigned long function, const wchar_t* lpLocaleName, NLSVersionInfoEx& VersionInformation )
+	bool CLocaleHelper::GetNLSVersionEx( unsigned long function, const wchar_t* lpLocaleName, NLSVersionInfoEx& VersionInformation ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::GetNLSVersionEx" );
 		bool bResult = false;
@@ -655,7 +655,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::GetNumberFormatT( unsigned long Locale, unsigned long dwFlags, const TCHAR* lpValue, const NUMBERFMT& Format, CTStringRef strNumber )
+	int CLocaleHelper::GetNumberFormatT( unsigned long Locale, unsigned long dwFlags, const TCHAR* lpValue, const NUMBERFMT& Format, CTStringRef strNumber ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetNumberFormat" );
 		int iResult = 0;
@@ -667,7 +667,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::GetNumberFormatEx( const wchar_t* lpLocaleName, unsigned long dwFlags, const wchar_t* lpValue, const nsWin32::NUMBERFMTW& Format, CWStringRef strNumber )
+	int CLocaleHelper::GetNumberFormatEx( const wchar_t* lpLocaleName, unsigned long dwFlags, const wchar_t* lpValue, const nsWin32::NUMBERFMTW& Format, CWStringRef strNumber ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::GetNumberFormatEx" );
 		int iResult = 0;
@@ -679,7 +679,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned int CLocaleHelper::GetOEMCP()
+	unsigned int CLocaleHelper::GetOEMCP() const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetOEMCP" );
 		UINT uiResult = 0;
@@ -691,7 +691,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::GetStringScripts( unsigned long dwFlags, const wchar_t* lpString, int cchString, CWStringRef strScripts )
+	int CLocaleHelper::GetStringScripts( unsigned long dwFlags, const wchar_t* lpString, int cchString, CWStringRef strScripts ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetStringScripts" );
 		int iResult = 0;
@@ -703,7 +703,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned short CLocaleHelper::GetSystemDefaultLangID()
+	unsigned short CLocaleHelper::GetSystemDefaultLangID() const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetSystemDefaultLangID" );
 		LANGID Result = 0;
@@ -715,7 +715,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CLocaleHelper::GetSystemDefaultLCID(void)
+	unsigned long CLocaleHelper::GetSystemDefaultLCID(void) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetSystemDefaultLCID" );
 		LCID Result = 0;
@@ -727,7 +727,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::GetSystemDefaultLocaleName( CWStringRef strLocaleName )
+	int CLocaleHelper::GetSystemDefaultLocaleName( CWStringRef strLocaleName ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::GetSystemDefaultLocaleName" );
 		int iResult = 0;
@@ -739,7 +739,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CLocaleHelper::GetThreadLocale()
+	unsigned long CLocaleHelper::GetThreadLocale() const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetThreadLocale" );
 		LCID Result = 0;
@@ -751,7 +751,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned short CLocaleHelper::GetUserDefaultLangID()
+	unsigned short CLocaleHelper::GetUserDefaultLangID() const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetUserDefaultLangID" );
 		LANGID Result = 0;
@@ -763,7 +763,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CLocaleHelper::GetUserDefaultLCID()
+	unsigned long CLocaleHelper::GetUserDefaultLCID() const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetUserDefaultLCID" );
 		LCID Result = 0;
@@ -775,7 +775,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CWString CLocaleHelper::GetUserDefaultLocaleName()
+	CWString CLocaleHelper::GetUserDefaultLocaleName() const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::GetUserDefaultLocaleName" );
 		CWString strUserDefaultLocaleName;
@@ -789,7 +789,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	long CLocaleHelper::GetUserGeoID( unsigned long GeoClass )
+	long CLocaleHelper::GetUserGeoID( unsigned long GeoClass ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::GetUserGeoID" );
 		GEOID Result = 0;
@@ -801,7 +801,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::IdnToAscii( unsigned long dwFlags, const wchar_t* lpUnicodeCharStr, int cchUnicodeChar, CWStringRef strASCIIChar )
+	int CLocaleHelper::IdnToAscii( unsigned long dwFlags, const wchar_t* lpUnicodeCharStr, int cchUnicodeChar, CWStringRef strASCIIChar ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::IdnToAscii" );
 		int iResult = 0;
@@ -813,7 +813,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::IdnToNameprepUnicode( unsigned long dwFlags, const wchar_t* lpUnicodeCharStr, int cchUnicodeChar, CWStringRef strNameprepChar )
+	int CLocaleHelper::IdnToNameprepUnicode( unsigned long dwFlags, const wchar_t* lpUnicodeCharStr, int cchUnicodeChar, CWStringRef strNameprepChar ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::IdnToNameprepUnicode" );
 		int iResult = 0;
@@ -825,7 +825,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::IdnToUnicode( unsigned long dwFlags, const wchar_t* lpASCIICharStr, int cchASCIIChar, CWStringRef strUnicodeChar )
+	int CLocaleHelper::IdnToUnicode( unsigned long dwFlags, const wchar_t* lpASCIICharStr, int cchASCIIChar, CWStringRef strUnicodeChar ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::IdnToUnicode" );
 		int iResult = 0;
@@ -837,7 +837,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::IsNLSDefinedString( unsigned long Function, unsigned long dwFlags, NLSVersionInfo& VersionInfo, const wchar_t* lpString, int cchStr )
+	bool CLocaleHelper::IsNLSDefinedString( unsigned long Function, unsigned long dwFlags, NLSVersionInfo& VersionInfo, const wchar_t* lpString, int cchStr ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::IsNLSDefinedString" );
 		bool bResult = false;
@@ -849,7 +849,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::IsNormalizedString( NORM_FORM NormForm, const wchar_t* lpString, int cwLength )
+	bool CLocaleHelper::IsNormalizedString( NORM_FORM NormForm, const wchar_t* lpString, int cwLength ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::IsNormalizedString" );
 		bool bResult = false;
@@ -861,7 +861,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::IsValidCodePage( unsigned int CodePageID )
+	bool CLocaleHelper::IsValidCodePage( unsigned int CodePageID ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::IsValidCodePage" );
 		bool bResult = false;
@@ -873,7 +873,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::IsValidLanguageGroup( unsigned long LanguageGroup, unsigned long dwFlags )
+	bool CLocaleHelper::IsValidLanguageGroup( unsigned long LanguageGroup, unsigned long dwFlags ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::IsValidLanguageGroup" );
 		bool bResult = false;
@@ -885,7 +885,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::IsValidLocale( unsigned long Locale, unsigned long dwFlags )
+	bool CLocaleHelper::IsValidLocale( unsigned long Locale, unsigned long dwFlags ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::IsValidLocale" );
 		bool bResult = false;
@@ -897,7 +897,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::IsValidLocaleName( const wchar_t* lpLocaleName )
+	bool CLocaleHelper::IsValidLocaleName( const wchar_t* lpLocaleName ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::IsValidLocaleName" );
 		bool bResult = false;
@@ -909,7 +909,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::LCIDToLocaleName( unsigned long Locale, CWStringRef strName, unsigned long dwFlags )
+	int CLocaleHelper::LCIDToLocaleName( unsigned long Locale, CWStringRef strName, unsigned long dwFlags ) const
 	{			
 		_WINQ_FCONTEXT( "CLocaleHelper::LCIDToLocaleName" );
 		int iResult = 0;
@@ -921,7 +921,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::LCMapStringT( unsigned long Locale, unsigned long dwMapFlags, const TCHAR* lpSrcStr, int cchSrc, CTStringRef strDestStr )
+	int CLocaleHelper::LCMapStringT( unsigned long Locale, unsigned long dwMapFlags, const TCHAR* lpSrcStr, int cchSrc, CTStringRef strDestStr ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::LCMapString" );
 		int iResult = 0;
@@ -933,7 +933,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::LCMapStringA( unsigned long Locale, unsigned long dwMapFlags, const char* lpSrcStr, int cchSrc, CAStringRef strDestStr )
+	int CLocaleHelper::LCMapStringA( unsigned long Locale, unsigned long dwMapFlags, const char* lpSrcStr, int cchSrc, CAStringRef strDestStr ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::LCMapStringA" );
 		int iResult = 0;
@@ -945,7 +945,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::LCMapStringW( unsigned long Locale, unsigned long dwMapFlags, const wchar_t* lpSrcStr, int cchSrc, CWStringRef strDestStr )
+	int CLocaleHelper::LCMapStringW( unsigned long Locale, unsigned long dwMapFlags, const wchar_t* lpSrcStr, int cchSrc, CWStringRef strDestStr ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::LCMapStringW" );
 		int iResult = 0;
@@ -957,7 +957,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::LCMapStringEx( const wchar_t* lpLocaleName, unsigned long dwMapFlags, const wchar_t* lpSrcStr, int cchSrc, wchar_t* lpDestStr, int cchDest, NLSVersionInfo* lpVersionInformation, void* lpReserved, Cmp_long_ptr lParam )
+	int CLocaleHelper::LCMapStringEx( const wchar_t* lpLocaleName, unsigned long dwMapFlags, const wchar_t* lpSrcStr, int cchSrc, wchar_t* lpDestStr, int cchDest, NLSVersionInfo* lpVersionInformation, void* lpReserved, Cmp_long_ptr lParam ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::LCMapStringEx" );
 		int iResult = 0;
@@ -969,7 +969,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CLocaleHelper::LocaleNameToLCID( wchar_t* lpName, unsigned long dwFlags )
+	unsigned long CLocaleHelper::LocaleNameToLCID( wchar_t* lpName, unsigned long dwFlags ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::LocaleNameToLCID" );
 		LCID Result = 0;
@@ -981,7 +981,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	int CLocaleHelper::NormalizeString( NORM_FORM NormForm, const wchar_t* lpSrcString, int cwSrcLength, CWStringRef strDst )
+	int CLocaleHelper::NormalizeString( NORM_FORM NormForm, const wchar_t* lpSrcString, int cwSrcLength, CWStringRef strDst ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::NormalizeString" );
 		int iResult = 0;
@@ -993,7 +993,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::SetLocaleInfoT( unsigned long Locale, unsigned long LCType, const TCHAR* lpLCData )
+	bool CLocaleHelper::SetLocaleInfoT( unsigned long Locale, unsigned long LCType, const TCHAR* lpLCData ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::SetLocaleInfo" );
 		bool bResult = false;
@@ -1005,7 +1005,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::SetThreadLocale( unsigned long Locale )
+	bool CLocaleHelper::SetThreadLocale( unsigned long Locale ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::SetThreadLocale" );
 		bool bResult = false;
@@ -1017,7 +1017,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::SetUserGeoID( long GeoID )
+	bool CLocaleHelper::SetUserGeoID( long GeoID ) const
 	{
 		_WINQ_FCONTEXT( "CLocaleHelper::SetUserGeoID" );
 		bool bResult = false;
@@ -1029,7 +1029,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CLocaleHelper::VerifyScripts( unsigned long dwFlags, const wchar_t* lpLocaleScripts, int cchLocaleScripts, const wchar_t* lpTestScripts, int cchTestScripts )
+	bool CLocaleHelper::VerifyScripts( unsigned long dwFlags, const wchar_t* lpLocaleScripts, int cchLocaleScripts, const wchar_t* lpTestScripts, int cchTestScripts ) const
 	{	
 		_WINQ_FCONTEXT( "CLocaleHelper::VerifyScripts" );
 		bool bResult = false;

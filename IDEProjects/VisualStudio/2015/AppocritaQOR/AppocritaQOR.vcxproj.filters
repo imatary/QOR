@@ -58,6 +58,9 @@
     <ClCompile Include="..\..\..\..\Source\AppocritaQOR\SubSystems\Bluetooth.cpp">
       <Filter>Source Files\SubSystems</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AppocritaQOR\SubSystems\Networking.cpp">
+      <Filter>Source Files\SubSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Application.h">
@@ -127,6 +130,12 @@
       <Filter>Source Files\SubSystems</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\IBluetooth.h">
+      <Filter>Source Files\SubSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\INetworking.h">
+      <Filter>Source Files\SubSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\Networking.h">
       <Filter>Source Files\SubSystems</Filter>
     </ClInclude>
   </ItemGroup>

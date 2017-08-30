@@ -63,7 +63,8 @@ namespace nsQOR
 		virtual int Run( IWorkflow::ref_type );
 		virtual void EnqueueEvent( IEvent::ref_type pEvent );
 		virtual void Stop( void );
-		
+		virtual void OnIdle(void);
+
 		template< class TSubSystem >
 		void AddSubSystem( const TSubSystem& SubSystem )
 		{

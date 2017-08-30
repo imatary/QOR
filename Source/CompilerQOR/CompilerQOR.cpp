@@ -52,7 +52,7 @@ __QCMP_ENDLINKAGE_C
 namespace nsCompiler
 {
 
-//Implement the builtin wrappers within the CCompiler clas
+//Implement the built-in wrappers within the CCompiler class
 #ifdef __QCMP_BUILTINS_INC
 #	include __QCMP_BUILTINS_INC
 #endif
@@ -129,7 +129,7 @@ __QCMP_STARTLINKAGE_C
 
 	//------------------------------------------------------------------------------
 	//This gives the Compiler QOR library a unique identity
-	//NOTE: The prototype for this function is delibrately ommitted. The client must explicitly request this entry point at runtime to identify this module.
+	//NOTE: The prototype for this function is deliberately omitted. The client must explicitly request this entry point at runtime to identify this module.
 	__QCMP_EXPORT nsCodeQOR::mxGUID* QORidentity( void )
 	{
 		static nsCodeQOR::mxGUID CompilerQOR = { 0x8519f0c2, 0xd864, 0x4477, { 0xbb, 0x36, 0xa0, 0xed, 0xbc, 0x0b, 0xb5, 0x05 } };
@@ -142,8 +142,14 @@ __QCMP_ENDLINKAGE_C
 	//This gives the Compiler QOR library a singleton representing the module at runtime
 	nsCodeQOR::CLoadableModuleBase& __QCMP_LOCAL ThisModule( void )
 	{
-		static nsCodeQOR::CLoadableModuleBase CompilerQORModule( "Querysoft Open Runtime compiler compatability library (CompilerQOR)" );
+		static nsCodeQOR::CLoadableModuleBase CompilerQORModule( "Querysoft Open Runtime compiler compatibility library (CompilerQOR)" );
 		return CompilerQORModule;
+	}
+
+	//------------------------------------------------------------------------------
+	const char* __QCMP_LOCAL ThisModuleVersion(void)
+	{
+		return QOR_PP_STRINGIZE(__DATE__:__TIME__);
 	}
 
 #endif//_USRDLL

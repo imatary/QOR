@@ -1,6 +1,6 @@
 //WinQLUSBHub.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -66,7 +66,7 @@ namespace nsWin32
 		CTString strHubName(  m_strPath.GetBuffer() + 4, m_strPath.Len() - 4 ); 
 		m_strHubName = strHubName.toUpper();
 		
-		TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS ).RegisterUSBHub( m_strHubName, this );
+		TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS )().RegisterUSBHub( m_strHubName, this );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -190,10 +190,10 @@ namespace nsWin32
 	bool CUSBHub::GetNodeInformation()
 	{
 		_WINQ_FCONTEXT( "CUSBHub::GetNodeInformation" );
-		CDeviceSession Session( *this, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = Open(Generic_Write, File_Share_Write, Open_Existing);
 		unsigned long nBytes = 0;
 		memset( &m_HubInfo, 0, sizeof( USB_NODE_INFORMATION ) );
-		bool bSuccess = m_pDeviceFile->Control( 
+		bool bSuccess = Session->Control( 
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_NODE_INFORMATION, Method_Buffered, File_Any_Access ), &m_HubInfo, sizeof(USB_NODE_INFORMATION), &m_HubInfo, sizeof(USB_NODE_INFORMATION), &nBytes, NULL );
 
 		if( bSuccess )
@@ -272,9 +272,9 @@ namespace nsWin32
 	bool CUSBHub::GetHubInformation()
 	{
 		_WINQ_FCONTEXT( "CUSBHub::GetHubInformation" );
-		CDeviceSession Session( *this, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = Open(Generic_Write, File_Share_Write, Open_Existing);
 		unsigned long nBytes = 0;
-		bool bSuccess = m_pDeviceFile->Control( 
+		bool bSuccess = Session->Control( 
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_HUB_INFORMATION_EX, Method_Buffered, File_Any_Access ), &m_HubInfoEx, sizeof(USB_HUB_INFORMATION_EX), &m_HubInfoEx, sizeof(USB_HUB_INFORMATION_EX), &nBytes, NULL );
 		return bSuccess;
 	}
@@ -308,12 +308,12 @@ namespace nsWin32
 	bool CUSBHub::GetDescriptorFromNodeConnection()
 	{
 		_WINQ_FCONTEXT( "CUSBHub::GetDescriptorFromNodeConnection" );
-		CDeviceSession Session( *this, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = Open(Generic_Write, File_Share_Write, Open_Existing);
 		USB_DESCRIPTOR_REQUEST ConfigDescReq;
 		unsigned long nBytes = sizeof( USB_DESCRIPTOR_REQUEST ) + sizeof( USB_CONFIGURATION_DESCRIPTOR );
 		unsigned long nBytesReturned = 0;
 
-		bool bSuccess = m_pDeviceFile->Control( 
+		bool bSuccess = Session->Control( 
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_DESCRIPTOR_FROM_NODE_CONNECTION, Method_Buffered, File_Any_Access ), &ConfigDescReq, nBytes, &ConfigDescReq, nBytes, &nBytesReturned, NULL );
 		return bSuccess;
 	}
@@ -340,9 +340,9 @@ namespace nsWin32
     bool CUSBHub::GetCapabilities()
 	{
 		_WINQ_FCONTEXT( "CUSBHub::GetCapabilities" );
-		CDeviceSession Session( *this, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = Open(Generic_Write, File_Share_Write, Open_Existing);
 		unsigned long nBytes = 0;
-		bool bSuccess = m_pDeviceFile->Control(
+		bool bSuccess = Session->Control(
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_HUB_CAPABILITIES, Method_Buffered, File_Any_Access ), &m_Capabilities, sizeof(USB_HUB_CAPABILITIES), &m_Capabilities, sizeof(USB_HUB_CAPABILITIES), &nBytes, NULL );
 		return bSuccess;
 	}
@@ -411,9 +411,9 @@ namespace nsWin32
     bool CUSBHub::GetCapabilitiesEx()
 	{
 		_WINQ_FCONTEXT( "CUSBHub::GetCapabilitiesEx" );
-		CDeviceSession Session( *this, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = Open(Generic_Write, File_Share_Write, Open_Existing);
 		unsigned long nBytes = 0;
-		bool bSuccess = m_pDeviceFile->Control(
+		bool bSuccess = Session->Control(
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_GET_HUB_CAPABILITIES_EX, Method_Buffered, File_Any_Access ), &m_CapabilitiesEx, sizeof(USB_HUB_CAPABILITIES_EX), &m_CapabilitiesEx, sizeof(USB_HUB_CAPABILITIES_EX), &nBytes, NULL );
 		return bSuccess;
 	}
@@ -423,10 +423,10 @@ namespace nsWin32
 	bool CUSBHub::CyclePort( unsigned long ulConnectionIndex )
 	{
 		_WINQ_FCONTEXT( "CUSBHub::CyclePort" );
-		CDeviceSession Session( *this, Generic_Write, File_Share_Write, Open_Existing );
+		auto Session = Open(Generic_Write, File_Share_Write, Open_Existing);
 		unsigned long nBytes = 0;
 		unsigned long ulResult = 0;
-		bool bSuccess = m_pDeviceFile->Control(
+		bool bSuccess = Session->Control(
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_HUB_CYCLE_PORT, Method_Buffered, File_Any_Access ), &ulConnectionIndex, sizeof( unsigned long ), &ulResult, sizeof( unsigned long ), &nBytes, NULL );
 		return bSuccess;
 	}
@@ -435,17 +435,17 @@ namespace nsWin32
 	bool CUSBHub::Reset()
 	{
 		_WINQ_FCONTEXT( "CUSBHub::Reset" );
-		CDeviceSession Session( *this, Generic_Write, File_Share_Write, Open_Existing );
-		bool bSuccess = m_pDeviceFile->Control(
+		auto Session = Open(Generic_Write, File_Share_Write, Open_Existing);
+		bool bSuccess = Session->Control(
 			__WINQL_DEVICE_CONTROL_CODE( File_Device_USB, USB_RESET_HUB, Method_Buffered, File_Any_Access ), 0, 0, 0, 0, 0, 0 );
 		return bSuccess;
 	}
 
 	//--------------------------------------------------------------------------------
-	CUSBHub::CPortConnection::refType CUSBHub::GetPort( byte Port )
+	CUSBHub::CPortConnection::ref_type CUSBHub::GetPort( byte Port )
 	{
 		_WINQ_FCONTEXT( "CUSBHub::GetPort" );
-		CUSBHub::CPortConnection::refType Result;
+		CUSBHub::CPortConnection::ref_type Result;
 		if( Port > 0 && Port <= m_VecConnections.size() )
 		{
 			Result.Attach( &m_VecConnections[ Port - 1 ], false );

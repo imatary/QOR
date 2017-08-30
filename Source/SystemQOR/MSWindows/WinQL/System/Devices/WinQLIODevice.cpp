@@ -1,6 +1,6 @@
 //WinQLIODevice.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -49,7 +49,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------	
-	CIODeviceFile::CIODeviceFile( CDeviceHandle& hExisting ) : CDeviceFile( hExisting )
+	CIODeviceFile::CIODeviceFile( CDeviceHandle::ref_type hExisting ) : CDeviceFile( hExisting )
 	{
 		_WINQ_FCONTEXT( "CIODeviceFile::CIODeviceFile" );
 	}
@@ -67,7 +67,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::DeviceIoControl( m_Handle.Use(), dwIoControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
+			bResult = CKernel32::DeviceIoControl( m_Handle().Use(), dwIoControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}

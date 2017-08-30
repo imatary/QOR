@@ -41,7 +41,7 @@ namespace nsWin32
 	using namespace nsWinQAPI;
 
 	//--------------------------------------------------------------------------------
-	char CStream::sachLookupTrailBytes[ 256 ] =
+	__QOR_INTERFACE(__WINQL) char CStream::sachLookupTrailBytes[ 256 ] =
 	{
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -57,6 +57,12 @@ namespace nsWin32
 		1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
 		3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0
 	};
+
+	//----------------------------------------------------------------------------------------
+	int CStream::utf8_no_of_trailbytes(char c)
+	{
+		return CStream::sachLookupTrailBytes[(unsigned char)c];
+	}
 
 	//------------------------------------------------------------------------------
 	void* CStream::_stdbuf[ 2 ] = { NULL, NULL };
@@ -384,26 +390,19 @@ namespace nsWin32
 	{
 		__try
 		{
-			/* We deliberately don't hard-validate for empty strings here. All other invalid
-			path strings are treated as runtime errors by the inner code in _open and openfile.
-			This is also the appropriate treatment here. Since fopen is the primary access point
-			for file strings it might be subjected to direct user input and thus must be robust to
-			that rather than aborting. The CRT and OS do not provide any other path validator (because
-			WIN32 doesn't allow such things to exist in full generality).
-			*/
-
 			if( *file == '\0' )
 			{
 				errno = EINVAL;
-				return NULL;
+				return nullptr;
 			}
-
-			stream->_openfile( file, mode, shflag, stream );
-
+			else if( stream != nullptr )
+			{
+				stream->_openfile(file, mode, shflag, stream);
+			}
 		}
 		__finally
 		{
-			if( stream )
+			if( stream != nullptr )
 			{
 				stream->funlockfile();
 			}
@@ -436,7 +435,7 @@ namespace nsWin32
 
 		ParseMode( mode, modeflag, streamflag );
 
-		// Try to open the file.  Note that if neither 't' nor 'b' is specified, _sopen will use the default. */
+		// Try to open the file.  Note that if neither 't' nor 'b' is specified, _sopen will use the default.
 
 		if( _sopen_s( &filedes, filename, modeflag, shflag, _S_IREAD | _S_IWRITE ) != 0 )
 		{
@@ -883,7 +882,7 @@ namespace nsWin32
 
 			int count;
 
-			// Set default tmode per oflag. BOM will change the defualt.
+			// Set default tmode per oflag. BOM will change the default.
 			// If oflag does not specify file type get type from _fmode 
 			if( ( oflag & ( OText | OWText | OU16Text | OU8Text ) ) == 0 )
 			{
@@ -1174,9 +1173,9 @@ namespace nsWin32
 		CDeviceFile* pDeviceFile = 0;
 		CErrorHelper ErrorHelper;
 
-		CDeviceHandle Handle = CKernel32::CreateFileW( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile );
+		CDeviceHandle::ref_type Handle = new_shared_ref<CDeviceHandle>( CKernel32::CreateFileW( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast< ::LPSECURITY_ATTRIBUTES >( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile ) );
 
-		if( Handle.IsInvalid() )
+		if( Handle().IsInvalid() )
 		{
 			if( ( dwDesiredAccess & ( Generic_Read | Generic_Write ) ) == ( Generic_Read | Generic_Write ) && ( oflag & OWriteOnly ) )
 			{
@@ -1184,8 +1183,8 @@ namespace nsWin32
 				//So try again with GENERIC_WRITE and we will have to use the default encoding.  We won't be able to determine the encoding from reading the BOM.
 
 				dwDesiredAccess &= ~Generic_Read;
-				Handle = CKernel32::CreateFileW( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast<::LPSECURITY_ATTRIBUTES>( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile );
-				if( Handle.IsInvalid() )
+				Handle = new_shared_ref<CDeviceHandle>( CKernel32::CreateFileW( lpFileName, dwDesiredAccess, dwShareMode, reinterpret_cast<::LPSECURITY_ATTRIBUTES>( lpSecurityAttributes ), dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile ) );
+				if( Handle().IsInvalid() )
 				{
 					return pDeviceFile;
 				}
@@ -1196,7 +1195,7 @@ namespace nsWin32
 			}
 		}
 
-		switch( CKernel32::GetFileType( Handle.Use() ) )
+		switch( CKernel32::GetFileType( Handle().Use() ) )
 		{
 		case File_Type_Unknown:
 		{

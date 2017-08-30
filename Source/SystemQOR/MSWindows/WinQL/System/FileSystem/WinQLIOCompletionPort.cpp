@@ -40,26 +40,26 @@ namespace nsWin32
 	CIOCompletionPort::CIOCompletionPort()
 	{
 		_WINQ_FCONTEXT( "CIOCompletionPort::CIOCompletionPort" );
-		m_Handle = CKernel32::CreateIoCompletionPort( (HANDLE)Invalid_Handle_Value, 0, 0, 0 );
+		m_Handle = new_shared_ref<CFileHandle>( CKernel32::CreateIoCompletionPort( (HANDLE)Invalid_Handle_Value, 0, 0, 0 ) );
 	}
 
 	//--------------------------------------------------------------------------------
-	CIOCompletionPort::CIOCompletionPort( CFileHandle& FileHandle, Cmp_ulong_ptr CompletionKey, unsigned long NumberOfConcurrentThreads )
+	CIOCompletionPort::CIOCompletionPort( CFileHandle::ref_type FileHandle, Cmp_ulong_ptr CompletionKey, unsigned long NumberOfConcurrentThreads )
 	{
 		_WINQ_FCONTEXT( "CIOCompletionPort::CIOCompletionPort" );
-		m_Handle = CKernel32::CreateIoCompletionPort( (HANDLE)Invalid_Handle_Value, 0, 0, 0 );
+		m_Handle = new_shared_ref<CFileHandle>( CKernel32::CreateIoCompletionPort( (HANDLE)Invalid_Handle_Value, 0, 0, 0 ) );
 		Attach( FileHandle, CompletionKey, NumberOfConcurrentThreads );
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CIOCompletionPort::Attach( CFileHandle& FileHandle, Cmp_ulong_ptr CompletionKey, unsigned long NumberOfConcurrentThreads )
+	bool CIOCompletionPort::Attach( CFileHandle::ref_type FileHandle, Cmp_ulong_ptr CompletionKey, unsigned long NumberOfConcurrentThreads )
 	{
 		_WINQ_FCONTEXT( "CIOCompletionPort::CIOCompletionPort" );
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			void* pCheck = CKernel32::CreateIoCompletionPort( FileHandle.Use(), m_Handle.Use(), CompletionKey, NumberOfConcurrentThreads );
-			if( pCheck == 0 || pCheck != m_Handle.ptr() )
+			void* pCheck = CKernel32::CreateIoCompletionPort( FileHandle().Use(), m_Handle().Use(), CompletionKey, NumberOfConcurrentThreads );
+			if( pCheck == 0 || pCheck != m_Handle().ptr() )
 			{
 				//TODO: Raise error
 			}
@@ -84,7 +84,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::GetQueuedCompletionStatus( m_Handle.Use(), lpNumberOfBytes, lpCompletionKey, reinterpret_cast< ::LPOVERLAPPED* >( lpOverlapped ), dwMilliseconds ) ? true : false;
+			bResult = CKernel32::GetQueuedCompletionStatus( m_Handle().Use(), lpNumberOfBytes, lpCompletionKey, reinterpret_cast< ::LPOVERLAPPED* >( lpOverlapped ), dwMilliseconds ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -96,7 +96,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::Instance().GetQueuedCompletionStatusEx( m_Handle.Use(), reinterpret_cast< ::LPOVERLAPPED_ENTRY >( lpCompletionPortEntries ), ulCount, ulNumEntriesRemoved, dwMilliseconds, fAlertable ) ? true : false;
+			bResult = CKernel32::Instance().GetQueuedCompletionStatusEx( m_Handle().Use(), reinterpret_cast< ::LPOVERLAPPED_ENTRY >( lpCompletionPortEntries ), ulCount, ulNumEntriesRemoved, dwMilliseconds, fAlertable ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}
@@ -108,7 +108,7 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::PostQueuedCompletionStatus( m_Handle.Use(), dwNumberOfBytesTransferred, dwCompletionKey, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
+			bResult = CKernel32::PostQueuedCompletionStatus( m_Handle().Use(), dwNumberOfBytesTransferred, dwCompletionKey, reinterpret_cast< ::LPOVERLAPPED >( lpOverlapped ) ) ? true : false;
 		}__QOR_ENDPROTECT
 		return bResult;
 	}

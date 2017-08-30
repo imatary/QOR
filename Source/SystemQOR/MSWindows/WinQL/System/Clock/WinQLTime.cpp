@@ -1,6 +1,6 @@
 //WinQLTime.cpp
 
-// Copyright Querysoft Limited 2015
+// Copyright Querysoft Limited 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -49,13 +49,39 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CTimeHelper::CTimeHelper(const CTimeHelper& src)
+	{
+		_WINQ_FCONTEXT("CTimeHelper::CTimeHelper");
+	}
+
+	//--------------------------------------------------------------------------------
+	CTimeHelper::CTimeHelper( CTimeHelper&& move)
+	{
+		_WINQ_FCONTEXT("CTimeHelper::CTimeHelper");
+	}
+
+	//--------------------------------------------------------------------------------
+	CTimeHelper& CTimeHelper::operator = (const CTimeHelper& src)
+	{
+		_WINQ_FCONTEXT("CTimeHelper::operator =");
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
+	CTimeHelper& CTimeHelper::operator = (CTimeHelper&& move)
+	{
+		_WINQ_FCONTEXT("CTimeHelper::operator =");
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
 	CTimeHelper::~CTimeHelper()
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::~CTimeHelper" );
 	}
 
 	//--------------------------------------------------------------------------------
-	long CTimeHelper::CompareFileTime( const nsWin32::FILETIME* lpFileTime1, const nsWin32::FILETIME* lpFileTime2 )
+	long CTimeHelper::CompareFileTime( const nsWin32::FILETIME* lpFileTime1, const nsWin32::FILETIME* lpFileTime2 ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::CompareFileTime" );
 		LONG lResult = 0;
@@ -67,7 +93,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::DosDateTimeToFileTime( unsigned short wFatDate, unsigned short wFatTime, nsWin32::LPFILETIME lpFileTime )
+	bool CTimeHelper::DosDateTimeToFileTime( unsigned short wFatDate, unsigned short wFatTime, nsWin32::LPFILETIME lpFileTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::DosDateTimeToFileTime" );
 		bool bResult = false;
@@ -79,7 +105,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::FileTimeToDosDateTime( const nsWin32::FILETIME* lpFileTime, unsigned short* lpFatDate, unsigned short* lpFatTime )
+	bool CTimeHelper::FileTimeToDosDateTime( const nsWin32::FILETIME* lpFileTime, unsigned short* lpFatDate, unsigned short* lpFatTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::FileTimeToDosDateTime" );
 		bool bResult = false;
@@ -91,7 +117,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::FileTimeToLocalFileTime( const nsWin32::FILETIME* lpFileTime, nsWin32::LPFILETIME lpLocalFileTime )
+	bool CTimeHelper::FileTimeToLocalFileTime( const nsWin32::FILETIME* lpFileTime, nsWin32::LPFILETIME lpLocalFileTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::FileTimeToLocalFileTime" );
 		bool bResult = false;
@@ -103,7 +129,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::FileTimeToSystemTime( const nsWin32::FILETIME* lpFileTime, nsWin32::SystemTime* lpSystemTime )
+	bool CTimeHelper::FileTimeToSystemTime( const nsWin32::FILETIME* lpFileTime, nsWin32::SystemTime* lpSystemTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::FileTimeToSystemTime" );
 		bool bResult = false;
@@ -115,7 +141,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CTimeHelper::GetDynamicTimeZoneInformation( nsWin32::DynamicTimeZoneInformation* pTimeZoneInformation )
+	unsigned long CTimeHelper::GetDynamicTimeZoneInformation( nsWin32::DynamicTimeZoneInformation* pTimeZoneInformation ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::GetDynamicTimeZoneInformation" );
 		DWORD dwResult = 0;
@@ -127,7 +153,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::GetFileTime( void* hFile, nsWin32::LPFILETIME lpCreationTime, nsWin32::LPFILETIME lpLastAccessTime, nsWin32::LPFILETIME lpLastWriteTime )
+	bool CTimeHelper::GetFileTime( void* hFile, nsWin32::LPFILETIME lpCreationTime, nsWin32::LPFILETIME lpLastAccessTime, nsWin32::LPFILETIME lpLastWriteTime ) const
 	{			
 		_WINQ_FCONTEXT( "CTimeHelper::GetFileTime" );
 		bool bResult = false;
@@ -139,7 +165,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CTimeHelper::GetLocalTime( nsWin32::SystemTime* lpSystemTime )
+	void CTimeHelper::GetLocalTime( nsWin32::SystemTime* lpSystemTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::GetLocalTime" );
 		__QOR_PROTECT
@@ -149,7 +175,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CTimeHelper::GetSystemTime( nsWin32::SystemTime* lpSystemTime )
+	void CTimeHelper::GetSystemTime( nsWin32::SystemTime* lpSystemTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::GetSystemTime" );
 		__QOR_PROTECT
@@ -159,7 +185,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::GetSystemTimeAdjustment( unsigned long* lpTimeAdjustment, unsigned long* lpTimeIncrement, int* lpTimeAdjustmentDisabled )
+	bool CTimeHelper::GetSystemTimeAdjustment( unsigned long* lpTimeAdjustment, unsigned long* lpTimeIncrement, int* lpTimeAdjustmentDisabled ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::GetSystemTimeAdjustment" );
 		bool bResult = false;
@@ -171,14 +197,14 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CTimeHelper::GetSystemTimeAsFileTime( nsWin32::LPFILETIME lpSystemTimeAsFileTime )
+	void CTimeHelper::GetSystemTimeAsFileTime( nsWin32::LPFILETIME lpSystemTimeAsFileTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::GetSystemTimeAsFileTime" );
 		CKernel32::GetSystemTimeAsFileTime( reinterpret_cast< ::LPFILETIME >( lpSystemTimeAsFileTime ) );
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::GetSystemTimes( nsWin32::LPFILETIME lpIdleTime, nsWin32::LPFILETIME lpKernelTime, nsWin32::LPFILETIME lpUserTime )
+	bool CTimeHelper::GetSystemTimes( nsWin32::LPFILETIME lpIdleTime, nsWin32::LPFILETIME lpKernelTime, nsWin32::LPFILETIME lpUserTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::GetSystemTimes" );
 		bool bResult = false;
@@ -190,14 +216,14 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CTimeHelper::GetTickCount()
+	unsigned long CTimeHelper::GetTickCount() const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::GetTickCount" );
 		return CKernel32::GetTickCount();
 	}
 
 	//--------------------------------------------------------------------------------
-	Cmp_unsigned_long_long CTimeHelper::GetTickCount64()
+	Cmp_unsigned_long_long CTimeHelper::GetTickCount64() const
 	{			
 		_WINQ_FCONTEXT( "CTimeHelper::GetTickCount64" );
 		ULONGLONG ullResult = 0;
@@ -209,7 +235,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CTimeHelper::GetTimeZoneInformation( nsWin32::TimeZoneInformation* lpTimeZoneInformation )
+	unsigned long CTimeHelper::GetTimeZoneInformation( nsWin32::TimeZoneInformation* lpTimeZoneInformation ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::GetTimeZoneInformation" );
 		DWORD dwResult = 0;
@@ -221,7 +247,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::GetTimeZoneInformationForYear( unsigned short wYear, nsWin32::DynamicTimeZoneInformation* pdtzi, nsWin32::TimeZoneInformation* ptzi )
+	bool CTimeHelper::GetTimeZoneInformationForYear( unsigned short wYear, nsWin32::DynamicTimeZoneInformation* pdtzi, nsWin32::TimeZoneInformation* ptzi ) const
 	{			
 		_WINQ_FCONTEXT( "CTimeHelper::GetTimeZoneInformationForYear" );
 		bool bResult = false;
@@ -233,7 +259,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::LocalFileTimeToFileTime( const nsWin32::FILETIME* lpLocalFileTime, nsWin32::LPFILETIME lpFileTime )
+	bool CTimeHelper::LocalFileTimeToFileTime( const nsWin32::FILETIME* lpLocalFileTime, nsWin32::LPFILETIME lpFileTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::LocalFileTimeToFileTime" );
 		bool bResult = false;
@@ -245,7 +271,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::SetDynamicTimeZoneInformation( const nsWin32::DynamicTimeZoneInformation* lpTimeZoneInformation )
+	bool CTimeHelper::SetDynamicTimeZoneInformation( const nsWin32::DynamicTimeZoneInformation* lpTimeZoneInformation ) const
 	{			
 		_WINQ_FCONTEXT( "CTimeHelper::SetDynamicTimeZoneInformation" );
 		bool bResult = false;
@@ -257,7 +283,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::SetFileTime( void* hFile, const nsWin32::FILETIME* lpCreationTime, const nsWin32::FILETIME* lpLastAccessTime, const nsWin32::FILETIME* lpLastWriteTime )
+	bool CTimeHelper::SetFileTime( void* hFile, const nsWin32::FILETIME* lpCreationTime, const nsWin32::FILETIME* lpLastAccessTime, const nsWin32::FILETIME* lpLastWriteTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::SetFileTime" );
 		bool bResult = false;
@@ -269,7 +295,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::SetLocalTime( const nsWin32::SystemTime* lpSystemTime )
+	bool CTimeHelper::SetLocalTime( const nsWin32::SystemTime* lpSystemTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::SetLocalTime" );
 		bool bResult = false;
@@ -281,7 +307,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::SetSystemTime( const nsWin32::SystemTime* lpSystemTime )
+	bool CTimeHelper::SetSystemTime( const nsWin32::SystemTime* lpSystemTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::SetSystemTime" );
 		bool bResult = false;
@@ -293,7 +319,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::SetSystemTimeAdjustment( unsigned long dwTimeAdjustment, bool bTimeAdjustmentDisabled )
+	bool CTimeHelper::SetSystemTimeAdjustment( unsigned long dwTimeAdjustment, bool bTimeAdjustmentDisabled ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::SetSystemTimeAdjustment" );
 		bool bResult = false;
@@ -305,7 +331,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::SetTimeZoneInformation( const nsWin32::TimeZoneInformation* lpTimeZoneInformation )
+	bool CTimeHelper::SetTimeZoneInformation( const nsWin32::TimeZoneInformation* lpTimeZoneInformation ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::SetTimeZoneInformation" );
 		bool bResult = false;
@@ -317,7 +343,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::SystemTimeToFileTime( const nsWin32::SystemTime* lpSystemTime, nsWin32::LPFILETIME lpFileTime )
+	bool CTimeHelper::SystemTimeToFileTime( const nsWin32::SystemTime* lpSystemTime, nsWin32::LPFILETIME lpFileTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::SystemTimeToFileTime" );
 		bool bResult = false;
@@ -329,7 +355,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::SystemTimeToTzSpecificLocalTime( nsWin32::TimeZoneInformation* lpTimeZone, nsWin32::SystemTime* lpUniversalTime, nsWin32::SystemTime* lpLocalTime )
+	bool CTimeHelper::SystemTimeToTzSpecificLocalTime( nsWin32::TimeZoneInformation* lpTimeZone, nsWin32::SystemTime* lpUniversalTime, nsWin32::SystemTime* lpLocalTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::SystemTimeToTzSpecificLocalTime" );
 		bool bResult = false;
@@ -341,7 +367,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTimeHelper::TzSpecificLocalTimeToSystemTime( nsWin32::TimeZoneInformation* lpTimeZoneInformation, nsWin32::SystemTime* lpLocalTime, nsWin32::SystemTime* lpUniversalTime )
+	bool CTimeHelper::TzSpecificLocalTimeToSystemTime( nsWin32::TimeZoneInformation* lpTimeZoneInformation, nsWin32::SystemTime* lpLocalTime, nsWin32::SystemTime* lpUniversalTime ) const
 	{
 		_WINQ_FCONTEXT( "CTimeHelper::TzSpecificLocalTimeToSystemTime" );
 		bool bResult = false;
@@ -353,6 +379,14 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CTime::CClockTime::CClockTime(const CClockTime& Src) : CClockTime( Src.wYear, Src.wMonth, Src.wDayOfWeek, Src.wDay, Src.wHour, Src.wMinute, Src.wSecond, Src.wMilliseconds)
+	{
+	}
+
+	//--------------------------------------------------------------------------------
+	CTime::CClockTime::CClockTime( CClockTime&& move) : CClockTime(move.wYear, move.wMonth, move.wDayOfWeek, move.wDay, move.wHour, move.wMinute, move.wSecond, move.wMilliseconds)
+	{
+	}
 
 	//--------------------------------------------------------------------------------
 	CTime::CClockTime::CClockTime( const SystemTime& Src )
@@ -383,62 +417,93 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CTime::CClockTime& CTime::CClockTime::operator = (const CTime::CClockTime& src)
+	{
+		_WINQ_FCONTEXT("CTime::CClockTime::operator =");
+		wYear = src.wYear;
+		wMonth = src.wMonth;
+		wDayOfWeek = src.wDayOfWeek;
+		wDay = src.wDay;
+		wHour = src.wHour;
+		wMinute = src.wMinute;
+		wSecond = src.wSecond;
+		wMilliseconds = src.wMilliseconds;
+
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
+	CTime::CClockTime& CTime::CClockTime::operator = (CTime::CClockTime&& move)
+	{
+		_WINQ_FCONTEXT("CTime::CClockTime::operator =");
+		wYear = move.wYear;
+		wMonth = move.wMonth;
+		wDayOfWeek = move.wDayOfWeek;
+		wDay = move.wDay;
+		wHour = move.wHour;
+		wMinute = move.wMinute;
+		wSecond = move.wSecond;
+		wMilliseconds = move.wMilliseconds;
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
 	CTime::CClockTime::~CClockTime()
 	{
 		_WINQ_FCONTEXT( "CTime::CClockTime::~CClockTime" );
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned short CTime::CClockTime::Year()
+	unsigned short CTime::CClockTime::Year() const
 	{
 		_WINQ_FCONTEXT( "CTime::CClockTime::Year" );
 		return wYear;
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned short CTime::CClockTime::Month()
+	unsigned short CTime::CClockTime::Month() const
 	{
 		_WINQ_FCONTEXT( "CTime::CClockTime::Month" );
 		return wMonth;
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned short CTime::CClockTime::DayOfWeek()
+	unsigned short CTime::CClockTime::DayOfWeek() const
 	{
 		_WINQ_FCONTEXT( "CTime::CClockTime::DayOfWeek" );
 		return wDayOfWeek;
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned short CTime::CClockTime::Day()
+	unsigned short CTime::CClockTime::Day() const
 	{
 		_WINQ_FCONTEXT( "CTime::CClockTime::Day" );
 		return wDay;
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned short CTime::CClockTime::Hour()
+	unsigned short CTime::CClockTime::Hour() const
 	{
 		_WINQ_FCONTEXT( "CTime::CClockTime::Hour" );
 		return wHour;
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned short CTime::CClockTime::Minute()
+	unsigned short CTime::CClockTime::Minute() const
 	{
 		_WINQ_FCONTEXT( "CTime::CClockTime::Minute" );
 		return wMinute;
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned short CTime::CClockTime::Second()
+	unsigned short CTime::CClockTime::Second() const
 	{
 		_WINQ_FCONTEXT( "CTime::CClockTime::Second" );
 		return wSecond;
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned short CTime::CClockTime::MilliSeconds()
+	unsigned short CTime::CClockTime::MilliSeconds() const
 	{
 		_WINQ_FCONTEXT( "CTime::CClockTime::MilliSeconds" );
 		return wMilliseconds;
@@ -449,6 +514,34 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CTime::CUTCClock::CAdjustment::CAdjustment" );
 		GetSystemTimeAdjustment();
+	}
+	
+	//--------------------------------------------------------------------------------
+	CTime::CUTCClock::CAdjustment::CAdjustment( const CTime::CUTCClock::CAdjustment& src )
+	{
+		_WINQ_FCONTEXT("CTime::CUTCClock::CAdjustment::CAdjustment");
+		GetSystemTimeAdjustment();
+	}
+
+	//--------------------------------------------------------------------------------
+	CTime::CUTCClock::CAdjustment::CAdjustment( CTime::CUTCClock::CAdjustment&& move)
+	{
+		_WINQ_FCONTEXT("CTime::CUTCClock::CAdjustment::CAdjustment");
+		GetSystemTimeAdjustment();
+	}
+
+	//--------------------------------------------------------------------------------
+	CTime::CUTCClock::CAdjustment& CTime::CUTCClock::CAdjustment::operator = (const CTime::CUTCClock::CAdjustment& src)
+	{
+		_WINQ_FCONTEXT("CTime::CUTCClock::CAdjustment::operator =");
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
+	CTime::CUTCClock::CAdjustment& CTime::CUTCClock::CAdjustment::operator = ( CTime::CUTCClock::CAdjustment&& move)
+	{
+		_WINQ_FCONTEXT("CTime::CUTCClock::CAdjustment::operator =");
+		return *this;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -519,6 +612,46 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CTime::CUTCClock::CUTCClock( const CTime::CUTCClock& src )
+	{
+		_WINQ_FCONTEXT("CTime::CUTCClock::CUTCClock");
+		*this = src;
+	}
+
+	//--------------------------------------------------------------------------------
+	CTime::CUTCClock::CUTCClock( CTime::CUTCClock&& move)
+	{
+		_WINQ_FCONTEXT("CTime::CUTCClock::CUTCClock");
+		*this = std::move(move);
+		Adjustment = std::move(move.Adjustment);
+		m_ClockTime = std::move(move.m_ClockTime);
+	}
+
+	//--------------------------------------------------------------------------------
+	CTime::CUTCClock& CTime::CUTCClock::operator = (const CTime::CUTCClock& src)
+	{
+		_WINQ_FCONTEXT("CTime::CUTCClock::operator =");
+		if (&src != this)
+		{
+			Adjustment = src.Adjustment;
+			m_ClockTime = src.m_ClockTime;
+		}
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
+	CTime::CUTCClock& CTime::CUTCClock::operator = (CTime::CUTCClock&& move)
+	{
+		_WINQ_FCONTEXT("CTime::CUTCClock::operator =");
+		if (&move != this)
+		{
+			Adjustment = move.Adjustment;
+			m_ClockTime = move.m_ClockTime;
+		}
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
 	CTime::CUTCClock::~CUTCClock()
 	{
 		_WINQ_FCONTEXT( "CTime::CUTCClock::~CUTCClock" );
@@ -548,13 +681,6 @@ namespace nsWin32
 		CFileTime FileTime;
 		GetSystemTimeAsFileTime( &FileTime );
 		return FileTime;
-	}
-
-	//--------------------------------------------------------------------------------
-	CTime::CUTCClock::CAdjustment& CTime::CUTCClock::Adjustment()
-	{
-		_WINQ_FCONTEXT( "CTime::CUTCClock::CAdjustment" );
-		return m_Adjustment;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -865,13 +991,6 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CTime::CLocalClock::CTimeZone& CTime::CLocalClock::TimeZone()
-	{
-		_WINQ_FCONTEXT( "CTime::CLocalClock::TimeZone" );
-		return m_TimeZone;
-	}
-
-	//--------------------------------------------------------------------------------
 	CTime::CTime()
 	{
 		_WINQ_FCONTEXT( "CTime::CTime" );
@@ -884,7 +1003,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTime::GetSystemTimes( CTime::CFileTime* pIdleTime, CTime::CFileTime* pKernelTime, CTime::CFileTime* pUserTime )
+	bool CTime::GetSystemTimes( CTime::CFileTime* pIdleTime, CTime::CFileTime* pKernelTime, CTime::CFileTime* pUserTime ) const
 	{
 		_WINQ_FCONTEXT( "CTime::GetSystemTimes" );
 		bool bResult = false;
@@ -893,7 +1012,7 @@ namespace nsWin32
 	}			
 
 	//--------------------------------------------------------------------------------
-	unsigned long CTime::GetTickCount()
+	unsigned long CTime::GetTickCount() const
 	{
 		_WINQ_FCONTEXT( "CTime::GetTickCount" );
 		unsigned long dwResult = 0;
@@ -902,7 +1021,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	Cmp_unsigned_long_long CTime::GetTickCount64()
+	Cmp_unsigned_long_long CTime::GetTickCount64() const
 	{
 		_WINQ_FCONTEXT( "CTime::GetTickCount64" );
 		Cmp_unsigned_long_long Result = 0;
@@ -911,7 +1030,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTime::GetTimeZoneInformationForYear( unsigned short wYear, DynamicTimeZoneInformation* pdtzi, TimeZoneInformation* ptzi )
+	bool CTime::GetTimeZoneInformationForYear( unsigned short wYear, DynamicTimeZoneInformation* pdtzi, TimeZoneInformation* ptzi ) const
 	{
 		_WINQ_FCONTEXT( "CTime::GetTimeZoneInformationForYear" );
 		bool bResult = false;
@@ -920,7 +1039,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTime::LocalFileTimeToFileTime( const CTime::CFileTime* pLocalFileTime, CTime::CFileTime* pFileTime )
+	bool CTime::LocalFileTimeToFileTime( const CTime::CFileTime* pLocalFileTime, CTime::CFileTime* pFileTime ) const
 	{
 		_WINQ_FCONTEXT( "CTime::LocalFileTimeToFileTime" );
 		bool bResult = false;
@@ -929,7 +1048,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTime::SystemTimeToFileTime( const CTime::CClockTime* pSystemTime, CTime::CFileTime* pFileTime )
+	bool CTime::SystemTimeToFileTime( const CTime::CClockTime* pSystemTime, CTime::CFileTime* pFileTime ) const
 	{
 		_WINQ_FCONTEXT( "CTime::SystemTimeToFileTime" );
 		bool bResult = false;
@@ -938,7 +1057,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTime::SystemTimeToTzSpecificLocalTime( TimeZoneInformation* pTimeZone, CTime::CClockTime* pUniversalTime, CTime::CClockTime* pLocalTime )
+	bool CTime::SystemTimeToTzSpecificLocalTime( TimeZoneInformation* pTimeZone, CTime::CClockTime* pUniversalTime, CTime::CClockTime* pLocalTime ) const
 	{
 		_WINQ_FCONTEXT( "CTime::SystemTimeToTzSpecificLocalTime" );
 		bool bResult = false;
@@ -947,7 +1066,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	bool CTime::TzSpecificLocalTimeToSystemTime( TimeZoneInformation* pTimeZoneInformation, CTime::CClockTime* pLocalTime, CTime::CClockTime* pUniversalTime )
+	bool CTime::TzSpecificLocalTimeToSystemTime( TimeZoneInformation* pTimeZoneInformation, CTime::CClockTime* pLocalTime, CTime::CClockTime* pUniversalTime ) const
 	{
 		_WINQ_FCONTEXT( "CTime::TzSpecificLocalTimeToSystemTime" );
 		bool bResult = false;
@@ -956,21 +1075,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CTime::CUTCClock::refType CTime::UTCClock( void )
-	{
-		_WINQ_FCONTEXT( "CTime::UTCClock" );
-		return CTime::CUTCClock::refType( new CUTCClock(), true );
-	}
-
-	//--------------------------------------------------------------------------------
-	CTime::CLocalClock::refType CTime::LocalClock( void )
-	{
-		_WINQ_FCONTEXT( "CTime::LocalClock" );
-		return CTime::CLocalClock::refType( new CLocalClock(), true );
-	}
-
-	//--------------------------------------------------------------------------------
-	CTimeHelper& CTime::Helper( void )
+	const CTimeHelper& CTime::Helper( void ) const
 	{
 		_WINQ_FCONTEXT( "CTime::Helper" );
 		return m_Win32TimeHelper;

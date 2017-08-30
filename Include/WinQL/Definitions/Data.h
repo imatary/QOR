@@ -3094,6 +3094,62 @@ __QCMP_WARNING_POP
 		TCHAR*				lpDisplayName;
 	} QUERY_SERVICE_CONFIG, *LPQUERY_SERVICE_CONFIG;
 
+
+	//--------------------------------------------------------------------------------
+	typedef struct DXGI_RATIONAL 
+	{
+		unsigned int Numerator;
+		unsigned int Denominator;
+	} DXGI_RATIONAL;
+
+	//--------------------------------------------------------------------------------
+	typedef struct _DCOMPOSITION_FRAME_STATISTICS 
+	{
+		LARGE_INTEGER lastFrameTime;
+		DXGI_RATIONAL currentCompositionRate;
+		LARGE_INTEGER currentTime;
+		LARGE_INTEGER timeFrequency;
+		LARGE_INTEGER nextEstimatedFrameTime;
+	} DCOMPOSITION_FRAME_STATISTICS, *PDCOMPOSITION_FRAME_STATISTICS;
+
+	//--------------------------------------------------------------------------------
+	typedef struct D2D_MATRIX_3X2_F
+	{
+		float _11;
+		float _12;
+		float _21;
+		float _22;
+		float _31;
+		float _32;
+	} D2D_MATRIX_3X2_F;
+
+	//--------------------------------------------------------------------------------
+	typedef struct _D3DMATRIX 
+	{
+		union 
+		{
+			struct 
+			{
+				float        _11, _12, _13, _14;
+				float        _21, _22, _23, _24;
+				float        _31, _32, _33, _34;
+				float        _41, _42, _43, _44;
+
+			};
+			float m[4][4];
+		};
+	} D3DMATRIX;
+
+	//--------------------------------------------------------------------------------
+	typedef struct D2D_RECT_F
+	{
+		float left;
+		float top;
+		float right;
+		float bottom;
+
+	} D2D_RECT_F;
+
 }//nsWin32
 
 #endif//_QSYS_WINDOWS_WWL_DATA_H_3

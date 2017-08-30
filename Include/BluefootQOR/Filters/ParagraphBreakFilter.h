@@ -1,6 +1,6 @@
 //ParagraphBreakFilter.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -31,12 +31,13 @@
 //This filter can be operated in both Push and Pull modes
 
 #include "BluefootQOR/BfFilter.h"
+#include "CodeQOR/DataStructures/TArray.h"
 
 //------------------------------------------------------------------------------
 namespace nsBluefoot
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CParagraphBreakFilter : public nsBluefoot::CBFFilter
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CParagraphBreakFilter : public CFilter
 	{
 	public:
 

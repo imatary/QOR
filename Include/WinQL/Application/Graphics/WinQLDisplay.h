@@ -35,7 +35,10 @@
 #include "WinQL/GUI/Desktop.h"
 #include "WinQL/Application/Graphics/WinQLRectangle.h"
 #include "WinQL/GUI/Window.h"
-#include "WinQL/CodeServices/WinQLSharedRef.h"
+#include "CodeQOR/DataStructures/TRef.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDisplayDevice, CTRef);
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDisplayMonitor, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -73,24 +76,24 @@ namespace nsWin32
 		__QOR_DECLARE_OCLASS_ID( CDisplayHelper );
 
 		CDisplayHelper();
+		CDisplayHelper(const CDisplayHelper& src);
+		CDisplayHelper(CDisplayHelper&& move);
+		CDisplayHelper& operator = (const CDisplayHelper& src);
+		CDisplayHelper& operator = (CDisplayHelper&& move);
 		virtual ~CDisplayHelper();
-		long ChangeSettings( nsWin32::LPDEVMODE lpDevMode, unsigned long dwflags );
-		long ChangeSettings( const TCHAR* lpszDeviceName, nsWin32::LPDEVMODE lpDevMode, COSWindow::refType Window, unsigned long dwflags, void* lParam );
-		bool EnumDevices( const TCHAR* lpDevice, unsigned long iDevNum, nsWin32::PDISPLAY_DEVICE lpDisplayDevice, unsigned long dwFlags );
-		bool EnumSettings( const TCHAR* lpszDeviceName, unsigned long iModeNum, nsWin32::LPDEVMODE lpDevMode, unsigned long dwFlags = 0 );
-		bool EnumDisplayMonitors( CDeviceContext::refType dc, const nsWin32::RECT* lprcClip, nsWin32::MONITORENUMPROC lpfnEnum, Cmp_long_ptr dwData );
-		bool SetProcessDPIAware( void );
-		bool GetProcessDefaultLayout( unsigned long* pdwDefaultLayout );
-		bool SetProcessDefaultLayout( unsigned long dwDefaultLayout );
-		bool IsProcessDPIAware( void );
+		long ChangeSettings( nsWin32::LPDEVMODE lpDevMode, unsigned long dwflags ) const;
+		long ChangeSettings( const TCHAR* lpszDeviceName, nsWin32::LPDEVMODE lpDevMode, COSWindow::refType Window, unsigned long dwflags, void* lParam ) const;
+		bool EnumDevices( const TCHAR* lpDevice, unsigned long iDevNum, nsWin32::PDISPLAY_DEVICE lpDisplayDevice, unsigned long dwFlags ) const;
+		bool EnumSettings( const TCHAR* lpszDeviceName, unsigned long iModeNum, nsWin32::LPDEVMODE lpDevMode, unsigned long dwFlags = 0 ) const;
+		bool EnumDisplayMonitors( CDeviceContext::refType dc, const nsWin32::RECT* lprcClip, nsWin32::MONITORENUMPROC lpfnEnum, Cmp_long_ptr dwData ) const;
+		bool SetProcessDPIAware( void ) const;
+		bool GetProcessDefaultLayout( unsigned long* pdwDefaultLayout ) const;
+		bool SetProcessDefaultLayout( unsigned long dwDefaultLayout ) const;
+		bool IsProcessDPIAware( void ) const;
 
 	private:
 
-		nsWinQAPI::CUser32& m_User32Library;
-			
-		CDisplayHelper ( const CDisplayHelper& );
-		CDisplayHelper& operator=( const CDisplayHelper& );
-
+		nsWinQAPI::CUser32& m_User32Library;			
 	};
 
 	//--------------------------------------------------------------------------------
@@ -106,7 +109,7 @@ namespace nsWin32
 		CMonitorHelper( const nsWin32::RECT* lprc, unsigned long dwFlags );
 		CMonitorHelper( COSWindow::refType Window, unsigned long dwFlags );
 		virtual ~CMonitorHelper();
-		bool GetInfo( nsWin32::LPMONITORINFO lpmi );
+		bool GetInfo( nsWin32::LPMONITORINFO lpmi ) const;
 
 	protected:
 
@@ -119,73 +122,90 @@ namespace nsWin32
 		__QCS_DECLARE_NONASSIGNABLE( CMonitorHelper );
 	};
 
+	__QOR_DECLARE_OCLASS_ID(CDisplay);
+
 	//--------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __WINQL ) CDisplay
+	class __QOR_INTERFACE(__WINQL) CDisplayDevice : public nsWin32::DISPLAY_DEVICE
 	{
-		QOR_PP_WINQL_SHARED;
+		friend class CDisplay;
 
 	public:
 
-		__QOR_DECLARE_OCLASS_ID( CDisplay );
+		__QOR_DECLARE_OCLASS_ID(CDisplayDevice);
+		__QOR_DECLARE_REF_TYPE(CDisplayDevice);
 
-		//--------------------------------------------------------------------------------
-		class __QOR_INTERFACE( __WINQL ) CDevice : public nsWin32::DISPLAY_DEVICE
-		{
-			friend class CDisplay;
+		CDisplayDevice();
+		CDisplayDevice( const CDisplayDevice& src );
+		CDisplayDevice(CDisplayDevice&& move);
+		CDisplayDevice& operator=(const CDisplayDevice& Src);
+		CDisplayDevice& operator=(CDisplayDevice&& move);
+		~CDisplayDevice();
+				
+		bool EnumSettings(unsigned long iModeNum, nsWin32::LPDEVMODE lpDevMode, unsigned long dwFlags) const;
+		long ChangeSettings(nsWin32::LPDEVMODE lpDevMode, COSWindow::refType Window, unsigned long dwflags, void* lParam) const;
+		CTString GetDeviceID(void) const;
+		CTString GetDeviceString(void) const;
 
-		public:
+	private:
 
-			__QOR_DECLARE_OCLASS_ID( CDevice );
+		CDisplayHelper m_Win32DisplayHelper;
+		bool m_bInitialised;
+	};
 
-			CDevice();
-			~CDevice();
-			CDevice( const CDevice& );
-			CDevice& operator=( const CDevice& Src );
-			bool EnumSettings( unsigned long iModeNum, nsWin32::LPDEVMODE lpDevMode, unsigned long dwFlags );
-			long ChangeSettings( nsWin32::LPDEVMODE lpDevMode, COSWindow::refType Window, unsigned long dwflags, void* lParam );
-			CTString GetDeviceID( void );
-			CTString GetDeviceString( void );
+	//--------------------------------------------------------------------------------
+	class __QOR_INTERFACE(__WINQL) CDisplayMonitor : public nsWin32::MONITORINFO
+	{
+	public:
 
-		private:
+		__QOR_DECLARE_OCLASS_ID(CDisplayMonitor);
+		__QOR_DECLARE_REF_TYPE(CDisplayMonitor);
 
-			CDisplayHelper m_Win32DisplayHelper;
-			bool m_bInitialised;
-		};
+		CDisplayMonitor() = delete;
+		CDisplayMonitor(const CDisplayMonitor& Monitor);
+		CDisplayMonitor(CDisplayMonitor&& move);
+		CDisplayMonitor(CMonitorHandle::refType hMonitor);
+		CDisplayMonitor(nsWin32::POINT pt, unsigned long dwFlags);
+		CDisplayMonitor(const CRectangle* lprc, unsigned long dwFlags);
+		CDisplayMonitor(COSWindow::refType Window, unsigned long dwFlags);
+		CDisplayMonitor& operator = (const CDisplayMonitor& src);
+		CDisplayMonitor& operator = (CDisplayMonitor&& move);
+		bool IsPrimary(void) const;
+		virtual ~CDisplayMonitor();
 
-		//--------------------------------------------------------------------------------
-		class __QOR_INTERFACE( __WINQL ) CMonitor : public nsWin32::MONITORINFO
-		{
-		public:
+	protected:
 
-			__QOR_DECLARE_OCLASS_ID( CMonitor );
+		CMonitorHelper m_Win32Monitor;
+	};
 
-			CMonitor( const CMonitor& Monitor );
-			CMonitor( CMonitorHandle::refType hMonitor );
-			CMonitor( nsWin32::POINT pt, unsigned long dwFlags );
-			CMonitor( const CRectangle* lprc, unsigned long dwFlags );
-			CMonitor( COSWindow::refType Window, unsigned long dwFlags );
-			bool IsPrimary( void );
-			virtual ~CMonitor();
+	//--------------------------------------------------------------------------------
+	class __QOR_INTERFACE( __WINQL ) CDisplay
+	{
 
-		protected:
+	public:
 
-			CMonitorHelper m_Win32Monitor;
-		};
+		__QOR_DECLARE_OCLASS_ID(CDisplay);
 
 		CDisplay();
-		virtual ~CDisplay();
-		CDisplay::CDevice DefaultDevice();
-		CDisplay::CDevice Device( unsigned int uiDevice );
-		CDisplay::CMonitor& Monitor( unsigned int uiMonitor );
-		CDisplay::CMonitor MonitorFromPoint( nsWin32::POINT pt, unsigned long dwFlags );
-		CDisplay::CMonitor MonitorFromRect( const CRectangle* lprc, unsigned long dwFlags );
-		CDisplay::CMonitor MonitorFromWindow( COSWindow::refType Window, unsigned long dwFlags );
+		CDisplay(const CDisplay&) = delete;
+		CDisplay(CDisplay&& move);
+		CDisplay& operator = (const CDisplay&) = delete;
+		CDisplay& operator = (CDisplay&& move);
+		~CDisplay();
+
+		CDisplayDevice::ref_type DefaultDevice( void );
+		std::vector< CDisplayDevice::ref_type >::iterator Devices_begin(void);
+		std::vector< CDisplayDevice::ref_type >::iterator Devices_end(void);
+		std::vector< CDisplayMonitor::ref_type >::iterator Monitors_begin(void);
+		std::vector< CDisplayMonitor::ref_type >::iterator Monitors_end(void);
+		CDisplayMonitor::ref_type MonitorFromPoint( nsWin32::POINT pt, unsigned long dwFlags );
+		CDisplayMonitor::ref_type MonitorFromRect( const CRectangle* lprc, unsigned long dwFlags );
+		CDisplayMonitor::ref_type MonitorFromWindow( COSWindow::refType Window, unsigned long dwFlags );
+
 		long ChangeSettingsForDefaultDevice( nsWin32::LPDEVMODE lpDevMode, unsigned long dwflags );
 		bool EnumMonitors( CDeviceContext::refType dc, const CRectangle* lprcClip, nsWin32::MONITORENUMPROC lpfnEnum, Cmp_long_ptr dwData );
 
 	private:
 
-		//--------------------------------------------------------------------------------
 		bool EnumDevices();
 		bool EnumAllMonitors();
 		static bool __QCMP_STDCALLCONVENTION EnumMonitorProc( void* hMonitor, void* hdcMonitor, nsWin32::LPRECT lprcMonitor, Cmp_long_ptr dwData );
@@ -193,8 +213,8 @@ namespace nsWin32
 
 		bool m_bDevicesEnumerated;
 		bool m_bMonitorsEnumerated;
-		nsCodeQOR::CTArray< CDevice, CWinQLPolicy > m_Devices;
-		nsCodeQOR::CTArray< CMonitor*, CWinQLPolicy > m_apMonitors;
+		std::vector< CDisplayDevice::ref_type > m_Devices;
+		std::vector< CDisplayMonitor::ref_type > m_Monitors;
 		CDisplayHelper m_Win32DisplayHelper;
 
 	};

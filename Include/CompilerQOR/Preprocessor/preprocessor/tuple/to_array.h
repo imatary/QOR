@@ -10,7 +10,7 @@
 #  *                                                                          *
 #  ************************************************************************** */
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -44,18 +44,19 @@
 
 //QOR_PP_TUPLE_TO_ARRAY
 
-#if QOR_PP_VARIADICS
-#   if QOR_PP_VARIADICS_MSVC
-#       define QOR_PP_TUPLE_TO_ARRAY( ... )				QOR_PP_TUPLE_TO_ARRAY_I(QOR_PP_OVERLOAD(QOR_PP_TUPLE_TO_ARRAY_, __VA_ARGS__), (__VA_ARGS__))
-#       define QOR_PP_TUPLE_TO_ARRAY_I( m, args )		QOR_PP_TUPLE_TO_ARRAY_II(m, args)
-#       define QOR_PP_TUPLE_TO_ARRAY_II( m, args )		QOR_PP_CAT(m ## args,)
-#   else
-#       define QOR_PP_TUPLE_TO_ARRAY( ... )				QOR_PP_OVERLOAD( QOR_PP_TUPLE_TO_ARRAY_, __VA_ARGS__ )( __VA_ARGS__ )
-#   endif
-#   define QOR_PP_TUPLE_TO_ARRAY_1( tuple )				( QOR_PP_VARIADIC_SIZE tuple, tuple )
-#   define QOR_PP_TUPLE_TO_ARRAY_2( size, tuple )		( size, tuple )
-#else
-#   define QOR_PP_TUPLE_TO_ARRAY( size, tuple )			( size, tuple )
-#endif
+# if QOR_PP_VARIADICS
+#    if QOR_PP_VARIADICS_MSVC
+#        define QOR_PP_TUPLE_TO_ARRAY(...) QOR_PP_TUPLE_TO_ARRAY_I(QOR_PP_OVERLOAD(QOR_PP_TUPLE_TO_ARRAY_, __VA_ARGS__), (__VA_ARGS__))
+#        define QOR_PP_TUPLE_TO_ARRAY_I(m, args) QOR_PP_TUPLE_TO_ARRAY_II(m, args)
+#        define QOR_PP_TUPLE_TO_ARRAY_II(m, args) QOR_PP_CAT(m ## args,)
+#        define QOR_PP_TUPLE_TO_ARRAY_1(tuple) (QOR_PP_TUPLE_SIZE(tuple), tuple)
+#    else
+#        define QOR_PP_TUPLE_TO_ARRAY(...) QOR_PP_OVERLOAD(QOR_PP_TUPLE_TO_ARRAY_, __VA_ARGS__)(__VA_ARGS__)
+#        define QOR_PP_TUPLE_TO_ARRAY_1(tuple) (QOR_PP_VARIADIC_SIZE tuple, tuple)
+#    endif
+#    define QOR_PP_TUPLE_TO_ARRAY_2(size, tuple) (size, tuple)
+# else
+#    define QOR_PP_TUPLE_TO_ARRAY(size, tuple) (size, tuple)
+# endif
 
 #endif//QOR_PREPROCESSOR_TUPLE_TO_ARRAY_H_1

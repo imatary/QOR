@@ -90,6 +90,13 @@ namespace nsWinQAPI
 		__QCMP_UNREF( namelen );
 		__WINQAPI_CONT_ERROR(( API_REQUIRES_VERSION, _T( "connect" ), _T( "Windows 2000 Professional" ), 0 ));
 #endif//( _WIN32_WINNT >= 0x0500 )
+
+		if (iResult == SOCKET_ERROR)
+		{
+			int iError = WSAGetLastError();
+			//__WINQAPI_CONT_ERROR((WINSOCK_ERROR, _T("Connect"), iResult, 0));
+		}
+
 		return iResult;
 	}
 

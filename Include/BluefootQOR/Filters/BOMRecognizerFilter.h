@@ -57,13 +57,6 @@ namespace nsBluefoot
 			m_BOMType = eNone;
 		}
 
-		/*
-		//------------------------------------------------------------------------------
-		CBOMRecognizedEvent( const CBOMRecognizedEvent& Src ) : nsQOR::CEvent( Src )
-		{
-			*this = Src;
-		}*/
-
 		//------------------------------------------------------------------------------
 		CBOMRecognizedEvent& operator = ( const CBOMRecognizedEvent& Src )
 		{
@@ -84,7 +77,7 @@ namespace nsBluefoot
 	};
 
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBOMRecognizerFilter : public nsBluefoot::CBFFilter
+	class __QOR_INTERFACE( __BLUEFOOTQOR ) CBOMRecognizerFilter : public nsBluefoot::CFilter
 	{
 	public:
 
@@ -97,7 +90,7 @@ namespace nsBluefoot
 		
 		virtual bool Read( unsigned long& ulUnitsRead, unsigned long ulUnitsToRead = 1 );
 		virtual bool Write( unsigned long& ulUnitsWritten, unsigned long ulUnitsToWrite = 1 );
-		virtual CBFBuffer* GetSourceBuffer( void );
+		virtual CBuffer* GetSourceBuffer( void );
 
 		__QCMP_STATIC_CONSTANT( unsigned long, sculBOMBytes = 4 );
 		__QCMP_STATIC_CONSTANT( unsigned long, sculPatterns = 3 );

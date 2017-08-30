@@ -1,6 +1,6 @@
 //WinQLDeviceInterfaceClass.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -86,14 +86,14 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CDeviceInterfaceClass::RegisterInterface( CDeviceInterface::refType DeviceInterface )
+	unsigned long CDeviceInterfaceClass::RegisterInterface( CDeviceInterface::ref_type DeviceInterface )
 	{
 		m_VecInterfaceInstances.push_back( DeviceInterface );
 		return m_VecInterfaceInstances.size();
 	}
 
 	//--------------------------------------------------------------------------------
-	std::vector< CDeviceInterface::refType >& CDeviceInterfaceClass::Interfaces( void )
+	std::vector< CDeviceInterface::ref_type >& CDeviceInterfaceClass::Interfaces( void )
 	{
 		if( !m_bEnumerated )
 		{
@@ -116,17 +116,9 @@ namespace nsWin32
 
 	//--------------------------------------------------------------------------------
 	//Create an object for the type of interface the class represents
-	CDeviceInterface* CDeviceInterfaceClass::CreateObject()
+	CDeviceInterface::ref_type CDeviceInterfaceClass::CreateObject()
 	{
-		CDeviceInterface* pDeviceInterface = 0;
-		nsCodeQOR::CClassInstanceFactory* pFactory = ThisModule().ExternalClassReg().GetFactory( &m_GUID );
-		
-		if( pFactory )
-		{
-			pDeviceInterface = reinterpret_cast< CDeviceInterface* >( pFactory->Instance() );
-		}
-
-		return pDeviceInterface;
+		return new_ext_ref< CDeviceInterface >(&m_GUID);
 	}
 
 	//--------------------------------------------------------------------------------
@@ -206,16 +198,16 @@ namespace nsWin32
 					{
 						strDeviceID.ValidateBuffer();
 
-						nsCodeQOR::CTLRef< CDeviceInstance > RefDevInst( TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS).DeviceFromID( strDeviceInstance ) );
+						CDeviceInstance::ref_type RefDevInst = TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS)().DeviceFromID( strDeviceInstance );
 
 						if( RefDevInst.IsNull() )
 						{
 							//Device instance not enumerated. This is normal for well known Interface Class IDs on startup
-							RefDevInst.Attach( new CDeviceInstance( strDeviceID, DevInfo ), true );
+							RefDevInst = new_shared_ref<CDeviceInstance>( strDeviceID, DevInfo );
 						}
 						
 						//Create the CDeviceInterface derivative
-						CDeviceInterface::refType DeviceInterface( CreateObject(), true );
+						CDeviceInterface::ref_type DeviceInterface = CreateObject();
 
 						if( !DeviceInterface.IsNull() )
 						{
@@ -223,14 +215,12 @@ namespace nsWin32
 							DeviceInterface->SetDefault( DevInterfaceData.Flags & SPINT_DEFAULT ? true : false );
 							DeviceInterface->SetRemoved( DevInterfaceData.Flags & SPINT_REMOVED ? true : false );
 							DeviceInterface->SetPath( DevInterfaceDetailData.DevicePath );
-							DeviceInterface->SetClass( this, ulIndex );
-							DeviceInterface->SetInstance( RefDevInst );		//Add the device to the Interface
 
 							m_VecInterfaceInstances.push_back( DeviceInterface );		//Add it to the Interface class
 						
 							if( !RefDevInst.IsNull() )							//Add it to the DeviceInstance
 							{
-								RefDevInst->Interfaces().push_back( DeviceInterface->Ref() );
+								RefDevInst->Interfaces().push_back( DeviceInterface );
 							}
 							else
 							{

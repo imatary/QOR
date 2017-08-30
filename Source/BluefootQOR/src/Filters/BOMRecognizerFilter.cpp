@@ -1,6 +1,6 @@
 //BOMRecognizerFilter.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2016
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -46,7 +46,7 @@ namespace nsBluefoot
 	};
 
 	//------------------------------------------------------------------------------
-	CBOMRecognizerFilter::CBOMRecognizerFilter() : CBFFilter()
+	CBOMRecognizerFilter::CBOMRecognizerFilter() : CFilter()
 	,	m_bRecognized( false )
 	{
 	}
@@ -57,7 +57,7 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBOMRecognizerFilter::CBOMRecognizerFilter( const CBOMRecognizerFilter& src ) : CBFFilter( src )
+	CBOMRecognizerFilter::CBOMRecognizerFilter( const CBOMRecognizerFilter& src ) : CFilter( src )
 	{
 		m_bRecognized = src.m_bRecognized;
 	}
@@ -73,9 +73,9 @@ namespace nsBluefoot
 	}
 
 	//------------------------------------------------------------------------------
-	CBFBuffer* CBOMRecognizerFilter::GetSourceBuffer( void )
+	CBuffer* CBOMRecognizerFilter::GetSourceBuffer( void )
 	{
-		CBFBuffer* pBuffer = 0;
+		CBuffer* pBuffer = 0;
 		if( GetSource() )
 		{
 			pBuffer = GetSource()->GetBuffer();
@@ -87,7 +87,7 @@ namespace nsBluefoot
 	byte* CBOMRecognizerFilter::GetBOM( unsigned long& ulBOMBytes )
 	{
 		byte* pSequence = 0;
-		CBFBuffer* pBuffer = GetSourceBuffer();
+		CBuffer* pBuffer = GetSourceBuffer();
 		if( pBuffer )
 		{
 			ulBOMBytes = sculBOMBytes;
@@ -99,7 +99,7 @@ namespace nsBluefoot
 	//------------------------------------------------------------------------------
 	void CBOMRecognizerFilter::AcknowledgeBOM( unsigned long ulBOMBytes )
 	{
-		CBFBuffer* pBuffer = GetSourceBuffer();
+		CBuffer* pBuffer = GetSourceBuffer();
 		if( pBuffer )
 		{
 			pBuffer->ReadAcknowledge( ulBOMBytes );
@@ -109,7 +109,7 @@ namespace nsBluefoot
 	//------------------------------------------------------------------------------
 	void CBOMRecognizerFilter::RejectBOM( unsigned long ulBOMBytes )
 	{
-		CBFBuffer* pBuffer = GetSourceBuffer();
+		CBuffer* pBuffer = GetSourceBuffer();
 		if( pBuffer )
 		{
 			pBuffer->ReadReject( ulBOMBytes );

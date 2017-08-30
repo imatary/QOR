@@ -34,10 +34,10 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CSocketServerAdaptor );
 
 	//--------------------------------------------------------------------------------
-	CSocketServerAdaptor::CSocketServerAdaptor( nsBluefoot::CBFConnectionPool* pPool ) : CSocketConnector( pPool ), m_iBacklog( 5 )
+	CSocketServerAdaptor::CSocketServerAdaptor( nsBluefoot::CConnectionPool* pPool ) : CSocketConnector( pPool ), m_iBacklog( 5 )
 	{
 		_WINQ_FCONTEXT( "CSocketServerAdaptor::CSocketServerAdaptor" );
-		memset( m_Address.sa_data, 0, 60 );
+		memset( m_Address.data.sa_data, 0, 60 );
 	}
 	
 	//--------------------------------------------------------------------------------
@@ -72,11 +72,11 @@ namespace nsWin32
 		m_pAcceptBuffer = new byte[ ( ( 16 + 16 ) * 2 ) ];
 		memset( m_pAcceptBuffer, 0, ( 16 + 16 ) * 2 );		
 		m_Address.sa_family = static_cast< unsigned short >( m_AddressFamily );
-		m_Socket.Bind( &m_Address, 16 );
+		m_Socket.Bind( m_Address );
 	}
 
 	//--------------------------------------------------------------------------------
-	void CSocketServerAdaptor::SetAcceptConnection( nsBluefoot::CBFPlug::refPlugType AcceptConnection )
+	void CSocketServerAdaptor::SetAcceptConnection( nsBluefoot::CPlug::refPlugType AcceptConnection )
 	{
 		m_AcceptConnection = AcceptConnection->Ref();
 	}
@@ -129,28 +129,19 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	void CSocketServerAdaptor::OnConnected()
-	{
-		_WINQ_FCONTEXT( "CSocketServerAdaptor::OnConnected" );
-
-		m_bConnected = true;
-		if( Protocol() )
-		{
-			Protocol().As< nsBluefoot::CBFProtocol >()->OnConnected();
-		}
-	}
-
-	//--------------------------------------------------------------------------------
 	void CSocketServerAdaptor::Disconnect() 
 	{ 
 		_WINQ_FCONTEXT( "CSocketServerAdaptor::Disconnect" );
 		m_bConnected = false;
 		bool bDisconnected = m_Socket.Shutdown( 1 ) ? true : false;		// Disconnect the pipe instance. 
 
+		CSocketConnector::Disconnect();
+		/*
 		if( !AsyncConnection() && Protocol() )
 		{
-			bDisconnected ? Protocol().As< nsBluefoot::CBFProtocol >()->OnDisconnected() : Protocol().As< nsBluefoot::CBFProtocol >()->OnDisconnectionError();
-		}		
+			bDisconnected ? Protocol().As< nsBluefoot::CProtocol >()->OnDisconnected() : Protocol().As< nsBluefoot::CProtocol >()->OnDisconnectionError();
+		}
+		*/
 	}
 
 

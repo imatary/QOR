@@ -54,7 +54,7 @@ namespace nsCodeQOR
 namespace nsCodeQOR
 {
 	//--------------------------------------------------------------------------------
-	//A specialised error domain for parameter validation errors
+	//A specialized error domain for parameter validation errors
 	class __QOR_INTERFACE( __CODEQOR ) CParamErrorDomain : public CBaseErrorDomain
 	{		
 	public:

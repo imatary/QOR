@@ -72,7 +72,7 @@ namespace nsBluefoot
 		NamespaceMap m_Ns;
 
 		friend class CXmlSimpleReaderPrivate;
-		friend class CBFXMLReader;
+		friend class CXMLReader;
 		CXmlNamespaceSupport( const CXmlNamespaceSupport& src );
 		CXmlNamespaceSupport& operator = ( const CXmlNamespaceSupport& src );
 	};

@@ -102,6 +102,12 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	bool CIOBuffer::IsUnBuffered( void )
+	{
+		return _base == 0 ? true : false;
+	}
+
+	//--------------------------------------------------------------------------------
 	byte* CIOBuffer::GetFallbackBuffer( void )
 	{
 		return reinterpret_cast<byte*>( &_charbuf );
@@ -609,7 +615,7 @@ namespace nsWin32
 		if( _ptr == _base )
 		{
 			if( _cnt )
-			{ // my back is against the wall; i've already done ungetc, and there's no room for this one 
+			{ // my back is against the wall; I've already done ungetc, and there's no room for this one 
 				return EOF;
 			}
 

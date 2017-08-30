@@ -41,18 +41,18 @@ friend class nsCodeQOR::CTPoolInstancer< _Class, _Policy, _CacheSize, _HardLimit
 
 //------------------------------------------------------------------------------
 //Macro to pool enable a class implementation
-#define __QOR_IMPLEMENT_POOL( _Class, _Policy, _CacheSize, _HardLimit  )																		\
+#define __QOR_IMPLEMENT_POOL( _Class, _Policy, _CacheSize, _HardLimit  )																				\
 																																						\
-template<> _Policy::TThreadSyncSinglePrimitive nsCodeQOR::CTPoolInstancer< _Class, _Policy, _CacheSize, _HardLimit >::m_Section;				\
-template<> mem_traits< _Class >::CSource nsCodeQOR::CTPoolInstancer< _Class, _Policy, _CacheSize, _HardLimit >::m_Source;											\
-template<> nsCodeQOR::CTLinkedList< _Class > nsCodeQOR::CTPoolInstancer< _Class, _Policy, _CacheSize, _HardLimit >::m_FreeList;				\
-template<> nsCodeQOR::CTIndexedArray< _Class*, _Policy > nsCodeQOR::CTPoolInstancer< _Class, _Policy, _CacheSize, _HardLimit >::m_InUseList;	\
+template<> _Policy::TThreadSyncSinglePrimitive nsCodeQOR::CTPoolInstancer< _Class, _Policy, _CacheSize, _HardLimit >::m_Section;						\
+template<> mem_traits< _Class >::CSource nsCodeQOR::CTPoolInstancer< _Class, _Policy, _CacheSize, _HardLimit >::m_Source;								\
+template<> nsCodeQOR::CTLinkedList< _Class > nsCodeQOR::CTPoolInstancer< _Class, _Policy, _CacheSize, _HardLimit >::m_FreeList;							\
+template<> nsCodeQOR::CTIndexedArray< _Class*, _Policy > nsCodeQOR::CTPoolInstancer< _Class, _Policy, _CacheSize, _HardLimit >::m_InUseList;			\
 template<> unsigned int nsCodeQOR::CTPoolInstancer< _Class, _Policy, _CacheSize, _HardLimit >::m_uiCount;
 
-//Add __QOR_DECLARE_POOLED( classname, policy, cache_size, hard_limit ); to your class declaration
-//Add __QOR_IMPLEMENT_POOL( classname, policy, cache_size, hard_limit) to your class implementation
+//Add __QOR_DECLARE_POOLED( class-name, policy, cache_size, hard_limit ); to your class declaration
+//Add __QOR_IMPLEMENT_POOL( class-name, policy, cache_size, hard_limit) to your class implementation
 
-//Use nsCodeQOR::CTPoolInstancer< source_type, classname, policy, cache_size, hard_limit >::Instance() to get an pointer to a pooled instance
+//Use nsCodeQOR::CTPoolInstancer< source_type, class-name, policy, cache_size, hard_limit >::Instance() to get an pointer to a pooled instance
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR

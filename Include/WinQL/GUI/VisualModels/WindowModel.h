@@ -1,6 +1,6 @@
 //WindowModel.h
 
-// Copyright Querysoft Limited 2013, 215
+// Copyright Querysoft Limited 2013, 2015, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -33,7 +33,6 @@
 #ifndef WINQL_GUI_VISMODELS_WINDOW_H_3
 #define WINQL_GUI_VISMODELS_WINDOW_H_3
 
-//#include "stdafx.h"
 #include "MammutQOR/Model.h"
 #include "MammutQOR/Model/MProperty.h"
 #include "MammutQOR/Model/MPropertySet.h"

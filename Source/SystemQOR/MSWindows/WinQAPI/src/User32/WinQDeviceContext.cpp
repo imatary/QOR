@@ -1,6 +1,6 @@
 //WinQDeviceContext.cpp
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -33,7 +33,7 @@
 namespace nsWinQAPI
 {
 	//--------------------------------------------------------------------------------
-	LONG CUser32::ChangeDisplaySettings( ::LPDEVMODE lpDevMode, DWORD dwflags )
+	LONG CUser32::ChangeDisplaySettings( ::LPDEVMODE lpDevMode, DWORD dwflags ) const
 	{
 		_WINQ_FCONTEXT( "CUser32::ChangeDisplaySettings" );
 		CCheckReturn< LONG, CSuccessCheck< > >::TType lResult;
@@ -43,7 +43,7 @@ namespace nsWinQAPI
 	}
 
 	//--------------------------------------------------------------------------------
-	LONG CUser32::ChangeDisplaySettingsEx( LPCTSTR lpszDeviceName, ::LPDEVMODE lpDevMode, HWND hwnd, DWORD dwflags, LPVOID lParam )
+	LONG CUser32::ChangeDisplaySettingsEx( LPCTSTR lpszDeviceName, ::LPDEVMODE lpDevMode, HWND hwnd, DWORD dwflags, LPVOID lParam ) const
 	{
 		_WINQ_FCONTEXT( "CUser32::ChangeDisplaySettingsEx" );
 		CCheckReturn< LONG, CSuccessCheck< > >::TType lResult;
@@ -53,7 +53,7 @@ namespace nsWinQAPI
 	}
 
 	//--------------------------------------------------------------------------------
-	BOOL CUser32::EnumDisplayDevices( LPCTSTR lpDevice, DWORD iDevNum, ::PDISPLAY_DEVICE lpDisplayDevice, DWORD dwFlags )
+	BOOL CUser32::EnumDisplayDevices( LPCTSTR lpDevice, DWORD iDevNum, ::PDISPLAY_DEVICE lpDisplayDevice, DWORD dwFlags ) const
 	{
 		_WINQ_FCONTEXT( "CUser32::EnumDisplayDevices" );
 		BOOL bResult;
@@ -63,7 +63,7 @@ namespace nsWinQAPI
 	}
 
 	//--------------------------------------------------------------------------------
-	BOOL CUser32::EnumDisplaySettings( LPCTSTR lpszDeviceName, DWORD iModeNum, ::LPDEVMODE lpDevMode )
+	BOOL CUser32::EnumDisplaySettings( LPCTSTR lpszDeviceName, DWORD iModeNum, ::LPDEVMODE lpDevMode ) const
 	{
 		_WINQ_FCONTEXT( "CUser32::EnumDisplaySettings" );
 		CCheckReturn< BOOL, CBoolCheck< > >::TType bResult;
@@ -73,7 +73,7 @@ namespace nsWinQAPI
 	}
 
 	//--------------------------------------------------------------------------------
-	BOOL CUser32::EnumDisplaySettingsEx( LPCTSTR lpszDeviceName, DWORD iModeNum, ::LPDEVMODE lpDevMode, DWORD dwFlags )
+	BOOL CUser32::EnumDisplaySettingsEx( LPCTSTR lpszDeviceName, DWORD iModeNum, ::LPDEVMODE lpDevMode, DWORD dwFlags ) const
 	{
 		_WINQ_FCONTEXT( "CUser32::EnumDisplaySettingsEx" );
 		CCheckReturn< BOOL, CBoolCheck< > >::TType bResult;

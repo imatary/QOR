@@ -47,54 +47,64 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	bool CFileSource::ReadAsync(unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead, byte* pBuffer)
+	{
+		CFileConnector* pFileConnector = dynamic_cast< CFileConnector* >(m_pIOSourceConnector);
+		return pFileConnector->File()->ReadEx((void*)(pBuffer), ulNumberOfUnitsToRead * GetBuffer()->GetUnitSize(),
+			reinterpret_cast< OVERLAPPED* >(pFileConnector->GetSyncObject()), (LPOVERLAPPED_COMPLETION_ROUTINE)(&COverlappedHandler::OnOverlappedReadCompleted));
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CFileSource::ReadSync(unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead, byte* pBuffer)
+	{
+		CFileConnector* pFileConnector = dynamic_cast< CFileConnector* >(m_pIOSourceConnector);
+		return pFileConnector->File()->Read(pBuffer, ulNumberOfUnitsToRead * GetBuffer()->GetUnitSize(), &ulNumberOfUnitsRead, 0);
+	}
+
+	//--------------------------------------------------------------------------------
 	bool CFileSource::Read( unsigned long& ulNumberOfUnitsRead, unsigned long ulNumberOfUnitsToRead )
 	{
 		_WINQ_FCONTEXT( "CFileSource::Read" );
-		bool bResult = false;
-		CFileConnector* pFileConnector = dynamic_cast< CFileConnector* >( m_pIOSourceConnector );
-		if( pFileConnector && pFileConnector->IsConnected() )
+		bool bResult = false;		
+		if(m_pIOSourceConnector && m_pIOSourceConnector->IsConnected() )
 		{
 			byte* pBuffer = GetBuffer()->WriteRequest( ulNumberOfUnitsToRead );
 
-			if( pFileConnector->AsyncConnection() )
+			if(m_pIOSourceConnector->AsyncConnection() )
 			{
-				bResult = pFileConnector->File()->ReadEx( (void*)(pBuffer), ulNumberOfUnitsToRead * GetBuffer()->GetUnitSize(), 
-					reinterpret_cast< OVERLAPPED* >( pFileConnector->GetSyncObject() ), (LPOVERLAPPED_COMPLETION_ROUTINE)(&COverlappedHandler::OnOverlappedReadCompleted) );
+				bResult = ReadAsync(ulNumberOfUnitsRead, ulNumberOfUnitsToRead, pBuffer);
 				ulNumberOfUnitsRead = 0;
-
-				if( !bResult && pFileConnector->Protocol() )
+				
+				if( !bResult )
 				{
-					pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadError();
+					ReadError.Signal();
 				}
 			}
 			else
 			{				
 				m_bEOF = false;
-				if( pFileConnector->File()->Read( pBuffer, ulNumberOfUnitsToRead * GetBuffer()->GetUnitSize(), &ulNumberOfUnitsRead, 0 ) )
+				if(ReadSync(ulNumberOfUnitsRead, ulNumberOfUnitsToRead, pBuffer))
 				{
 					ulNumberOfUnitsRead /= GetBuffer()->GetUnitSize();
 					GetBuffer()->WriteAcknowledge( ulNumberOfUnitsRead );
 					bResult = true;
 				}
 
-				if( bResult && ulNumberOfUnitsRead == 0 )
+				if( bResult )
 				{
-					m_bEOF = true;
-					if( pFileConnector->Protocol() )
+					if(ulNumberOfUnitsRead == 0)
 					{
-						pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnEndOfData();
-					}
-				}
-				else if( pFileConnector->Protocol() )
-				{
-					if( bResult )
-					{
-						pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadSuccess( ulNumberOfUnitsRead );
+						m_bEOF = true;
+						EndOfData.Signal();
 					}
 					else
 					{
-						pFileConnector->Protocol().As< nsBluefoot::CBFProtocol >()->OnReadError();
-					}
+						ReadSuccess.Signal();
+					}					
+				}
+				else
+				{
+					ReadError.Signal();
 				}
 			}
 		}

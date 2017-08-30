@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Basic default policy class for no-threading OS ignorant behaviour
+//Basic default policy class for no-threading OS agnostic behavior
 
 #ifndef CODEQOR_POLICY_H_1
 #define CODEQOR_POLICY_H_1
@@ -53,6 +53,8 @@ namespace nsCodeQOR
 class CCodeQORPolicy
 {
 public:
+
+	static const char* Name;// = "Default CodeQOR Policy";
 
 	//default container initial sizes
 	__QCMP_STATIC_CONSTANT( unsigned long, DEFAULT_INITIAL_ARRAY_SIZE = 8 );

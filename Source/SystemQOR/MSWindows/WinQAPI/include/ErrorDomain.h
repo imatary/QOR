@@ -93,6 +93,8 @@ namespace nsWinQAPI
 		API_NOT_IN_MINGW32,
 		MISSING_LIBRARY_FUNCTION,
 
+		WINSOCK_ERROR,
+
 		MAX_ERROR //Always last
 	};
 

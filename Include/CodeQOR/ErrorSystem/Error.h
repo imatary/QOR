@@ -75,7 +75,7 @@
 #   define __QCS_ENDPROTECT
 #endif
 
-#else//__QOR_PERFORMANCE == __QCS_MAX_PERFORMANCE_ is defined so neutralise all error raising and handling
+#else//__QOR_PERFORMANCE == __QCS_MAX_PERFORMANCE_ is defined so neutralize all error raising and handling
 	#define __QCS_FATAL_ERROR( Description )
 	#define __QCS_SERIOUS_ERROR( Description )
 	#define __QCS_CONTINUABLE_ERROR( Description )
@@ -93,7 +93,6 @@ namespace nsCodeQOR
 	class __QOR_INTERFACE( __CODEQOR ) CWhat;
 	class __QOR_INTERFACE( __CODEQOR ) CWhere;
 	class __QOR_INTERFACE( __CODEQOR ) CWhen;
-	//class __QOR_INTERFACE( __CODEQOR ) CThreadContextBase;
 	class __QOR_INTERFACE( __CODEQOR ) CProcessBase;
 	class __QOR_INTERFACE( __CODEQOR ) CLoadableModuleBase;
 
@@ -141,7 +140,7 @@ namespace nsCodeQOR
 
 		protected:
 
-			unsigned int m_uiCode;									//Every error needs an identitiy to link it to additional information
+			unsigned int m_uiCode;									//Every error needs an identity to link it to additional information
 			void* m_pParams[ sMaxParams ];							//Array of parameter addresses
 
 		private:

@@ -37,7 +37,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CConsoleScreenBuffer );
 
 	//--------------------------------------------------------------------------------
-	CConsoleScreenBuffer::CConsoleScreenBuffer( const CFileHandle& InputHandle, const CFileHandle& OutputHandle ) : m_hInput( InputHandle )
+	CConsoleScreenBuffer::CConsoleScreenBuffer( const CStdHandle& InputHandle, const CStdHandle& OutputHandle ) : m_hInput( InputHandle )
 	,	m_hOutput( OutputHandle )
 	{
 		_WINQ_FCONTEXT( "CConsoleScreenBuffer::CConsoleScreenBuffer" );
@@ -45,7 +45,8 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	CConsoleScreenBuffer::CConsoleScreenBuffer( unsigned long dwDesiredAccess, unsigned long dwShareMode, const SECURITY_ATTRIBUTES* lpSecurityAttributes )
+	CConsoleScreenBuffer::CConsoleScreenBuffer( unsigned long dwDesiredAccess, unsigned long dwShareMode, const SECURITY_ATTRIBUTES* lpSecurityAttributes ) : m_hInput(nullptr)
+		, m_hOutput(nullptr)
 	{
 		_WINQ_FCONTEXT( "CConsoleScreenBuffer::CConsoleScreenBuffer" );
 		m_bDefault = false;
@@ -67,13 +68,13 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------	
-	void CConsoleScreenBuffer::SetInputHandle( const CFileHandle& InputHandle )
+	void CConsoleScreenBuffer::SetInputHandle( const CStdHandle& InputHandle )
 	{
 		m_hInput = InputHandle;
 	}
 
 	//--------------------------------------------------------------------------------	
-	void CConsoleScreenBuffer::SetOutputHandle( const CFileHandle& OutputHandle )
+	void CConsoleScreenBuffer::SetOutputHandle( const CStdHandle& OutputHandle )
 	{
 		m_hOutput = OutputHandle;
 	}

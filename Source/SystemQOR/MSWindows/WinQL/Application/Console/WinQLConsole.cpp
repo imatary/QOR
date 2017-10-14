@@ -270,7 +270,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_OCLASS_LUID( CConsole );
 
 	//--------------------------------------------------------------------------------
-	CConsole::CConsole() : m_Win32DefaultScreenBuffer( 0,0 )
+	CConsole::CConsole() : m_Win32DefaultScreenBuffer( nullptr,nullptr )
 	{	
 		_WINQ_FCONTEXT( "CConsole::CConsole" );
 #ifndef _CONSOLE
@@ -304,6 +304,7 @@ namespace nsWin32
 #ifndef _CONSOLE
 		CConsole::__termcon();
 #endif
+		m_ConsoleInput.Handle()->Drop();
 		g_pConsole = 0;
 	}
 
@@ -499,7 +500,8 @@ namespace nsWin32
 			}
 			else
 			{
-				s_pConsoleInput = new nsWin32::CCRTFile( hstdin );
+				s_pConsoleInput = new nsWin32::CCRTFile( hstdin );		
+				hstdin = 0;
 			}
 		}
 	}
@@ -521,6 +523,7 @@ namespace nsWin32
 			else
 			{
 				s_pConsoleOutput = new nsWin32::CCRTFile( hstdout );
+				hstdout = 0;
 			}				
 		}
 	}

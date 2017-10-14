@@ -294,10 +294,10 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------	
-	CFileHandle CConsoleHelper::GetStdHandle( unsigned long nStdHandle )
+	CStdHandle CConsoleHelper::GetStdHandle( unsigned long nStdHandle )
 	{
 		_WINQ_FCONTEXT( "CConsoleHelper::GetStdHandle" );
-		CFileHandle hStd;
+		CStdHandle hStd(nullptr);
 		__QOR_PROTECT
 		{
 			hStd = CKernel32::GetStdHandle( nStdHandle );
@@ -366,7 +366,7 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------	
-	bool CConsoleHelper::SetStdHandle( unsigned long nStdHandle, CFileHandle& hHandle )
+	bool CConsoleHelper::SetStdHandle( unsigned long nStdHandle, CStdHandle& hHandle )
 	{
 		_WINQ_FCONTEXT( "CConsoleHelper::SetStdHandle" );
 		bool bResult = false;

@@ -64,6 +64,7 @@ namespace nsWin32
 		virtual ~CDeviceEnumerator();
 
 		CTString ID( void );
+		bool IsInProgress(void);
 		unsigned int Enumerate( void );
 
 		nsCodeQOR::CTArray< CDeviceInstance*, CWinQLPolicy >& Instances( void );
@@ -76,6 +77,7 @@ namespace nsWin32
 		SP_DevInfo_Data m_DevInfo;
 		nsCodeQOR::CTArray< CDeviceInstance*, CWinQLPolicy > m_ArrayDeviceInstances;
 		bool m_bEnumerated;
+		bool m_bEnumerationInProgress;
 		
 		CDeviceEnumerator() = delete;//not to be implemented
 		CDeviceEnumerator( const CDeviceEnumerator& src ) = delete;

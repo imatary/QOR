@@ -165,6 +165,8 @@ namespace nsWin32
 		CDeviceEnumerator::ref_type EnumeratorFromName( CTStringRef strEnumerator );
 		CDeviceInterfaceClass::ref_type InterfaceClassFromGUID( nsCodeQOR::mxGUID& GUID );
 
+		bool AreInstancesEnumerated(void);
+
 	protected:
 
 		std::map< const CTString, CDeviceEnumerator::ref_type > m_DeviceEnumeratorCollection;
@@ -197,6 +199,7 @@ namespace nsWin32
 
 		bool m_bEnumeratorsEnumerated;
 		bool m_bInstancesEnumerated;
+		bool m_bEnumerationInProgress;
 		bool m_bSetupClassesEnumerated;
 		bool m_bInterfaceClassesEnumerated;
 		bool m_bDriversEnumerated;

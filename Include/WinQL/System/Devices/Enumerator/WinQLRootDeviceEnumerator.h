@@ -60,8 +60,6 @@ namespace nsWin32
 		__QOR_DECLARE_REF_TYPE(CRootDeviceEnumerator);
 		__QOR_DECLARE_OCLASS_ID( CRootDeviceEnumerator );
 
-		typedef nsCodeQOR::CTLRef< CRootDeviceEnumerator > refType;
-
 		CRootDeviceEnumerator();
 		CRootDeviceEnumerator( const CRootDeviceEnumerator& src );
 		CRootDeviceEnumerator& operator = ( const CRootDeviceEnumerator& src );

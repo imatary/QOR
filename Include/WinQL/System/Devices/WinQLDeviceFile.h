@@ -57,6 +57,7 @@ namespace nsWin32
 		__QOR_DECLARE_OCLASS_ID(CDeviceFile);
 
 		CDeviceFile( const TCHAR* pDeviceName, unsigned long dwDesiredAccess, unsigned long dwShareMode, unsigned long dwFlagsAndAttributes );
+		CDeviceFile( CDeviceHandle& hExisting );
 		CDeviceFile( CDeviceHandle::ref_type hExisting );
 		virtual ~CDeviceFile();
 

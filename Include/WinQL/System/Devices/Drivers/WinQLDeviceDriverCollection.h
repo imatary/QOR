@@ -55,7 +55,8 @@ namespace nsWin32
 
 	public:
 
-		__QOR_DECLARE_OCLASS_ID( CDeviceDriverCollection );
+		__QOR_DECLARE_REF_TYPE(CDeviceDriverCollection);
+		__QOR_DECLARE_OCLASS_ID(CDeviceDriverCollection);
 
 		CDeviceDriverCollection( const mxTCHAR* szMachine = 0 );
 		CDeviceDriverCollection( const CDeviceDriverCollection& src );

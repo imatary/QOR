@@ -245,6 +245,9 @@
     <Filter Include="Source Files\Application\Resources">
       <UniqueIdentifier>{f6d6ac34-c455-4433-8c7f-7938b2241c86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Application\Graphics\DeviceContext">
+      <UniqueIdentifier>{9aa2cefc-7848-4200-9294-59f43b39fe7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\WinQL.cpp">
@@ -1015,11 +1018,11 @@
     <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\IO\Socket\WinQLSocketConnector.cpp">
       <Filter>Source Files\Application\IO\Socket</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\IO\Socket\WinQLSocketSink.cpp">
-      <Filter>Source Files\Application\IO\Socket</Filter>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\System\FileSystem\WinQLStreamFormatter.cpp">
+      <Filter>Source Files\System\FileSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\Application\IO\Socket\WinQLSocketSource.cpp">
-      <Filter>Source Files\Application\IO\Socket</Filter>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinQL\System\FileSystem\WinQLVolume.cpp">
+      <Filter>Source Files\System\FileSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1722,11 +1725,200 @@
     <ClInclude Include="..\..\..\..\Include\WinQL\Application\IO\Socket\WinQLSocketConnector.h">
       <Filter>Source Files\Application\IO\Socket</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\WinQL\Application\IO\Socket\WinQLSocketSink.h">
-      <Filter>Source Files\Application\IO\Socket</Filter>
+    <ClInclude Include="..\..\..\..\Include\WinQL\System\FileSystem\WinQLStreamFormatter.h">
+      <Filter>Source Files\System\FileSystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\WinQL\Application\IO\Socket\WinQLSocketSource.h">
-      <Filter>Source Files\Application\IO\Socket</Filter>
+    <ClInclude Include="..\..\..\..\Include\WinQL\CodeServices\Text\WinQLCharDecl.h">
+      <Filter>Source Files\CodeServices\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\CodeServices\Text\WinQLCharImpl.h">
+      <Filter>Source Files\CodeServices\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\CodeServices\Text\WinQLCodePage.h">
+      <Filter>Source Files\CodeServices\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\CodeServices\Text\WinQLFormatter.h">
+      <Filter>Source Files\CodeServices\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\CodeServices\Text\WinQLStringServices.h">
+      <Filter>Source Files\CodeServices\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\CodeServices\Text\WinString.h">
+      <Filter>Source Files\CodeServices\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\CodeServices\Text\BluefootFilters\WinQLANSICodePointFilter.h">
+      <Filter>Source Files\CodeServices\Text\BluefootFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\CodeServices\Text\BluefootFilters\WinQLCodePointANSIFilter.h">
+      <Filter>Source Files\CodeServices\Text\BluefootFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Resources\WinQLResourceManager.h">
+      <Filter>Source Files\Application\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Resources\WinQLResources.h">
+      <Filter>Source Files\Application\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Resources\WinQLResourceUpdateHandle.h">
+      <Filter>Source Files\Application\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\I18n\WinQLI18n.h">
+      <Filter>Source Files\Application\I18n</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLBitmap.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLBrush.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLDeviceContext.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLDisplay.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLEnhMetaFile.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLFont.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLGDIObj.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLMetaFile.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLPalette.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLPen.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLPoint.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLRectangle.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLRegion.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\WinQLSize.h">
+      <Filter>Source Files\Application\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCClipping.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCDraw.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCFonts.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCInternal.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCPath.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCPixelFormat.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCPrintDoc.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCProperties.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCSelectedBrush.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCSelectedFont.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCText.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCViewport.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCWindow.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Graphics\DeviceContext\WinQLDCWorldTransform.h">
+      <Filter>Source Files\Application\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLDebugging.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLDOSError.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLErrDomain.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLError.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLErrorHandling.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLErrorHeap.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLErrorSystem.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLExceptionFrame.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLExceptionImpl.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLFlagChecks.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLFunctionContext.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLHandleCheck.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLParamErrorDomain.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLParameterCheck.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLPointerChecks.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLSEH.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\ErrorSystem\WinQLStringChecks.h">
+      <Filter>Source Files\Application\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Comms\Serial\WinQLComm.h">
+      <Filter>Source Files\Application\Comms\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Comms\IPC\MailSlot\WinQLMailSlot.h">
+      <Filter>Source Files\Application\Comms\IPC\MailSlot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Comms\IPC\DDE\WinQLDDE.h">
+      <Filter>Source Files\Application\Comms\IPC\DDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Comms\IPC\Atoms\WinQLAtoms.h">
+      <Filter>Source Files\Application\Comms\IPC\Atoms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Backup\WinQLBackup.h">
+      <Filter>Source Files\Application\Backup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\Application\Roles\WinQLTestingRole.h">
+      <Filter>Source Files\Application\Roles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\WinQL\System\FileSystem\WinQLDirectoryEntry.h">
+      <Filter>Source Files\System\FileSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

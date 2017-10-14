@@ -24,8 +24,8 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-#include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/Application/Memory/WinQLMemFile.h"
+#include "WinQL/Application/ErrorSystem/WinQLError.h"
 #include "WinQL/Definitions/Constants.h"
 #include "WinQAPI/Kernel32.h"
 
@@ -75,7 +75,5 @@ namespace nsWin32
 	{
 		return m_pMapping;
 	}
-
-
 
 }//nsWin32

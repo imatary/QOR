@@ -57,7 +57,7 @@ namespace nsCodeQOR
 		CFastBucket* pBucket = &m_InitialPages[ uiBasePage ];
 		while( ( uiBasePage++ < suiRootBuckets ) && ( ( uiAllocSize * 2 ) > pBucket->PageSize() ) )
 		{				
-			pBucket = &m_InitialPages[ uiBasePage ];
+			pBucket = &m_InitialPages[ uiBasePage ];|
 		}
 		if( uiBasePage < suiRootBuckets )
 		{

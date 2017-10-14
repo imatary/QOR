@@ -194,7 +194,7 @@ namespace nsBluefoot
 		virtual void SetCapacity( unsigned long ulItemCount )
 		{
 			delete [] m_pAllocation;
-			m_pAllocation = ( ulItemCount > 0 ) ? new pod_t[ ulItemCount ] : 0;
+			m_pAllocation = ( ulItemCount > 0 ) ? new pod_t[ ulItemCount ] : nullptr;
 
 			CBuffer::SetCapacity( ulItemCount );
 		}

@@ -61,28 +61,31 @@ namespace nsWin32
 		FILE* pResult = 0;
 		__QOR_PROTECT
 		{
+			pResult = nsPosum::CStream::_stdin()->GetFILE();
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
 
 	//--------------------------------------------------------------------------------
-    FILE* Cstdio::_stdout( void )
+    FILE* Cstdio::_stdout()
 	{
 		_WINQ_FCONTEXT( "Cstdio::_stdout" );
 		FILE* pResult = 0;
 		__QOR_PROTECT
 		{
+			pResult = nsPosum::CStream::_stdout()->GetFILE();
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
 
 	//--------------------------------------------------------------------------------
-    FILE* Cstdio::_stderr( void )
+    FILE* Cstdio::_stderr()
 	{
 		_WINQ_FCONTEXT( "Cstdio::_stderr" );
 		FILE* pResult = 0;
 		__QOR_PROTECT
 		{
+			pResult = nsPosum::CStream::_stderr()->GetFILE();
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
@@ -93,8 +96,8 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "Cstdio::clearerr" );
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//Stream.ClearError();
+			nsPosum::CStream Stream( stream );
+			Stream.clearerr();
 		}__QOR_ENDPROTECT
 	}
 
@@ -105,19 +108,19 @@ namespace nsWin32
 		errno_t Result = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//Result = Stream.ClearError();
+			Result = nsPosum::CStream( stream ).clearerr_s();
 		}__QOR_ENDPROTECT
 		return Result;
 	}
 
 	//--------------------------------------------------------------------------------
-	char* Cstdio::ctermid( char* )
+	char* Cstdio::ctermid( char* s )
 	{
 		_WINQ_FCONTEXT( "Cstdio::ctermid" );
 		char* pResult = 0;
 		__QOR_PROTECT
 		{
+			//TODO: pResult = nsPosum::CStream::ctermid(s);
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
@@ -129,8 +132,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CFile File( fd );
-			//iResult = File.PrintF( format, args );
+			iResult = nsPosum::CStream(fd).vfprintf(format,args);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -142,8 +144,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			iResult = -1;//Stream.Close();
+			iResult = nsPosum::CStream(stream).fclose();
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -155,8 +156,7 @@ namespace nsWin32
 		FILE* pResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( fd, mode );
-			//pResult = Stream.GetFILE();
+			pResult = nsPosum::CStream::fdopen(fd, mode)->GetFILE();
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
@@ -168,8 +168,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			iResult = 0;// Stream.EoF();
+			iResult = nsPosum::CStream(stream).feof();
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -181,8 +180,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			iResult = 0;// Stream.Error();
+			iResult = nsPosum::CStream(stream).ferror();
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -194,8 +192,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			iResult = 0;//Stream.Flush();
+			iResult = nsPosum::CStream(stream).fflush();
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -207,8 +204,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			iResult = 0;// Stream.GetC();
+			iResult = nsPosum::CStream(stream).fgetc();
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -220,8 +216,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			iResult = 0;// Stream.GetPos(pos);
+			iResult = nsPosum::CStream(stream).fgetpos(pos);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -233,8 +228,7 @@ namespace nsWin32
 		char* pResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			pResult = 0;// Stream.GetS(s, n);
+			pResult = nsPosum::CStream(stream).fgets(s, n);
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
@@ -246,8 +240,7 @@ namespace nsWin32
 		int iResult = -1;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			iResult = 0;// Stream.FileNumber();
+			iResult = nsPosum::CStream(stream).fileno();
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -255,11 +248,10 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	void Cstdio::flockfile( FILE* stream )
 	{
-		_WINQ_FCONTEXT( "Cstdio::fmemopen" );
+		_WINQ_FCONTEXT( "Cstdio::flockfile" );
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//Stream.Lock();
+			nsPosum::CStream(stream).flockfile();
 		}__QOR_ENDPROTECT
 	}
 
@@ -270,9 +262,8 @@ namespace nsWin32
 		FILE* pResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( buf, size, szMode );
-			pResult = 0;// Stream.GetFILE();
-		}__QOR_PROTECT
+			pResult = nsPosum::CStream::fmemopen( buf, size, szMode )->GetFILE();
+		}__QOR_ENDPROTECT
 		return pResult;
 	}
 
@@ -283,8 +274,7 @@ namespace nsWin32
 		FILE* pResult = 0;
 		__QOR_PROTECT
 		{
-			auto ref = nsPosum::CStream::fopen(filename, mode);
-			pResult = ref->GetFILE();
+			pResult = nsPosum::CStream::fopen(filename, mode)->GetFILE();
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
@@ -302,8 +292,7 @@ namespace nsWin32
 			}
 			else
 			{
-				//nsPosum::CStream Stream( szFilename, szMode );
-				*ppFile = 0;// Stream.GetFILE();
+				*ppFile = nsPosum::CStream::fopen(szFilename, szMode)->GetFILE();
 			}
 		}__QOR_ENDPROTECT
 		return Result;
@@ -316,8 +305,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			iResult = 0;// Stream.PrintF(format, vargs);
+			iResult = nsPosum::CStream( stream ).vfprintf( format, vargs );
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -329,8 +317,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			iResult = 0;// Stream.PrintF(format, vargs);
+			iResult = nsPosum::CStream(stream).vfprintf(format, vargs);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -342,8 +329,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//iResult = Stream.PutC( c );
+			iResult = nsPosum::CStream(stream).fputc(c);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -356,8 +342,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//iResult = Stream.PutS( s );
+			iResult = nsPosum::CStream(stream).fputs(s);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -369,21 +354,19 @@ namespace nsWin32
 		size_t Result = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//Result = Stream.Read( ptr, size, nmemb );
+			Result = nsPosum::CStream(stream).fread(ptr, size, nmemb);
 		}__QOR_ENDPROTECT
 		return Result;
 	}
 
 	//--------------------------------------------------------------------------------
-	size_t Cstdio::fread_s( void* ptr, size_t DstSize, size_t ElementSize, size_t Count, FILE* pFile )
+	size_t Cstdio::fread_s( void* ptr, size_t DstSize, size_t ElementSize, size_t Count, FILE* stream )
 	{
 		_WINQ_FCONTEXT( "Cstdio::fread_s" );
 		size_t Result = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( pFile );
-			//Result = Stream.Read( ptr, ElementSize, Count ); 
+			Result = nsPosum::CStream(stream).fread_s(ptr, DstSize, ElementSize, Count);
 		}__QOR_ENDPROTECT
 		return Result;
 	}
@@ -395,7 +378,7 @@ namespace nsWin32
 		FILE* pResult = 0;
 		__QOR_PROTECT
 		{
-			//TODO:??
+			pResult = nsPosum::CStream(stream).freopen(filename, mode)->GetFILE();
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
@@ -404,10 +387,10 @@ namespace nsWin32
 	errno_t Cstdio::freopen_s( FILE** ppFile, const char* szFilename, const char* szMode, FILE* pOldFile )
 	{
 		_WINQ_FCONTEXT( "Cstdio::freopen_s" );
-		errno_t Result = -1;
+		errno_t Result = 0;
 		__QOR_PROTECT
 		{
-			//TODO:??
+			*ppFile = nsPosum::CStream(pOldFile).freopen(szFilename, szMode)->GetFILE();
 		}__QOR_ENDPROTECT
 		return Result;
 	}
@@ -419,21 +402,19 @@ namespace nsWin32
 		int iResult = -1;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//iResult = Stream.ScanF( format, vargs );
+			iResult = nsPosum::CStream(stream).vfscanf(format, vargs);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	int Cstdio::fscanf_s( FILE* pFile, const char* format, va_list vargs )
+	int Cstdio::fscanf_s( FILE* stream, const char* format, va_list vargs )
 	{
 		_WINQ_FCONTEXT( "Cstdio::fscanf_s" );
 		int iResult = -1;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( pFile );
-			//iResult = Stream.ScanF( format, vargs );
+			iResult = nsPosum::CStream(stream).vfscanf(format, vargs);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -445,8 +426,7 @@ namespace nsWin32
 		int iResult = -1;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//iResult = Stream.Seek( offset, whence );
+			iResult = nsPosum::CStream(stream).fseek(offset, whence);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -458,8 +438,7 @@ namespace nsWin32
 		int iResult = -1;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//iResult = Stream.SeekO( offset, whence );
+			iResult = nsPosum::CStream(stream).fseeko(offset, whence);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -471,8 +450,7 @@ namespace nsWin32
 		int iResult = -1;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//iResult = Stream.SetPos( pos );
+			iResult = nsPosum::CStream(stream).fsetpos(pos);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -484,8 +462,7 @@ namespace nsWin32
 		long int liResult = -1;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//liResult = Stream.Tell();
+			liResult = nsPosum::CStream(stream).ftell();
 		}__QOR_ENDPROTECT
 		return liResult;
 	}
@@ -497,8 +474,7 @@ namespace nsWin32
 		off_t Result = -1;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//Result = Stream.TellO();
+			Result = nsPosum::CStream(stream).ftello();
 		}__QOR_ENDPROTECT
 		return Result;
 	}
@@ -510,8 +486,7 @@ namespace nsWin32
 		int iResult = -1;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//iResult = Stream.TryLock();
+			iResult = nsPosum::CStream(stream).ftrylockfile();
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -522,8 +497,7 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "Cstdio::funlockfile" );
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//Stream.Unlock();
+			nsPosum::CStream(stream).funlockfile();
 		}__QOR_ENDPROTECT
 	}
 
@@ -534,8 +508,7 @@ namespace nsWin32
 		size_t Result = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			Result = 0;//Stream.Write( ptr, size, nmemb );
+			Result = nsPosum::CStream(stream).fwrite(ptr, size, nmemb);
 		}__QOR_ENDPROTECT
 		return Result;
 	}
@@ -547,8 +520,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//iResult = Stream.GetC();
+			iResult = nsPosum::CStream(stream).getc();
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -560,8 +532,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//::nsPosum::CStream Stream( 0 );
-			//iResult = Stream.GetC();
+			iResult = nsPosum::CStream::_stdin()->getc();
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -573,8 +544,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			//iResult = Stream.GetCUnlocked();
+			iResult = nsPosum::CStream(stream).getc_unlocked();
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -586,8 +556,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( 1 );
-			//iResult = Stream.GetCUnlocked();
+			iResult = nsPosum::CStream::_stdin()->getc_unlocked();
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -598,7 +567,7 @@ namespace nsWin32
 		ssize_t Result = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
+			Result = nsPosum::CStream(stream).getdelim(lineptr, n, delimiter);
 		}__QOR_ENDPROTECT
 		return Result;
 	}
@@ -609,8 +578,7 @@ namespace nsWin32
 		ssize_t Result = 0;
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( stream );
-			
+			Result = nsPosum::CStream(stream).getline(lineptr, n);
 		}__QOR_ENDPROTECT
 		return Result;
 	}
@@ -622,7 +590,7 @@ namespace nsWin32
 		char* pResult = 0;
 		__QOR_PROTECT
 		{
-
+			pResult = nsPosum::CStream::_stdin()->fgets(s, 0);
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
@@ -634,7 +602,7 @@ namespace nsWin32
 		char* pResult = 0;
 		__QOR_PROTECT
 		{
-
+			pResult = nsPosum::CStream::_stdin()->fgets(s, _Size);
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
@@ -646,18 +614,19 @@ namespace nsWin32
 		FILE* pResult = 0;
 		__QOR_PROTECT
 		{
-			//pResult = nsPosum::CStream( *bufp, *sizep, "" );
+			pResult = nsPosum::CStream::open_memstream( bufp, sizep )->GetFILE();
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	int Cstdio::pclose( FILE* )
+	int Cstdio::pclose( FILE* stream )
 	{
 		_WINQ_FCONTEXT( "Cstdio::pclose" );
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream(stream).pclose();
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -669,8 +638,7 @@ namespace nsWin32
 
 		__QOR_PROTECT
 		{
-			//nsPosum::CStream Stream( 2 );
-			//Stream.PrintF( s, 0 );
+			nsPosum::CStream::_stderr()->fprintf(s);
 		}__QOR_ENDPROTECT
 	}
 
@@ -681,8 +649,7 @@ namespace nsWin32
 		FILE* pResult = 0;
 		__QOR_PROTECT
 		{
-//			nsPosum::CPipe Pipe( command, mode );
-//			pResult = Pipe.GetFILE();
+			pResult = nsPosum::CStream::popen(command, mode)->GetFILE();
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
@@ -710,17 +677,19 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "Cstdio::printf_s" );
 		int iResult = 0;
+		__QOR_PROTECT
+		{
 
-		if( format == 0 )
-		{
-			errno = EINVAL;
-			iResult = -1;
-		}
-		else
-		{
-			//::nsPosum::CStream Stream( 1 );
-			//iResult = Stream.PrintF( format, vargs );
-		}
+			if( format == 0 )
+			{
+				errno = EINVAL;
+				iResult = -1;
+			}
+			else
+			{
+				iResult = ::nsPosum::CStream::_stdout()->_vfprintf_l(format, nullptr, vargs);
+			}
+		}__QOR_ENDPROTECT
 		return iResult;
 	}
 
@@ -731,8 +700,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//::nsPosum::CStream Stream( 1 );
-			//iResult = Stream.PutC( c );	
+			iResult = nsPosum::CStream(stream).putc(c);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -744,30 +712,31 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//::nsPosum::CStream Stream( 1 );
-			//iResult = Stream.PutC( c );	
+			iResult = nsPosum::CStream::_stdout()->putc(c);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	int Cstdio::putc_unlocked( int, FILE* )
+	int Cstdio::putc_unlocked( int c, FILE* stream )
 	{
 		_WINQ_FCONTEXT( "Cstdio::putc_unlocked" );
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream(stream).putc_unlocked(c);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	int Cstdio::putchar_unlocked( int )
+	int Cstdio::putchar_unlocked( int c )
 	{
 		_WINQ_FCONTEXT( "Cstdio::putchar_unlocked" );
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream::_stdout()->putc_unlocked(c);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -780,8 +749,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
-			//::nsPosum::CStream Stream( 1 );
-			//iResult = Stream.PutS( s );
+			iResult = nsPosum::CStream::_stdout()->fputs(s);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -793,6 +761,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			//TODO: nsPosum::CStream::remove(filename);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -829,6 +798,7 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "Cstdio::rewind" );
 		__QOR_PROTECT
 		{
+			nsPosum::CStream(stream).rewind();
 		}__QOR_ENDPROTECT
 	}
 
@@ -839,6 +809,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream::_stdin()->vfscanf(format,vargs);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -850,6 +821,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream::_stdin()->vfscanf(format, vargs);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -860,6 +832,7 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "Cstdio::setbuf" );
 		__QOR_PROTECT
 		{
+			nsPosum::CStream(stream).setbuf(buf);
 		}__QOR_ENDPROTECT
 	}
 
@@ -870,6 +843,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream(stream).setvbuf(buf, mode, size);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -881,6 +855,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			//iResult = nsPosum::CStream
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -911,6 +886,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream::_stdin()->vfscanf(format, vargs);//TODO: s ?
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -922,6 +898,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream::_stdin()->vfscanf(format, vargs);//TODO: s ?
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -944,6 +921,7 @@ namespace nsWin32
 		FILE* pResult = 0;
 		__QOR_PROTECT
 		{
+			pResult = nsPosum::CStream::tmpfile()->GetFILE();
 		}__QOR_ENDPROTECT
 		return pResult;
 	}
@@ -977,6 +955,7 @@ namespace nsWin32
 		errno_t Result = 0;
 		__QOR_PROTECT
 		{
+			//Result = nsPosum::CStream::tmpnam_s(s, Size);//TODO:
 		}__QOR_ENDPROTECT
 		return Result;
 	}
@@ -988,6 +967,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream(stream).ungetc(c);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -996,7 +976,12 @@ namespace nsWin32
 	int Cstdio::vfprintf( FILE* stream, const char* format, va_list vargs )
 	{
 		_WINQ_FCONTEXT( "Cstdio::vfprintf" );
-		return 0;//fprintf( stream, format, vargs );
+		int iResult = 0;
+		__QOR_PROTECT
+		{
+			iResult = nsPosum::CStream(stream).vfprintf(format,vargs);
+		}__QOR_ENDPROTECT
+		return iResult;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -1006,6 +991,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream(stream).vfprintf_s(format,arg);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -1017,6 +1003,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream(stream).vfscanf(format,arg);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -1025,7 +1012,12 @@ namespace nsWin32
 	int Cstdio::vprintf(const char* format, va_list vargs )
 	{
 		_WINQ_FCONTEXT( "Cstdio::vprintf" );
-		return 0;//printf( format, vargs );
+		int iResult = 0;
+		__QOR_PROTECT
+		{
+			iResult = nsPosum::CStream::_stdout()->vfprintf(format, vargs);
+		}__QOR_ENDPROTECT
+		return iResult;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -1035,6 +1027,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream::_stdout()->vfprintf(format, arg);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -1046,6 +1039,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream::_stdin()->vfscanf(format, arg);
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -1057,6 +1051,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream::_stdout()->vfprintf(format, arg);//TODO: s, n ?
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -1068,6 +1063,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream::_stdout()->vfprintf(format, arg);//TODO: s ?
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -1079,6 +1075,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream::_stdout()->vfprintf_s(format, arg);//TODO: s, SizeInBytes ?
 		}__QOR_ENDPROTECT
 		return iResult;
 	}
@@ -1090,6 +1087,7 @@ namespace nsWin32
 		int iResult = 0;
 		__QOR_PROTECT
 		{
+			iResult = nsPosum::CStream::_stdin()->vfscanf(format, arg);//TODO: s ?
 		}__QOR_ENDPROTECT
 		return iResult;
 	}

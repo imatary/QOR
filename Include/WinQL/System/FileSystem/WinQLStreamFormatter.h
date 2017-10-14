@@ -33,10 +33,23 @@
 #pragma __QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-#include "WinQL/System/FileSystem/WinQLCRTFile.h"
+#include "WinQL/Application/ErrorSystem/WinQLErrorHandling.h"
+#include "WinQL/Application/Threading/WinQLCriticalSection.h"
+#include "WinQL/Application/Threading/WinQLThread.h"
+#include "WinQL/System/FileSystem/WinQLFileManagement.h"
+#include "WinQL/System/FileSystem/WinQLFile.h"
+#include "WinQL/System/Clock/WinQLTime.h"
+#include "WinQL/Application/Console/WinQLConsole.h"
+#include "WinQL/Application/Threading/WinQLSynchronization.h"
+#include "WinQL/CodeServices/Text/WinQLStringServices.h"
+
+//#include "WinQL/System/FileSystem/WinQLCRTFile.h"
 //#include "WinQL/CodeServices/Locale/Locale.h"
 //#include "WinQL/CodeServices/Locale/LocaleUpdate.h"
 //#include <limits.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <wchar.h>
 
 //--------------------------------------------------------------------------------
 namespace nsWin32

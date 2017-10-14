@@ -843,7 +843,7 @@ namespace nsWin32
 		nsCodeQOR::CTLRef< Power_Policy > CurrentPowerPolicy( void );
 		
 		ePowerPlatformRole GetPlatformRole( void );												//Get the kind of Computer this is in terms of power usage, mobile, desktop, server...
-		bool CanUserWriteAPowerScheme();														//Does the current user have sufficent permissions to write a power managment scheme
+		bool CanUserWriteAPowerScheme();														//Does the current user have sufficient permissions to write a power management scheme
 
 		nsCodeQOR::CSTMember< CPowerSchemeCollection > PowerSchemes;							//An array of the power schemes on this computer
 		nsCodeQOR::CSTMember< CPowerScenarioCollection > PowerScenarios;						//An array of the power scenarios on this computer

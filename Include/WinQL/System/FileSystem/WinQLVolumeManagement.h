@@ -33,6 +33,7 @@
 
 #include "WinQL/CodeServices/Text/WinString.h"
 #include "WinQL/CodeServices/Handles/WinQLRAIISessionHandle.h"
+#include "WinQL/System/FileSystem/WinQLVolume.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -52,7 +53,7 @@ namespace nsWin32
 		CDosDeviceHelper& operator = ( const CDosDeviceHelper& src );
 		~CDosDeviceHelper();
 		bool Define( unsigned long dwFlags, const TCHAR* lpDeviceName, const TCHAR* lpTargetPath );
-		unsigned long Query( const TCHAR* lpDeviceName, CTStringRef strTargetPath );
+		unsigned long Query( const TCHAR* lpDeviceName, CTString& strTargetPath );
 	};
 
 	//--------------------------------------------------------------------------------
@@ -92,46 +93,6 @@ namespace nsWin32
 	};
 
 	//--------------------------------------------------------------------------------
-	//Stateless helper for Volume functions
-	class __QOR_INTERFACE( __WINQL ) CVolumeHelper
-	{
-	public:
-
-		//--------------------------------------------------------------------------------
-		struct VolumeInformation
-		{
-			CTString strName;
-			unsigned long ulSerialNumber;
-			unsigned long ulMaximumComponentLength;
-			unsigned long ulFileSystemFlags;
-			CTString strFileSystemName;
-		};
-
-		//--------------------------------------------------------------------------------
-		struct ByHandleVolumeInformation
-		{
-			CWString strName;
-			unsigned long ulSerialNumber;
-			unsigned long ulMaximumComponentLength;
-			unsigned long ulFileSystemFlags;
-			CWString strFileSystemName;
-		};
-
-		__QOR_DECLARE_OCLASS_ID( CVolumeHelper );
-
-		CVolumeHelper();
-		CVolumeHelper( const CVolumeHelper& );
-		CVolumeHelper& operator = ( const CVolumeHelper& );
-		~CVolumeHelper();
-		bool SetLabel( const TCHAR* lpRootPathName, const TCHAR* lpVolumeName );
-		bool GetInformation( const TCHAR* lpRootPathName, VolumeInformation& VolumeInfo );
-		bool GetInformationByHandle( CFile& File, ByHandleVolumeInformation& VolumeInfo );
-		bool GetInformationByHandle( CFile& File, wchar_t* lpVolumeNameBuffer, unsigned long nVolumeNameSize, unsigned long* lpVolumeSerialNumber, unsigned long* lpMaximumComponentLength, unsigned long* lpFileSystemFlags, wchar_t* lpFileSystemNameBuffer, unsigned long nFileSystemNameSize );
-		bool GetPathName( const TCHAR* lpszFileName, TCHAR* lpszVolumePathName, unsigned long cchBufferLength );
-		bool GetPathNamesForName( const TCHAR* lpszVolumeName, TCHAR* lpszVolumePathNames, unsigned long cchBufferLength, unsigned long* lpcchReturnLength );	
-	};
-
-	//--------------------------------------------------------------------------------
 	//Session class which iterates over Volumes
 	class __QOR_INTERFACE( __WINQL ) CFindVolume
 	{
@@ -139,18 +100,18 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CFindVolume );
 
-		CFindVolume( CTStringRef strVolumeName );
+		CFindVolume();
 		virtual ~CFindVolume();
 		bool Next();
+		CVolume::ref_type Volume(void);
 
 	protected:
 
 		CRAIISessionHandle m_Handle;
-		CTStringRef m_strVolume;
+		CTString m_strVolume;
 
 	private:
 
-		CFindVolume();
 		CFindVolume( const CFindVolume& );
 		CFindVolume& operator = ( const CFindVolume& );
 	};
@@ -163,14 +124,17 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CFindMountPoint );
 
-		CFindMountPoint( const CTString& strRootPathName, CTStringRef strVolumeMountPoint );
+		CFindMountPoint( const CTString& strRootPathName );
 		virtual ~CFindMountPoint();
 		bool Next();
+		CTString MountPoint(void);
+		bool IsValid(void);
 
 	protected:
 
-		CTStringRef m_strVolumeMountPoint;
+		CTString m_strVolumeMountPoint;
 		CRAIISessionHandle m_Handle;
+		unsigned long m_ulStatus;
 
 	private:
 

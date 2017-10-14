@@ -120,6 +120,7 @@ __QCMP_WARNING_POP
 	public:
 
 		CFile();
+		CFile( CFileHandle& hExisting );
 		CFile( CFileHandle::ref_type hExisting );
 		CFile( const char* lpFileName, unsigned long dwDesiredAccess, unsigned long dwShareMode, nsWin32::LPSECURITY_ATTRIBUTES lpSecurityAttributes, unsigned long dwCreationDisposition, unsigned long dwFlagsAndAttributes, void* hTemplateFile );
 		CFile( const wchar_t* lpFileName, unsigned long dwDesiredAccess, unsigned long dwShareMode, nsWin32::LPSECURITY_ATTRIBUTES lpSecurityAttributes, unsigned long dwCreationDisposition, unsigned long dwFlagsAndAttributes, void* hTemplateFile );

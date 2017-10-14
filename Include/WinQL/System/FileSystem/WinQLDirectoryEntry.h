@@ -1,6 +1,6 @@
-//WinQLFileSystem.h
+//WinQLDirectoryEntry.h
 
-// Copyright Querysoft Limited 2013, 2015
+// Copyright Querysoft Limited 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,8 +24,8 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-#ifndef WINQL_FILESYSTEM_H_3
-#define WINQL_FILESYSTEM_H_3
+#ifndef WINQL_FILESYSTEM_DIRECTORYENTRY_H_2
+#define WINQL_FILESYSTEM_DIRECTORYENTRY_H_2
 
 #include "CompilerQOR.h"
 
@@ -33,36 +33,26 @@
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-#include "WinQL/WinQL.h"
-#include "WinQL/CodeServices/WinQLPolicy.h"
-#include "WinQL/System/FileSystem/WinQLVolume.h"
-
-__QOR_DECLARE_REF(nsWin32, __WINQL, CFileSystem, CTRef);
+#include "WinQL/Definitions/IO.h"
+#include "WinQL/CodeServices/Handles/WinQLRAIISessionHandle.h"
+#include "WinQL/CodeServices/Text/WinString.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
-	//--------------------------------------------------------------------------------	
-	class __QOR_INTERFACE( __WINQL ) CFileSystem
+	//--------------------------------------------------------------------------------
+	class __QOR_INTERFACE(__WINQL) CDirectoryEntry
 	{
 	public:
 
-		__QOR_DECLARE_REF_TYPE(CFileSystem);
+		__QOR_DECLARE_OCLASS_ID(CDirectoryEntry);
 
-		CFileSystem();
-		CFileSystem( const CFileSystem& );
-		CFileSystem& operator = ( const CFileSystem& );
-		virtual ~CFileSystem();
-
-		nsCodeQOR::CRefProperty< CFileSystem, std::vector< CVolume::ref_type > > Volumes;
-
-	private:
-
-		std::vector< CVolume::ref_type > m_Volumes;
-
-		std::vector< CVolume::ref_type > GetVolumes(void);
+		CDirectoryEntry( /*CPath& path*/ );
+		CDirectoryEntry(const CDirectoryEntry&);
+		CDirectoryEntry& operator = (const CDirectoryEntry&);
+		virtual ~CDirectoryEntry();
 	};
 
 }//nsWin32
 
-#endif//WINQL_FILESYSTEM_H_3
+#endif//WINQL_FILESYSTEM_DIRECTORYENTRY_H_2

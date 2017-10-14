@@ -231,7 +231,7 @@ namespace nsWin32
 		wint_t fputwc( wchar_t c );
 		int fputws( const wchar_t* s );
 		int fwide( int mode );
-		int fwprintf( const wchar_t* format, va_list vargs );
+		int fwprintf( const wchar_t* format, ... );
 		int fwscanf( const wchar_t* format, va_list vargs );
 		wint_t getwc();
 		wint_t putwc( wchar_t c );
@@ -283,12 +283,11 @@ namespace nsWin32
 		wint_t _putwch_nolock( wchar_t ch );
 
 		void _openfile( const char* filename, const char* mode, int shflag, CStream* str );
-		errno_t _sopen_s( int* pfh, const char* path, int oflag, int shflag, int pmode );
-		errno_t _sopen_helper( const char* path, int oflag, int shflag, int pmode, int * pfh, int bSecure );
-		errno_t _sopen_nolock( int* punlock_flag, int* pfh, const char* path, int oflag, int shflag, int pmode, int bSecure );
+		errno_t _sopen_s( const char* path, int oflag, int shflag, int pmode );
+		errno_t _sopen_helper( const char* path, int oflag, int shflag, int pmode, int bSecure );
+		errno_t _sopen_nolock( int* punlock_flag, const char* path, int oflag, int shflag, int pmode, int bSecure );
 		bool __copy_path_to_wide_string( const char* path, wchar_t** outPath );
-		errno_t _wsopen_nolock( int* punlock_flag, int* pfh, const wchar_t* path, int oflag, int shflag, int pmode, int bSecure );
-		//CStreamDevice* __createFile( const wchar_t* path, unsigned long fileaccess, unsigned long fileshare, SECURITY_ATTRIBUTES* lpSecurityAttributes, unsigned long filecreate, unsigned long fileattrib, unsigned long fileflags );
+		errno_t _wsopen_nolock( int* punlock_flag, const wchar_t* path, int oflag, int shflag, int pmode, int bSecure );
 		CDeviceFile* CreateDeviceFile( const wchar_t* lpFileName, unsigned long& dwDesiredAccess, unsigned long dwShareMode, nsWin32::LPSECURITY_ATTRIBUTES lpSecurityAttributes, unsigned long dwCreationDisposition, unsigned long dwFlagsAndAttributes, void* hTemplateFile, int oFlag );
 		errno_t _chsize_s( int filedes, Cmp__int64 size );
 		errno_t _chsize_nolock( int filedes, Cmp__int64 size );
@@ -319,18 +318,6 @@ namespace nsWin32
 
 		int _flush( void );
 
-		//bool IsString( void );
-		//bool IsEOF( void );
-		//bool IsError( void );
-		//bool IsReadWrite( void );
-		//bool IsRead( void );
-
-
-		//bool IsMyBuffer( void );
-		//bool IsNoBuffer( void );
-		//bool IsYourBuffer( void );
-		//bool IsBigBuffer( void );
-		//bool IsAnyBuffer( void );
 		bool ParseMode( const char* szMode, int& iModeFlags, int& iStreamFlags );
 
 		int utf8_no_of_trailbytes(char c);

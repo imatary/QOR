@@ -31,50 +31,60 @@
 namespace nsWinQAPI
 {
 	//--------------------------------------------------------------------------------
-	BOOL CKernel32::DefineDosDevice( DWORD dwFlags, LPCTSTR lpDeviceName, LPCTSTR lpTargetPath )
+	BOOL CKernel32::DefineDosDevice(DWORD dwFlags, LPCTSTR lpDeviceName, LPCTSTR lpTargetPath)
 	{
-		_WINQ_SFCONTEXT( "CKernel32::DefineDosDevice" );
+		_WINQ_SFCONTEXT("CKernel32::DefineDosDevice");
 		CCheckReturn< BOOL, CBoolCheck< nsCodeQOR::CError::ERR_LVL_CONTINUE, GENERAL_API_ERROR > >::TType bResult;
-		bResult = ::DefineDosDevice( dwFlags, lpDeviceName, lpTargetPath );
+		bResult = ::DefineDosDevice(dwFlags, lpDeviceName, lpTargetPath);
 		return bResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	BOOL CKernel32::DeleteVolumeMountPoint( LPCTSTR lpszVolumeMountPoint )
+	BOOL CKernel32::DeleteVolumeMountPoint(LPCTSTR lpszVolumeMountPoint)
 	{
-		_WINQ_SFCONTEXT( "CKernel32::DeleteVolumeMountPoint" );
+		_WINQ_SFCONTEXT("CKernel32::DeleteVolumeMountPoint");
 		CCheckReturn< BOOL, CBoolCheck< nsCodeQOR::CError::ERR_LVL_CONTINUE, GENERAL_API_ERROR > >::TType bResult;
 #	if ( _WIN32_WINNT >= 0x0500 )
-		bResult = ::DeleteVolumeMountPoint( lpszVolumeMountPoint );
+		bResult = ::DeleteVolumeMountPoint(lpszVolumeMountPoint);
 #	else
-		__QCMP_UNREF( lpszVolumeMountPoint );
-		__WINQAPI_CONT_ERROR(( API_REQUIRES_VERSION, _T( "DeleteVolumeMountPoint" ), _T( "Windows 2000" ), 0 ));
+		__QCMP_UNREF(lpszVolumeMountPoint);
+		__WINQAPI_CONT_ERROR((API_REQUIRES_VERSION, _T("DeleteVolumeMountPoint"), _T("Windows 2000"), 0));
 #	endif
 		return bResult;
 	}
 
 	//--------------------------------------------------------------------------------
-	HANDLE CKernel32::FindFirstVolume( LPTSTR lpszVolumeName, DWORD cchBufferLength )
+	HANDLE CKernel32::FindFirstVolume(LPTSTR lpszVolumeName, DWORD cchBufferLength)
 	{
-		_WINQ_SFCONTEXT( "CKernel32::FindFirstVolume" );
+		_WINQ_SFCONTEXT("CKernel32::FindFirstVolume");
 		CCheckReturn< HANDLE, CHandleCheck< nsCodeQOR::CError::ERR_LVL_CONTINUE, GENERAL_API_ERROR > >::TType h;
 #	if ( _WIN32_WINNT >= 0x0500 )
-		h = ::FindFirstVolume( lpszVolumeName, cchBufferLength );
+		h = ::FindFirstVolume(lpszVolumeName, cchBufferLength);
 #	else
-		__QCMP_UNREF( cchBufferLength );
-		__QCMP_UNREF( lpszVolumeName );
-		__WINQAPI_CONT_ERROR(( API_REQUIRES_VERSION, _T( "FindFirstVolume" ), _T( "Windows 2000" ), 0 ));
+		__QCMP_UNREF(cchBufferLength);
+		__QCMP_UNREF(lpszVolumeName);
+		__WINQAPI_CONT_ERROR((API_REQUIRES_VERSION, _T("FindFirstVolume"), _T("Windows 2000"), 0));
 #	endif
 		return h;
 	}
 
 	//--------------------------------------------------------------------------------
-	HANDLE CKernel32::FindFirstVolumeMountPoint( LPTSTR lpszRootPathName, LPTSTR lpszVolumeMountPoint, DWORD cchBufferLength )
+	HANDLE CKernel32::FindFirstVolumeMountPoint(LPTSTR lpszRootPathName, LPTSTR lpszVolumeMountPoint, DWORD cchBufferLength)
 	{
-		_WINQ_SFCONTEXT( "CKernel32::FindFirstVolumeMountPoint" );
+		_WINQ_SFCONTEXT("CKernel32::FindFirstVolumeMountPoint");
 		CCheckReturn< HANDLE, CHandleCheck< nsCodeQOR::CError::ERR_LVL_CONTINUE, GENERAL_API_ERROR > >::TType h;
 #	if ( _WIN32_WINNT >= 0x0500 )
-		h = ::FindFirstVolumeMountPoint( lpszRootPathName, lpszVolumeMountPoint, cchBufferLength );
+		h = ::FindFirstVolumeMountPoint(lpszRootPathName, lpszVolumeMountPoint, cchBufferLength);
+		if (h == INVALID_HANDLE_VALUE)
+		{
+			DWORD dwError = CKernel32::GetLastError();
+			if (dwError != ERROR_NO_MORE_FILES)//An error other than 'there are no more mount points'
+			{
+				//Could be ACCESS_DENIED = 5 if you aren't running as administrator or ERROR_INVALID_NAME = 123 if you try this on a soft drive
+				//Either way the docs are poor and don't say why, when or what to do about it.
+				//__WINQAPI_CONT_ERROR((GENERAL_API_ERROR, _T("FindFirstVolumeMountPoint"), 0));
+			}
+		}
 #	else
 		__QCMP_UNREF( cchBufferLength );
 		__QCMP_UNREF( lpszVolumeMountPoint );

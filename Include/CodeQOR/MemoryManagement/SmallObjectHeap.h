@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//A heap manager optimised for many 'small' i.e. < 64K allocations
+//A heap manager optimized for many 'small' i.e. < 64K allocations
 
 //Only to be used from a single thread as no locking is performed.
 
@@ -37,12 +37,18 @@ Deallocation performance is typical 10 * that of the system allocator rising to
  ~16 * as the number of items increases.
 
  Allocation space efficiency is generally lower than the system heap. The larger the
- items stored the lower the efficiency. typicaly an SO Heap will be 125% to 150% of the
+ items stored the lower the efficiency. typically an SO Heap will be 125% to 150% of the
  system heap with identical allocations
 */
 
 #ifndef CODEQOR_SMALLOBJECTHEAP_H_2
 #define CODEQOR_SMALLOBJECTHEAP_H_2
+
+#include "CompilerQOR.h"
+
+#ifdef	__QCMP_OPTIMIZEINCLUDE
+#pragma	__QCMP_OPTIMIZEINCLUDE
+#endif//__QCMP_OPTIMIZEINCLUDE
 
 #include "CodeQOR/MemoryManagement/SmallObjectBucket.h"
 
@@ -112,7 +118,7 @@ namespace nsCodeQOR
 			}
 			else
 			{
-#ifdef _EXCEPTIONS
+#ifdef __QOR_CPP_EXCEPTIONS
 				throw "Small Object Heap, failure to get a bucket to allocate in.";
 #endif
 			}
@@ -188,7 +194,7 @@ namespace nsCodeQOR
 			}
 			else
 			{
-#ifdef _EXCEPTIONS
+#ifdef __QOR_CPP_EXCEPTIONS
 				throw( "Small Object Heap out of memory!" );
 #endif
 			}
@@ -225,7 +231,7 @@ namespace nsCodeQOR
 				}
 				else
 				{
-#ifdef _EXCEPTIONS
+#ifdef __QOR_CPP_EXCEPTIONS
 					throw( "Small Object Heap failed to find memory to free!" );
 #endif
 				}

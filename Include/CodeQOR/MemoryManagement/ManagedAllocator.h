@@ -29,7 +29,7 @@
 #ifndef CODEQOR_MEMMAN_MANAGEDALLOCATOR_H_2
 #define CODEQOR_MEMMAN_MANAGEDALLOCATOR_H_2
 
-#include "SystemQOR.h"
+#include "CompilerQOR.h"
 
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
@@ -47,7 +47,7 @@ namespace nsCodeQOR
 #	define tp( _TYPE_ ) nsCodeQOR::TPointer< _TYPE_ >
 #	define _tp( _TYPE_ ) typedef tp( _TYPE_ ) __QCMP_JOIN( tp_, _TYPE_ )
 
-//	e.g. _tp( CObject );// gives typedef nsCodeQOR::TPointer< CObject > tp_Object; creating a manager pointer to CObject type
+//	e.g. _tp( CObject );// gives typedef nsCodeQOR::TPointer< CObject > tp_CObject; creating a manager pointer to CObject type
 
 	__QOR_INTERFACE( __CODEQOR ) CFastHeap& FastHeap( void );
 	__QOR_INTERFACE( __CODEQOR ) CSmallObjectHeap& SmallObjectHeap( void );
@@ -80,6 +80,6 @@ namespace nsCodeQOR
 		FastHeap().Free< T >( pT, uiCount );
 	}
 
-}//namespace nsCodeQOR
+}//nsCodeQOR
 
 #endif//CODEQOR_MEMMAN_MANAGEDALLOCATOR_H_2

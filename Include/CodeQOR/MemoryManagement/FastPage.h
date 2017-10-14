@@ -31,6 +31,10 @@
 
 #include "CompilerQOR.h"
 
+#ifdef	__QCMP_OPTIMIZEINCLUDE
+#pragma	__QCMP_OPTIMIZEINCLUDE
+#endif//__QCMP_OPTIMIZEINCLUDE
+
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR
 {

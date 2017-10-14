@@ -30,6 +30,11 @@
 #define CODEQOR_FASTBUCKET_H_2
 
 #include "CompilerQOR.h"
+
+#ifdef	__QCMP_OPTIMIZEINCLUDE
+#pragma	__QCMP_OPTIMIZEINCLUDE
+#endif//__QCMP_OPTIMIZEINCLUDE
+
 #include "FastPage.h"
 
 //--------------------------------------------------------------------------------
@@ -70,6 +75,6 @@ namespace nsCodeQOR
 		Cmp_uint_ptr m_uiPages;
 	};
 
-}//namespace nsCodeQOR
+}//nsCodeQOR
 
 #endif//CODEQOR_FASTBUCKET_H_2

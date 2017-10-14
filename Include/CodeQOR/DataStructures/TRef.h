@@ -58,8 +58,10 @@ namespace nsCodeQOR
 		}
 
 		//--------------------------------------------------------------------------------
-		CTCSharedRef() : m_p( _new( T ) ), m_ulRefCount( 0 )
+		CTCSharedRef() : m_p( nullptr ), m_ulRefCount( 0 )
 		{			
+			T* pT = nsCodeQOR::mem_traits< T >::CTAllocator::BoxAllocate(this);
+			m_p = new (pT)T();
 		}
 
 		CTCSharedRef( const CTCSharedRef< T >& Src ) = delete;

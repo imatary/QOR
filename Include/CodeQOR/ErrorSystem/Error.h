@@ -58,7 +58,7 @@
 	nsCodeQOR::CError::CBaseErrorParams( _TRACE_TEXT ), &ErrorDomain, nsCodeQOR::CError::ERR_LVL_NOTE );
 
 //Integrate errors with exception handling
-#if _EXCEPTIONS
+#if __QOR_CPP_EXCEPTIONS
 #	define __QCS_PROTECT try
 
 #	define __QCS_ENDPROTECT						\

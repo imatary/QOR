@@ -29,6 +29,12 @@
 #ifndef CODEQOR_FASTHEAP_H_2
 #define CODEQOR_FASTHEAP_H_2
 
+#include "CompilerQOR.h"
+
+#ifdef	__QCMP_OPTIMIZEINCLUDE
+#pragma	__QCMP_OPTIMIZEINCLUDE
+#endif//__QCMP_OPTIMIZEINCLUDE
+
 #include "SystemQOR.h"
 #include <stdlib.h>
 #include "FastBucket.h"

@@ -80,6 +80,7 @@ namespace nsWin32
 			    {
 					// obtained a valid HANDLE from GetStdHandle
 					pStream->SetLowLevelFile( new CFile( CFileHandle( stdfh ) ) );
+					pStream->AddRef();
 
 					if( ( htype & 0xFF ) == FILE_TYPE_CHAR )
 					{
@@ -97,6 +98,7 @@ namespace nsWin32
 					between a failure in opening a file & a program run without a console.*/
 					pStream->SetLowLevelFlags( FOPEN | FTEXT | FDEV );
 					pStream->_file = _NO_CONSOLE_FILENO;
+					pStream->AddRef();
 				}
 				m_DescriptorStreamMap.insert( std::make_pair( fh, pStream ) );
 			}

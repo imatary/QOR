@@ -78,13 +78,14 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
-	unsigned long CDosDeviceHelper::Query( const TCHAR* lpDeviceName, CTStringRef strTargetPath )
+	unsigned long CDosDeviceHelper::Query( const TCHAR* lpDeviceName, CTString& strTargetPath )
 	{
 		_WINQ_FCONTEXT( "CDosDeviceHelper::Query" );
 		DWORD dwResult = 0;
 		__QOR_PROTECT
-		{
-			dwResult = CKernel32::QueryDosDevice( lpDeviceName, strTargetPath->GetBuffer(), strTargetPath->Allocation() );
+		{			
+			dwResult = CKernel32::QueryDosDevice( lpDeviceName, strTargetPath.GetBufferSetLength(MaxPath), MaxPath );
+			strTargetPath.ValidateBuffer(static_cast< unsigned short>( dwResult ));
 		}__QOR_ENDPROTECT
 		return dwResult;
 	}
@@ -156,12 +157,13 @@ namespace nsWin32
 		{
 			unsigned long ulDriveMap = GetDrives();
 			unsigned long ulDriveIterator = 0x00000001;
-			for( unsigned long ulDriveMatch = 0; ulDriveMatch < ( sizeof( unsigned long ) * 8 ); ulDriveMatch++, ulDriveIterator << 1 )
+			for( unsigned long ulDriveMatch = 0; ulDriveMatch < ( sizeof( unsigned long ) * 8 ); ulDriveMatch++ )
 			{
 				if( ( ulDriveMap & ulDriveIterator ) > 0 )
 				{
 					ulResult++;
 				}
+				ulDriveIterator = ulDriveIterator << 1;
 			}
 		}__QOR_ENDPROTECT
 		return ulResult;
@@ -174,7 +176,7 @@ namespace nsWin32
 		DWORD dwResult = 0;
 		__QOR_PROTECT
 		{
-			dwResult = CKernel32::GetLogicalDriveStrings( strBuffer->Allocation() - 1, strBuffer->GetBuffer() );
+			dwResult = CKernel32::GetLogicalDriveStrings( strBuffer->Allocation() == 0 ? 0 : strBuffer->Allocation() - 1, strBuffer->GetBuffer() );
 			if( dwResult == 0 )
 			{
 				strBuffer->ReleaseBuffer();
@@ -301,127 +303,6 @@ namespace nsWin32
 	}
 
 
-	//--Volume Helper-----------------------------------------------------------------
-
-	__QOR_IMPLEMENT_OCLASS_LUID( CVolumeHelper );
-
-	//--------------------------------------------------------------------------------
-	CVolumeHelper::CVolumeHelper()
-	{
-		_WINQ_FCONTEXT( "CVolumeHelper::CVolumeHelper" );
-	}
-
-	//--------------------------------------------------------------------------------
-	CVolumeHelper::CVolumeHelper( const CVolumeHelper& src )
-	{
-		_WINQ_FCONTEXT( "CVolumeHelper::CVolumeHelper" );
-		*this = src;
-	}
-
-	//--------------------------------------------------------------------------------
-	CVolumeHelper& CVolumeHelper::operator = ( const CVolumeHelper& src )
-	{
-		_WINQ_FCONTEXT( "CVolumeHelper::CVolumeHelper" );
-		if( &src != this )
-		{
-		}
-		return *this;
-	}
-
-	//--------------------------------------------------------------------------------
-	CVolumeHelper::~CVolumeHelper()
-	{
-		_WINQ_FCONTEXT( "CVolumeHelper::~CVolumeHelper" );
-	}
-
-	//--------------------------------------------------------------------------------
-	bool CVolumeHelper::SetLabel( const TCHAR* lpRootPathName, const TCHAR* lpVolumeName )
-	{
-		_WINQ_FCONTEXT( "CVolumeHelper::SetLabel" );
-		bool bResult = false;
-		__QOR_PROTECT
-		{
-			bResult = CKernel32::SetVolumeLabel( lpRootPathName, lpVolumeName ) ? true : false;
-		}__QOR_ENDPROTECT
-		return bResult;
-	}
-
-	//--------------------------------------------------------------------------------
-	bool CVolumeHelper::GetInformation( const TCHAR* lpRootPathName, CVolumeHelper::VolumeInformation& VolumeInfo )
-	{
-		_WINQ_FCONTEXT( "CVolumeHelper::GetInformation" );
-		bool bResult = false;
-		__QOR_PROTECT
-		{
-			bResult = CKernel32::GetVolumeInformation(
-				lpRootPathName, 
-				VolumeInfo.strName.GetBuffer(), 
-				VolumeInfo.strName.Allocation(),
-				&VolumeInfo.ulSerialNumber,
-				&VolumeInfo.ulMaximumComponentLength,
-				&VolumeInfo.ulFileSystemFlags, 
-				VolumeInfo.strFileSystemName.GetBuffer(), 
-				VolumeInfo.strFileSystemName.Allocation() ) ? true : false;
-			VolumeInfo.strName.ReleaseBuffer();
-			VolumeInfo.strFileSystemName.ReleaseBuffer();
-		}__QOR_ENDPROTECT
-		return bResult;
-	}
-
-	//--------------------------------------------------------------------------------
-	bool CVolumeHelper::GetInformationByHandle( CFile& File, ByHandleVolumeInformation& VolumeInfo )
-	{
-		_WINQ_FCONTEXT( "CVolumeHelper::GetInformationByHandle" );
-		bool bResult = false;
-		__QOR_PROTECT
-		{
-			bResult = CKernel32::GetVolumeInformationByHandleW( File.Handle()->Use(),
-				VolumeInfo.strName.GetBuffer(), VolumeInfo.strName.Allocation(),
-				&VolumeInfo.ulSerialNumber, &VolumeInfo.ulMaximumComponentLength, &VolumeInfo.ulFileSystemFlags, 
-				VolumeInfo.strFileSystemName.GetBuffer(), VolumeInfo.strFileSystemName.Allocation() ) ? true : false;
-			VolumeInfo.strName.ReleaseBuffer();
-			VolumeInfo.strFileSystemName.ReleaseBuffer();
-		}__QOR_ENDPROTECT
-		return bResult;
-	}
-
-	//--------------------------------------------------------------------------------
-	bool CVolumeHelper::GetInformationByHandle( CFile& File, wchar_t* lpVolumeNameBuffer, 
-		unsigned long nVolumeNameSize, unsigned long* lpVolumeSerialNumber, 
-		unsigned long* lpMaximumComponentLength, unsigned long* lpFileSystemFlags, wchar_t* lpFileSystemNameBuffer, unsigned long nFileSystemNameSize )
-	{
-		_WINQ_FCONTEXT( "CVolumeHelper::GetInformationByHandle" );
-		bool bResult = false;
-		__QOR_PROTECT
-		{
-			bResult = CKernel32::GetVolumeInformationByHandleW( File.Handle()->Use(), lpVolumeNameBuffer, nVolumeNameSize, lpVolumeSerialNumber, lpMaximumComponentLength, lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize ) ? true : false;
-		}__QOR_ENDPROTECT
-		return bResult;
-	}
-
-	//--------------------------------------------------------------------------------
-	bool CVolumeHelper::GetPathName( const TCHAR* lpszFileName, TCHAR* lpszVolumePathName, unsigned long cchBufferLength )
-	{
-		_WINQ_FCONTEXT( "CVolumeHelper::GetPathName" );
-		bool bResult = false;
-		__QOR_PROTECT
-		{
-			bResult = CKernel32::GetVolumePathName( lpszFileName, lpszVolumePathName, cchBufferLength ) ? true : false;
-		}__QOR_ENDPROTECT
-		return bResult;
-	}
-
-	//--------------------------------------------------------------------------------
-	bool CVolumeHelper::GetPathNamesForName( const TCHAR* lpszVolumeName, TCHAR* lpszVolumePathNames, unsigned long cchBufferLength, unsigned long* lpcchReturnLength )
-	{
-		_WINQ_FCONTEXT( "CVolumeHelper::GetPathNamesForName" );
-		bool bResult = false;
-		__QOR_PROTECT
-		{
-			bResult = CKernel32::GetVolumePathNamesForVolumeName( lpszVolumeName, lpszVolumePathNames, cchBufferLength, lpcchReturnLength ) ? true : false;
-		}__QOR_ENDPROTECT
-		return bResult;
-	}
 
 
 	//--Find Volume-------------------------------------------------------------------
@@ -431,12 +312,12 @@ namespace nsWin32
 	__QCMP_WARNING_PUSH
 	__QCMP_WARNING_DISABLE( __QCMP_WARN_THIS_USED_IN_BASE_INIT_LIST, "Safe usage: this stored in member's base for later usage." )
 	//--------------------------------------------------------------------------------
-	CFindVolume::CFindVolume( CTStringRef strVolume ) : m_Handle( this, 0 )
-	,	m_strVolume( strVolume )
+	CFindVolume::CFindVolume() : m_Handle( this, 0 )
+	,	m_strVolume()
 	{
 		_WINQ_FCONTEXT( "CFindVolume::CFindVolume" );
-		m_Handle = CKernel32::FindFirstVolume( m_strVolume->GetBuffer(), m_strVolume->Allocation() );
-		m_strVolume->ReleaseBuffer();
+		m_Handle = CKernel32::FindFirstVolume(m_strVolume.GetBufferSetLength(MaxPath), MaxPath );
+		m_strVolume.ReleaseBuffer();
 	}
 	__QCMP_WARNING_POP
 
@@ -458,10 +339,16 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::FindNextVolume( m_Handle.Use(), m_strVolume->GetBuffer(), m_strVolume->Allocation() ) ? true : false;
-			m_strVolume->ReleaseBuffer();
+			bResult = CKernel32::FindNextVolume( m_Handle.Use(), m_strVolume.GetBufferSetLength( MaxPath ), MaxPath ) ? true : false;
+			m_strVolume.ReleaseBuffer();
 		}__QOR_ENDPROTECT
 		return bResult;
+	}
+
+	//--------------------------------------------------------------------------------
+	CVolume::ref_type CFindVolume::Volume()
+	{
+		return new_shared_ref<CVolume>(m_strVolume.Ref());
 	}
 
 
@@ -472,14 +359,14 @@ namespace nsWin32
 	__QCMP_WARNING_PUSH
 	__QCMP_WARNING_DISABLE( __QCMP_WARN_THIS_USED_IN_BASE_INIT_LIST, "Safe usage: this stored in member's base for later usage." )
 	//--------------------------------------------------------------------------------
-	CFindMountPoint::CFindMountPoint( const CTString& strRootPathName, CTStringRef strVolumeMountPoint ) : m_strVolumeMountPoint( strVolumeMountPoint )
-	,	m_Handle( this, 0 )
+	CFindMountPoint::CFindMountPoint( const CTString& strRootPathName ) : m_Handle( this, 0 )
 	{
 		_WINQ_FCONTEXT( "CFindMountPoint::CFindMountPoint" );
 		__QOR_PROTECT
 		{
-			m_Handle = CKernel32::FindFirstVolumeMountPoint( const_cast< LPTSTR >( strRootPathName.operator const TCHAR *() ), m_strVolumeMountPoint->GetBuffer(), m_strVolumeMountPoint->Allocation() );
-			m_strVolumeMountPoint->ReleaseBuffer();
+			m_Handle = CKernel32::FindFirstVolumeMountPoint( const_cast< LPTSTR >( strRootPathName.operator const TCHAR *() ), m_strVolumeMountPoint.GetBufferSetLength( MaxPath * 2 ), MaxPath * 2 );
+			m_ulStatus = CKernel32::GetLastError();
+			m_strVolumeMountPoint.ReleaseBuffer();
 		}__QOR_ENDPROTECT
 	}
 	__QCMP_WARNING_POP
@@ -501,10 +388,23 @@ namespace nsWin32
 		bool bResult = false;
 		__QOR_PROTECT
 		{
-			bResult = CKernel32::FindNextVolumeMountPoint( m_Handle.Use(), m_strVolumeMountPoint->GetBuffer(), m_strVolumeMountPoint->Allocation() ) ? true : false;
-			m_strVolumeMountPoint->ReleaseBuffer();
+			bResult = CKernel32::FindNextVolumeMountPoint( m_Handle.Use(), m_strVolumeMountPoint.GetBufferSetLength( MaxPath * 2), MaxPath * 2 ) ? true : false;
+			m_ulStatus = CKernel32::GetLastError();
+			m_strVolumeMountPoint.ReleaseBuffer();
 		}__QOR_ENDPROTECT
 		return bResult;
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CFindMountPoint::IsValid()
+	{
+		return m_ulStatus == 0 ? true : false;
+	}
+
+	//--------------------------------------------------------------------------------
+	CTString CFindMountPoint::MountPoint()
+	{
+		return m_strVolumeMountPoint;
 	}
 
 }//nsWin32

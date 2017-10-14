@@ -25,6 +25,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include "WinQL/System/FileSystem/WinQLFileSystem.h"
+#include "WinQL/System/FileSystem/WinQLVolumeManagement.h"
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -33,6 +34,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CFileSystem::CFileSystem()
 	{
+		Volumes.Attach(this, &CFileSystem::GetVolumes, nullptr);
 	}
 
 	//--------------------------------------------------------------------------------
@@ -46,6 +48,7 @@ namespace nsWin32
 	{
 		if( &src != this )
 		{
+			m_Volumes = src.m_Volumes;
 		}
 
 		return *this;
@@ -54,6 +57,22 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CFileSystem::~CFileSystem()
 	{
+		//m_Volumes.erase(m_Volumes.begin(), m_Volumes.end());
+	}
+
+	//--------------------------------------------------------------------------------
+	std::vector< CVolume::ref_type > CFileSystem::GetVolumes()
+	{
+		if (m_Volumes.size() == 0)
+		{
+			CFindVolume FindVolume;
+			do
+			{
+				m_Volumes.push_back(FindVolume.Volume());
+			} while (FindVolume.Next());
+
+		}
+		return m_Volumes;
 	}
 
 }//nsWin32

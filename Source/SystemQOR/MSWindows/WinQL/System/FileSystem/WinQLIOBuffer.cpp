@@ -85,7 +85,7 @@ namespace nsWin32
 	void CIOBuffer::OpenBuffer( int FileNumber, int Flags )
 	{
 		ResetBuffer();
-		_file = FileNumber;
+		SetFileNumber(FileNumber);
 		_flag = Flags;
 	}
 

@@ -1,6 +1,6 @@
-//Application.h
+//Memory.h
 
-// Copyright Querysoft Limited 2013, 2016
+// Copyright Querysoft Limited 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Abstract base for applications
+//Memory Manager
 
 #include "CompilerQOR.h"
 
@@ -32,55 +32,44 @@
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-#ifndef APPOCRITAQOR_APPLICATION_H_3
-#define APPOCRITAQOR_APPLICATION_H_3
+#ifndef APPOCRITAQOR_MEMORY_H_3
+#define APPOCRITAQOR_MEMORY_H_3
 
-#include "AppocritaQOR/Controller.h"
-#include "AppocritaQOR/Role.h"
-#include "AppocritaQOR/Workflow.h"
-#include "AppocritaQOR/IApplication.h"
-#include "CodeQOR/Modules/ProcessBase.h"
+#include "CodeQOR/Traits/ReferenceTraits.h"
 
 //------------------------------------------------------------------------------
 namespace nsQOR
 {
 	//------------------------------------------------------------------------------
-	class __QOR_INTERFACE( __APPOCRITA ) CApplication : public IApplication
+	class __QOR_INTERFACE(__APPOCRITA) IMemoryManager
 	{
 	public:
 
-		CApplication();
-		CApplication( CRole::ref_type Role );
-		CApplication( const nsCodeQOR::mxGUID* pRoleID );
-		virtual ~CApplication();
+		__QOR_DECLARE_OCLASS_ID(IMemoryManager);
 
-		virtual void SetRole( IRole::ref_type Role );
-		virtual IRole::ref_type GetRole( void );
-		virtual void SetWorkflow( IWorkflow::ref_type );
-		virtual IWorkflow::ref_type GetWorkflow( void );
-		virtual void SetOuter( IApplication::ref_type );
-		virtual void Setup( void );
-		virtual void Shutdown( void );
-		virtual int Run( void );
-		virtual int Run( IWorkflow::ref_type );
-		virtual void EnqueueEvent( IEvent::ref_type pEvent );
-		virtual void Stop( void );
-		virtual void OnIdle(void);
+		__QOR_IMPL_REF(IMemoryManager);
 
-		template< class TSubSystem >
-		void AddSubSystem( const TSubSystem& SubSystem )
-		{
-			GetRole()->AddSubSystem( *TSubSystem::ClassID(), SubSystem.Ref() );
-		}
-		
+		IMemoryManager() {}
+		virtual ~IMemoryManager() {};
+
+	};
+
+	//------------------------------------------------------------------------------
+	class __QOR_INTERFACE(__APPOCRITA) CMemory //: public IMemory
+	{
+	public:
+
+		CMemory();
+		virtual ~CMemory();
+
+		virtual void Setup(void);
+		virtual void Shutdown(void);
+
 	private:
 
-		IApplication::ref_type m_Impl;
 	};
 
 }//nsQOR
 
-__QOR_INTERFACE( __APPOCRITA ) nsQOR::CApplication::ref_type TheApplication( void );
-
-#endif//APPOCRITAQOR_APPLICATION_H_3
+#endif//APPOCRITAQOR_MEMORY_H_3
 

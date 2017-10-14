@@ -75,7 +75,7 @@ namespace nsWin32
 				}
 				else
 				{
-					//TODO: Handle wierdness
+					//TODO: Handle weirdness
 				}
 				ulEnumIndex++;
 			}

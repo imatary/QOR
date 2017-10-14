@@ -434,12 +434,13 @@ __QCMP_WARNING_POP
 				
 			do
 			{
-				CDisplayDevice::ref_type DisplayDevice = new_shared_ref<CDisplayDevice>();
-				bResult = m_Win32DisplayHelper.EnumDevices( 0, iDevNum, &(DisplayDevice()), CDisplayHelper::_EDD_GET_DEVICE_INTERFACE_NAME );
+				DISPLAY_DEVICE tmpDisplayDevice;
+				memset(&tmpDisplayDevice, 0, sizeof(DISPLAY_DEVICE));
+				tmpDisplayDevice.cb = sizeof(DISPLAY_DEVICE);				
+				bResult = m_Win32DisplayHelper.EnumDevices( 0, iDevNum, &tmpDisplayDevice, CDisplayHelper::_EDD_GET_DEVICE_INTERFACE_NAME );
 				if( bResult == true )
 				{
-					DisplayDevice().m_bInitialised = true;
-					m_Devices.push_back( DisplayDevice );
+					m_Devices.push_back(new_shared_ref<CDisplayDevice>(tmpDisplayDevice));
 				}
 				iDevNum++;
 			}while( bResult == true );
@@ -448,8 +449,7 @@ __QCMP_WARNING_POP
 		else
 		{
 #		else
-			CDisplayDevice::ref_type DisplayDevice = new_shared_ref<CDisplayDevice>();
-			m_Devices.push_back( DisplayDevice );
+			m_Devices.push_back(new_shared_ref<CDisplayDevice>());
 #		endif
 #		if( WINVER >= 0x0500 )
 		}
@@ -469,7 +469,23 @@ __QCMP_WARNING_POP
 	{				
 		_WINQ_FCONTEXT( "CDisplayDevice::CDisplayDevice" );
 		cb = sizeof( nsWin32::DISPLAY_DEVICE );
+		DeviceID[0] = 0;
+		DeviceKey[0] = 0;
+		DeviceName[0] = 0;
+		DeviceString[0] = 0;
 		StateFlags = 0;
+	}
+
+	//--------------------------------------------------------------------------------
+	CDisplayDevice::CDisplayDevice( const DISPLAY_DEVICE& src) : m_bInitialised(true)
+	{
+		_WINQ_FCONTEXT("CDisplayDevice::CDisplayDevice");
+		cb = src.cb;
+		memcpy(DeviceID, src.DeviceID, sizeof(TCHAR) * 128);
+		memcpy(DeviceKey, src.DeviceKey, sizeof(TCHAR) * 128);
+		memcpy(DeviceName, src.DeviceName, sizeof(TCHAR) * 32);
+		memcpy(DeviceString, src.DeviceString, sizeof(TCHAR) * 128);
+		StateFlags = src.StateFlags;
 	}
 
 	//--------------------------------------------------------------------------------

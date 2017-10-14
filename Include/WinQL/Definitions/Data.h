@@ -3124,6 +3124,9 @@ __QCMP_WARNING_POP
 	} D2D_MATRIX_3X2_F;
 
 	//--------------------------------------------------------------------------------
+	__QCMP_WARNING_PUSH
+	__QCMP_WARNING_DISABLE(__QCMP_WARN_NAMELESS_STRUCTUNION, "Deliberate use of Microsoft extension")
+
 	typedef struct _D3DMATRIX 
 	{
 		union 
@@ -3139,6 +3142,8 @@ __QCMP_WARNING_POP
 			float m[4][4];
 		};
 	} D3DMATRIX;
+
+	__QCMP_WARNING_POP
 
 	//--------------------------------------------------------------------------------
 	typedef struct D2D_RECT_F

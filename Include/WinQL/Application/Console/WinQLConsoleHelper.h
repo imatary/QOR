@@ -113,13 +113,13 @@ namespace nsWin32
 		unsigned long GetTitle(CTString& strConsoleTitle);
 		COSWindow::refType GetWindow(void);
 		bool GetNumberOfMouseButtons(unsigned long& NumberOfMouseButtons);
-		CFileHandle GetStdHandle(unsigned long nStdHandle);
+		CStdHandle GetStdHandle(unsigned long nStdHandle);
 		bool SetCP(const CCodePage& CodePage);
 		bool SetCtrlHandler(CtrlHandlerCallback HandlerRoutine, bool Add);
 		bool SetHistoryInfo(const ConsoleHistoryInfo& ConsoleHistoryInfo);
 		bool SetOutputCP(const CCodePage& CodePage);
 		bool SetTitle(const TCHAR* lpConsoleTitle);
-		bool SetStdHandle(unsigned long nStdHandle, CFileHandle& hHandle);
+		bool SetStdHandle(unsigned long nStdHandle, CStdHandle& hHandle);
 
 	};
 

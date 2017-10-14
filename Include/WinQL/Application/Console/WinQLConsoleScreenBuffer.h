@@ -206,12 +206,12 @@ namespace nsWin32
 
 		__QOR_DECLARE_OCLASS_ID( CConsoleScreenBuffer );
 
-		CConsoleScreenBuffer( const CFileHandle& InputHandle, const CFileHandle& OutputHandle );
+		CConsoleScreenBuffer( const CStdHandle& InputHandle, const CStdHandle& OutputHandle );
 		CConsoleScreenBuffer( unsigned long dwDesiredAccess, unsigned long dwShareMode, const SECURITY_ATTRIBUTES* lpSecurityAttributes );
 		~CConsoleScreenBuffer();
 
-		void SetInputHandle( const CFileHandle& InputHandle );
-		void SetOutputHandle( const CFileHandle& OutputHandle );
+		void SetInputHandle( const CStdHandle& InputHandle );
+		void SetOutputHandle( const CStdHandle& OutputHandle );
 		bool FillOutputAttribute( unsigned short wAttribute, unsigned long nLength, Coord dwWriteCoord, unsigned long* lpNumberOfAttrsWritten );
 		bool FillOutputCharacter( TCHAR cCharacter, unsigned long nLength, Coord dwWriteCoord, unsigned long* lpNumberOfCharsWritten );
 		bool FlushInputBuffer( void );
@@ -254,8 +254,8 @@ namespace nsWin32
 	private:
 
 		bool m_bDefault;
-		CFileHandle m_hOutput;
-		CFileHandle m_hInput;
+		CStdHandle m_hOutput;
+		CStdHandle m_hInput;
 
 		CConsoleScreenBuffer();
 		CConsoleScreenBuffer( const CConsoleScreenBuffer& );

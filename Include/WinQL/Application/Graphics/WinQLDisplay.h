@@ -135,11 +135,12 @@ namespace nsWin32
 		__QOR_DECLARE_REF_TYPE(CDisplayDevice);
 
 		CDisplayDevice();
+		CDisplayDevice(const DISPLAY_DEVICE& src);
 		CDisplayDevice( const CDisplayDevice& src );
 		CDisplayDevice(CDisplayDevice&& move);
 		CDisplayDevice& operator=(const CDisplayDevice& Src);
 		CDisplayDevice& operator=(CDisplayDevice&& move);
-		~CDisplayDevice();
+		virtual ~CDisplayDevice();
 				
 		bool EnumSettings(unsigned long iModeNum, nsWin32::LPDEVMODE lpDevMode, unsigned long dwFlags) const;
 		long ChangeSettings(nsWin32::LPDEVMODE lpDevMode, COSWindow::refType Window, unsigned long dwflags, void* lParam) const;

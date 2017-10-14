@@ -108,16 +108,16 @@ namespace nsWin32
 		//Comms/IPC
 		nsCodeQOR::CSTMember< CLocalAtomTable > LocalAtomTable;
 		
+		//CResourceManager::refType Resources( void );
+		//CUser::ref_type User( void );
 
 		//CLocale::refType Locale( void );		
 		//CErrorSystem::refType ErrorSystem( void );
-		//CMemoryManager::refType Memory( void );
-		CResourceManager::refType Resources( void );
+		//CMemoryManager::ref_type Memory( void );		
 		//CThreadManager::refType Threads( void );
 		//CTimerManager::refType Timers( void );
 		//CModuleManager::refType Modules( void );
-		//CSecurityManager::refType Security( void );
-		CUser::ref_type User( void );
+		//CSecurityManager::refType Security( void );		
 		//CGUI::refType GUI( void );		
 
 		static ref_type TheWin32Application( void );

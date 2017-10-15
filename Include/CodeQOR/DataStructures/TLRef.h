@@ -191,11 +191,7 @@ namespace nsCodeQOR
 		template< class TDerived >
 		CTLRef< TDerived > AsRef(void)
 		{
-			if (dynamic_cast<TDerived*>(m_p) != nullptr)
-			{
-				return CTLRef< TDerived >(m_p);
-			}
-			return CTLRef< TDerived >(nullptr);
+			return CTLRef< TDerived >((dynamic_cast<TDerived*>(m_p)));
 		}
 
 		//--------------------------------------------------------------------------------

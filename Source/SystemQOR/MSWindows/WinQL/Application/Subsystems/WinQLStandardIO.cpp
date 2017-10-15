@@ -48,7 +48,7 @@ namespace nsWin32
 	__QOR_IMPLEMENT_EXTERNAL_FACTORY( CStandardIO, 0x261fc4e5, 0xad60, 0x4b8a, 0xb8, 0x4a, 0xd5, 0xa2, 0x3, 0x2e, 0xaa, 0x84 );
 
 	//--------------------------------------------------------------------------------
-	CStandardIO::CStandardIO() : m_uiNextStream( 0 ), m_uiInitialStreams( 20 ), m_uiMaxStreams( 512 ), m_bExitFlag( false ), m_umaskval( 0 ), m_fmode( 0 )
+	CStandardIO::CStandardIO() : m_uiNextStream( 3 ), m_uiInitialStreams( 20 ), m_uiMaxStreams( 512 ), m_bExitFlag( false ), m_umaskval( 0 ), m_fmode( 0 )
 	{
 		Initialize( CProcessHelper::StartupInfo() );
 	}
@@ -130,7 +130,7 @@ namespace nsWin32
 				if( ( ( stdfh = (intptr_t)GetStdHandle( stdhndl( fh ) ) ) != (intptr_t)INVALID_HANDLE_VALUE ) && ( stdfh != ( (intptr_t)NULL ) ) && ( ( htype = GetFileType( (HANDLE)stdfh ) ) != FILE_TYPE_UNKNOWN ) )
 				{
 					// obtained a valid HANDLE from GetStdHandle
-					CFileHandle handle( stdfh );
+					CFileHandle::ref_type handle = new_shared_ref<CFileHandle>( stdfh );
 					pStream->SetLowLevelFile( new CFile( handle ) );
 
 					if( ( htype & 0xFF ) == FILE_TYPE_CHAR )

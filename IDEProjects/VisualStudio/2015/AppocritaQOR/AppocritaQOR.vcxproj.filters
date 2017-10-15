@@ -17,6 +17,9 @@
     <Filter Include="Source Files\Interfaces">
       <UniqueIdentifier>{a2e01a64-5db8-4961-a4b0-270c84ffd95c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Application">
+      <UniqueIdentifier>{c2b2a7f0-6edf-4f03-ac22-a4a9fa7d0ab5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\AppocritaQOR\AppocritaQOR.cpp">
@@ -137,6 +140,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\SubSystems\Networking.h">
       <Filter>Source Files\SubSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Application\Memory.h">
+      <Filter>Source Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Application\HostProcess.h">
+      <Filter>Source Files\Application</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

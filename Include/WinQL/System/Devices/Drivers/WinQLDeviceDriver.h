@@ -49,7 +49,7 @@ namespace nsWin32
 	public:
 
 		__QOR_DECLARE_REF_TYPE(CDeviceDriver);
-		__QOR_DECLARE_OCLASS_ID( CDeviceDriver );
+		__QOR_DECLARE_OCLASS_ID(CDeviceDriver);
 
 		CDeviceDriver();
 		virtual ~CDeviceDriver();

@@ -71,6 +71,26 @@ namespace nsWin32
 
 	};
 
+	//--------------------------------------------------------------------------------
+	class __QOR_INTERFACE(__WINQL) CStdHandle : public CDeviceHandle
+	{
+		QOR_PP_WINQL_THREAD_ATTACHED;
+
+	public:
+
+		__QOR_DECLARE_REF_TYPE(CStdHandle);
+		__QOR_DECLARE_OCLASS_ID(CStdHandle);
+
+		CStdHandle(void* h);
+		CStdHandle(unsigned long);
+		CStdHandle(const CStdHandle& src);
+		CStdHandle(CStdHandle&& move);
+		CStdHandle& operator = (const CStdHandle& src);
+		CStdHandle& operator = (CStdHandle&& move);
+		virtual ~CStdHandle();
+
+	};
+
 }//nsWin32
 
 #endif//WINQL_DEVICEHANDLE_H_1

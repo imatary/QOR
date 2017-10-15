@@ -137,7 +137,7 @@ namespace nsCodeQOR
 		}
 		else
 		{
-#if _EXCEPTIONS
+#if __QOR_CPP_EXCEPTIONS
 			throw( this );
 #else
             abort();

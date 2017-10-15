@@ -584,6 +584,7 @@
 					(WinQLIOStream)\
 					(WinQLStream)\
 					(WinQLStreamFormatter)\
+					(WinQLVolume)\
 					(WinQLVolumeManagement)
 #	include "BuildQOR/BuildGroup.pph"
 

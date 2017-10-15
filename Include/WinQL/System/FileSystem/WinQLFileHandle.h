@@ -41,8 +41,6 @@
 namespace nsWin32
 {
 	typedef CDeviceHandle CFileHandle;
-	/*
-	*/
 }//nsWin32
 
 #endif//WINQL_FILEHANDLE_H_3

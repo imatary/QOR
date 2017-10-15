@@ -465,9 +465,17 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CFile::CFile(CFileHandle& hExisting) : CDeviceFile(hExisting)
+	{
+		_WINQ_FCONTEXT("CFile::CFile");
+		m_Handle().Attach(this);
+	}
+
+	//--------------------------------------------------------------------------------
 	CFile::CFile( CFileHandle::ref_type hExisting ) : CDeviceFile( hExisting )
 	{
 		_WINQ_FCONTEXT( "CFile::CFile" );
+		m_Handle().Attach(this);
 	}
 
 	//--------------------------------------------------------------------------------

@@ -30,13 +30,15 @@
 #ifndef CODEQOR_MEMMAN_SMALLOBJECTBUCKET_H_2
 #define CODEQOR_MEMMAN_SMALLOBJECTBUCKET_H_2
 
-#include "SmallObjectPage.h"
-#include "CodeQOR/DataStructures/TMap.h"
-#include "CodeQOR/DataStructures/TRangePair.h"
+#include "CompilerQOR.h"
 
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
+
+#include "SmallObjectPage.h"
+#include "CodeQOR/DataStructures/TMap.h"
+#include "CodeQOR/DataStructures/TRangePair.h"
 
 //--------------------------------------------------------------------------------
 namespace nsCodeQOR

@@ -108,7 +108,7 @@ namespace nsWin32
 	}
 
 	//Workflow integration
-	//If the application uses a Wrokflow it is integrated here and processes all application events
+	//If the application uses a Workflow it is integrated here and processes all application events
 	//--------------------------------------------------------------------------------
 	void CWin32Application::SetWorkflow( nsQOR::IWorkflow::ref_type pWorkflow )
 	{

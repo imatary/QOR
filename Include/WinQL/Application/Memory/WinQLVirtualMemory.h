@@ -27,6 +27,8 @@
 #ifndef WINQL_VIRTUALMEM_H_2
 #define WINQL_VIRTUALMEM_H_2
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE

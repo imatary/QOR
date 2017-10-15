@@ -33,6 +33,7 @@
 #include "WinQL/Application/SubSystems/WinQLTerminal.h"
 #include "WinQL/Application/Comms/IPC/Pipe/WinQLPipe.h"
 #include "WinQL/System/FileSystem/WinQLStream.h"
+#include "WinQL/System/FileSystem/WinQLStreamFormatter.h"
 #include "WinQAPI/Kernel32.h"
 
 //--------------------------------------------------------------------------------
@@ -68,7 +69,7 @@ namespace nsWin32
 	void* CStream::_stdbuf[ 2 ] = { NULL, NULL };
 
 	//------------------------------------------------------------------------------
-	CStream::CStream()
+	CStream::CStream() : CIOStream()
 	{
 		Reset();
 	}
@@ -93,7 +94,7 @@ namespace nsWin32
 
 	//------------------------------------------------------------------------------
 	//fopen constructor
-	CStream::CStream( const char* filename, const char* mode )
+	CStream::CStream( const char* filename, const char* mode ) : CIOStream()
 	{
 		Reset();
 
@@ -110,6 +111,7 @@ namespace nsWin32
 	//------------------------------------------------------------------------------
 	CStream::~CStream()
 	{
+		fclose();
 	}
 
 	//------------------------------------------------------------------------------
@@ -160,7 +162,13 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	CStream* CStream::fdopen( int, const char* )
+	CStream* CStream::fdopen( int fd, const char* mode )
+	{
+		return 0;//TODO:
+	}
+
+	//------------------------------------------------------------------------------
+	CStream* CStream::_fdopen(int fd, const char* mode)
 	{
 		return 0;//TODO:
 	}
@@ -422,7 +430,7 @@ namespace nsWin32
 		int streamflag = _commode;
 		//int commodeset = 0;
 		//int scanset = 0;
-		int filedes;
+		//int filedes = -2;
 		//bool encodingFlag = false;
 
 		assert( filename != NULL );
@@ -437,35 +445,27 @@ namespace nsWin32
 
 		// Try to open the file.  Note that if neither 't' nor 'b' is specified, _sopen will use the default.
 
-		if( _sopen_s( &filedes, filename, modeflag, shflag, _S_IREAD | _S_IWRITE ) != 0 )
+		if( _sopen_s( filename, modeflag, shflag, _S_IREAD | _S_IWRITE ) != 0 )
 		{
 			return;
 		}
 
 		// Init pointers
-		CIOStream::OpenBuffer( filedes, streamflag );
+		CIOStream::OpenBuffer( GetFileNumber(), streamflag );
 	}
 
 	//------------------------------------------------------------------------------
-	errno_t CStream::_sopen_s( int* pfh, const char* path, int oflag, int shflag, int pmode )
+	errno_t CStream::_sopen_s( const char* path, int oflag, int shflag, int pmode )
 	{
 		// Last parameter passed as 1 because we want to validate pmode from the secure open_s
-		return _sopen_helper( path, oflag, shflag, pmode, pfh, 1 );
+		return _sopen_helper( path, oflag, shflag, pmode, 1 );
 	}
 
 	//------------------------------------------------------------------------------
-	errno_t CStream::_sopen_helper( const char* path, int oflag, int shflag, int pmode, int * pfh, int bSecure )
+	errno_t CStream::_sopen_helper( const char* path, int oflag, int shflag, int pmode, int bSecure )
 	{
 		errno_t retval = 0;
 		int unlock_flag = 0;
-
-		if( pfh == NULL )
-		{
-			errno = EINVAL;
-			return EINVAL;
-		}
-
-		*pfh = -1;
 
 		if( path == NULL )
 		{
@@ -484,7 +484,7 @@ namespace nsWin32
 
 		__try
 		{
-			retval = _sopen_nolock( &unlock_flag, pfh, path, oflag, shflag, pmode, bSecure );
+			retval = _sopen_nolock( &unlock_flag, path, oflag, shflag, pmode, bSecure );
 		}
 		__finally
 		{
@@ -501,14 +501,14 @@ namespace nsWin32
 		// in error case, ensure *pfh is -1
 		if( retval != 0 )
 		{
-			*pfh = -1;
+			SetFileNumber(-1);
 		}
 
 		return retval;
 	}
 
 	//------------------------------------------------------------------------------
-	errno_t CStream::_sopen_nolock( int* punlock_flag, int* pfh, const char* path, int oflag, int shflag, int pmode, int bSecure )
+	errno_t CStream::_sopen_nolock( int* punlock_flag, const char* path, int oflag, int shflag, int pmode, int bSecure )
 	{
 		wchar_t* pathw = 0;
 		int retval;
@@ -520,7 +520,7 @@ namespace nsWin32
 		}
 
 		// call the wide-char variant
-		retval = _wsopen_nolock( punlock_flag, pfh, pathw, oflag, shflag, pmode, bSecure );
+		retval = _wsopen_nolock( punlock_flag, pathw, oflag, shflag, pmode, bSecure );
 
 		free( pathw ); // _free_crt leaves errno alone if everything completes as expected
 
@@ -576,7 +576,7 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	errno_t CStream::_wsopen_nolock( int* punlock_flag, int* pfh, const wchar_t* path, int oflag, int shflag, int pmode, int bSecure )
+	errno_t CStream::_wsopen_nolock( int* punlock_flag, const wchar_t* path, int oflag, int shflag, int pmode, int bSecure )
 	{
 		Cmp__int64 filepos;						// length of file - 1
 		wchar_t ch;								// character at end of file
@@ -662,7 +662,7 @@ namespace nsWin32
 
 		default:                // error, bad oflag
 			_set_doserrno( 0 ); // not an OS error
-			*pfh = -1;
+			SetFileNumber(-1);
 			return EINVAL;
 			//_VALIDATE_RETURN_ERRCODE(( "Invalid open flag" , 0 ), EINVAL);
 
@@ -698,7 +698,7 @@ namespace nsWin32
 
 		default:               // error, bad shflag
 			_set_doserrno( 0 ); // not an OS error
-			*pfh = -1;
+			SetFileNumber(-1);
 			return EINVAL;
 			//_VALIDATE_RETURN_ERRCODE(( "Invalid sharing flag" , 0 ), EINVAL);
 		}
@@ -733,7 +733,7 @@ namespace nsWin32
 		default:
 			// this can't happen ... all cases are covered
 			_set_doserrno( 0 );
-			*pfh = -1;
+			SetFileNumber(-1);
 			return EINVAL;
 			//_VALIDATE_RETURN_ERRCODE(( "Invalid open flag" , 0 ), EINVAL);
 		}
@@ -840,14 +840,14 @@ namespace nsWin32
 			/* We have a text mode file.  If it ends in CTRL-Z, we wish to remove the CTRL-Z character, so that appending will work.
 			We do this by seeking to the end of file, reading the last byte, and shortening the file if it is a CTRL-Z. */
 
-			if( ( filepos = _lseeki64_nolock( *pfh, -1, SEEK_END ) ) == -1 )
+			if( ( filepos = _lseeki64_nolock(GetFileNumber(), -1, SEEK_END ) ) == -1 )
 			{
 				// OS error -- should ignore negative seek error, since that means we had a zero-length file.
 				int err;
 				_get_doserrno( &err );
 				if( err != ErrorNegativeSeek )
 				{
-					_close_nolock( *pfh );
+					_close_nolock(GetFileNumber());
 					retvalue = errno;
 					goto exit;
 				}
@@ -856,21 +856,21 @@ namespace nsWin32
 			{
 				// Seek was OK, read the last char in file. The last char is a CTRL-Z if and only if _read returns 0 and ch ends up with a CTRL-Z.
 				ch = 0;
-				if( _read_nolock( *pfh, &ch, 1 ) == 0 && ch == 26 )
+				if( _read_nolock(GetFileNumber(), &ch, 1 ) == 0 && ch == 26 )
 				{
 					// read was OK and we got CTRL-Z! Wipe it out!
-					if( _chsize_nolock( *pfh, filepos ) == -1 )
+					if( _chsize_nolock(GetFileNumber(), filepos ) == -1 )
 					{
-						_close_nolock( *pfh );
+						_close_nolock(GetFileNumber());
 						retvalue = errno;
 						goto exit;
 					}
 				}
 
 				// now rewind the file to the beginning
-				if( ( filepos = _lseeki64_nolock( *pfh, 0, SEEK_SET ) ) == -1 )
+				if( ( filepos = _lseeki64_nolock(GetFileNumber(), 0, SEEK_SET ) ) == -1 )
 				{
-					_close_nolock( *pfh );
+					_close_nolock( GetFileNumber() );
 					retvalue = errno;
 					goto exit;
 				}
@@ -953,11 +953,11 @@ namespace nsWin32
 						{
 							/* Check if the file contains at least one byte */
 							/* Fall through otherwise */
-							if( _lseeki64_nolock( *pfh, 0, SEEK_END ) != 0 )
+							if( _lseeki64_nolock(GetFileNumber(), 0, SEEK_END ) != 0 )
 							{
-								if( _lseeki64_nolock( *pfh, 0, SEEK_SET ) == -1 )
+								if( _lseeki64_nolock(GetFileNumber(), 0, SEEK_SET ) == -1 )
 								{
-									_close_nolock( *pfh );
+									_close_nolock(GetFileNumber());
 									retvalue = errno;
 									goto exit;
 								}
@@ -988,11 +988,11 @@ namespace nsWin32
 						{
 							// Check if the file contains at least one byte
 							// Fall through otherwise
-							if( _lseeki64_nolock( *pfh, 0, SEEK_END ) != 0 )
+							if( _lseeki64_nolock(GetFileNumber(), 0, SEEK_END ) != 0 )
 							{
-								if( _lseeki64_nolock( *pfh, 0, SEEK_SET ) == -1 )
+								if( _lseeki64_nolock(GetFileNumber(), 0, SEEK_SET ) == -1 )
 								{
-									_close_nolock( *pfh );
+									_close_nolock(GetFileNumber());
 									retvalue = errno;
 									goto exit;
 								}
@@ -1022,7 +1022,7 @@ namespace nsWin32
 
 				if( bCheckBom )
 				{
-					count = _read_nolock( *pfh, &bom, UTF8_BOMLEN );
+					count = _read_nolock(GetFileNumber(), &bom, UTF8_BOMLEN );
 
 					//Internal Validation. This branch should never be taken if bWriteBom is 1 and count > 0
 
@@ -1035,7 +1035,7 @@ namespace nsWin32
 					switch( count )
 					{
 					case -1:
-						_close_nolock( *pfh );
+						_close_nolock(GetFileNumber());
 						retvalue = errno;
 						goto exit;
 
@@ -1048,7 +1048,7 @@ namespace nsWin32
 					case UTF16_BOMLEN:
 						if( ( bom & BOM_MASK ) == UTF16BE_BOM )
 						{
-							_close_nolock( *pfh );
+							_close_nolock(GetFileNumber());
 							assert( 0 && "Only UTF-16 little endian & UTF-8 is supported for reads" );
 							retvalue = errno = EINVAL;
 							goto exit;
@@ -1057,9 +1057,9 @@ namespace nsWin32
 						if( ( bom & BOM_MASK ) == UTF16LE_BOM )
 						{
 							/* We have read 3 bytes, so we should seek back 1 byte */
-							if( ( filepos = _lseeki64_nolock( *pfh, UTF16_BOMLEN, SEEK_SET ) ) == -1 )
+							if( ( filepos = _lseeki64_nolock(GetFileNumber(), UTF16_BOMLEN, SEEK_SET ) ) == -1 )
 							{
-								_close_nolock( *pfh );
+								_close_nolock(GetFileNumber());
 								retvalue = errno;
 								goto exit;
 							}
@@ -1070,10 +1070,10 @@ namespace nsWin32
 						// Fall through to default case to lseek to beginning of file
 
 					default:
-						if( ( filepos = _lseeki64_nolock( *pfh, 0, SEEK_SET ) ) == -1 )
+						if( ( filepos = _lseeki64_nolock(GetFileNumber(), 0, SEEK_SET ) ) == -1 )
 						{
 							// No BOM, so we should seek back to the beginning of the file
-							_close_nolock( *pfh );
+							_close_nolock(GetFileNumber());
 							retvalue = errno;
 							goto exit;
 						}
@@ -1108,9 +1108,9 @@ namespace nsWin32
 					{
 						int tmp = 0;
 						// Note that write may write less than bomlen characters, but not really fail. Retry till write fails or till we wrote all the characters.
-						if( ( tmp = _write( *pfh, ( (char *)( &bom ) ) + written, bomlen - written ) ) == -1 )
+						if( ( tmp = _write(GetFileNumber(), ( (char *)( &bom ) ) + written, bomlen - written ) ) == -1 )
 						{
-							_close_nolock( *pfh );
+							_close_nolock( GetFileNumber() );
 							retvalue = errno;
 							goto exit;
 						}
@@ -1159,7 +1159,7 @@ namespace nsWin32
 				// We were able to open the file successfully, set the file
 				// handle in the _ioinfo structure, then we are done.  All
 				// the fileflags should have been set properly already.
-				//_osfhnd(*pfh) = (intptr_t)osfh;
+				//*pfh = (intptr_t)osfh;
 			}
 		}
 
@@ -3000,9 +3000,14 @@ namespace nsWin32
 	}
 
 	//------------------------------------------------------------------------------
-	int CStream::fwprintf( const wchar_t* format, va_list vargs )
+	int CStream::fwprintf( const wchar_t* format, ... )
 	{
-		return 0;
+		int iResult = 0;
+		va_list args;
+		va_start(args, format);
+		iResult = vfwprintf(format, args);
+		va_end(args);
+		return iResult;
 	}
 
 	//------------------------------------------------------------------------------
@@ -3105,7 +3110,9 @@ namespace nsWin32
 		__try
 		{
 			buffing = _stbuf();
-			retval = woutfn( this, format, plocinfo, ap );
+			CStreamFormatter formatter(this);
+			retval = formatter.OutputW_l(format, ap);
+			//retval = woutfn( this, format, plocinfo, ap );
 			_ftbuf( buffing );
 		}
 		__finally

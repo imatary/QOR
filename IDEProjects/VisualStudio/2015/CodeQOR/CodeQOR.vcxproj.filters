@@ -369,9 +369,6 @@
     <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\StringSource.h">
       <Filter>Source Files\MemoryManagement</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\TAllocator.h">
-      <Filter>Source Files\MemoryManagement</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Modules\LibraryBase.h">
       <Filter>Source Files\Modules</Filter>
     </ClInclude>

@@ -24,10 +24,12 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Source for validatable string allocationa
+//Source for validatable string allocations
 
 #ifndef CODEQOR_STRINGSOURCE_H_1
 #define CODEQOR_STRINGSOURCE_H_1
+
+#include "CompilerQOR.h"
 
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE

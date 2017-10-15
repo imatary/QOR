@@ -74,6 +74,14 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	CDeviceFile::CDeviceFile(CDeviceHandle& hExisting)
+	{
+		_WINQ_FCONTEXT("CDeviceFile::CDeviceFile");
+
+		m_Handle = new_shared_ref<CDeviceHandle>(hExisting);
+	}
+
+	//--------------------------------------------------------------------------------
 	CDeviceFile::CDeviceFile( CDeviceHandle::ref_type hExisting )
 	{
 		_WINQ_FCONTEXT( "CDeviceFile::CDeviceFile" );

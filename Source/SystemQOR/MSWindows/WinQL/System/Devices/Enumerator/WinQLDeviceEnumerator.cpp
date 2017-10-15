@@ -44,7 +44,7 @@ namespace nsWin32
 
 	//--------------------------------------------------------------------------------
 	CDeviceEnumerator::CDeviceEnumerator( CTString& strEnumID ) : m_Library( CSetupAPI::Instance() )
-	,	m_strID( strEnumID ), m_ArrayDeviceInstances(), m_bEnumerated( false )
+	,	m_strID( strEnumID ), m_ArrayDeviceInstances(), m_bEnumerated( false ), m_bEnumerationInProgress( false )
 	{
 		_WINQ_FCONTEXT( "CDeviceEnumerator::CDeviceEnumerator" );		
 	}
@@ -70,12 +70,19 @@ namespace nsWin32
 	}
 
 	//--------------------------------------------------------------------------------
+	bool CDeviceEnumerator::IsInProgress()
+	{
+		return m_bEnumerationInProgress;
+	}
+
+	//--------------------------------------------------------------------------------
 	unsigned int CDeviceEnumerator::Enumerate( void )
 	{
 		_WINQ_FCONTEXT( "CDeviceEnumerator::Enumerate" );
 		unsigned int uiIndex = m_ArrayDeviceInstances.Size();
-		if( !m_bEnumerated )
+		if( !m_bEnumerated && !m_bEnumerationInProgress )
 		{
+			m_bEnumerationInProgress = true;
 			m_InfoSet.Attach( new CDeviceInfoSet( m_strID ), true );
 			nsCodeQOR::mxGUID nullGUID = { 0x00000000, 0x0000, 0x0000, { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } };			
 			do
@@ -143,6 +150,11 @@ namespace nsWin32
 					m_bEnumerated = true;
 				}
 			}while( !m_bEnumerated );
+			m_bEnumerationInProgress = false;
+		}
+		if (m_bEnumerationInProgress)
+		{
+			uiIndex = 0;
 		}
 		return uiIndex;
 	}

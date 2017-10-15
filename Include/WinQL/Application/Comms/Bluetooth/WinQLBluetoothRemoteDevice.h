@@ -40,13 +40,15 @@
 #include "AppocritaQOR/SubSystems/IBluetooth.h"
 #include "BluefootQOR/BfConnectionPool.h"
 #include "BluefootQOR/BfSocket.h"
+#include "BluefootQOR/Socket/BfSocketConnector.h"
+#include "BluefootQOR/Sources/SocketSource.h"
+#include "BluefootQOR/Sinks/SocketSink.h"
 #include "WinQL/WinQL.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
 #include "WinQL/Definitions/Constants.h"
 #include "WinQL/System/Clock/WinQLTime.h"
 #include "WinQL/GUI/Window.h"
-//#include "WinQL/Application/IO/Socket/WinQLSocketConnector.h"
-//#include <ws2bth.h>
+
 //--------------------------------------------------------------------------------
 namespace nsWinQAPI
 {

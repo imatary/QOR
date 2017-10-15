@@ -25,25 +25,221 @@
 // DEALINGS IN THE SOFTWARE.
 
 //NOTE: Winner only supports UNICODE Windows platforms
+#define USE_WINQL_POLICY 1
 
+#include "WinQL/CodeServices/WinQLPolicy.h"
 #include "SystemQOR.h"
 #include "WinnerApp.h"
 #include "AppocritaQOR/Role.h"
+#include "WinQL/WinQL.h"
 #include "WinQL/System/FileSystem/WinQLStream.h"
+#include "WinQL/System/FileSystem/WinQLVolumeManagement.h"
+#include "WinQL/System/FileSystem/WinQLFileSystem.h"
+#include "WinQL/System/WinQLSystem.h"
 
 //------------------------------------------------------------------------------
 int __stdcall wWinMain(void* hInstance, void* prevInstance, wchar_t* cmdLine, int nShowCmd)
 {
 	CWinnerApp WinnerApp;
 
-	CStream* pStream = CStream::fopen("C:\\Develop\\Test.tmp", "rw");
+	auto Process = WinnerApp.Process();
 
-	if (pStream)
+	
+
+
 	{
-		delete pStream;
-		pStream = nullptr;
-	}
+		auto Console = WinnerApp.Console();
+		auto ConsoleScreenBuffer = Console().ScreenBuffer();
+		nsWin32::CLocalAtomTable& LocalAtomTable = WinnerApp.LocalAtomTable();
+		
+		//auto ResourceManager = WinnerApp.Resources();
+		//auto User = WinnerApp.User();
+		auto ApplicationRole = WinnerApp.GetRole(); //TODO: Consider adding enumeration of existing SubSystems in the Role
 
+		nsWin32::CMemoryManager& MemoryManager = Process().MemoryManager();
+
+		nsWin32::CErrorSystem& ErrorSystem = Process().ErrorSystem();
+		nsWin32::CErrorHeap& ErrorHeap = ErrorSystem.Heap();
+
+		nsWin32::CEnvironment& Environment = Process().Environment();
+
+		nsWin32::CDebuggingHelper& DebugHelper = Process().DebugHelper();
+		DebugHelper.OutputDebugStringT(_TXT("Debug output, Hooray!\n"));
+
+
+		auto System = TheSystem().As< nsWin32::CSystem >();
+		{
+			auto fs = System->FileSystem();
+
+			std::vector< CVolume::ref_type > VecVolumes = fs(QOR_PP_SYNCHRONIZE).Volumes.Get();
+			size_t VolumeCount = VecVolumes.size();
+
+			auto it = VecVolumes.begin();
+			while (it != VecVolumes.end())
+			{
+				CTString strVolumeID = (*it)->GUID();
+				CTString strDeviceName = (*it)->DeviceName();
+				std::vector< CTString > strPaths = (*it)->PathNames();
+				std::vector< CTString > strMountPoints = (*it)->MountPoints();
+				++it;
+			}
+
+			auto GlobalAtomTable = System->AtomTable();
+			auto Clipboard = System->Clipboard();
+			auto Devices = System->Devices();
+
+			auto RootEnumerator = Devices(QOR_PP_SYNCHRONIZE).m_EnumeratorEnumerator();			
+
+			auto Display = System->Display();
+			auto DefaultDisplayDevice = Display(QOR_PP_SYNCHRONIZE).DefaultDevice();
+			auto EventLog = System->EventLog();
+			auto Information = System->Information();
+			auto SystemLocale = System->Locale();
+			auto Machine = System->Machine();
+			const char* szArchitectureBaseName = Machine(QOR_PP_SYNCHRONIZE).GetArchBaseName();
+			auto Performance = System->Performance();
+			auto PowerManager = System->Power();
+			auto ProcessManager = System->Processes();
+			auto Registry = System->Registry();
+			auto ServiceManager = System->Services();
+			auto Session = System->Session();
+			auto TerminalServices = System->TerminalServices();
+			auto Clock = System->Time();
+			auto SysTimeNow = Clock(QOR_PP_SYNCHRONIZE).SystemTime;
+
+			auto WindowStations = System->WindowStations();
+			auto CurrentWindowStation = WindowStations(QOR_PP_SYNCHRONIZE).Current();
+		}
+	}
+	CStream* pstdin = CStream::_stdin();
+	assert(pstdin);
+	CStream* pstdout = CStream::_stdout();
+	assert(pstdout);
+	CStream* pstderr = CStream::_stderr();
+	assert(pstderr);
+	CStream* pfopenfile = CStream::fopen(_ATXT("D:\\Data\\TestTemp1.txt"), _ATXT("w"));
+	assert(pfopenfile);
+	int ifcloseResult = pfopenfile->fclose();
+
+	CStream* pfdopen = CStream::fdopen(4, _ATXT("D:\\Data\\TestTemp1.txt"));
+	assert(pfdopen);
+	int ifdopenResult = pfdopen->fclose();
+
+	CStream* _pfdopen = CStream::_fdopen(4, _ATXT("D:\\Data\\TestTemp1.txt"));
+	assert(_pfdopen);
+
+	CStream* pfreopen = _pfdopen->freopen(_ATXT("D:\\Data\\TestTemp1.txt"), _ATXT("w+") );
+
+	int i_fdopenResult = _pfdopen->fclose();
+	
+	/*
+
+	static CStream* fmemopen( void*, size_t, const char * );
+	static CStream*  open_memstream( char**, size_t* );
+	static CStream*  popen( const char*, const char* );
+	static CStream*  _popen( const char* command, const char* mode );
+	static CStream*  tmpfile( void );
+	static CStream*  _fsopen( const char* filename, const char* mode, int shflag );
+	static CStream*  open_wmemstream( wchar_t**, size_t* );
+	static CStream*  _wpopen( const wchar_t* pCommand, const wchar_t* pMode );
+	static CStream*  _wfsopen( const wchar_t* pFilename, const wchar_t* pMode );
+	CStream* _wfreopen( const wchar_t* pFilename, const wchar_t* pMode );
+	static CStream* _wfopen( const wchar_t* pFilename, const wchar_t* pMode );
+	*/
+
+	CStream* p_wfopen = CStream::_wfopen(_WTXT("D:\\Data\\UTF16Test.txt"), _WTXT("W+"));
+
+	int iFileno1 = p_wfopen->fileno();
+	int iFileno2 = p_wfopen->_fileno();
+
+	assert(iFileno1);
+	assert(iFileno2 == iFileno1);
+
+	::errno_t err = p_wfopen->clearerr_s();
+	int iError = p_wfopen->ferror();
+	p_wfopen->clearerr();
+
+	int ifflushResult = p_wfopen->fflush();
+	p_wfopen->fclose();
+
+	delete p_wfopen;
+
+	/*
+	int feof( void );
+	int fgetc( void );
+	int fgetpos( fpos_t* pos );
+	char* fgets( char* s, int n );
+	void flockfile( void );
+	int fprintf( const char* format, va_list vargs );
+	int fprintf_s( const char* format, va_list vargs );
+	int fputc( int c );
+	int fputs( const char* s );
+	size_t fread( void* ptr, size_t size, size_t nmemb );
+	size_t fread_s( void* ptr, size_t DstSize, size_t ElementSize, size_t Count );
+	void rewind( void );
+	int fscanf( const char* format, va_list vargs );
+	int fscanf_s( const char* format, va_list vargs );
+	int fseek( long int offset, int whence );
+	int fseeko( off_t, int );
+	int SeekO( off_t offset, int whence );
+	void setbuf( char* buf );
+	int setvbuf( char* buf, int mode, size_t size );
+	int fsetpos( const fpos_t* pos );
+	long int ftell( void );
+	off_t ftello( void );
+	int ftrylockfile( void );
+	void funlockfile( void );
+	size_t fwrite( const void* ptr, size_t size, size_t nmemb );
+	int getc( void );
+	int getc_unlocked( void );
+	ssize_t getdelim( char**, size_t*, int );
+	ssize_t getline( char**, size_t* );
+	int pclose( void );
+	int putc( int c );
+	int putc_unlocked( int );
+	int ungetc( int c );
+	int vfprintf( const char* format, va_list arg );
+	int vfprintf_s( const char* format, va_list arg );
+	int vfscanf( const char* format, va_list arg );
+	int _putw( int binint );
+	int _getw( void );
+	int _fwprintf_l( const wchar_t* format, ::locale_t locale, va_list vargs );
+	int _fwprintf_p( const wchar_t* format, va_list vargs );
+	int _fwprintf_p_l( const wchar_t* format, ::locale_t locale, va_list vargs );
+	int _fwprintf_s_l( const wchar_t* format, ::locale_t locale, va_list vargs );
+	int _fwscanf_l( const wchar_t* format, ::locale_t locale, va_list vargs );
+	int _fwscanf_s_l( const wchar_t* format, ::locale_t locale, va_list vargs );
+	int _fscanf_l( const char* format, ::locale_t locale, va_list vargs );
+	int _fscanf_s_l( const char* format, ::locale_t locale, va_list vargs );
+	int _fseeki64( Cmp__int64 offset, int origin );
+	int _fprintf_l( const char* format, ::locale_t locale, va_list vargs );
+	int _fprintf_p( const char* format, va_list vargs );
+	int _fprintf_p_l( const char* format, ::locale_t locale, va_list vargs );
+	int _fprintf_s_l( const char* format, ::locale_t locale, va_list vargs );
+	wint_t fgetwc();
+	wchar_t* fgetws( wchar_t* s, int n );
+	wint_t fputwc( wchar_t c );
+	int fputws( const wchar_t* s );
+	int fwide( int mode );
+	int fwprintf( const wchar_t* format, ... );
+	int fwscanf( const wchar_t* format, va_list vargs );
+	wint_t getwc();
+	wint_t putwc( wchar_t c );
+	wint_t ungetwc( wint_t c );
+	int vfwprintf( const wchar_t* format, va_list arg );
+	int vfwscanf( const wchar_t* format, va_list arg );
+	int fwprintf_s( const wchar_t* format, va_list vargs );
+	int fwscanf_s( const wchar_t* format, va_list vargs );
+	int vfwprintf_s( const wchar_t* format, va_list arg );
+	int _vfprintf_l( const char* format, ::locale_t locale, va_list argptr );
+	int _vfprintf_p( const char* format, va_list argptr );
+	int _vfprintf_p_l( const char* format, ::locale_t locale, va_list argptr );
+	int _vfprintf_s_l( const char* format, ::locale_t locale, va_list argptr );
+	int _vfwprintf_l( const wchar_t* format, ::locale_t locale, va_list argptr );
+	int _vfwprintf_p( const wchar_t* format, va_list argptr );
+	int _vfwprintf_p_l( const wchar_t* format, ::locale_t locale, va_list argptr );
+	int _vfwprintf_s_l( const wchar_t* format, ::locale_t locale, va_list argptr );
+	*/
 	return WinnerApp.Run();
 }
 

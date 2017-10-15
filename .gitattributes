@@ -61,3 +61,14 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+###############################################################################
+# Tweak the behaviour of linguist library when it is pointed at this codebase
+# 
+# Ensure all headers are treated as C++
+# .pp files are not pascal they are C preprocessor files
+# 
+###############################################################################
+
+*.pp linguist-language=C
+*.h linguist-language=C++

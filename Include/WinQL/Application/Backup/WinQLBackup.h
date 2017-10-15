@@ -40,8 +40,8 @@ namespace nsWin32
 
 	//--------------------------------------------------------------------------------
 	//A backup helper class over a CFile
-	//A single instance is used either to read or write, an attempt to to both will fail
-	//delete the instance to fianlize the read/write session
+	//A single instance is used either to read or write, an attempt to do both will fail
+	//delete the instance to finalize the read/write session
 	class __QOR_INTERFACE( __WINQL ) CBackup
 	{
 	public:

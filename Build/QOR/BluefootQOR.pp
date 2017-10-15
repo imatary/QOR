@@ -91,12 +91,26 @@
 
 #define SOURCE_PATH ../../../Source/BluefootQOR/src/Sources/
 #define SOURCES (cinSource)\
+				(IOSource)\
+				(SocketSource)\
 				(StringSource)
 #include "BuildQOR/BuildGroup.pph"
 
-#define SOURCE_PATH ../../../Source/BluefootQOR/src/Sinks/
-#define SOURCES (coutSink)
+#define SOURCE_PATH ../../../Source/BluefootQOR/src/Socket/
+#define SOURCES (BfSocketConnector)
 #include "BuildQOR/BuildGroup.pph"
+
+#define SOURCE_PATH ../../../Source/BluefootQOR/src/Sinks/
+#define SOURCES (coutSink)\
+				(IOSink)\
+				(SocketSink)\
+				(StringSink)
+#include "BuildQOR/BuildGroup.pph"
+
+//#define SOURCE_PATH ../../../Source/BluefootQOR/src/Protocols/
+//#define SOURCES (BfInputProtocol)\
+//				(BfOutputProtocol)
+//#include "BuildQOR/BuildGroup.pph"
 
 #define SOURCE_PATH ../../../Source/BluefootQOR/src/Protocols/OBEX/
 #define SOURCES (ObexHeader)\
@@ -104,8 +118,8 @@
 #include "BuildQOR/BuildGroup.pph"
 
 #define SOURCE_PATH ../../../Source/BluefootQOR/src/Pipelines/
-#define SOURCES (BfTextReader)
-//(BfXMLReader)
+#define SOURCES (BfTextReader)\
+				(BfXMLReader)
 #include "BuildQOR/BuildGroup.pph"
 
 #define SOURCE_PATH ../../../Source/BluefootQOR/src/Filters/

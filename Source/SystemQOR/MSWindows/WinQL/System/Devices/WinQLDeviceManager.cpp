@@ -189,6 +189,7 @@ namespace nsWin32
 	,	m_strMachine( *refstrMachine )
 	,	m_bEnumeratorsEnumerated( false )
 	,	m_bInstancesEnumerated( false )
+	,	m_bEnumerationInProgress( false )
 	,	m_bSetupClassesEnumerated( false )
 	,	m_bInterfaceClassesEnumerated( false )
 	,	m_bDriversEnumerated( false )
@@ -208,7 +209,7 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	CDeviceNode::ref_type CDeviceManager::RootDevice()
 	{
-		return ref(m_ConfigManagementSession.RootDevice());
+		return m_ConfigManagementSession.RootDevice().Ref();
 	}
 
 	//--------------------------------------------------------------------------------
@@ -227,7 +228,7 @@ namespace nsWin32
 	std::map< const CTString, CDeviceInstance::ref_type >& CDeviceManager::Instances()
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::Instances" );
-		if( !m_bInstancesEnumerated )
+		if( !m_bInstancesEnumerated && !m_bEnumerationInProgress )
 		{
 			EnumerateInstances();
 		}
@@ -278,7 +279,7 @@ namespace nsWin32
 	void CDeviceManager::RegisterInstance( const CTString strDeviceID, CDeviceInstance::ref_type pDeviceInstance )
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::RegisterInstance" );
-		m_DeviceInstanceCollection.insert( std::make_pair( strDeviceID, pDeviceInstance ) );
+		Instances().insert( std::make_pair( strDeviceID, pDeviceInstance ) );
 	}
 
 	//--------------------------------------------------------------------------------
@@ -321,8 +322,8 @@ namespace nsWin32
 	CDeviceInstance::ref_type CDeviceManager::DeviceFromID( CTString& strDeviceID )
 	{
 		_WINQ_FCONTEXT( "CDeviceManager::DeviceFromID" );
-		std::map< const CTString, CDeviceInstance::ref_type >::iterator it = m_DeviceInstanceCollection.find( strDeviceID );
-		return it == m_DeviceInstanceCollection.end() ? CDeviceInstance::ref_type((CDeviceInstance*)(nullptr)) : (*it).second;
+		std::map< const CTString, CDeviceInstance::ref_type >::iterator it = Instances().find( strDeviceID );
+		return (m_bEnumerationInProgress || it == m_DeviceInstanceCollection.end() || it->first == _TXT("")) ? CDeviceInstance::ref_type() : (*it).second;
 	}
 	
 	//--------------------------------------------------------------------------------
@@ -331,8 +332,8 @@ namespace nsWin32
 		_WINQ_FCONTEXT( "CDeviceManager::DeviceFromName" );
 
 		CTString strDeviceID = DeviceIDFromName( szDeviceName );
-		std::map< const CTString, CDeviceInstance::ref_type >::iterator it = m_DeviceInstanceCollection.find( strDeviceID );
-		return it == m_DeviceInstanceCollection.end() ? CDeviceInstance::ref_type((CDeviceInstance*)(nullptr)) : (*it).second;
+		std::map< const CTString, CDeviceInstance::ref_type >::iterator it = Instances().find( strDeviceID );
+		return it == m_DeviceInstanceCollection.end() ? CDeviceInstance::ref_type() : (*it).second;
 	}
 	
 	//--------------------------------------------------------------------------------
@@ -408,9 +409,20 @@ namespace nsWin32
 	//--------------------------------------------------------------------------------
 	void CDeviceManager::EnumerateInstances()
 	{
-		_WINQ_FCONTEXT( "CDeviceManager::EnumerateInstances" );
-		WalkInstances( RootDevice(), &CDeviceManager::InstanceFromNodeCallback );
-		m_bInstancesEnumerated = true;
+		_WINQ_FCONTEXT( "CDeviceManager::EnumerateInstances" );		
+		if (!m_bEnumerationInProgress)
+		{
+			m_bEnumerationInProgress = true;
+			WalkInstances(RootDevice(), &CDeviceManager::InstanceFromNodeCallback);
+			m_bEnumerationInProgress = false;
+			m_bInstancesEnumerated = true;
+		}
+	}
+
+	//--------------------------------------------------------------------------------
+	bool CDeviceManager::AreInstancesEnumerated()
+	{
+		return m_bInstancesEnumerated;
 	}
 	
 	//--------------------------------------------------------------------------------

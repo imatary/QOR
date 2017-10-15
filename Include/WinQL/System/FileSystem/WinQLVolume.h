@@ -1,6 +1,6 @@
 //WinQLVolume.h
 
-// Copyright Querysoft Limited 2013
+// Copyright Querysoft Limited 2013, 2017
 //
 // Permission is hereby granted, free of charge, to any person or organization
 // obtaining a copy of the software and accompanying documentation covered by
@@ -27,28 +27,95 @@
 #ifndef WINQL_FILESYSTEM_VOLUME_H_3
 #define WINQL_FILESYSTEM_VOLUME_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
+#include <vector>
+#include "CodeQOR/DataTypes/Property.h"
+#include "WinQL/CodeServices/Text/WinString.h"
+#include "WinQL/System/FileSystem/WinQLFile.h"
 #include "WinQL/System/Devices/WinQLDeviceFile.h"
-#include "WinQL/System/FileSystem/WinQLVolumeManagement.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CVolume, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
 {
+	//--------------------------------------------------------------------------------
+	//Stateless helper for Volume functions
+	class __QOR_INTERFACE(__WINQL) CVolumeHelper
+	{
+	public:
+
+		//--------------------------------------------------------------------------------
+		struct VolumeInformation
+		{
+			CTString strName;
+			unsigned long ulSerialNumber;
+			unsigned long ulMaximumComponentLength;
+			unsigned long ulFileSystemFlags;
+			CTString strFileSystemName;
+		};
+
+		//--------------------------------------------------------------------------------
+		struct ByHandleVolumeInformation
+		{
+			CWString strName;
+			unsigned long ulSerialNumber;
+			unsigned long ulMaximumComponentLength;
+			unsigned long ulFileSystemFlags;
+			CWString strFileSystemName;
+		};
+
+		__QOR_DECLARE_OCLASS_ID(CVolumeHelper);
+
+		CVolumeHelper();
+		CVolumeHelper(const CVolumeHelper&);
+		CVolumeHelper& operator = (const CVolumeHelper&);
+		~CVolumeHelper();
+		bool SetLabel(const TCHAR* lpRootPathName, const TCHAR* lpVolumeName);
+		bool GetInformation(const TCHAR* lpRootPathName, VolumeInformation& VolumeInfo);
+		bool GetInformationByHandle(CFile& File, ByHandleVolumeInformation& VolumeInfo);
+		bool GetInformationByHandle(CFile& File, wchar_t* lpVolumeNameBuffer, unsigned long nVolumeNameSize, unsigned long* lpVolumeSerialNumber, unsigned long* lpMaximumComponentLength, unsigned long* lpFileSystemFlags, wchar_t* lpFileSystemNameBuffer, unsigned long nFileSystemNameSize);
+		bool GetPathName(const TCHAR* lpszFileName, TCHAR* lpszVolumePathName, unsigned long cchBufferLength);
+		bool GetPathNamesForName(const TCHAR* lpszVolumeName, TCHAR* lpszVolumePathNames, unsigned long cchBufferLength, unsigned long* lpcchReturnLength);
+	};
+
 	//--------------------------------------------------------------------------------	
+	//A read only Volume object
 	class __QOR_INTERFACE( __WINQL ) CVolume
 	{
 	public:
 
-		CVolume();
+		__QOR_DECLARE_REF_TYPE(CVolume);
+
+		CVolume( CTStringRef VolumeGUID );
 		CVolume( const CVolume& );
 		CVolume& operator = ( const CVolume& );
 		virtual ~CVolume();
-		/*
-		must provide path equivalent to volume root
-		*/
+
+		nsCodeQOR::CRefProperty< CVolume, CTString > GUID;
+		nsCodeQOR::CRefProperty< CVolume, CTString > DeviceName;
+		nsCodeQOR::CRefProperty< CVolume, std::vector< CTString > > PathNames;
+		nsCodeQOR::CRefProperty< CVolume, std::vector< CTString > > MountPoints;
+
+	private:
+
+		CTString m_GUID;
+		CTString m_DeviceName;
+		std::vector< CTString > m_VecPathNames;
+		std::vector< CTString > m_VecMountPoints;
+		CVolumeHelper m_Helper;
+
+		CVolume();//No default construction
+
+		CTString GetGuid(void);
+		CTString GetDeviceName(void);
+		std::vector< CTString > GetPathNames(void);
+		std::vector< CTString > GetMountPoints(void);
 	};
 
 }//nsWin32

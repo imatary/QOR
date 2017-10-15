@@ -108,7 +108,10 @@ namespace nsWin32
 	{
 		_WINQ_FCONTEXT( "CDeviceNode::GetInstance" );
 		CTString strDeviceInstance = m_Session.GetDeviceInstanceID( m_DevInst );
-		m_pInstance = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS )().DeviceFromID( strDeviceInstance );
+		if (TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS)().AreInstancesEnumerated() == true)
+		{
+			m_pInstance = TheSystem().As< nsWin32::CSystem >()->Devices(QOR_PP_SHARED_OBJECT_ACCESS)().DeviceFromID(strDeviceInstance);
+		}
 
 		if( m_pInstance == 0 )
 		{
@@ -116,7 +119,7 @@ namespace nsWin32
 
 			CDeviceEnumerator::ref_type Enumerator = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS )().EnumeratorFromName( strEnumerator.Ref() );
 
-			if( !Enumerator.IsNull() )
+			if( !Enumerator.IsNull() && !Enumerator->IsInProgress() )
 			{
 				Enumerator->Enumerate();
 				m_pInstance = TheSystem().As< nsWin32::CSystem >()->Devices( QOR_PP_SHARED_OBJECT_ACCESS )().DeviceFromID( strDeviceInstance );

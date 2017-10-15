@@ -148,7 +148,6 @@
     <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\SmallObjectHeap.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\SmallObjectPage.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\StringSource.h" />
-    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\TAllocator.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Modules\LibraryBase.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Modules\LoadableModuleBase.h" />
     <ClInclude Include="..\..\..\..\Include\CodeQOR\Modules\ProcessBase.h" />

@@ -46,7 +46,7 @@ namespace nsWinQAPI
 }//nsWinQAPI
 
 
-__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceNode, CTRef);
+__QOR_DECLARE_REF(nsWin32, __WINQL, CDeviceNode, CTLRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -60,8 +60,8 @@ namespace nsWin32
 	{
 	public:
 
-		__QOR_DECLARE_REF_TYPE(CDeviceNode);
-		__QOR_DECLARE_OCLASS_ID( CDeviceNode );
+		__QOR_DECLARE_OCLASS_ID(CDeviceNode);
+		__QOR_IMPL_REF(CDeviceNode);		
 
 		CDeviceNode( unsigned long ulDevInst, CConfigurationManagementSession& Session );
 		CDeviceNode( CDeviceNode&& move );

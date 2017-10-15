@@ -27,14 +27,17 @@
 #ifndef WINQL_FILESYSTEM_H_3
 #define WINQL_FILESYSTEM_H_3
 
+#include "CompilerQOR.h"
+
 #ifdef	__QCMP_OPTIMIZEINCLUDE
 #pragma	__QCMP_OPTIMIZEINCLUDE
 #endif//__QCMP_OPTIMIZEINCLUDE
 
-#include "CompilerQOR.h"
 #include "WinQL/WinQL.h"
 #include "WinQL/CodeServices/WinQLPolicy.h"
-#include "WinQL/CodeServices/WinQLSharedRef.h"
+#include "WinQL/System/FileSystem/WinQLVolume.h"
+
+__QOR_DECLARE_REF(nsWin32, __WINQL, CFileSystem, CTRef);
 
 //--------------------------------------------------------------------------------
 namespace nsWin32
@@ -44,14 +47,20 @@ namespace nsWin32
 	{
 	public:
 
+		__QOR_DECLARE_REF_TYPE(CFileSystem);
+
 		CFileSystem();
 		CFileSystem( const CFileSystem& );
 		CFileSystem& operator = ( const CFileSystem& );
 		virtual ~CFileSystem();
 
-		/*
-		must provide enumeration of volumes via CFindVolume
-		*/
+		nsCodeQOR::CRefProperty< CFileSystem, std::vector< CVolume::ref_type > > Volumes;
+
+	private:
+
+		std::vector< CVolume::ref_type > m_Volumes;
+
+		std::vector< CVolume::ref_type > GetVolumes(void);
 	};
 
 }//nsWin32

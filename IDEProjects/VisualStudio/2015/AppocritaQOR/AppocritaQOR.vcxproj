@@ -170,6 +170,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Application.h" />
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Applications\CmdLineApp.h" />
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Application\HostProcess.h" />
+    <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Application\Memory.h" />
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\AppocritaQOR.h" />
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Controller.h" />
     <ClInclude Include="..\..\..\..\Include\AppocritaQOR\Event.h" />

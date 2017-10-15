@@ -110,4 +110,65 @@ namespace nsWin32
 		return ptr();
 	}
 
+
+	__QOR_IMPLEMENT_OCLASS_LUID(CStdHandle);
+
+	//--------------------------------------------------------------------------------
+	CStdHandle::CStdHandle(void* h) : CDeviceHandle(h)
+	{
+		_WINQ_FCONTEXT("CStdHandle::CStdHandle");
+	}
+
+	//--------------------------------------------------------------------------------
+	CStdHandle::CStdHandle(unsigned long nStdHandle) : CDeviceHandle( CKernel32::GetStdHandle( nStdHandle ))
+	{
+		_WINQ_FCONTEXT("CStdHandle::CStdHandle");
+	}
+	
+	//--------------------------------------------------------------------------------
+	CStdHandle::CStdHandle(const CStdHandle& src) : CDeviceHandle( src.ptr() )
+	{
+		_WINQ_FCONTEXT("CStdHandle::CStdHandle");
+	}
+
+	//--------------------------------------------------------------------------------
+	CStdHandle::CStdHandle(CStdHandle&& move) : CDeviceHandle(std::move(move.ptr()))
+	{
+		_WINQ_FCONTEXT("CStdHandle::CStdHandle");
+	}
+
+	//--------------------------------------------------------------------------------
+	CStdHandle& CStdHandle::operator = (const CStdHandle& src)
+	{
+		_WINQ_FCONTEXT("CStdHandle::operator =");
+
+		if (&src != this)
+		{
+			m_h = src.ptr();
+		}
+
+		return *this;
+	}
+
+	//--------------------------------------------------------------------------------
+	CStdHandle& CStdHandle::operator = (CStdHandle&& move)
+	{
+		_WINQ_FCONTEXT("CStdHandle::operator =");
+
+		if (&move != this)
+		{
+			m_h = move.ptr();
+			move.m_h = 0;
+		}
+
+		return *this;
+	}
+	
+	//--------------------------------------------------------------------------------
+	CStdHandle::~CStdHandle()
+	{	
+		_WINQ_FCONTEXT("CStdHandle::~CStdHandle");
+		m_h = nullptr; //Don't close, nullify, as it's a Standard Handle
+	}
+
 }//nsWin32

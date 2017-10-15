@@ -200,7 +200,7 @@ namespace nsWin32
 	//Return a pointer to the process object for this process
 	__QOR_INTERFACE( __WINQL ) CProcess* ThisProcess( void );
 
-	//Intialise the Windows Process Object in preallocated image memory
+	//Initialize the Windows Process Object in preallocated image memory
 	void InitWindowsProcess( void );
 
 }//nsWin32

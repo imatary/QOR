@@ -24,7 +24,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-//Windows specific implementation of the generic System concept modelling the operating system.
+//Windows specific implementation of the generic System concept modeling the operating system.
 
 #include "WinQL/WinQL.h"
 #include "WinQL/Application/Threading/WinQLCriticalSection.h"

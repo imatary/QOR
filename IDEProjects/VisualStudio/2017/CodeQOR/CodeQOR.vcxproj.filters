@@ -1,0 +1,593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{5741fb79-435c-4511-ae11-2881a3af4312}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tracing">
+      <UniqueIdentifier>{bc6b6bf4-edf3-4a1a-9534-60577529d769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Text">
+      <UniqueIdentifier>{4766577f-fdf6-4aa9-af80-1ab4f72080ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SyncObjects">
+      <UniqueIdentifier>{d9d1ff33-b5a6-4d3b-a362-9beef432767d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Parameters">
+      <UniqueIdentifier>{9eef6c7a-f60c-4766-9741-26baaa5fb614}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ClassReg">
+      <UniqueIdentifier>{19e50f96-a6e1-41de-8e86-221af1927511}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CodePages">
+      <UniqueIdentifier>{394f9e0a-47e8-4635-9406-6b4259a4c1a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataStructures">
+      <UniqueIdentifier>{43f3a8c8-8a3b-4a97-865c-0c33f59fcd89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataTypes">
+      <UniqueIdentifier>{0ae0e9c9-ea0c-4391-b66c-2e759407bad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ErrorSystem">
+      <UniqueIdentifier>{59f23478-81a3-4413-8d98-6d71fec4b6ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interception">
+      <UniqueIdentifier>{795aae3e-93c7-4b3d-b5c2-250e5502c486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MemoryManagement">
+      <UniqueIdentifier>{5d1819e8-00dc-4f2e-92ec-0ae7e21f4486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Modules">
+      <UniqueIdentifier>{a3b85b4e-856a-4672-a46a-f23b0c77cff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Parameters\PChecks">
+      <UniqueIdentifier>{c2c406ee-a51a-489a-8192-97d192bfec0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Traits">
+      <UniqueIdentifier>{3ede7556-8e52-4611-a8d9-29d7dd3f8107}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataStructures\Collections">
+      <UniqueIdentifier>{b77a960e-fc32-4120-8de4-b90600cb2c00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Instancing">
+      <UniqueIdentifier>{3fee7888-a78b-43d6-9be9-0e8c728b0adc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\docs">
+      <UniqueIdentifier>{4155ce61-cd06-48f1-928c-7497a0877f8f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\CodeQOR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Utils\Utils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Tracing\CallContextBase.cpp">
+      <Filter>Source Files\Tracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Tracing\FunctionContextBase.cpp">
+      <Filter>Source Files\Tracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Tracing\ObjectContextBase.cpp">
+      <Filter>Source Files\Tracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Tracing\TraceFlyer.cpp">
+      <Filter>Source Files\Tracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\ACodeString.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\Char.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\Char8.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\Char16.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\Char32.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\CQString.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\TExtString.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\UTF8Char.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\UTF8String.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\UTF16Char.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\UTF16String.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\UTF32String.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Text\WCodeString.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullLock.cpp">
+      <Filter>Source Files\SyncObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullMutex.cpp">
+      <Filter>Source Files\SyncObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullSection.cpp">
+      <Filter>Source Files\SyncObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Parameters\InterParamChecks.cpp">
+      <Filter>Source Files\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Parameters\ParamRegister.cpp">
+      <Filter>Source Files\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Parameters\PChecks\IntRangeChecks.cpp">
+      <Filter>Source Files\Parameters\PChecks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Parameters\PChecks\PointerChecks.cpp">
+      <Filter>Source Files\Parameters\PChecks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Parameters\PChecks\StringChecks.cpp">
+      <Filter>Source Files\Parameters\PChecks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Parameters\PChecks\TRangeChecks.cpp">
+      <Filter>Source Files\Parameters\PChecks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Modules\ProcessBase.cpp">
+      <Filter>Source Files\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Modules\LoadableModuleBase.cpp">
+      <Filter>Source Files\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\BaseHeap.cpp">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\DefaultSource.cpp">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\FastBucket.cpp">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\FastHeap.cpp">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\FastPage.cpp">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\ManagedAllocator.cpp">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\SmallObjectBucket.cpp">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\SmallObjectHeap.cpp">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\SmallObjectPage.cpp">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\MemoryManagement\StringSource.cpp">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\CallInterceptor.cpp">
+      <Filter>Source Files\Interception</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\DefaultInterceptor.cpp">
+      <Filter>Source Files\Interception</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\EventInterceptor.cpp">
+      <Filter>Source Files\Interception</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\FlyStrap.cpp">
+      <Filter>Source Files\Interception</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\Interception\FlyStrapBase.cpp">
+      <Filter>Source Files\Interception</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\BaseErrorDomain.cpp">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\DefaultHandler.cpp">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\Error.cpp">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\ErrorPropertyBase.cpp">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\ExpectedHandler.cpp">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\IExceptionFrame.cpp">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\ParamErrorDomain.cpp">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\What.cpp">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\When.cpp">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ErrorSystem\Where.cpp">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\DataTypes\OTypes.cpp">
+      <Filter>Source Files\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\CodePages\CodePage.cpp">
+      <Filter>Source Files\CodePages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\ClassReg\ClassReg.cpp">
+      <Filter>Source Files\ClassReg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\SyncObjects\NullSemaphore.cpp">
+      <Filter>Source Files\SyncObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\DataStructures\PODVector.cpp">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CodeQOR\DataStructures\THash.cpp">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\AbstractFactory.h">
+      <Filter>Source Files\ClassReg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\ClassReg.h">
+      <Filter>Source Files\ClassReg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\ClassRegEntry.h">
+      <Filter>Source Files\ClassReg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\ExternalClassReg.h">
+      <Filter>Source Files\ClassReg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\PoolFactory.h">
+      <Filter>Source Files\ClassReg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\SingletonFactory.h">
+      <Filter>Source Files\ClassReg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\TFlyer.h">
+      <Filter>Source Files\ClassReg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ClassReg\TFlyerRegEntry.h">
+      <Filter>Source Files\ClassReg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\CodePages\CodePage.h">
+      <Filter>Source Files\CodePages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TBox.h">
+      <Filter>Source Files\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TCRef.h">
+      <Filter>Source Files\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TLRef.h">
+      <Filter>Source Files\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TPointer.h">
+      <Filter>Source Files\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataTypes\GUID.h">
+      <Filter>Source Files\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataTypes\OTypes.h">
+      <Filter>Source Files\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataTypes\Property.h">
+      <Filter>Source Files\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\BaseErrorDomain.h">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\DefaultHandler.h">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\Error.h">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\ExpectedHandler.h">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\IExceptionFrame.h">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\ParamErrorDomain.h">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\What.h">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\When.h">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\ErrorSystem\Where.h">
+      <Filter>Source Files\ErrorSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\CallInterceptor.h">
+      <Filter>Source Files\Interception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\DefaultInterceptor.h">
+      <Filter>Source Files\Interception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\EventInterceptor.h">
+      <Filter>Source Files\Interception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\FlyStrap.h">
+      <Filter>Source Files\Interception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Interception\FlyStrapBase.h">
+      <Filter>Source Files\Interception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\BaseHeap.h">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\DefaultAllocator.h">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\DefaultSource.h">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\FastBucket.h">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\FastHeap.h">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\FastPage.h">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\ManagedAllocator.h">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\SmallObjectBucket.h">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\SmallObjectHeap.h">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\SmallObjectPage.h">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\MemoryManagement\StringSource.h">
+      <Filter>Source Files\MemoryManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Modules\LibraryBase.h">
+      <Filter>Source Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Modules\LoadableModuleBase.h">
+      <Filter>Source Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Modules\ProcessBase.h">
+      <Filter>Source Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\InterParamChecks.h">
+      <Filter>Source Files\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\ParamChecking.h">
+      <Filter>Source Files\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\ParamRegister.h">
+      <Filter>Source Files\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\ReturnCheck.h">
+      <Filter>Source Files\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\PChecks\FlagChecks.h">
+      <Filter>Source Files\Parameters\PChecks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\PChecks\IntRangeChecks.h">
+      <Filter>Source Files\Parameters\PChecks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\PChecks\PointerChecks.h">
+      <Filter>Source Files\Parameters\PChecks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\PChecks\StringChecks.h">
+      <Filter>Source Files\Parameters\PChecks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Parameters\PChecks\TRangeChecks.h">
+      <Filter>Source Files\Parameters\PChecks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\SyncObjects\NullLock.h">
+      <Filter>Source Files\SyncObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\SyncObjects\NullMutex.h">
+      <Filter>Source Files\SyncObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\SyncObjects\NullSection.h">
+      <Filter>Source Files\SyncObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\SyncObjects\NullSemaphore.h">
+      <Filter>Source Files\SyncObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\SyncObjects\SectionLock.h">
+      <Filter>Source Files\SyncObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\ACodeString.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\Char.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\Char8.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\Char16.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\Char32.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\CodeString.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\TChar.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\TExtString.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\TString.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\unicode.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\unicodedata.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\UTF8Char.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\UTF8String.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\UTF16Char.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\UTF16String.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\UTF32String.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Text\WCodeString.h">
+      <Filter>Source Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\CallContextBase.h">
+      <Filter>Source Files\Tracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\FunctionContextBase.h">
+      <Filter>Source Files\Tracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\ObjectContext.h">
+      <Filter>Source Files\Tracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\ObjectContextBase.h">
+      <Filter>Source Files\Tracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\ObjectPointer.h">
+      <Filter>Source Files\Tracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\ObjectPointerBase.h">
+      <Filter>Source Files\Tracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Tracing\TraceFlyer.h">
+      <Filter>Source Files\Tracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Utils\Utils.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Traits\MemoryTraits.h">
+      <Filter>Source Files\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Traits\Policy.h">
+      <Filter>Source Files\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Traits\ReferenceTraits.h">
+      <Filter>Source Files\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TRef.h">
+      <Filter>Source Files\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TArray.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TBitArray.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TIndexedArray.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TLinkedList.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TMap.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TMapPair.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TPair.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TRangePair.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\PODVector.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\THash.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TFLink.h">
+      <Filter>Source Files\DataStructures\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TSyncRef.h">
+      <Filter>Source Files\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\DataStructures\TLazy.h">
+      <Filter>Source Files\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\DefaultInstancer.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\PoolInstancer.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\SingletonInstancer.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\STMember.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\sTOB.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\TInstancePtr.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\TMemberPtr.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeQOR\Instancing\TWeakPtr.h">
+      <Filter>Source Files\Instancing</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\Source\CodeQOR\docs\CONCEPT.txt">
+      <Filter>Source Files\docs</Filter>
+    </Text>
+    <Text Include="..\..\..\..\Source\CodeQOR\docs\Memory.txt">
+      <Filter>Source Files\docs</Filter>
+    </Text>
+    <Text Include="..\..\..\..\Source\CodeQOR\docs\Notes.txt">
+      <Filter>Source Files\docs</Filter>
+    </Text>
+    <Text Include="..\..\..\..\Source\CodeQOR\docs\Outline.txt">
+      <Filter>Source Files\docs</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Source\CodeQOR\docs\Design.odp">
+      <Filter>Source Files\docs</Filter>
+    </None>
+  </ItemGroup>
+</Project>

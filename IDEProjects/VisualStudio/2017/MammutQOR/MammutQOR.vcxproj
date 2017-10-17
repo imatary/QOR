@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\MammutQOR.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\ModelObserver.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMAttr.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMCDATASection.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMCharacterData.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMComment.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMDocument.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMDocumentFragment.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMDocumentType.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMElement.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMEntity.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMEntityReference.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMNode.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMNotation.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMProcessingInstruction.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTDOMText.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Models\DOM\MTXMLDOM.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model\MBitSetIterator.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model\MProperty.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model\MPropertyBitSet.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model\MPropertyIterator.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model\MPropertySet.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MammutQOR\Model\MTypes.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Action.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Model.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\ModelObserver.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\AppConfigModel.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DocumentModel.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMAttr.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMCharacterData.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMDocument.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMDocumentFragment.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMDocumentType.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMElement.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMEntity.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMEntityReference.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMNode.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMNotation.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMProcessingInstruction.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTDOMText.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\DOM\MTXMLDOM.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\MapModel.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\MediaStreamModel.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\RuntimeAppModel.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\SQLDbModel.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\SysUIIntegrationModel.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\UserPreferencesModel.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Models\VectorModel.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Transaction.h" />
+    <ClInclude Include="..\..\..\..\Include\MammutQOR\Workflow.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6A433096-F520-440A-A5BE-1F2B918A6C9B}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>MammutQOR</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;__MAMMUTQOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../include</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FloatingPointModel>Strict</FloatingPointModel>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>QORModule.lib;WinCmpSupQORVC.lib;WinSharedBootstrap.lib;ArchQOR.lib;CodeQOR.lib;SystemQOR.lib;CQOR.lib;stdQOR.lib;kernel32.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;MAMMUTQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;MAMMUTQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;MAMMUTQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

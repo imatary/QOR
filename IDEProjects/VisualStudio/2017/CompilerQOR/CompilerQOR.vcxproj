@@ -1,0 +1,687 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{384595C7-0199-4468-BAF5-AADB99AE7A11}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>CompilerQOR</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>__QCMP;WIN32;_DEBUG;_WINDOWS;_USRDLL;_LIBCPP_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../include;$(FrameworkSdkDir)include</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <FloatingPointModel>Strict</FloatingPointModel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ShowIncludes>true</ShowIncludes>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>QORModule.lib;WinCmpSupQORVC.lib;WinSharedBootstrap.lib;ArchQOR.lib;CodeQOR.lib;SystemQOR.lib;CQOR.lib;stdQOR.lib;kernel32.lib</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <AdditionalLibraryDirectories>../QOR/Debug</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;COMPILERQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;COMPILERQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;COMPILERQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\CompilerQOR\CompilerQOR.cpp">
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ShowIncludes>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\Compiler.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\CompilerFeatures.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\CompilerPath.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\Compilers.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\CompilerSelection.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\PreCompiler.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\PreConfig.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\clang\clang.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\clang\Version.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\DependentCommon.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\MSVC.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\Builtins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\Intrinsics.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\MSVC6.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\UnBuiltins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\Unfeature.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\Version.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\Builtins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\Intrinsics.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\MSVC2002.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\UnBuiltins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\Unfeature.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\Builtins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\Intrinsics.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\MSVC2003.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\UnBuiltins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\Unfeature.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\Builtins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\Intrinsics.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\MSVC2005.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\UnBuiltins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\Unfeature.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\Builtins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\Intrinsics.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\MSVC2008.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\UnBuiltins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\Unfeature.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\BuildOpts.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\Builtins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\Intrinsics.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\MSVC2010.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\UnBuiltins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\Unfeature.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\Builtins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\Intrinsics.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\MSVC11.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\UnBuiltins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\Unfeature.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\Builtins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\Intrinsics.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\MSVC12.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\UnBuiltins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\Unfeature.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildAsmCmdLine.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildCmpCmdLine.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildLibCmdLine.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildLnkCmdLine.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildOpts.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\Builtins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\Intrinsics.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\MSVC14.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\UnBuiltins.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\Unfeature.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\Preprocessor.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\add.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\dec.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\detail\div_base.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\div.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\inc.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\mod.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\mul.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\sub.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\data.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\detail\get_data.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\elem.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\enum.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\insert.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\pop_back.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\pop_front.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\push_back.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\push_front.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\remove.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\replace.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\reverse.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\size.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\to_list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\to_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\to_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\assert_msg.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\cat.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comma.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comma_if.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison\equal.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison\greater.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison\greater_equal.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison\less.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison\less_equal.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison\not_equal.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\config\config.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\config\limits.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\deduce_d.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\detail\dmc\while.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\detail\edg\while.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\detail\msvc\while.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\detail\while.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\expr_if.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\expr_iif.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\if.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\iif.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\while.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\debug.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\debug\assert.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\debug\error.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\debug\line.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\dec.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\auto_rec.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\check.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\dmc\auto_rec.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\is_binary.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\is_nullary.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\is_unary.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\null.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\split.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\empty.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\enum.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\enum_params.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\enum_params_with_a_default.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\enum_params_with_defaults.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\enum_shifted.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\enum_shifted_params.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\expand.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\expr_if.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\apply.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\detail\is_empty.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\empty.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\expand.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\identity.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\intercept.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\is_1.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\is_empty.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\is_empty_or_1.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\is_empty_variadic.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\overload.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\flow.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\flow\emptyfile.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\for.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\identity.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\if.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\inc.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iterate.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\lower1.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\lower2.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\lower3.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\lower4.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\lower5.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\upper1.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\upper2.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\upper3.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\upper4.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\upper5.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\finish.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\forward1.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\forward2.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\forward3.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\forward4.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\forward5.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\reverse1.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\reverse2.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\reverse3.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\reverse4.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\reverse5.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\local.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\rlocal.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\self.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\start.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\iterate.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\local.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\self.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\library.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\limits.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\adt.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\append.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\at.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\cat.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\detail\dmc\fold_left.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\detail\edg\fold_left.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\detail\edg\fold_right.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\detail\fold_left.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\detail\fold_right.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\enum.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\filter.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\first_n.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\fold_left.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\fold_right.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\for_each.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\for_each_i.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\for_each_product.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\rest_n.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\reverse.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\size.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\to_array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\to_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\to_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\transform.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\and.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\bitand.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\bitnor.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\bitor.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\bitxor.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\bool.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\compl.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\nor.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\not.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\or.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\xor.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\max.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\min.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\comma.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\comma_if.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\detail\is_begin_parens.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\is_begin_parens.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\paren.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\paren_if.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\remove_parens.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repeat.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repeat_2nd.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repeat_3rd.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repeat_from_to.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repeat_from_to_2nd.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repeat_from_to_3rd.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\deduce_r.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\deduce_z.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\detail\dmc\for.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\detail\edg\for.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\detail\for.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\detail\msvc\for.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_binary_params.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_params.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_params_with_a_default.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_params_with_defaults.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_shifted.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_shifted_binary_params.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_shifted_params.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_trailing.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_trailing_binary_params.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_trailing_params.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\for.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\repeat.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\repeat_from_to.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\selection.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\selection\max.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\selection\min.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\cat.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\detail\binary_transform.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\detail\is_empty.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\detail\split.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\elem.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\enum.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\filter.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\first_n.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\fold_left.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\fold_right.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\for_each.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\for_each_i.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\for_each_product.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\insert.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\pop_back.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\pop_front.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\push_back.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\push_front.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\remove.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\replace.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\rest_n.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\reverse.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\size.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\subseq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\to_array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\to_list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\to_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\transform.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\variadic_seq_to_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\counter.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\counter.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\def.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\shared.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\slot1.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\slot2.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\slot3.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\slot4.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\slot5.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\slot.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\stringize.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\detail\is_single_return.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\eat.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\elem.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\enum.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\insert.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\pop_back.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\pop_front.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\push_back.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\push_front.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\rem.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\remove.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\replace.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\reverse.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\size.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\to_array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\to_list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\to_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\detail\is_single_return.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\elem.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\size.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\to_array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\to_list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\to_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\to_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\array\to_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\array\to_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_empty.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_identifier.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_number.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_type.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\adjust_tuple_type.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\assert.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\data_equal.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\data_equal_common.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\empty_result.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\equal.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\equal_common.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\equal_type.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\identifier.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\identifier_concat.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\identifier_type.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\idprefix.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_array_common.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_empty.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_empty_array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_empty_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_entire.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_identifier.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_number.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_type.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_type_type.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\match_identifier.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\match_identifier_common.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\match_single_identifier.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\modifiers.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\mods.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\nil_registration.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\not_empty.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\number_registration.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\only_after.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\parens.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\parens_common.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\parens_split.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_1.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_10.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_11.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_12.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_13.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_14.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_15.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_16.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_2.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_3.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_4.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_5.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_6.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_7.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_8.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_9.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_headers.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_specific.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_1.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_10.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_11.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_12.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_13.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_14.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_15.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_16.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_2.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_3.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_4.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_5.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_6.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_7.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_8.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_9.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_headers.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_arity.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_common.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_elem.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_enum.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_size.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_to_array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_to_list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_to_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_to_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_type.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\setup.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\type_registration.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\variadic_pop_front.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\elem.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\empty.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\enum.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\equal.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\get_type.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\identity.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_empty.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_empty_array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_empty_list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_identifier.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_multi.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_number.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_parens_empty.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_type.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_unary.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\list\to_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\list\to_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\not_equal.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\is_vmd_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\pop_back.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\pop_front.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\push_back.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\push_front.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\remove.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\size.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\to_array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\to_list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\to_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\size.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\to_array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\to_list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\to_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\to_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\is_vmd_tuple.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\pop_back.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\pop_front.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\push_back.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\push_front.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\remove.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\size.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\to_array.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\to_list.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\to_seq.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\vmd.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\while.h" />
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\wstringize.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\AssembleCmd.pph" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\CompileCmd.pph" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\DelayLinkCmd.pph" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\ExportObjectName.pph" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\Initialize.pph" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\LibCmd.pph" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\LibCmd2.pph" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\LibraryHeader.pph" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\LinkCmd.pph" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\LinkCmd2.pph" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\ModuleHeader.pph" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\Builtins.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\Intrinsics.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\Builtins.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\Intrinsics.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\Builtins.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\Intrinsics.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\Builtins.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\Intrinsics.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\Builtins.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\Intrinsics.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\Builtins.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\Intrinsics.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\Builtins.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\Intrinsics.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\Builtins.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\Intrinsics.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\Builtins.inl" />
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\Intrinsics.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

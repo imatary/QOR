@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Exceptions">
+      <UniqueIdentifier>{d85c458d-0f08-4f49-a9a4-be04d40e64d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PortableExecutable">
+      <UniqueIdentifier>{457874e9-5d20-4896-a13b-9da54c84464f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RunTimeChecks">
+      <UniqueIdentifier>{ace6aec9-9d32-442f-875a-eae8389919f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RunTimeTypeInfo">
+      <UniqueIdentifier>{a19a8838-7e72-40d0-a3ad-9b3726aa3c74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Security">
+      <UniqueIdentifier>{f81f33e0-7981-40ec-8832-6ec984162b61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ThreadLocalStorage">
+      <UniqueIdentifier>{a2157cf0-549b-4832-ae08-f32f669c9884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Memory">
+      <UniqueIdentifier>{34dae620-e2e6-4d76-8eb2-9cb8e1533002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Builtins">
+      <UniqueIdentifier>{f184bd06-9ba8-444d-bac1-8100fda3a9f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Exceptions\StructuredExceptionHandling">
+      <UniqueIdentifier>{e5526e9b-b9a2-464b-a27f-d2d9ee2ed9a8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\PE\LoadConfig.cpp">
+      <Filter>Source Files\PortableExecutable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Exceptions\Call.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Exceptions\Catch.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Exceptions\EH_GuardDescriptor.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Exceptions\EH_Vec_Tor.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Exceptions\ExceptionHandling.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Exceptions\Throw.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Exceptions\SEH\SEH.cpp">
+      <Filter>Source Files\Exceptions\StructuredExceptionHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Memory\StackCheck.cpp">
+      <Filter>Source Files\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\TLS\TLS_DTor.cpp">
+      <Filter>Source Files\ThreadLocalStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\TLS\TLSDyn.c">
+      <Filter>Source Files\ThreadLocalStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\TLS\TLSSupport.cpp">
+      <Filter>Source Files\ThreadLocalStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Security\Cookie.cpp">
+      <Filter>Source Files\Security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\RTC\RTC.cpp">
+      <Filter>Source Files\RunTimeChecks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\RTTI\DynamicCast.cpp">
+      <Filter>Source Files\RunTimeTypeInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\RTTI\RTTI.cpp">
+      <Filter>Source Files\RunTimeTypeInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\RTTI\VCtypeinfo.cpp">
+      <Filter>Source Files\RunTimeTypeInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Constants.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\InitThread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\SupportFuncs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ftol2.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\lldiv.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\lldvrm.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\llmul.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\llrem.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\llshl.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\llshr.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ulldiv.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ulldvrm.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ullrem.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ullshr.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\ltod3.cpp">
+      <Filter>Source Files\Builtins</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\..\Source\SystemQOR\MSWindows\WinCmpSupQORVC\src\Intrinsics.asm">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

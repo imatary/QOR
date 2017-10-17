@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{97037648-56B9-4755-A1EF-B3261E6FCF11}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>CQOR</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>__CQOR;WIN32;_DEBUG;_WINDOWS;_USRDLL;_LIBCPP_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../include</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <MinimalRebuild>false</MinimalRebuild>
+      <FloatingPointModel>Strict</FloatingPointModel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <DisableSpecificWarnings>4290;4201</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../QOR/Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies />
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;CQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;CQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\CQOR\aio.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\arpa\inet.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\assert.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\complex.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\cpio.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\CQOR0.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\ctype.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\dirent.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\dlfcn.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\errno.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\fcntl.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\fenv.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\float.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\fmtmsg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\fnmatch.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\ftw.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\glob.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\grp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\iconv.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\inttypes.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\iso646.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\langinfo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\libgen.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\limits.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\locale.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\math.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\monetary.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\mqueue.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\ndbm.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\netdb.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\netinet\in.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\netinet\tcp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\net\if.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\nl_types.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\poll.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\pthread.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\pwd.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\regex.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sched.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\search.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\semaphore.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\setjmp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\signal.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\spawn.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\stdarg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\stdbool.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\stddef.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\stdint.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\stdio.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\stdlib.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\string.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\strings.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\stropts.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\syslog.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\acct.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\ipc.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\mman.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\msg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\param.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\resource.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\select.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\sem.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\shm.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\socket.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\stat.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\statvfs.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\timeb.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\times.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\types.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\uio.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\un.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\utsname.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\wait.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\sys\_time.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\tar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\termios.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\tgmath.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\time.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\trace.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\ucontext.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\ulimit.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\unistd.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\utime.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\utmpx.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\wchar.cpp">
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ShowIncludes>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CQOR\wctype.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CQOR\wordexp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\aio.h" />
+    <ClInclude Include="..\..\..\..\Include\assert.h" />
+    <ClInclude Include="..\..\..\..\Include\complex.h" />
+    <ClInclude Include="..\..\..\..\Include\cpio.h" />
+    <ClInclude Include="..\..\..\..\Include\CQOR.h" />
+    <ClInclude Include="..\..\..\..\Include\CQOR\CQORPolicy.h" />
+    <ClInclude Include="..\..\..\..\Include\ctype.h" />
+    <ClInclude Include="..\..\..\..\Include\dirent.h" />
+    <ClInclude Include="..\..\..\..\Include\dlfcn.h" />
+    <ClInclude Include="..\..\..\..\Include\errno.h" />
+    <ClInclude Include="..\..\..\..\Include\fcntl.h" />
+    <ClInclude Include="..\..\..\..\Include\fenv.h" />
+    <ClInclude Include="..\..\..\..\Include\float.h" />
+    <ClInclude Include="..\..\..\..\Include\fmtmsg.h" />
+    <ClInclude Include="..\..\..\..\Include\fnmatch.h" />
+    <ClInclude Include="..\..\..\..\Include\ftw.h" />
+    <ClInclude Include="..\..\..\..\Include\glob.h" />
+    <ClInclude Include="..\..\..\..\Include\grp.h" />
+    <ClInclude Include="..\..\..\..\Include\iconv.h" />
+    <ClInclude Include="..\..\..\..\Include\inttypes.h" />
+    <ClInclude Include="..\..\..\..\Include\iso646.h" />
+    <ClInclude Include="..\..\..\..\Include\langinfo.h" />
+    <ClInclude Include="..\..\..\..\Include\libgen.h" />
+    <ClInclude Include="..\..\..\..\Include\limits.h" />
+    <ClInclude Include="..\..\..\..\Include\locale.h" />
+    <ClInclude Include="..\..\..\..\Include\math.h" />
+    <ClInclude Include="..\..\..\..\Include\monetary.h" />
+    <ClInclude Include="..\..\..\..\Include\mqueue.h" />
+    <ClInclude Include="..\..\..\..\Include\ndbm.h" />
+    <ClInclude Include="..\..\..\..\Include\netdb.h" />
+    <ClInclude Include="..\..\..\..\Include\nl_types.h" />
+    <ClInclude Include="..\..\..\..\Include\poll.h" />
+    <ClInclude Include="..\..\..\..\Include\pthread.h" />
+    <ClInclude Include="..\..\..\..\Include\pwd.h" />
+    <ClInclude Include="..\..\..\..\Include\regex.h" />
+    <ClInclude Include="..\..\..\..\Include\sched.h" />
+    <ClInclude Include="..\..\..\..\Include\search.h" />
+    <ClInclude Include="..\..\..\..\Include\semaphore.h" />
+    <ClInclude Include="..\..\..\..\Include\setjmp.h" />
+    <ClInclude Include="..\..\..\..\Include\signal.h" />
+    <ClInclude Include="..\..\..\..\Include\spawn.h" />
+    <ClInclude Include="..\..\..\..\Include\stdarg.h" />
+    <ClInclude Include="..\..\..\..\Include\stdbool.h" />
+    <ClInclude Include="..\..\..\..\Include\stddef.h" />
+    <ClInclude Include="..\..\..\..\Include\stdint.h" />
+    <ClInclude Include="..\..\..\..\Include\stdio.h" />
+    <ClInclude Include="..\..\..\..\Include\stdlib.h" />
+    <ClInclude Include="..\..\..\..\Include\strdup.h" />
+    <ClInclude Include="..\..\..\..\Include\string.h" />
+    <ClInclude Include="..\..\..\..\Include\strings.h" />
+    <ClInclude Include="..\..\..\..\Include\stropts.h" />
+    <ClInclude Include="..\..\..\..\Include\syslog.h" />
+    <ClInclude Include="..\..\..\..\Include\tar.h" />
+    <ClInclude Include="..\..\..\..\Include\termios.h" />
+    <ClInclude Include="..\..\..\..\Include\tgmath.h" />
+    <ClInclude Include="..\..\..\..\Include\time.h" />
+    <ClInclude Include="..\..\..\..\Include\trace.h" />
+    <ClInclude Include="..\..\..\..\Include\ucontext.h" />
+    <ClInclude Include="..\..\..\..\Include\ulimit.h" />
+    <ClInclude Include="..\..\..\..\Include\unistd.h" />
+    <ClInclude Include="..\..\..\..\Include\utime.h" />
+    <ClInclude Include="..\..\..\..\Include\utmpx.h" />
+    <ClInclude Include="..\..\..\..\Include\wchar.h" />
+    <ClInclude Include="..\..\..\..\Include\wctype.h" />
+    <ClInclude Include="..\..\..\..\Include\wordexp.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

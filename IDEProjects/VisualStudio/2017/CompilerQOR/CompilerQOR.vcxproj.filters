@@ -1,0 +1,1767 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Common">
+      <UniqueIdentifier>{b8fb8e56-b0eb-4974-ae7b-283e604125f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers">
+      <UniqueIdentifier>{f457e8d1-35c3-48bb-bcf0-463ea7c56019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor">
+      <UniqueIdentifier>{9eedd2f0-e9e1-4e8e-b063-e873356d466a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers\Borland">
+      <UniqueIdentifier>{b5a532e6-d812-4b6d-8dbc-11fb50f56dcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers\clang">
+      <UniqueIdentifier>{075dec85-00ec-4063-bb33-abb712bd39b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers\CodeGear">
+      <UniqueIdentifier>{d39d264a-26a5-467a-88b2-6ad9eeec186f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers\MSVC">
+      <UniqueIdentifier>{8d4a7016-605a-4c4c-b678-e94a93fa6064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers\MSVC\VS2015">
+      <UniqueIdentifier>{bc52de0d-f232-4b4a-9383-689f8b23bbc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers\MSVC\VS2013">
+      <UniqueIdentifier>{0713952f-51d4-4fed-801e-6d9fc7c9afc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers\MSVC\VS2012">
+      <UniqueIdentifier>{15aa81c1-73e6-453f-aadd-705bc4335b2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers\MSVC\VS2010">
+      <UniqueIdentifier>{716a0f87-7852-447d-b50f-cf3617288ad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers\MSVC\VS2008">
+      <UniqueIdentifier>{23942765-63ba-4a90-bb4a-d38e8071c480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers\MSVC\VS2005">
+      <UniqueIdentifier>{b82b608b-efa0-4462-b719-91fd31215221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers\MSVC\VS2003">
+      <UniqueIdentifier>{d1456f9e-51d9-4d02-8ebf-c2a63a6b9fa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers\MSVC\VS2002">
+      <UniqueIdentifier>{3ddc6017-f3a2-4740-a29d-b2a864204ca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compilers\MSVC\VC6">
+      <UniqueIdentifier>{785ce8d8-7ddb-4402-9e48-02730d0e54d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\variadic">
+      <UniqueIdentifier>{27858775-a6e3-4c5c-a841-9b6d90f60f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\tuple">
+      <UniqueIdentifier>{17db9ffe-8328-487c-ac27-c4c62c2f86e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\slot">
+      <UniqueIdentifier>{02c61d0c-2e35-4609-b632-38df10192978}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\slot\detail">
+      <UniqueIdentifier>{e9055190-a14f-4ddb-a883-13ddce95c333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\seq">
+      <UniqueIdentifier>{53221b56-719e-49eb-b4a3-c7775509b07d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\seq\detail">
+      <UniqueIdentifier>{069e7700-a092-4127-9551-a6edc7907ec9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\selection">
+      <UniqueIdentifier>{b0769cc0-ec64-4690-a15f-b1154ddf4ca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\repetition">
+      <UniqueIdentifier>{9a0ec0ca-992a-4856-890e-894792b5a9ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\repetition\detail">
+      <UniqueIdentifier>{db79405b-82fa-49c3-84b8-eef28230baf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\repetition\detail\dmc">
+      <UniqueIdentifier>{c3fd66ef-e831-4f01-8c73-b5552aabeece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\repetition\detail\edg">
+      <UniqueIdentifier>{a82b25a1-a501-4dc2-adcb-ad3e2cfe71de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\repetition\detail\msvc">
+      <UniqueIdentifier>{6d9fe93b-6810-4a63-b078-90674b0f4722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\punctuation">
+      <UniqueIdentifier>{2ddeedf9-2698-4435-b684-9b0f75c18f2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\arithmetic">
+      <UniqueIdentifier>{442ce85a-a547-4e58-bd7f-1385f819498e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\arithmetic\detail">
+      <UniqueIdentifier>{c7014143-1c64-4fad-8e7e-2d14d190e1b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\array">
+      <UniqueIdentifier>{d00915ef-e712-4d3e-ad14-968dd639455b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\comparison">
+      <UniqueIdentifier>{445165d0-f83c-4f08-bd6b-af040fdd3f9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\config">
+      <UniqueIdentifier>{6c1c460e-cfda-40d3-846e-ec8422ed0e94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\control">
+      <UniqueIdentifier>{320fa4cb-81cd-47be-b618-becd6be197da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\control\detail">
+      <UniqueIdentifier>{6d15de2b-edb0-49a9-8bda-afd244483024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\control\detail\dmc">
+      <UniqueIdentifier>{393f57a1-1e4f-4ba3-896b-d367f94f6a5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\control\detail\edg">
+      <UniqueIdentifier>{33c8fec9-f7a0-415a-99de-c8613734bcb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\control\detail\msvc">
+      <UniqueIdentifier>{f446c3b7-419e-41a7-88f7-4db55d39ee11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\debug">
+      <UniqueIdentifier>{6d65b10a-371b-4290-b9dd-1baaa49850d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\detail">
+      <UniqueIdentifier>{37b65ee1-e385-4dd9-a18c-9defc448ac60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\detail\dmc">
+      <UniqueIdentifier>{8d72ee28-7356-46f0-a1cc-1ddcb6d009ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\facilities">
+      <UniqueIdentifier>{aebb5bb1-c148-4548-a664-4eeafa83fb12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\flow">
+      <UniqueIdentifier>{d5796450-057e-44fc-86b4-9f2a8028c44b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\iteration">
+      <UniqueIdentifier>{2704b770-5903-49ad-b399-453022171827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\iteration\detail">
+      <UniqueIdentifier>{237d4522-ee9e-477b-a36d-ed9ea3f952fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\iteration\detail\bounds">
+      <UniqueIdentifier>{afeeb427-e692-4842-8c2e-367dbac1fc32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\iteration\detail\iter">
+      <UniqueIdentifier>{4992886b-8154-4828-87b2-fc062b61e706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\list">
+      <UniqueIdentifier>{cedf4132-7b5c-47d5-a346-4ff717f07c9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\list\detail">
+      <UniqueIdentifier>{1112fa91-8dab-4777-bf66-20a3a2dda734}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\list\detail\dmc">
+      <UniqueIdentifier>{96797466-dfe6-4aac-b46b-2f933a5bbc2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\list\detail\edg">
+      <UniqueIdentifier>{1a774636-cdac-44d3-9458-b434a68ee270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\logical">
+      <UniqueIdentifier>{6de0b09c-8120-4daa-86eb-d6d01d7fa625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\vmd">
+      <UniqueIdentifier>{71f33872-edc7-4025-baa2-37ed2fce8d14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\vmd\tuple">
+      <UniqueIdentifier>{6294159c-fec2-43b6-bb82-e69777132ff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\vmd\seq">
+      <UniqueIdentifier>{3c51fbe5-bc98-47bb-874d-96ac3902ad2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\vmd\array">
+      <UniqueIdentifier>{189d7fc0-6800-4c36-bb87-8020101981bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\vmd\detail">
+      <UniqueIdentifier>{0f8d54d4-7bb6-4384-8c60-bf0b22974e78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\vmd\list">
+      <UniqueIdentifier>{e6ca331c-02d9-48a4-992c-8de13ed4b707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\vmd\detail\recurse">
+      <UniqueIdentifier>{28db076e-9655-478c-96af-60f9cf69039a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\vmd\detail\recurse\data_equal">
+      <UniqueIdentifier>{59d4aeed-1ac3-456a-a25e-77555ccab15e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\vmd\detail\recurse\equal">
+      <UniqueIdentifier>{79e76bfa-99b7-4dfc-a4a2-1ed5fcdda288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\punctuation\detail">
+      <UniqueIdentifier>{c344ffda-4e98-48dc-a822-4bae827789e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\tuple\detail">
+      <UniqueIdentifier>{720d1161-e577-43f1-9daa-ecaa481dd629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\array\detail">
+      <UniqueIdentifier>{ba952205-17ca-4dba-9095-88622c7e9706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\facilities\detail">
+      <UniqueIdentifier>{785ffc34-0aa2-414b-868b-8e654f149f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Preprocessor\variadic\detail">
+      <UniqueIdentifier>{4069f38d-f4fc-405e-a2e8-e02be7d7deee}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\CompilerQOR\CompilerQOR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\Compiler.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\CompilerFeatures.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\CompilerPath.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\Compilers.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\CompilerSelection.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\PreCompiler.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Common\PreConfig.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\clang\clang.h">
+      <Filter>Source Files\Compilers\clang</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\clang\Version.h">
+      <Filter>Source Files\Compilers\clang</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\DependentCommon.h">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\MSVC.h">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\Version.h">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\Builtins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\Intrinsics.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\MSVC14.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\UnBuiltins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\Unfeature.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\Builtins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2013</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\Intrinsics.h">
+      <Filter>Source Files\Compilers\MSVC\VS2013</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\MSVC12.h">
+      <Filter>Source Files\Compilers\MSVC\VS2013</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\UnBuiltins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2013</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\Unfeature.h">
+      <Filter>Source Files\Compilers\MSVC\VS2013</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\Builtins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2012</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\Intrinsics.h">
+      <Filter>Source Files\Compilers\MSVC\VS2012</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\MSVC11.h">
+      <Filter>Source Files\Compilers\MSVC\VS2012</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\UnBuiltins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2012</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\Unfeature.h">
+      <Filter>Source Files\Compilers\MSVC\VS2012</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\BuildOpts.h">
+      <Filter>Source Files\Compilers\MSVC\VS2010</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\Builtins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2010</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\Intrinsics.h">
+      <Filter>Source Files\Compilers\MSVC\VS2010</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\MSVC2010.h">
+      <Filter>Source Files\Compilers\MSVC\VS2010</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\UnBuiltins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2010</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\Unfeature.h">
+      <Filter>Source Files\Compilers\MSVC\VS2010</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\Builtins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2008</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\Intrinsics.h">
+      <Filter>Source Files\Compilers\MSVC\VS2008</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\MSVC2008.h">
+      <Filter>Source Files\Compilers\MSVC\VS2008</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\UnBuiltins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2008</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\Unfeature.h">
+      <Filter>Source Files\Compilers\MSVC\VS2008</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\Builtins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2005</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\Intrinsics.h">
+      <Filter>Source Files\Compilers\MSVC\VS2005</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\MSVC2005.h">
+      <Filter>Source Files\Compilers\MSVC\VS2005</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\UnBuiltins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2005</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\Unfeature.h">
+      <Filter>Source Files\Compilers\MSVC\VS2005</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\Builtins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2003</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\Intrinsics.h">
+      <Filter>Source Files\Compilers\MSVC\VS2003</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\MSVC2003.h">
+      <Filter>Source Files\Compilers\MSVC\VS2003</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\UnBuiltins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2003</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\Unfeature.h">
+      <Filter>Source Files\Compilers\MSVC\VS2003</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\Builtins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2002</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\Intrinsics.h">
+      <Filter>Source Files\Compilers\MSVC\VS2002</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\MSVC2002.h">
+      <Filter>Source Files\Compilers\MSVC\VS2002</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\UnBuiltins.h">
+      <Filter>Source Files\Compilers\MSVC\VS2002</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\Unfeature.h">
+      <Filter>Source Files\Compilers\MSVC\VS2002</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\Builtins.h">
+      <Filter>Source Files\Compilers\MSVC\VC6</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\Intrinsics.h">
+      <Filter>Source Files\Compilers\MSVC\VC6</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\MSVC6.h">
+      <Filter>Source Files\Compilers\MSVC\VC6</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\UnBuiltins.h">
+      <Filter>Source Files\Compilers\MSVC\VC6</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\Unfeature.h">
+      <Filter>Source Files\Compilers\MSVC\VC6</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\Preprocessor.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\expand.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\expr_if.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\flow.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\for.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\identity.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\if.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\inc.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iterate.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\library.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\limits.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\max.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\min.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repeat.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repeat_2nd.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repeat_3rd.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repeat_from_to.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repeat_from_to_2nd.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repeat_from_to_3rd.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\selection.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\stringize.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\while.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\wstringize.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\assert_msg.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\cat.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comma.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comma_if.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\debug.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\dec.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\empty.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\enum.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\enum_params.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\enum_params_with_a_default.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\enum_params_with_defaults.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\enum_shifted.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\enum_shifted_params.h">
+      <Filter>Source Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\elem.h">
+      <Filter>Source Files\Preprocessor\variadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\size.h">
+      <Filter>Source Files\Preprocessor\variadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\to_array.h">
+      <Filter>Source Files\Preprocessor\variadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\to_list.h">
+      <Filter>Source Files\Preprocessor\variadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\to_seq.h">
+      <Filter>Source Files\Preprocessor\variadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\to_tuple.h">
+      <Filter>Source Files\Preprocessor\variadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\eat.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\elem.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\enum.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\rem.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\reverse.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\size.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\to_array.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\to_list.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\to_seq.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\counter.h">
+      <Filter>Source Files\Preprocessor\slot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\slot.h">
+      <Filter>Source Files\Preprocessor\slot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\counter.h">
+      <Filter>Source Files\Preprocessor\slot\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\def.h">
+      <Filter>Source Files\Preprocessor\slot\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\shared.h">
+      <Filter>Source Files\Preprocessor\slot\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\slot1.h">
+      <Filter>Source Files\Preprocessor\slot\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\slot2.h">
+      <Filter>Source Files\Preprocessor\slot\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\slot3.h">
+      <Filter>Source Files\Preprocessor\slot\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\slot4.h">
+      <Filter>Source Files\Preprocessor\slot\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\slot\detail\slot5.h">
+      <Filter>Source Files\Preprocessor\slot\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\cat.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\elem.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\enum.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\filter.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\first_n.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\fold_left.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\fold_right.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\for_each.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\for_each_i.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\for_each_product.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\insert.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\pop_back.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\pop_front.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\push_back.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\push_front.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\remove.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\replace.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\rest_n.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\reverse.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\seq.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\size.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\subseq.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\to_array.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\to_list.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\to_tuple.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\transform.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\detail\binary_transform.h">
+      <Filter>Source Files\Preprocessor\seq\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\detail\split.h">
+      <Filter>Source Files\Preprocessor\seq\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\selection\max.h">
+      <Filter>Source Files\Preprocessor\selection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\selection\min.h">
+      <Filter>Source Files\Preprocessor\selection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\deduce_r.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\deduce_z.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_binary_params.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_params.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_params_with_a_default.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_params_with_defaults.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_shifted.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_shifted_binary_params.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_shifted_params.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_trailing.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_trailing_binary_params.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\enum_trailing_params.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\for.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\repeat.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\repeat_from_to.h">
+      <Filter>Source Files\Preprocessor\repetition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\detail\for.h">
+      <Filter>Source Files\Preprocessor\repetition\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\detail\msvc\for.h">
+      <Filter>Source Files\Preprocessor\repetition\detail\msvc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\detail\edg\for.h">
+      <Filter>Source Files\Preprocessor\repetition\detail\edg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\repetition\detail\dmc\for.h">
+      <Filter>Source Files\Preprocessor\repetition\detail\dmc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\comma.h">
+      <Filter>Source Files\Preprocessor\punctuation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\comma_if.h">
+      <Filter>Source Files\Preprocessor\punctuation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\paren.h">
+      <Filter>Source Files\Preprocessor\punctuation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\paren_if.h">
+      <Filter>Source Files\Preprocessor\punctuation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\add.h">
+      <Filter>Source Files\Preprocessor\arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\dec.h">
+      <Filter>Source Files\Preprocessor\arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\div.h">
+      <Filter>Source Files\Preprocessor\arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\inc.h">
+      <Filter>Source Files\Preprocessor\arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\mod.h">
+      <Filter>Source Files\Preprocessor\arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\mul.h">
+      <Filter>Source Files\Preprocessor\arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\sub.h">
+      <Filter>Source Files\Preprocessor\arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\arithmetic\detail\div_base.h">
+      <Filter>Source Files\Preprocessor\arithmetic\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\data.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\elem.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\enum.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\insert.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\pop_back.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\pop_front.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\push_back.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\push_front.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\remove.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\replace.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\reverse.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\size.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\to_list.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\to_seq.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\to_tuple.h">
+      <Filter>Source Files\Preprocessor\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison\equal.h">
+      <Filter>Source Files\Preprocessor\comparison</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison\greater.h">
+      <Filter>Source Files\Preprocessor\comparison</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison\greater_equal.h">
+      <Filter>Source Files\Preprocessor\comparison</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison\less.h">
+      <Filter>Source Files\Preprocessor\comparison</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison\less_equal.h">
+      <Filter>Source Files\Preprocessor\comparison</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\comparison\not_equal.h">
+      <Filter>Source Files\Preprocessor\comparison</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\config\config.h">
+      <Filter>Source Files\Preprocessor\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\config\limits.h">
+      <Filter>Source Files\Preprocessor\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\deduce_d.h">
+      <Filter>Source Files\Preprocessor\control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\expr_if.h">
+      <Filter>Source Files\Preprocessor\control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\expr_iif.h">
+      <Filter>Source Files\Preprocessor\control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\if.h">
+      <Filter>Source Files\Preprocessor\control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\iif.h">
+      <Filter>Source Files\Preprocessor\control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\while.h">
+      <Filter>Source Files\Preprocessor\control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\detail\while.h">
+      <Filter>Source Files\Preprocessor\control\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\detail\msvc\while.h">
+      <Filter>Source Files\Preprocessor\control\detail\msvc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\detail\edg\while.h">
+      <Filter>Source Files\Preprocessor\control\detail\edg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\control\detail\dmc\while.h">
+      <Filter>Source Files\Preprocessor\control\detail\dmc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\debug\assert.h">
+      <Filter>Source Files\Preprocessor\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\debug\error.h">
+      <Filter>Source Files\Preprocessor\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\debug\line.h">
+      <Filter>Source Files\Preprocessor\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\auto_rec.h">
+      <Filter>Source Files\Preprocessor\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\check.h">
+      <Filter>Source Files\Preprocessor\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\is_binary.h">
+      <Filter>Source Files\Preprocessor\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\is_nullary.h">
+      <Filter>Source Files\Preprocessor\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\is_unary.h">
+      <Filter>Source Files\Preprocessor\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\null.h">
+      <Filter>Source Files\Preprocessor\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\split.h">
+      <Filter>Source Files\Preprocessor\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\detail\dmc\auto_rec.h">
+      <Filter>Source Files\Preprocessor\detail\dmc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\apply.h">
+      <Filter>Source Files\Preprocessor\facilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\empty.h">
+      <Filter>Source Files\Preprocessor\facilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\expand.h">
+      <Filter>Source Files\Preprocessor\facilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\identity.h">
+      <Filter>Source Files\Preprocessor\facilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\intercept.h">
+      <Filter>Source Files\Preprocessor\facilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\is_1.h">
+      <Filter>Source Files\Preprocessor\facilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\is_empty.h">
+      <Filter>Source Files\Preprocessor\facilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\is_empty_or_1.h">
+      <Filter>Source Files\Preprocessor\facilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\overload.h">
+      <Filter>Source Files\Preprocessor\facilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\flow\emptyfile.h">
+      <Filter>Source Files\Preprocessor\flow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\iterate.h">
+      <Filter>Source Files\Preprocessor\iteration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\local.h">
+      <Filter>Source Files\Preprocessor\iteration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\self.h">
+      <Filter>Source Files\Preprocessor\iteration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\finish.h">
+      <Filter>Source Files\Preprocessor\iteration\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\local.h">
+      <Filter>Source Files\Preprocessor\iteration\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\rlocal.h">
+      <Filter>Source Files\Preprocessor\iteration\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\self.h">
+      <Filter>Source Files\Preprocessor\iteration\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\start.h">
+      <Filter>Source Files\Preprocessor\iteration\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\forward1.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\iter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\forward2.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\iter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\forward3.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\iter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\forward4.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\iter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\forward5.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\iter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\reverse1.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\iter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\reverse2.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\iter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\reverse3.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\iter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\reverse4.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\iter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\iter\reverse5.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\iter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\lower1.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\bounds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\lower2.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\bounds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\lower3.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\bounds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\lower4.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\bounds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\lower5.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\bounds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\upper1.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\bounds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\upper2.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\bounds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\upper3.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\bounds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\upper4.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\bounds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\iteration\detail\bounds\upper5.h">
+      <Filter>Source Files\Preprocessor\iteration\detail\bounds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\adt.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\append.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\at.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\cat.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\enum.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\filter.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\first_n.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\fold_left.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\fold_right.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\for_each.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\for_each_i.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\for_each_product.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\rest_n.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\reverse.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\size.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\to_array.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\to_seq.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\to_tuple.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\transform.h">
+      <Filter>Source Files\Preprocessor\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\detail\fold_left.h">
+      <Filter>Source Files\Preprocessor\list\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\detail\fold_right.h">
+      <Filter>Source Files\Preprocessor\list\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\detail\edg\fold_left.h">
+      <Filter>Source Files\Preprocessor\list\detail\edg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\detail\edg\fold_right.h">
+      <Filter>Source Files\Preprocessor\list\detail\edg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\list\detail\dmc\fold_left.h">
+      <Filter>Source Files\Preprocessor\list\detail\dmc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\and.h">
+      <Filter>Source Files\Preprocessor\logical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\bitand.h">
+      <Filter>Source Files\Preprocessor\logical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\bitnor.h">
+      <Filter>Source Files\Preprocessor\logical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\bitor.h">
+      <Filter>Source Files\Preprocessor\logical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\bitxor.h">
+      <Filter>Source Files\Preprocessor\logical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\bool.h">
+      <Filter>Source Files\Preprocessor\logical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\compl.h">
+      <Filter>Source Files\Preprocessor\logical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\nor.h">
+      <Filter>Source Files\Preprocessor\logical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\not.h">
+      <Filter>Source Files\Preprocessor\logical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\or.h">
+      <Filter>Source Files\Preprocessor\logical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\logical\xor.h">
+      <Filter>Source Files\Preprocessor\logical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildAsmCmdLine.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildCmpCmdLine.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildLibCmdLine.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildLnkCmdLine.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\BuildOpts.h">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\vmd.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\variadic_pop_front.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\type_registration.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\tuple.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\setup.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_type.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_to_tuple.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_to_seq.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_to_list.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_to_array.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_size.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_enum.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_elem.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_common.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\sequence_arity.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\seq.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\parens_split.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\parens_common.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\parens.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\only_after.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\number_registration.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\not_empty.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\nil_registration.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\mods.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\modifiers.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\match_single_identifier.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\match_identifier_common.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\match_identifier.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\list.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_type_type.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_type.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_tuple.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_seq.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_number.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_list.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_identifier.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_entire.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_empty_tuple.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_empty_array.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_empty.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_array_common.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\is_array.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\idprefix.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\identifier_type.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\identifier_concat.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\identifier.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\equal_type.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\equal_common.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\equal.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\empty_result.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\data_equal_common.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\data_equal.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\assert.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\array.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\adjust_tuple_type.h">
+      <Filter>Source Files\Preprocessor\vmd\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\to_seq.h">
+      <Filter>Source Files\Preprocessor\vmd\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\to_list.h">
+      <Filter>Source Files\Preprocessor\vmd\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\to_array.h">
+      <Filter>Source Files\Preprocessor\vmd\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\size.h">
+      <Filter>Source Files\Preprocessor\vmd\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\remove.h">
+      <Filter>Source Files\Preprocessor\vmd\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\push_front.h">
+      <Filter>Source Files\Preprocessor\vmd\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\push_back.h">
+      <Filter>Source Files\Preprocessor\vmd\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\pop_front.h">
+      <Filter>Source Files\Preprocessor\vmd\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\pop_back.h">
+      <Filter>Source Files\Preprocessor\vmd\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\tuple\is_vmd_tuple.h">
+      <Filter>Source Files\Preprocessor\vmd\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\to_tuple.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\to_seq.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\to_list.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\to_array.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\size.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\not_equal.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\list.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_unary.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_type.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_tuple.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_seq.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_parens_empty.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_number.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_multi.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_list.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_identifier.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_empty_list.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_empty_array.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_empty.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\is_array.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\identity.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\get_type.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\equal.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\enum.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\empty.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\elem.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_type.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_tuple.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_seq.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_number.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_list.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_identifier.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_empty.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert_is_array.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\assert.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\array.h">
+      <Filter>Source Files\Preprocessor\vmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\to_tuple.h">
+      <Filter>Source Files\Preprocessor\vmd\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\to_list.h">
+      <Filter>Source Files\Preprocessor\vmd\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\to_array.h">
+      <Filter>Source Files\Preprocessor\vmd\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\size.h">
+      <Filter>Source Files\Preprocessor\vmd\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\remove.h">
+      <Filter>Source Files\Preprocessor\vmd\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\push_front.h">
+      <Filter>Source Files\Preprocessor\vmd\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\push_back.h">
+      <Filter>Source Files\Preprocessor\vmd\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\pop_front.h">
+      <Filter>Source Files\Preprocessor\vmd\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\pop_back.h">
+      <Filter>Source Files\Preprocessor\vmd\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\seq\is_vmd_seq.h">
+      <Filter>Source Files\Preprocessor\vmd\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\list\to_tuple.h">
+      <Filter>Source Files\Preprocessor\vmd\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\list\to_seq.h">
+      <Filter>Source Files\Preprocessor\vmd\list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\array\to_tuple.h">
+      <Filter>Source Files\Preprocessor\vmd\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\array\to_seq.h">
+      <Filter>Source Files\Preprocessor\vmd\array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_headers.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_16.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_15.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_14.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_13.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_12.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_11.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_10.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_9.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_8.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_7.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_6.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_5.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_4.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_3.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_2.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\equal\equal_1.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_specific.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_headers.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_16.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_15.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_14.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_13.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_12.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_11.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_10.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_9.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_8.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_7.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_6.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_5.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_4.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_3.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_2.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\vmd\detail\recurse\data_equal\data_equal_1.h">
+      <Filter>Source Files\Preprocessor\vmd\detail\recurse\data_equal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\is_begin_parens.h">
+      <Filter>Source Files\Preprocessor\punctuation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\remove_parens.h">
+      <Filter>Source Files\Preprocessor\punctuation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\punctuation\detail\is_begin_parens.h">
+      <Filter>Source Files\Preprocessor\punctuation\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\replace.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\detail\is_single_return.h">
+      <Filter>Source Files\Preprocessor\tuple\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\array\detail\get_data.h">
+      <Filter>Source Files\Preprocessor\array\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\is_empty_variadic.h">
+      <Filter>Source Files\Preprocessor\facilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\facilities\detail\is_empty.h">
+      <Filter>Source Files\Preprocessor\facilities\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\variadic_seq_to_seq.h">
+      <Filter>Source Files\Preprocessor\seq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\seq\detail\is_empty.h">
+      <Filter>Source Files\Preprocessor\seq\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\insert.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\pop_back.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\pop_front.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\push_back.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\push_front.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\tuple\remove.h">
+      <Filter>Source Files\Preprocessor\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CompilerQOR\Preprocessor\preprocessor\variadic\detail\is_single_return.h">
+      <Filter>Source Files\Preprocessor\variadic\detail</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\CompileCmd.pph">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\DelayLinkCmd.pph">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\ExportObjectName.pph">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\Initialize.pph">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\LibCmd.pph">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\LibCmd2.pph">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\LibraryHeader.pph">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\LinkCmd.pph">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\LinkCmd2.pph">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\Builtins.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2015\Intrinsics.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2015</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\Builtins.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2013</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2013\Intrinsics.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2013</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\Builtins.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2012</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2012\Intrinsics.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2012</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\Builtins.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2010</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2010\Intrinsics.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2010</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\Builtins.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2008</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2008\Intrinsics.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2008</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\Builtins.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2005</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2005\Intrinsics.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2005</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\Builtins.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2003</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2003\Intrinsics.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2003</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\Builtins.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2002</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VS2002\Intrinsics.inl">
+      <Filter>Source Files\Compilers\MSVC\VS2002</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\Builtins.inl">
+      <Filter>Source Files\Compilers\MSVC\VC6</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\VC6\Intrinsics.inl">
+      <Filter>Source Files\Compilers\MSVC\VC6</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\ModuleHeader.pph">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </None>
+    <None Include="..\..\..\..\Include\CompilerQOR\Compilers\MSVC\AssembleCmd.pph">
+      <Filter>Source Files\Compilers\MSVC</Filter>
+    </None>
+  </ItemGroup>
+</Project>

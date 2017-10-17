@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{10323F71-53A9-4986-BF25-7C6AB6896C71}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Qurses</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;_LIBCPP_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../include</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <MinimalRebuild>false</MinimalRebuild>
+      <FloatingPointModel>Strict</FloatingPointModel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>deliberately_prevent_linking.lib</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;QURSES_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;QURSES_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;QURSES_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\Qurses\addch.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\addchstr.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\addstr.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\attr.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\beep.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\bkgd.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\border.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\clear.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\color.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\debug.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\delch.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\deleteln.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\deprec.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\getch.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\getstr.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\getyx.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\GUI\QGBrush.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\GUI\QGCaption.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\GUI\QGChildWindow.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\GUI\QGHorizontal.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\GUI\QGLabel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\GUI\QGLayout.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\GUI\QGPalette.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\GUI\QGPanel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\GUI\QGSession.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\GUI\QGVertical.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\GUI\QGWindow.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\inch.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\inchstr.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\initscr.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\inopts.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\insch.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\insstr.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\instr.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\kernel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\keyname.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\mouse.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\move.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\outopts.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\overlay.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\pad.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\panel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\printw.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\QursesGUI.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\QursesQOR.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\refresh.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\scanw.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\scroll.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\scr_dump.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\slk.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\termattr.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\terminfo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\touch.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\util.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\window.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\Windows\WinQCclip.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\Windows\WinQCdisp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\Windows\WinQCgetsc.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\Windows\WinQCkbd.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\Windows\WinQCscrn.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\Windows\WinQCsetsc.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Qurses\Windows\WinQCutil.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\Qurses\curses.h" />
+    <ClInclude Include="..\..\..\..\Include\Qurses\curspriv.h" />
+    <ClInclude Include="..\..\..\..\Include\Qurses\panel.h" />
+    <ClInclude Include="..\..\..\..\Include\Qurses\QursesGUI.h" />
+    <ClInclude Include="..\..\..\..\Include\Qurses\QursesPolicy.h" />
+    <ClInclude Include="..\..\..\..\Include\Qurses\term.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

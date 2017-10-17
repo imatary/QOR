@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{44D13247-CE43-4DDA-9A27-5FBA48B12C3F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Qosh</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Develop\github\QOR\include;D:\Develop\github\QOR\Test\Qosh\include</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <MinimalRebuild>false</MinimalRebuild>
+      <FloatingPointModel>Strict</FloatingPointModel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies />
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\args.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\blok.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\bltin.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\cmd.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\ctype.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\defs.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\echo.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\error.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\expand.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\fault.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\func.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\getopt.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\gmatch.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\hash.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\hashserv.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\io.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\jobs.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\macro.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\main.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\mapmalloc.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\msg.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\name.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\print.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\pwd.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\service.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\setbrk.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\stak.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\string.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\strsig.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\test.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\ulimit.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\umask.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\version.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\word.cpp" />
+    <ClCompile Include="..\..\..\..\Test\Qosh\src\xec.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Test\Qosh\include\brkincr.h" />
+    <ClInclude Include="..\..\..\..\Test\Qosh\include\ctype.h" />
+    <ClInclude Include="..\..\..\..\Test\Qosh\include\defs.h" />
+    <ClInclude Include="..\..\..\..\Test\Qosh\include\dup.h" />
+    <ClInclude Include="..\..\..\..\Test\Qosh\include\hash.h" />
+    <ClInclude Include="..\..\..\..\Test\Qosh\include\mac.h" />
+    <ClInclude Include="..\..\..\..\Test\Qosh\include\mbtowi.h" />
+    <ClInclude Include="..\..\..\..\Test\Qosh\include\mode.h" />
+    <ClInclude Include="..\..\..\..\Test\Qosh\include\name.h" />
+    <ClInclude Include="..\..\..\..\Test\Qosh\include\stak.h" />
+    <ClInclude Include="..\..\..\..\Test\Qosh\include\sym.h" />
+    <ClInclude Include="..\..\..\..\Test\Qosh\include\timeout.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

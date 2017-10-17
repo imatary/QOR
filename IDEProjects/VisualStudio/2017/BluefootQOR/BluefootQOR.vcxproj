@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{48F174E3-C042-4CD3-8FFC-8565F2C6945B}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>BluefootQOR</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_LIBCPP_DLL;WIN32;_DEBUG;_WINDOWS;_USRDLL;__BLUEFOOTQOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>../../../../include</AdditionalIncludeDirectories>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <MinimalRebuild>false</MinimalRebuild>
+      <FloatingPointModel>Strict</FloatingPointModel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>QORModule.lib;WinCmpSupQORVC.lib;WinSharedBootstrap.lib;ArchQOR.lib;CodeQOR.lib;SystemQOR.lib;CQOR.lib;stdQOR.lib;kernel32.lib</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;BLUEFOOTQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;BLUEFOOTQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;BLUEFOOTQOR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\BluefootQOR.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\BfBuffer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\BfElement.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\BfFilter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\BfPipeline.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\BfPlug.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\BfProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\BfSink.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\BfSocket.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\BfSource.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Filters\BOMRecognizerFilter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Filters\CodePointSAXParser.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Filters\CodePointUTF16Filter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Filters\CodePointUTF8Filter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Filters\MimeRecognizerFilter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Filters\ParagraphBreakFilter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Filters\UTF16CodePointFilter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Filters\UTF8CodePointFilter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Pipelines\BfTextReader.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Pipelines\BfXMLReader.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Protocols\OBEX\ObexHeader.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Protocols\OBEX\ObexObject.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Sinks\coutSink.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Sinks\IOSink.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Sinks\SocketSink.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Sinks\StringSink.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Socket\BfSocketConnector.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Sources\cinSource.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Sources\IOSource.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Sources\SocketSource.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\Sources\StringSource.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfXmlAttributes.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfXmlContentHandler.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfXmlDeclHandler.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfXmlDefaultHandler.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfXmlDTDHandler.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfXmlEntityResolver.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfXmlErrorHandler.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfXmlInputSource.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfXmlLexicalHandler.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfXmlLocator.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfXmlNamespaceSupport.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfXmlParseException.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfSAXXmlReader.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BluefootQOR\src\XML\SAX\BfXmlSimpleReader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BfBuffer.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BfConnection.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BfConnectionPool.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BfElement.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BFFilter.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BfJunction.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BFPipeline.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BfPlug.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BfProtocol.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BFSink.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BfSocket.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BFSource.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BfTee.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\BluefootQOR.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\BOMRecognizerFilter.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\CodePointSAXParser.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\CodePointUTF16Filter.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\CodePointUTF8Filter.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\MimeRecognizerFilter.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\ParagraphBreakFilter.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\UTF16CodePointFilter.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Filters\UTF8CodePointFilter.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Pipelines\BFTextReader.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Pipelines\BfXMLReader.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Protocols\BfObexProtocol.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Protocols\OBEX\ObexHeader.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Protocols\OBEX\ObexObject.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Protocols\OBEX\ObexSession.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Protocols\SMTP.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Sinks\coutSink.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Sinks\IOSink.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Sinks\SocketSink.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Sinks\StringSink.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Socket\BfSocketConnector.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Socket\BfSocketInterface.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Sources\cinSource.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Sources\IOSource.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Sources\SocketSource.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\Sources\StringSource.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlAttributes.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlContentHandler.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlDeclHandler.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlDefaultHandler.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlDTDHandler.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlEntityResolver.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlErrorHandler.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlInputSource.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlLexicalHandler.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlLocator.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlNamespaceSupport.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlParseException.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlReader.h" />
+    <ClInclude Include="..\..\..\..\Include\BluefootQOR\XML\SAX\BfXmlSimpleReader.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

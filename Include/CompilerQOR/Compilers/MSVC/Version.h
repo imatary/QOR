@@ -143,7 +143,15 @@
 #	define __QCMP_COMPILER_NAME "Visual Studio 2015, VC 14.0"
 #	define __QCMP_COMPILER_FOLDER QOR_PP_CAT(__QCMP_COMPILER_ROOT_FOLDER,/VS2015)
 #	define __QCMP_COMPILER_HEADER QOR_PP_CAT(__QCMP_COMPILER_FOLDER,/MSVC14.h)
-#elif( _MSC_VER > 1900 )
+#elif( _MSC_VER==1911 )
+#if ( __QCMP_REPORTCONFIG == __QCS_YES )
+#	pragma message( "Version is Visual Studio 2017, VC 14.1" )
+#endif
+#	define __QCMP_COMPILER_VERSION_FOLDER VS2017
+#	define __QCMP_COMPILER_NAME "Visual Studio 2017, VC 14.1"
+#	define __QCMP_COMPILER_FOLDER QOR_PP_CAT(__QCMP_COMPILER_ROOT_FOLDER,/VS2017)
+#	define __QCMP_COMPILER_HEADER QOR_PP_CAT(__QCMP_COMPILER_FOLDER,/MSVC14.h)
+#elif( _MSC_VER > 1911 )
 //NOTE: ("Add new MSVC version support here" )
 #	error "Version is later than VS2015: Please update this file: "
 #else

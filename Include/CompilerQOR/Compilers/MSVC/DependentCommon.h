@@ -72,9 +72,14 @@ namespace nsCompiler
 {
 	typedef CMSVCCompiler14 CCompilerBase;
 }
-#elif( _MSC_VER > 1900 )
+#elif( _MSC_VER==1911)
+namespace nsCompiler
+{
+	typedef CMSVCCompiler14_1 CCompilerBase;
+}
+#elif( _MSC_VER > 1911 )
 //NOTE: ("Add new MSVC version support here" )
-#	error "Version is later than VS2015: Please update this file: "
+#	error "Version is later than VS2017: Please update this file: "
 #else
 #	error "Unable to determine Microsoft Compiler Version!"
 #endif
